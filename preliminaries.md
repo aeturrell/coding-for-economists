@@ -6,12 +6,22 @@ In this chapter, you'll find out how to install and setup everything you need to
 
 Computer programming, or coding, is the process of issuing a series of commands that a computer can understand and execute in order to perform a task. Given so much of economics is quantitative, coding is an essential skill for many economists.
 
+As a skill, programming is incredibly useful in a wide range of domains. It can be hugely rewarding. It's worth saying at the outset though, that, *no-one*, and I mean no-one, memorises half of the stuff you'll see in this book. 80% or more of time spent programming is actually time spent looking up how to do this or that online, 'debugging' a code for errors, or testing code. This applies to all programmers, regardless of level. You are here to learn the skills and concepts of programming, not the precise syntax (which is easy to look up later).
+
+![xkcd-what-did-you-see](https://imgs.xkcd.com/comics/wisdom_of_the_ancients.png)
+
+## Notation
+
+Greek letters, like $\beta$, are the truth. Modified Greek letters are an estimate of the truth, for example $\hat{\beta}$. Letters from the Latin alphabet denote the values of data, for instance $x$ for a variable or vector. Modified Latin alphabet letters denote computations performed on data, for instance $\bar{x} = \frac{1}{N} \displaystyle\sum_{i} x_i$.
+
 ## Computational environment
 
 ### Choice of programming language
 
 This book uses Python, which is usually ranked as the first or second most popular programming language in the world and, just as importantly, it's also one of the easiest to learn. The joke goes that Python is the 2nd best language at everything, and there's some truth to that (although Python is 1st best in machine learning). But a language that covers such a lot of ground is also very useful; and Python is widely used across industry, academia, and the public sector. It is used for everything from computer games to websites, data science to software applications.
-As an economist, you will know that this means it benefits from strong positive network externalities. As such, learning Python has a lot of value and, once you have, learning more specialised languages like C++ or R is much easier. Because of their similarities, however, readers will find that they can follow a good deal of the content of the book in other languages, especially Julia and R.
+As an economist, you will know that this means it benefits from strong positive network externalities. As such, learning Python has a lot of value and, once you have, learning more specialised languages like C++ or R is much easier. Basic programming concepts can be found in almost any programming language. Because of their similarities, however, readers will find that they can follow even more of the content of the book in some specific other languages, especially Julia and R.
+
+![xkcd-python](https://imgs.xkcd.com/comics/python.png)
 
 Different languages have different strengths and weaknesses. Python and Julia are so-called high-level languages that are easier to write code in. C++ and Fortran are more low-level languages and much more fussy and labour-intensive to write code in; but, once the code is written, it runs *fast*.
 
