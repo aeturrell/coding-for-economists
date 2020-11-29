@@ -101,7 +101,7 @@ Firstly, everything you can do by clicking on icons to launch programmes on your
 
 on Mac, and the same but with '%' replaced by '$' on linux, and
 
-```powershell
+```bash
 (base) C:\Users\YourUsername>
 ```
 
