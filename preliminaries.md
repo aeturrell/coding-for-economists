@@ -2,14 +2,6 @@
 
 In this chapter, you'll find out how to install and setup everything you need to get coding.
 
-## What is coding?
-
-Computer programming, or coding, is the process of issuing a series of commands that a computer can understand and execute in order to perform a task. Given so much of economics is quantitative, coding is an essential skill for many economists.
-
-As a skill, programming is incredibly useful in a wide range of domains. It can be hugely rewarding. It's worth saying at the outset though, that, *no-one*, and I mean no-one, memorises half of the stuff you'll see in this book. 80% or more of time spent programming is actually time spent looking up how to do this or that online, 'debugging' a code for errors, or testing code. This applies to all programmers, regardless of level. You are here to learn the skills and concepts of programming, not the precise syntax (which is easy to look up later).
-
-![xkcd-what-did-you-see](https://imgs.xkcd.com/comics/wisdom_of_the_ancients.png)
-
 ## Notation
 
 Greek letters, like $\beta$, are the truth. Modified Greek letters are an estimate of the truth, for example $\hat{\beta}$. Letters from the Latin alphabet denote the values of data, for instance $x$ for a variable or vector. Modified Latin alphabet letters denote computations performed on data, for instance $\bar{x} = \frac{1}{N} \displaystyle\sum_{i} x_i$.
@@ -69,7 +61,7 @@ If you have installed these then you are ready to run your first script!
 
 ## Running your first code: Hello World!
 
-Now you will run your first code. Create a new folder for your work (perhaps named 'codingforeconomists', no white space), open that folder with Visual Studio Code ,and create a new file, naming it `hello_world.py`. In the Visual Studio Code editor, add a single line to the file:
+Now you will run your first code. Create a new folder for your work (perhaps named 'codingforeconomists', no white space), open that folder with Visual Studio Code and create a new file, naming it `hello_world.py`. In the Visual Studio Code editor, add a single line to the file:
 
 ```python
 print('Hello World!')
@@ -82,6 +74,13 @@ To run the code in the **terminal**, right-click and select 'Run Python file in 
 The other way of working, with the interactive window, will be much more familiar to anyone who has used Stata or Matlab and is much more suited to the way economists tend to work because it doesn't require you to write the whole script, start to finish, ahead of time. Instead, you can jam, changing code as you go, (re-)running it line by line. To run the code in an interactive window, **right-click and select 'Run Selection/Line in Interactive Window'**. This should cause a new interactive window to appear within Visual Studio Code, and the line to execute within it.
 
 At this point, you may see a message about the default behaviour when you press shift+return; for this book, it's good to have shift+return default to running a line in the interactive window.
+
+```{admonition} Making code run in interactive window by default
+:class: dropdown
+
+Open up Visual Studio Code and go to settings (click on the cog in the bottom left-hand corner, then click settings). Type 'python send' into the search box. Depending on your configuration and Visual Studio Code version, you will either see 'Python › Data Science: Send Selection To Interactive Window' or 'Jupyter: Send Selection To Interactive Window'. Make sure that there is a tick in the box. This will ensure that when you hit shift+enter on code scripts, it will execute your code in Visual Studio's interactive window.
+
+```
 
 Let's make more use of the interactive window. At the bottom of it, there is a box that says 'Type code here and press shift-enter to run'. Go ahead and type `print('Hello World!')` directly in there to achieve the same effect as running the line from your script. Also, any variables you run in the interactive window (from your script or directly) will persist.
 
