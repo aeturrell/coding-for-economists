@@ -384,9 +384,52 @@ for key, value in fruit_dict.items():
 
 ```
 
-## How packages and modules work
+## Using packages and modules
 
-We already saw how to install package work in the previous chapter.
+We already saw how to install packages in the previous chapter: using `pip install packagename` or `conda install packagename` on the command line. What about using a package that you've installed? That's what we'll look at now.
+
+```{note}
+If you want to install packages into a dedicated conda environment, remember to `conda activate environmentname` before using the package install command(s).
+```
+
+Let's see an example of using the powerful numerical library **numpy**. There are different ways to import packages, you can import the entire package in one go or just import the functions you need. When an entire package is imported, you can give it any name you like and the convention for **numpy** is to import it as the shortened 'np'. All of the functions and methods of the package can be accessed by typing `np` followed by `.` and then typing the function name. As well as demonstrating importing the whole package, the example below shows importing just one specific function.
+
+```{code-cell} ipython3
+import numpy as np
+from numpy.linalg import inv
+
+matrix = np.random.randint(10, size=(3, 3))
+print('Matrix:')
+print(matrix)
+
+inv_mat = inv(matrix)
+print('Inverse:')
+print(inv_mat)
+```
+
+We could have imported all of **numpy** using `from numpy import *` but this is considered bad practice as it fills our 'namespace' with function names that might clash with other packages and it's less easy to parse which package's function is doing what. R also relies heavily on imported libraries but uses a different convention for namespaces: in that case, everything is imported but the *order* of package imports matters for what functions are default.
+
+### Modules
+
+Sometimes, you will want to call in some code from a different script. Imagine `:tags: [remove-input]`
+
+```{code-cell} ipython3
+import networkx as nx
+import matplotlib.pyplot as plt
+graph = nx.DiGraph()
+graph.add_edges_from([("Utility script", "code file b"),
+                      ("Utility script", "code file c"),
+                      ("code file b", "code file d"),
+                      ("code file c", "code file d"),
+                      ("Utility script", "code file d")])
+colour_node = '#AFCBFF'
+nx.draw(graph, with_labels=True,
+        node_size=5000, node_color=colour_node)
+plt.xlim(-1.3, 1.3)
+plt.ylim(-1.3, 1.3)
+plt.tight_layout()
+plt.show()
+```
 
 ## Splat and splatty-splat
 
@@ -487,11 +530,10 @@ from itertools import combinations
 print(combinations('abc', 2))
 ```
 
-Find out what the time and date are! (Can pass a timezone as an argument.)
+Find out what the date is! (Can pass a timezone as an argument.)
 
 ```{code-cell} ipython3
-from datetime import date, time
+from datetime import date
 
 print(date.today())
-print(time.today())
 ```
