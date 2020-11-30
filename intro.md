@@ -10,6 +10,8 @@ Naturally, at times, I have made choices regarding what to include, what to omit
 
 Computer programming, or coding, is the process of issuing a series of commands that a computer can understand and execute in order to perform a task. Today, almost all research with some quantitative aspect involves coding.
 
+Imagine a computer as being like a particularly mischevious genie; if your instructions aren't completely unambiguous, the computer won't do what you asked for. So we write out our code, our list of instructions for the computer, very explicitly to make sure *we* can check we wrote what we meant, and that the computer will do it in the way we anticipate. Like a genie though, if you can get the instructions just so, you can create magical things.
+
 ## Why should economists learn to code?
 
 Given so much of economics is quantitative, coding is an essential skill for many economists. Many of the tools and packages that have been developed will help you to do better work more productively. It's Pareto improving.

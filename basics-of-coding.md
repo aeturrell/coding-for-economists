@@ -434,6 +434,10 @@ print(inv_mat)
 
 We could have imported all of **numpy** using `from numpy import *` but this is considered bad practice as it fills our 'namespace' with function names that might clash with other packages and it's less easy to parse which package's function is doing what. R also relies heavily on imported libraries but uses a different convention for namespaces: in that case, everything is imported but the *order* of package imports matters for what functions are default.
 
+```{note}
+If you want to check what packages you have installed in your Python environment, run `conda list` on the command line.
+```
+
 ### Modules
 
 Sometimes, you will want to call in some code from a different script. Imagine you have several code scripts (a, b, and c), all of which use the same underlying function that *you* have written. A central tenet of good coding is that you *do not repeat yourself*. Therefore, a bad solution to this problem would be to copy and paste the same code into all three of the scripts. A *good* solution is to write the code that's need just once in a separate 'utility' script and have the other scripts import that one function:
