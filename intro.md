@@ -18,7 +18,7 @@ Given so much of economics is quantitative, coding is an essential skill for man
 
 As a skill, programming is enormously valuable *beyond economics* too because it's used across a wide range of domains (this is especially true for general purpose programming languages). Code is widely used across industry, academia, and the public sector in everything from computer games to websites, data science to software applications. And learning basic programming concepts in any language is useful for almost any other programming language. So learning to code is good for your human capital.
 
-Coding is like a superpower; it's both fun and powerful! Head to chapter 1 to get started.
+Coding is like a superpower; it's both fun and powerful! Head to the first section to get started.
 
 ## How to use this book
 
@@ -26,4 +26,4 @@ Apart from the quickstart, which is available to run with a single click using G
 
 ## Reading guide
 
-You can read this book in any order depending on your experience. Check the chapter headings and sub-headings to find out what would be most valuable for you.
+You can read this book in any order depending on your experience. Check the section headings and numbered chapter headings to find out what would be most valuable for you.
