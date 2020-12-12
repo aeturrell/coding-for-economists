@@ -1,5 +1,7 @@
 # Introduction
 
+**Warning** This is still under construction.
+
 Welcome to **coding for economists**, a guide for economists on what programming is, why it's useful, and how to do it.
 
 The book aims to give you the skills you need to code for economics, while also giving you bits and pieces of information about programming more generally that might be useful to you. It's suitable for complete beginniners who have never written any code before. Some of the later chapters are suitable for people who have coded before too.

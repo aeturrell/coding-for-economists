@@ -15,12 +15,9 @@ kernelspec:
 
 # Best practice in coding
 
-In this chapter, you'll learn about best practice for coding. As you code, you'll be tempted to ignore these (we all are). But the truth is that they will *all* save you time in the long run, and future you will thank past you for sticking to them.
+In this chapter, you'll learn about best practices for coding. As you code, you'll be tempted to ignore these (that's normal; we all are). But the truth is that they will *save* time in the long run, and future you will thank past you for sticking to them.
 
-
-## Background
-
-The validity of your research depends, to a frightening degree, on the quality of your code. There are many ways to write code and, over the years, software developers have worked out best practices that help to make writing, using, debugging, and reading code more fun, and to make the end product higher quality. (There's nothing worse than wading through someone's terrible code.)
+The validity of your research depends, to a frightening degree, on the quality of your code. There are many ways to write code and, over the years, software developers have worked out best practices that help to make writing, using, debugging, and reading code more fun, and to make the end product higher quality. (There's nothing worse than wading through someone else's terrible code.)
 
 ![Code quality 2](https://imgs.xkcd.com/comics/code_quality_2.png)
 
@@ -85,13 +82,88 @@ In Python, the naming convention for almost all objects is lower case separated 
 
 But good naming isn't just about following the conventions, it's also about giving objects names that are clear and useful. Instead of calling a variable that measures incomes `variable_one`, call it `income_measure`. Instead of calling a function that inverts a matrix `matrix_stuff`, call it `matrix_invert`. The better named your variables, the clearer your code will be--and the fewer comments you will need to write!
 
+## Make it modular
+
+Do not have a single file that does everything. If you split your code into separate, independent modules it will be easier to read, debug, test, and use. You can check the basics of coding chapter to see how to create and import functions from other scripts. But even within a script, you can still make your code modular by defining functions that have clear inputs and outputs.
+
+A good rule of thumb is that if a code that achieves one end goes longer than about 30 lines, it should probably go into a function. Scripts longer than about 500 lines are ripe for splitting up too.
+
 ## Code comments
 
 Code comments, extra information that is not executed when the code is run, can be added by a preceding hash character `# This is a comment`. Use code comments to provide extra contextual information that *isn't* conveyed by function and variable names.
 
+Actually, well-written code needs *fewer* comments because it's more evidence what's going on. And it's tempting not to update comments even when code changes. So do comment, but see if you can make the code tell its own story first.
+
 ## Code review
 
-Perform code reviews. Give what you’ve done to a colleague and ask them to go through it line-by-line checking it works as intended. If they do this properly and don’t find any mistakes or issues then I’d be very surprised. Return the favour to magically become a better coder yourself.
+Perform code reviews: give what you’ve done to a colleague and ask them to go through it line-by-line to check it works as intended. If they do this properly and don’t find any mistakes or issues then I’d be very surprised. Return the favour to magically become a better coder yourself.
+
+## Use interoperable file formats
+
+We'll talk much more about data in an upcoming chapter. For now, some basic pointers for the most common form of data: tabular data that's arranged in columns and rows.
+
+First: **do not** store your data in Excel file formats. Ever. First, it's not an open format, it's proprietary, even if you can open it with many open source tools. Second, more importantly, Excel can do bad things like [changing the underlying values in your dataset](http://www.win-vector.com/blog/2014/11/excel-spreadsheets-are-hard-to-get-right/) (dates and booleans), and it tempts other users to start slotting Excel code around the data. This is bad - best practice is to **separate** code and data. Code hidden in Excel cells is not very transparent or auditable.
+
+![jpg](https://pbs.twimg.com/media/D8z-M_dVUAA6NOh?format=jpg&name=medium)
+
+If you want examples of what can go wrong using Excel, look no further than the famous [Reinhart and Rogoff Excel error](https://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646_), where they didn't select all cells (it's harder to make this kind of mistake with real programming languages, though of course not impossible), the time when a first-year law associated [added extra 179 contracts](https://www.abajournal.com/news/article/excel_error_by_a_cleary_gottlieb_associate_alters_lehman_asset_deal1) to an agreement to buy Lehman Brothers assets, or when the UK [under-counted the number](https://www.bbc.co.uk/news/technology-54423988) of coronavirus cases by *16,000* because their Excel spreedsheet wasn't big enough. In programming, the dataset limitation is the size of your computer's hard drive (and even then, you can jump onto the cloud).
+
+In the majority of cases, the best data file format for your project is CSV--certainly for outputting final results. Everyone can open a CSV file, no matter what analytical tool or operating system they are using. As a storage format, it’s unlikely to change. Without going into the mire of [different encodings](http://kunststube.net/encoding/), save it with the UTF-8 encoding (note that this is not the default encoding in Windows).
+
+Do not use Stata's .dta format for storing data, especially long term. For one thing, the format changes with the version of Stata. You do not want your data to depend on what version of software you're using! Second, it has the downsides of only being able to be opened by special tools (including `pd.read_stata()`) without the benefits of lightning fast input and output, or a small size of file on disk.
+
+Although open source, I also don't recommend the statistical language R's RDS format or Python's pickle format, because neither are easily accessible from other tools. These are okay for intermediate data within a project that won't persist, but you could also use parquet for that, which is cross-platform.
+
+And if you're working with big data, I *strongly* recommend the parquet file format. In most programming languages, it's [blazing fast](https://ursalabs.org/blog/2019-10-columnar-perf/) for input/output and packs down to a very efficient size. For example, a file saved in parquet might be 10 times smaller than the same .dta file; in tests, a 114 Mb parquet file was a whopping 4.68 GB in R's RDS format. If you're using cloud or have a small laptop, these space-savings add up. Better yet, parquet is available across a wide range of tools and languages including Python, R, Ruby, C++, Java, and Go. (Worth saying that parquet won't always be the right choice, but it's a great default for big data.)
+
+## Use relative filepaths
+
+A path, or filepath, is a slash-separated list of directory names followed by either a directory name or a file name. You'll use them to read data into code, for example using `df = pd.read_csv('path/to/data.csv')`. A directory is the same as a folder. On Unix based systems (Mac and Linux), these paths use forward slashes:
+
+```shell
+/Users/yourname/Documents/projects/file.csv
+```
+
+On Windows, which insists on being different, the slashes go the other way:
+
+```shell
+C:\Documents\projects\file.csv
+```
+
+These are *absolute paths*, that is they give the full information to go from a disk to the file. These are okay on your computer, but they are useless for replicability or for working with co-authors. It's much better in that case to use *relative paths*, where the path to a file is defined relative to a project folder. For example,
+
+```shell
+project_folder/data/raw/file.csv
+```
+
+Then, we use the convention that code executed for a project should have the project folder as its root directory, and any paths are relative to it. So to open `file.csv` using **pandas**, you would use
+
+```python
+import pandas as pd
+df = pd.read_csv('data/raw/file.csv')
+```
+
+This works great on Mac and Linux, but it's not going to work on Windows. For that we need to use operating system independent paths. One way of doing this in Python is to use the `os` package that tells the operating system (whatever it may be) to combine folder names into a path:
+
+```python
+import pandas as pd
+import os
+
+path_to_data = os.path.join('data', 'raw', 'file.csv')
+df = pd.read_csv(path_to_data)
+```
+
+## Don't prematurely optimise for speed
+
+Make code correct and readable first, and fast second. You can waste a lot of time optimising only to find that either the bottleneck is not where you thought it was, or that you change your mind about what process needs to be done.
+
+## Rubber duck your problems
+
+Rubber duck debugging is a method of fixing code that isn't working as intended by, err, talking to a rubber duck. Something about describing your problem out loud and in detail can suddenly illuminate the issue to you and your plastic waterfowl friend.
+
+![jpg](https://gitduck.com/blog/content/images/2019/10/IMG_7540.jpeg)
+
+
 
 ## The Zen of Python
 
@@ -104,4 +176,4 @@ import this
 Finally, it's always good to start by choosing clarity over optimisation. Computation is cheap, brain time is not. If you really need to optimise, do it later when you’ve figured out where it will count.
 
 ## Review
-...
+
