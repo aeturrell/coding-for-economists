@@ -4,7 +4,7 @@ import os
 
 def star_wars_data():
     """ Saves star wars character data with set
-        datatypes and in feather format.
+        datatypes and in pickle format.
     """
     df = pd.read_csv(os.path.join('data', 'characters.csv'),
                      thousands=',',
@@ -18,9 +18,9 @@ def star_wars_data():
                             'gender': 'category',
                             'homeworld': 'category',
                             'species': 'category'})
-
+    df = df.drop(['skin_color', 'birth_year'], axis=1)
     df.info()
-    df.to_feather(os.path.join('data', 'starwars.feather'))
+    df.to_pickle(os.path.join('data', 'starwars.pickle'))
 
 
 star_wars_data()
