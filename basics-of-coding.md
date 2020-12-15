@@ -551,6 +551,7 @@ more_nums = (1, 2, 3, 4, 5)
 
 print(sum_elements(more_nums))
 ```
+
 ## Miscellaneous fun
 
 Here are some other bits of basic coding that might be useful. They really show why Python is such a delightful language.
@@ -613,6 +614,22 @@ raw_str = 'asdfaa3fa'
 for str_func in functions:
     print(f'Function name: {str_func.__name__}, value is:')
     print(str_func(raw_str))
+```
+
+Functions can be defined recursively. For instance, the Fibonacci sequence is defined such that $ a_n = a_{n-1} + a_{n-2} $ for $ n>1 $.
+
+```{code-cell} ipython3
+def fibonacci(n):
+    if(n < 0):
+        print('Please enter n>0')
+        return 0
+    elif(n <= 1):
+        return n
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+
+
+[fibonacci(i) for i in range(10)]
 ```
 
 This is just a taster of what can be done using 'batteries included' base Python; for more see the Advanced Coding Chapter.

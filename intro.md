@@ -1,6 +1,8 @@
 # Introduction
 
-**Warning** This is still under construction.
+```{warning}
+This is still under construction.
+```
 
 Welcome to **coding for economists**, a guide for economists on what programming is, why it's useful, and how to do it.
 
