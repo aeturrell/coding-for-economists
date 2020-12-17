@@ -13,7 +13,7 @@ kernelspec:
   name: codeforecon
 ---
 
-# Reading and writing data
+# Reading and Writing Data
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
@@ -84,15 +84,17 @@ Okay, so you have a big list of file paths: now what!? Assuming that the files h
 df = pd.concat([pd.read_csv(x) for x in list_of_files], axis=0)
 ```
 
-### Working with complex Excel data
+## Reading data from the web
 
-## Reading data from the internet and APIs
+### Files from the internet
 
 As you will have seen in some of the examples in this book, it's easy to read data from the internet once you have the url and file type. Here, for instance, is an example that reads in the 'storms' dataset:
 
 ```{code-cell} ipython3
 pd.read_csv('https://vincentarelbundock.github.io/Rdatasets/csv/dplyr/storms.csv')
 ```
+
+### APIs
 
 Using an API (application programming interface) is another way to draw down information from the interweb. Their just a way for one tool, say Python, to speak to another tool, say a server, and usefully exchange information. The classic use case would be to post a request for data that fits a certain query via an API and to get a download of that data back in return. (You should always preferentially use an API over webscraping a site.)
 
@@ -126,7 +128,7 @@ df = (pd.DataFrame(pd.json_normalize(json_data['months']))
 df['value'].plot(title=title, ylim=(0, df['value'].max()*1.2), lw=3.);
 ```
 
-### An easier way to interact with (some) APIs
+#### An easier way to interact with (some) APIs
 
 Although it didn't take much code to get the ONS data, it would be even better if it was just a single line, wouldn't it? Fortunately there are some packages out there that make this easy, but it does depend on the API (and APIs come and go over time).
 
@@ -140,23 +142,24 @@ By far the most comprehensive library for accessing extra APIs is [**pandas-data
 
 and more.
 
-Let's see an example using FRED (the Federal Reserve Bank of St. Louis' economic data library). Again, let's look at job vacancies: in this case the total for the UK:
+Let's see an example using FRED (the Federal Reserve Bank of St. Louis' economic data library). This time, let's look at the UK unemployment rate:
 
 ```{code-cell} ipython3
 import pandas_datareader.data as web
 
-series_name = 'LMJVTTUVGBM647S'
-title = 'UK vacancies (thousands)'
+df_u = web.DataReader('LRHUTTTTGBM156S', 'fred')
 
-# The first line retrieves the data:
-df_v = (web.DataReader(series_name, 'fred')
-        .rename(columns={series_name: title})
-        .divide(1e3))
-
-df_v.plot(title=title, legend=False, ylim=(0, df_v[title].max()*1.2), lw=3.);
+df_u.plot(title='UK unemployment (percent)',
+          legend=False,
+          ylim=(2, 6),
+          lw=3.);
 ```
 
 ## Writing data to file
+
+The syntax for writing to a file is also very consistent, taking the form `df.to_*` where `*` might be `csv`, `stata`, or a number of output formats (you can even output to your computer's clipboard!).
+
+In general, you *do* need to specify the file extension though, i.e. when saving data you should specify `df.to_csv('dataout.csv')` rather than `df.to_csv('dataout')`. As with reading in, there are plenty of options for how to output data, and you can find more on outputs in the **pandas** [documentation](https://pandas.pydata.org/docs/user_guide/io.html).
 
 ### Formats
 
@@ -168,7 +171,6 @@ If you're interested in how effective the different data formats are, there blog
 
 It's best *not* to use formats associated with proprietary software, especially if the standard may change over time (Stata files change with the version of Stata used!!) or if opening the data in that tool might change it (hello Excel). It's also good practice *not* to use a data storage format that cannot easily be opened by other tools. For this reason, I don't generally recommend Python's pickle format or R's RDA format (though of course it's fine if your data is completely internal to your project and you're only using one language).
 
-
-
 ## Review
 
+If you know how to read in data from file(s), the internet, and APIs, and write out to file, then you've mastered the content of this chapter!

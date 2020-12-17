@@ -15,7 +15,7 @@ kernelspec:
 
 # Best practice in coding
 
-In this chapter, you'll learn about best practices for coding. As you code, you'll be tempted to ignore these (that's normal; we all are). But the truth is that they will *save* time in the long run, and future you will thank past you for sticking to them.
+In this chapter, you'll learn about some best practices for coding. As you code, you'll be tempted to ignore these (that's normal; we all are). But the truth is that they will *save* time in the long run, and future you will thank past you for sticking to them.
 
 The validity of your research depends, to a frightening degree, on the quality of your code. There are many ways to write code and, over the years, software developers have worked out best practices that help to make writing, using, debugging, and reading code more fun, and to make the end product higher quality. (There's nothing worse than wading through someone else's terrible code.)
 
@@ -74,6 +74,10 @@ This saves having to repeat code, having no idea whether it's this or that versi
 
 Some practical ways to apply DRY in practice are to use functions, to put functions or code that needs to be executed multiple times by multiple different scripts into another script (eg called `utilities.py`) and then import it, and to think carefully if another way of writing your code would be more concise (yet still readable).
 
+```{note}
+If you're using Visual Studio Code, you can [automatically send code into a function](https://code.visualstudio.com/docs/editor/refactoring) by right-clicking on code and using the 'Extract to method' option.
+```
+
 ## Naming conventions
 
 In Python, the naming convention for almost all objects is lower case separated by underscores, e.g. ‘this_is_a_script.py’. This style of naming is also known as snake case. There are different naming conventions though--[Allison Horst](https://twitter.com/allison_horst) made this fantastic cartoon of the different conventions that are in use.
@@ -106,13 +110,13 @@ First: **do not** store your data in Excel file formats. Ever. First, it's not a
 
 ![jpg](https://pbs.twimg.com/media/D8z-M_dVUAA6NOh?format=jpg&name=medium)
 
-If you want examples of what can go wrong using Excel, look no further than the famous [Reinhart and Rogoff Excel error](https://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646_), where they didn't select all cells (it's harder to make this kind of mistake with real programming languages, though of course not impossible), the time when a first-year law associated [added extra 179 contracts](https://www.abajournal.com/news/article/excel_error_by_a_cleary_gottlieb_associate_alters_lehman_asset_deal1) to an agreement to buy Lehman Brothers assets, or when the UK [under-counted the number](https://www.bbc.co.uk/news/technology-54423988) of coronavirus cases by *16,000* because their Excel spreedsheet wasn't big enough. In programming, the dataset limitation is the size of your computer's hard drive (and even then, you can jump onto the cloud).
+If you want examples of what can go wrong using Excel, look no further than the famous [Reinhart and Rogoff Excel error](https://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646_), where they didn't select all cells (it's harder to make this kind of mistake with real programming languages, though of course not impossible), the time when a first-year law associate [added an extra 179 contracts](https://www.abajournal.com/news/article/excel_error_by_a_cleary_gottlieb_associate_alters_lehman_asset_deal1) to an agreement to buy Lehman Brothers assets, or when the UK [under-counted the number](https://www.bbc.co.uk/news/technology-54423988) of coronavirus cases by *16,000* because their Excel spreedsheet wasn't big enough. In programming, the dataset limitation is the size of your computer's hard drive (and even then, you can jump onto the cloud).
 
 In the majority of cases, the best data file format for your project is CSV--certainly for outputting final results. Everyone can open a CSV file, no matter what analytical tool or operating system they are using. As a storage format, it’s unlikely to change. Without going into the mire of [different encodings](http://kunststube.net/encoding/), save it with the UTF-8 encoding (note that this is not the default encoding in Windows).
 
-Do not use Stata's .dta format for storing data, especially long term. For one thing, the format changes with the version of Stata. You do not want your data to depend on what version of software you're using! Second, it has the downsides of only being able to be opened by special tools (including `pd.read_stata()`) without the benefits of lightning fast input and output, or a small size of file on disk.
+Do not use Stata's .dta format for storing data, especially long term. For one thing, the format changes with the version of Stata. You do not want your data to depend on what version of software you're using! Second, it isn't very interoperable across tools (although you can use `pd.read_stata()` in Python). Third, it is not very efficient in the way that it uses disk space.
 
-Although open source, I also don't recommend the statistical language R's RDS format or Python's pickle format, because neither are easily accessible from other tools. These are okay for intermediate data within a project that won't persist, but you could also use parquet for that, which is cross-platform.
+Although open source and compressed, I also don't recommend the statistical language R's RDS format or Python's pickle format, because neither are easily accessible from other tools. These are okay for intermediate data within a project that won't persist, but you could also use parquet for that, which is cross-platform.
 
 And if you're working with big data, I *strongly* recommend the parquet file format. In most programming languages, it's [blazing fast](https://ursalabs.org/blog/2019-10-columnar-perf/) for input/output and packs down to a very efficient size. For example, a file saved in parquet might be 10 times smaller than the same .dta file; in tests, a 114 Mb parquet file was a whopping 4.68 GB in R's RDS format. If you're using cloud or have a small laptop, these space-savings add up. Better yet, parquet is available across a wide range of tools and languages including Python, R, Ruby, C++, Java, and Go. (Worth saying that parquet won't always be the right choice, but it's a great default for big data.)
 
@@ -163,8 +167,6 @@ Rubber duck debugging is a method of fixing code that isn't working as intended 
 
 ![jpg](https://gitduck.com/blog/content/images/2019/10/IMG_7540.jpeg)
 
-
-
 ## The Zen of Python
 
 For a more poetic take on how to code, `import this` in your Python session.
@@ -177,3 +179,12 @@ Finally, it's always good to start by choosing clarity over optimisation. Comput
 
 ## Review
 
+From this chapter, you should remember to
+
+- [x] follow a code style and use a linter;
+- [x] not repeat yourself;
+- [x] be consistent with your naming convention;
+- [x] write modular, well-documented code;
+- [x] use interoperable file formats;
+- [x] use relative file paths; and
+- [x] stay zen!
