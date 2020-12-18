@@ -64,6 +64,8 @@ df = pd.read_csv(os.path.join('path', 'to', 'data.csv'))
 
 This code assumes that python is being executed in a directory that has a subdirectory 'path', which has a subdirectory 'to', inside which is 'data.csv'. Why are we using `os.path.join(...)` instead of just passing `pd.read_csv('path/to/data.csv'))`? The answer is that paths are not all alike; they're different on Linux/Mac and Windows. By saying `os.path.join` we tell Python to figure out how to create a path from the folder names.
 
+TODO: Change this to use pathlib. There are introductory videos to pathlib and its use available [here](https://calmcode.io/pathlib/do-not-hardcode.html).
+
 ### Reading data from lots of files
 
 Quite often, you have a case where you need to read in data from many files at once. There are two tools that will help with this: glob and concatenate.
@@ -127,6 +129,8 @@ df = (pd.DataFrame(pd.json_normalize(json_data['months']))
 
 df['value'].plot(title=title, ylim=(0, df['value'].max()*1.2), lw=3.);
 ```
+
+We've talked about *reading* APIs. You can also create your own to serve up data, models, whatever you like! This is an advanced topic and we won't cover it; but if you do need to, the simplest way is to use [Fast API](https://fastapi.tiangolo.com/). You can find some short video tutorials for Fast API [here](https://calmcode.io/fastapi/hello-world.html).
 
 #### An easier way to interact with (some) APIs
 

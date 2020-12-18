@@ -62,6 +62,8 @@ def very_important_function(
         ...
 ```
 
+To see more about black and how to use it, check out these [short video tutorials](https://calmcode.io/black/introduction.html).
+
 Most programming languages have a style guide or at least some conventions.
 
 ![Code quality](https://imgs.xkcd.com/comics/code_quality.png)

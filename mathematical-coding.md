@@ -144,7 +144,7 @@ expr.series(α, 0, 4)
 
 This is a 3rd order expansion around $\alpha=0$.
 
-#### Linear algebra
+#### Symbolic linear algebra
 
 The support for **matrices** can also come in handy for economic applications. Here's a matrix,
 
@@ -231,19 +231,13 @@ which creates a file called 'latex_equation.tex' that has a single line in it: '
 
 ## Numerical Mathematics
 
-For much of the time, you'll be dealing with numbers rather than symbols. The workhorses of numerical mathematics are the two packages **numpy** and **scipy**. Both have excellent documentation, where you can find out more.
-
-In this section, we'll look at how to use these in some standard mathematical operations that arise in economics.
-
-### Preliminaries
-
-Here we'll meet some of the basic objects that will be needed for numerical operations.
+For much of the time, you'll be dealing with numbers rather than symbols. The workhorses of numerical mathematics are the two packages **numpy** and **scipy**. Both have excellent documentation, where you can find out more. In this section, we'll look at how to use them in some standard mathematical operations that arise in economics.
 
 The most basic object is an array, which can be defined as follows:
 
 ```{code-cell} ipython3
 import numpy as np
-a = np.array([0, 1, 2, 3], dytpe=int64)
+a = np.array([0, 1, 2, 3], dtype='int64')
 a
 ```
 
@@ -303,21 +297,21 @@ c
 
 To access values in an array, you can use all of the by-position slicing methods that you've seen already in data analysis and with lists. The figure gives an example of some common slicing operations:
 
-![](https://scipy-lectures.org/_images/numpy_indexing.png)
+![Examples of array slices](https://scipy-lectures.org/_images/numpy_indexing.png)
 
 Arrays can also be sliced and diced based on boolean indexing, just like a dataframe.
 
 For example, using the array defined above, we can create a boolean array of true and false values from a condition such as `c > 6` and use that to only access some elements of an array (it doesn't have to be the same array, though it usually is):
 
 ```{code-cell} ipython3
-c[c > 2]
+c[c > 6]
 ```
 
 As with dataframes, arrays can be combined. The main command to remember is `np.concatenate`, which has an `axis` keyword option.
 
 ```{code-cell} ipython3
 x = np.eye(3)
-np.concatenate([x, x], axis=1)
+np.concatenate([x, x], axis=0)
 ```
 
 Splitting is performed with `np.split(array, splits, axis=)`, for example
@@ -335,7 +329,7 @@ Finally, numpy does a lot of smart broadcasting of arrays. Broadcasting is what 
 Summing two arrays of the same shape is a pretty obvious example, but it also applies to cases that are *not* completely matched. For example, multiplication by a scalar is broadcast across all elements of an array:
 
 ```{code-cell} ipython3
-x = np.fromfunction(lambda i, j: i + j, (2, 3))
+x = np.ones(shape=(3, 3))
 x*3
 ```
 
@@ -345,13 +339,7 @@ Similarly, numpy functions are broadcast across elements of an array:
 np.exp(x)
 ```
 
-### Linear algebra
-
-Let's kick things off by importing some more linear algebra routines (it will come in handy soon).
-
-```{code-cell} ipython3
-import numpy.linalg as la
-```
+### Numeric linear algebra
 
 The transpose of an array `x` is given by `x.T`.
 
@@ -367,7 +355,7 @@ Inverting matrices:
 
 ```{code-cell} ipython3
 a = np.random.randint(9, size=(3, 3), dtype='int')
-la.inv(a)
+a @ np.linalg.inv(a)
 ```
 
 Computing the trace:
@@ -379,7 +367,7 @@ a.trace()
 Determinant:
 
 ```{code-cell} ipython3
-la.det(a)
+np.linalg.det(a)
 ```
 
 #### Solving systems of linear equations
@@ -397,10 +385,113 @@ $$
 M^{-1} M \cdot \vec{x} = I \cdot \vec{x} = M^{-1} \cdot \vec{c}
 $$
 
-which could be called by running `x = la.inv(M).dot(c)`. There's a convenience function in **numpy** called solve too though, which we'll use in this example:
+which could be called by running `x = la.inv(M).dot(c)`. There's a convenience function in **numpy** called solve that does the same thing: here it finds the real values of the vector $\vec{x}$.
 
 ```{code-cell} ipython3
 M = np.array([[4, 3, 2], [-2, 2, 3], [3, -5, 2]])
 c = np.array([25, -10, -4])
 np.linalg.solve(M, c)
 ```
+
+Finally, eigenvalues and eigenvectors can be found from:
+
+```{code-cell} ipython3
+import scipy.linalg as la
+eigvals, eigvecs = la.eig(M)
+eigvals
+```
+
+### Distribution functions
+
+TODO -- maybe in econometrics though?
+
+### Interpolation
+
+This section draws on the **scipy** documentation. There are built-in **pandas** methods for interpolation in dataframes, but **scipy** also has a range of functions for this including for univariate data `interp1d`, multidimensional interpolation on a grid `interpn`, `griddata` for unstructured data. Let's see a simple example with interpolation between a regular grid of integers.
+
+```{code-cell} ipython3
+import matplotlib.pyplot as plt
+from scipy import interpolate
+x = np.arange(0, 10)
+y = np.exp(-x/3.0)
+f = interpolate.interp1d(x, y, kind='cubic')
+# Create a finer grid to interpolation function f
+xnew = np.arange(0, 9, 0.1)
+ynew = f(xnew)
+plt.plot(x, y, 'o', xnew, ynew, '-')
+plt.show()
+```
+
+What about unstructured data? Let's create a Cobb-Douglas function on a detailed grid but then only retain a random set of the established points.
+
+```{code-cell} ipython3
+from scipy.interpolate import griddata
+
+def cobb_doug(x, y):
+    alpha = 0.8
+    return x**(alpha)*y**(alpha-1)
+
+
+# Take some random points of the Cobb-Douglas function
+points = np.random.rand(1000, 2)
+values = cobb_doug(points[:,0], points[:,1])
+
+# Create a grid
+grid_x, grid_y = np.mgrid[0.01:1:200j, 0.01:1:200j]
+
+# Interpolate the points we have onto the grid
+interp_data = griddata(points, values, (grid_x, grid_y), method='cubic')
+
+# Plot results
+fig, axes = plt.subplots(1, 2)
+# Plot function & scatter of random points
+axes[0].imshow(cobb_doug(grid_x, grid_y).T,
+               extent=(0, 1, 0, 1),
+               origin='lower', cmap='plasma_r',
+               vmin=0, vmax=1)
+axes[0].plot(points[:, 0], points[:, 1], 'r.', ms=1.2)
+axes[0].set_title('Original + points')
+# Interpolation of random points
+axes[1].imshow(interp_data.T, extent=(0, 1, 0, 1),
+               origin='lower', cmap='plasma_r',
+               vmin=0, vmax=1)
+axes[1].set_title('Cubic interpolation');
+```
+
+### Optimisation
+
+**scipy** has functions for minimising scalar functions, minimising multivariate functions with complex surfaces, and root-finding. Let's see an example of finding the minimum of a scalar function.
+
+```{code-cell} ipython3
+from scipy import optimize
+
+def f(x):
+    return x**2 + 10*np.sin(x) - 1.2
+
+
+result = optimize.minimize(f, x0=0)
+result
+```
+
+The result of the optimisation is in the 'x' attribute of `result`. Let's see this:
+
+```{code-cell} ipython3
+x = np.arange(-10, 10, 0.1)
+fig, ax = plt.subplots()
+ax.plot(x, f(x))
+ax.scatter(result.x, f(result.x), s=150, color='k')
+ax.set_xlabel('x')
+ax.set_ylabel('f(x)', rotation=90)
+plt.show()
+```
+
+In higher dimensions, the minimisation works in much the same way, with the same function `optimize.minimize`. There are a LOT of minimisation options that you can pass to the `method=` keyword; the default is intelligently chosen from BFGS, L-BFGS-B, or SLSQP, depending upon whether you supply constraints or bounds.
+
+Root finding, aka solving equations of the form $f(x)=$, is also catered for by **scipy**, through `optimize.root`.
+
+In both of these cases, be warned that multiple roots and multiple minima can be hard to detect, and you may need to carefully specify the bounds or the starting positions in order to find the root you're looking for. Also, both of these methods can accept the Jacobian of the function you're working with as an argument, which is likely to improve performance with some solvers.
+
+
+### Calculus
+
+#### Numerical Integration

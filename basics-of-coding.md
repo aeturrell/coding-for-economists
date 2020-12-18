@@ -334,7 +334,7 @@ names_list = [[x + ' ' + y for x in first_names] for y in last_names]
 print(names_list)
 ```
 
-This gives a nested structure that (in this case) iterates over `first_names` first, and then `last_names`.
+This gives a nested structure that (in this case) iterates over `first_names` first, and then `last_names`. If you'd like to learn more about list comprehensions, check out these [short video tutorials](https://calmcode.io/comprehensions/introduction.html).
 
 ## Functions
 
@@ -506,6 +506,35 @@ python utilities.py
 
 It will return `Script has run` because, by executing the script alone, we are asking for anything in the `main` block defined at the end of the file to be run. But we can still import anything from utilities into other scripts as before--and in this case it is not the main script, but an import, and so the `main` block will *not* be executed.
 
+## Lambda functions
+
+Lambda functions are a very old idea in programming, and part of the functional programming paradigm. Coding languages tend to be more object-oriented or functional, though high-level languages often mix both. For example, R leans slightly more toward being a functional language, while Python is slightly more object oriented. However, Python does have lambda functions, for example:
+
+```{code-cell} ipython3
+plus_one = lambda x: x+1
+plus_one(3)
+```
+
+For a one-liner function that has a name it's actually better practice here to use `def plus_one(x): return x + 1`, so you shouldn't see this form of lambda function too much in the wild. However, you are likely to see lambda functions being used with dataframes and other objects. For example, if you had a dataframe with a column of string called 'strings' that you want to lower the case of and replace one phrase with another, you could use lambda functions to do that (there are better ways of doing this but this is useful as a simple example):
+
+```{code-cell} ipython3
+df = pd.DataFrame(data=[['hello my blah is Ada'], ['hElLo mY blah IS Adam']],
+                  columns=['strings'],
+                  dtype='string')
+df['strings'].apply(lambda x: x.lower().title().replace('blah', 'Name'))
+```
+
+More complex lambda functions can be constructed, eg `lambda x, y, z: x + y + z`. One of the best use cases of lambdas is when you *don't* want to go to the trouble of declaring a function. For example, let's say you want to compose a series of functions and you want to specify those functions in a list, one after the other. Using functions alone, you'd have to define a new function for each operation. With lambdas, it would look like this (again, there are easier ways to do this operation, but we'll use simple functions to demonstrate the principle):
+
+```{code-cell} ipython3
+number = 1
+for func in [lambda x: x + 1, lambda x: x*2, lambda x: x**2]:
+    number = func(number)
+    print(number)
+```
+
+Note that people often use `x` by convention, but there's nothing to stop you writing `lambda horses: horses**2` (except the looks your co-authors will give you). If you want to learn more about lambda functions, check out these [short video tutorials](https://calmcode.io/lambda/introduction.html).
+
 ## Splat and splatty-splat
 
 You read those right, yes. These are also known as unpacking operators for, respectively, arguments and dictionaries. For instance, if I have a function that takes two arguments I can send variables to it in different ways:
@@ -522,7 +551,7 @@ func_args = (6, 11)
 print(add(*func_args))
 ```
 
-The splat operator, `*`, unpacks the variable `func_args` into two different function arguments. Splatty-splat unpacks dictionaries into keyword arguments:
+The splat operator, `*`, unpacks the variable `func_args` into two different function arguments. Splatty-splat unpacks dictionaries into keyword arguments (aka kwargs):
 
 ```{code-cell} ipython3
 
@@ -551,6 +580,8 @@ more_nums = (1, 2, 3, 4, 5)
 
 print(sum_elements(more_nums))
 ```
+
+To learn more about args and kwargs, check out these [short video tutorials](https://calmcode.io/args-kwargs/introduction.html).
 
 ## Miscellaneous fun
 
