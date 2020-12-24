@@ -13,7 +13,7 @@ kernelspec:
   name: codeforecon
 ---
 
-# Introduction to Mathematics with Code
+# Intro to Mathematics with Code
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
@@ -274,16 +274,22 @@ mat.shape
 
 We already saw how `np.arange(start, stop, step)` produces a vector; `np.linspace(start, stop, number)` produces a vector of length `number` by equally dividing the space between `start` and `stop`.
 
-A couple of really useful arrays are `np.ones(shape)`, for example,
+Three really useful arrays are `np.ones(shape)`, for example,
 
 ```{code-cell} ipython3
 np.ones((3, 3))
 ```
 
-and `np.diag`:
+`np.diag` for diagnoal arrays,
 
 ```{code-cell} ipython3
 np.diag(np.array([1, 2, 3, 4]))
+```
+
+and `np.zeros` for empty arrays:
+
+```{code-cell} ipython3
+np.zeros((2, 2))
 ```
 
 Random numbers are supplied by `np.random.rand()` for a uniform distribution in [0, 1], and `np.random.randn()` for numbers drawn from a standard normal distribution.
@@ -370,6 +376,15 @@ Determinant:
 np.linalg.det(a)
 ```
 
+Computing a Cholesky decomposition, i.e. finding lower triangular matrix $C$ such that $C C' = \Sigma$ for $\Sigma$ a 2-dimensional positive definite matrix.
+
+```{code-cell} ipython3
+Σ = np.array([[4, 1], [1, 3]])
+c = np.linalg.cholesky(Σ)
+
+c @ c.T - Σ
+```
+
 #### Solving systems of linear equations
 
 Say we have a system of equations, $4x + 3y + 2z = 25$,
@@ -400,10 +415,6 @@ import scipy.linalg as la
 eigvals, eigvecs = la.eig(M)
 eigvals
 ```
-
-### Distribution functions
-
-TODO -- maybe in econometrics though?
 
 ### Interpolation
 
@@ -487,11 +498,39 @@ plt.show()
 
 In higher dimensions, the minimisation works in much the same way, with the same function `optimize.minimize`. There are a LOT of minimisation options that you can pass to the `method=` keyword; the default is intelligently chosen from BFGS, L-BFGS-B, or SLSQP, depending upon whether you supply constraints or bounds.
 
-Root finding, aka solving equations of the form $f(x)=$, is also catered for by **scipy**, through `optimize.root`.
+Root finding, aka solving equations of the form $f(x)=0$, is also catered for by **scipy**, through `optimize.root`. It works in much the same way as `optimizer.minimize`.
 
 In both of these cases, be warned that multiple roots and multiple minima can be hard to detect, and you may need to carefully specify the bounds or the starting positions in order to find the root you're looking for. Also, both of these methods can accept the Jacobian of the function you're working with as an argument, which is likely to improve performance with some solvers.
 
+### Numerical Integration
 
-### Calculus
+**scipy** provides routines to numerically evaluate integrals in `scipy.integrate`, which you can find the documentation for [here](https://docs.scipy.org/doc/scipy/reference/integrate.html). Let's see an example using the 'vanilla' integration method, `quad`, to solve a known function between given (numerical) limits:
 
-#### Numerical Integration
+$$
+\displaystyle\int_0^{\pi} \sin(x) d x
+$$
+
+```{code-cell} ipython3
+from scipy.integrate import quad
+res, err = quad(np.sin, 0, np.pi)
+res
+```
+
+What if we just have data samples? In that case, there are several routines that perform purely numerical integration:
+
+```{code-cell} ipython3
+from scipy.integrate import simps
+x = np.arange(0, 10)
+f_of_x = np.arange(0, 10)
+
+simps(f_of_x, x) - 9**2/2
+```
+
+Even with just 10 evenly spaced points, the composite Simpson’s rule integration given by `simps` is able to accurately find the answer as $\left( x^2/2\right) |_{0}^{9}$.
+
+### Set theory
+
+See https://www.kevinsheppard.com/files/teaching/python/notes/python_introduction_2020.pdf 5.5
+### Distribution functions
+
+TODO -- maybe in econometrics.

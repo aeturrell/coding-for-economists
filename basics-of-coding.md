@@ -518,6 +518,7 @@ plus_one(3)
 For a one-liner function that has a name it's actually better practice here to use `def plus_one(x): return x + 1`, so you shouldn't see this form of lambda function too much in the wild. However, you are likely to see lambda functions being used with dataframes and other objects. For example, if you had a dataframe with a column of string called 'strings' that you want to lower the case of and replace one phrase with another, you could use lambda functions to do that (there are better ways of doing this but this is useful as a simple example):
 
 ```{code-cell} ipython3
+import pandas as pd
 df = pd.DataFrame(data=[['hello my blah is Ada'], ['hElLo mY blah IS Adam']],
                   columns=['strings'],
                   dtype='string')

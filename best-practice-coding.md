@@ -76,7 +76,8 @@ This saves having to repeat code, having no idea whether it's this or that versi
 
 Some practical ways to apply DRY in practice are to use functions, to put functions or code that needs to be executed multiple times by multiple different scripts into another script (eg called `utilities.py`) and then import it, and to think carefully if another way of writing your code would be more concise (yet still readable).
 
-```{note}
+```{admonition} Tip
+:class: tip
 If you're using Visual Studio Code, you can [automatically send code into a function](https://code.visualstudio.com/docs/editor/refactoring) by right-clicking on code and using the 'Extract to method' option.
 ```
 
