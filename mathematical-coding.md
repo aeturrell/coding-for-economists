@@ -361,13 +361,14 @@ Inverting matrices:
 
 ```{code-cell} ipython3
 a = np.random.randint(9, size=(3, 3), dtype='int')
-a @ np.linalg.inv(a)
+b = a @ np.linalg.inv(a)
+b
 ```
 
 Computing the trace:
 
 ```{code-cell} ipython3
-a.trace()
+b.trace()
 ```
 
 Determinant:
@@ -528,9 +529,51 @@ simps(f_of_x, x) - 9**2/2
 
 Even with just 10 evenly spaced points, the composite Simpson’s rule integration given by `simps` is able to accurately find the answer as $\left( x^2/2\right) |_{0}^{9}$.
 
-### Set theory
+## Set theory
 
-See https://www.kevinsheppard.com/files/teaching/python/notes/python_introduction_2020.pdf 5.5
-### Distribution functions
+Set theory is a surprisingly useful tool in research (and invaluable in spatial analysis). Here are some really useful bits of set theory inspired by examples in {cite}`sheppard2012introduction`.
 
-TODO -- maybe in econometrics.
+Sets are first class citizens in Python in the same way that lists are. We can define and view a set like this:
+
+```{code-cell} ipython3
+x = set(['Ada Lovelace', 'Sadie Alexander',
+         'Charles Babbage', 'Ada Lovelace',
+         'Adam Smith', 'Sadie Alexander'])
+x
+```
+
+Notice that a couple of entries appeared twice in the list but only once in the set: that's because a set contains only unique elements. Let's define a second set in order to demonstrate some of the operations we can perform on sets.
+
+```{code-cell} ipython3
+y = set(['Grace Hopper', 'Jean Bartik',
+         'Janet Yellen', 'Joan Robinson',
+         'Adam Smith', 'Ada Lovelace'])
+y
+```
+
+```{code-cell} ipython3
+:tags: ["remove-cell"]
+from myst_nb import glue
+inters = x.intersection(y)
+differ = x.difference(y)
+union = x.union(y)
+glue("inters", inters)
+glue("differ", differ)
+glue("union", union)
+```
+
+Now we have two sets we can look at to demonstrate some of the basic functions you can call on the set object type. `x.intersection(y)` gives, in this example, {glue:}`inters`, `x.difference(y)` gives {glue:}`differ`, and `x.union(y)` gives {glue:}`union`.
+
+Python also has functions that use set theory in other contexts--in practice, these tend to be very useful. `np.unique` returns only the unique entries of an input array or list:
+
+```{code-cell} ipython3
+
+```
+
+## Review
+
+In this chapter, you should have:
+
+- [x] seen how to use symbolic algebra with code, including Lagrangrians and linear algebra;
+- [x] seen how to code numerical mathematics, including linear algebra and optimisation; and
+- [x] found out about using set theory via the `set` object type and set-oriented functions.
