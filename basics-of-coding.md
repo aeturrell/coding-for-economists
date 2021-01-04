@@ -522,7 +522,7 @@ import pandas as pd
 df = pd.DataFrame(data=[['hello my blah is Ada'], ['hElLo mY blah IS Adam']],
                   columns=['strings'],
                   dtype='string')
-df['strings'].apply(lambda x: x.lower().title().replace('blah', 'Name'))
+df['strings'].apply(lambda x: x.lower().title().replace('Blah', 'Name'))
 ```
 
 More complex lambda functions can be constructed, eg `lambda x, y, z: x + y + z`. One of the best use cases of lambdas is when you *don't* want to go to the trouble of declaring a function. For example, let's say you want to compose a series of functions and you want to specify those functions in a list, one after the other. Using functions alone, you'd have to define a new function for each operation. With lambdas, it would look like this (again, there are easier ways to do this operation, but we'll use simple functions to demonstrate the principle):
