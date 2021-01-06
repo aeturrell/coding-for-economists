@@ -43,7 +43,7 @@ plot_style = {'xtick.labelsize': 20,
 plt.style.use(plot_style)
 ```
 
-In this chapter, you'll learn about doing mathematics with code, including solving equations symbollicaly, ...
+In this chapter, you'll learn about doing mathematics with code, including solving equations both in the abstract and numerically.
 
 This chapter uses the **numpy**, **scipy**, and **sympy** packages. If you're running this code, you may need to install these packages using, for example, `pip install packagename` on your computer's command line. (If you're not sure what a command line or terminal is, take a quick look at the basics of coding chapter.)
 
@@ -564,10 +564,26 @@ glue("union", union)
 
 Now we have two sets we can look at to demonstrate some of the basic functions you can call on the set object type. `x.intersection(y)` gives, in this example, {glue:}`inters`, `x.difference(y)` gives {glue:}`differ`, and `x.union(y)` gives {glue:}`union`.
 
-Python also has functions that use set theory in other contexts--in practice, these tend to be very useful. `np.unique` returns only the unique entries of an input array or list:
+**numpy** also has functions that use set theory. `np.unique` returns only the unique entries of an input array or list:
 
 ```{code-cell} ipython3
+np.unique(['Lovelace', 'Hopper', 'Alexander', 'Hopper', 45, 27, 45])
+```
 
+We can also ask which of a second set is a repeat of a first:
+
+```{code-cell} ipython3
+x = np.arange(10)
+y = np.arange(5, 10)
+np.in1d(x, y)
+```
+
+And we have the numpy equivalents of intersection, `np.intersect1d(x, y)`, difference, `np.setdiff1d(x, y)`, and union, `np.union1d(x, y)`. Additionally, there is the exclusive-or (that I like to call 'xor'). This effectively returns the two arrays with their union removed:
+
+```{code-cell} ipython3
+a = np.array([1, 2, 3, 2, 4])
+b = np.array([2, 3, 5, 7, 5])
+np.setxor1d(a,b)
 ```
 
 ## Review
