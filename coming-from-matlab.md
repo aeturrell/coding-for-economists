@@ -36,7 +36,7 @@ import scipy.linalg
 
 before using any of the Python commands. In case you're wondering, `from package import *` imports everything from that package so that, instead of calling `np.size(a)` you can just call `size(a)`.
 
-In what follows, `a` and `b` will be arrays.
+In what follows, `a` and `b` will be arrays. For more, see [hyperpolyglot](https://hyperpolyglot.org/numerical-analysis).
 
 | Matlab      | Python (using numpy and scipy) |
 | ----------- | ----------- |

@@ -32,6 +32,10 @@ To programme, you will need two things on your computer:
 
 Download the individual edition of the [Anaconda distribution](https://www.anaconda.com/) of Python for your operating system and install it (currently found under Products -> Individual Edition). This will provide you with a Python installation and a host of the most useful libraries.
 
+Anaconda will ask whether you want to add Anaconda to your PATH environment variable. Your PATH variable is a list of where programmes are located on your computer that *other* programmes can see. By adding Anaconda to your PATH, you will be able to more easily launch applications that make use of Python.
+
+You can confirm that you've set up Anaconda correctly by following the [verify installation instructions](https://docs.anaconda.com/anaconda/install/verify-install/) on the Anaconda website.
+
 ### Installing an integrated development environment (IDE)
 
 An integrated development environment is a software application that provides a few tools to make coding easier. The most important of these is a way to write the code itself! IDEs are not the only way to programme, but they are the most useful. If you have used **Stata** or **Matlab**, you may not have realised it, but these package up the language and the IDE together. But they are separate things: the language is like a language, the IDE is the notebook that you write it in.
@@ -52,7 +56,9 @@ Here are some of the useful features an IDE might have:
 
 People have strong feelings about which IDE they prefer. I strongly recommmend [Visual Studio Code](https://code.visualstudio.com/), a free and open source IDE from Microsoft that is available on all major operating systems. Just like Python itself, Visual Studio can be extended with packages, and it is those packages, called extensions in this case, that make it so useful.
 
-Download and install Visual Studio Code and then navigate to the 'extensions' tab on the left hand side. You'll need to install the following extensions, which you can search for by using the text box:
+Download and install Visual Studio Code. If you need some help, see this [very short tutorial](https://code.visualstudio.com/docs/python/python-tutorial) on setting it up from Microsoft (ignore the bits about debugging and installing packages).
+
+Once you have Visual Studio Code installed and opened, navigate to the 'extensions' tab on the left hand side navigation bar. You'll need to install the following extensions, which you can search for by using the text box:
 
 - Python
 - Pylance
