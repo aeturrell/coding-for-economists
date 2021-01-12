@@ -21,7 +21,7 @@ There are, however, some fundamental differences between the two languages. The 
 
 Actually, the biggest practical difference I have found in an economics and data science context is that Python has more of a flavour of the bazaar--there are lots of people, and you can find everything under the Sun, but it can be a *little bit* chaotic--while R has the feel of a curated garden--there is a chief gardener (RStudio) tending a smaller number of more beautiful things, but the garden has boundaries.
 
-There's a list of differences at the end of this chapter, but a couple of important gotchas to be aware of up fonrt: First, R uses vectors, arrays, etc., that are indexed from 1. Like C++, Python is numbered from zero, with, eg, `a[0]` as the first element. Second, `<-` is the preferred assignment operator in R but in Python it's `=` (and `<-` isn't used). In fact, in R `a<-5` assigns `a` the value `5`, while `a<-5` in Python would return `True` or `False` based on whether `a` was less than `-5` or not!
+There's a list of differences at the end of this chapter, but a couple of important gotchas to be aware of up front: first, R uses vectors, arrays, etc., that are indexed from 1. Like C++, Python is numbered from zero, with, eg, `a[0]` as the first element. Second, `<-` is the preferred assignment operator in R but in Python it's `=` (and `<-` isn't used). In fact, in R `a<-5` assigns `a` the value `5`, while `a<-5` in Python would return `True` or `False` based on whether `a` was less than `-5` or not!
 
 ## Tools similar to those found in an R workflow
 
