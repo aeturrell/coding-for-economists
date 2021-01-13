@@ -13,7 +13,7 @@ kernelspec:
   name: codeforecon
 ---
 
-# Basics of coding
+# Basics of Coding
 
 In this chapter, you'll learn about the basics of objects, types, operations, conditions, loops, functions, and imports. These are the basic building blocks of any programming language.
 
