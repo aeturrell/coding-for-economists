@@ -36,3 +36,17 @@ Every page with code can be downloaded and run as a Jupyter notebook--just click
 ## Reading guide
 
 You can read this book in any order depending on your experience. Check the section headings and numbered chapter headings to find out what would be most valuable for you.
+
+## Citing Coding for Economists
+
+To cite this book, please use:
+
+```
+@book{Turrell2021,
+title     = "Coding for Economists",
+author    = "Turrell, Arthur",
+year      = 2021,
+publisher = "Online",
+url       = "https://aeturrell.github.io/coding-for-economists"
+}
+```

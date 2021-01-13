@@ -47,6 +47,10 @@ In this chapter, you'll learn about doing econometrics with code. It assumes som
 
 This chapter uses the **statsmodels** package, along with some others that we've already seen. If you're running this code, you may need to install these packages using, for example, `pip install packagename` on your computer's command line. (If you're not sure what a command line or terminal is, take a quick look at the basics of coding chapter.)
 
+## Notation
+
+Greek letters, like $\beta$, are the truth. Modified Greek letters are an estimate of the truth, for example $\hat{\beta}$. Letters from the Latin alphabet denote the values of data, for instance $x$ for a variable or vector. Modified Latin alphabet letters denote computations performed on data, for instance $\bar{x} = \frac{1}{N} \displaystyle\sum_{i} x_i$.
+
 ## Basics
 
 There are usually two ways to run regressions in code: specifying a formula in text eg `reg('y ~ x', data=df)`, or specifying columns of a dataframe eg `reg(df['y'], df['x'])`. To add to the confusion, the conventions in economics and in machine learning are the opposite way around in terms of which comes first, the dependent (endogenous) variable or the independent (exogenous) variable. In machine learning, the basic regression might look more like `reg.fit(X, y)` where `X` is a matrix (usually a **numpy** array) and `y` is a vector (ditto). I state these things now to avoid confusion in a later chapter on machine learning! For much of this chapter, we'll assume that you're using a **pandas** dataframe rather than **numpy** arrays because that's a typical econometrics workflow.
