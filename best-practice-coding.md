@@ -13,7 +13,7 @@ kernelspec:
   name: codeforecon
 ---
 
-# Best practice in coding
+# Best Practice in Coding
 
 In this chapter, you'll learn about some best practices for coding. As you code, you'll be tempted to ignore these (that's normal; we all are). But the truth is that they will *save* time in the long run, and future you will thank past you for sticking to them.
 

@@ -33,6 +33,29 @@ If you are coming from R, you're likely familiar with **dplyr** for data analysi
 
 - **data.table**: if you use this library instead of **dplyr**, have no fear as there's an almost identical library in Python called [**datatable**](https://datatable.readthedocs.io/en/latest/). It's not nearly as popular in Python as **data.table** is in R, but it's a very high quality library.
 
+
+## Need a specific library that's in R but not in Python?
+
+You can run a full R session from Python. Here's an example:
+
+```python
+import rpy2.robjects as ro
+from rpy2.robjects.packages import importr
+
+base = importr('base')
+
+fit_full = ro.r("lm('mpg ~ wt + cyl', data=mtcars)")
+print(base.summary(fit_full))
+```
+
+To install R packages, use this:
+
+```python
+from rpy2.robjects.packages import importr
+utils = importr('utils')
+utils.install_packages('packagename')
+```
+
 ## R <==> Python
 
 Here are some tables of translations between base R and Python code. For more, see [hyperpolyglot](https://hyperpolyglot.org/numerical-analysis).
@@ -92,6 +115,8 @@ Assuming the use of **pandas** in Python, and the **dplyr** and **tidyr** packag
 | <code> df <- read.csv("input.csv", <br>&nbsp; header = TRUE, <br> &nbsp; na.strings=c("","NA"), sep = ",")</code> | `df = pd.read_csv("input.csv")` |
 | `write.csv(df, "output.csv", row.names = FALSE)` | `df.to_csv("output.csv", index = False)`|
 | `df[c(4:6)]` | `df.iloc[:, 3:6]` |
+| `mutate(df, c=a-b)` | `df.assign(c=df['a']-df['b'])` |
+| `distinct(select(df, col1))` | `df[['col1']].drop_duplicates()`|
 
 ### Object types
 
