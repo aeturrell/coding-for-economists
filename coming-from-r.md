@@ -29,14 +29,15 @@ If you are coming from R, you're likely familiar with **dplyr** for data analysi
 
 - **dplyr**: the most similar Python version of this library is [**plydata**](https://plydata.readthedocs.io/en/stable/index.html), while the most popular Python library that performs similar functions is [**pandas**](https://pandas.pydata.org/pandas-docs/stable/index.html). I tend to recommend people learn **pandas** for data analysis in Python because it is comprehensive and ubiquitious. It also has unrivaled documentation.
 
+- More **dplyr**: [**pyjanitor**](https://ericmjl.github.io/pyjanitor/index.html) builds a range of extra features on top of **pandas**. Two of the things it adds are likely to make anyone coming from **dplyr** feel a bit more at home: better support for method chaining and some functions with the same names as the ones in **dplyr** and which do the same things.
+
 - **ggplot2**: the most similar Python version of this library is [**plotnine**](https://plotnine.readthedocs.io/en/stable/index.html), while the most popular Python library that performs similar functions is a combination of [**matplolib**](https://matplotlib.org/) and [**seaborn**](https://seaborn.pydata.org/), which builds on **matplotlib**. I think either those two together or **plotnine** are good choices, though **plotnine**'s documentation is not (yet) as good and it's certainly not as widely used. (It's gaining popularity though.)
 
 - **data.table**: if you use this library instead of **dplyr**, have no fear as there's an almost identical library in Python called [**datatable**](https://datatable.readthedocs.io/en/latest/). It's not nearly as popular in Python as **data.table** is in R, but it's a very high quality library.
 
-
 ## Need a specific library that's in R but not in Python?
 
-You can run a full R session from Python. Here's an example:
+You can run a full R session from Python (if you already have R installed). Here's an example:
 
 ```python
 import rpy2.robjects as ro

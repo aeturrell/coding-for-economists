@@ -26,11 +26,11 @@ Coding is like a superpower; it's both fun and powerful! Head to the first secti
 
 ## How to use this book
 
-Apart from the quickstart, which is available to run with a single click using Google Colab, pages that have code on can be downloaded and run as *Jupyter Notebooks*. Just click the download symbol in the top right hand corner of the page and select '.ipynb', which stands for 'ipython notebook'. To run downloaded notebooks, just open them directly in Visual Studio Code (see the instructions in the Preliminaries chapter for more on installing Visual Studio Code).
+Apart from the quickstart, which is available to run with a single click using Google Colab, pages that have code on can be downloaded and run as *Jupyter Notebooks*. Click the download symbol in the top right hand corner of the page and select '.ipynb', which stands for 'ipython notebook'. To run downloaded notebooks, just open them directly in Visual Studio Code (see the instructions in the Preliminaries chapter for more on installing Visual Studio Code). For notebooks that you download and run on your own computer, you may need to install additional software packages. You can also import these notebooks into Google Colab and run them their.
 
 ```{admonition} Tip
 :class: tip
-Every page with code can be downloaded and run as a Jupyter notebook--just click   <i class="fas fa-download"></i>   at the top of the page and select '.ipynb'.
+Every page with code can be downloaded and run as a Jupyter notebook--just click <i class="fas fa-download"></i> at the top of the page and select '.ipynb'.
 ```
 
 ## Reading guide

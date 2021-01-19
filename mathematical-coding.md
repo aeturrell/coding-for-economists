@@ -529,6 +529,84 @@ simps(f_of_x, x) - 9**2/2
 
 Even with just 10 evenly spaced points, the composite Simpson’s rule integration given by `simps` is able to accurately find the answer as $\left( x^2/2\right) |_{0}^{9}$.
 
+## Advanced: Composable Function Transformations
+
+In recent years, there have been great developments in the ability of Python to easily carry out numerical 'composable function transformations'. What this means is that, if you can dream up an arbitrary numerical operations -- including differentiation, linear algebrea, and optimisation -- you can write code that will execute it quickly and automatically on CPUs, GPUs, or TPUs as you like.
+
+Here we'll look at one library that does this, **jax**, developed by Google {cite}`jax2018github`. It can automatically differentiate native Python and **numpy** functions, including when they are in loops, branches, or subject to recursion, and it can take derivatives of derivatives of derivatives. It supports reverse-mode differentiation (a.k.a. backpropagation) via grad as well as forward-mode differentiation, and the two can be composed arbitrarily to any order.
+
+To do these at speed, it uses just-in-time compilation. If you don't know what that is, don't worry: the details aren't important. It's just a way of getting close to C++ or Fortran speeds while still being able to write code in *much* more user friendly Python!
+
+### Auto-differentiation
+
+Let's see an example of auto-differentiation an arbitrary function. We'll write the definition of $\tanh(x)$ as a function and evaluate it. Because we already imported a (symbolic) `tanh` function from Sympy above, we'll call the function below `tanh_num`.
+
+```{code-cell} ipython3
+from jax import grad
+import jax.numpy as jnp
+
+def tanh_num(θ):  # Define a function
+  y = jnp.exp(-2.0 * θ)
+  return (1.0 - y) / (1.0 + y)
+
+grad_tanh = grad(tanh_num)  # Obtain its gradient function
+grad_tanh(1.0)   # Evaluate it at x = 1.0
+```
+
+You can differentiate to any order using grad:
+
+```{code-cell} ipython3
+grad(grad(grad(tanh_num)))(1.0)
+```
+
+Let's check this using symbolic mathematics:
+
+```{code-cell} ipython3
+θ = Symbol(r'\theta')
+triple_deriv = diff(diff(diff(tanh(θ), θ)))
+triple_deriv
+```
+
+```{code-cell} ipython3
+:tags: ["remove-cell"]
+
+symp_est = triple_deriv.subs(θ, 1.)
+glue('symp_est', f'{symp_est:.3f}')
+```
+
+If we evaluate this at $\theta=1$, we get {glue:}`symp_est`. This was a simple example that had a (relatively) simple mathematical expression. But imagine if we had lots of branches (eg if, else statements), and/or a really complicated function: **jax**'s grad would still work. It's designed for really complex derivatives of the kind encountered in machine learning.
+
+### Just-in-time compilation
+
+The other nice feature of **jax** is the ability to do just-in-time (JIT) compilation. Because they do not compile their code into machine-code before running, high-level languages like Python and R are not as fast as the same code written in C++ or Fortran (the benefit is that it takes you less time to write the code in the first place). Much of the time, there are pre-composed functions that call C++ under the hood to do these things--but only for those operations that people have already taken the time to code up in a lower level language. JIT compilation offers a compromise: you can code more or less as you like in the high-level language but it will be compiled just-in-time to give you a speed-up!
+
+**jax** is certainly not the only Python package that does this, and if you're not doing anything like differentiating or propagating, **numba** is a more mature alternative. But here we'll see the time difference for JIT compilation on an otherwise slow operation: element wise multiplication and addition.
+
+```{code-cell} ipython3
+from jax import jit
+
+def slow_f(x):
+  """Slow, element-wise function"""
+  return x * x + x * 2.0
+
+x = jnp.ones((5000, 5000))
+fast_f = jit(slow_f)
+```
+
+Now let's see how fast the 'slow' version goes:
+
+```{code-cell} ipython3
+%timeit -n15 -r3 slow_f(x)
+```
+
+what about with the JIT compilation?
+
+```{code-cell} ipython3
+%timeit -n15 -r3 fast_f(x)
+```
+
+This short introduction has barely scratched the surface of **jax** and what you can do with it. For more, see the [official documentation](https://jax.readthedocs.io/en/latest/).
+
 ## Set theory
 
 Set theory is a surprisingly useful tool in research (and invaluable in spatial analysis). Here are some really useful bits of set theory inspired by examples in {cite}`sheppard2012introduction`.
