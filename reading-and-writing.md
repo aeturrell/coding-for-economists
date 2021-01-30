@@ -13,7 +13,7 @@ kernelspec:
   name: codeforecon
 ---
 
-# Reading and Writing Data
+# Reading and Writing Files
 
 ```{code-cell} ipython3
 :tags: ["remove-cell"]
@@ -84,79 +84,6 @@ Okay, so you have a big list of file paths: now what!? Assuming that the files h
 
 ```python
 df = pd.concat([pd.read_csv(x) for x in list_of_files], axis=0)
-```
-
-## Reading data from the web
-
-### Files from the internet
-
-As you will have seen in some of the examples in this book, it's easy to read data from the internet once you have the url and file type. Here, for instance, is an example that reads in the 'storms' dataset:
-
-```{code-cell} ipython3
-pd.read_csv('https://vincentarelbundock.github.io/Rdatasets/csv/dplyr/storms.csv')
-```
-
-### APIs
-
-Using an API (application programming interface) is another way to draw down information from the interweb. Their just a way for one tool, say Python, to speak to another tool, say a server, and usefully exchange information. The classic use case would be to post a request for data that fits a certain query via an API and to get a download of that data back in return. (You should always preferentially use an API over webscraping a site.)
-
-Because they are designed to work with any tool, you don't actually need a programming language to interact with an API, it's just a *lot* easier if you do.
-
-```{note}
-An API key is needed in order to access some APIs. Sometimes all you need to do is register with site, in other cases you may have to pay for access.
-```
-
- To see this, let's directly use an API to get some time series data. We will make the call out to the internet using the **requests** package.
-
-An API has an 'endpoint', the base url, and then a URL that encodes the question. Let's see an example with the ONS API for which the endpoint is "https://api.ons.gov.uk/". The rest of the API has the form 'key/value', for example we'll ask for timeseries data 'timeseries' followed by 'JP9Z' for the vacancies in the UK services sector. We then ask for 'dataset' followed by 'UNEM' to specify which overarching dataset the series we want is in. The last part asks for the data with 'data'. Often you won't need to know all of these details, but it's useful to see a detailed example.
-
-The data that are returned by APIs are typically in JSON format, which looks a lot like a nested Python dictionary and its entries can be accessed in the same way--this is what is happening when getting the series' title in the example below. JSON is not good for analysis, so we'll use **pandas** to put the data into shape.
-
-```{code-cell} ipython3
-import requests
-
-url = 'https://api.ons.gov.uk/timeseries/JP9Z/dataset/UNEM/data'
-
-# Get the data from the ONS API:
-json_data = requests.get(url).json()
-
-# Prep the data for a quick plot
-title = json_data['description']['title']
-df = (pd.DataFrame(pd.json_normalize(json_data['months']))
-        .assign(date=lambda x: pd.to_datetime(x['date']),
-                value=lambda x: pd.to_numeric(x['value']))
-        .set_index('date'))
-
-df['value'].plot(title=title, ylim=(0, df['value'].max()*1.2), lw=3.);
-```
-
-We've talked about *reading* APIs. You can also create your own to serve up data, models, whatever you like! This is an advanced topic and we won't cover it; but if you do need to, the simplest way is to use [Fast API](https://fastapi.tiangolo.com/). You can find some short video tutorials for Fast API [here](https://calmcode.io/fastapi/hello-world.html).
-
-#### An easier way to interact with (some) APIs
-
-Although it didn't take much code to get the ONS data, it would be even better if it was just a single line, wouldn't it? Fortunately there are some packages out there that make this easy, but it does depend on the API (and APIs come and go over time).
-
-By far the most comprehensive library for accessing extra APIs is [**pandas-datareader**](https://pandas-datareader.readthedocs.io/en/latest/), which provides convenient access to:
-
-- FRED
-- Quandl
-- World Bank
-- OECD
-- Eurostat
-
-and more.
-
-Let's see an example using FRED (the Federal Reserve Bank of St. Louis' economic data library). This time, let's look at the UK unemployment rate:
-
-```{code-cell} ipython3
-import pandas_datareader.data as web
-
-df_u = web.DataReader('LRHUTTTTGBM156S', 'fred')
-
-df_u.plot(title='UK unemployment (percent)',
-          legend=False,
-          ylim=(2, 6),
-          lw=3.);
 ```
 
 ## Writing data to file
