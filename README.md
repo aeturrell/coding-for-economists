@@ -17,3 +17,7 @@ The command is
 ```bash
 ghp-import -n -p -f _build/html
 ```
+
+## Other dependencies
+
+- Camelot on Ghostscript: `brew install ghostscript` (MacOS), or download the windows installer.

@@ -4,6 +4,10 @@ In this chapter, you'll find out how to install and setup everything you need to
 
 ## Computational environment
 
+### Operating system
+
+Much of the coding you'll need to do can be achieved on all three of the major operating systems: Windows, MacOS, and Linux. But if you haven't yet decided which operating system to use, I strongly recommend you do not choose Windows because coding on Windows brings with it many more challenges. Some packages won't work at all, and others will be *much* more difficult to set up. This is only true in a small number of cases, but it's just often enough for it to be a real problem. Furthermore, if you ever need to scale up your work to the cloud, you'll find that it's more cost effective to use machines that have use something which is closer to Linux (which MacOS is). While Macs are famous for being expensive, most Linux distributions are free so even when avoiding Windows, there should be a solution to satisfy all budget constraints. Linux used to have a reputation as being fearsomely difficult for beginners. But modern Linux distributions, such as Ubuntu, are pretty user-friendly.
+
 ### Choice of programming language
 
 This book uses Python, which is usually ranked as the first or second most popular programming language in the world and, just as importantly, it's also one of the easiest to learn. It's a general purpose language, which means it can perform a wide range of tasks. This combination of features is why people say Python has a low floor and a high ceiling. It's also very versatile; the joke goes that Python is the 2nd best language at everything, and there's some truth to that (although Python is 1st best at some tasks, like machine learning). But a language that covers such a lot of ground is also very useful; and Python is widely used across industry, academia, and the public sector. It is used for everything from computer games to websites, data science to software applications. As an economist, you will know that this means Python benefits from strong positive network externalities. As such, learning Python has a lot of value and, once you have, learning more specialised languages like C++ or R is much easier; many of the basic programming concepts you'll see in this book are useful in almost any programming language. Because of their similarities, however, readers will find that they can follow even more of the content of the book in some specific other languages, especially Julia and R.
@@ -32,6 +36,8 @@ Anaconda might ask whether you want to add Anaconda to your PATH environment var
 
 You can confirm that you've set up Anaconda correctly by following the [verify installation instructions](https://docs.anaconda.com/anaconda/install/verify-install/) on the Anaconda website.
 
+Python and Anaconda are available on all major operating systems.
+
 ### Installing an integrated development environment (IDE)
 
 An integrated development environment is a software application that provides a few tools to make coding easier. The most important of these is a way to write the code itself! IDEs are not the only way to programme, but they are perhaps the most useful. If you have used **Stata** or **Matlab**, you may not have realised it, but these package up the language and the IDE together. But they are separate things: the language is a way of processing your instructions, the IDE is where you write those instructions.
@@ -50,7 +56,7 @@ Here are some of the useful features an IDE might have:
 
 - automatic code checking for basic errors
 
-People have strong feelings about which IDE they prefer. I strongly recommmend [Visual Studio Code](https://code.visualstudio.com/), a free and open source IDE from Microsoft that is available on all major operating systems. Just like Python itself, Visual Studio can be extended with packages, and it is those packages, called extensions in this case, that make it so useful.
+People have strong feelings about which IDE they prefer. I strongly recommend [Visual Studio Code](https://code.visualstudio.com/), a free and open source IDE from Microsoft that is available on all major operating systems. Just like Python itself, Visual Studio can be extended with packages, and it is those packages, called extensions in this case, that make it so useful. Visual Studio Code is available on all major operating systems.
 
 Download and install Visual Studio Code. If you need some help, see this [very short tutorial](https://code.visualstudio.com/docs/python/python-tutorial) on setting it up from Microsoft (ignore the bits about debugging and installing packages).
 

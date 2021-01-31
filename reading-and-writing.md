@@ -45,7 +45,7 @@ plt.style.use(plot_style)
 
 In this chapter, you'll learn about reading and writing data.
 
-This chapter uses the **pandas** and **pandas-datareader** packages. If you're running this code, you may need to install these packages using, for example, `pip install packagename` on your computer's command line. (If you're not sure what a command line or terminal is, take a quick look at the basics of coding chapter.)
+This chapter uses the **pandas** package. If you're running this code, you may need to install these packages using, for example, `pip install packagename` on your computer's command line. (If you're not sure what a command line or terminal is, take a quick look at the basics of coding chapter.)
 
 ![From the pandas documentation](https://pandas.pydata.org/pandas-docs/stable/_images/02_io_readwrite1.svg)
 
