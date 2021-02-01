@@ -1,7 +1,7 @@
 # Introduction
 
 ```{warning}
-This book is still under construction.
+This book is under construction.
 ```
 
 Welcome to **coding for economists**, a guide for economists on what programming is, why it's useful, and how to do it.
@@ -50,3 +50,5 @@ publisher = "Online",
 url       = "https://aeturrell.github.io/coding-for-economists"
 }
 ```
+
+Please note that this book does not represent the views of any employer of its author(s).
