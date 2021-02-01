@@ -6,7 +6,7 @@ This book is still under construction.
 
 Welcome to **coding for economists**, a guide for economists on what programming is, why it's useful, and how to do it.
 
-The book aims to give you the skills you need to code for economics, while also giving you bits and pieces of information about programming more generally that might be useful to you. It's suitable for complete beginniners who have never written any code before. Some of the later chapters are suitable for people who have coded before too.
+The book aims to give you the skills you need to code for economics, while also giving you bits and pieces of information about programming more generally that might be useful to you. It's suitable for complete beginners who have never written any code before. Some of the later chapters are suitable for people who have coded before too.
 
 Naturally, at times, I have made choices regarding what to include, what to omit, and what to recommend. I have given recommendations based on what will serve you best in the long-run. Very occasionally, like the Karate Kid painting Mr Miyagi's fence, you will wonder why such and such a thing is useful for coding in an economics context. But, also like the Karate Kid, you will find that you weren't *just* learning to paint a fence, you were becoming a karate (coding) master.
 
@@ -14,7 +14,7 @@ Naturally, at times, I have made choices regarding what to include, what to omit
 
 Computer programming, or coding, is the process of issuing a series of commands that a computer can understand and execute in order to perform a task. Today, almost all research with some quantitative aspect involves coding.
 
-Imagine a computer as being like a particularly mischevious genie; if your instructions aren't completely unambiguous, the computer won't do what you asked for. So we write out our code, our list of instructions for the computer, very explicitly to make sure *we* can check we wrote what we meant, and that the computer will do it in the way we anticipate. Like a genie though, if you can get the instructions just so, you can create magical things.
+Imagine a computer as being like a particularly mischievous genie; if your instructions aren't completely unambiguous, the computer won't do what you asked for. So we write out our code, our list of instructions for the computer, very explicitly to make sure *we* can check we wrote what we meant, and that the computer will do it in the way we anticipate. Like a genie though, if you can get the instructions just so, you can create magical things.
 
 ## Why should economists learn to code?
 
@@ -26,7 +26,7 @@ Coding is like a superpower; it's both fun and powerful! Head to the first secti
 
 ## How to use this book
 
-Apart from the quickstart, which is available to run with a single click using Google Colab, pages that have code on can be downloaded and run as *Jupyter Notebooks*. Click the download symbol in the top right hand corner of the page and select '.ipynb', which stands for 'ipython notebook'. To run downloaded notebooks, just open them directly in Visual Studio Code (see the instructions in the Preliminaries chapter for more on installing Visual Studio Code). For notebooks that you download and run on your own computer, you may need to install additional software packages. You can also import these notebooks into Google Colab and run them their.
+Pages that have code on can be downloaded and run as *Jupyter Notebooks*. Click the download symbol in the top right hand corner of the page and select '.ipynb', which stands for 'ipython notebook'. To run downloaded notebooks, just open them directly in Visual Studio Code (see the instructions in the Preliminaries chapter for more on installing Visual Studio Code). For notebooks that you download and run on your own computer, you may need to install additional software packages. You can also import these notebooks into Google Colab and run them there.
 
 ```{admonition} Tip
 :class: tip
