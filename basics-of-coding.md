@@ -51,13 +51,13 @@ b = 'This is a string'
 print(b)
 ```
 
-It's the same thing but with a different **type** of data, a string instead of an integer. Python is *dynamically typed*, which you means it will guess what type of variable you're creating as you create it. This has pros and cons, with the main pro being that it makes for more concise code.
+It's the same thing but with a different **type** of data, a string instead of an integer. Python is *dynamically typed*, which means it will guess what type of variable you're creating as you create it. This has pros and cons, with the main pro being that it makes for more concise code.
 
 ```{admonition} Important
 Everything is an object, and every object has a type.
 ```
 
-The most basic built-in data types that you'll need to know about are: integers `10`, floats `1.23`, strings `like this`, booleans `True`, and nothing `None`. Python also has a built-in types called a list `[10, 15, 20]` that can contain anything, even *different* types. So
+The most basic built-in data types that you'll need to know about are: integers `10`, floats `1.23`, strings `like this`, booleans `True`, and nothing `None`. Python also has a built-in type called a list `[10, 15, 20]` that can contain anything, even *different* types. So
 
 ```{code-cell} ipython3
 list_example = [10, 1.23, 'like this', True, None]
