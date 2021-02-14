@@ -209,9 +209,9 @@ This saves the tedium of installing packages one-by-one, and it gives you a nice
 
 If you have:
 
-- [x] installed Python, using the Anaconda distribution of Python;
-- [x] installed Visual Studio Code, and its Python and Pylance extensions;
-- [x] written and saved 'hello_world.py' with `print('Hello World!')` in it; and
-- [x] run 'hello_world.py' both in the terminal and in the Visual Studio Code interactive window, then
+- ✅ installed Python, using the Anaconda distribution of Python;
+- ✅ installed Visual Studio Code, and its Python and Pylance extensions;
+- ✅ written and saved 'hello_world.py' with `print('Hello World!')` in it; and
+- ✅ run 'hello_world.py' both in the terminal and in the Visual Studio Code interactive window, then
 
 you are ready to move on to the next chapter!

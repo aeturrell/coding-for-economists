@@ -184,10 +184,10 @@ Finally, it's always good to start by choosing clarity over optimisation. Comput
 
 From this chapter, you should remember to
 
-- [x] follow a code style and use a linter;
-- [x] not repeat yourself;
-- [x] be consistent with your naming convention;
-- [x] write modular, well-documented code;
-- [x] use interoperable file formats;
-- [x] use relative file paths; and
-- [x] stay zen!
+- ✅ follow a code style and use a linter;
+- ✅ not repeat yourself;
+- ✅ be consistent with your naming convention;
+- ✅ write modular, well-documented code;
+- ✅ use interoperable file formats;
+- ✅ use relative file paths; and
+- ✅ stay zen!

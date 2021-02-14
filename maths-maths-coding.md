@@ -668,6 +668,6 @@ np.setxor1d(a,b)
 
 In this chapter, you should have:
 
-- [x] seen how to use symbolic algebra with code, including Lagrangrians and linear algebra;
-- [x] seen how to code numerical mathematics, including linear algebra and optimisation; and
-- [x] found out about using set theory via the `set` object type and set-oriented functions.
+- ✅ seen how to use symbolic algebra with code, including Lagrangrians and linear algebra;
+- ✅ seen how to code numerical mathematics, including linear algebra and optimisation; and
+- ✅ found out about using set theory via the `set` object type and set-oriented functions.
