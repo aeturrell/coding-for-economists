@@ -3,10 +3,16 @@
 After installing env, activate, and use
 
 ```bash
-python -m ipykernel install --user --name=codeforecon
+python3.8 -m ipykernel install --user --name=codeforecon
 ```
 
-to install new ipykernel.
+to install a new ipykernel.
+
+To build the book using Jupyter books use
+
+```bash
+jupyter-book build .
+```
 
 To ensure that Jupyter notebooks are running the correct kernel, open them in Jupyter notebook server and change the kernel there to 'codeforecon' and save it.
 

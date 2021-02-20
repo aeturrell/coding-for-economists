@@ -3,6 +3,8 @@ import os
 from bs4 import BeautifulSoup
 from bs4.element import Comment
 import urllib.request
+import geopandas as gpd
+import shapely.geometry
 
 
 def star_wars_data():
@@ -55,6 +57,20 @@ def save_smith_book():
     open(os.path.join('data', 'smith_won.txt'), 'w').write(book_text)
 
 
+def prep_river_data():
+    """
+    Download the 10m rivers, lakes, and centerlines from and put in scratch/rivers/
+    https://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-rivers-lake-centerlines/
+    TODO: automate download of shapefile
+    """
+    rivers = gpd.read_file(os.path.join('scratch', 'rivers', 'ne_10m_rivers_lake_centerlines.shp'))
+    uk_bound_box = (-7.57216793459, 49.959999905, 1.68153079591, 58.6350001085)
+    uk_polygon = shapely.geometry.box(*uk_bound_box, ccw=True)
+    rivers = rivers[rivers.within(uk_polygon)]
+    rivers.to_file(os.path.join('data', 'geo', 'rivers', 'rivers.shp'))
+
+
 if __name__ == '__main__':
+    prep_river_data()
     star_wars_data()
     save_smith_book()
