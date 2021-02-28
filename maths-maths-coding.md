@@ -27,20 +27,7 @@ np.random.seed(10)
 # Set max rows displayed for readability
 pd.set_option('display.max_rows', 6)
 # Plot settings
-plot_style = {'xtick.labelsize': 20,
-                  'ytick.labelsize': 20,
-                  'font.size': 22,
-                  'figure.autolayout': True,
-                  'figure.figsize': (10, 5.5),
-                  'axes.titlesize': 22,
-                  'axes.labelsize': 20,
-                  'lines.linewidth': 4,
-                  'lines.markersize': 6,
-                  'legend.fontsize': 16,
-                  'mathtext.fontset': 'stix',
-                  'font.family': 'STIXGeneral',
-                  'legend.frameon': False}
-plt.style.use(plot_style)
+plt.style.use('plot_style.txt')
 ```
 
 In this chapter, you'll learn about doing mathematics with code, including solving equations both in the abstract and numerically.
