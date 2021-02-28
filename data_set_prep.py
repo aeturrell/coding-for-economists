@@ -70,6 +70,22 @@ def prep_river_data():
     rivers.to_file(os.path.join('data', 'geo', 'rivers', 'rivers.shp'))
 
 
+def prep_covid_data():
+    """
+    Downloads covid data from uk gov't website and processes it ready for plotting.
+    """
+    # data_url = "https://api.coronavirus.data.gov.uk/v2/data?areaType=ltla&metric=newDeaths28DaysByDeathDate&format=csv&release=2021-02-27"
+    cv_df = pd.read_csv(os.path.join('~', 'Downloads', 'ltla_2021-02-27.csv'))
+    cv_df['date'] = pd.to_datetime(cv_df['date'])
+    cv_df['newDeaths28DaysByDeathDate'] = cv_df['newDeaths28DaysByDeathDate'].astype(int)
+    cv_df['areaCode'] = cv_df['areaCode'].astype('string')
+    cv_df['areaName'] = cv_df['areaName'].astype('string')
+    cv_df = cv_df.rename(columns={'areaCode': 'LAD20CD', 'areaName': 'LAD20NM'})
+    cv_df = cv_df[cv_df['LAD20CD'].str.contains('E09')]
+    cv_df = cv_df.set_index(['date']).groupby([pd.Grouper(freq='M'), 'LAD20CD', 'LAD20NM']).sum().reset_index()
+    cv_df.to_parquet(os.path.join('data', 'geo', 'cv_ldn_deaths.parquet'))
+
+
 if __name__ == '__main__':
     prep_river_data()
     star_wars_data()
