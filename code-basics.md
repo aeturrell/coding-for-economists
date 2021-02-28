@@ -15,7 +15,9 @@ kernelspec:
 
 # Basics of Coding
 
-In this chapter, you'll learn about the basics of objects, types, operations, conditions, loops, functions, and imports. These are the basic building blocks of any programming language.
+In this chapter, you'll learn about the basics of objects, types, operations, conditions, loops, functions, and imports. These are the basic building blocks of almost all programming languages.
+
+This chapter has benefited from the excellent [*Python Programming for Data Science*](https://www.tomasbeuzen.com/python-programming-for-data-science/README.html) book by Tomas Beuzen.
 
 ## If you get stuck
 
@@ -33,9 +35,13 @@ Knowing how to Google is one of the most important skills of any coder. No-one r
 
 - if you're having a coding issue, take a walk to think about the problem, or explain your problem to an animal toy on your desk ([traditionally](https://en.wikipedia.org/wiki/Rubber_duck_debugging) a rubber duck, but other animals are available).
 
-## Variables and types
+## Values, variables, and types
 
-Creating a variable in Python is achieved via an assignment. It's simpler than it sounds:
+A value is datum such as a number or text. There are different types of values: 352.3 is known as a float or double, 22 is an integer, and "Hello World!" is a string. A variable is a name that refers to a value: you can think of a variable as a box that has a value, or multiple values, packed inside it. 
+
+Almost word can be a variable name as long as it starts with a letter or an underscore, although there are some special keywords that can't be used because they already have a role in the Python language: these include `if`, `while`, `class`, and `lambda`.
+
+Creating a variable in Python is achieved via an assignment (putting a value in the box), and this assignment is done via the `=` operator. The box, or variable, goes on the left while the value we wish to store appears on the right. It's simpler than it sounds:
 
 ```{code-cell} ipython3
 a = 10
@@ -64,13 +70,29 @@ list_example = [10, 1.23, 'like this', True, None]
 print(list_example)
 ```
 
-is completely valid code. As well as the built-in types, packages can define their own custom types.
+is completely valid code. `None` is a special type of nothingness, and represents an object with no value. It has type `NoneType` and is more useful than you might think! 
 
-If you ever want to check the type of a Python variable, you can call the `type` function on it like so:
+As well as the built-in types, packages can define their own custom types. If you ever want to check the type of a Python variable, you can call the `type` function on it like so:
 
 ```{code-cell} ipython3
 type(list_example)
 ```
+
+This is especially useful for debugging `ValueError` messages.
+
+Below is a table of common data types in Python:
+
+| Name          | Type name  | Type Category  | Description                                   | Example                                    |
+| :-------------------- | :--------- | :------------- | :-------------------------------------------- | :----------------------------------------- |
+| integer               | `int`      | Numeric Type   | positive/negative whole numbers               | `22`                                       |
+| floating point number | `float`    | Numeric Type   | real number in decimal form                   | `3.14159`                                  |
+| boolean               | `bool`     | Boolean Values | true or false                                 | `True`                                     |
+| string                | `str`      | Sequence Type  | text                                          | `"Hello World!"`                 |
+| list                  | `list`     | Sequence Type  | a collection of objects - mutable & ordered   | `['text entry', True, 16]`               |
+| tuple                 | `tuple`    | Sequence Type  | a collection of objects - immutable & ordered | `(51.02, -0.98)`                 |
+| dictionary            | `dict`     | Mapping Type   | mapping of key-value pairs                    | `{'name':'Ada', 'subject':'computer science'}` |
+| none                  | `NoneType` | Null Object    | represents no value                           | `None`                                     |
+| function                  | `function` | Function   | Represents a function                           | `def add_one(x): return x+1`                                     |
 
 ## Lists and slicing
 
@@ -111,6 +133,15 @@ A handy trick is that you can reverse a list entirely using this:
 print(list_of_numbers[::-1])
 ```
 
+What's amazing about lists is that they can hold any type, including other lists! Here's a valid example of a list that's got a lot going on:
+
+```{code-cell} ipython3
+wacky_list = [3.1415, 16, ["five", 4, 3], "Hello World!", True, None, {"key": "value", "key2": "value2"}]
+wacky_list
+```
+
+Can you identify the types of each of the entries (and entries of entries)?
+
 ## Operators
 
 All of the basic operators you see in mathematics are available to use: `+` for addition, `-` for subtraction, `*` for multiplication, `**` for powers, `/` for division, and `%` for modulo. These work as you'd expect on numbers. But these operators are sometimes defined for other built-in data types too. For instance, we can 'sum' strings (which really concatenates them):
@@ -138,6 +169,20 @@ string = 'apples, '
 print(string*3)
 ```
 
+Below is a table of the basic arithmetic operations.
+
+| Operator |   Description    |
+| :------: | :--------------: |
+|   `+`    |     addition     |
+|   `-`    |   subtraction    |
+|   `*`    |  multiplication  |
+|   `/`    |     division     |
+|   `**`   |  exponentiation  |
+|   `//`   | integer division / floor division |
+|   `%`    |      modulo      |
+|   `@`    |     matrix multiplication |
+
+
 ## Strings
 
 In some ways, strings are treated a bit like lists, meaning you can access the individual characters via slicing and indexing. For example:
@@ -157,6 +202,8 @@ list_of_numbers = range(1, 20)
 print('List of numbers has length:')
 print(len(list_of_numbers))
 ```
+
+Strings have type `string` and can be defined by single or double quotes, eg `string = "cheesecake"` would have been equally valid above.
 
 There are various functions built into Python to help you work with strings that are particularly useful for cleaning messy data. For example, imagine you have a variable name like 'This Is /A Variable   '. (You may think this is implausibly bad; I only wish that were true). Let's see if we can clean this up:
 
@@ -184,15 +231,40 @@ f-strings are only available in Python 3.6+
 
 ## Booleans and conditions
 
-Some of the most important operations you will perform are with True and False values, also known as boolean data types. First, these behave as you'd expect: `True and False` evaluates to `False`, while `True or False` evaluates to `True`. There's also the `not` keyword. For example
+Some of the most important operations you will perform are with `True` and `False` values, also known as boolean data types. There are two types of operation that are associated with booleans: boolean operations, in which existing booleans are combined, and condition operations, which create a boolean when executed.
+
+Boolean operators that return booleans are as follows:
+
+| Operator | Description |
+| :---: | :--- |
+|`x and y`| are `x` and `y` both True? |
+|`x or y` | is at least one of `x` and `y` True? |
+| `not x` | is `x` False? | 
+
+These behave as you'd expect: `True and False` evaluates to `False`, while `True or False` evaluates to `True`. There's also the `not` keyword. For example
 
 ```{code-cell} ipython3
 not True
 ```
 
-as you might expect.
+as you would expect.
 
-Conditions are expressions that evaluate as booleans. A simple example is `10 == 20`. The `==` is yet another operator that compares the objects on either side and returns `True` if they have the same *values*--though be careful using it with different data types. The opposite of `==` is `!=`, which you can read as 'not equal to the value of'. Here's an example of `==`:
+Conditions are expressions that evaluate as booleans. A simple example is `10 == 20`. The `==` is an operator that compares the objects on either side and returns `True` if they have the same *values*--though be careful using it with different data types.
+
+Here's a table of conditions that return booleans:
+
+| Operator  | Description                          |
+| :-------- | :----------------------------------- |
+| `x == y ` | is `x` equal to `y`?                 |
+| `x != y`  | is `x` not equal to `y`?             |
+| `x > y`   | is `x` greater than `y`?             |
+| `x >= y`  | is `x` greater than or equal to `y`? |
+| `x < y`   | is `x` less than `y`?                |
+| `x <= y`  | is `x` less than or equal to `y`?    |
+| `x is y`  | is `x` the same object as `y`?       |
+
+
+As you can see from the table, the opposite of `==` is `!=`, which you can read as 'not equal to the value of'. Here's an example of `==`:
 
 ```{code-cell} ipython3
 boolean_condition = (10 == 20)
@@ -257,6 +329,40 @@ else:
 ```
 
 Note that this does nothing if the score is between 11 and 90, and prints a message otherwise.
+
+## Casting variables
+
+Sometimes we need to explicitly cast a value from one type to another. We can do this using functions like `str()`, `int()`, and `float()`. If you try these, Python will do its best to interpret the input and convert it to the output type you'd like and, if they can't, the code will throw a great big error.
+
+Here's an example of casting a `float` as an `int`:
+
+```{code-cell} ipython3
+orig_number = 4.39898498
+type(orig_number)
+```
+
+Now we cast it to an int:
+
+```{code-cell} ipython3
+mod_number = int(orig_number)
+mod_number
+```
+
+which looks like it became an integer, but we can double check that:
+
+```{code-cell} ipython3
+type(mod_number)
+```
+
+## Tuples and (im)mutability
+
+A tuple is an object that is defined by parentheses and entries that are separated by commas, for example `(15, 20, 32)`. (They are of type `tuple`.) As such, they have a lot in common with lists-but there's a big and important difference.
+
+Tuples are immutable, while lists are mutable. This means that, once defined, we can always modify a list using slicing and indexing, e.g. to change the first entry of a list called `listy` we would use `listy[0] = 5`. But trying to do this with a tuple will result in an error.
+
+*Immutable* objects, such as tuples, can't have their elements changed, appended, extended, or removed. Lists can do all of these things. Tuples aren't the only immutable objects in Python; strings are immutable too.
+
+You may wonder why both are needed given lists seem to provide a superset of functionality: sometimes in coding, lack of flexibility is a *good* thing because it restricts the number of ways a process can go awry. I dare say there are other reasons too, but you don't need to worry about them and using lists is a good default most of the time.
 
 ## Indentation
 
@@ -323,7 +429,12 @@ names_list = [x + ' ' + y for x, y in zip(first_names, last_names)]
 print(names_list)
 ```
 
-The `zip` keyword is doing this magic; think of it like a zipper, bringing an element of each list together in turn.
+The `zip` keyword is doing this magic; think of it like a zipper, bringing an element of each list together in turn. It can also be used directly in a for loop:
+
+```{code-cell} ipython3
+for first_nm, last_nm in zip(first_names, last_names):
+    print(first_nm, last_nm)
+```
 
 Finally, an even more extreme use of list comprehensions can deliver nested structures:
 
@@ -335,6 +446,54 @@ print(names_list)
 ```
 
 This gives a nested structure that (in this case) iterates over `first_names` first, and then `last_names`. If you'd like to learn more about list comprehensions, check out these [short video tutorials](https://calmcode.io/comprehensions/introduction.html).
+
+## While loops
+
+`while` loops continue to execute code until their conditional expression evaluates to `False`. (Of course, if it evaluates to `True` forever, your code will just continue to execute...)
+
+
+```{code-cell} ipython3
+n = 10
+while n > 0:
+    print(n)
+    n -= 1
+
+print('execution complete')
+```
+
+NB: in case you're wondering what `-=` does, it's a compound assignment that sets the left-hand side equal to the left-hand side minus the right-hand side.
+
+You can use the keyword `break` to break out of a while loop, for example if it's reached a certain number of iterations without converging.
+
+## Dictionaries
+
+Another built-in Python type that is enormously useful is the *dictionary*. This provides a mapping one set of variables to another (either one-to-one or many-to-one). Let's see an example of defining a dictionary and using it:
+
+```{code-cell} ipython3
+fruit_dict = {'Jazz': 'Apple', 'Owari': 'Satsuma', 'Seto': 'Satsuma',
+              'Pink Lady': 'Apple'}
+
+# Add an entry
+fruit_dict.update({'Cox': 'Apple'})
+
+variety_list = ['Jazz', 'Jazz', 'Seto', 'Cox']
+
+fruit_list = [fruit_dict[x] for x in variety_list]
+print(fruit_list)
+```
+
+From an input list of varieties, we get an output list of their associated fruits. Another good trick to know with dictionaries is that you can iterate through their keys and values:
+
+```{code-cell} ipython3
+
+for key, value in fruit_dict.items():
+    print(key + ' maps into ' + value)
+
+```
+
+## Running on empty
+
+Being able to create empty containers is sometimes useful. The commands to create empty lists, tuples, dictionaries, and sets are `lst = []`, `tup=()`, `dic={}`, and `st = set()` respectively.
 
 ## Functions
 
@@ -382,31 +541,31 @@ In that last example, you'll notice that I added some text to the function. This
 help(score_message)
 ```
 
-## Dictionaries
+## Scope
 
-Another built-in Python type that is enormously useful is the *dictionary*. This provides a mapping one set of variables to another (either one-to-one or many-to-one). Let's see an example of defining a dictionary and using it:
+Scope refers to what parts of your code can see what other parts. If you define a variable inside a function, the rest of your code won't be able to 'see' it or use it. For example, here's a function that creates a variable and then an example of calling that variable:
 
-```{code-cell} ipython3
-fruit_dict = {'Jazz': 'Apple', 'Owari': 'Satsuma', 'Seto': 'Satsuma',
-              'Pink Lady': 'Apple'}
+```python
+def var_func():
+    str_variable = 'Hello World!'
 
-# Add an entry
-fruit_dict.update({'Cox': 'Apple'})
-
-variety_list = ['Jazz', 'Jazz', 'Seto', 'Cox']
-
-fruit_list = [fruit_dict[x] for x in variety_list]
-print(fruit_list)
+var_func()
+print(str_variable)
 ```
 
-From an input list of varieties, we get an output list of their associated fruits. Another good trick to know with dictionaries is that you can iterate through their keys and values:
+This would raise an error, because as far as your general code is concerned `str_variable` doesn't exist outside of the function. If you want to create variables inside a function and have them persist, you need to explicitly pass them out using, for example `return str_variable` like this:
 
 ```{code-cell} ipython3
+def var_func():
+    str_variable = 'Hello World!'
+    return str_variable
 
-for key, value in fruit_dict.items():
-    print(key + ' maps into ' + value)
-
+returned_var = var_func()
+print(returned_var)
 ```
+
+Or, if you only want to modify a variable, you can declare the variable before the function is run, pass it into the function, and then return it.
+
 
 ## Using packages and modules
 

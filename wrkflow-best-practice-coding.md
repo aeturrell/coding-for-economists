@@ -13,9 +13,11 @@ kernelspec:
   name: codeforecon
 ---
 
-# Best Practice in Coding
+# Basics of Best Practice Coding
 
-In this chapter, you'll learn about some best practices for coding. As you code, you'll be tempted to ignore these (that's normal; we all are). But the truth is that they will *save* time in the long run, and future you will thank past you for sticking to them.
+In this chapter, you'll learn about some best practices for coding. **These will save you *so much time*!**. Trust me.
+
+As you code, you'll be tempted to ignore these (that's normal; we all are). But the truth is that they will *save* time in the long run, and future you will thank past you for sticking to them.
 
 The validity of your research depends, to a frightening degree, on the quality of your code. There are many ways to write code and, over the years, software developers have worked out best practices that help to make writing, using, debugging, and reading code more fun, and to make the end product higher quality. (There's nothing worse than wading through someone else's terrible code.)
 

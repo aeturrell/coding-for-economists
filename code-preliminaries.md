@@ -6,7 +6,9 @@ In this chapter, you'll find out how to install and setup everything you need to
 
 ### Operating system
 
-Much of the coding you'll need to do can be achieved on all three of the major operating systems: Windows, MacOS, and Linux. But if you haven't yet decided which operating system to use, I strongly recommend you do not choose Windows because coding on Windows brings with it many more challenges. Some packages won't work at all, and others will be *much* more difficult to set up. This is only true in a small number of cases, but it's just often enough for it to be a real problem. Furthermore, if you ever need to scale up your work to the cloud, you'll find that it's more cost effective to use machines that have use something which is closer to Linux (which MacOS is). While Macs are famous for being expensive, most Linux distributions are free so even when avoiding Windows, there should be a solution to satisfy all budget constraints. Linux used to have a reputation as being fearsomely difficult for beginners. But modern Linux distributions, such as Ubuntu, are pretty user-friendly.
+Much of the coding you'll need to do can be achieved on all three of the major operating systems: Windows, MacOS, and Linux. 
+
+However, if you haven't yet decided which operating system to use, I strongly recommend you do not choose Windows because coding on that operating system brings with it many more challenges. Some packages won't work at all, and others will be *much* more difficult to set up. This is only true in a small number of cases, but it's just often enough for it to be a real problem. Furthermore, if you ever need to scale up your work to the cloud, you'll find that it's more cost effective to use machines that have use something which is closer to Linux (which MacOS is). While Macs are famous for being expensive, most Linux distributions are free so even when avoiding Windows, there should be a solution to satisfy all budget constraints. Linux used to have a reputation as being fearsomely difficult for beginners. But modern Linux distributions, such as Ubuntu, are pretty user-friendly. If you are using Windows, for whatever reason, I recommend you work in the [*Windows Subsystem for Linux*](https://pbpython.com/wsl-python.html) for the best experience.
 
 ### Choice of programming language
 
@@ -64,8 +66,9 @@ Once you have Visual Studio Code installed and opened, navigate to the 'extensio
 
 - Python
 - Pylance
+- Jupyter
 
-If you have installed these then you are ready to run your first script!
+If you have installed these and Python then you are ready to run your first script!
 
 ## Running your first code: Hello World!
 
@@ -77,9 +80,9 @@ print('Hello World!')
 
 Hit save. If you now select/highlight this text and right-click you should seem some options, including 'Run Selection/Line in Terminal' and `Run Selection/Line in Interactive Window'. Because VS Code is a richly featured IDE, there are lots of options for how to run the file. Let's try both of the main ways: the terminal and the interactive window.
 
-To run the code in the **terminal**, right-click and select 'Run Python file in terminal'. This will bring up a new panel (called a terminal) *within* Visual Studio Code that runs your entire script from top to bottom--and you should see 'Hello World!' pop up!
+To run the code in the **terminal**, right-click and select 'Run Python file in terminal'. This will bring up a new panel (called a terminal) *within* Visual Studio Code that runs your entire script from top to bottom-and you should see 'Hello World!' pop up!
 
-The other way of working, with the interactive window, will be much more familiar to anyone who has used Stata or Matlab and is much more suited to the way economists tend to work because it doesn't require you to write the whole script, start to finish, ahead of time. Instead, you can jam, changing code as you go, (re-)running it line by line. To run the code in an interactive window, **right-click and select 'Run Selection/Line in Interactive Window'**. This should cause a new 'interactive' panel to appear within Visual Studio Code, and the selected line only to execute within it.
+The other way of working, with the interactive window, will be much more familiar to anyone who has used Stata or Matlab and is much more suited to the way economists tend to work because it doesn't require you to write the whole script, start to finish, ahead of time. Instead, you can jam, changing code as you go, (re-)running it line by line. To run the code in an interactive window, **right-click and select 'Run Selection/Line in Interactive Window'**. This should cause a new 'interactive' panel to appear within Visual Studio Code, and only the selected line will execute within it.
 
 At this point, you may see a message about Visual Studio Code's default behaviour when you press shift+return; for this book, it's good to have shift+return default to running a line in the interactive window.
 
@@ -102,7 +105,7 @@ This shows the two ways of working with the interactive window--running (segment
 
 ## Packages, environments, and the terminal
 
-### The terminal
+### The terminal in brief
 
 In the section above, I mentioned the *terminal*. This is a text-based way to issue all kinds of commands to your computer (not just Python commands) and knowing a little bit about it is really useful for coding (and more) because managing packages, environments (which we haven't yet discussed), and version control (ditto) can all be done via the terminal. We'll come to these in due course, but for now, a little background on what the terminal is and what it does.
 
@@ -204,6 +207,34 @@ conda env create -f codeforecon.yml
 ```
 
 This saves the tedium of installing packages one-by-one, and it gives you a nice separate environment for going through 'coding for economists'. Remember, to use the new environment, use the button in Visual Studio Code or `conda activate codeforecon` on the command line. You can find much more details of how to use environments--including deleting them--over on Anaconda's [guide to managing environments](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
+
+## (Advanced) Fine-tuning your integrated development environment
+
+If you just want to get on with some coding, feel free to skip this section.
+
+Once you've downloaded *Visual Studio Code* and installed some basic extension - Python, Pylance, and Jupyter - you'll have enough to get going but VS Code can do a whole lot more with some extra add ons. You can install these using the extensions tab on the left hand side of VS Code. Here are the ones I recommend and why:
+
+- Markdown extensions - markdown is a simple text language that is often used to provide readmes for code repositories. It comes with the file extension .md
+  - *Markdown All in One*, to help writing Markdown docs.
+  - *Markdown Preview Enhanced*, to view rendered markdown as you type it (right click and select 'Open Preview...').
+- Coding extensions
+  - *Bracket Pair Colorizer 2*, which allows matching brackets to be identified with colours. Very useful when you have nested methods!
+  - *indent-rainbow*, gives different levels of indentation different colours for ease of reading.
+  - *Path Intellisense*, autocompletes filenames in code.
+- Version control
+  - *Git History*, view and search your git log along and show a graph of git commits with details.
+  - *GitLens*, helps to visualise code authorship at a glance via 'Git blame' annotations, navigate and explore Git repositories, and more.
+  - *Code Spell Checker*, does exactly what it says, really useful for avoiding mangled variable name errors. To ensure it uses 'British English', change the 'C Spell: Language' text from 'en' to 'en-GB' in VS Code's settings. Other languages are available as separate extensions.
+- General
+  - *Rainbow CSV*, uses colour to make plain old CSV files much more readable in VS Code.
+  - *vscode-icons*, intelligent icons for your files as seen in the VS Code file explorer, eg a folder called data gets an icon showing a disc drive superimposed onto a folder.
+- LaTex - it's a bit of surprise, but VS Code is one of the best LaTeX editors out there: if not *the* best. You will need LaTeX installed already though and initial setup of a compilation 'recipe' is a bit fiddly (though, once it works, it's dreamy).
+  - *LaTeX Workshop*, provides core features for LaTeX typesetting with Visual Studio Code.
+  - *LaTeX Preview*, both in-line and side-by-side previews of LaTeX code. A really fantastic extension.
+
+As well as adding extra extensions, you can customise the default settings of VS Code. As mentioned before, you'll probably want to change the `jupyter.sendSelectionToInteractiveWindow` setting to True. The easiest way to do this is to go to Settings (the cog icon) and type in 'Jupyter: Send Selection', and you should see a tick box come up; make sure it's ticked.
+
+Another useful one for coding is to change the 'Editor: Render Whitespace' setting, aka `editor.renderWhitespace` from 'selection' to 'boundary'. This will now show any boundary whitespace, or more than one instance of whitespace contiguously, as a grey dot. This might seem odd but it's really useful because the wrong amount of whitespace can create problems with code.
 
 ## Review
 
