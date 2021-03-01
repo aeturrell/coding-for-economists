@@ -182,6 +182,8 @@ Below is a table of the basic arithmetic operations.
 |   `%`    |      modulo      |
 |   `@`    |     matrix multiplication |
 
+As well as the usual operators, Python supports *assignment operators*. An example of one is `x+=3`, which is equivalent to running `x = x + 3`. Pretty much all of the operators can be used in this way.
+
 
 ## Strings
 
@@ -497,7 +499,7 @@ Being able to create empty containers is sometimes useful. The commands to creat
 
 ## Functions
 
-If you're an economist, I hardly need to tell you what a function is. In coding, it's much the same as in mathematics: a function has inputs, it performs its function, and it returns any outputs. Functions begin with a `def` keyword for 'define a function'. The body of the function is then indented relative to the left-most text. Function arguments are defined in brackets following the name, with different inputs separated by commas. Any outputs are given with the `return` keyword, again with different variables separated by commas. Let's see a very simple example:
+If you're an economist, I hardly need to tell you what a function is. In coding, it's much the same as in mathematics: a function has inputs, it performs its function, and it returns any outputs. Functions begin with a `def` keyword for 'define a function'. It then has a name, followed by brackets, `()`, which may contain *function arguments* and *function keyword arguments*. The body of the function is then indented relative to the left-most text. Function arguments are defined in brackets following the name, with different inputs separated by commas. Any outputs are given with the `return` keyword, again with different variables separated by commas. Let's see a very simple example:
 
 ```{code-cell} ipython3
 
