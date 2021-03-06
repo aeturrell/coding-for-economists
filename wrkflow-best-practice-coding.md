@@ -88,6 +88,7 @@ If you're using Visual Studio Code, you can [automatically send code into a func
 In Python, the naming convention for almost all objects is lower case separated by underscores, e.g. ‘this_is_a_script.py’. This style of naming is also known as snake case. There are different naming conventions though--[Allison Horst](https://twitter.com/allison_horst) made this fantastic cartoon of the different conventions that are in use.
 
 ![Different naming conventions](http://aeturrell.github.io/home/images/in_that_case.jpeg)
+Artwork by @allison_horst.
 
 But good naming isn't just about following the conventions, it's also about giving objects names that are clear and useful. Instead of calling a variable that measures incomes `variable_one`, call it `income_measure`. Instead of calling a function that inverts a matrix `matrix_stuff`, call it `matrix_invert`. The better named your variables, the clearer your code will be--and the fewer comments you will need to write!
 
