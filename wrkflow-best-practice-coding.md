@@ -31,44 +31,75 @@ Fortunately there's lot of great advice, and even tools, to help you do this.
 
 ## Code in style
 
-The first thing to think about is code style, ie how you write equivalent valid code. Python has a whole set of conventions about good style called ['PEP8'](https://www.python.org/dev/peps/pep-0008/), which it's worth taking a quick look at. It includes advice like indentation should always be 4 spaces per level and to surround top-level function and class definitions with two blank lines.
+The first thing to think about is code style, ie the way you write equivalent valid code. Python has a whole set of conventions about good style called ['PEP8'](https://www.python.org/dev/peps/pep-0008/), which it's worth taking a quick look at. It includes advice like indentation should always be 4 spaces per level and to surround top-level function and class definitions with two blank lines.
 
-Learning all of these would be tedious beyond belief. The good news is that a combination of packages and Visual Studio Code will do almost all of them for you!
+Learning *all* of the PEP8 conventions would be tedious beyond belief. The good news is that a combination of packages and Visual Studio Code will do a lot of them for you. Packages can re-style and even re-write your code automatically; we'll see how to do this in the next chapter.
 
-Visual Studio Code can use a so-called 'linter' package to highlight any lines of your code that don't comply with PEP8. I use [**pycodestyle**](https://pypi.org/project/pycodestyle/). Once you've installed it and set it up in Visual Studio Code (Command Palette -> Python: Set Linter) you select some of your code in a script and hit Command+K, Command+F on Mac (Ctrl+K, Ctrl+F otherwise) and pycodestyle will automatically fix what it can.
+For now, we will find out about some of the most important style factors. Before that, PEP8 is not the only Python style guide going around: another popular one is the [Google style guide](https://google.github.io/styleguide/pyguide.html).
 
-You can go even further than just linting and allow all of your code to be restyled more dramatically using a 'code formatter'. I sometimes use [**black**](https://black.readthedocs.io/en/stable/) (you can have any code style you like, as long as it's black), which is very opinionated but great it you just want to forget about formatting your own code nicely.
-
-To use **black**, install it according to the documentation. Then it runs from the command line, eg `black yourscript.py`. Here's an example of the kind of reformatting it does:
-
-```python
-# in:
-
-def very_important_function(template: str, *variables, file: os.PathLike, engine: str, header: bool = True, debug: bool = False):
-    """Applies `variables` to the `template` and writes to `file`."""
-    with open(file, 'w') as f:
-        ...
-
-# out:
-
-def very_important_function(
-    template: str,
-    *variables,
-    file: os.PathLike,
-    engine: str,
-    header: bool = True,
-    debug: bool = False,
-):
-    """Applies `variables` to the `template` and writes to `file`."""
-    with open(file, "w") as f:
-        ...
-```
-
-To see more about black and how to use it, check out these [short video tutorials](https://calmcode.io/black/introduction.html).
-
-Most programming languages have a style guide or at least some conventions.
+Most programming languages have a style guide or at least some conventions!
 
 ![Code quality](https://imgs.xkcd.com/comics/code_quality.png)
+
+### Naming conventions
+
+In Python, the naming convention for almost all objects is lower case separated by underscores, e.g. `a_variable=10` or ‘this_is_a_script.py’. This style of naming is also known as snake case. There are different naming conventions though--[Allison Horst](https://twitter.com/allison_horst) made this fantastic cartoon of the different conventions that are in use.
+
+![Different naming conventions](http://aeturrell.github.io/home/images/in_that_case.jpeg)
+Artwork by @allison_horst.
+
+There are three exceptions to the snake case convention: classes, which should be in camel case, eg `ThisIsAClass`; constants, which are in capital snake case, eg `THIS_IS_A_CONSTANT`; and packages, which are typically without spaces or underscores and are lowercase `this_is_a_package`.
+
+For some quick shortcuts to re-naming columns in **pandas** dataframes or other string variables, try the unicode-friendly [**slugify**](https://github.com/un33k/python-slugify) library or the `clean_headers` function from the [**dataprep**](https://docs.dataprep.ai/index.html) library.
+
+Good naming isn't just about following the conventions, it's also about giving objects names that are clear and useful. Instead of calling a variable that measures incomes `variable_one`, call it `income_measure`. Instead of calling a function that inverts a matrix `matrix_stuff`, call it `matrix_invert`. The better named your variables, the clearer your code will be--and the fewer comments you will need to write!
+
+### Whitespace
+
+Surrounding bits of code with whitespace can significantly enhance readability. One such convention is that functions should have two blank lines following their last line. Another is that assignments are separated by spaces
+
+```python
+this_is_a_var = 5
+```
+
+whereas keyword arguments in functions do not have spaces
+
+```python
+def function(input_one, input_two=5):
+    return input_one
+```
+
+Another convention is that a space appears after a `,`, for example in the definition of a list we would have
+
+```python
+list_var = [1, 2, 3, 4]
+```
+
+rather than
+
+```python
+list_var = [1,2,3,4]
+# or
+list_var = [1 , 2 , 3 , 4]
+```
+
+There are packages that can re-organise your whitespace for you that we'll meet in the next chapter.
+
+### Line width and line continuation
+
+For quite arbitrary historical reasons, PEP8 also suggests 79 characters for each line of code. Some find this too restrictive, especially with the advent of wider monitors. But it is good to split up very long lines. Anything that is contained in parenthesis can be split into multiple lines like so:
+
+```python
+def function(input_one, input_two,
+             input_three, input_four):
+    result = (input_one,
+              + input_two,
+              + input_three,
+              + input_four)
+    return result
+```
+
+Code formatters, which we'll meet in the next chapter, will try and break up long lines for you.
 
 ## Do not repeat yourself (DRY)
 
@@ -82,17 +113,6 @@ Some practical ways to apply DRY in practice are to use functions, to put functi
 :class: tip
 If you're using Visual Studio Code, you can [automatically send code into a function](https://code.visualstudio.com/docs/editor/refactoring) by right-clicking on code and using the 'Extract to method' option.
 ```
-
-## Naming conventions
-
-In Python, the naming convention for almost all objects is lower case separated by underscores, e.g. ‘this_is_a_script.py’. This style of naming is also known as snake case. There are different naming conventions though--[Allison Horst](https://twitter.com/allison_horst) made this fantastic cartoon of the different conventions that are in use.
-
-![Different naming conventions](http://aeturrell.github.io/home/images/in_that_case.jpeg)
-Artwork by @allison_horst.
-
-But good naming isn't just about following the conventions, it's also about giving objects names that are clear and useful. Instead of calling a variable that measures incomes `variable_one`, call it `income_measure`. Instead of calling a function that inverts a matrix `matrix_stuff`, call it `matrix_invert`. The better named your variables, the clearer your code will be--and the fewer comments you will need to write!
-
-For some quick shortcuts to re-naming columns in **pandas** dataframes or other string variables, try the unicode-friendly [**slugify**](https://github.com/un33k/python-slugify) library or the `clean_headers` function from the [**dataprep**](https://docs.dataprep.ai/index.html) library.
 
 ## Make it modular
 
