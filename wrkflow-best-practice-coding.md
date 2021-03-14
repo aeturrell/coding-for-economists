@@ -13,7 +13,7 @@ kernelspec:
   name: codeforecon
 ---
 
-# Basics of Best Practice Coding
+# Tips for Better Coding
 
 In this chapter, you'll learn about some best practices for coding. **These will save you *so much time*!**. Trust me.
 
