@@ -173,7 +173,7 @@ your-username@your-computer current-directory % conda activate environmentname
 
 To use your new environment in Visual Studio Code, you may need to restart it. Open up a Python script, for example, 'hello_world.py'. Then, in the bottom left-hand corner of Visual Studio Code, you will see what Python environment that you are using. You can click on this to bring up a dropdown menu of all Python environments on your system and just choose whichever you want to use for this project. Visual Studio Code configuration settings for individual folders can be saved as 'workspaces', which remember which Python environment you were using for which folder.
 
-Installing packages one-by-one is very tedious. Fortunately, there's a better way. You can install an entire Anaconda environment from a file. Here's an example which would be saved as 'codeforecon.yml':
+Installing packages one-by-one is very tedious. Fortunately, there's a better way. You can install an entire Anaconda environment from a file. Here's an example 'yaml' (this stands for "YAML Ain't Markup Language") file that would be saved as 'codeforecon.yml' and which includes a good standard set of packages for doing economics:
 
 ```yaml
 name: codeforecon
@@ -195,11 +195,17 @@ dependencies:
   - tqdm
   - yaml
   - pycodestyle
+  - autopep8
+  - pyarrow
   - pip:
     - jupyter-book
-    - specification_curve
-    - ghp-import
     - pandas-profiling
+    - pandas-datareader
+    - sympy
+    - plotnine
+    - altair
+    - stargazer
+    - linearmodels
 ```
 
 Note that most of these packages will be installed by conda, with just a few being installed by pip. The entire environment can be installed on the command line by running (from the same directory as the environment file):

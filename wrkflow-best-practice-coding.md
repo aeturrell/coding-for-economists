@@ -175,15 +175,17 @@ import pandas as pd
 df = pd.read_csv('data/raw/file.csv')
 ```
 
-This works great on Mac and Linux, but it's not going to work on Windows. For that we need to use operating system independent paths. One way of doing this in Python is to use the `os` package that tells the operating system (whatever it may be) to combine folder names into a path:
+This works great on Mac and Linux, but it's not going to work on Windows; Windows uses backwards slashes, which unfortunately tend to do other things in programming too. To ensure relative paths work across operating systems, the best way is to wrap the file path in a call to the `Path` method in the **pathlib** module:
 
 ```python
+from pathlib import Path
 import pandas as pd
-import os
 
-path_to_data = os.path.join('data', 'raw', 'file.csv')
+path_to_data = Path('data/raw/file.csv')
 df = pd.read_csv(path_to_data)
 ```
+
+**pathlib** will translate the relative path you have entered into whatever the local operating system needs.
 
 ## Don't prematurely optimise for speed
 

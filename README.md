@@ -1,5 +1,9 @@
 # coding-for-economists
 
+This readme is intended to help those contributing to or editing the book, not those trying to follow it. To follow the book, head to the [coding for economists website](https://aeturrell.github.io/coding-for-economists/intro.html) and download the jupyter notebooks directly from the relevant page.
+
+## Setting up the environment
+
 After installing env, activate, and use
 
 ```bash
@@ -23,10 +27,3 @@ The command is
 ```bash
 ghp-import -n -p -f _build/html
 ```
-
-## Other dependencies
-
-(Not currently active due to latter bullet)
-
-- Camelot on Ghostscript: `brew install ghostscript` (MacOS), or download the windows installer.
-- Camelot on outdate sqlalchemy, can cause problems.
