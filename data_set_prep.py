@@ -25,7 +25,7 @@ def star_wars_data():
                             'species': 'category'})
     df = df.drop(['skin_color', 'birth_year'], axis=1)
     df.info()
-    df.to_pickle(os.path.join('data', 'starwars.pickle'))
+    df.to_csv(os.path.join('data', 'starwars.csv'))
 
 
 def tag_visible(element):
