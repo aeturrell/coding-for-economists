@@ -19,7 +19,7 @@ In this chapter, you'll meet the *command line* and learn how to use it. Beyond 
 
 To try out any of the commands in this chapter on your machine, you can select 'New Terminal' from the menu bar in Visual Studio Code (Mac and Linux), use the Windows Subsystem for Linux or git bash (Windows), or use a free [online terminal](https://cocalc.com/doc/terminal.html).
 
-This chapter has benefited from numerous sources, including [Grant McDermott](https://grantmcdermott.com/)'s notes, Melanie Walsh's [Introduction to Cultural Analytics & Python](https://melaniewalsh.github.io/Intro-Cultural-Analytics/welcome.html), [Data Science Bootstrap](https://ericmjl.github.io/data-science-bootstrap-notes/) and [Research Software Engineering with Python](https://merely-useful.tech/py-rse/).
+This chapter has benefited from numerous sources, including absolutely excellent notes by [Grant McDermott](https://grantmcdermott.com/), Melanie Walsh's [Introduction to Cultural Analytics & Python](https://melaniewalsh.github.io/Intro-Cultural-Analytics/welcome.html), [Data Science Bootstrap](https://ericmjl.github.io/data-science-bootstrap-notes/) and [Research Software Engineering with Python](https://merely-useful.tech/py-rse/).
 
 ## What is the command line?
 
@@ -33,9 +33,9 @@ The command line has many uses. Graphical user interfaces are, generally, a bit 
 
 The broad reasons you might use the command line to issue instructions include:
 
-- software functionality: some software *only* has a command line interface so sometimes it's the only way
+- software functionality: some software *only* has a command line interface
 
-- efficiency: your computer has limited memory, which graphical user interfaces use a lot of-the command line uses less
+- efficiency: your computer has limited memory, which graphical user interfaces use a lot of—the command line uses less
 
 - reproducibility: scripts that run on the command line are reproducible in a way that clicking around a graphical user interface is not
 
@@ -61,8 +61,15 @@ Bash is often the default command line shell on UNIX but zsh has gained populari
 
 To open up the command line within Visual Studio Code, you can use the ``⌃` `` keyboard shortcut (Mac) or ``ctrl` `` (Windows), or by clicking "View > Terminal".
 
-Let's try a simple command: type `date` into a command line window and hit return. You should see today's date and time (and timezone). You could also try `echo hello` and `whoami`.
+You should now see something like this
 
+```bash
+username@hostname:~$
+```
+
+Let's break down what this is telling us. `username` says who the current user is; `@hostname` denotes the name of the computer; `~` is the default (home) directory; and `$` is the 'command prompt', a signifier that this is where you should type your command. (Note that this line may look different depending on what shell and/or operating system you're using.)
+
+Let's try a simple command: type `date` into a command line window and hit return. You should see today's date and time (and timezone). You could also try `echo hello` and `whoami`.
 
 All commands that you run in the terminal have the same structure:
 `command`, followed by `option(s)`, followed by `argument(s)`. The options are also called flag.s An example serves to demonstrate this: if you have a terminal open in a directory that includes a CSV file called 'data.csv', the command to look at the first 5 lines is:
@@ -115,7 +122,6 @@ The table below shows some useful commands for moving around your computer using
 | `cd ..`   | Go up one level in the directory (`cd ../..` for two levels)        |
 | `cd ~`   | Go to your home directory        |
 | `cd -`   | Go to the previous directory        |
-| `cd -`   | Go to the previous directory        |
 | `cd documents/papers`   | Go directly to a directory named 'papers' |
 
 
@@ -161,7 +167,7 @@ jupyter lab
 
 Now we'll see some useful commands for the terminal.
 
-| Command      | What it does |
+| Command  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | What it does |
 | ----------- | ----------- |
 | `man <command>`      | Shows a manual for the given command       |
 | `touch <filename>`   | Creates an empty file named `<filename>`        |
@@ -213,21 +219,81 @@ do
 done
 ```
 
-Wait, but what's that asterisk doing there? It's a *wildcard character*, it tells bash to look for anything that ends in ".csv".
-
 We can get even more fancy with the above example and put those counts in a new text file:
 
 ```bash
 touch counts_of_csvs.txt
 for i in $(ls *.csv)
-do 
+do
   wc $i >> counts_of_csvs.txt
 done
 ```
 
-## Bash scripting
+A couple of new features appeared in the examples above.
 
-TODO
+`*` is a *wildcard character*, it tells bash to look for anything that ends in ".csv". This is not the only special case; `?` serves a similar purpose of standing in for any character but just *one* character rather than arbitrarily many. If you had a folder with `file1.csv`, `file2.csv`, etc., up to 9, then you could use `file?.csv` to refer to all of them but this would not pick up `file10.csv`.
+
+Another special character we've already seen is the curly brace, `{}`. Whenever you have a common substring in a series of commands using curly braces tells the command line to expand what's in them automatically. In an example above, this is used on 1 to 5. But it can also be used in, for example, file names:
+
+```bash
+cp /path/to/project/{foo,bar,baz}.csv /newpath
+```
+
+would copy the csv files called `foo`, `bar`, and `baz` to the directory `/newpath`. Similarly,
+
+```bash
+touch {a..c}{.csv,.txt}
+```
+
+would create the files a.csv, a.txt, b.csv, b.txt, c.csv, and c.txt.
+
+## Scripting
+
+For tasks that will be repeated, it's more reproducible and reliable to put your terminal commands into a script than executing them from memory each time—not to mention a lot easier! Because the command line has its own language, we can create scripts that execute commands. There are some differences between bash and zsh but we'll try and keep the guidelines general.
+
+Create a script called `hello_world.sh`. Inside it, write:
+
+```bash
+#!/bin/sh
+echo "Hello World!"
+```
+
+The first line is called a shebang and it indicates what programme to run the commands below with (sh means any Bash-compatible shell). The `#` character also indicates a comment. The second part will print out a string to the screen. Now, depending on whether you're using bash or zsh, run
+
+```bash
+bash hello_world.sh
+# or
+zsh hello_world.sh
+```
+
+Let's see a more complex example:
+
+```bash
+#!/bin/bash
+echo "Starting program at $(date)"
+echo "Running program $0 with $# arguments
+```
+
+which produces
+
+```
+Starting program at Thu 25 Mar 2021 21:23:22 GMT
+Running program hello_world.sh with 0 arguments
+```
+
+Notice that using `"$(command)"` inserted the output of the command into the text string. To assign variables in bash and zsh scripts, use the syntax `foo=bar` (no spaces) and access the value of the variable with `$foo`.
+
+Strings can be defined with `'` and `"` delimiters, but they are not equivalent. Strings delimited with `'` are literal strings and will not substitute variable values whereas `"` delimited strings will.
+
+Bash and zsh have a couple of unusual features as compared with other languages because of what they are used for. One of those are the special variables that come pre-defined, one of which we saw in the example above. Here is a list of some of the main ones:
+
+- `$0` - Name of the script
+- `$1` to `$9` - Arguments to the script (ordered by the numbers)
+- `$@` - All the arguments
+- `$#` - Number of arguments
+- `!!` - Entire last command, including arguments
+
+You can find more of these special variables [here](https://tldp.org/LDP/abs/html/special-chars.html).
 
 ## Useful command line tools
 
@@ -264,6 +330,8 @@ pandoc -s -N --reference-doc ref.docx -F pandoc-crossref -Mchapters book_compile
 
 [**exa**](https://the.exa.website/) is an upgrade on the `ls` command. It is designed to be an improved file lister with more features and better defaults. It uses colours to distinguish file types and metadata. Follow the instructions on the website to install it on your operating system. To replace `ls` with `exa`, you can use a terminal *alias*. There's a good guide [available here](https://ericmjl.github.io/data-science-bootstrap-notes/create-shell-command-aliases-for-your-commonly-used-commands/).
 
-## Review
+**nano** is a built-in text editor that runs *within* the terminal. This can be really useful if you're working on the cloud (but it's not got the rich features of a GUI-based text editor like VS Code). To open a file using **nano**, the command is `nano file.txt`. Nano displays instructions on how to navigate when it loads up but exiting is the hardest part: when you're done, hit `Ctrl+X`, then `y` to save, and then `enter` to exit.
 
-This brief introduction to the command line, should have made you feel comfortable with: opening terminal windows; using built-in commands to change directories, rename files, and list files; using Python on the command line; and using installed command line tools such as **pandoc**.
+## Review
+
+This brief introduction to the command line, should have made you feel comfortable with: opening terminal windows; using built-in commands to change directories, rename files, and list files; using Python on the command line; scripting terminal commands; and using installed command line tools such as **pandoc**.
