@@ -28,9 +28,11 @@ Coding is like a superpower; it's both fun and powerful! Head to the first secti
 
 As well as reading the book, you can also run the code examples for yourself (this is a great way to learn). There are a couple of ways to run code from the book:
 
-1. All pages that have code on can be downloaded to your desktop and run as *Jupyter Notebooks*. Click the download symbol in the top right hand corner of the page and select '.ipynb', which stands for 'ipython notebook'. To use downloaded notebooks, you'll need a minimum of an installation of Python and the Jupyter (or Jupyter Lab) library (`pip install jupyterlab`). To run a downloaded notebook you can either open it directly in Visual Studio Code (see the instructions in the Preliminaries chapter for more on installing Visual Studio Code) or you can run `jupyter lab` on the command line (you can find out more about what a 'command line' is in the book!) and then open the notebook file.
+1. All pages that have code on can be downloaded to your desktop and run as *Jupyter Notebooks*. Click the download symbol in the top right hand corner of the page and select '.ipynb', which stands for 'ipython notebook'. You will need to install software on your computer to run Jupyter Notebooks.
 
-2. Most pages that have code on can be run as a *Google Colab* notebook with a single click on `Colab`, found under the rocket launch button at the top of the page. If you need to install any extra packages in a Google Colab session, the syntax is `!pip install packagename` to install a library called 'packagename'.
+2. Most pages that have code on can be run as a *Google Colab* notebook with a single click on `Colab`, found under the rocket launch button at the top of the page. If you need to install any extra packages in a Google Colab session, the syntax is `!pip install packagename` to install a library called 'packagename'. No installation is required for Colab notebooks, they are run through a browser.
+
+If following option 1., to use downloaded notebooks, you'll need a minimum of an installation of Python and an installation of the Jupyter Lab library (`pip install jupyterlab`). You can then either run `jupyter lab` on the command line (you can find out more about what a 'command line' is in the book!) and open the notebook file, or open the notebook with Visual Studio Code (you would then also need to install VS Code-there are instructions in the Preliminaries chapter.)
 
 For a small number of the examples using data, you may need to download the relevant files from this book's github [repository](https://github.com/aeturrell/coding-for-economists/tree/main/data), but this will always be explained in the relevant subsections.
 

@@ -19,6 +19,12 @@ In this chapter, you'll learn about the basics of objects, types, operations, co
 
 This chapter has benefited from the excellent [*Python Programming for Data Science*](https://www.tomasbeuzen.com/python-programming-for-data-science/README.html) book by Tomas Beuzen.
 
+```{admonition}
+:class: tip
+Remember, you can download this notebook (to run it on your own computer) using the 'download .ipynb' button at the top of the page.
+```
+
+
 ## If you get stuck
 
 It's worth saying at the outset that, *no-one*, and I mean no-one, memorises half of the stuff you'll see in this book. 80% or more of time spent programming is actually time spent looking up how to do this or that online, 'debugging' a code for errors, or testing code. This applies to all programmers, regardless of level. You are here to learn the skills and concepts of programming, not the precise syntax (which is easy to look up later).
@@ -94,6 +100,16 @@ Below is a table of common data types in Python:
 | none                  | `NoneType` | Null Object    | represents no value                           | `None`                                     |
 | function                  | `function` | Function   | Represents a function                           | `def add_one(x): return x+1`                                     |
 
+### Brackets
+
+You may notice that there are several kinds of brackets that appear in the code we've seen so far, including `[]`, `{}`, and `()`. These can play different roles depending on the context, but the most common uses are:
+
+- `[]` is used to denote a list, eg `['a', 'b']`, or to signify accessing a position using an index, eg `vector[0]` to get the first entry of a variable called vector.
+
+- `{}` is used to denote a set, eg `{'a', 'b'}`, or a dictionary (with pairs of terms), eg `{'first_letter': 'a', 'second_letter': 'b'}`.
+
+- `()` is used to denote a tuple, eg `('a', 'b')`, or the arguments to a function, eg `function(x)` where `x` is the input passed to the function, *or* to indicate the order operations are carried out.
+
 ## Lists and slicing
 
 Lists are a really useful way to work with lots of data at once. They're defined with square brackets, with entries separated by commas. You can also construct them by appending entries:
@@ -110,14 +126,16 @@ print(list_example[0])
 print(list_example[-1])
 ```
 
-As well as accessing positions in lists using indexing, you can use *slices* on lists. This uses the colon character, `:`, to stand in for 'from the beginning' or 'until the end' (when only appearing once). For instance, to print just the last two entries, we would use the index `-2:` to mean from the second-to-last onwards. If we just want the first and last three entries to be printed, we can use:
+You can 
+
+As well as accessing positions in lists using indexing, you can use *slices* on lists. This uses the colon character, `:`, to stand in for 'from the beginning' or 'until the end' (when only appearing once). For instance, to print just the last two entries, we would use the index `-2:` to mean from the second-to-last onwards. Here are two distinct examples: getting the first three and last three entries to be successively printed:
 
 ```{code-cell} ipython3
 print(list_example[:3])
 print(list_example[-3:])
 ```
 
-Slicing can be even more elaborate than that because we can jump entries using a second colon. Here's a full example that begins at the second entry (remember the index starts at 0), runs up until the second-to-last entry (exclusive), and jumps every other entry inbetween (range just produces a list of numbers):
+Slicing can be even more elaborate than that because we can jump entries using a second colon. Here's a full example that begins at the second entry (remember the index starts at 0), runs up until the second-to-last entry (exclusive), and jumps every other entry inbetween (range just produces a list of integers from the value to one less than the last):
 
 ```{code-cell} ipython3
 list_of_numbers = list(range(1, 11))
@@ -127,7 +145,7 @@ step = 2
 print(list_of_numbers[start:stop:step])
 ```
 
-A handy trick is that you can reverse a list entirely using this:
+A handy trick is that you can print a reversed list entirely using double colons:
 
 ```{code-cell} ipython3
 print(list_of_numbers[::-1])
@@ -332,6 +350,14 @@ else:
 
 Note that this does nothing if the score is between 11 and 90, and prints a message otherwise.
 
+One nice feature of Python is that you can make multiple boolean comparisons in a single line.
+
+```{code-cell} ipython3
+a, b = 3, 6
+
+1 < a < b < 20
+```
+
 ## Casting variables
 
 Sometimes we need to explicitly cast a value from one type to another. We can do this using functions like `str()`, `int()`, and `float()`. If you try these, Python will do its best to interpret the input and convert it to the output type you'd like and, if they can't, the code will throw a great big error.
@@ -410,6 +436,14 @@ prints out a name until all names have been printed out. A useful trick with for
 name_list = ['Lovelace', 'Smith', 'Hopper', 'Babbage']
 
 for i, name in enumerate(name_list):
+    print(f'The name in position {i} is {name}')
+
+```
+
+Remember, Python indexes from 0 so the first entry of `i` will be zero. But, if you'd like to index from a different number, you can:
+
+```{code-cell} ipython3
+for i, name in enumerate(name_list, start=1):
     print(f'The name in position {i} is {name}')
 
 ```
@@ -770,6 +804,51 @@ print(sum_elements(more_nums))
 ```
 
 To learn more about args and kwargs, check out these [short video tutorials](https://calmcode.io/args-kwargs/introduction.html).
+
+## Time
+
+Let's do a quick dive into how to deal with dates and times. This is only going to scratch the surface, but should give a sense of what's possible.
+
+The built-in library that deals with datetimes is called `datetime`. Let's import it and ask it to give us a very precise account of the datetime (when the code is executed):
+
+
+```{code-cell} ipython3
+from datetime import datetime
+now = datetime.now()
+print(now)
+```
+
+You can pick out bits of the datetime that you need:
+
+```{code-cell} ipython3
+day = now.day
+month = now.month
+year = now.year
+hour = now.hour
+minute = now.minute
+print(f'{year}/{month}/{day}, {hour}:{minute}')
+```
+
+To add or subtract time to a datetime, use `timedelta`:
+
+```{code-cell} ipython3
+from datetime import timedelta
+
+new_time = now + timedelta(days=365, hours=5)
+print(new_time)
+```
+
+To take the difference of two dates:
+
+```{code-cell} ipython3
+from datetime import date
+
+new_year = date(year=2022, month=1, day=1)
+time_till_ny = new_year - date.today()
+print(f'{time_till_ny.days} days until New Year')
+```
+
+Note that date and datetime are two different types of objects-a datetime includes information on the date and time, whereas a date does not.
 
 ## Miscellaneous fun
 

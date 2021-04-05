@@ -14,7 +14,7 @@ If you are using Windows, then a good workaround for some of these issues is to 
 
 ### Choice of programming language
 
-This book uses Python, which is usually ranked as the first or second most popular programming language in the world and, just as importantly, it's also one of the easiest to learn. It's a general purpose language, which means it can perform a wide range of tasks. This combination of features is why people say Python has a low floor and a high ceiling. It's also very versatile; the joke goes that Python is the 2nd best language at everything, and there's some truth to that (although Python is 1st best at some tasks, like machine learning). But a language that covers such a lot of ground is also very useful; and Python is widely used across industry, academia, and the public sector. Python is the main 'dynamic' language used at [Google](https://google.github.io/styleguide/pyguide.html) and the [most demanded language](https://insights.dice.com/2020/12/01/7-programming-languages-popular-at-apple-that-could-land-you-a-job/) in jobs for Apple. It is used for everything from computer games to websites, data science to software applications: it's even being used to help [fly a helicopter on Mars](https://github.com/nasa/fprime). As an economist, you will know that this means Python benefits from strong positive network externalities. As such, learning Python has a lot of value and, once you have, learning more specialised languages like C++ or R is much easier; many of the basic programming concepts you'll see in this book are useful in almost any programming language. Because of their similarities, however, readers will find that they can follow even more of the content of the book in some specific other languages, especially Julia and R.
+This book uses Python, which is usually ranked as the first or second most popular programming language in the world and, just as importantly, it's also one of the easiest to learn. It's a general purpose language, which means it can perform a wide range of tasks. This combination of features is why people say Python has a low floor and a high ceiling. It's also very versatile; the joke goes that Python is the 2nd best language at everything, and there's some truth to that (although Python is 1st best at some tasks, like machine learning). But a language that covers such a lot of ground is also very useful; and Python is widely used across industry, academia, and the public sector. Python is the main 'dynamic' language used at [Google](https://google.github.io/styleguide/pyguide.html) and the [most demanded language](https://insights.dice.com/2020/12/01/7-programming-languages-popular-at-apple-that-could-land-you-a-job/) in jobs for Apple. It is used for everything from computer games to websites, data science to software applications: it's even being used to help [fly a helicopter on Mars](https://github.com/nasa/fprime). As an economist, you will know that this means Python benefits from strong positive network externalities. As such, learning Python has a lot of value and, once you have, learning more specialised languages like C++ or R is much easier; many of the basic programming concepts you'll see in this book are useful in almost any programming language.
 
 ![xkcd-python](https://imgs.xkcd.com/comics/python.png)
 
@@ -80,7 +80,13 @@ Now you will run your first code. Create a new folder for your work (perhaps nam
 print('Hello World!')
 ```
 
-Hit save. If you now select/highlight this text and right-click you should seem some options, including 'Run Selection/Line in Terminal' and `Run Selection/Line in Interactive Window'. Because VS Code is a richly featured IDE, there are lots of options for how to run the file. Let's try both of the main ways: the terminal and the interactive window.
+Save the file.
+
+If you named this file with the extension `.py` then VS Code will recognise that it is Python code and you should see the name and version of Python pop up in the blue bar at the bottom of your VS Code window. Make sure that the version of Python displayed here is the Anaconda version that you just installed rather than one that comes built-in with your operating system (this is particularly an issue on Mac). To change which Python version your code uses, click on the version shown in the blue bar and select the version you want. If you're using a fresh Anaconda install it will probably say `conda (base)` or similar words on the version you want. If you've just changed Python version, it can be a good idea to restart VS Code.
+
+When you press save, you may get messages about installing extra packages or making Pylance your default language server; just go with VS Code's suggestions here, except the one about the terminal, which you can say no to.
+
+Alright, shall we actually run some code? Select/highlight the `print('Hello world!')` text you typed in the file and right-click to bring up some options including 'Run Selection/Line in Terminal' and `Run Selection/Line in Interactive Window'. Because VS Code is a richly featured IDE, there are lots of options for how to run the file. Let's try both of the main ways: the terminal and the interactive window.
 
 To run the code in the **terminal**, right-click and select 'Run Python file in terminal'. This will bring up a new panel (called a terminal) *within* Visual Studio Code that runs your entire script from top to bottom-and you should see 'Hello World!' pop up!
 
@@ -111,7 +117,9 @@ This shows the two ways of working with the interactive window--running (segment
 
 In the section above, I mentioned the *terminal*. This is a text-based way to issue all kinds of commands to your computer (not just Python commands) and knowing a little bit about it is really useful for coding (and more) because managing packages, environments (which we haven't yet discussed), and version control (ditto) can all be done via the terminal. We'll come to these in due course, but for now, a little background on what the terminal is and what it does.
 
-Firstly, everything you can do by clicking on icons to launch programmes on your computer, you can also do via the terminal, also known as the command line. For many programmes, a lot of their functionality can be accessed using the command line, and other programmes *only* have a command line interface (CLI), including some that are used for data science. If you have installed the Anaconda distribution of Python, your terminal should look something like this as your 'command prompt':
+Firstly, everything you can do by clicking on icons to launch programmes on your computer, you can also do via the terminal, also known as the command line. For many programmes, a lot of their functionality can be accessed using the command line, and other programmes *only* have a command line interface (CLI), including some that are used for data science.
+
+Use Visual Studio Code to open a terminal window by clicking Terminal -> New Terminal on the list of commands at the very top of the window. If you have installed the Anaconda distribution of Python, your terminal should look something like this as your 'command prompt':
 
 ```bash
 (base) your-username@your-computer current-directory %
@@ -127,13 +135,19 @@ on Windows. If you don't see the word `(base)` at the start of the line, you may
 
 The `(base)` part is saying that your current Python environment is the base one (later, we'll see how to add others for reproducibility and to isolate projects). Unfortunately, and confusingly, the commands that you can use in the terminal on Mac and Linux, on the one hand, and Windows, on the other, are different. This won't be much of an issue in practice.
 
-For now, to at least try out the command line, let's use something that works across all three of the major operating systems. Use Visual Studio Code to open a terminal window by clicking Terminal -> New Terminal on the list of commands at the very top of the window. You should see the command prompt for your system. Now type `python`. If you installed Python, and put it on your PATH, you should see information about your installation of Python appear, including the version, followed by a Python prompt that looks like `>>>`. This is a kind of interactive Python session, in the terminal. It's much less rich than the one available in Visual Studio Code (it can't run scripts, for example) but you can try `print('Hello World!')` and it will run, printing your message. To exit the terminal-based Python session, type `exit()` to go back to the regular command line.
+For now, to at least try out the command line, let's use something that works across all three of the major operating systems. Type `python` on the command prompt that came up in your new terminal window. If you installed Python, and put it on your PATH, you should see information about your installation of Python appear, including the version, followed by a Python prompt that looks like `>>>`. This is a kind of interactive Python session, in the terminal. It's much less rich than the one available in Visual Studio Code (it can't run scripts, for example) but you can try `print('Hello World!')` and it will run, printing your message. To exit the terminal-based Python session, type `exit()` to go back to the regular command line.
 
 If you're using a bash or zsh terminal, there are a couple of commands that are so essential it would be remiss *not* to mention them. One is to list the contents of the current directory, for which the command is `ls`. The other is to move directory, for which the command is `cd`. If you find that you've opened a terminal you can always get a sense of where you are from `ls` and move to where you need to be using `cd directory/`. One of the advantages of opening a folder in Visual Studio Code and then opening a terminal with Code using 'New Terminal' is that the terminal will open in the folder you're working in (which is usually where you want to be).
 
 ### Installing packages
 
 The default installation of Anaconda comes with many of the packages you'll need, but it won't be long before you'll need to install some extra ones. Extra packages, for example for regression, deliver a lot of the value of a programming language. You may sometimes hear that Python is a 'batteries included' programming language, meaning that the base language is very rich. This is definitely true! But even so, for economics, we'll extend it further in numerous ways.
+
+```{admonition}
+:class: tip
+The command line interacts with your operating system and is used to create, activate, or change python installations.
+```
+
 
 To install extra Python packages, there are two options, and both use the command line. You'll need to have conda activated before installing a package--if you don't see the name of an environment, eg `(base)`, at the start of your terminal's line, use the `conda activate` command first. Once you have activated the conda environment, you install packages using another command.
 
@@ -154,15 +168,22 @@ your-username@your-computer current-directory % conda activate
 
 ### (Advanced) Working with Python environments and Anaconda
 
-You can get by just fine using the base Python environment to follow this book. However, it's always good practice to *use a new environment for every project* because, for reproducible research, we want to know what packages were used and be able to export them to a file that others can use too. For example, if you're following this book by running the code yourself, it's a good idea to create a new environment using the following command:
-
-```bash
-conda create -n codeforecon python=3.8
+```{admonition}
+:class: tip
+If you just want to get to some coding, you can skip the advanced sections for now.
 ```
 
-This will create a brand new Python 3.8 environment called 'codeforecon'. It will only have the barebones packages in; you can install extras as outlined above. At a minimum, you will want jupyter, matplotlib, numpy, and pandas.
+You don't have to stick to just one Python environment, you can have as many as you like. Running `conda activate base` on the command line (or switching to `base` via the blue bar in VS Code) activates the base environment, but you can create and activate other environments as you like. For example, you could install a Python 3.9 environment alongside your Python 3.8 environment when 3.9 is released.
 
-To activate and use the new Python environment on the command line, type `conda activate codeforecon`. This should change `(base)` to `(codeforecon)` on the command line. Likewise you can switch back with `conda activate base`. Note that this only changes the environment on the command line, what we really want to do is use the new environment in our IDE.
+You can get by just fine using the base Python environment to follow this book. However, it's always good practice to *use a new environment for every project* because, for reproducible research, we want to know what packages were used and be able to export them to a file that others can use too. You might also find that you break environments occasionally, so isolating them into the minimum set of packages needed to produce a distinct set of results is helpful for this reason too. To create a new Python 3.8 environment you would use the following command in the terminal:
+
+```bash
+conda create -n newenv python=3.8
+```
+
+This will create a brand new Python 3.8 environment called 'newenv' (the part after `-n` is the name). It will only have the barebones packages in; you can install extras as outlined above. At a minimum, you will want jupyter, matplotlib, numpy, and pandas.
+
+To activate and use the new Python environment on the command line, type `conda activate newenv`. This should change `(base)` to `(newenv)` on the command line. Likewise you can switch back with `conda activate base`. Note that this only changes the environment on the command line, what we really want to do is use the new environment in our IDE.
 
 To install a package into a *specific* environment, the easiest way is to activate that environment first by running `conda activate environmentname` followed by installing the package with `conda install packagename` or `pip install packagename`. Here's a full example:
 
@@ -171,9 +192,9 @@ your-username@your-computer current-directory % conda activate environmentname
 (environmentname) your-username@your-computer current-directory % conda install pandas
 ```
 
-To use your new environment in Visual Studio Code, you may need to restart it. Open up a Python script, for example, 'hello_world.py'. Then, in the bottom left-hand corner of Visual Studio Code, you will see what Python environment that you are using. You can click on this to bring up a dropdown menu of all Python environments on your system and just choose whichever you want to use for this project. Visual Studio Code configuration settings for individual folders can be saved as 'workspaces', which remember which Python environment you were using for which folder.
+To use your new environment in Visual Studio Code, you may need to restart VS Code. Open up a Python script so that it has its own tab in Visual Studio Code, for example, 'hello_world.py'. Then, in the bottom left-hand corner of Visual Studio Code, you will see what Python environment that you are using. You can click on this to bring up a dropdown menu of all Python environments on your system and just choose whichever you want to use for this project. Visual Studio Code configuration settings for individual folders can be saved as 'workspaces', which remember which Python environment you were using for which folder.
 
-Installing packages one-by-one is very tedious. Fortunately, there's a better way. You can install an entire Anaconda environment from a file. Here's an example 'yaml' (this stands for "YAML Ain't Markup Language") file that would be saved as 'codeforecon.yml' and which includes a good standard set of packages for doing economics:
+Installing packages one-by-one is very tedious. Fortunately, there's a better way. You can install an entirely new Anaconda environment from a file. Here's an example 'yaml' (this stands for "YAML Ain't Markup Language") file that would be saved as 'codeforecon.yml' and which includes a good standard set of packages for doing economics:
 
 ```yaml
 name: codeforecon
@@ -198,7 +219,6 @@ dependencies:
   - autopep8
   - pyarrow
   - pip:
-    - jupyter-book
     - pandas-profiling
     - pandas-datareader
     - sympy
@@ -208,13 +228,15 @@ dependencies:
     - linearmodels
 ```
 
-Note that most of these packages will be installed by conda, with just a few being installed by pip. The entire environment can be installed on the command line by running (from the same directory as the environment file):
+To install a new environment with these packages, you would need to create a new file called `codeforecon.yml` in Visual Studio Code and copy and paste the list of packages from above into it. Then, the entire environment can be installed on the command line by running (from the same directory as the environment file):
 
 ```bash
 conda env create -f codeforecon.yml
 ```
 
-This saves the tedium of installing packages one-by-one, and it gives you a nice separate environment for going through 'coding for economists'. Remember, to use the new environment, use the button in Visual Studio Code or `conda activate codeforecon` on the command line. You can find much more details of how to use environments--including deleting them--over on Anaconda's [guide to managing environments](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
+The `-f` flag tells the `conda env create` command that the file with the packages in is to follow; here, that file is called `codeforecon.yml`. When you enter the command on the terminal, you will see packages begin to download and install. Note that most of these packages are installed by conda, with just a few being installed by pip. If you already have a environment with the same name (`codeforecon` in this case), the command will fail as you can't overwrite an existing environment-you'd need to remove it first.
+
+This approach saves the tedium of installing packages one-by-one, and it gives you a nice separate environment for going through 'coding for economists'. Remember, to use the new environment, use the button in Visual Studio Code or `conda activate codeforecon` on the command line. You can find much more details of how to use environments--including deleting them--over on Anaconda's [guide to managing environments](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
 
 ## (Advanced) Fine-tuning your integrated development environment
 
