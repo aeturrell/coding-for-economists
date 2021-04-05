@@ -19,7 +19,7 @@ In this chapter, you'll meet the *command line* and learn how to use it. Beyond 
 
 To try out any of the commands in this chapter on your machine, you can select 'New Terminal' from the menu bar in Visual Studio Code (Mac and Linux), use the Windows Subsystem for Linux or git bash (Windows), or use a free [online terminal](https://cocalc.com/doc/terminal.html).
 
-This chapter has benefited from numerous sources, including absolutely excellent notes by [Grant McDermott](https://grantmcdermott.com/), Melanie Walsh's [Introduction to Cultural Analytics & Python](https://melaniewalsh.github.io/Intro-Cultural-Analytics/welcome.html), [Data Science Bootstrap](https://ericmjl.github.io/data-science-bootstrap-notes/) and [Research Software Engineering with Python](https://merely-useful.tech/py-rse/).
+This chapter has benefited from numerous sources, including absolutely excellent notes by [Grant McDermott](https://grantmcdermott.com/), Melanie Walsh's [Introduction to Cultural Analytics & Python](https://melaniewalsh.github.io/Intro-Cultural-Analytics/welcome.html), [Data Science Bootstrap](https://ericmjl.github.io/data-science-bootstrap-notes/), [calmcode.io](https://calmcode.io/), and [Research Software Engineering with Python](https://merely-useful.tech/py-rse/).
 
 ## What is the command line?
 
@@ -254,7 +254,7 @@ For tasks that will be repeated, it's more reproducible and reliable to put your
 Create a script called `hello_world.sh`. Inside it, write:
 
 ```bash
-#!/bin/sh
+#!/bin/bash
 echo "Hello World!"
 ```
 
@@ -331,6 +331,46 @@ pandoc -s -N --reference-doc ref.docx -F pandoc-crossref -Mchapters book_compile
 [**exa**](https://the.exa.website/) is an upgrade on the `ls` command. It is designed to be an improved file lister with more features and better defaults. It uses colours to distinguish file types and metadata. Follow the instructions on the website to install it on your operating system. To replace `ls` with `exa`, you can use a terminal *alias*. There's a good guide [available here](https://ericmjl.github.io/data-science-bootstrap-notes/create-shell-command-aliases-for-your-commonly-used-commands/).
 
 **nano** is a built-in text editor that runs *within* the terminal. This can be really useful if you're working on the cloud (but it's not got the rich features of a GUI-based text editor like VS Code). To open a file using **nano**, the command is `nano file.txt`. Nano displays instructions on how to navigate when it loads up but exiting is the hardest part: when you're done, hit `Ctrl+X`, then `y` to save, and then `enter` to exit.
+
+[**wget**](https://www.gnu.org/software/wget/) is a command-line utility for downloading files from the internet. It's very simple to use, the syntax is just `wget [options] [url]`. For example, to download the starwars csv file used in this book, the command is
+
+```bash
+wget https://github.com/aeturrell/coding-for-economists/blob/main/data/starwars.csv
+```
+
+[**htop**](https://htop.dev/) is a tool that lets you see what processes are running on your computer at any time (across individual processors), and how much memory you are using up. To install it on a Mac, you can use `brew install htop` if you use homebrew. Otherwise you can compile it from source after downloading it from the website. To use it, simply type `htop` on the command line.
+
+[**parallel**](https://www.gnu.org/software/parallel/) is a tool for executing jobs in parallel using one or more processors on your computer. A job can be a single command or a small script that has to be run for each of the lines in the input. The typical input is a list of files, a list of URLs, or similar. It's useful in coding when you have a so-called embarrassingly parallel job that can be perfectly and evenly split into sub-operations. You may need to install it using `brew install parallel` (Mac) or `apt-get install parallel` (most Linux distributions). 
+
+Using all of the processors available on your computer, you can launch the jobs in parallel batches of as many as you like. For example, if you had a python script called `print_num.py` that prints the number it is given as an input via `sys.argv`:
+
+```python
+import sys
+import time
+
+if __name__ == "__main__":
+    time.sleep(6)
+    print(f'Input settings: {sys.argv}')
+
+```
+
+Using **parallel**, we would launch the script 50 times over in batches of 10 using
+
+```bash
+seq 50 | parallel -j 10 python print_num.py
+```
+
+And you would see
+
+```bash
+Input settings: ['print_num.py', '1']
+Input settings: ['print_num.py', '2']
+...
+```
+
+etc.
+
+[**ncdu**](https://dev.yorhel.nl/ncdu) is a disk usage analyser. It reports, interactively and via the terminal, how much space in a folder is taking up. You can also use return to enter a folder and explore sub-folders. This is especially useful when using a remote computer that you can't view via a graphical user interface (GUI).
 
 ## Review
 
