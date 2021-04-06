@@ -850,6 +850,44 @@ print(f'{time_till_ny.days} days until New Year')
 
 Note that date and datetime are two different types of objects-a datetime includes information on the date and time, whereas a date does not.
 
+## Reading and writing files
+
+Although most applications in economics will probably use the **pandas** package to read and write tabular data, it's sometimes useful to know how to read and write arbitrary files using the built-in Python libraries too. To open a file
+
+```python
+open('filename', mode)
+```
+
+where `mode` could be `r` for read, `a` for append, `w` for write, and `x` to create a file. Create a file called `text_example.txt` and write a single line in it, 'hello world'. To open the file and print the text, use:
+
+```python
+with open('text_example.txt') as f:
+    text_in = f.read()
+
+print(text_in)
+```
+
+```python
+'hello world!\n'
+```
+
+`\n` is the new line character. Now let's try adding a line to the file:
+
+```python
+with open('text_example.txt', 'a') as f:
+    f.write('this is another line\n')
+```
+
+Writing and reading files using the `with` command is a quick and convenient shorthand for the less concise open, action, close pattern. For example, the above example can also be written as:
+
+```python
+f = open('text_example.txt', 'a')
+f.write('this is another line\n')
+f.close()
+```
+
+Although this short example shows opening and writing a text file, this approach can be used to edit a wide range of file extensions including .json, .xml, .csv, .tsv, and many more, including binary files in addition to plain text files.
+
 ## Miscellaneous fun
 
 Here are some other bits of basic coding that might be useful. They really show why Python is such a delightful language.

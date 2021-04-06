@@ -226,6 +226,8 @@ dependencies:
     - altair
     - stargazer
     - linearmodels
+    - pingouin
+    - jupyterlab
 ```
 
 To install a new environment with these packages, you would need to create a new file called `codeforecon.yml` in Visual Studio Code and copy and paste the list of packages from above into it. Then, the entire environment can be installed on the command line by running (from the same directory as the environment file):
