@@ -72,7 +72,7 @@ Let's break down what this is telling us. `username` says who the current user i
 Let's try a simple command: type `date` into a command line window and hit return. You should see today's date and time (and timezone). You could also try `echo hello` and `whoami`.
 
 All commands that you run in the terminal have the same structure:
-`command`, followed by `option(s)`, followed by `argument(s)`. The options are also called flag.s An example serves to demonstrate this: if you have a terminal open in a directory that includes a CSV file called 'data.csv', the command to look at the first 5 lines is:
+`command`, followed by `option(s)`, followed by `argument(s)`. The options are also called flags. An example serves to demonstrate this: if you have a terminal open in a directory that includes a CSV file called 'data.csv', the command to look at the first 5 lines is:
 
 ```bash
 head -n 5 data.csv
