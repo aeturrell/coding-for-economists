@@ -15,11 +15,11 @@ kernelspec:
 
 # Automating Outputs
 
-In this chapter, you'll learn how to automate the inclusion of figures, tables, and code in your outputs. Much of what you'll see in this chapter is possible in a wide range of languages (not just Python). The first section assumes some familiarity with the $\LaTeX$ typesetting language.
+In this chapter, you'll learn how to automate the inclusion of figures, tables, and code in your outputs. Much of what you'll see in this chapter is possible in a wide range of languages (not just Python). The first section assumes you're writing a document or presentation using the $\LaTeX$ typesetting language.
 
-## Including code outputs in documents and presentations
+## Including code outputs in LaTeX documents and presentations
 
-Let's say you're writing a paper, using $\LaTeX$, or presentation, using $\LaTeX$ and beamer. (Perhaps you'd like the final document or presentation to be in Word, Powerpoint-that's okay too, but let's assume you're *writing* it in $\LaTeX$.)
+Let's say you're writing a paper, using $\LaTeX$, or a presentation, using $\LaTeX$ and beamer. (Perhaps you'd like the final document or presentation to be in Word, Powerpoint-that's okay too, but let's assume you're *writing* it in $\LaTeX$.)
 
 Including code outputs is pretty simple, but is slightly different for figures and tables (the two main outputs you might include).
 
@@ -108,6 +108,8 @@ which picks up your table. If you don't want to have to add the full path to the
 \makeatother
 ```
 
+So that you need only write `\input{reg_table.tex}` in your $\LaTeX$ document.
+
 ### Exporting to other document types
 
 Finally, you may *not* want your final output to be a PDF (the standard output for $\LaTeX$), but to be one of a range of other document types. For this, the command line tool [**pandoc**](https://pandoc.org/) is absolutely brilliant and can translate $\LaTeX$ papers and beamer presentations into a whole variety of other formats, including Microsoft Word's .docx, OpenOffice's .ODT, Microsoft Powerpoint's .pptx, HTML, plain text, markdown, and more. See the previous chapter or the pandoc documentation for more on how to do this. We will also make use of pandoc in the next section.
@@ -118,9 +120,9 @@ Sometimes, partial automation is not enough: you want everything to be run by co
 
 ### Using Jupyter notebooks to automate code outputs in reports
 
-Jupyter notebooks mix text and code, and the best notebook-dedicated integrated development editor (IDE) is [Jupyter Lab](https://jupyter.org/). Jupyter Lab offers a quick and simple method of fully automating reports. Once installed, to start Jupyter Lab, type `jupyter lab` in the command line and a browser window will open. Select your programming environment, for instance 'Python-codeforecon', under the notebook heading and a fresh '.ipynb' file will open up. Try adding in some text, in the markdown cells, and some code, in the code cells. You can add new cells with the '+' button, and change cell type with the dropdown (new cells default to code). To demonstrate how notebooks can be used to fully automate reports, it's a good idea to include code that produces charts and tables, so you can get a feel for how these get weaved into a final output. Once you have a demo notebook you're happy with, and you've run all the code blocks using the play button, save it.
+Jupyter notebooks mix text and code. Perhaps the best notebook-dedicated integrated development editor (IDE) is [Jupyter Lab](https://jupyter.org/). Jupyter Lab offers a quick and simple method of fully automating reports. Once installed, to start Jupyter Lab, type `jupyter lab` in the command line and a browser window will open. Select your programming environment, for instance 'Python-codeforecon', under the notebook heading and a fresh '.ipynb' file will open up. Try adding in some text, in the markdown cells, and some code, in the code cells. You can add new cells with the '+' button, and change cell type with the dropdown (new cells default to code). To demonstrate how notebooks can be used to fully automate reports, it's a good idea to include code that produces charts and tables, so you can get a feel for how these get weaved into a final output. Once you have a demo notebook you're happy with, and you've run all the code blocks using the play button, save it.
 
-Now, within Jupyter Lab, go to 'File->Export Notebook As...', and you'll be given several options to export the notebook into other formats. Some of the most useful are HTML, PDF, and markdown (which will include outputs such as figures). The beauty of this setup is that, if the data change, you can just re-run the entire notebook to update the code outputs. Now, one caveat to that is that you *cannot mix code and text in the same cell*. They must be in different cells. So you can't update the text automatically, only the the code outputs (we'll see an example of updating the text automatically too in the next subsection).
+Now, within Jupyter Lab, go to 'File->Export Notebook As...', and you'll be given several options to export the notebook into other formats. Some of the most useful are HTML, PDF, and markdown (which will include outputs such as figures). The beauty of this setup is that, if the data change, you can just re-run the entire notebook to update the code outputs. Now, one caveat to that is that you *cannot mix code and text in the same cell*. They must be in different cells. So you can't update the text automatically, only the code outputs (we'll see an example of updating the text automatically too in the next subsection).
 
 Jupyter Lab doesn't just offer exports to document type formats though, it can do slides too. To use this functionality, hit the the button in the left hand ribbon that has an icon that features two cogs. This opens up a window to edit the meta-data of cells. You'll see a dropdown menu with the heading 'slide type' with options:
 
@@ -134,25 +136,108 @@ By giving each cell in your notebook one of these designations and then using 'F
 
 It is hoped that future versions of Visual Studio Code will incorporate some of these 'export as' features that currently exist in Jupyter Lab.
 
-Using the export notebook as option produces reports that include every cell you entered. If you're sending your report on to someone who isn't interested in the code inputs, only the outputs, then that might be less than optimal. However, there is a way to do this. It's easiest on the command line. Let's say you had a report in a notebook called `report_example.ipynb`. To convert this into an output without any code inputs, you'd navigate to the same folder as the notebook in the command line and run:
+Using the 'export notebook as' option produces reports that include every cell you entered. If you're sending your report on to someone who isn't interested in the code inputs, only the outputs, then that might be less than optimal. However, there is a way to do this. It's easiest on the command line. Let's say you had a report in a notebook called `report_example.ipynb`. To convert this into an output without any code inputs, you'd navigate to the same folder as the notebook in the command line and run:
 
 ```bash
-jupyter nbconvert --to html --no-input Example.ipynb
+jupyter nbconvert --to html --no-input report_example.ipynb
 ```
 
-to convert it to a HTML file, or substitute `--to pdf` to get a PDF file out (etc). This method can also be used to create slides that do not have the code inputs.
+to convert it to a HTML file, or substitute `--to pdf` to get a PDF file out (and so on). This method can also be used to create slides that do not have the code inputs.
 
-### Using codebraid to automate code outputs (including within text)
+### Using codebraid to automate code outputs
 
-- outputs can include word docs, pdfs (papers and beamer pres), powerpoint, html slides, html page: anything that pandoc can do. Use codebraid.
+We'll now see a more flexible way to produce automatic reports and slides. Unlike in the previous example, the input does not need to be a '.ipynb' file but can instead be a simpler markdown file. See [here](https://guides.github.com/features/mastering-markdown/) for a quick introduction to markdown, but the important thing to know is that it's about as simple as writing a .txt file.
 
-- *Many* languages
+The **codebraid** output formats include Word documents, PDFs (papers and beamer presentations), Powerpoint presentations, HTML slides, HTML pages; anything that pandoc can do. But, in contrast to the examples in the previous sub-section, we'll see that we can have a lot more flexibility on inputs and outputs, *and* we can have code outputs appear within text.
 
-- two examples, a document and a presentation, both with refs and mention ref doc
+The magic package that we'll use to achieve all of this is called [**codebraid**](https://github.com/gpoore/codebraid). **codebraid** can take markdown documents, execute any code in them, and incorporate the outputs of that code in a final version of the document. It has built-in code execution that currently supports Python 3.5+, Julia, Rust, R, Bash, JavaScript, and SageMath. It can mix and match languages within the same document and it allows to you to insert code outputs anywhere in your document-even within a paragraph of text.
 
-- use code_presentation.md and code_pres_md.sh. Run latter with ./code_pres_md.sh
+**Codebraid** has some similarities to the R package **knitr**, which can execute R code blocks in a flavour of markdown called rmarkdown, but it overcomes some limitations of **knitr**: it supports more languages natively (eg Python *and* R), uses the standard markdown extension (.md), and has other extras. Like **knitr**, **codebraid** uses [**pandoc**](https://pandoc.org/) to perform the document conversions. Code chunks appear within the document demarked by triple backticks, \```.
 
-- if no code, everything will still work the same
+Let's see an example of codebraid in action. Codebraid works via the command line. To execute the code in a markdown file called `intro-to-codebraid.md` you would run:
+
+` codebraid pandoc --from markdown --to markdown --overwrite intro-to-codebraid.md -o intro-to-codebraid-proc.md`
+
+For instance, a markdown file with this:
+>
+>\```{.python .cb.run show=code+stdout}
+>var = 'Hello from Python!'
+>print(var)
+>\```
+
+produces this:
+
+```{.python .cb.run show=code+stdout}
+var = 'Hello from Python!'
+print(var)
+```
+
+```{.stdout}
+Hello from Python!
+```
+
+when executed. Plots and other rich outputs are incorporated and displayed when the code is executed.
+
+We have individual-chunk level control over what is shown. For example, to suppress the input code and just get the output (the printed string), we would use `show=stdout` instead of `show=code+stdout`.
+
+In-line code output is supported too, using single quote marks around variables followed by `{.python .cb.expr}` for instance using `var{.python .cb.expr}` in this way yields: Hello from Python!.
+
+To dip into other languages natively, for example R:
+
+>\```{.R .cb.run show=code+stdout}
+> print(paste("Hello", "from", "R"))
+>\```
+
+**codebraid** has two ways of running code; via Jupyter notebooks or via pure Python. One downside of **codebraid** for now is that one has to choose between automatic inclusion of rich outputs, such as plots, in Jupyter mode or being able to add code outputs in-line with text, in pure Python mode.
+
+A pure Python session is started as shown above, with `cb.run`, while a Jupyter session is started using, for example,
+
+>\```{.python .cb.run jupyter_kernel=codeforecon}
+> ...code...
+> \```
+
+where `codeforecon` is the name of the Jupyter environment to use. You can list all Jupyter environments you have active by using
+
+```bash
+jupyter kernelspec list
+```
+
+on the command line.
+
+### Presentation from codebraid
+
+A raw markdown example can be found at the end of this article. This would be saved in a file called 'code_presentation.md' and crafted into a presentation using the following commands (for example).
+
+html slides:
+
+```bash
+codebraid pandoc -f markdown -t revealjs -s --self-contained -o presentation_reveal.html code_presentation.md --mathjax
+```
+
+beamer:
+
+```bash
+codebraid pandoc -f markdown -t beamer -o presentation.pdf code_presentation.md
+```
+
+beamer with a theme:
+
+```bash
+codebraid pandoc -f markdown -t beamer -V theme:Warsaw -o presentation_themed.pdf code_presentation.md
+```
+
+Powerpoint:
+
+```bash
+codebraid pandoc -f markdown -o presentation.pptx code_presentation.md
+```
+
+For Powerpoint presentations, you can also specify a reference Powerpoint to use the theme from by appending `--reference-doc another.pptx` to the end of the terminal command.
+
+The document is carved up into slides according to rules that you can read more about in the [section on slides in the Pandoc manual](https://pandoc.org/MANUAL.html#slide-shows). Even on the same slide, sometimes you might want information in lists to be revealed successively. To achieve this and display lists incrementally, use the `-i` option with the above commands.
+
+### Document from codebraid
+
 
 - see also:
   - more control for Word, python-docx https://python-docx.readthedocs.io/en/latest/
@@ -160,3 +245,129 @@ to convert it to a HTML file, or substitute `--to pdf` to get a PDF file out (et
 ## Review
 
 ..
+
+## Examples
+
+### Example presentation
+
+
+> \---
+>title: "Example presentation"
+>author: Ada Lovelace
+>date: 2021/01/01
+>fontsize: 11pt
+>\---
+>
+>\# Just a title
+>
+>\## Title followed by content
+>
+>\- first point
+>\- second point
+>
+>::: notes
+>
+>These are speaker notes.
+>
+>:::
+>
+>\## Not all slides need titles
+>
+>Dashed horizontal lines can...
+>
+>\-----------------
+>
+>... create a slide with no title
+>
+>\## Making use of two columns
+>
+>:::::::::::::: {.columns}
+>::: {.column width="40%"}
+>An example of two column content
+>:::
+>::: {.column width="60%"}
+>Here's the second column
+>:::
+>::::::::::::::
+>
+>\# Static markdown content
+>
+>\## Code
+>
+>\```python
+>print("Hello world!")
+>\```
+>
+>\## Images
+>
+>\!\[Image caption\](smith_lovelace.png){width=50%}
+>
+>\## Tables
+>
+>\| Table        | From           | Markdown  |
+>\| ------------- |:-------------: | -----: |
+>\| col 3 is      | right-aligned | $1600 |
+>\| col 2 is      | centered      |   $12 |
+>\| zebra stripes | are neat      |    $1 |
+>
+>\## Equations
+>
+>\$g_{\mu \nu }$ is an in-line equation.
+>
+>Display equations are rendered thus:
+>\$$
+>\{\displaystyle G_{\mu \nu }+\Lambda g_{\mu \nu }=\kappa T_{\mu >\nu }}
+>\$$
+>
+>\# Content from code
+>
+>\## Code (and its output)
+> Initiate rich Jupyter output
+>\```{.python .cb.run jupyter_kernel=codeforecon}
+>import pandas as pd
+>import numpy as np
+>import seaborn as sns
+>import matplotlib as mpl
+>mpl.rcParams['figure.dpi'] = 150
+>\```
+>
+>\```{.python .cb.nb}
+>string_example = "Hello from Python!"
+>print(string_example)
+>\```
+>
+>\## Images (from code)
+>
+>Image from code, without showing code.
+>
+>\```{.python .cb.run show=rich_output}
+>sns.set_theme()
+>penguins = sns.load_dataset("penguins")
+>g = sns.lmplot(
+>    data=penguins,
+>    x="bill_length_mm",
+>    y="bill_depth_mm",
+>    hue="species",
+>    height=5
+>)
+>g.set_axis_labels("Snoot length (mm)", "Snoot depth (mm)");
+>\```
+>
+>\## Tables (from code)
+>
+>\```{.python .cb.nb}
+>import pandas as pd
+>import numpy as np
+>df = pd.DataFrame(np.random.randn(2, 4), columns=['Markdown', >'Table', 'From', 'Code'])
+>print(df.to_markdown(index=False))
+>\```
+>
+>\## Equations (from code)
+>
+>\```{.python .cb.nb}
+>from sympy import *
+>x = Symbol('x')
+>diff(log(x) + x**3, x)
+>\```
+
+### Example document
