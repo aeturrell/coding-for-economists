@@ -45,7 +45,7 @@ Most programming languages have a style guide or at least some conventions!
 
 In Python, the naming convention for almost all objects is lower case separated by underscores, e.g. `a_variable=10` or ‘this_is_a_script.py’. This style of naming is also known as snake case. There are different naming conventions though--[Allison Horst](https://twitter.com/allison_horst) made this fantastic cartoon of the different conventions that are in use.
 
-![Different naming conventions](http://aeturrell.github.io/home/images/in_that_case.jpeg)
+![Different naming conventions](https://aeturrell.github.io/home/images/in_that_case.jpeg)
 Artwork by @allison_horst.
 
 There are three exceptions to the snake case convention: classes, which should be in camel case, eg `ThisIsAClass`; constants, which are in capital snake case, eg `THIS_IS_A_CONSTANT`; and packages, which are typically without spaces or underscores and are lowercase `thisisapackage`.

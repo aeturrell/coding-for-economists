@@ -19,8 +19,7 @@ In this chapter, you'll learn about the basics of objects, types, operations, co
 
 This chapter has benefited from the excellent [*Python Programming for Data Science*](https://www.tomasbeuzen.com/python-programming-for-data-science/README.html) book by Tomas Beuzen.
 
-```{admonition}
-:class: tip
+```{tip}
 Remember, you can download this notebook (to run it on your own computer) using the 'download .ipynb' button at the top of the page.
 ```
 

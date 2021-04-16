@@ -145,8 +145,7 @@ If you're using a bash or zsh terminal, there are a couple of commands that are 
 
 The default installation of Anaconda comes with many of the packages you'll need, but it won't be long before you'll need to install some extra ones. Extra packages, for example for regression, deliver a lot of the value of a programming language. You may sometimes hear that Python is a 'batteries included' programming language, meaning that the base language is very rich. This is definitely true! But even so, for economics, we'll extend it further in numerous ways.
 
-```{admonition}
-:class: tip
+```{tip}
 The command line interacts with your operating system and is used to create, activate, or change python installations.
 ```
 
@@ -170,8 +169,7 @@ your-username@your-computer current-directory % conda activate
 
 ### (Advanced) Working with Python environments and Anaconda
 
-```{admonition}
-:class: tip
+```{tip}
 If you just want to get to some coding, you can skip the advanced sections for now.
 ```
 
