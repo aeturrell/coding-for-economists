@@ -15,19 +15,15 @@ kernelspec:
 
 # Tips for Better Coding
 
-In this chapter, you'll learn about some best practices for coding. **These will save you *so much time*!**. Trust me.
+In this chapter, you'll learn some of the easiest and most impactful tips for better coding. 
 
-As you code, you'll be tempted to ignore these (that's normal; we all are). But the truth is that they will *save* time in the long run, and future you will thank past you for sticking to them.
-
-The validity of your research depends, to a frightening degree, on the quality of your code. There are many ways to write code and, over the years, software developers have worked out best practices that help to make writing, using, debugging, and reading code more fun, and to make the end product higher quality. (There's nothing worse than wading through someone else's terrible code.)
+There are many ways to write equally valid code and, over the years, software developers have worked out ways that help to make writing, using, debugging, and reading code more fun and certainly more efficient. **Following these best practice tips will save you hours, and hours, and *hours* of time.**
 
 ![Code quality 2](https://imgs.xkcd.com/comics/code_quality_2.png)
 
-Most of the time, you are going to be writing code for your co-authors or for future you. Following best practice will save you hours, and hours, and *hours* of time. You may think that by cutting out some of these practices that you'll save time. Well, it depends how heavily you discount your future time. Regardless of your discount rate, it's almost always worth it to follow best practices.
+Remember, most of the time, you are going to be writing code that someone else will read (most probably it will be future you), or that you'll need to run again. So you may think that by cutting out some of these practices that you'll save time, but it depends how heavily you discount your future time! It's almost always worth it to follow best practices.
 
-Fortunately there's lot of great advice, and even tools, to help you do this.
-
-(Reproducibility is also an important part of coding best practice, but we'll talk about that in a later chapter. Likewise, I won't talk about a more advanced best practice, testing, here.)
+As this is the bare bones of best practice for research. we won't cover some very important but more complex topics, such as reproducibility, testing, and version control, here.
 
 ## Code in style
 
@@ -41,18 +37,20 @@ Most programming languages have a style guide or at least some conventions!
 
 ![Code quality](https://imgs.xkcd.com/comics/code_quality.png)
 
-### Naming conventions
+### What's in a name?
 
-In Python, the naming convention for almost all objects is lower case separated by underscores, e.g. `a_variable=10` or ‘this_is_a_script.py’. This style of naming is also known as snake case. There are different naming conventions though--[Allison Horst](https://twitter.com/allison_horst) made this fantastic cartoon of the different conventions that are in use.
+First, naming matters. Use meaningful names for variables, functions, or whatever it is you're naming. Avoid abbreviations that you understand *now* but which will be unclear to others, or future you. For example, use `real_wage_hourly` over `re_wg_ph`. I know it's tempting to use `temp` but you'll feel silly later when you can't for the life of you remember what `temp` does or is. A good trick when naming booleans (variables that are either true or false) is to use `is` followed by what the boolean variable refers to, for example `is_married`.
 
-![Different naming conventions](https://aeturrell.github.io/home/images/in_that_case.jpeg)
+As well as this general tip, Python has conventions on naming different kinds of variables. The naming convention for almost all objects is lower case separated by underscores, e.g. `a_variable=10` or ‘this_is_a_script.py’. This style of naming is also known as snake case. There are different naming conventions though--[Allison Horst](https://twitter.com/allison_horst) made this fantastic cartoon of the different conventions that are in use.
+
+![Different naming conventions](https://github.com/aeturrell/home/blob/master/images/in_that_case.jpeg)
 Artwork by @allison_horst.
 
 There are three exceptions to the snake case convention: classes, which should be in camel case, eg `ThisIsAClass`; constants, which are in capital snake case, eg `THIS_IS_A_CONSTANT`; and packages, which are typically without spaces or underscores and are lowercase `thisisapackage`.
 
 For some quick shortcuts to re-naming columns in **pandas** dataframes or other string variables, try the unicode-friendly [**slugify**](https://github.com/un33k/python-slugify) library or the `clean_headers` function from the [**dataprep**](https://docs.dataprep.ai/index.html) library.
 
-Good naming isn't just about following the conventions, it's also about giving objects names that are clear and useful. Instead of calling a variable that measures incomes `variable_one`, call it `income_measure`. Instead of calling a function that inverts a matrix `matrix_stuff`, call it `matrix_invert`. The better named your variables, the clearer your code will be--and the fewer comments you will need to write!
+The better named your variables, the clearer your code will be--and the fewer comments you will need to write!
 
 ### Whitespace
 
