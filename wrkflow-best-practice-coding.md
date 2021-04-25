@@ -43,8 +43,7 @@ First, naming matters. Use meaningful names for variables, functions, or whateve
 
 As well as this general tip, Python has conventions on naming different kinds of variables. The naming convention for almost all objects is lower case separated by underscores, e.g. `a_variable=10` or ‘this_is_a_script.py’. This style of naming is also known as snake case. There are different naming conventions though--[Allison Horst](https://twitter.com/allison_horst) made this fantastic cartoon of the different conventions that are in use.
 
-![Different naming conventions](https://github.com/aeturrell/home/blob/master/images/in_that_case.jpeg)
-Artwork by @allison_horst.
+![Different naming conventions. Artwork by @allison_horst.](https://github.com/aeturrell/coding-for-economists/raw/main/img/in_that_case.jpg) Different naming conventions. Artwork by @allison_horst.
 
 There are three exceptions to the snake case convention: classes, which should be in camel case, eg `ThisIsAClass`; constants, which are in capital snake case, eg `THIS_IS_A_CONSTANT`; and packages, which are typically without spaces or underscores and are lowercase `thisisapackage`.
 
