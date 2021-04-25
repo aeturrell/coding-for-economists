@@ -24,15 +24,23 @@ As a skill, programming is enormously valuable *beyond economics* too because it
 
 Coding is like a superpower; it's both fun and powerful! Head to the first section to get started.
 
-## How to use this book
+## Reading guide
 
-As well as reading the book, you can also run the code examples for yourself (this is a great way to learn). There are a couple of ways to run code from the book:
+You can read this book in any order depending on your experience. Check the section headings and numbered chapter headings to find out what would be most valuable for you.
 
-1. All pages that have code on can be downloaded to your desktop and run as *Jupyter Notebooks*. Click the download symbol in the top right hand corner of the page and select '.ipynb', which stands for 'ipython notebook'. You will need to install software on your computer to run Jupyter Notebooks.
+## Using the book interactively
 
-2. Most pages that have code on can be run as a *Google Colab* notebook with a single click on `Colab`, found under the rocket launch button at the top of the page. If you need to install any extra packages in a Google Colab session, the syntax is `!pip install packagename` to install a library called 'packagename'. No installation is required for Colab notebooks, they are run through a browser.
+As well as reading the book, you can also run the code examples for yourself (this is a great way to learn). There are three ways to run code from the book:
 
-If following option 1., to use downloaded notebooks, you'll need a minimum of an installation of Python and an installation of the Jupyter Lab library (`pip install jupyterlab`). You can then either run `jupyter lab` on the command line (you can find out more about what a 'command line' is in the book!) and open the notebook file, or open the notebook with Visual Studio Code (you would then also need to install VS Code-there are instructions in the Preliminaries chapter.)
+1. All pages that have code on can be downloaded to your desktop and run as *Jupyter Notebooks*. Click the download symbol in the top right hand corner of the page and select '.ipynb', which stands for 'ipython notebook'. You will need to install software on your computer to run Jupyter Notebooks (more on this below).
+
+2. Most pages that have code on can be run as a *Google Colab* notebook with a single click on `Colab`, found under the rocket button at the top of the page. If you need to install any extra packages in a Google Colab session, the syntax is `!pip install packagename` to install a library called 'packagename'. Colab notebooks are run in a browser window.
+
+3. Most pages that have code on can be run in an online *Binder* environment as a notebook with a single click on `Binder`, found under the rocket button at the top of the page. Binder notebooks are run in a browser window. Binder is a free way to run computational environments in the browser {cite}`jupyter2018binder`.
+
+If you are using option 1., you'll need a minimum of an installation of Python and an installation of the Jupyter Lab library (`pip install jupyterlab`). You can then either run `jupyter lab` on the command line (you can find out more about what a 'command line' is in the book!) and open the notebook file, or open the notebook with Visual Studio Code (you would then also need to install VS Code-there are instructions in the Preliminaries chapter.) To run all of the examples in the book, you may need to install additional packages too, depending on what you already have installed on your computer. The Preliminaries chapter will cover how to install additional packages.
+
+Note that if you're on a secure network, you may find that options 2 and 3 don't work for you. However, as long as you can download and run files locally, option 1 should always work.
 
 For a small number of the examples using data, you may need to download the relevant files from this book's github [repository](https://github.com/aeturrell/coding-for-economists/tree/main/data), but this will always be explained in the relevant subsections.
 
@@ -41,12 +49,7 @@ For a small number of the examples using data, you may need to download the rele
 Every page with code can be downloaded and run as a Jupyter notebook--just click <i class="fas fa-download"></i> at the top of the page and select '.ipynb'.
 
 Most pages with code can be run in Google Colab --just click <i class="fas fa-rocket"></i> at the top of the page and select 'Colab'.
-
 ```
-
-## Reading guide
-
-You can read this book in any order depending on your experience. Check the section headings and numbered chapter headings to find out what would be most valuable for you.
 
 ## Contributing
 

@@ -1,6 +1,11 @@
 # coding-for-economists
 
-This readme is intended to help those contributing to or editing the book, not those trying to follow it. To follow the book, head to the [coding for economists website](https://aeturrell.github.io/coding-for-economists/intro.html) and download the jupyter notebooks directly from the relevant page.
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/aeturrell/coding-for-economists/HEAD)
+
+This readme is intended to help those contributing to or editing the book, not those trying to follow it. To read or use the book, head to the [coding for economists website](https://aeturrell.github.io/coding-for-economists/intro.html). You can use the book interactively via the following options:
+- download pages to your computer as jupyter notebooks
+- run pages in Google Colab through your browser
+- run pages in Binder through your browser
 
 ## Setting up the environment
 
