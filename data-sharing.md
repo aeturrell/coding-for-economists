@@ -19,11 +19,31 @@ There are many times when you want to share data with a much wider audience. In 
 
 When might you want to share your data? If you've just finished writing a paper, you might want to share derived series; perhaps the data are the result of the paper if you're working in a field such as economic history. If you're working at a firm or in the public sector, perhaps there are datasets that you've decided to put out into the public domain and you want a cost effective way to share them. Perhaps you've got a slightly larger or more complex dataset that you'd like to put online, password protected, for a large number of co-authors.
 
+One part of best practice when sharing data is following the FAIR principles:
+
+- Findable: The first step in allowing people to re-use data is for those people to be able to find them. Metadata and data should be easy to find for both humans and computers. This includes registering data (and meta-data) in a searchable source.
+
+- Accessible: Once a user finds the required data, they need to know how those data can accessed, possibly including authentication and authorisation. So the data should be retrievable by their identifiers using a standardised protocol that is open, free, and universally implementable.
+
+- Interoperable: The data usually need to be integrated with other data. In addition, the data need to interoperate with applications or workflows for analysis, storage, and processing.  Although there are free tools to open Excel and Stata files, data stored in those formats are that bit more difficult than truly open formats like CSV or parquet. Universally implementable means that Python's pickle format or R's .rds format shouldn't be used to share data either. Interoperability means using open formats that can be accessed using free tools across different languages and operating systems.
+
+- Reusable: The ultimate goal of FAIR is to optimise the reuse of data. To achieve this, metadata and data should be well-described so that they can be replicated and/or combined in different settings.
+
+Different ways of sharing data are inevitably better or worse across the four principles.
+
+Another part of best practice in sharing data is following the 'five safes':
+
+1. Safe projects –– Is this use of the data appropriate, lawful, ethical, and sensible?
+2. Safe people –– Can the user be trusted to use the data in an appropriate manner?
+3. Safe data –– Is there a disclosure risk in the data itself?
+4. Safe settings –– Does the means of access limit unauthorised use?
+5. Safe outputs –– Are the statistical results non-disclosive?
+
+You can find out more about data sharing policies and best practice at [FAIRsharing](https://fairsharing.org/).
+
 ## Datasette for sharing data
 
-[Datasette](https://datasette.io/) is an extraordinary tool for exploring, sharing, and publishing data. It helps you take data of any shape or size, analyze and explore it, and publish it as an interactive website and accompanying API. Remember, API stands for application programming interface, which in this case means the data can be accessed directly through programming languages.
-
-Datasette is aimed at data journalists, museum curators, archivists, local governments, *economists*, and anyone else who has data that they wish to share with the world.
+[Datasette](https://datasette.io/) is an extraordinary tool for exploring, sharing, and publishing data. It helps you take data of any shape or size, analyze and explore it, and publish it as an interactive website and accompanying API. Remember, API stands for application programming interface, which in this case means the data can be accessed directly through programming languages. Datasette is aimed at data journalists, museum curators, archivists, local governments, *economists*, and anyone else who has data that they wish to share with the world.
 
 An example datasette instance is [available here](https://global-power-plants.datasettes.com/); it shows a dataset of power stations.
 
@@ -71,7 +91,12 @@ If you want to follow a full example of serving up data end-to-end, take a look 
 
 **You can see how the data in this repo get served up by datasette at [this link](https://particulatematter-fsx2r7puuq-nw.a.run.app/).**
 
-### Benefits of datasette
+```{admonition} Exercises
+1. Download the CSV file from the [particulate matter repo](https://github.com/aeturrell/datasette_particulate_matter) and run it as a datasette locally on your own computer.
+2. (Advanced) Run the same set of data via a datasette instance on the web using Google Cloud Run. (This requires a Google Cloud Account; you may be billed for excessive use of this service so remember to shut it down via the Google Cloud Console once you're done.)
+```
+
+### Pros and cons of datasette
 
 [**datasette**](https://datasette.io/) is an extremely quick and cost-efficient way to serve up large datasets to anyone with an internet connection. The full utility comes from the ways that people can then use the data. Using the particulate matter example from the previous section, people can:
 
@@ -94,4 +119,26 @@ Publishing data with datasette is *fast*: we only needed a CSV file and a couple
 
 Datasette also has add-ons that provide extra support for geospatial data, password protection, and more; see the [plug-ins](https://datasette.io/plugins) page.
 
-The *downsides* of datasette are that you have to pay to serve up the data (at least if it becomes very popular) and that it is built around *tabular data*.
+The *downsides* of datasette are that you have to pay to serve up the data (at least if it becomes very popular), that it is built around *tabular data*, and that the data are not very findable (one of the four data principles): they may be available online through a website, but unless you do some work in sharing, promoting, and registering the link where they can be found, people are unlikely to find them.
+
+## Data repositories for sharing data
+
+Putting your data in a managed data repository is another way to ensure others can find it and re-use it. Data repositories are websites where you can deposit a dataset, and its metadata, and others can come along and download it. The repositories are managed by third party organisations, and, typically, they are used to lodge a dataset that won't be updated, eg if you have a dataset that was used for a paper that's been published. Some of the benefits of data repositories are:
+
+- You may get a permalink, eg a digital object identifier (DOI), and citation information to help people recognise and refer to your contribution
+
+- Unless you are lodging *extremely* large datasets, you will likely not have to pay anything to host your data
+
+- Data repositories are searchable, both within the site itself and in the sense of being indexed by Google-so people will potentially be able to find your data via a Google search.
+
+Some of the less good things, or at least things to bear in mind, about data repositories are:
+
+- They are much less suitable for data that are being updated, and not at all suited to automatic updates (datasette is a better tool for this)
+
+- They do not always provide good accessibility options; usually the only option is to download *all* of the data in a single format rather than the cut you want in the format you want.
+
+- Whether or not the data are interoperable comes down to how the user chose to provide the data. Sometimes you will find repositories with closed data formats that require special tools. You can choose to put data in interoperable formats, but you aren't compelled to.
+
+So the canonical use case for a data repository is static data that's associated with a paper and which you don't think many people will want to access a lot, or in different ways, but which needs to exist as a matter of record.
+
+If you're interested in exploring some data repositories, there are lists [here](https://authorservices.taylorandfrancis.com/data-sharing-policies/repositories/) and [here](https://www.springernature.com/gp/authors/research-data-policy/repositories/12327124). If you'd like to see how one works, [check out Zenodo](https://zenodo.org/) which, at the time of writing, accepts up to 50GB per dataset and may accept larger files following discussion. Zenodo accepts both code and data, and gives each repo a DOI. Zenodo is run and hosted by CERN, the European Organization for Nuclear Research.
