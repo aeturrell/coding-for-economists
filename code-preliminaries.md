@@ -1,6 +1,6 @@
 # Preliminaries
 
-In this chapter, you'll find out how to install and setup everything you need to get coding.
+In this chapter, you'll find out about how to get the basic tools you need to code set up on your own computer. While you don't need to know all of this if you're planning on using the 'Googler Colab' or 'Binder' options to run code examples from the book, you may find it helpful to read through this chapter anyway.
 
 ## Computational environment
 
@@ -8,7 +8,7 @@ In this chapter, you'll find out how to install and setup everything you need to
 
 Almost all of the code you'll see can be run on all three of the major operating systems: Windows, MacOS, and Linux.
 
-However, if you haven't yet decided which operating system to use, I strongly recommend that you choose either Linux or MacOS because, in a small number of cases, your code, third party packages and libraries, and coding related tools like Docker, either won't work at all on Windows or will be *much* more difficult to set up. (Don't panic if you have Windows already: we'll come to a workaround in a moment.) Although it is rare that you run into a case like this, it's just often enough for it to be a real pain. Furthermore, if you ever need to scale up your work to the cloud, you'll find that it's more cost effective to use machines that have use an operating system closer to Linux (which MacOS is). While Macs are famous for being expensive, most Linux distributions are free, so you should be able to find a code-friendly operating system to satisfy any budget constraint. Linux used to have a reputation as being fearsomely difficult for beginners. But modern Linux distributions, such as Ubuntu, are pretty user-friendly.
+If you haven't yet decided which operating system to use, I recommend either Linux or MacOS because, in a very small number of cases, your code, third party packages and libraries, and coding related tools like Docker, either won't work at all on Windows or will be *much* more difficult to set up. (Don't panic if you have Windows already: we'll come to a workaround in a moment.) Although it is rare that you run into a case like this, it's just often enough for it to be a real pain. Furthermore, if you ever need to scale up your work to the cloud, you'll find that it's more cost effective to use machines that have use an operating system closer to Linux (which MacOS is). While Macs are famous for being expensive, most Linux distributions are free, so you should be able to find a code-friendly operating system to satisfy any budget constraint. Linux used to have a reputation as being fearsomely difficult for beginners. But modern Linux distributions, such as Ubuntu, are pretty user-friendly.
 
 If you are using Windows, then a good workaround for some of these issues is to use the [*Windows Subsystem for Linux*](https://pbpython.com/wsl-python.html). It's essentially a Linux operating system that installs alongside and integrates with your existing Windows operating system. This allows you to run code as if you were using Linux. You can get WSL [for free from Microsoft](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 
@@ -34,13 +34,13 @@ To programme, you will need two things on your computer:
 
 ### Installing Python
 
+Note that if you are going to use Google Colab or Binder to run code examples, both of these come with Python installed. These instructions are just for installing Python on your own computer.
+
 Download the individual edition of the [Anaconda distribution](https://www.anaconda.com/) of Python for your operating system and install it (on Anaconda's website, this is currently found under Products -> Individual Edition). This will provide you with a Python installation and a host of the most useful libraries.
 
 Anaconda might ask whether you want to add Anaconda to your PATH environment variable. Your PATH variable is a list of where programmes are located on your computer that *other* programmes can see. By adding Anaconda to your PATH, you will be able to more easily launch applications that make use of Python.
 
-You can confirm that you've set up Anaconda correctly by following the [verify installation instructions](https://docs.anaconda.com/anaconda/install/verify-install/) on the Anaconda website.
-
-Python and Anaconda are available on all major operating systems.
+You can confirm that you've set up Anaconda correctly by following the [verify installation instructions](https://docs.anaconda.com/anaconda/install/verify-install/) on the Anaconda website. Python and Anaconda are available on all major operating systems.
 
 ### Installing an integrated development environment (IDE)
 
@@ -104,7 +104,6 @@ Open up Visual Studio Code and go to settings (click on the cog in the bottom le
 Type 'python send' into the search box. Depending on your configuration and Visual Studio Code version, you will either see 'Python › Data Science: Send Selection To Interactive Window' or 'Jupyter: Send Selection To Interactive Window'. Make sure that there is a tick in the box.
 
 This will ensure that when you hit shift+enter on code scripts, it will execute your code in Visual Studio's interactive window (starting a new window if necessary).
-
 ```
 
 Let's make more use of the interactive window. At the bottom of it, there is a box that says 'Type code here and press shift-enter to run'. Go ahead and type `print('Hello World!')` directly in there to achieve the same effect as running the line from your script. Also, any variables you run in the interactive window (from your script or directly by entering them in the box) will persist.
@@ -113,11 +112,15 @@ To see how variables persist, type `hello_string = 'Hello World!'` into the inte
 
 This shows the two ways of working with the interactive window--running (segments) from a script, or writing code directly in the entry box.
 
-## Packages, environments, and the terminal
+```{admonition} Exercise
+Create a new script that, when run, prints "Welcome to coding for economists" and run it in both the terminal and an interactive window.
+```
+
+## Installing Packages on the Command Line
 
 ### The terminal in brief
 
-In the section above, I mentioned the *terminal*. This is a text-based way to issue all kinds of commands to your computer (not just Python commands) and knowing a little bit about it is really useful for coding (and more) because managing packages, environments (which we haven't yet discussed), and version control (ditto) can all be done via the terminal. We'll come to these in due course, but for now, a little background on what the terminal is and what it does.
+In the section above, I mentioned the *terminal*, also known as the *command line*. This is a text-based way to issue all kinds of commands to your computer (not just Python commands) and knowing a little bit about it is really useful for coding (and more) because managing packages, environments (which we haven't yet discussed), and version control (ditto) can all be done via the terminal. We'll come to these in due course, but for now, a little background on what the terminal is and what it does.
 
 ```{note}
 To open up the command line within Visual Studio Code, use the ``⌃+` `` keyboard shortcut (Mac) or ``ctrl+` `` (Windows/Linux), or click "View > Terminal".
@@ -153,7 +156,6 @@ The default installation of Anaconda comes with many of the packages you'll need
 The command line interacts with your operating system and is used to create, activate, or change python installations.
 ```
 
-
 To install extra Python packages, there are two options, and both use the command line. You'll need to have conda activated before installing a package--if you don't see the name of an environment, eg `(base)`, at the start of your terminal's line, use the `conda activate` command first. Once you have activated the conda environment, you install packages using another command.
 
 For very widely used packages, you can often use `conda install packagename`. Anaconda provide pre-built packages that are convenient for a host of reasons. If there isn't a pre-built Anaconda version of the package available, you can fall back on installing via pip using
@@ -171,80 +173,11 @@ your-username@your-computer current-directory % conda activate
 (base) your-username@your-computer current-directory % conda install pandas
 ```
 
-### (Advanced) Working with Python environments and Anaconda
-
-```{tip}
-If you just want to get to some coding, you can skip the advanced sections for now.
+```{admonition} Exercise
+Try installing the **matplotlib**, **pandas*, and **statsmodels** packages.
 ```
 
-You don't have to stick to just one Python environment, you can have as many as you like. Running `conda activate base` on the command line (or switching to `base` via the blue bar in VS Code) activates the base environment, but you can create and activate other environments as you like. For example, you could install a Python 3.9 environment alongside your Python 3.8 environment when 3.9 is released.
-
-You can get by just fine using the base Python environment to follow this book. However, it's always good practice to *use a new environment for every project* because, for reproducible research, we want to know what packages were used and be able to export them to a file that others can use too. You might also find that you break environments occasionally, so isolating them into the minimum set of packages needed to produce a distinct set of results is helpful for this reason too. To create a new Python 3.8 environment you would use the following command in the terminal:
-
-```bash
-conda create -n newenv python=3.8
-```
-
-This will create a brand new Python 3.8 environment called 'newenv' (the part after `-n` is the name). It will only have the barebones packages in; you can install extras as outlined above. At a minimum, you will want jupyter, matplotlib, numpy, and pandas.
-
-To activate and use the new Python environment on the command line, type `conda activate newenv`. This should change `(base)` to `(newenv)` on the command line. Likewise you can switch back with `conda activate base`. Note that this only changes the environment on the command line, what we really want to do is use the new environment in our IDE.
-
-To install a package into a *specific* environment, the easiest way is to activate that environment first by running `conda activate environmentname` followed by installing the package with `conda install packagename` or `pip install packagename`. Here's a full example:
-
-```bash
-your-username@your-computer current-directory % conda activate environmentname
-(environmentname) your-username@your-computer current-directory % conda install pandas
-```
-
-To use your new environment in Visual Studio Code, you may need to restart VS Code. Open up a Python script so that it has its own tab in Visual Studio Code, for example, 'hello_world.py'. Then, in the bottom left-hand corner of Visual Studio Code, you will see what Python environment that you are using. You can click on this to bring up a dropdown menu of all Python environments on your system and just choose whichever you want to use for this project. Visual Studio Code configuration settings for individual folders can be saved as 'workspaces', which remember which Python environment you were using for which folder.
-
-Installing packages one-by-one is very tedious. Fortunately, there's a better way. You can install an entirely new Anaconda environment from a file. Here's an example 'yaml' (this stands for "YAML Ain't Markup Language") file that would be saved as 'codeforecon.yml' and which includes a good standard set of packages for doing economics:
-
-```yaml
-name: codeforecon
-channels:
-  - conda-forge
-  - defaults
-dependencies:
-  - jupyter
-  - matplotlib
-  - numpy
-  - pandas
-  - pip
-  - python=3.8
-  - pyyaml
-  - scikit-learn
-  - scipy
-  - seaborn
-  - statsmodels
-  - tqdm
-  - yaml
-  - pycodestyle
-  - autopep8
-  - pyarrow
-  - pip:
-    - pandas-profiling
-    - pandas-datareader
-    - sympy
-    - plotnine
-    - altair
-    - stargazer
-    - linearmodels
-    - pingouin
-    - jupyterlab
-```
-
-To install a new environment with these packages, you would need to create a new file called `codeforecon.yml` in Visual Studio Code and copy and paste the list of packages from above into it. Then, the entire environment can be installed on the command line by running (from the same directory as the environment file):
-
-```bash
-conda env create -f codeforecon.yml
-```
-
-The `-f` flag tells the `conda env create` command that the file with the packages in is to follow; here, that file is called `codeforecon.yml`. When you enter the command on the terminal, you will see packages begin to download and install. Note that most of these packages are installed by conda, with just a few being installed by pip. If you already have a environment with the same name (`codeforecon` in this case), the command will fail as you can't overwrite an existing environment-you'd need to remove it first.
-
-This approach saves the tedium of installing packages one-by-one, and it gives you a nice separate environment for going through 'coding for economists'. Remember, to use the new environment, use the button in Visual Studio Code or `conda activate codeforecon` on the command line. You can find much more details of how to use environments--including deleting them--over on Anaconda's [guide to managing environments](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
-
-## (Advanced) Fine-tuning your integrated development environment
+## Fine-tuning your integrated development environment
 
 If you just want to get on with some coding, feel free to skip this section.
 
