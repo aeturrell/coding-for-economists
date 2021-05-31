@@ -238,7 +238,6 @@ The document is carved up into slides according to rules that you can read more 
 
 ### Document from codebraid
 
-
 - see also:
   - more control for Word, python-docx https://python-docx.readthedocs.io/en/latest/
 
