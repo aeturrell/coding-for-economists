@@ -29,7 +29,7 @@ Regardless of Python not being a programming language solely dedicated to data a
 
 What follows is a giant table of translations between Stata code and Python's [**pandas**](https://pandas.pydata.org/)(panel-data-analysis) package. The econometrics examples below use Daniel M Sullivan's [**econtools**](https://www.danielmsullivan.com/econtools/metrics.html) package, but you could also use [**statsmodels**](https://www.statsmodels.org/). Bear in mind, it's certainly not meant to be exhaustive but it should give you a flavour of the syntax differences and, in some cases, I've pointed out where to find further information.
 
-Following, Daniel's treatment, the Stata-to-Python translations assume that, in Python, you have a **pandas** DataFrame called `df`. We will use placeholders like `varname` for Stata variables and `df['varname']` for the Python equivalent. Remember that you need to `import pandas as pd` before running any of the examples that use `pd`. For the econometrics examples, you will need `import econtools.metrics as mt`.
+Following Daniel's treatment, the Stata-to-Python translations assume that, in Python, you have a **pandas** DataFrame called `df`. We will use placeholders like `varname` for Stata variables and `df['varname']` for the Python equivalent. Remember that you need to `import pandas as pd` before running any of the examples that use `pd`. For the econometrics examples, you will need `import econtools.metrics as mt`.
 
 | Stata      | Python (pandas) |
 | ----------- | ----------- |

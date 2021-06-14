@@ -1,6 +1,6 @@
 # Preliminaries
 
-In this chapter, you'll find out about how to get the basic tools you need to code set up on your own computer. While you don't need to know all of this if you're planning on using the 'Googler Colab' or 'Binder' options to run code examples from the book, you may find it helpful to read through this chapter anyway.
+In this chapter, you'll find out about how to get the basic tools you need to code set up on your own computer. While you don't need to know all of this if you're planning on using the 'Google Colab' or 'Binder' options to run code examples from the book, you may find it helpful to read through this chapter anyway.
 
 ## Computational environment
 
