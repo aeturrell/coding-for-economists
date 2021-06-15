@@ -45,4 +45,4 @@ To get started with Excel, you open the application and create a new empty file.
 | Transpose data | `=TRANSPOSE(A1:C100)`, assuming a 3 by 100 input data set between columns A and C, and rows 1 to 100 | `df.T` |
 | Create a pivot table | Manually select data and use the various menus (example [here](https://www.excel-easy.com/data-analysis/pivot-tables.html)) | `pd.pivot_table(df, values='D', index=['A'], columns=['C'], aggfunc=np.sum)` by summing over a column named 'D' with rows 'A', creating columns 'C' |
 
-For more on how to replace Excel with Python and **pandas**, see the [Data Analysis Quickstart](data-quickstart) and [Data Analysis](data-analysis) sections.
+For more on how to replace Excel with Python and **pandas**, see the [Data Analysis Quickstart](data-quickstart) and [Data Analysis](working-with-data) sections.
