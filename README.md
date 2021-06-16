@@ -17,6 +17,8 @@ python3.8 -m ipykernel install --user --name=codeforecon
 
 to install a new ipykernel.
 
+From a fresh install, it's recommended that you use **nbstripout** to avoid committing notebook outputs to github. Once pip installing the package, run `nbstripout --install --global` for installation within a given Python environment or `nbstripout --install --attributes .gitattributes` within the folder.
+
 To build the book using Jupyter books use
 
 ```bash
