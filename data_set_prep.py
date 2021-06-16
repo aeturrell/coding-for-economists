@@ -5,6 +5,7 @@ from bs4.element import Comment
 import urllib.request
 import geopandas as gpd
 import shapely.geometry
+from pathlib import Path
 
 
 def star_wars_data():
@@ -86,7 +87,26 @@ def prep_covid_data():
     cv_df.to_parquet(os.path.join('data', 'geo', 'cv_ldn_deaths.parquet'))
 
 
+def prep_gapminder_data():
+    """
+    Downloaded from Our World in Data:
+    https://ourworldindata.org/grapher/life-expectancy-vs-gdp-per-capita
+    """
+    df = pd.read_csv(os.path.join('~', 'Downloads', 'life-expectancy-vs-gdp-per-capita.csv'))
+    df = df[df["Year"]>1957]
+    df = df.dropna(subset=["Life expectancy", "GDP per capita", "Total population (Gapminder, HYDE & UN)"])
+    continents_dict = df.loc[df["Year"] == 2015, ["Entity", "Continent"]].set_index("Entity").to_dict()["Continent"]
+    df["Continent"] = df["Entity"].map(continents_dict)
+    nice_names = {"Entity": "Country",
+                  "Total population (Gapminder, HYDE & UN)": "Population"}
+    df = df.rename(columns=nice_names)
+    df = df.drop(["Code", "145446-annotations"], axis=1)
+    df = df[df["Country"] != "World"]
+    df.to_csv(Path("data/owid_gapminder.csv"), index=False)
+
+
 if __name__ == '__main__':
     prep_river_data()
     star_wars_data()
     save_smith_book()
+    prep_gapminder_data()
