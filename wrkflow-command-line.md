@@ -372,6 +372,9 @@ etc.
 
 [**ncdu**](https://dev.yorhel.nl/ncdu) is a disk usage analyser. It reports, interactively and via the terminal, how much space in a folder is taking up. You can also use return to enter a folder and explore sub-folders. This is especially useful when using a remote computer that you can't view via a graphical user interface (GUI).
 
+
+[**ffmpeg**](https://www.ffmpeg.org/) is a command line tool that aims to "decode, encode, transcode, mux, demux, stream, filter and play pretty much anything that humans and machines have created. It supports the most obscure ancient formats up to the cutting edge." Look at the documentation for all of the uses.
+
 ## Review
 
 This brief introduction to the command line, should have made you feel comfortable with: opening terminal windows; using built-in commands to change directories, rename files, and list files; using Python on the command line; scripting terminal commands; and using installed command line tools such as **pandoc**.
