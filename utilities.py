@@ -41,7 +41,7 @@ def test_plot_style():
     ax.plot(x_vals, x_vals / 1e2, label="more legend text")
     ax.plot(x_vals, x_vals * 0.4 / 1e2 + 10)
     ax.plot(x_vals, -x_vals * 0.4 / 1e2 + 1e3)
-    ax.annotate("test text $y=e^{\gamma t}$", xy=(1e4, 300))
+    ax.annotate(r"test text $y=e^{\gamma t}$", xy=(1e4, 300))
     ax.legend()
     ax.set_xlabel("x label")
     ax.set_ylabel("y label")
