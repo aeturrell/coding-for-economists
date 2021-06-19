@@ -19,7 +19,7 @@ In this chapter, you'll meet the *command line* and learn how to use it. Beyond 
 
 To try out any of the commands in this chapter on your machine, you can select 'New Terminal' from the menu bar in Visual Studio Code (Mac and Linux), use the Windows Subsystem for Linux or git bash (Windows), or use a free [online terminal](https://cocalc.com/doc/terminal.html).
 
-This chapter has benefited from numerous sources, including absolutely excellent notes by [Grant McDermott](https://grantmcdermott.com/), Melanie Walsh's [Introduction to Cultural Analytics & Python](https://melaniewalsh.github.io/Intro-Cultural-Analytics/welcome.html), [Data Science Bootstrap](https://ericmjl.github.io/data-science-bootstrap-notes/), [calmcode.io](https://calmcode.io/), and [Research Software Engineering with Python](https://merely-useful.tech/py-rse/).
+This chapter has benefited from numerous sources, including absolutely excellent notes by [Grant McDermott](https://grantmcdermott.com/), Melanie Walsh's [Introduction to Cultural Analytics & Python](https://melaniewalsh.github.io/Intro-Cultural-Analytics/welcome.html), [Data Science Bootstrap](https://ericmjl.github.io/data-science-bootstrap-notes/), [calmcode.io](https://calmcode.io/), and [Research Software Engineering with Python](https://merely-useful.tech/py-rse/). A promising resource that, at the time of writing, was still being compiled is [Data Science at the Command Line](https://www.datascienceatthecommandline.com/2e/).
 
 ## What is the command line?
 
@@ -372,8 +372,9 @@ etc.
 
 [**ncdu**](https://dev.yorhel.nl/ncdu) is a disk usage analyser. It reports, interactively and via the terminal, how much space in a folder is taking up. You can also use return to enter a folder and explore sub-folders. This is especially useful when using a remote computer that you can't view via a graphical user interface (GUI).
 
-
 [**ffmpeg**](https://www.ffmpeg.org/) is a command line tool that aims to "decode, encode, transcode, mux, demux, stream, filter and play pretty much anything that humans and machines have created. It supports the most obscure ancient formats up to the cutting edge." Look at the documentation for all of the uses.
+
+For more on the command line, see [The Art of the Command Line](https://github.com/jlevy/the-art-of-command-line).
 
 ## Review
 
