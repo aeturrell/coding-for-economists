@@ -61,7 +61,6 @@ Following Daniel's treatment, the Stata-to-Python translations assume that, in P
 | `subinstr(string, " ", "_", .)`   | `df['var'].str.replace(' ', '_')`      |
 | `egen newvar = statistic(var), by(groupvars)`   | `df['newvar'] = df.groupby(groupvars)['var'].transform('statistic')`      |
 | `collapse (sd) var (median) var (max) var (min) <var>, by(groupvars)`   | `df.groupby(groupvars)['var'].agg(['std', 'median', 'min', 'max', 'sum'])`      |
-| `collapse (sd) var (median) var (max) var (min) <var>, by(groupvars)`   | `df.groupby(groupvars)['var'].agg(['std', 'median', 'min', 'max', 'sum'])`      |
 | `append using filename`  | `df = df1.append(df2)`      |
 | `merge 1:1 vars using filename`  | `df = pd.merge(df1, df2, on=vars)` but there are very rich options for merging dataframes (Python is similar to SQL in this respect) and you should check the [full documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/merging.html).     |
 | `reshape <wide/long> <stubs>, i(<vars>) j(<var>)`  | **pandas** has several reshaping functions, including `df.unstack('level')` for going to wide, `df.stack('column_level')` for going to long, `pd.melt`, and `df.pivot`. It's best to check the excellent [reshaping](https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html) documentation to find what best suits your needs.    |
