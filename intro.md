@@ -55,7 +55,11 @@ Most pages with code can be run in Google Colab --just click <i class="fas fa-ro
 
 Contributions are welcome! You can make suggestions, requests, and point out bugs or mistakes by [raising an issue](https://github.com/aeturrell/coding-for-economists/issues) on the github repository for the book. You can also make [pull requests](https://github.com/aeturrell/coding-for-economists/pulls) with fixes, edits, or new content.
 
-## Citing Coding for Economists
+Contributors:
+
+- [lukestein](https://github.com/lukestein)
+
+***Citing Coding for Economists***
 
 To cite this book, please use:
 
