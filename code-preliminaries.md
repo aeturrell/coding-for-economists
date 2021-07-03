@@ -125,7 +125,7 @@ Create a new script that, when run, prints "Welcome to coding for economists" an
 In the section above, I mentioned the *terminal*, also known as the *command line*. This is a text-based way to issue all kinds of commands to your computer (not just Python commands) and knowing a little bit about it is really useful for coding (and more) because managing packages, environments (which we haven't yet discussed), and version control (ditto) can all be done via the terminal. We'll come to these in due course, but for now, a little background on what the terminal is and what it does.
 
 ```{note}
-To open up the command line within Visual Studio Code, use the ``⌃+` `` keyboard shortcut (Mac) or ``ctrl+` `` (Windows/Linux), or click "View > Terminal".
+To open up the command line within Visual Studio Code, use the <kbd>⌃</kbd> + <kbd>\`</kbd> keyboard shortcut (Mac) or <kbd>ctrl</kbd> + <kbd>\`</kbd> (Windows/Linux), or click "View > Terminal".
 ```
 
 Firstly, everything you can do by clicking on icons to launch programmes on your computer, you can also do via the terminal, also known as the command line. For many programmes, a lot of their functionality can be accessed using the command line, and other programmes *only* have a command line interface (CLI), including some that are used for data science.

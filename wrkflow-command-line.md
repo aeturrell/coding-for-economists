@@ -59,7 +59,7 @@ Here are some specific tasks you might use the command line to complete:
 
 Bash is often the default command line shell on UNIX but zsh has gained popularity and is now the default for Mac. If you're wondering what to use then I recommend zsh (Z Shell) from [oh-my-zsh](https://ohmyz.sh/).
 
-To open up the command line within Visual Studio Code, you can use the ``⌃` `` keyboard shortcut (Mac) or ``ctrl` `` (Windows), or by clicking "View > Terminal".
+To open up the command line within Visual Studio Code, you can use the <kbd>⌃</kbd> + <kbd>\`</kbd> keyboard shortcut ( onMac) or <kbd>ctrl</kbd> + <kbd>\`</kbd> (Windows/Linux), or click "View > Terminal".
 
 You should now see something like this
 
