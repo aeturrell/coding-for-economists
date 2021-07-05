@@ -59,7 +59,7 @@ Here are some specific tasks you might use the command line to complete:
 
 Bash is often the default command line shell on UNIX but zsh has gained popularity and is now the default for Mac. If you're wondering what to use then I recommend zsh (Z Shell) from [oh-my-zsh](https://ohmyz.sh/).
 
-To open up the command line within Visual Studio Code, you can use the <kbd>⌃</kbd> + <kbd>\`</kbd> keyboard shortcut ( onMac) or <kbd>ctrl</kbd> + <kbd>\`</kbd> (Windows/Linux), or click "View > Terminal".
+To open up the command line within Visual Studio Code, you can use the <kbd>⌃</kbd> + <kbd>\`</kbd> keyboard shortcut (on Mac) or <kbd>ctrl</kbd> + <kbd>\`</kbd> (Windows/Linux), or click "View > Terminal".
 
 You should now see something like this
 
@@ -92,19 +92,19 @@ Once you've run a few commands, you'll notice that you can't navigate around the
 
 - use tab to complete commands you've only partially written out. Try it by typing `dat` then hitting tab.
 
-- use the ↑ (and ↓) keys to scroll through previous commands.
+- use the <kbd>↑</kbd> and <kbd>↓</kbd> keys to scroll through previous commands.
 
-- to skip whole words, use ⌥+→ (and ⌥+←) on Mac, Ctrl+→ (and Ctrl+←) on Windows and Linux.
+- to skip whole words, use <kbd>⌥</kbd> + <kbd>→</kbd> and <kbd>⌥</kbd> + <kbd>←</kbd> on Mac, or <kbd>ctrl</kbd> + <kbd>→</kbd> and <kbd>ctrl</kbd> + <kbd>←</kbd> on Windows and Linux.
 
-- Ctrl+a to move the cursor to the beginning of the line.
+- <kbd>ctrl</kbd> + <kbd>a</kbd> to move the cursor to the beginning of the line.
 
-- Ctrl+e moves the cursor to the end of the line.
+- <kbd>ctrl</kbd> + <kbd>e</kbd> moves the cursor to the end of the line.
 
-- Ctrl+k to delete everything to the right of the cursor.
+- <kbd>ctrl</kbd> + <kbd>k</kbd> to delete everything to the right of the cursor.
 
-- Ctrl+u to delete everything to the left of the cursor.
+- <kbd>ctrl</kbd> + <kbd>u</kbd> to delete everything to the left of the cursor.
 
-- Ctrl + r to search through previously used commands
+- <kbd>ctrl</kbd> + <kbd>r</kbd> to search through previously used commands
 clear to clear your terminal.
 
 ### Navigating directories
@@ -123,7 +123,6 @@ The table below shows some useful commands for moving around your computer using
 | `cd ~`   | Go to your home directory        |
 | `cd -`   | Go to the previous directory        |
 | `cd documents/papers`   | Go directly to a directory named 'papers' |
-
 
 ## Using Python on the command line
 
@@ -276,7 +275,7 @@ echo "Running program $0 with $# arguments
 
 which produces
 
-```
+```bash
 Starting program at Thu 25 Mar 2021 21:23:22 GMT
 Running program hello_world.sh with 0 arguments
 ```
@@ -326,7 +325,6 @@ pandoc -s -N --reference-doc ref.docx -F pandoc-crossref -Mchapters book_compile
 - `--bibliography=*.bib` tells pandoc where to find citations
 - `--csl=*.csl` is the name of the style file for citations
 - `-o` means output, in this case a word document
-
 
 [**exa**](https://the.exa.website/) is an upgrade on the `ls` command. It is designed to be an improved file lister with more features and better defaults. It uses colours to distinguish file types and metadata. Follow the instructions on the website to install it on your operating system. To replace `ls` with `exa`, you can use a terminal *alias*. There's a good guide [available here](https://ericmjl.github.io/data-science-bootstrap-notes/create-shell-command-aliases-for-your-commonly-used-commands/).
 
