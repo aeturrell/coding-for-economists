@@ -3,6 +3,7 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/aeturrell/coding-for-economists/HEAD)
 
 This readme is intended to help those contributing to or editing the book, not those trying to follow it. To read or use the book, head to the [coding for economists website](https://aeturrell.github.io/coding-for-economists/intro.html). You can use the book interactively via the following options, all available via the link above:
+
 - download pages to your computer as jupyter notebooks
 - run pages in Google Colab through your browser
 - run pages in Binder through your browser
@@ -10,6 +11,7 @@ This readme is intended to help those contributing to or editing the book, not t
 ## Dev
 
 These instructions are only for developers working on the book.
+
 ### Setting up the Environment
 
 Install the environment using
@@ -37,7 +39,6 @@ jupyter-book build .
 Once this command is run, you should be able to look at the HTML files for the book locally on your computer.
 
 ### Uploading Built Files
-
 
 See [here](https://jupyterbook.org/publish/gh-pages.html) for how to upload revised HTML files, but the key command is
 
