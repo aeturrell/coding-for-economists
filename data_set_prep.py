@@ -140,6 +140,17 @@ def prep_gapminder_data():
     df.to_csv(Path("data/owid_gapminder.csv"), index=False)
 
 
+def prep_air_quality_data():
+    # first download data from Air Quality Historical Data Platform
+    df = pd.read_csv(Path("/Users/aet/Downloads/beijing-air-quality.csv"))
+    df["date"] = pd.to_datetime(df["date"], format="%d/%m/%Y")
+    df = df.set_index("date")
+    df = df.sort_index()
+    # make 7 day rolling
+    df = df.rolling(7).mean()
+    df.to_csv(Path("data/beijing_pm.csv"))
+
+
 if __name__ == "__main__":
     prep_river_data()
     star_wars_data()
