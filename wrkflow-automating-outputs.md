@@ -12,7 +12,7 @@ kernelspec:
   language: python
   name: codeforecon
 ---
-
+(wrkflow-automating-outputs)=
 # Automating Outputs
 
 In this chapter, you'll learn how to automate the inclusion of figures, tables, and code in your outputs. Much of what you'll see in this chapter is possible in a wide range of languages (not just Python). The first section assumes you're writing a document or presentation using the $\LaTeX$ typesetting language.

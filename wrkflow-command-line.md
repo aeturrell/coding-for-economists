@@ -12,7 +12,7 @@ kernelspec:
   language: python
   name: codeforecon
 ---
-
+(wrkflow-command-line)=
 # The Command Line
 
 In this chapter, you'll meet the *command line* and learn how to use it. Beyond a few key commands like `pip install <packagename>`, `conda activate <environmentname>`, and `jupyter lab`, you don't strictly need to know how to use the command line to follow the rest of this book. However, even a tiny bit of knowledge of the command line goes a long way in coding and will serve you well.
