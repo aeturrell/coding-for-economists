@@ -13,6 +13,7 @@ kernelspec:
   name: codeforecon
 ---
 
+(wrkflow-best-practice)=
 # Tips for Better Coding
 
 In this chapter, you'll learn some of the easiest and most impactful tips for better coding. 
@@ -192,7 +193,7 @@ Make code correct and readable first, and fast second. You can waste a lot of ti
 
 Rubber duck debugging is a method of fixing code that isn't working as intended by, err, talking to a rubber duck. Something about describing your problem out loud and in detail can suddenly illuminate the issue to you and your plastic waterfowl friend.
 
-![jpg](https://gitduck.com/blog/content/images/2019/10/IMG_7540.jpeg)
+🦆
 
 ## The Zen of Python
 

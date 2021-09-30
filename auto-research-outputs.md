@@ -202,7 +202,7 @@ What's surprising is how effective the conversion to word is: even if you have f
 
 You can get quite fancy with **pandoc**, for example you can translate a whole book's worth of latex into a Word doc complete with a Word style, a bibliography via biblatex, equations, and figures. Nothing can save Word from being painful to use, but **pandoc** certainly helps.
 
-Here's a real example of doing all of that, taken from an open source [**cookie-cutter-latex-book-manuscript**](https://github.com/aeturrell/cookie-cutter-latex-book-manuscript) that I wrote:
+Here's a real example of doing all of that, taken from an open source [**cookie-cutter-latex-book-manuscript**](https://github.com/aeturrell/cookie-cutter-latex-book-manuscript) written by a contributor to Coding for Economists:
 
 ```bash
 pandoc -s -N --reference-doc ref.docx -F pandoc-crossref -Mchapters book_compiler.tex --bibliography=book_bibliography.bib --csl=nature.csl -o exported_word/book.docx

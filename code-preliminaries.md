@@ -108,6 +108,10 @@ Type 'python send' into the search box. Depending on your configuration and Visu
 This will ensure that when you hit shift+enter on code scripts, it will execute your code in Visual Studio's interactive window (starting a new window if necessary).
 ```
 
+```{admonition} Start interactive windows and terminals within your project directory
+In Visual Studio Code, you can ensure that the interactive window starts in the root directory of your project by setting "Jupyter: Notebook File Root" to "${workspaceFolder}" in the Settings menu. For the integrated command line, change "Terminal › Integrated: Cwd" to "${workspaceFolder}" too.
+```
+
 Let's make more use of the interactive window. At the bottom of it, there is a box that says 'Type code here and press shift-enter to run'. Go ahead and type `print('Hello World!')` directly in there to achieve the same effect as running the line from your script. Also, any variables you run in the interactive window (from your script or directly by entering them in the box) will persist.
 
 To see how variables persist, type `hello_string = 'Hello World!'` into the interactive window's code entry box and hit shift-enter. If you now type `hello_string` and hit shift+enter, you will see the contents of the variable you just created. You can also click the grid symbol at the top of the interactive window (between the stop symbol and the save file symbol); this is the variable explorer and will pop open a panel showing all of the variables you've created in this interactive session. You should see one called `hello_string` of type `str` with a value `Hello World!`.

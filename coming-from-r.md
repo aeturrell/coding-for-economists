@@ -35,6 +35,8 @@ If you are coming from R, you're likely familiar with **dplyr** for data analysi
 
 - **data.table**: if you use this library instead of **dplyr**, have no fear as there's an almost identical library in Python called [**datatable**](https://datatable.readthedocs.io/en/latest/). It's not nearly as popular in Python as **data.table** is in R, but it's a very high quality library.
 
+- **here**: Lots of people switching from R to Python ask what the equivalent of the `here()` function is. The "best practice" answer is that you shouldn't need one! It's good practice to have your Visual Studio Code (or other IDE) console and interactive Python window automatically start *within* the directory of your project; that is, you should always be "here" automatically. In Visual Studio Code, you can ensure that the interactive window starts in the root directory of your project by setting "Jupyter: Notebook File Root" to "${workspaceFolder}" in the Settings menu. For the integrated command line, change "Terminal › Integrated: Cwd" to "${workspaceFolder}" too. If you still need a replacement for `here`, then the [pyprojroot](https://github.com/chendaniely/pyprojroot) package has you covered.
+
 ## Need a specific library that's in R but not in Python?
 
 You can run a full R session from Python (if you already have R installed). Here's an example:
