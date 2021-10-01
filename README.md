@@ -14,19 +14,21 @@ These instructions are only for developers working on the book.
 
 ### Setting up the Environment
 
-Install the environment using
+In principle, the environment can be installed using
 
 ```bash
 conda env create -f environment.yml
 ```
 
-on the command line. After installing the environment, activate using `conda activate codeforecon`, and use
+on the command line. However, the large number of pip dependencies causes conda's env create function to hang and the only way to work around it seems to be to allow conda to install conda packages and then install the pip packages manually. After installing the conda environment but before pip installing packages individually, activate using `conda activate codeforecon`, and use
 
 ```bash
 python3.8 -m ipykernel install --user --name=codeforecon
 ```
 
 to install a new named ipykernel. To ensure that Jupyter notebooks are running the correct kernel, open them in Jupyter notebook server and change the kernel there to 'codeforecon' and save it.
+
+Some extra assets associated with packages are required. You will need to run `python -m spacy download en_core_web_sm` to download the spacy model. There are also several models needed for nltk.
 
 ### Building the Book
 
@@ -37,6 +39,8 @@ jupyter-book build .
 ```
 
 Once this command is run, you should be able to look at the HTML files for the book locally on your computer.
+
+Note that, due to package conflicts, several pages may not compile when taking this approach. One work around is to manually run troublesome notebooks and, when jupyterbook encounters a problem when executing them to build the book, it will pick up the notebook at the last point it was successfully manually executed.
 
 ### Uploading Built Files
 
