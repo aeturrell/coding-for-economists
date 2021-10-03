@@ -190,7 +190,7 @@ If you're using a bash or zsh terminal, there are a couple of commands that are 
 
 In Windows prompts, `dir` lists the contents of a directory and `cd` moves directory.
 
-### Installing packages
+### Installing Packages
 
 To install extra Python packages, there are two options, and both use the command line.
 
@@ -212,7 +212,7 @@ However, there are over 320,00 Python packages on PyPI (the Python Package Index
 pip install packagename
 ```
 
-In true programming-humour style, pip is a recursive acronym that stands for 'pip install packages'.
+In true programming-humour style, pip is a recursive acronym that stands for 'pip install packages'. You can see what packages you have installed by entering `conda list` into the command line.
 
 Here's a full example of the commands used to install the **pandas** package into the base environment (you may not need the first one):
 
