@@ -518,7 +518,7 @@ Even with just 10 evenly spaced points, the composite Simpson’s rule integrati
 
 ## Advanced: Composable Function Transformations
 
-In recent years, there have been great developments in the ability of Python to easily carry out numerical 'composable function transformations'. What this means is that, if you can dream up an arbitrary numerical operations -- including differentiation, linear algebrea, and optimisation -- you can write code that will execute it quickly and automatically on CPUs, GPUs, or TPUs as you like.
+In recent years, there have been great developments in the ability of Python to easily carry out numerical 'composable function transformations'. What this means is that, if you can dream up an arbitrary numerical operations -- including differentiation, linear algebra, and optimisation -- you can write code that will execute it quickly and automatically on CPUs, GPUs, or TPUs as you like.
 
 Here we'll look at one library that does this, **jax**, developed by Google {cite}`jax2018github`. It can automatically differentiate native Python and **numpy** functions, including when they are in loops, branches, or subject to recursion, and it can take derivatives of derivatives of derivatives. It supports reverse-mode differentiation (a.k.a. backpropagation) via grad as well as forward-mode differentiation, and the two can be composed arbitrarily to any order.
 

@@ -69,3 +69,22 @@ If **black-nb** finds a pre-commit error that is difficult to diagnose, a tip is
 ```bash
 jupytext --to py data-intro.ipynb
 ```
+
+## Good to Know
+
+If you get a
+
+```bash
+File "python3.8/site-packages/myst_nb/parser.py", line 139, in nb_to_tokens
+    start_line = source_map[cell_index] if source_map else (cell_index + 1) * 10000
+IndexError: list index out of range
+```
+
+error then it may be that the notebook metadata has gone awry. If you can isolate the notebook, you can refresh the metadata by running:
+
+```bash
+jupytext --to py bad_notebook.ipynb
+jupytext --to notebook bad_notebook.py
+```
+
+This will overwrite the existing notebook!
