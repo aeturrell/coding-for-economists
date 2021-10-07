@@ -194,7 +194,7 @@ In Windows prompts, `dir` lists the contents of a directory and `cd` moves direc
 
 To install extra Python packages, there are two options, and both use the command line.
 
-```{admonition}
+```{admonition} Activating Conda Python Environments
 You'll need to have conda "activated" before installing a package in the terminal--if you don't see the name of an environment, eg `(base)`, at the start of your terminal's line, use the `conda activate` command first.
 ```
 

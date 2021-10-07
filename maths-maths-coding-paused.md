@@ -6,11 +6,11 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: '0.8'
-    jupytext_version: 1.5.0
+    jupytext_version: 1.10.3
 kernelspec:
-  display_name: 'Python 3.8.6 64-bit (''codeforecon'': conda)'
+  display_name: 'Python 3.8.12 64-bit (''codeforecon'': conda)'
   language: python
-  name: codeforecon
+  name: python3
 ---
 
 # Intro to Mathematics with Code

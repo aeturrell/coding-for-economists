@@ -1,10 +1,20 @@
 # Set base image (this also loads the Debian Linux operating system)
-FROM python:3.8.12-buster
+FROM python:3.8.12-bullseye
 
 # Update Linux package list and install some key libraries for compiling code
 RUN apt-get update && apt-get install -y gcc libffi-dev \
     g++ libssl-dev openssl build-essential graphviz \
-    libgdal-dev libgeos-dev libproj-dev proj-data proj-bin
+    libgdal-dev libgeos-dev libproj-dev proj-data proj-bin \
+    nano sqlite3
+
+RUN wget https://download.osgeo.org/proj/proj-8.1.0.tar.gz \
+    && tar xzf proj-8.1.0.tar.gz \
+    && cd proj-8.1.0 \
+    && ./configure \
+    && make \
+    && make install \
+    && cd ..
+
 
 # Install Latex
 RUN apt-get --no-install-recommends install -y texlive-latex-extra
@@ -36,8 +46,8 @@ WORKDIR /app
 # Copy only packages to cache them in docker layer
 COPY pyproject.toml /app/
 
-# Install the packages
+# # Install the packages
 RUN poetry install $(test "$YOUR_ENV" == production && echo "--no-dev") --no-interaction --no-ansi
 
 # Copy the current directory contents into the container at /app
-COPY . /app
+# COPY . /app
