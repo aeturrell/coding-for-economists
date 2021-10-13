@@ -13,7 +13,7 @@ kernelspec:
   name: python3
 ---
 
-(wrkflow-best-practice)=
+(code-best-practice)=
 # Tips for Better Coding
 
 In this chapter, you'll learn some of the easiest and most impactful tips for better coding. 
@@ -184,6 +184,12 @@ df = pd.read_csv(path_to_data)
 ```
 
 **pathlib** will translate the relative path you have entered into whatever the local operating system needs.
+
+Setting up Visual Studio Code so that Python interactive windows and terminals start in the current folder, typically your project's root directory, makes it easier to use relative filepaths.
+
+```{admonition} Start interactive windows and terminals within your project directory
+In Visual Studio Code, you can ensure that the interactive window starts in the root directory of your project by setting "Jupyter: Notebook File Root" to `${workspaceFolder}` in the Settings menu. For the integrated command line, change "Terminal › Integrated: Cwd" to `${workspaceFolder}` too.
+```
 
 ## Don't prematurely optimise for speed
 

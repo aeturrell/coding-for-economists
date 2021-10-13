@@ -137,4 +137,4 @@ open('file.txt', 'w').write(text)
 
 ## Review
 
-If you know how to read in data and text from file(s), the internet, and APIs, and write out to file too, then you've mastered the content of this chapter!
+If you know how to read in data and text from file(s), and write out to file too, then you've mastered the content of this chapter!

@@ -1,6 +1,6 @@
 # Preliminaries
 
-In this chapter, you'll find out about how to get the basic tools you need to code set up on your own computer. While you don't need to know all of this if you're planning on using the 'Google Colab' or 'Binder' options to run code examples from the book, you may find it helpful to read through this chapter anyway.
+In this chapter, you'll find out about how to get the basic tools you need to code set up on your own computer. While you don't need to know all of this if you're planning on using the 'Google Colab' or 'Binder' options to run code examples from this book, you may find it helpful to read through this chapter anyway.
 
 ## Computational environment
 
@@ -8,7 +8,7 @@ In this chapter, you'll find out about how to get the basic tools you need to co
 
 Almost all of the code you'll see can be run on all three of the major operating systems: Windows, MacOS, and Linux.
 
-If you haven't yet decided which operating system to use, I recommend either Linux or MacOS because, in a very small number of cases, your code, third party packages and libraries, the command line, and coding related tools like Docker, either won't work at all on Windows or will be *much* more difficult to set up. (Don't panic if you have Windows already: we'll come to a workaround in a moment.) Although it is rare that you run into a case like this, it's just often enough for it to be a real pain. The most common way this manifests is that Windows uses a different set of text-based commands to Linux and Mac. Furthermore, if you ever need to scale up your work to the cloud, you'll find that it's more cost effective to use machines that have use an operating system closer to Linux (which MacOS is). While Macs are famous for being expensive, most Linux distributions are free, so you should be able to find a code-friendly operating system to satisfy any budget constraint. Linux used to have a reputation as being fearsomely difficult for beginners. But modern Linux distributions, such as Ubuntu, are pretty user-friendly.
+If you haven't yet decided which operating system to use, this book recommends either Linux or MacOS because, in a very small number of cases, your code, third party packages and libraries, the command line, and coding related tools like Docker, either won't work at all on Windows or will be *much* more difficult to set up. (Don't panic if you have Windows already: we'll come to a workaround in a moment.) Although it is rare that you run into a case like this, it's just often enough for it to be a real pain. The most common way this manifests is that Windows uses a different set of text-based commands to Linux and Mac. Furthermore, if you ever need to scale up your work to the cloud, you'll find that it's more cost effective to use machines that have use an operating system closer to Linux (which MacOS is). While Macs are famous for being expensive, most Linux distributions are free, so you should be able to find a code-friendly operating system to satisfy any budget constraint. Linux used to have a reputation as being fearsomely difficult for beginners. But modern Linux distributions, such as Ubuntu, are pretty user-friendly.
 
 If you are using Windows, then a good workaround for these issues is to use the [*Windows Subsystem for Linux*](https://pbpython.com/wsl-python.html). It's essentially a Linux operating system that installs alongside and integrates with your existing Windows operating system. This allows you to run code as if you were using Linux. You can get WSL [for free from Microsoft](https://docs.microsoft.com/en-us/windows/wsl/install-win10). (The fact that Microsoft has included this feature speaks to the need for it.)
 
@@ -32,11 +32,9 @@ To programme, you will need two things on your computer:
 
 - a way to write and run your code, using an integrated development environment (IDE)
 
-### Installing Python
+### Installing Python On Your Computer
 
 Python and Anaconda are available on all major operating systems.
-
-Note that if you are going to use Google Colab or Binder to run code examples, both of these come with Python installed. These instructions are just for installing Python on your own computer.
 
 Download the individual edition of the [Anaconda distribution](https://www.anaconda.com/) of Python for your operating system and install it (on Anaconda's website, this is currently found under Products -> Individual Edition). This will provide you with a Python installation and a host of the most useful libraries.
 
@@ -44,7 +42,9 @@ The instructions for [installing on Windows are here](https://docs.anaconda.com/
 
 You can confirm that you've set up Anaconda correctly by following the [verify installation instructions](https://docs.anaconda.com/anaconda/install/verify-install/) on the Anaconda website.
 
-If you're using Windows, you can check if Anaconda has installed properly by opening the 'Anaconda prompt' (a special text-based way to issue commands to your computer) and type `where python`. You should see a path rendered as text in the prompt that includes "Anaconda3", for example something like `C:\Users\<your-username>\Anaconda3\...`. On Mac and Linux you may need to run `conda init` on your command line to activate your Anaconda Python environment (Mac and Linux usually come with, typically, old versions of Python pre-installed). You can check you've got the right Python with `which python`, which should result in a message back saying `/Users/<your-username>/opt/anaconda3/bin/python`.
+If you're using Windows, you can check if Anaconda has installed properly by opening the 'Anaconda prompt' (a special text-based way to issue commands to your computer) and type `where python`. You should see a path rendered as text in the prompt that includes "Anaconda3", for example something like `C:\Users\<your-username>\Anaconda3\...`.
+
+On Mac and Linux you may need to run `conda init` on your command line to activate your Anaconda Python environment (Mac and Linux usually come with, typically, old versions of Python pre-installed). You can check you've got the right Python with `which python`, which should result in a message back saying `/Users/<your-username>/opt/anaconda3/bin/python`.
 
 ### Installing an integrated development environment (IDE)
 
@@ -66,7 +66,7 @@ Here are some of the useful features an IDE might have:
 
 - colouring your brackets in pairs so you can keep track of the logical order of execution of your code!
 
-People have strong feelings about which IDE they prefer. I strongly recommend [Visual Studio Code](https://code.visualstudio.com/), a free and open source IDE from Microsoft that is available on all major operating systems. Just like Python itself, Visual Studio can be extended with packages, and it is those packages, called extensions in this case, that make it so useful. Visual Studio Code is available on all major operating systems.
+People have strong feelings about which IDE they prefer. I strongly recommend [Visual Studio Code](https://code.visualstudio.com/), a free and open source IDE from Microsoft that is available on all major operating systems. Just like Python itself, Visual Studio can be extended with packages, and it is those packages, called extensions in this case, that make it so useful.
 
 Another IDE that you might find useful from time to time is [Jupyter Lab](https://jupyter.org/), which runs in a browser window. It is designed around 'Jupyter' notebooks (with the extension '.ipynb'), which mix code and text, rather than scripts, which are predominantly code (and have extension '.py'). The name, 'Jupyter', is a reference to the three original languages supported by Jupyter, which are Julia, Python, and R, and to Galileo's notebooks recording the discovery of the moons of Jupiter. Jupyter notebooks now support a vast number of languages beyond the original three, including Ruby, Haskell, Go, Scala, Octave, Java, and [more](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels). There'll be more about the difference between scripts and notebooks later on in the book, for now though, we'll keep our focus on scripts and Visual Studio Code.
 
@@ -128,7 +128,7 @@ This shows the two ways of working with the interactive window--running (segment
 Create a new script that, when run, prints "Welcome to coding for economists" and run it in both the terminal and an interactive window.
 ```
 
-### Writing your First Notebook
+### Writing your first notebook
 
 Notebooks are another popular way to write code, in addition to scripts (`.py` files). Notebooks can mix code and a type of plain text called Markdown by having "cells" that are either code or Markdown. This chapter was written in Markdown; many other chapters in the book are written as notebooks, and you can download them to run them on your own computer. Look for the download symbol at the top of each page; ".ipynb" means ipython notebook. We'll be seeing more of notebooks in subsequent chapters.
 
@@ -143,8 +143,6 @@ What happens when you press "clear outputs"? What about "run all?".
 ## Packages and How to Install Them
 
 Packages (also called libraries) are key to extending the functionality of Python. The default installation of Anaconda comes with many (around 250) of the packages you'll need, but it won't be long before you'll need to install some extra ones. There are packages for geoscience, for building websites, for analysing genetic data, and, yes, even for economics. Packages are typically not written by the core maintainers of the Python language but by enthusiasts, firms, researchers, academics, all sorts! Because anyone can write packages, they vary widely in their quality and usefulness. There are some that are key for an economics workflow, though, and you'll be seeing them again and again.
-
-![](https://pbs.twimg.com/media/DlSkZi5UYAAiMxG?format=jpg&name=900x900)
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Name a more iconic trio, I&#39;ll wait. <a href="https://t.co/pGaLuUxQ3r">pic.twitter.com/pGaLuUxQ3r</a></p>&mdash; Vicki Boykis (@vboykis) <a href="https://twitter.com/vboykis/status/1032631145035427840?ref_src=twsrc%5Etfw">August 23, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
@@ -184,7 +182,7 @@ on Windows. If you don't see the word `(base)` at the start of the line, you may
 
 The `(base)` part is saying that your current Python environment is the base one (later, we'll see how to add others for reproducibility and to isolate projects). Unfortunately, and confusingly, the commands that you can use in the terminal on Mac and Linux, on the one hand, and Windows, on the other, are different but many of the principles are the same.
 
-For now, to at least try out the command line, let's use something that works across all three of the major operating systems. Type `python` on the command prompt that came up in your new terminal window. If you installed Python, and put it on your PATH, you should see information about your installation of Python appear, including the version, followed by a Python prompt that looks like `>>>`. This is a kind of interactive Python session, in the terminal. It's much less rich than the one available in Visual Studio Code (it can't run scripts line-by-line, for example) but you can try `print('Hello World!')` and it will run, printing your message. To exit the terminal-based Python session, type `exit()` to go back to the regular command line.
+For now, to at least try out the command line, let's use something that works across all three of the major operating systems. Type `python` on the command prompt that came up in your new terminal window. You should see information about your installation of Python appear, including the version, followed by a Python prompt that looks like `>>>`. This is a kind of interactive Python session, in the terminal. It's much less rich than the one available in Visual Studio Code (it can't run scripts line-by-line, for example) but you can try `print('Hello World!')` and it will run, printing your message. To exit the terminal-based Python session, type `exit()` to go back to the regular command line.
 
 If you're using a bash or zsh terminal, there are a couple of commands that are so essential it would be remiss *not* to mention them. One is to list the contents of the current directory, for which the command is `ls`. The other is to move directory, for which the command is `cd`. If you find that you've opened a terminal you can always get a sense of where you are from `ls` and move to where you need to be using `cd directory/`. One of the advantages of opening a folder in Visual Studio Code and then opening a terminal with Code using 'New Terminal' is that the terminal will open in the folder you're working in (which is usually where you want to be).
 
@@ -239,6 +237,7 @@ Once you've downloaded *Visual Studio Code* and installed the Python extension, 
   - *Markdown All in One*, to help writing Markdown docs.
   - *Markdown Preview Enhanced*, to view rendered markdown as you type it (right click and select 'Open Preview...').
 - Coding extensions
+  - *Jupyter* provides support for Jupyter Notebooks
   - *indent-rainbow*, gives different levels of indentation different colours for ease of reading.
   - *Path Intellisense*, autocompletes filenames in code.
 - Version control
@@ -248,13 +247,24 @@ Once you've downloaded *Visual Studio Code* and installed the Python extension, 
 - General
   - *Rainbow CSV*, uses colour to make plain old CSV files much more readable in VS Code.
   - *vscode-icons*, intelligent icons for your files as seen in the VS Code file explorer, eg a folder called data gets an icon showing a disc drive superimposed onto a folder.
-- LaTex - it's a bit of surprise, but VS Code is one of the best LaTeX editors out there: if not *the* best. You will need LaTeX installed already though and initial setup of a compilation 'recipe' is a bit fiddly (though, once it works, it's dreamy).
+  - *polacode*, take pictures of code snippets to share on social media
+  - *Excel viewer*, does what it says
+  - *Selection Word Count*, calculates and displays the word count of a document and, when there is a selection, the word count of a selection (both are shown in the status bar)
+  - *LiveShare*, to collaborate on code with someone else in real-time
+- LaTeX - it's a bit of surprise, but VS Code is one of the best LaTeX editors out there. You will need LaTeX installed already though and initial setup of a compilation 'recipe' is a bit fiddly (though, once it works, it's dreamy).
   - *LaTeX Workshop*, provides core features for LaTeX typesetting with Visual Studio Code.
   - *LaTeX Preview*, both in-line and side-by-side previews of LaTeX code. A really fantastic extension.
 
-As well as adding extra extensions, you can customise the default settings of VS Code. As mentioned before, you'll probably want to change the `jupyter.sendSelectionToInteractiveWindow` setting to True. The easiest way to do this is to go to Settings (the cog icon) and type in 'Jupyter: Send Selection', and you should see a tick box come up; make sure it's ticked.
+There are some extensions that most people won't need but which experienced coders may find useful:
+- *Github Pull Request* — allows you to review and manage GitHub pull requests and issues in Visual Studio Code
+- *Remote development* — allows you to open any folder in: a container, a remote machine, or the Windows Subsystem for Linux (WSL)
+- *Remote - WSL* — run VS Code in the Windows Subsystem for Linux
+- *Remote - SSH* — run VS Code over an SSH connection, eg in the cloud
+- *Remote - Container* — run VS Code in a Docker container
+- *Python Docstring Generator* — automatically generates part of the documentation for your Python functions
+- *Docker* - makes it easy to build, manage, and deploy Docker containers from Visual Studio Code
 
-Another useful one for coding is to change the 'Editor: Render Whitespace' setting, aka `editor.renderWhitespace` from 'selection' to 'boundary'. This will now show any boundary whitespace, or more than one instance of whitespace contiguously, as a grey dot. This might seem odd but it's really useful because the wrong amount of whitespace can create problems with code.
+As well as adding extra extensions, you can customise the default settings of VS Code. As mentioned before, you'll probably want to change the `jupyter.sendSelectionToInteractiveWindow` setting to True. The easiest way to do this is to go to Settings (the cog icon) and type in 'Jupyter: Send Selection', and you should see a tick box come up; make sure it's ticked. Another useful one for coding is to change the 'Editor: Render Whitespace' setting, aka `editor.renderWhitespace` from 'selection' to 'boundary'. This will now show any boundary whitespace, or more than one instance of whitespace contiguously, as a grey dot. This might seem odd but it's really useful because the wrong amount of whitespace can create problems with code.
 
 ````{admonition} Exercise
 Go back to your `hello_world.py` script having installed the rainbow indent extension for Visual Studio Code. Modify the code to:
