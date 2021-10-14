@@ -16,33 +16,41 @@ kernelspec:
 (code-best-practice)=
 # Tips for Better Coding
 
-In this chapter, you'll learn some of the easiest and most impactful tips for better coding. 
+In this chapter, you'll learn some of the easiest and most impactful tips for better coding. This chapter has benefitted from the [Clean Code In Python](https://testdriven.io/blog/clean-code-python/) guide by Nik Tomazic and the UK Government Statistical Service's [Quality Assurance of Code for Analysis and Research](https://best-practice-and-impact.github.io/qa-of-code-guidance/intro.html) guidance (which is well worth checking out).
 
-There are many ways to write equally valid code and, over the years, software developers have worked out ways that help to make writing, using, debugging, and reading code more fun and certainly more efficient. **Following these best practice tips will save you hours, and hours, and *hours* of time.**
+As this is the bare bones of best practice coding, we won't cover some very important but more complex topics, such as reproducibility, testing, and version control, here.
+
+There are many ways to write equally valid code and, over the years, software developers have worked out ways that help to make writing, using, debugging, and reading code more fun and certainly more efficient. **Following these best practice tips will save you hours and *hours* of time.**
 
 ![Code quality 2](https://imgs.xkcd.com/comics/code_quality_2.png)
 
 Remember, most of the time, you are going to be writing code that someone else will read (most probably it will be future you), or that you'll need to run again. So you may think that by cutting out some of these practices that you'll save time, but it depends how heavily you discount your future time! It's almost always worth it to follow best practices.
 
-As this is the bare bones of best practice for research. we won't cover some very important but more complex topics, such as reproducibility, testing, and version control, here.
+If you follow the guidelines in this chapter you will find that your code will be:
 
-## Code in style
+ - easier to understand
+ - more efficient
+ - easier to maintain, scale, debug, and refactor
 
-The first thing to think about is code style, ie the way you write equivalent valid code. Python has a whole set of conventions about good style called ['PEP8'](https://www.python.org/dev/peps/pep-0008/), which it's worth taking a quick look at. It includes advice like indentation should always be 4 spaces per level and to surround top-level function and class definitions with two blank lines.
+## Code in Style
 
-Learning *all* of the PEP8 conventions would be tedious beyond belief. The good news is that a combination of packages and Visual Studio Code will do a lot of them for you. Packages can re-style and even re-write your code automatically; we'll see how to do this in the next chapter.
+The first thing to think about is code style, ie the way you write equivalent valid code.
 
-For now, we will find out about some of the most important style factors. Before that, PEP8 is not the only Python style guide going around: another popular one is the [Google style guide](https://google.github.io/styleguide/pyguide.html).
+Feeling lazy? Don't worry, because in the next chapter we'll find out how to get the computer to apply style to your code *automatically*.
 
-Most programming languages have a style guide or at least some conventions!
+Python has a whole set of conventions about good style called ['PEP8'](https://www.python.org/dev/peps/pep-0008/), which it's worth taking a quick look at. It includes advice like indentation should always be 4 spaces (not tabs) per level and that you should surround top-level function and class definitions with two blank lines.
+
+Most programming languages have a style guide, or at least some conventions! PEP8 is not the only Python style guide around: another popular one is the [Google style guide](https://google.github.io/styleguide/pyguide.html). But PEP8 is the most popular.
+
+Learning *all* of the PEP8 conventions would be tedious beyond belief. The good news is that a combination of packages and Visual Studio Code will do a lot of them for you. Packages can re-style and even re-write your code automatically; we'll see how to do a lot styling automatically in Chapter on {ref}`code-advcd-best-practice`.
 
 ![Code quality](https://imgs.xkcd.com/comics/code_quality.png)
 
 ### What's in a name?
 
-First, naming matters. Use meaningful names for variables, functions, or whatever it is you're naming. Avoid abbreviations that you understand *now* but which will be unclear to others, or future you. For example, use `real_wage_hourly` over `re_wg_ph`. I know it's tempting to use `temp` but you'll feel silly later when you can't for the life of you remember what `temp` does or is. A good trick when naming booleans (variables that are either true or false) is to use `is` followed by what the boolean variable refers to, for example `is_married`.
+First, name matter. Use meaningful names for variables, functions, or whatever it is you're naming. Avoid abbreviations that you understand *now* but which will be unclear to others, or future you. For example, use `real_wage_hourly` over `re_wg_ph`. I know it's tempting to use `temp` but you'll feel silly later when you can't for the life of you remember what `temp` does or is. A good trick when naming booleans (variables that are either true or false) is to use `is` followed by what the boolean variable refers to, for example `is_married`.
 
-As well as this general tip, Python has conventions on naming different kinds of variables. The naming convention for almost all objects is lower case separated by underscores, e.g. `a_variable=10` or ‘this_is_a_script.py’. This style of naming is also known as snake case. There are different naming conventions though--[Allison Horst](https://twitter.com/allison_horst) made this fantastic cartoon of the different conventions that are in use.
+As well as this general tip, Python has conventions on naming different kinds of variables. The naming convention for almost all objects is lower case separated by underscores, e.g. `a_variable=10` or ‘this_is_a_script.py’. This style of naming is also known as snake case. There are different naming conventions though—[Allison Horst](https://twitter.com/allison_horst) made this fantastic cartoon of the different conventions that are in use.
 
 ![Different naming conventions. Artwork by @allison_horst.](https://github.com/aeturrell/coding-for-economists/raw/main/img/in_that_case.jpg) Different naming conventions. Artwork by @allison_horst.
 
@@ -51,6 +59,33 @@ There are three exceptions to the snake case convention: classes, which should b
 For some quick shortcuts to re-naming columns in **pandas** dataframes or other string variables, try the unicode-friendly [**slugify**](https://github.com/un33k/python-slugify) library or the `clean_headers` function from the [**dataprep**](https://docs.dataprep.ai/index.html) library.
 
 The better named your variables, the clearer your code will be--and the fewer comments you will need to write!
+
+In summary:
+- use descriptive variable names that reveal your intention, eg `days_since_treatment`
+- avoid using ambiguous abbreviations in names, eg use `real_wage_hourly` over `rw_ph`
+- always use the same vocabulary, eg don't switch from `worker_type` to `employee_type`
+- avoid 'magic numbers', eg numbers in your code that set a key parameter. Set these as named constants instead. Here's an example:
+  ```python
+    import random
+
+    # This is bad
+    def roll():
+        return random.randint(0, 36)  # magic number!
+
+    # This is good
+    MAX_INT_VALUE = 36
+
+    def roll():
+        return random.randint(0, MAX_INT_VALUE)
+  ```
+- use verbs for function names, eg `get_regression`
+- use consistent verbs for function names, don't use `get_score` and `grab_results` (instead use `get` for both)
+- variable names should be snake_case and all lowercase, eg `first_name`
+ - class names should be CamelCase, eg `MyClass`
+function names should be snake_case and all lowercase, eg `quick_sort()`
+ - constants should be snake_case and all uppercase, eg `PI = 3.14159`
+ - modules should have short, snake_case names and all lowercase, eg `pandas`
+ - single quotes and double quotes are equivalent so pick one and be consistent—most automatic formatters prefer `"`
 
 ### Whitespace
 
@@ -81,7 +116,16 @@ list_var = [1,2,3,4]
 list_var = [1 , 2 , 3 , 4]
 ```
 
-There are packages that can re-organise your whitespace for you that we'll meet in the next chapter.
+There are packages that can re-organise your whitespace for you; these are featured in the Chapter on {ref}`code-advcd-best-practice`.
+
+In summary,
+
+ - indent using 4 spaces (spaces are preferred over tabs)
+ - lines should not be longer than 79 characters
+ - avoid multiple statements on the same line
+ - top-level function and class definitions are surrounded with two blank lines
+ - method definitions inside a class are surrounded by a single blank line
+ - imports should be on separate lines
 
 ### Line width and line continuation
 
@@ -97,9 +141,13 @@ def function(input_one, input_two,
     return result
 ```
 
-Code formatters, which we'll meet in the next chapter, will try and break up long lines for you.
+Again, automatic formatters, which we'll meet in the {ref}`code-advcd-best-practice` Chapter, will try and break up long lines for you.
 
-## Do not repeat yourself (DRY)
+## Principles of Clean Code
+
+While automation can help apply style, it can't help you write *clean code*. Clean code is a set of rules and principles that helps to keep your code readable, maintainable, and extendable. Writing code is easy; writing clean code is hard! However, if you follow these principles, you won't go far wong.
+
+### Do not repeat yourself (DRY)
 
 The DRY principle is 'Every piece of knowledge or logic must have a single, unambiguous representation within a system.' Divide your code into re-usable pieces that you can call when and where you want. Don't write lengthy methods, but divide logic up into clearly differentiated chunks.
 
@@ -112,23 +160,74 @@ Some practical ways to apply DRY in practice are to use functions, to put functi
 If you're using Visual Studio Code, you can [automatically send code into a function](https://code.visualstudio.com/docs/editor/refactoring) by right-clicking on code and using the 'Extract to method' option.
 ```
 
-## Make it modular
+### KISS (Keep It Simple, Stupid)
+
+Most systems work best if they are kept simple, rather than made complicated. This is a rule that says you should avoid unnecessary complexity. If your code is complex, it will only make it harder for you to understand what you did when you come back to it later.
+
+## SoC (Separation of Concerns) / Make it Modular
 
 Do not have a single file that does everything. If you split your code into separate, independent modules it will be easier to read, debug, test, and use. You can check the basics of coding chapter to see how to create and import functions from other scripts. But even within a script, you can still make your code modular by defining functions that have clear inputs and outputs.
 
 A good rule of thumb is that if a code that achieves one end goes longer than about 30 lines, it should probably go into a function. Scripts longer than about 500 lines are ripe for splitting up too.
 
-## Code comments
+Relatedly, do not have a single function that tries to do everything. Functions should have limits too; they should do approximately one thing. If you're naming a function and you have to use 'and' in the name then it's probably worth splitting it into two functions.
+
+Functions should have no 'side effects' either; that is, they shouldn't only take in value(s), and output value(s) via a return statement. They shouldn't modify global variables or make other changes.
+
+Another good rule of thumb is that each function shouldn't have lots of separate arguments.
+
+A final tip for modularity and the creation of functions is that you shouldn't use 'flags' in functions (aka boolean conditions). Here's an example:
+
+```python
+# This is bad
+def transform(text, uppercase):
+    if uppercase:
+        return text.upper()
+    else:
+        return text.lower()
+
+# This is good
+def uppercase(text):
+    return text.upper()
+
+def lowercase(text):
+    return text.lower()
+```
+
+## Code Comments
 
 Code comments, extra information that is not executed when the code is run, can be added by a preceding hash character `# This is a comment`. Use code comments to provide extra contextual information that *isn't* conveyed by function and variable names.
 
 Actually, well-written code needs *fewer* comments because it's more evidence what's going on. And it's tempting not to update comments even when code changes. So do comment, but see if you can make the code tell its own story first.
 
-## Code review
+Also, avoid "noise" comments that tell you what you already know from just looking at the code.
+
+![Picture of a cat wearing a label that says cat](https://i.postimg.cc/t4SV5NQg/catto.png)
+
+Finally, functions come with their own special type of comments called a doc string. Here's an example that tells us all about the functions inputs and outputs, including the type of input and output (here a dataframe, also known as `pd.DataFrame`).
+
+```python
+def round_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+    """Rounds numeric columns in dataframe to 2 s.f.
+    Args:
+        df (pd.DataFrame): Input dataframe
+    Returns:
+        pd.DataFrame: Dataframe with numbers rounded to 2 s.f.
+    """
+    for col in df.select_dtypes("number"):
+        df[col] = df[col].apply(lambda x: float(f'{float(f"{x:.2g}"):g}'))
+    return df
+```
+
+### Code review
 
 Perform code reviews: give what you’ve done to a colleague and ask them to go through it line-by-line to check it works as intended. If they do this properly and don’t find any mistakes or issues then I’d be very surprised. Return the favour to magically become a better coder yourself.
 
-## Use interoperable file formats
+### Don't prematurely optimise for speed
+
+Make code correct and readable first, and fast second. You can waste a lot of time optimising only to find that either the bottleneck is not where you thought it was, or that you change your mind about what process needs to be done.
+
+### Use interoperable file formats
 
 We'll talk much more about data in an upcoming chapter. For now, some basic pointers for the most common form of data: tabular data that's arranged in columns and rows.
 
@@ -146,7 +245,7 @@ Although open source and compressed, I also don't recommend the statistical lang
 
 And if you're working with big data, I *strongly* recommend the parquet file format. In most programming languages, it's [blazing fast](https://ursalabs.org/blog/2019-10-columnar-perf/) for input/output and packs down to a very efficient size. For example, a file saved in parquet might be 10 times smaller than the same .dta file; in tests, a 114 Mb parquet file was a whopping 4.68 GB in R's RDS format. If you're using cloud or have a small laptop, these space-savings add up. Better yet, parquet is available across a wide range of tools and languages including Python, R, Ruby, C++, Java, and Go. (Worth saying that parquet won't always be the right choice, but it's a great default for big data.)
 
-## Use relative filepaths
+### Use relative filepaths
 
 A path, or filepath, is a slash-separated list of directory names followed by either a directory name or a file name. You'll use them to read data into code, for example using `df = pd.read_csv('path/to/data.csv')`. A directory is the same as a folder. On Unix based systems (Mac and Linux), these paths use forward slashes:
 
@@ -191,17 +290,13 @@ Setting up Visual Studio Code so that Python interactive windows and terminals s
 In Visual Studio Code, you can ensure that the interactive window starts in the root directory of your project by setting "Jupyter: Notebook File Root" to `${workspaceFolder}` in the Settings menu. For the integrated command line, change "Terminal › Integrated: Cwd" to `${workspaceFolder}` too.
 ```
 
-## Don't prematurely optimise for speed
-
-Make code correct and readable first, and fast second. You can waste a lot of time optimising only to find that either the bottleneck is not where you thought it was, or that you change your mind about what process needs to be done.
-
-## Rubber duck your problems
+### Rubber duck your problems
 
 Rubber duck debugging is a method of fixing code that isn't working as intended by, err, talking to a rubber duck. Something about describing your problem out loud and in detail can suddenly illuminate the issue to you and your plastic waterfowl friend.
 
 🦆
 
-## The Zen of Python
+### The Zen of Python
 
 For a more poetic take on how to code, `import this` in your Python session.
 
@@ -209,13 +304,61 @@ For a more poetic take on how to code, `import this` in your Python session.
 import this
 ```
 
-Finally, it's always good to start by choosing clarity over optimisation. Computation is cheap, brain time is not. If you really need to optimise, do it later when you’ve figured out where it will count.
+## Advanced Coding Tips
+
+```{warning}
+If you are just learning to code you should feel free to skip this section for now.
+```
+
+There are many other coding tips that are useful but that make use of concepts or tools that we haven't met yet. To be comprehensive, they are included here.
+
+### Version Control
+
+ - Control versions of your code using Git, which is the standard for research, industry, and everyone on planet Earth.
+
+ - Code should be committed regularly, preferably when a discrete unit of work has been completed.
+
+ - Continuous integration, for example using tools such as GitHub Actions, should be used to ensure that each change is integrated into the workflow smoothly.
+
+### Configuration
+
+ - Credentials and other secrets are not written in code but are configured as environment variables.
+
+ - Configuration as applied to code or simulations is written as code, but is clearly separated from code used for analysis.
+
+ - The configuration used to generate particular outputs, releases and publications is recorded.
+
+ - If appropriate, multiple configuration files are used and interchangeable depending on system/local/user.
+
+### Environments
+
+- Code environments are reproducible and development is done within a consistent code environment.
+
+### Project management
+
+- The roles and responsibilities of team members are clearly defined.
+
+- An issue tracker (e.g GitHub Project, Trello, or Jira) is used to record development tasks.
+
+### Testing
+
+- Core functionality is unit tested as code.
+
+- Code based tests are run regularly and before each commit (for example using pre-commit).
+
+- Bug fixes include implementing new unit tests to ensure that the same bug does not reoccur.
+
+- Tests are automatically run and recorded using continuous integration.
+
+- The whole process is tested from start to finish using one or more realistic end-to-end tests.
+
+- Test code is clean an readable.
 
 ## Review
 
 From this chapter, you should remember to
 
-- ✅ follow a code style;
+- ✅ know what a code style is;
 - ✅ not repeat yourself;
 - ✅ be consistent with your naming convention;
 - ✅ write modular, well-documented code;
