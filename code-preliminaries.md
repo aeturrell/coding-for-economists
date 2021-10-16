@@ -282,7 +282,6 @@ for i in [1, 2, 3]:
         print(f"Hello world {i}:{char}")
 ```
 What do you notice about the different levels of indentation?
-```
 ````
 
 ## Review

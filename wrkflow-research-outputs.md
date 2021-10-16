@@ -12,7 +12,7 @@ kernelspec:
   language: python
   name: python3
 ---
-
+(wrkflow-research-outputs)=
 # Automating Research Outputs
 
 In this chapter, you'll learn how to automate the inclusion of figures and tables in research outputs including PDFs, Word documents, slides, and more. Much of what you'll see in this chapter applies to a wide range of coding languages.
