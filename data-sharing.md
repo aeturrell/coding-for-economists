@@ -49,7 +49,7 @@ An example datasette instance is [available here](https://global-power-plants.da
 
 So, how does it work? Let's assume you have some data in a CSV file. The first step in creating a datasette website is to turn that CSV file into a SQL-lite database (don't worry if you don't know what that is). The second step is to publish the data either *locally* (on your own computer) or on the internet (using a cloud service provider). Once the data are published, you and/or others can interact with them in several different ways.
 
-To use datasette, you'll need a Python installation. Then, to install the datasette package run
+To use datasette, you'll need a Python installation and to install some extra packages. (There's a brief guide to installing packages in the Chapter on {ref}`code-preliminaries`.). Then, to install the datasette package run
 
 ```python
 pip install csvs-to-sqlite datasette 

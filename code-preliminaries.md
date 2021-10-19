@@ -152,12 +152,14 @@ As with Linux's `apt-get install` or Mac's `brew install` commands, Python's pac
 
 ### The terminal in brief
 
-The *terminal* is also known as the *command line*. This is a text-based way to issue all kinds of commands to your computer (not just Python commands) and knowing a little bit about it is really useful for coding (and more) because managing packages, environments (which we haven't yet discussed), and version control (ditto) can all be done via the terminal. We'll come to these in due course, but for now, a little background on what the terminal is and what it does.
+The *terminal* is also known as the *command line* and sometimes the *command prompt*. This is a text-based way to issue all kinds of commands to your computer (not just Python commands) and knowing a little bit about it is really useful for coding (and more) because managing packages, environments (which we haven't yet discussed), and version control (ditto) can all be done via the terminal. We'll come to these in due course, but for now, a little background on what the terminal is and what it does.
 
 ```{note}
 To open up the command line within Visual Studio Code, use the <kbd>⌃</kbd> + <kbd>\`</kbd> keyboard shortcut (Mac) or <kbd>ctrl</kbd> + <kbd>\`</kbd> (Windows/Linux), or click "View > Terminal".
 
 Windows users may find it easiest to use the Anaconda Prompt as their terminal, at least for installing Python packages.
+
+If you want to open up the command line independently of Visual Studio Code, search for "Terminal" on Mac and Linux, and "Anaconda Prompt" on Windows. 
 ```
 
 Firstly, everything you can do by clicking on icons to launch programmes on your computer, you can also do via the terminal, also known as the command line. For many programmes, a lot of their functionality can be accessed using the command line, and other programmes *only* have a command line interface (CLI), including some that are used for data science.
@@ -184,9 +186,7 @@ The `(base)` part is saying that your current Python environment is the base one
 
 For now, to at least try out the command line, let's use something that works across all three of the major operating systems. Type `python` on the command prompt that came up in your new terminal window. You should see information about your installation of Python appear, including the version, followed by a Python prompt that looks like `>>>`. This is a kind of interactive Python session, in the terminal. It's much less rich than the one available in Visual Studio Code (it can't run scripts line-by-line, for example) but you can try `print('Hello World!')` and it will run, printing your message. To exit the terminal-based Python session, type `exit()` to go back to the regular command line.
 
-If you're using a bash or zsh terminal, there are a couple of commands that are so essential it would be remiss *not* to mention them. One is to list the contents of the current directory, for which the command is `ls`. The other is to move directory, for which the command is `cd`. If you find that you've opened a terminal you can always get a sense of where you are from `ls` and move to where you need to be using `cd directory/`. One of the advantages of opening a folder in Visual Studio Code and then opening a terminal with Code using 'New Terminal' is that the terminal will open in the folder you're working in (which is usually where you want to be).
-
-In Windows prompts, `dir` lists the contents of a directory and `cd` moves directory.
+You can find out more about the terminal in the Chapter {ref}`wrkflow-command-line`.
 
 ### Installing Packages
 
@@ -204,7 +204,7 @@ conda install package-name
 
 and hitting return, where `package-name` might be `pandas`. This will try to install a version of the package that is already optimised for your type of computer, and will automatically come with any dependencies (packages the package you want needs) you might also need. These pre-built packages that are provided by Anaconda are convenient for a host of reasons. Anaconda provide pre-built versions of around 7,500 the most popular packages (including the statistical programming language R).
 
-However, there are over 320,00 Python packages on PyPI (the Python Package Index) so you may sometimes find one that is not covered by `conda install`. When there isn't a pre-built Anaconda version of a package available, the next thing to try is
+However, there are over 330,000 Python packages on PyPI (the Python Package Index) so you may sometimes find one that is not covered by `conda install`. When there isn't a pre-built Anaconda version of a package available, the next thing to try is
 
 ```bash
 pip install packagename
@@ -229,7 +229,9 @@ Install the **plotnine** package. (Hint: `conda install` may not be enough.)
 
 ## Fine-tuning your integrated development environment
 
+```{note}
 If you just want to get on with some coding, feel free to skip this section.
+```
 
 Once you've downloaded *Visual Studio Code* and installed the Python extension, you'll have enough to get going but VS Code can do a whole lot more with some extra add-ons. You can install these using the extensions tab on the left hand side of VS Code. Here are the ones this book recommends and why:
 

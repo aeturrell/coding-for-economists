@@ -32,7 +32,7 @@ plt.style.use('plot_style.txt')
 
 In this chapter, you'll learn about doing mathematics with code, including solving equations both in the abstract and numerically.
 
-This chapter uses the **numpy**, **scipy**, and **sympy** packages. If you're running this code, you may need to install these packages using, for example, `pip install packagename` on your computer's command line. (If you're not sure what a command line or terminal is, take a quick look at the basics of coding chapter.)
+This chapter uses the **numpy**, **scipy**, and **sympy** packages. If you're running this code, you may need to install these packages using, for example, `pip install packagename` on your computer's command line. There's a brief guide to installing packages in the Chapter on {ref}`code-preliminaries`.
 
 ## Symbolic mathematics
 

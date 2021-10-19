@@ -36,9 +36,7 @@ As well as reading the book, you can also run the code examples for yourself (th
 
 2. Most pages that have code on can be run as a *Google Colab* notebook with a single click on `Colab`, found under the rocket button at the top of the page. If you need to install any extra packages in a Google Colab session, the syntax is `!pip install packagename` to install a library called 'packagename'. Colab notebooks are run in a browser window.
 
-3. Most pages that have code on can be run in an online *Binder* environment as a notebook with a single click on `Binder`, found under the rocket button at the top of the page. Binder notebooks are run in a browser window. Binder is a free way to run computational environments in the browser {cite}`jupyter2018binder`. **Note that Binder can take a long time to start, but will come with all the packages used in the book already installed.** This book uses a really wide range of packages, which makes it harder for Binder to start quickly.
-
-To run all of the examples in the book, you may need to install additional packages too, depending on what you already have installed on your computer. The Preliminaries chapter will cover how to install additional packages.
+To run all of the examples in the book, you may need to install additional packages too, depending on what you already have installed on your computer. The Chapter on {ref}`code-preliminaries` will cover how to install additional packages.
 
 ```{admonition} Exercise
 Try going to the {ref}`code-basics` chapter now and clicking on the rocketship symbol (🚀), then select "Colab". Try running the first few code cells.
