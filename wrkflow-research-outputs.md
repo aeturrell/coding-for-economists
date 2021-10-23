@@ -21,7 +21,7 @@ Automating the inclusion of figures and tables in your research outputs has many
 
 - once configured, it's clearly *easier* than manual updates
 - your paper can update at the touch of a button
-- it helps with creating a *reproducible analytical pipeline*
+- it helps with creating a *reproducible analytical pipeline* (for more on these, see the {ref}`wrkflow-rap` chapter).
 - it enforces structure on your project
 - automation is complementary to other good practices such as version control
 
