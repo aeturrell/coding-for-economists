@@ -24,6 +24,16 @@ on the command line. **This takes a really, really long time to install**. Codin
 
 Some extra assets associated with packages are required. You will need to run `python -m spacy download en_core_web_sm` to download the spacy model. There are also several models needed for nltk.
 
+### Using the docker image
+
+There is a Dockerfile for the environment, but it's a work in progress. The easiest way to run it right now is:
+
+1. Ensure you have docker, the docker extension for VS Code, and the Code remote extension installed
+2. In VS Code, right click on the Dockerfile and hit "build image". Switch to the docker tab and hit "Run interactive". Switch to the VS Code Remote tab, then click "Attach in new window" on the running container.
+3. Once you are in the container via VS Code remote, you may need to install the Python extension (within the container version of VS Code).
+
+Warning: if you are building the dockerfile with the environment, it will take a very long time to build. The ambition is to create a ready made image and put it on an image repository.
+
 ### Building the Book
 
 To build the book using Jupyter books use
