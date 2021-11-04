@@ -9,13 +9,18 @@ RUN apk update && apk add openssl graphviz \
 
 # Create the environment:
 COPY environment.yml .
-RUN conda env create -f environment.yml
+# RUN conda env create -f environment.yml
 # for debugging (builds in under 1 min)
-# RUN conda create -n codeforecon python=3.8
+RUN conda create -n codeforecon python=3.8
 
 # Make RUN commands use the new environment:
-RUN echo "conda activate codeforecon" >> ~/.bashrc
-SHELL ["/bin/bash", "--login", "-c"]
+SHELL ["conda", "run", "-n", "codeforecon", "/bin/bash", "-c"]
+
+RUN conda install spacy
+
+RUN python3 -m spacy download en
 
 # Copy the current directory contents into the container at /app
-# COPY . /app
+COPY . /app
+
+RUN echo "Success building the codeforecon container!"
