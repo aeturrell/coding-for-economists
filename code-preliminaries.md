@@ -67,7 +67,7 @@ Here are some of the useful features an IDE might have:
 
 - colouring your brackets in pairs so you can keep track of the logical order of execution of your code!
 
-People have strong feelings about which IDE they prefer. I strongly recommend [Visual Studio Code](https://code.visualstudio.com/), a free and open source IDE from Microsoft that is available on all major operating systems. Just like Python itself, Visual Studio can be extended with packages, and it is those packages, called extensions in this case, that make it so useful.
+People have strong feelings about which IDE they prefer. This book strongly recommends [Visual Studio Code](https://code.visualstudio.com/), a free and open source IDE from Microsoft that is available on all major operating systems. Just like Python itself, Visual Studio can be extended with packages, and it is those packages, called extensions in this case, that make it so useful.
 
 Another IDE that you might find useful from time to time is [Jupyter Lab](https://jupyter.org/), which runs in a browser window. It is designed around 'Jupyter' notebooks (with the extension '.ipynb'), which mix code and text, rather than scripts, which are predominantly code (and have extension '.py'). The name, 'Jupyter', is a reference to the three original languages supported by Jupyter, which are Julia, Python, and R, and to Galileo's notebooks recording the discovery of the moons of Jupiter. Jupyter notebooks now support a vast number of languages beyond the original three, including Ruby, Haskell, Go, Scala, Octave, Java, and [more](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels). There'll be more about the difference between scripts and notebooks later on in the book, for now though, we'll keep our focus on scripts and Visual Studio Code.
 
@@ -259,6 +259,7 @@ Once you've downloaded *Visual Studio Code* and installed the Python extension, 
   - *LaTeX Preview*, both in-line and side-by-side previews of LaTeX code. A really fantastic extension.
 
 There are some extensions that most people won't need but which experienced coders may find useful:
+
 - *Github Pull Request* — allows you to review and manage GitHub pull requests and issues in Visual Studio Code
 - *Remote development* — allows you to open any folder in: a container, a remote machine, or the Windows Subsystem for Linux (WSL)
 - *Remote - WSL* — run VS Code in the Windows Subsystem for Linux
