@@ -12,10 +12,12 @@ kernelspec:
   language: python
   name: python3
 ---
-(wrkflow-research-outputs)=
+(auto-research-outputs)=
 # Automating Research Outputs
 
-In this chapter, you'll learn how to automate the inclusion of figures and tables in research outputs including PDFs, Word documents, slides, and more. Much of what you'll see in this chapter applies to a wide range of coding languages.
+In this chapter, you'll learn how to automate the inclusion of figures and tables in LaTeX-derived research outputs including PDFs and slides——plus how to convert those outputs to Microsoft Word documents and more. Much of what you'll see in this chapter applies to a wide range of coding languages.
+
+This chapter has some similarities with the next chapter, on {ref}`auto-reports`. But this chapter puts the LaTeX typesetting language front and centre, because it's the *de facto* standard for preparing *research outputs* (most journals have a LaTeX template for submission, for example), and it gives you full control over every aspect of how your outputs look. However, if you don't already know LaTeX, there is a steep-ish learning curve and—if you're just looking to create some automated reports using code and text rather than write pre-prints, working papers, journal articles, or academic-talk style slide decks—the next chapter on {ref}`auto-reports` is going to be a better and easier fit for you.
 
 Automating the inclusion of figures and tables in your research outputs has many benefits:
 
