@@ -131,7 +131,7 @@ Create a new script that, when run, prints "Welcome to coding for economists" an
 
 ### Writing your first notebook
 
-Notebooks are another popular way to write code, in addition to scripts (`.py` files). Notebooks can mix code and a type of plain text called Markdown by having "cells" that are either code or Markdown. This chapter was written in Markdown; many other chapters in the book are written as notebooks, and you can download them to run them on your own computer. Look for the download symbol at the top of each page; ".ipynb" means ipython notebook. We'll be seeing more of notebooks in subsequent chapters.
+Notebooks are another popular way to write code, in addition to scripts (`.py` files). Notebooks can mix code and a type of plain text called Markdown by having "cells" that are either code or Markdown. This chapter was written in Markdown; many other chapters in the book are written as notebooks, and you can download them to run them on your own computer. Look for the download symbol at the top of each page; ".ipynb" means ipython notebook. We'll be seeing more of notebooks and markdown in subsequent chapters.
 
 ```{admonition} Exercise
 In Visual Studio Code, click new file. Save the file as "hello_world.ipynb". Close the file, then re-open it within VS Code to make Code recognise that it's a notebook. Try adding `print("hello world!")` to the first cell and hitting the play symbol on the left-hand side of the cell. You will be prompted to select a "kernel", a version of Python on your system. It doesn't matter which you use.

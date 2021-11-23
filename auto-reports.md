@@ -42,7 +42,7 @@ Quarto can be used to create *output* documents and slides in a wide variety of 
 
 You can write the *input* documents (and code) in two possible ways:
 
-1. A special kind of markdown file, with extension `.qmd`
+1. A special kind of markdown file, with extension `.qmd`. For more on markdown, see {ref}`wrkflow-markdown`.
 2. Jupyter Notebooks, with extension `.ipynb` (which most of this book is written in)
 
 You optionally add code (e.g. Python, R, JavaScript, etc.) to the documents to dynamically create figures, tables, etc. and then render the documents to their final format using Quarto.
