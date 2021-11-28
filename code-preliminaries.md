@@ -9,13 +9,13 @@ In this chapter, you'll find out about how to get the basic tools you need to co
 
 Almost all of the code you'll see can be run on all three of the major operating systems: Windows, MacOS, and Linux.
 
-If you haven't yet decided which operating system to use, this book recommends either Linux or MacOS because, in a very small number of cases, your code, third party packages and libraries, the command line, and coding related tools like Docker, either won't work at all on Windows or will be *much* more difficult to set up. (Don't panic if you have Windows already: we'll come to a workaround in a moment.) Although it is rare that you run into a case like this, it's just often enough for it to be a real pain. The most common way this manifests is that Windows uses a different set of text-based commands to Linux and Mac. Furthermore, if you ever need to scale up your work to the cloud, you'll find that it's more cost effective to use machines that have use an operating system closer to Linux (which MacOS is). While Macs are famous for being expensive, most Linux distributions are free, so you should be able to find a code-friendly operating system to satisfy any budget constraint. Linux used to have a reputation as being fearsomely difficult for beginners. But modern Linux distributions, such as Ubuntu, are pretty user-friendly.
+If you haven't yet decided which operating system to use, this book recommends either Linux or MacOS because, in a very small number of cases, your code, third party packages and libraries, the command line, and coding related tools like Docker, either won't work at all on Windows or will be *much* more difficult to set up. (Don't panic if you have Windows already: we'll come to a workaround in a moment.) Although it is rare that you run into a case like this, it's just often enough for it to be a real pain. The most common way this manifests is that Windows uses a different set of text-based commands to Linux and Mac. Furthermore, if you ever need to scale up your work to the cloud, you'll find that it's more cost effective and far simpler to use machines that have use an operating system closer to Linux (which MacOS is). While Macs are famous for being expensive, most Linux distributions are free, so you should be able to find a code-friendly operating system to satisfy any budget constraint. Linux used to have a reputation as being fearsomely difficult for beginners. But modern Linux distributions, such as Ubuntu, are pretty user-friendly.
 
 If you are using Windows, then a good workaround for these issues is to use the [*Windows Subsystem for Linux*](https://pbpython.com/wsl-python.html). It's essentially a Linux operating system that installs alongside and integrates with your existing Windows operating system. This allows you to run code as if you were using Linux. You can get WSL [for free from Microsoft](https://docs.microsoft.com/en-us/windows/wsl/install-win10). (The fact that Microsoft has included this feature speaks to the need for it.)
 
 ### Choice of programming language
 
-This book uses Python, which is usually ranked as the first or second most popular programming language in the world and, just as importantly, it's also one of the easiest to learn. It's a general purpose language, which means it can perform a wide range of tasks. This combination of features is why people say Python has a low floor and a high ceiling. It's also very versatile; the joke goes that Python is the 2nd best language at everything, and there's some truth to that (although Python is 1st best at some tasks, like machine learning). But a language that covers such a lot of ground is also very useful; and Python is widely used across industry, academia, and the public sector, and is often taught in school computer science classes too. Python is the main 'dynamic' language used at [Google](https://google.github.io/styleguide/pyguide.html) and the [most demanded language](https://insights.dice.com/2020/12/01/7-programming-languages-popular-at-apple-that-could-land-you-a-job/) in jobs for Apple. It is used for everything from computer games to websites, data science to software applications: it's even being used to help [fly a helicopter on Mars](https://github.com/nasa/fprime). As an economist, you will know that this means Python benefits from strong positive network externalities. As such, learning Python has a lot of value and, once you have, learning more specialised languages like C++ or R is much easier; many of the basic programming concepts you'll see in this book are useful in almost any programming language.
+This book uses Python, which is usually ranked as the first or second most popular programming language in the world and, just as importantly, it's also one of the easiest to learn. It's a general purpose language, which means it can perform a wide range of tasks. This combination of features is why people say Python has a low floor and a high ceiling. It's also very versatile; the joke goes that Python is the 2nd best language at everything, and there's some truth to that (although Python is 1st best at some tasks, like machine learning). But a language that covers such a lot of ground is also very useful; and Python is widely used across industry, academia, and the public sector, and is often taught in school computer science classes too. Python is the main 'dynamic' language used at [Google](https://google.github.io/styleguide/pyguide.html) and the [most demanded language](https://insights.dice.com/2020/12/01/7-programming-languages-popular-at-apple-that-could-land-you-a-job/) in jobs for Apple. It is used for everything from computer games to websites, data science to software applications: it's even being used to help [fly a helicopter on Mars](https://github.com/nasa/fprime). As an economist, you will know that this means Python benefits from strong positive network externalities. As such, learning Python has a lot of value and, once you have, learning more specialised languages like C++ or R is much easier; many of the basic programming concepts you'll see in this book are useful in almost any programming language. One other benefit of Python if you plan to do any work on the cloud is that it is extremely well supported compared to Stata, Matlab, or R.
 
 ![xkcd-python](https://imgs.xkcd.com/comics/python.png)
 
@@ -25,17 +25,17 @@ Another big difference between languages is the extent to which users have creat
 
 Programming languages come in versions, which can be quite different, and some of the most important functionality of programming languages is provided by add-ons called packages or libraries, which themselves have versions. To make matters worse, not all versions of packages and languages will work together, and the combinations that work may depend on your operating system (Windows, Mac, etc)!
 
-The combination of the language and its version (eg Python 3.6.1), the packages and their versions (eg numpy 1.19), and the operating system the code is being run on (eg MacOS Catalina) is called the computational environment.
+The combination of the language and its version (eg Python 3.8), the packages and their versions (eg numpy 1.19), and the operating system the code is being run on (eg MacOS Catalina) is called the computational environment. This book is written with Python 3.8.
 
 To programme, you will need two things on your computer:
 
-- an installation of the programming language (also known as the "interpreter")
+- an installation of the programming language (also known as the "interpreter"), for example Python 3.8
 
-- a way to write and run your code, using an integrated development environment (IDE)
+- a way to write and run your code, using an integrated development environment (IDE), for example Visual Studio Code
 
 ### Installing Python On Your Computer
 
-Python and Anaconda are available on all major operating systems.
+The Anaconda distribution of Python, which this book recommends, is available on all major operating systems.
 
 Download the individual edition of the [Anaconda distribution](https://www.anaconda.com/) of Python for your operating system and install it (on Anaconda's website, this is currently found under Products -> Individual Edition). This will provide you with a Python installation and a host of the most useful libraries.
 
@@ -69,17 +69,27 @@ Here are some of the useful features an IDE might have:
 
 People have strong feelings about which IDE they prefer. This book strongly recommends [Visual Studio Code](https://code.visualstudio.com/), a free and open source IDE from Microsoft that is available on all major operating systems. Just like Python itself, Visual Studio can be extended with packages, and it is those packages, called extensions in this case, that make it so useful.
 
-Another IDE that you might find useful from time to time is [Jupyter Lab](https://jupyter.org/), which runs in a browser window. It is designed around 'Jupyter' notebooks (with the extension '.ipynb'), which mix code and text, rather than scripts, which are predominantly code (and have extension '.py'). The name, 'Jupyter', is a reference to the three original languages supported by Jupyter, which are Julia, Python, and R, and to Galileo's notebooks recording the discovery of the moons of Jupiter. Jupyter notebooks now support a vast number of languages beyond the original three, including Ruby, Haskell, Go, Scala, Octave, Java, and [more](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels). There'll be more about the difference between scripts and notebooks later on in the book, for now though, we'll keep our focus on scripts and Visual Studio Code.
+Visual Studio Code supports coding in both scripts and Jupyter Notebooks. While scripts mostly contain code (and have file extension `.py`), notebooks can contain text and code in different blocks called cells. 'Jupyter Notebooks' have the file extension '.ipynb'. The name, 'Jupyter', is a reference to the three original languages supported by Jupyter, which are Julia, Python, and R, and to Galileo's notebooks recording the discovery of the moons of Jupiter. Jupyter notebooks now support a vast number of languages beyond the original three, including Ruby, Haskell, Go, Scala, Octave, Java, and [more](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels). There'll be more about the difference between scripts and notebooks later on in the book.
+
+Another IDE that you might find useful from time to time is [Jupyter Lab](https://jupyter.org/), which runs in a browser window; for now, we'll keep our focus on Visual Studio Code.
 
 Download and install Visual Studio Code. If you need some help, see this [very short tutorial](https://code.visualstudio.com/docs/python/python-tutorial) on setting it up from Microsoft (ignore the bits about debugging and installing packages).
 
-Once you have Visual Studio Code installed and opened, navigate to the 'extensions' tab on the left hand side navigation bar. You'll need to install the [Python extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-python.python), which you can search for by using the text box within VS Code.
+Once you have Visual Studio Code installed and opened, navigate to the 'extensions' tab on the left hand side vertical bar of icons (it's the one that looks like 4 squares). You'll need to install the [Python extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-python.python), which you can search for by using the text box within VS Code's extensions panel.
 
-```{note}
-If you are a Windows user, a good trick is to launch Visual Studio Code from the Anaconda prompt. You can do this by starting the Anaconda prompt and then typing `code .`. This will help ensure Visual Studio Code "recognises" your Anaconda installation of Python. 
-```
+![A typical user view in Visual Studio Code](https://github.com/aeturrell/coding-for-economists/blob/main/img/vscode_layout.png?raw=true)
 
-If you have installed these and Python then you are ready to run your first script!
+The figure above shows the typical layout of Visual Studio Code. The long vertical panel on the far left-hand side changes what is seen in panels 1 and 2; it currently has the file explorer selected. Let's run through the numbered parts of the figure.
+
+1. When the explorer option is selected from the icons to the left of 1 and 2, the contents of the folder that's currently open are shown in 1.
+2. This is an outline of the key parts of the file that is open in 3.
+3. This is just a fancy text editor. In the figure above, it's showing a Python script (a file that contains code and has a name that ends in `.py`). Selecting code and pressing <kbd>Shift</kbd> + <kbd>Enter</kbd> ('Enter' is labelled as 'Return' on some keyboards) will execute that code in 5.
+4. This is the command line, a place where you can type in commands that your computer will then execute. If you want to try a command, type `date` (Mac/Linux) or `date /t` (Windows).
+5. This is the interactive Python window, which is where code and code outputs appear after you select and execute them from a script (see 3). It shows the code that you executed and any outputs from that execution—in the screenshot shown, the code has created a plot. The name and version of Python you're using appear at the top of the interactive window.
+
+Note that there is lots of useful information arrayed right at the bottom of the window in the blue bar, including the version of Python currently being used by VS Code.
+
+If you have installed the Anaconda distribution of Python, Visual Studio Code, and the Python extension for VS Code, then you are ready to run your first script!
 
 ## Running your first code: Hello World!
 
@@ -103,7 +113,7 @@ To run the code in the terminal, right-click and select 'Run Python file in term
 
 The other way of working, with the interactive window, will be much more familiar to anyone who has used Stata or Matlab and is much more suited to the way economists tend to work because it doesn't require you to write the whole script, start to finish, ahead of time. Instead, you can jam, changing code as you go, (re-)running it line by line. To run the code in an interactive window, **right-click and select 'Run Selection/Line in Interactive Window'**. This should cause a new 'interactive' panel to appear within Visual Studio Code, and only the selected line will execute within it.
 
-At this point, you may see a message about Visual Studio Code's default behaviour when you press shift+return; for this book, it's good to have shift+return default to running a line in the interactive window.
+At this point, you may see a message about Visual Studio Code's default behaviour when you press <kbd>Shift</kbd> + <kbd>Enter</kbd>; for this book, it's good to have <kbd>Shift</kbd> + <kbd>Enter</kbd> default to running a line in the interactive window.
 
 ```{admonition} Making code run in the interactive window by default
 :class: dropdown
@@ -116,6 +126,7 @@ This will ensure that when you hit shift+enter on code scripts, it will execute 
 ```
 
 ```{admonition} Start interactive windows and terminals within your project directory
+:class: dropdown
 In Visual Studio Code, you can ensure that the interactive window starts in the root directory of your project by setting "Jupyter: Notebook File Root" to `${workspaceFolder}` in the Settings menu. For the integrated command line, change "Terminal › Integrated: Cwd" to `${workspaceFolder}` too.
 ```
 
@@ -143,17 +154,19 @@ What happens when you press "clear outputs"? What about "run all?".
 
 ## Packages and How to Install Them
 
-Packages (also called libraries) are key to extending the functionality of Python. The default installation of Anaconda comes with many (around 250) of the packages you'll need, but it won't be long before you'll need to install some extra ones. There are packages for geoscience, for building websites, for analysing genetic data, and, yes, even for economics. Packages are typically not written by the core maintainers of the Python language but by enthusiasts, firms, researchers, academics, all sorts! Because anyone can write packages, they vary widely in their quality and usefulness. There are some that are key for an economics workflow, though, and you'll be seeing them again and again.
+Packages (also called libraries) are key to extending the functionality of Python. The default installation of Anaconda comes with many (around 250) of the packages you'll need, but it won't be long before you'll need to install some extra ones. There are packages for geoscience, for building websites, for analysing genetic data, and, yes, of course, for economics. Packages are typically not written by the core maintainers of the Python language but by enthusiasts, firms, researchers, academics, all sorts! Because anyone can write packages, they vary widely in their quality and usefulness. There are some that are key for an economics workflow, though, and you'll be seeing them again and again.
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Name a more iconic trio, I&#39;ll wait. <a href="https://t.co/pGaLuUxQ3r">pic.twitter.com/pGaLuUxQ3r</a></p>&mdash; Vicki Boykis (@vboykis) <a href="https://twitter.com/vboykis/status/1032631145035427840?ref_src=twsrc%5Etfw">August 23, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-Python packages don't come built-in (by definition) so you need to install them. When you issue an install command for a specific package, it is automatically downloaded from the internet and installed in the appropriate place on your computer.
+The three Python packages **numpy**, **pandas**, and **maplotlib**, which respectively provide numerical, data analysis, and plotting functionality, are ubiquitous. So many scripts begin by importing all three of them, as in the tweet above!
 
-As with Linux's `apt-get install` or Mac's `brew install` commands, Python's package install commands are issued in a text-based window called the "terminal".
+Python packages don't come built-in (by definition) so you need to install them (just once, like installing any other application), and then import them into your scripts (whenever you use them in a script). When you issue an install command for a specific package, it is automatically downloaded from the internet and installed in the appropriate place on your computer. 
+
+To install extra Python packages, you issue install commands to a text-based window called the "terminal".
 
 ### The terminal in brief
 
-The *terminal* is also known as the *command line* and sometimes the *command prompt*. This is a text-based way to issue all kinds of commands to your computer (not just Python commands) and knowing a little bit about it is really useful for coding (and more) because managing packages, environments (which we haven't yet discussed), and version control (ditto) can all be done via the terminal. We'll come to these in due course, but for now, a little background on what the terminal is and what it does.
+The *terminal* is also known as the *command line* and sometimes the *command prompt*. It was labelled 4 in the screenshot of Visual Studio Code from earlier in the chapter. The terminal is a text-based way to issue all kinds of commands to your computer (not just Python commands) and knowing a little bit about it is really useful for coding (and more) because managing packages, environments (which we haven't yet discussed), and version control (ditto) can all be done via the terminal. We'll come to these in due course, but for now, a little background on what the terminal is and what it does.
 
 ```{note}
 To open up the command line within Visual Studio Code, use the <kbd>⌃</kbd> + <kbd>\`</kbd> keyboard shortcut (Mac) or <kbd>ctrl</kbd> + <kbd>\`</kbd> (Windows/Linux), or click "View > Terminal".
@@ -203,7 +216,7 @@ Install packages on the command line by typing
 conda install package-name
 ```
 
-and hitting return, where `package-name` might be `pandas`. This will try to install a version of the package that is already optimised for your type of computer, and will automatically come with any dependencies (packages the package you want needs) you might also need. These pre-built packages that are provided by Anaconda are convenient for a host of reasons. Anaconda provide pre-built versions of around 7,500 the most popular packages (including the statistical programming language R).
+and hitting return, where `package-name` might be `pandas`. This will try to install a version of the package that is already optimised for your type of computer, and will automatically come with any dependencies (packages the package you want needs) you might also need. These pre-built packages that are provided by Anaconda are convenient for a host of reasons. Anaconda provide pre-built versions of around 7,500 of the most popular packages (including the statistical programming language R).
 
 However, there are over 330,000 Python packages on PyPI (the Python Package Index) so you may sometimes find one that is not covered by `conda install`. When there isn't a pre-built Anaconda version of a package available, the next thing to try is
 
@@ -228,10 +241,20 @@ Try installing the **matplotlib**, **pandas**, and **statsmodels** packages usin
 Install the **plotnine** package. (Hint: `conda install` may not be enough.)
 ```
 
+````{admonition} Exercise
+Having installed **pandas**, try running the following code in a script:
+
+```python
+import pandas as pd
+print(pd.__version__)
+```
+
+````
+
 ## Fine-tuning your integrated development environment
 
 ```{note}
-If you just want to get on with some coding, feel free to skip this section.
+If you just want to get on with some coding, you can skip this section.
 ```
 
 Once you've downloaded *Visual Studio Code* and installed the Python extension, you'll have enough to get going but VS Code can do a whole lot more with some extra add-ons. You can install these using the extensions tab on the left hand side of VS Code. Here are the ones this book recommends and why:
@@ -294,7 +317,8 @@ If you have:
 
 - ✅ installed Python, using the Anaconda distribution of Python;
 - ✅ installed Visual Studio Code, and its Python extension;
-- ✅ written and saved 'hello_world.py' with `print('Hello World!')` in it; and
-- ✅ run 'hello_world.py' both in the terminal and in the Visual Studio Code interactive window, then
+- ✅ written and saved 'hello_world.py' with `print('Hello World!')` in it;
+- ✅ run 'hello_world.py' both in the terminal and in the Visual Studio Code interactive window; and
+- ✅ installed packages in the terminal using both `conda install` and `pip install`, then
 
 you are ready to move on to the next chapter!
