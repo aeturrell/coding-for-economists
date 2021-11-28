@@ -13,7 +13,7 @@ If you haven't yet decided which operating system to use, this book recommends e
 
 If you are using Windows, then a good workaround for these issues is to use the [*Windows Subsystem for Linux*](https://pbpython.com/wsl-python.html). It's essentially a Linux operating system that installs alongside and integrates with your existing Windows operating system. This allows you to run code as if you were using Linux. You can get WSL [for free from Microsoft](https://docs.microsoft.com/en-us/windows/wsl/install-win10). (The fact that Microsoft has included this feature speaks to the need for it.)
 
-### Choice of programming language
+### Choice of Programming Language
 
 This book uses Python, which is usually ranked as the first or second most popular programming language in the world and, just as importantly, it's also one of the easiest to learn. It's a general purpose language, which means it can perform a wide range of tasks. This combination of features is why people say Python has a low floor and a high ceiling. It's also very versatile; the joke goes that Python is the 2nd best language at everything, and there's some truth to that (although Python is 1st best at some tasks, like machine learning). But a language that covers such a lot of ground is also very useful; and Python is widely used across industry, academia, and the public sector, and is often taught in school computer science classes too. Python is the main 'dynamic' language used at [Google](https://google.github.io/styleguide/pyguide.html) and the [most demanded language](https://insights.dice.com/2020/12/01/7-programming-languages-popular-at-apple-that-could-land-you-a-job/) in jobs for Apple. It is used for everything from computer games to websites, data science to software applications: it's even being used to help [fly a helicopter on Mars](https://github.com/nasa/fprime). As an economist, you will know that this means Python benefits from strong positive network externalities. As such, learning Python has a lot of value and, once you have, learning more specialised languages like C++ or R is much easier; many of the basic programming concepts you'll see in this book are useful in almost any programming language. One other benefit of Python if you plan to do any work on the cloud is that it is extremely well supported compared to Stata, Matlab, or R.
 
@@ -22,6 +22,10 @@ This book uses Python, which is usually ranked as the first or second most popul
 Different languages have different strengths and weaknesses. Python and Julia are so-called high-level languages that are easier to write code in. C++ and Fortran are more low-level languages and much more fussy and labour-intensive to write code in; but, once the code is written (and 'compiled'), it runs *fast*.
 
 Another big difference between languages is the extent to which users have created software that extends the base functionality of the language. The ecosystem of other users, and what they're using the language for, is really important for determining how useful a language is. For example, Python and R have vibrant data science communities producing extensions (called libraries or packages) that are what really make those languages so useful for data science (far more than the base functionality of either).
+
+To see how easy it is to get started with Python, you can try it out right now in the box below. Press the play button to run the code.
+
+<iframe frameborder="0" width="100%" height="500px" src="https://replit.com/@ArthurTurrell/PoulticeZenIde?lite=true"></iframe>
 
 Programming languages come in versions, which can be quite different, and some of the most important functionality of programming languages is provided by add-ons called packages or libraries, which themselves have versions. To make matters worse, not all versions of packages and languages will work together, and the combinations that work may depend on your operating system (Windows, Mac, etc)!
 
@@ -45,7 +49,7 @@ You can confirm that you've set up Anaconda correctly by following the [verify i
 
 If you're using Windows, you can check if Anaconda has installed properly by opening the 'Anaconda prompt' (a special text-based way to issue commands to your computer) and type `where python`. You should see a path rendered as text in the prompt that includes "Anaconda3", for example something like `C:\Users\<your-username>\Anaconda3\...`.
 
-On Mac and Linux you may need to run `conda init` on your command line to activate your Anaconda Python environment (Mac and Linux usually come with, typically, old versions of Python pre-installed). You can check you've got the right Python with `which python`, which should result in a message back saying `/Users/<your-username>/opt/anaconda3/bin/python`.
+On Mac and Linux you may need to run `conda init` on your command line to activate your Anaconda Python environment (Mac and Linux usually come with, typically, old versions of Python pre-installed). You can check you've got the right Python with `which python`, which should result in a message back saying `/Users/<your-username>/opt/anaconda3/bin/python`. 
 
 ### Installing an integrated development environment (IDE)
 
@@ -91,7 +95,7 @@ Note that there is lots of useful information arrayed right at the bottom of the
 
 If you have installed the Anaconda distribution of Python, Visual Studio Code, and the Python extension for VS Code, then you are ready to run your first script!
 
-## Running your first code: Hello World!
+## Writing Your First Code
 
 Now you will create and run your first code. If you get stuck, there's a more in-depth tutorial over at the [VS Code documentation](https://code.visualstudio.com/docs/python/python-tutorial).
 
@@ -164,7 +168,7 @@ Python packages don't come built-in (by definition) so you need to install them 
 
 To install extra Python packages, you issue install commands to a text-based window called the "terminal".
 
-### The terminal in brief
+### The Terminal in Brief
 
 The *terminal* is also known as the *command line* and sometimes the *command prompt*. It was labelled 4 in the screenshot of Visual Studio Code from earlier in the chapter. The terminal is a text-based way to issue all kinds of commands to your computer (not just Python commands) and knowing a little bit about it is really useful for coding (and more) because managing packages, environments (which we haven't yet discussed), and version control (ditto) can all be done via the terminal. We'll come to these in due course, but for now, a little background on what the terminal is and what it does.
 
