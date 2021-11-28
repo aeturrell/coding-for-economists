@@ -144,7 +144,7 @@ This shows the two ways of working with the interactive window--running (segment
 Create a new script that, when run, prints "Welcome to coding for economists" and run it in both the terminal and an interactive window.
 ```
 
-### Writing your first notebook
+### Writing Your First Notebook
 
 Notebooks are another popular way to write code, in addition to scripts (`.py` files). Notebooks can mix code and a type of plain text called Markdown by having "cells" that are either code or Markdown. This chapter was written in Markdown; many other chapters in the book are written as notebooks, and you can download them to run them on your own computer. Look for the download symbol at the top of each page; ".ipynb" means ipython notebook. We'll be seeing more of notebooks and markdown in subsequent chapters.
 
