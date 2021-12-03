@@ -102,10 +102,6 @@ Here are some other common syntax features that you'll need:
 - Maths is supported in-line via enclosing dollar signs, eg `${\displaystyle ds^{2}=\left(1-{\frac {r_{\mathrm {s} }}{r}}\right)^{-1}\,dr^{2}+r^{2}\,d\varphi ^{2}}$`, which renders as ${\displaystyle ds^{2}=\left(1-{\frac {r_{\mathrm {s} }}{r}}\right)^{-1}\,dr^{2}+r^{2}\,d\varphi ^{2}}$
 - Unicode is supported, so you can write symbols like ∰, as are emoji; syntax like `:tada:` creates :tada:
 
-```{admonition} Exercise
-Create a new 
-```
-
 ### Text Block Syntax
 
 Quotes can be achieved by adding an arrow, `>`, to every line:
