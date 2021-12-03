@@ -20,7 +20,15 @@ In principle, the environment can be installed using
 conda env create -f environment.yml
 ```
 
-on the command line. **This takes a really, really long time to install**. Coding for Economists depends on a LOT of packages, which in turn have a lot of dependencies. 
+on the command line. **This takes a really, really long time to install**. Coding for Economists depends on a LOT of packages, which in turn have a lot of dependencies.
+
+You can check that this has worked by running `which python` on the command line. You should get something like
+
+```bash
+/Users/USERNAME/opt/anaconda3/envs/codeforecon/bin/python
+```
+
+If you don't, and you get something like `/usr/bin/python` instead, then you need to following the instructions for the command line version of Python being incorrect below.
 
 Some extra assets associated with packages are required. You will need to run `python -m spacy download en_core_web_sm` to download the spacy model. There are also several models needed for nltk.
 
@@ -76,6 +84,8 @@ jupytext --to py data-intro.ipynb
 
 ## Good to Know
 
+### Debugging notebook errors
+
 If you get a
 
 ```bash
@@ -92,3 +102,7 @@ jupytext --to notebook bad_notebook.py
 ```
 
 This will overwrite the existing notebook!
+
+### Command line version of python is incorrect
+
+Deactivate the condsa environment (until even the base environment is deactivated) using `conda deactivate`. Then activate your environment with `conda activate your_env_name_goes_here`.
