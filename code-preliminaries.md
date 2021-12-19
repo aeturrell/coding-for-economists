@@ -18,7 +18,8 @@ If you have Windows and you want to use Linux or Mac but don't want to shell out
 This book uses Python, which is usually ranked as the first or second most popular programming language in the world and, just as importantly, it's also one of the easiest to learn. It's a general purpose language, which means it can perform a wide range of tasks. This combination of features is why people say Python has a low floor and a high ceiling. It's also very versatile; the joke goes that Python is the 2nd best language at everything, and there's some truth to that (although Python is 1st best at some tasks, like machine learning). But a language that covers such a lot of ground is also very useful; and Python is widely used across industry, academia, and the public sector, and is often taught in school computer science classes too. Python is the main 'dynamic' language used at [Google](https://google.github.io/styleguide/pyguide.html) and the [most demanded language](https://insights.dice.com/2020/12/01/7-programming-languages-popular-at-apple-that-could-land-you-a-job/) in jobs for Apple. It is used for everything from computer games to websites, data science to software applications: it's even being used to help [fly a helicopter on Mars](https://github.com/nasa/fprime). As an economist, you will know that this means Python benefits from strong positive network externalities. As such, learning Python has a lot of value and, once you have, learning more specialised languages like C++ or R is much easier; many of the basic programming concepts you'll see in this book are useful in almost any programming language. One other benefit of Python if you plan to do any work on the cloud is that it is extremely well supported.
 
 ![xkcd-python](https://imgs.xkcd.com/comics/python.png)
-*Python*, from xkcd.
+
+*Python*, from [xkcd](https://xkcd.com).
 
 Different languages have different strengths and weaknesses. Python and Julia are so-called high-level languages that are easier to write code in. C++ and Fortran are more low-level languages and much more fussy and labour-intensive to write code in; but, once the code is written (and 'compiled'), it runs *fast*.
 
@@ -38,9 +39,9 @@ To programme, you will need two things on your computer:
 
 The Anaconda distribution of Python, which this book recommends, is available on all major operating systems. To install it, follow the instructions below or watch the video.
 
-*[How to install Python using the Anaconda distribution of Python](https://www.youtube.com/watch?v=ZWQwGR5ppnk)*
+<iframe width="700" height="394" src="https://www.youtube.com/embed/ZWQwGR5ppnk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ZWQwGR5ppnk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+*[How to install Python using the Anaconda distribution of Python](https://www.youtube.com/watch?v=ZWQwGR5ppnk)*
 
 Download the individual edition of the [Anaconda distribution](https://www.anaconda.com/) of Python for your operating system and install it (on Anaconda's website, this is currently found under Products -> Individual Edition). This will provide you with a Python installation and a host of the most useful libraries. If you get stuck, there are more detailed instructions available for installing the Anaconda distribution of Python [on Windows](https://docs.anaconda.com/anaconda/install/windows/), [on Mac](https://docs.anaconda.com/anaconda/install/mac-os/), and [on Linux](https://docs.anaconda.com/anaconda/install/linux/).
 
@@ -66,18 +67,17 @@ Here are some of the useful features an IDE might have:
 
 - colouring your brackets in pairs so you can keep track of the logical order of execution of your code!
 
-People have strong feelings about which IDE they prefer. This book strongly recommends [Visual Studio Code](https://code.visualstudio.com/), a free and open source IDE from Microsoft that is available on all major operating systems. Just like Python itself, Visual Studio can be extended with packages, and it is those packages, called extensions in this case, that make it so useful.
+People have strong feelings about which IDE they prefer. This book strongly recommends [Visual Studio Code](https://code.visualstudio.com/), a free and open source IDE from Microsoft that is available on all major operating systems. Just like Python itself, Visual Studio can be extended with packages, and it is those packages, called extensions in this case, that make it so useful. As well as Python, Visual Studio Code supports a ton of other languages.
 
 Visual Studio Code supports coding in both scripts and Jupyter Notebooks. While scripts mostly contain code (and have file extension `.py`), notebooks can contain text and code in different blocks called cells. 'Jupyter Notebooks' have the file extension '.ipynb'. The name, 'Jupyter', is a reference to the three original languages supported by Jupyter, which are Julia, Python, and R, and to Galileo's notebooks recording the discovery of the moons of Jupiter. Jupyter notebooks now support a vast number of languages beyond the original three, including Ruby, Haskell, Go, Scala, Octave, Java, and [more](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels). There'll be more about the difference between scripts and notebooks later on in the book.
 
 Another IDE that you might find useful from time to time is [Jupyter Lab](https://jupyter.org/), which runs in a browser window; for now, we'll keep our focus on Visual Studio Code.
 
-Download and install Visual Studio Code. If you need some help, see this [very short tutorial](https://code.visualstudio.com/docs/python/python-tutorial) on setting it up from Microsoft (ignore the bits about debugging and installing packages) or the video below.
+Download and install Visual Studio Code. If you need some help, the video below will walk you through downloading and installing Visual Studio Code, and then using it to run Python code in both scripts and in notebooks. We'll go through these instructions in detail in the rest of this chapter. As an alternative to the instructions or video below, Microsoft also has a [very short tutorial](https://code.visualstudio.com/docs/python/python-tutorial) on setting it up (ignore the bits about debugging and installing packages for now).
+
+<iframe width="700" height="394" src="https://www.youtube.com/embed/1kKTYsQdaPw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 *[How to install Visual Studio Code and use it to run Python code](https://www.youtube.com/watch?v=1kKTYsQdaPw)*
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/1kKTYsQdaPw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 
 Once you have Visual Studio Code installed and opened, navigate to the 'extensions' tab on the left hand side vertical bar of icons (it's the one that looks like 4 squares). You'll need to install the [Python extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-python.python), which you can search for by using the text box within VS Code's extensions panel.
 
@@ -138,11 +138,7 @@ This shows the two ways of working with the interactive window--running (segment
 In Visual Studio Code, you can ensure that the interactive window starts in the root directory of your project by setting "Jupyter: Notebook File Root" to `${workspaceFolder}` in the Settings menu. For the integrated command line, change "Terminal › Integrated: Cwd" to `${workspaceFolder}` too.
 ```
 
-To run code the other way, in the terminal, right-click and select 'Run Python file in terminal'. This will bring up a new panel (called a terminal) *within* Visual Studio Code that runs your entire script from top to bottom-and you should see 'Hello World!' pop up!
-
-```{note}
-Although we're trying out running code in the terminal, the typical economics workflow would be to work with the interactive window.
-```
+To run code the other way, in the terminal, right-click and select 'Run Python file in terminal'. This will bring up a new panel (called a terminal) *within* Visual Studio Code that runs your entire script from top to bottom-and you should see 'Hello World!' pop up! Although we're trying out running code in the terminal, the typical economics workflow would be to work with the interactive window.
 
 ```{admonition} Exercise
 Create a new script that, when run, prints "Welcome to coding for economists" and run it in both the terminal and an interactive window.
@@ -208,14 +204,14 @@ The `(base)` part is saying that your current Python environment is the base one
 
 For now, to at least try out the command line, let's use something that works across all three of the major operating systems. Type `python` on the command prompt that came up in your new terminal window. You should see information about your installation of Python appear, including the version, followed by a Python prompt that looks like `>>>`. This is a kind of interactive Python session, in the terminal. It's much less rich than the one available in Visual Studio Code (it can't run scripts line-by-line, for example) but you can try `print('Hello World!')` and it will run, printing your message. To exit the terminal-based Python session, type `exit()` to go back to the regular command line.
 
-You can find out more about the terminal in the Chapter {ref}`wrkflow-command-line`.
+You can find out more about the terminal in the chapter on {ref}`wrkflow-command-line`.
 
 ### Installing Packages
 
 To install extra Python packages, there are two options, and both use the command line.
 
 ```{admonition} Activating Conda Python Environments
-You'll need to have conda "activated" before installing a package in the terminal--if you don't see the name of an environment, eg `(base)`, at the start of your terminal's line, use the `conda activate` command first.
+You'll need to have conda "activated" before installing a package in the terminal--if you don't see the name of an environment, eg `(base)`, at the start of your terminal's line, use the `conda activate` command first. On Windows, this is usually the command prompt (available in the integrated Visual Studio Code terminal) or the Anaconda Command Prompt (available in the start menu).
 ```
 
 Install packages on the command line by typing
@@ -224,7 +220,7 @@ Install packages on the command line by typing
 conda install package-name
 ```
 
-and hitting return, where `package-name` might be `pandas`. This will try to install a version of the package that is already optimised for your type of computer, and will automatically come with any dependencies (packages the package you want needs) you might also need. These pre-built packages that are provided by Anaconda are convenient for a host of reasons. Anaconda provide pre-built versions of around 7,500 of the most popular packages (including the statistical programming language R).
+and hitting return, where `package-name` might be `pandas`. This will try to install a version of the package that is already optimised for your type of computer, and will automatically come with any dependencies (packages the package you're installing needs to run). The pre-built packages that are provided by Anaconda are convenient for a host of reasons. Anaconda provide pre-built versions of around 7,500 of the most popular packages (including the statistical programming language R).
 
 However, there are over 330,000 Python packages on PyPI (the Python Package Index) so you may sometimes find one that is not covered by `conda install`. When there isn't a pre-built Anaconda version of a package available, the next thing to try is
 
@@ -246,28 +242,20 @@ Try installing the **matplotlib**, **pandas**, and **statsmodels** packages usin
 ```
 
 ```{admonition} Exercise
-Install the **plotnine** package. (Hint: `conda install` may not be enough.)
+Install the **skimpy** package. (Hint: `conda install` may not be enough.)
 ```
 
-````{admonition} Exercise
-Having installed **pandas**, try running the following code in a script:
+## Coding on your work computer
 
-```python
-import pandas as pd
-print(pd.__version__)
-```
-
-````
-
-## Coding on the work computer, and how to access a coding platform 'in a box'
-
+```{note}
 If you're not planning to code at work, or your place of work allows you to install whatever programmes you like, you can safely skip this section.
+```
 
-Unfortunately for anyone who wants to code at work, some work computer systems are locked down to the point where programming languages and the tools needed to use them are not able to be installed (often for good reasons). Even very big, well-funded organisations can struggle with the problem of providing a good platform for coding, analysis, and data science while also ensuring that the core systems are secure. Actually, separating 'developer environments' (ie the computers that you code on) from the locked down computer you receive your emails (even if you use the latter to remotely access the former) can promote good practices and comes with some benefits, frustrating though it may be in other ways. As it's usually safer to access a less secure computing environment from a more secure computing environment, rather than the other way around, this setup seems likely to become standard at organisations where security is a key concern.
+Ideally, you want to have full flexibility over the coding languages, IDEs, and tools that you can install and use. Unfortunately for anyone who wants to code at work, some work computer systems are locked down to the point where programming languages and the tools needed to use them are not able to be installed (often for extremely good reason). Even very big, well-funded organisations can struggle with the problem of providing a good platform for coding, analysis, and data science while also ensuring that the core systems are secure. IT departments faced with this trade-off are increasingly opting to separate out the base environment (where you receive your emails and so on) from the 'developer environment' (the computers that you code on) because it's usually safer to access a less secure computing environment from a more secure computing environment (rather than the other way around). For example, you might use your secure laptop to access a separate data science platform remotely. Although this setup can be frustrating, it can actually enforce lots of good practice too, so it's not all bad—and it does mean you have a chance of accessing more powerful systems with the latest software and hardware.
 
-Organisations that are further along their coding and automation journey will likely provide you with access to cloud computing environments that support Visual Studio Code and Python. However, this does not mean that you can't get on with some coding at organisations who don't have the same coding capabilities but which also have locked down IT!
+Organisations that are further along their coding and automation journey will likely provide you with access to cloud computing environments that support Visual Studio Code and Python, and you should speak to your IT department about what's available. However, even if your organisation hasn't invested in coding capabilities to the same extent, but does have locked down IT, there are some options for you!
 
-Let's explore some options for a coding platform 'in a box' that do not require installation, and can be accessed via the internet. Note that your IT department may still have blocked the URLs, but you can always make a case for unblocking them until the same capabilities are available in-house.
+Let's explore some options for coding platforms 'in a box' that do not require any installation, and can be accessed via the internet. Note that your IT department may still have blocked the URLs of the websites of these services, but you can always make a case for unblocking them until the same capabilities are available in-house.
 
 [Google Colab](https://research.google.com/colaboratory/) is a great way to start learning and trying out the exercises in this book remotely without having to install anything on your computer. Most pages in this book that have code on are just a click away from launching a Colab notebook—just click the <i class="fas fa-rocket"></i> at the top of a page with code on and select 'Colab'. Google Colab is fantastic for trying things out, sharing tinkering with others, and generally having a first go at some coding, but it only supports notebooks.
 
