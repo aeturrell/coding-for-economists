@@ -1,7 +1,7 @@
 import yaml
 import json
 from subprocess import run
-from rich import print_json, print
+from rich import print
 import subprocess
 import sys
 import argparse
@@ -27,6 +27,7 @@ def conda_install(environment, package, channel):
         text=True,
         capture_output=True,
     )
+    print(proc)
 
 
 with open("environment.yml", "r") as stream:
