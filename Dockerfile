@@ -14,14 +14,20 @@ RUN apk update && apk add openssl graphviz \
 # change default shell from ash to bash
 RUN sed -i -e "s/bin\/ash/bin\/bash/" /etc/passwd
 
+# Install mamba
+RUN conda install mamba -n base -c conda-forge
+
 # Create the environment:
 COPY environment.yml .
-RUN conda env create -f environment.yml
-# for debugging (builds in under 1 min)
-# RUN conda create -n codeforecon -c conda-forge python=3.8 pyyaml rich numpy
+# Install everything at once:
+RUN mamba env create -f environment.yml
+# Do a debug or incremental env install (builds in under 3 min):
+# RUN mamba create -n codeforecon -c conda-forge python=3.8 pyyaml rich numpy spacy -y
 
 # Make RUN commands use the new environment:
 SHELL ["conda", "run", "-n", "codeforecon", "/bin/bash", "-c"]
+
+# Incremental install
 
 # Copy over the incremental install script:
 # COPY install_conda.py .
@@ -37,7 +43,7 @@ SHELL ["conda", "run", "-n", "codeforecon", "/bin/bash", "-c"]
 # RUN python3 install_conda.py 8
 # RUN python3 install_conda.py 9
 
-RUN conda list
+RUN mamba list
 
 RUN python3 -m spacy download en
 
