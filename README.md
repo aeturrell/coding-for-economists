@@ -6,15 +6,17 @@ This readme is intended to help those contributing to or editing the book, not t
 
 - download pages to your computer as jupyter notebooks
 - run pages in Google Colab through your browser
-- run pages in Binder through your browser—currently this will not work due to the lack of a reproducible docker container for the book.
+- run pages in Binder through your browser—this should work but will likely be slow to start.
 
 ## Dev
 
-These instructions are only for developers working on the book. While we're working on a reproducible dev env, you can examine the exact set of packages that have been successfully installed in the conda environment in `package-list.txt`. This can be updated by running `conda list --export > package-list.txt`.
+These instructions are only for developers working on the book.
 
 ### Making A Change
 
-To make a change, create a new branch, install the environment, make your change, if you installed new packages then update the package list in `environment.yml` and run `conda list --export > package-list.txt`, run pre-commit using `pre-commit run --all-files`, if the checks clear then commit your change, make a pull request.
+To make a change, create a new branch, install the environment or use the docker image or build the docker image, make your change, if you installed new packages then update the package list in `environment.yml`, run pre-commit using `pre-commit run --all-files`, if the checks clear then commit your change and, finally, make a pull request. But do speak to us before making a pull request.
+
+Another way to make a change or contribute is to submit a notebook.
 
 ### Setting up the Environment
 
@@ -24,7 +26,7 @@ In principle, the environment can be installed using
 conda env create -f environment.yml
 ```
 
-on the command line. **This takes a really, really long time to install and has only been tested on Mac**. Coding for Economists depends on a LOT of packages, which in turn have a lot of dependencies.
+on the command line. **This takes a really, really long time to install**. The dockerfile version uses **Mamba** to speed up the install. The environment construction is slow because Coding for Economists depends on a LOT of packages, which in turn have a lot of dependencies.
 
 You can check that this has worked by running `which python` on the command line. You should get something like
 
@@ -34,17 +36,22 @@ You can check that this has worked by running `which python` on the command line
 
 If you don't, and you get something like `/usr/bin/python` instead, then you need to following the instructions for the command line version of Python being incorrect below.
 
-Some extra assets associated with packages are required. You will need to run `python -m spacy download en_core_web_sm` to download the spacy model. There are also several models needed for nltk.
+Some extra assets associated with packages are required. You will need to run `python3 -m spacy download en_core_web_sm` to download the spacy model, and `python3 -m nltk.downloader all` for the **nltk** models.
 
 ### Using the docker image
 
-There is a Dockerfile for the environment, but it's a work in progress (it doesn't currently work!). The easiest way to run it right now for dev is:
+There is a Dockerfile for the environment, which is the easiest way to set up a dev env. You run it by following these steps:
 
 1. Ensure you have docker, the docker extension for VS Code, and the Code remote extension installed
 2. In VS Code, right click on the Dockerfile and hit "build image". Switch to the docker tab and hit "Run interactive". Switch to the VS Code Remote tab, then click "Attach in new window" on the running container.
 3. Once you are in the container via VS Code remote, you may need to install the Python extension (within the container version of VS Code).
+4. If you're using the pre-built image from Dockerhub, you will need to ensure that you have the latest git commit of the code (for now, the Dockerhub image isn't automatically updated when a new commit is made).
+5. Once you are in the container, you'll need to use `conda activate codeforecon` to switch to the right conda environment to build files and run notebooks.
+6. To ping back the built HTML files, use `docker cp running-container-name:app/_build/ .` from your local command line (not the docker container) within the folder where you want to move all of the build files. We suggest creating a "scratch" folder and running the command from within it, or transferring directly to your local "_build" folder. You can partially view the HTML within the docker container using a HTML preview extension but note that MathJax and internal book links won't work in this.
 
-Warning: if you are building the dockerfile with the environment, it will take a very long time to build. The ambition is to create a ready made image and put it on an image repository.
+Warning: if you are building the dockerfile with the environment, it will take some time to build. There is a pre-built image available on Dockerhub [here](https://hub.docker.com/repository/docker/aeturrell/codingforeconomists/general).
+
+There is a bug inbetween all the dependencies that sees a list index error arise. You can squish this manually by commenting out `token.children[1].content = token.children[1].content[3:]` in `"/opt/conda/envs/codeforecon/lib/python3.8/site-packages/mdit_py_plugins/tasklists/__init__.py"`, line 84, in todoify. However, the commenting out is done automatically by the Dockerfile. (Generally, there have been version issues between markdown-it-py, myst-nb, and myst-parser.)
 
 ### Building the Book
 
