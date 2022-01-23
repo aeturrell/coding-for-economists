@@ -105,7 +105,6 @@ Once you've run a few commands, you'll notice that you can't navigate around the
 - <kbd>ctrl</kbd> + <kbd>u</kbd> to delete everything to the left of the cursor.
 
 - <kbd>ctrl</kbd> + <kbd>r</kbd> to search through previously used commands
-clear to clear your terminal.
 
 ### Navigating directories
 
@@ -178,9 +177,9 @@ Now we'll see some useful commands for the terminal.
 | `tail <filename>` | Print the end of a file |
 | `> <filename>`   | Redirects output from screen to `<filename>`. For example, `echo "Hello World" > hello.txt` |
 | `>> <filename>` | Redirects output from screen to the end of `<filename>`, ie appends output rather than overwrites it |
-| `| ` | The pipe symbol: uses output from one command as input into another. For example, `head -n 10 data.csv | > hello_world.txt` would write the first 10 lines of data.csv into a file called hello_world.txt
+| `|` | The pipe symbol: uses output from one command as input into another. For example, `head -n 10 data.csv | > hello_world.txt` would write the first 10 lines of data.csv into a file called hello_world.txt
 | `less <filename>` | Print out the contents of a file in paginated form. Use `ctrl+v` and `Alt+v` (or `⌘+v` and `⌥+v` on Mac) to move up and down. Press `q` to quit.|
-| `wc -l` | Returns number of lines in input, for example `cat <filename> | wc -l` |
+| `wc -l` | Returns number of lines in input, for example `cat <filename> | wc -l`. Use `wc` alone for word count. |
 | `sort` | Arrange lines in a file in alphabetical order |
 | `uniq` | Remove duplicate lines from input, for example `cat <filename> | uniq` or `uniq -d` to show duplicate files |
 | `mv` | Move or rename a file; for example, `mv file1 file2` would rename `file1` to `file2` while `mv file1 ~` would move `file1` to the home directory|
@@ -192,7 +191,13 @@ Now we'll see some useful commands for the terminal.
 | `ls` | Basically, this means list stuff (files and folders) in the current directory |
 | `ls -a` | List stuff in the current directory even if it's hidden |
 | `ls -l` | List stuff in a more readable format and show permissions |
+| `ls -S` | List stuff by size |
 | `file <filename>` | Give information on the file type of `<filename>`|
+| `find` | Find specific files on your computer, can be piped into other commands for example `find *.md -size +5k -type f | xargs wc -l` will count the number of lines `wc -l` of all files, `-type f`, ending in `.md` that are greater than 5 kilobytes in size, `-size +5k`. |
+| `diff -u <filename1> <filename2>` | Show a single summary of the differences between two files. |
+
+![More details of the grep command](https://pbs.twimg.com/media/DcPeD_CW0AEkSar?format=jpg&name=small)
+*More details of the grep command, by [@b0rk](https://twitter.com/b0rk).*
 
 You can write for loops in bash (remember, it's a language). The general structure is
 
@@ -372,7 +377,9 @@ etc.
 
 [**ffmpeg**](https://www.ffmpeg.org/) is a command line tool that aims to "decode, encode, transcode, mux, demux, stream, filter and play pretty much anything that humans and machines have created. It supports the most obscure ancient formats up to the cutting edge." Look at the documentation for all of the uses.
 
-For more on the command line, see [The Art of the Command Line](https://github.com/jlevy/the-art-of-command-line).
+[**yank**](https://github.com/mptre/yank) reads input from stdin (what you see in the terminal) and displays a selection interface that allows a field to be selected and copied to the clipboard. A typical use case would be to copy and paste a file name that you've found from using the `ls` command. For example, running `ls -lah | yank` in a directory brings up a list of permissions, sizes, users, dates modified, and names of files. You can then navigate to the filename you want with the keyboard, hit return, and have that file name in the clipboard ready to paste into your next terminal command. There's a nice demo [here](https://calmcode.io/cool-cli/yank.html).
+
+For more on the command line, see [The Art of the Command Line](https://github.com/jlevy/the-art-of-command-line). In terms of other commands, you might like to check out `patch`, `sed`, and `awk`.
 
 ## Review
 
