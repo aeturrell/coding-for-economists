@@ -73,6 +73,8 @@ Only upload built files based on a successful commit or merge to the main branch
 ghp-import -n -p -f _build/html
 ```
 
+Typically, only maintainers will need to upload built files.
+
 ### Pre-commit
 
 To perform the pre-commit checks, use
