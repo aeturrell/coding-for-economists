@@ -112,6 +112,9 @@ You should avoid doing the following with your hook:
 
 - "all my friends are doing it": presenting no other motivation for a topic than that other people have written papers on it.
 
+![](https://pbs.twimg.com/media/DxJVkF5XcAAQ8TP.jpg)
+*The bait and switch*
+
 ### The Question
 
 Tell the reader what the paper does. Think of this as the point in a trial where, having detailed the crime, you now identify a perpetrator and promise to provide a persuasive case. The reader should have an idea of a clean research question that will have a more or less satisfactory answer by the end of the paper. The question may take around two paragraphs. At the end of the first or possibly the beginning of the second you should probably have the sentence "This paper addresses the question ...".
@@ -300,6 +303,7 @@ Some papers title their conclusion "Summary and Concluding Remarks", which is a 
 
 Once you've written a draft you're happy with, there are a bunch of checks you can do to help make sure the draft is everything it can be. The first is to pop it in a drawer for a week and let it stew. When you come to read it again, you'll find that you can redraft it to be even better. The rest of the tips are:
 
+- Write and re-write. First drafts are always bad.
 - Get rid of every adjective modifying a relationship. Was x larger than y? Just say so. Saying it was much larger, or especially tiny, or amazingly huge adds no information.
 
 - Replace long words with short words. Good writing maximises the content of the message per number of letters used. Replace long words with short words of equal meaning. Replace utilisation with use.
@@ -311,6 +315,9 @@ Once you've written a draft you're happy with, there are a bunch of checks you c
 - Read it aloud. There is no better way to gauge the flow and logic of a manuscript.
 
 - Look back at your figures and tables, and be brutal. Do you need them all? Do they all convey important messages that a reader cannot get from the text? In general, you can have up to approximately 10 floats before an editor or referee may wonder if they have picked up a picture book rather than a journal article. Naturally, in some special cases—for example, if the paper is about data visualisation—you may feel warranted in having more. But a good check is whether you can tell the story in just four floats, and the most important result in just one.
+
+![](https://quotesnhumor.com/wp-content/uploads/2018/04/Writing-memes7.jpg)
+*First drafts*
 
 ## Further Resources
 
