@@ -56,7 +56,7 @@ Perhaps you feel that these aren't serious or technical looking enough? Even ser
 
 If you're making plots, think deeply about their purpose and how clear they are. You can find more information on plotting over in the {ref}`vis-intro` pages.
 
-To make life easier for your readers, put figures next to where they are first referenced in the text. If you have co-authors who prefer to have figures at the end, there's a single option toggle you can use with the LaTeX package [**endfloat**](https://texdoc.org/serve/endfloat.pdf/0).
+To make life easier for your readers, put figures next to where they are first referenced in the text. If you have co-authors who prefer to have figures at the end, there's a single option toggle you can use with the LaTeX package [**endfloat**](https://texdoc.org/serve/endfloat.pdf/0): turn it on before you compile it to send to them 😉.
 
 ## Title
 
@@ -82,7 +82,11 @@ Another way of thinking about organising your abstract is motivation, purpose, m
 
 Once you have written them, market test your title and abstract. The title and abstract are the front door. They are the most important parts of the paper. Craft them carefully and get frank feedback on them from people who know the field.
 
-Many people find it useful to write the abstract of a paper last. By the time you have thought about the overall contribution and written the rest of the paper (particularly the introduction and conclusion), the abstract will be far easier. Abstracts are usually limited to 150—250 words, but can be as few as 100 for some journals.
+Many people find it useful to write the abstract of a paper last. By the time you have thought about the overall contribution and written the rest of the paper (particularly the introduction and conclusion), the abstract will be far easier. Abstracts are usually limited to 150—250 words, but can be as few as 100 words for some journals.
+
+For an example of an abstract that really nails it, take a look at "The tradeoff between knowledge of mandated benefits and moral hazard" by Dr Jessica Brown {cite}`brown2022tradeoff`:
+
+> When workers are not aware of a mandated benefit, they cannot take it into account in their employment decision, leading to deadweight loss. On the other hand, lack of awareness of a benefit reduces moral hazard, decreasing deadweight loss. I incorporate these trade‐offs into a model of mandated benefits and apply the model to Temporary Disability Insurance, an employment benefit mandated in five states. First, using data collected through an original survey, I provide evidence that there is low awareness of this benefit. Second, I use the updated mandated benefits model to show that over a broad range of reasonable assumptions, the additional employee valuation of the benefit outweighs the additional program cost from moral hazard, and thus a public information campaign would increase employment.
 
 ## Paper Introduction
 
@@ -316,7 +320,7 @@ Once you've written a draft you're happy with, there are a bunch of checks you c
 
 - Look back at your figures and tables, and be brutal. Do you need them all? Do they all convey important messages that a reader cannot get from the text? In general, you can have up to approximately 10 floats before an editor or referee may wonder if they have picked up a picture book rather than a journal article. Naturally, in some special cases—for example, if the paper is about data visualisation—you may feel warranted in having more. But a good check is whether you can tell the story in just four floats, and the most important result in just one.
 
-![](https://quotesnhumor.com/wp-content/uploads/2018/04/Writing-memes7.jpg)
+![First drafts](https://quotesnhumor.com/wp-content/uploads/2018/04/Writing-memes7.jpg)
 *First drafts*
 
 ## Further Resources

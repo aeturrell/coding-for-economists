@@ -15,7 +15,7 @@ labels_blog = [
     "Caveats",
     "Core story",
     "Punchy intro",
-    "Exciting opener",
+    "Inviting title",
 ]
 
 height = 1
