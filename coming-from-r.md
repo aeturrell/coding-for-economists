@@ -15,15 +15,17 @@ kernelspec:
 
 # Coming from R
 
-If you're coming from R, then you're probably already familiar with coding and with integrated developer environments. Overall, Python and R are more similar than they are different, especially when it comes to economics and data science.
+Python and R have strong similarities when it comes to economics and data science. If you're coming from R, then you're probably already familiar with coding and with integrated developer environments. And because there are Python packages that replicate the major R packages, there is probably no easier switch in high-level programming languages than the one from R to Python.
 
 There are, however, some fundamental differences between the two languages. The biggest difference between Python and R is that Python is a general purpose programming language, while R began as a statistical language. But you won't really notice this unless you're writing something that looks more like production-grade software. (And, despite being a general language, Python has really fantastic support for statistics.) A second difference is that Python is more object-oriented while R is more functional. These are two different programming paradigms. Actually, both languages do a bit of both and, again, you're unlikely to notice any difference most of the time.
 
-Actually, the biggest practical difference I have found in an economics and data science context is that Python has more of a flavour of the bazaar--there are lots of people, and you can find everything under the Sun, but it can be a *little bit* chaotic--while R has the feel of a curated garden--there is a chief gardener (RStudio) tending a smaller number of more beautiful things, but the garden has boundaries.
+Actually, the biggest practical difference in the context of packages for economics and data science is that Python has more of a flavour of the bazaar—there are lots of people, and you can find everything under the Sun, but it can be a *little bit* chaotic—while R has the feel of a curated garden—there is a chief gardener (RStudio) tending a smaller number of more beautiful things, but the garden has boundaries. As an example of this dynamic, there are around 20,000 packages on CRAN, R's official and strict package server; there are 350,000+ on PyPI, the Python equivalent (but it's easier to get a package accepted).
 
-There's a list of differences at the end of this chapter, but a couple of important gotchas to be aware of up front: first, R uses vectors, arrays, etc., that are indexed from 1. Like C++, Python is numbered from zero, with, eg, `a[0]` as the first element. Second, `<-` is the preferred assignment operator in R but in Python it's `=` (and `<-` isn't used). In fact, in R `a<-5` assigns `a` the value `5`, while `a<-5` in Python would return `True` or `False` based on whether `a` was less than `-5` or not!
+For those coming from the 'tidyverse' set of packages produced by RStudio, there are very direct Python equivalents. For example, Python has **plotnine** which has the same syntax to R's **ggplot2**. There's also **plydata**, which has the same syntax as R's **dplyr** package. In Python, **matplotlib** and **pandas** are more popular packages for plotting and data analysis, respectively, but those R-style packages are absolutely there if you prefer them. More on other similar packages below.
 
-## Tools similar to those found in an R workflow
+There's a list of more fundamental differences between R and Python as programming languages at the end of this chapter, but a couple of important gotchas to be aware of up front: first, R uses vectors, arrays, etc., that are indexed from 1. Like C++, Python is numbered from zero, with, eg, `a[0]` as the first element. Second, `<-` is the preferred assignment operator in R but in Python it's `=` (and `<-` isn't used). In fact, in R `a<-5` assigns `a` the value `5`, while `a<-5` in Python would return `True` or `False` based on whether `a` was less than `-5` or not!
+
+## Tools with similar syntax to those found in an R workflow
 
 If you are coming from R, you're likely familiar with **dplyr** for data analysis and **ggplot2** for plotting. There are Python equivalents that have very similar syntax to these that you can use to help you to become productive quickly in Python--though these libraries are not so popular in Python. Here are the Python equivalents to those R libraries:
 
@@ -40,6 +42,29 @@ If you are coming from R, you're likely familiar with **dplyr** for data analysi
 - **data.table**: if you use this library instead of **dplyr**, have no fear as there's an almost identical library in Python called [**datatable**](https://datatable.readthedocs.io/en/latest/). It's not nearly as popular in Python as **data.table** is in R, but it's a very high quality library.
 
 - **here**: Lots of people switching from R to Python ask what the equivalent of the `here()` function is. The "best practice" answer is that you shouldn't need one! It's good practice to have your Visual Studio Code (or other IDE) console and interactive Python window automatically start *within* the directory of your project; that is, you should always be "here" automatically. In Visual Studio Code, you can ensure that the interactive window starts in the root directory of your project by setting "Jupyter: Notebook File Root" to "`${workspaceFolder}`" in the Settings menu. For the integrated command line, change "Terminal › Integrated: Cwd" to "`${workspaceFolder}`" too. If you still need a replacement for `here`, then the [pyprojroot](https://github.com/chendaniely/pyprojroot) package has you covered.
+
+## What is the Python package equivalent to...?
+
+In this section we show a list of some of the most popular packages in R along with the Python package(s) with the most similar functionality.
+
+| R      | Python |
+| ----------- | ----------- |
+| **dplyr**  | [**pandas**](https://pandas.pydata.org/)  |
+| **purrr**  | [**pandas**](https://pandas.pydata.org/)  |
+| **readr**/**vroom**  | [**pandas**](https://pandas.pydata.org/)  |
+| **lubridate**  | [**pandas**](https://pandas.pydata.org/)  |
+| **stringr** | [**pandas**](https://pandas.pydata.org/)  |
+| **sf**  | [**geopandas**](https://geopandas.org/)  |
+| **ggplot2** (declarative)[^1]  | [**matplotlib**](https://matplotlib.org/) (imperative) or [**seaborn**](https://seaborn.pydata.org/) (declarative) |
+| **mlr3** / **caret**   | [**scitkit-learn**](https://scikit-learn.org/) |
+| **tidymodels**  | [**scitkit-learn**](https://scikit-learn.org/) / [**statsmodels**](https://www.statsmodels.org/) |
+| **knitr** and r markdown  | [**quarto**](https://quarto.org/) and Jupyter Notebooks or quarto markdown |
+| **rvest** | [**beautifulsoup**](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) |
+| **testhat** | [**pytest**](https://docs.pytest.org/) |
+| **shiny** | [**streamlit**](https://streamlit.io/) |
+| **skimr** | [**skimpy**](https://aeturrell.github.io/skimpy/) |
+
+[^1]: Imperative programming is saying how to do something, and as a result what you want to happen will happen. Declarative programming is saying what you would like to happen, and letting the computer figure out how to do it.
 
 ## Need a specific library that's in R but not in Python?
 

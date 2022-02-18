@@ -37,8 +37,9 @@ Below the blog post layer is the paper and, given a large number of papers go un
 
 ```{code-cell} ipython3
 :tags: ["remove-input"]
-from craft_diss_pyramid import plot_pyramid
-plot_pyramid()
+import craft_diss_pyramid as craft
+
+craft.plot_pyramid()
 ```
 
 Each stage of the inverted pyramid is valuable, but it's important to recognise that:
@@ -90,11 +91,9 @@ Let's run over some other general tips for writing good research blog posts:
 
 - The threshold is a lot lower than you think! A blog post that isn't perfect will still drive more traffic to your work than one that wins a Pulitzer. Also, experience is easily the best way to improve for next time.
 
-Finally, two extremely good general resources on writing are {cite}`zinsser2006writing` and {cite}`white1972elements`.
+Finally, two extremely good general resources on writing are {cite:t}`zinsser2006writing` and {cite:t}`white1972elements`.
 
 ## Structuring a Research Blog Post
-
-### Structure
 
 The blog post pyramid in the figure above gives a good structure to work from, although experienced writers may want to get more creative.
 
@@ -112,22 +111,16 @@ Let's run through the parts:
 
 There are many bits of your paper that won't make it into the blog post. Much of the methodology will need to be jettisoned, ditto for the literature section unless is extremely relevant to the story you're telling.
 
-## Blogging Options
+## Where to put your blog piece
 
 So you've got an idea for a killer blog summarising your recent paper. Where can you unleash your blog piece on the world?
 
-The first option is to host it yourself on your own website or on a free service such as [Google's Blogger](https://www.blogger.com/). If you want to host a blog (and homepage) yourself, a combination of Github Pages and Jekyll is a good way to do it; the [Jekyll folio theme](https://github.com/alshedivat/al-folio) is particularly popular and will automatically ingest a .bib file of references but there are [plenty of others](https://jekyll-themes.com/free/). Once setup, you write blogs in markdown, put them in a folder, and commit them: the rest is automatic.
+The first option is to host it yourself on your own website or on a free service such as [Google's Blogger](https://www.blogger.com/). If you want to host a blog (and homepage) yourself, a combination of Github Pages and Jekyll is a good way to do it; the [Jekyll folio theme](https://github.com/alshedivat/al-folio) is particularly popular and will automatically ingest a .bib file of references but there are [plenty of others](https://jekyll-themes.com/free/). Once setup, you write blogs in markdown, put them in a folder, and commit them: the rest is automatic. As an aside, if you want to blog in code using a self-hosted service that accepts markdown files, you can export Jupyter Notebooks to markdown using the techniques showcased in {ref}`auto-reports`.
 
-As an aside, if you want to blog in code using a self-hosted service that accepts markdown files, you can export Jupyter Notebooks to markdown using the techniques showcased in {ref}`auto-reports`.
-
-Now although you get lots of control with a self-hosted blog, there are major downsides. Unless you have a large social media following already, posts on there might not find many readers.
-
-So what are your other options?
+Now although you get lots of control with a self-hosted blog, there are major downsides. Unless you have a large social media following already, posts on there might not find many readers. So what are your other options?
 
 If you are at a central bank or have a co-author who is, many of them have blogs with big readerships. [Bank Underground](https://bankunderground.co.uk/) (Bank of England) and [Liberty Street Economics](https://libertystreeteconomics.newyorkfed.org/) (New York Fed) are two worth checking out. Many other institutions have blogs too, like various parts of the UK public sector—the [ONS' blog](https://blog.ons.gov.uk/), for instance. Most universities have some sort of blog—[CAGE](https://warwick.ac.uk/fac/soc/economics/research/centres/cage/) at the University of Warwick is a good example—and, for universities that don't have their own, there's [The Conversation](https://theconversation.com/become-an-author).
 
 [VoxEU](https://voxeu.org/) has a very large economics readership and is solely focused on research blogs but the website is hardly encouraging when it comes to submissions: "Most Vox columns are commissioned directly by the Editor-in-Chief, but Vox does post a few unsolicited columns." There's also a [VoxDev](https://voxdev.org/) for development economics, and, happily, this outlet actively invites researchers to submit pieces.
 
 Bigger overall but less likely to reach an economics audience specifically, there's [Medium](https://medium.com/) and, for a more coding-oriented crowd, [Dev.to](https://dev.to/).
-
-For any of the options that are not self-hosted, remember that you may need to provide a bio of yourself too.

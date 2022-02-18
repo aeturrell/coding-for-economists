@@ -44,7 +44,7 @@ Try going to the {ref}`code-basics` chapter now and clicking on the rocketship s
 
 Note that if you're on a secure network, you may find that options 2 and 3 don't work for you. However, as long as you can download and run files locally, option 1 should always work.
 
-For a small number of the examples using data, you may need to download the relevant files from this book's github [repository](https://github.com/aeturrell/coding-for-economists/tree/main/data), but this will always be explained in the relevant subsections.
+For a small number of the examples using data, you may need to download the relevant files from this book's Github [repository](https://github.com/aeturrell/coding-for-economists/tree/main/data), but this will always be explained in the relevant subsections.
 
 ```{admonition} Tip
 :class: tip
@@ -57,19 +57,18 @@ Most pages with code can be run in Google Colab --just click <i class="fas fa-ro
 
 Contributions are welcome!
 
-The easiest way to contribute is to give this book's [Github page a star](https://github.com/aeturrell/coding-for-economists). This helps others find the book.
+The easiest way to contribute is to give this book's [Github page a star](https://github.com/aeturrell/coding-for-economists). You could also tweet about it using the hashtags `#Econtwitter` and `#datascience`. Both of these help others find the book.
 
-You can also make suggestions, requests, and point out bugs or mistakes by [raising an issue](https://github.com/aeturrell/coding-for-economists/issues) on the github repository for the book. You can also make [pull requests](https://github.com/aeturrell/coding-for-economists/pulls) with fixes, edits, or new content.
+You can make suggestions, requests, and point out bugs or mistakes by [raising an issue](https://github.com/aeturrell/coding-for-economists/issues) on the Github repository for the book. You can also make [pull requests](https://github.com/aeturrell/coding-for-economists/pulls) with fixes, edits, or new content.
 
 If you're thinking of making a contribution, especially of a new page, it's usually best to open an issue before starting to work on anything. This will allow you a chance to talk the new content over with the maintainers of the site. There is an official [dockerfile](https://github.com/aeturrell/coding-for-economists/blob/main/Dockerfile) for the project; you can find more about how to use it and build the book over on the GitHub [readme](https://github.com/aeturrell/coding-for-economists#coding-for-economists).
 
 Contributors:
 
+- [aeturrell](https://github.com/aeturrell)
 - [lukestein](https://github.com/lukestein)
 
-***Citing Coding for Economists***
-
-To cite this book, please use:
+If you wish to cite the book, please use:
 
 ```
 @book{Turrell2021,
@@ -81,4 +80,4 @@ url       = "https://aeturrell.github.io/coding-for-economists"
 }
 ```
 
-Please note that this book does not represent the views of any employer of its author(s).
+Please note that this book does not represent the views of any employer of its contributors.

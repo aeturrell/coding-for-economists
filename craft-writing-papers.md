@@ -42,13 +42,13 @@ Insofar as is possible, try to make figures self-contained. For example, don't a
 
 You should have one **killer chart** per paper, a single plot that tells the story of your most important finding clearly. This is the chart that might get picked up by *The Economist* or the *Financial Times*. Papers in science journals, which often have quite strict length limits, are very good this (they're also good at highly dense technical charts, though those are different).
 
-For example, here is a figure summarising a fairly complex precipitation nowcasting paper, "Skillful Precipitation Nowcasting Using Deep Generative Models of Radar", written by Deepmind {cite}`ravuris2021skillful`:
+For example, here is a figure summarising a fairly complex precipitation nowcasting paper, "Skillful Precipitation Nowcasting Using Deep Generative Models of Radar", written by Deepmind {cite:t}`ravuris2021skillful`:
 
 ![](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-021-03854-z/MediaObjects/41586_2021_3854_Fig1_HTML.png?as=webp)
 
 In one fell swoop, they tell us about the structure of the model, what it's useful for (UK rain nowcasting, for which there is a strong need), and how their model, DGMR, compares against both observations and the leading alternative code, PySTEPS. (You can even find the Python code over at their [Github page](https://github.com/deepmind/deepmind-research/tree/master/nowcasting).)
 
-Another good example is from "Inferring the effectiveness of government interventions against COVID-19", {cite}`brauner2021inferring`. This summarises the fairly complex results of a Bayesian model of non-pharmaceutical interventions into a single summary figure that policymakers can read off the results from in a second. This papers uses the Bayesian package PyMC, which you find out more about in the {ref}`econmt-bayesian` chapter.
+Another good example is from "Inferring the effectiveness of government interventions against COVID-19", {cite:t}`brauner2021inferring`. This summarises the fairly complex results of a Bayesian model of non-pharmaceutical interventions into a single summary figure that policymakers can read off the results from in a second. This papers uses the Bayesian package PyMC, which you find out more about in the {ref}`econmt-bayesian` chapter.
 
 ![](https://www.science.org/cms/10.1126/science.abd9338/asset/3ae0348b-6d8b-439c-8815-556bda63b789/assets/graphic/371_abd9338_f2.jpeg)
 
@@ -84,7 +84,7 @@ Once you have written them, market test your title and abstract. The title and a
 
 Many people find it useful to write the abstract of a paper last. By the time you have thought about the overall contribution and written the rest of the paper (particularly the introduction and conclusion), the abstract will be far easier. Abstracts are usually limited to 150—250 words, but can be as few as 100 words for some journals.
 
-For an example of an abstract that really nails it, take a look at "The tradeoff between knowledge of mandated benefits and moral hazard" by Dr Jessica Brown {cite}`brown2022tradeoff`:
+For an example of an abstract that really nails it, take a look at "The tradeoff between knowledge of mandated benefits and moral hazard" by Dr Jessica Brown {cite:t}`brown2022tradeoff`:
 
 > When workers are not aware of a mandated benefit, they cannot take it into account in their employment decision, leading to deadweight loss. On the other hand, lack of awareness of a benefit reduces moral hazard, decreasing deadweight loss. I incorporate these trade‐offs into a model of mandated benefits and apply the model to Temporary Disability Insurance, an employment benefit mandated in five states. First, using data collected through an original survey, I provide evidence that there is low awareness of this benefit. Second, I use the updated mandated benefits model to show that over a broad range of reasonable assumptions, the additional employee valuation of the benefit outweighs the additional program cost from moral hazard, and thus a public information campaign would increase employment.
 
@@ -177,7 +177,7 @@ You may find it useful to first remind the reader about the research question, a
 
 You are likely to want to report the following about your data: when, where, why, how and by whom was it collected? What is the sample size and how does it compare to the population of interest? Did you drop any observations and, if so, why? Did you have to impute any values and, if so, how did you do it? Are any variables proxies for the real thing? What does each variable measure, exactly, and how was it constructed?
 
-You should also ask yourself whether you have any 'dark data' {cite}`hand2020dark` and what limitations this might introduce to the analysis (and perhaps what mitigating steps you took). These are the types of dark data to consider:
+You should also ask yourself whether you have any 'dark data' {cite:t}`hand2020dark` and what limitations this might introduce to the analysis (and perhaps what mitigating steps you took). These are the types of dark data to consider:
 
 1. Data we know are missing, eg a missing survey response
 
@@ -325,4 +325,4 @@ Once you've written a draft you're happy with, there are a bunch of checks you c
 
 ## Further Resources
 
-Two extremely good general resources on writing are {cite}`zinsser2006writing` and {cite}`white1972elements`. For a more in-depth take on writing papers (specific to applied economics papers), see {cite}`bellemare2020write`.
+Two extremely good general resources on writing are {cite:t}`zinsser2006writing` and {cite:t}`white1972elements`. For a more in-depth take on writing papers (specific to applied economics papers), see {cite:t}`bellemare2020write`.

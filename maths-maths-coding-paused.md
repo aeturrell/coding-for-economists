@@ -520,7 +520,7 @@ Even with just 10 evenly spaced points, the composite Simpson’s rule integrati
 
 In recent years, there have been great developments in the ability of Python to easily carry out numerical 'composable function transformations'. What this means is that, if you can dream up an arbitrary numerical operations -- including differentiation, linear algebra, and optimisation -- you can write code that will execute it quickly and automatically on CPUs, GPUs, or TPUs as you like.
 
-Here we'll look at one library that does this, **jax**, developed by Google {cite}`jax2018github`. It can automatically differentiate native Python and **numpy** functions, including when they are in loops, branches, or subject to recursion, and it can take derivatives of derivatives of derivatives. It supports reverse-mode differentiation (a.k.a. backpropagation) via grad as well as forward-mode differentiation, and the two can be composed arbitrarily to any order.
+Here we'll look at one library that does this, **jax**, developed by Google {cite:t}`jax2018github`. It can automatically differentiate native Python and **numpy** functions, including when they are in loops, branches, or subject to recursion, and it can take derivatives of derivatives of derivatives. It supports reverse-mode differentiation (a.k.a. backpropagation) via grad as well as forward-mode differentiation, and the two can be composed arbitrarily to any order.
 
 To do these at speed, it uses just-in-time compilation. If you don't know what that is, don't worry: the details aren't important. It's just a way of getting close to C++ or Fortran speeds while still being able to write code in *much* more user friendly Python!
 
@@ -596,7 +596,7 @@ This short introduction has barely scratched the surface of **jax** and what you
 
 ## Set theory
 
-Set theory is a surprisingly useful tool in research (and invaluable in spatial analysis). Here are some really useful bits of set theory inspired by examples in {cite}`sheppard2012introduction`.
+Set theory is a surprisingly useful tool in research (and invaluable in spatial analysis). Here are some really useful bits of set theory inspired by examples in {cite:t}`sheppard2012introduction`.
 
 Sets are first class citizens in Python in the same way that lists are. We can define and view a set like this:
 

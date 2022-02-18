@@ -11,7 +11,7 @@ Almost all of the code you'll see can be run on all three of the major operating
 
 If you haven't yet decided which operating system to use, this book recommends either Linux or MacOS because, in a very small number of cases, you'll find it easier to run the most advanced code on them rather than on Windows. Don't panic if you have Windows already though—most things will work just fine and it tends to be power users who run into this problem. (If you're not familiar with Linux, it's a free operating system that is also widely used for cloud services and, while it used to  have a reputation as being fearsomely difficult for beginners, some modern Linux distributions, such as Ubuntu, are pretty user-friendly.)
 
-If you have Windows and you want to use Linux or Mac but don't want to shell out for a new computer, there are a couple of options. One is to use the [*Windows Subsystem for Linux*](https://pbpython.com/wsl-python.html). It's essentially a Linux operating system that installs alongside and integrates with your existing Windows operating system. This allows you to run code as if you were using Linux. You can get WSL [for free from Microsoft](https://docs.microsoft.com/en-us/windows/wsl/install-win10) (the fact that Microsoft has included this feature speaks to the demand for it). Another option is to use [Github Codespaces](https://github.com/features/codespaces), which gives cheap (but not free) access to a pre-built Linux machine in the cloud.
+If you have Windows and you want to use Linux or Mac but don't want to shell out for a new computer, there are a couple of options. One is to use the [*Windows Subsystem for Linux*](https://pbpython.com/wsl-python.html). It's essentially a Linux operating system that installs alongside and integrates with your existing Windows operating system. This allows you to run code as if you were using Linux. You can get WSL [for free from Microsoft](https://docs.microsoft.com/en-us/windows/wsl/install-win10) (the fact that Microsoft has included this feature speaks to the demand for it). Another option is to use [Github Codespaces](https://github.com/features/codespaces), which gives cheap (but not free) access to a pre-built Linux machine in the cloud. A further option is [Gitpod](https://www.gitpod.io/), which is like Codespaces but has a generous free tier.
 
 ### Choice of Programming Language
 
@@ -245,7 +245,26 @@ Try installing the **matplotlib**, **pandas**, and **statsmodels** packages usin
 Install the **skimpy** package. (Hint: `conda install` may not be enough.)
 ```
 
-## Coding on your work computer
+## Review
+
+That's it for the preliminaries! Well done if you made this far: starting is the hardest bit. There are some extra bits below for if you're coding on a restricted work computer or you want to add all the bells and whistles to Visual Studio Code, but you can safely skip these if you just want to get on with some coding.
+
+So, if you have:
+
+- ✅ installed Python, using the Anaconda distribution of Python;
+- ✅ installed Visual Studio Code, and its Python extension;
+- ✅ written and saved 'hello_world.py' with `print('Hello World!')` in it;
+- ✅ run 'hello_world.py' both in the terminal and in the Visual Studio Code interactive window
+- ✅ run code in a Jupyter Notebook; and
+- ✅ installed packages in the terminal using both `conda install` and `pip install`, then
+
+you are ready to move on to the next chapter! :rocket:
+
+## Extras
+
+These can be safely skipped if you just want to get on with some coding.
+
+### Coding on your work computer
 
 ```{note}
 If you're not planning to code at work, or your place of work allows you to install whatever programmes you like, you can safely skip this section.
@@ -259,9 +278,11 @@ Let's explore some options for coding platforms 'in a box' that do not require a
 
 [Google Colab](https://research.google.com/colaboratory/) is a great way to start learning and trying out the exercises in this book remotely without having to install anything on your computer. Most pages in this book that have code on are just a click away from launching a Colab notebook—just click the <i class="fas fa-rocket"></i> at the top of a page with code on and select 'Colab'. Google Colab is fantastic for trying things out, sharing tinkering with others, and generally having a first go at some coding, but it only supports notebooks.
 
-If you need the full power of Visual Studio Code, which supports scripts and notebooks, the easiest way is to use [Github Codespaces](https://github.com/features/codespaces). Codespaces provides cheap access to a ready-made Visual Studio Code development environment in your browser window. Many IT departments will use Github themselves, so you may find your organisation already has a subscription you can use. Another advantage of using a Github subscription is that you can use Github for version control too (if 'version control' is new to you, don't worry—it's just a way of efficiently working with files that have code in).
+If you need the full power of Visual Studio Code, which supports scripts and notebooks, the easiest way is to use [Github Codespaces](https://github.com/features/codespaces) or [Gitpod](https://www.gitpod.io/). Codespaces provides cheap access to a ready-made Visual Studio Code development environment in your browser window. Gitpod is similar, but also has a free tier. Many IT departments will use Github themselves, so you may find your organisation already has a subscription to GitHub (and therefore Codespaces) can use. Another advantage of using a Github subscription is that you can use Github for version control too (if 'version control' is new to you, don't worry—it's just a way of efficiently working with files that have code in).
 
-## Fine-tuning your integrated development environment
+Finally, if you're just starting to learn and don't need to save any data or code, or use any non-standard packages, you can run a limited instance of JupyterLab (an IDE) in your browser window using *JupyterLite*. This will be slower than regular Python because all of the computation is done by your browser (eg Google Chrome), as opposed to by your computer directly. And, also because of how this magic is put together, only some packages are available. To use it, head to the [JupyterLite website](https://jupyterlite.readthedocs.io/en/latest/) and click on the link that says *Try it with JupyterLab!*. Once the page loads, select Pyolite Notebook. Note that if you have very high levels of security at your organisation, this website may be blocked from running.
+
+### Fine-tuning Visual Studio Code
 
 ```{note}
 If you just want to get on with some coding, you can skip this section.
@@ -302,33 +323,3 @@ There are some extensions that most people won't need but which experienced code
 - *Docker* - makes it easy to build, manage, and deploy Docker containers from Visual Studio Code
 
 As well as adding extra extensions, you can customise the default settings of VS Code. As mentioned before, you'll probably want to change the `jupyter.sendSelectionToInteractiveWindow` setting to True. The easiest way to do this is to go to Settings (the cog icon) and type in 'Jupyter: Send Selection', and you should see a tick box come up; make sure it's ticked. Another useful one for coding is to change the 'Editor: Render Whitespace' setting, aka `editor.renderWhitespace` from 'selection' to 'boundary'. This will now show any boundary whitespace, or more than one instance of whitespace contiguously, as a grey dot. This might seem odd but it's really useful because the wrong amount of whitespace can create problems with code.
-
-````{admonition} Exercise
-Go back to your `hello_world.py` script having installed the rainbow indent extension for Visual Studio Code. Modify the code to:
-
-```python
-for i in [1, 2, 3]:
-    print(f"Hello world {i}")
-```
-
-using four spaces for indentation. And then
-
-```python
-for i in [1, 2, 3]:
-    for char in ["a", "b", "c"]:
-        print(f"Hello world {i}:{char}")
-```
-What do you notice about the different levels of indentation?
-````
-
-## Review
-
-If you have:
-
-- ✅ installed Python, using the Anaconda distribution of Python;
-- ✅ installed Visual Studio Code, and its Python extension;
-- ✅ written and saved 'hello_world.py' with `print('Hello World!')` in it;
-- ✅ run 'hello_world.py' both in the terminal and in the Visual Studio Code interactive window; and
-- ✅ installed packages in the terminal using both `conda install` and `pip install`, then
-
-you are ready to move on to the next chapter!

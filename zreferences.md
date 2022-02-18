@@ -16,5 +16,5 @@ kernelspec:
 # Bibliography
 
 ```{bibliography} references.bib
-:style: unsrt
+:style: unsrtalpha
 ```
