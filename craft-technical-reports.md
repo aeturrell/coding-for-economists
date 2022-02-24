@@ -5,9 +5,9 @@
 
 In this chapter, you will find guidance on writing *technical reports*. As with other chapters, it is opinionated about what technical reports are and should be. As ever with writing, there are often good reasons to bend the rules—but if you follow the guidance in this chapter, you will be beginning from a position of strength.
 
-Technical reports are fundamentally different to research papers (covered in {ref}`craft-writing-papers`) or research blog posts (covered in {ref}`craft-research-blogs`). In a research blog post or a research paper, the analytical finding (and the narrative around it) is the star of the show; in a technical report, processes and methods are the stars, even though findings may be included. Technical reports are about documenting, well, technical details. They should have enough detail for the reader to understand and perhaps even reproduce the methods under discussion (or know where to stat with it).
+Technical reports are fundamentally different to research papers (covered in {ref}`craft-writing-papers`) or research blog posts (covered in {ref}`craft-research-blogs`). In a research blog post or a research paper, the analytical finding (and the narrative around it) is the star of the show; in a technical report, processes and methods are the stars, even though findings may be included. Technical reports are about documenting, well, technical details. They should have enough detail for the reader to understand and perhaps even reproduce the methods under discussion (or know where to start with it).
 
-Another way that technical reports may different from a research paper is that they *can* contain the less than exciting bits of methodology and process that shouldn't make it into a paper. This can very much include dead ends, and, in fact, technical reports are as important for what they say about what *doesn't* work as what they say about what does.
+Another way that technical reports may differ from a research paper is that they *can* contain the less than exciting bits of methodology and process that shouldn't make it into a paper. This can very much include dead ends, and, in fact, technical reports are as important for what they say about what *doesn't* work as what they say about what does.
 
 This chapter has benefitted from The Institution of Engineering and Technology's guide on [Technical Report Writing](https://www.theiet.org/media/5182/technical-report-writing.pdf) as well as numerous other sources.
 
@@ -15,11 +15,9 @@ This chapter has benefitted from The Institution of Engineering and Technology's
 
 {cite:t}`zinsser2006writing` and {cite:t}`white1972elements` are two excellent general resources on writing. Let's go through some tips:
 
-- The reader is the most important person.
-
 - Keep the report as short and as concise as possible. A technical report is not an excuse to waffle and anyone reading it will only be too grateful if they can extract the information without having too wade through too many words.
 
-- Organise and signpost the report for the convenience of the reader. That means hyperlinks, decimal numbered sections (for example "1.2.1 Methods") with clear titles, figure captions, and a structure that follows a logical order. See the next section for the broad outline of a suggested structure.
+- Organise and signpost the report for the convenience of the reader. That means hyperlinks, decimal numbered sections (for example "1.2.1 Methods") with clear titles, figure captions, and a structure that follows a logical order. See the next section for a suggested structure.
 
 - Include references so that further information can be easily found.
 
@@ -29,7 +27,7 @@ This chapter has benefitted from The Institution of Engineering and Technology's
 
 - Put the reader first. Do not digress into details that are not relevant to achieving a similar technical outcome. Likewise, although you can include more detail than you would in a paper, you needn't give the comprehensive history of you have arrived at your knowledge, just the knowledge itself.
 
-- Signpost other outputs related to the same project, and do it early. If there's an accompanying code repository, paper, dataset, or software package, the introduction is probably the place to mention them (you can always give more detail on them later).
+- Signpost other outputs related to the same project, and do it early. If there's an accompanying code repository, paper, dataset, or software package, the introduction is probably the place to mention them (you can always give more detail on those additional outputs later).
 
 - Output formats (docx, markdown, HTML, PDF) will depend strongly on your particular context. But there is a way to write-once-output-many, as you'll see later in this chapter.
 
