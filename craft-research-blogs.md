@@ -15,8 +15,6 @@ kernelspec:
 (craft-research-blogs)=
 # Research Blog Posts
 
-## Introduction
-
 In this chapter, you will find hints and tips for writing impactful blog posts that summarise research or analysis. To make the distinction with blogging more generally, the chapter is called 'research blog posts', but the advice could apply to any complete analytical project. As in other chapters on craft, although the text below may say 'do this' or 'don't do that', there are few universal rules in writing and what's appropriate for your project may be something completely different. But following these guidelines should give you a solid place to start if you need one.
 
 Your first question is likely to be "why blog about my research?", and it's a good one. Blogs are a really useful way of getting your work to a wider audience, including the general public—either directly or via journalists and aggregators. They will drive people to your research, make your research findings more shareable, and, as a side benefit, help you improve your communication skills too. The rest of the chapter will, hopefully, take some of the pain out of blogging.
@@ -27,7 +25,7 @@ This chapter has benefitted from numerous sources, including conversations with 
 
 The reason most people take the trouble to present and summarise their analytical work in the form of a research blog post is to help find a wider audience for it.
 
-It's helpful to think of how many people will engage with the dissemination outputs you create as following the *inverted pyramid of research dissemination*. Note that these are outputs you create and control, so media articles or newsletters that others have written don't appear in this model. 
+It's helpful to think of how many people will engage with the dissemination outputs you create as following the *inverted pyramid of research dissemination*. Note that these are outputs you create and control, so media articles or newsletters that others have written don't appear in this model.
 
 At the top layer of the pyramid, you can draw a large number of people in via social media, including people who might not otherwise have ever thought about or seen what you're doing. This is quite unusual; for a blog post, they might have at least decided to visit a related website, but for social media they could just be scrolling through Twitter or TikTok.
 
@@ -81,11 +79,13 @@ Let's run over some other general tips for writing good research blog posts:
 
 - Don't use jargon or acronyms! Be really strict with your prose; you may not even realise that some words you write frequently *are* jargon.
 
-- Well-written and engaging blogs will have a much bigger impact. Writing concise, punchy pieces does take time and practice.
+- Well-written and engaging blogs will have a much bigger impact. Writing concise, punchy pieces does take time and practice though.
 
-- Figures and tables (floats) should be used sparingly, be really clear, and should tell the story. Take a look at the chapter on narrative data visualisation to get a sense of what works. Any floats should be able to stand alone without the text too. If re-using floats from a paper or report, strip out elements that are superfluous to the narrative of the post.
+- Figures and tables (floats) should be used sparingly, be really clear, and should tell the story. Take a look at the chapter on narrative data visualisation, {ref}`vis-narrative`, to get a sense of what works. Any floats should be able to stand alone without the text too. If re-using floats from a paper or report, strip out elements that are superfluous to the narrative of the post.
 
-- Some blogs require that references to other work only appear as hyperlinks—something to bear in mind as you're drafting.
+- Wherever possible, use vector graphics for your figures. This means using formats such as svg instead of png. Most plotting libraries will write to many output formats, including svg.
+
+- Some blog sites require that references to other work only appear as hyperlinks—something to bear in mind as you're drafting.
 
 - Just as with papers, readers of your blog post will want to know what is different today, now you've done this work, as compared to yesterday, when you hadn't. Is what you discovered a big effect? Does it have big implications? 
 
