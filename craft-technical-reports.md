@@ -51,17 +51,21 @@ This is only a suggested structure, and even then only at a high level of detail
 
 - Appendices: try not to have them at all (but sometimes they are necessary). They can sometimes be a good place to put things that aren't essential to the report but are needed for completeness, for example code showing how something was implemented that is so long it would break up the main report too much.
 
-## A Template for Writing Technical Reports
+## A Template for Technical Reports
 
 This section covers how to easily write your technical reports while following all of the best practice detailed in the previous sections. Some of the content is similar to what is in {ref}`auto-reports`.
 
+One of the first choices you need to make when writing a technical report is what tech to use.
+
 You can, of course, just write your technical report in Microsoft Word. This gives you useful features like tracked changes and, for a text heavy document, is not a bad choice. However, there are limitations such as formatting weirdness, difficulties with references, the lack of automation of any code-generated elements, and the lack of easy export to other formats.
 
-Another option is to write your report in a type of markdown known as *quarto markdown*, which has a ".qmd" file extension, or in a Jupyter Notebook. Then code-generated elements, references, hyperlinks, formatting, export to other formats, and more, are taken care of. You'll also be able to use version control.
+The rest of this section introduces an alternative, *quarto markdown*. This approach is in the spirit of what some people call 'literate programming', which mixes code (and code-related approaches) along with writing. Below, there is a quarto markdown template to help you get started.
 
-Regarding markdown, if you haven't skimmed the chapter on it, {ref}`wrkflow-markdown`, you may want to have a quick look at it before reading the rest of this chapter in order to understand the syntax. Quarto markdown is a superset of the markdown syntax, the main difference being that quarto has executable code blocks.
+The advantage of an approach based around markdown is that code-generated elements, references, hyperlinks, formatting, export to other formats, and more, are taken care of, and you can use version control on your report. (These won't be necessary or even desirable for some reports, but being able to use them if you need is *very* handy.)
 
-To create technical reports using this tech, you will need an installation of Jupyter Lab (which can be installed using `pip install jupyterlab`), an installation of a programme called [Quarto](https://quarto.org/), and the other Python packages as used below. For some types of output, you’ll also need to have an installation of the typesetting language LaTeX, for which this book recommends the [MikTeX](https://miktex.org/) distribution. If you get stuck, the documentation on the Quarto website is very good. (Under the hood, quarto uses pandoc, so you may recognise some commands from pandoc in the below.)
+Quarto markdown files have a ".qmd" file extension and look a lot like markdown, or they can be written in a Jupyter Notebook. Vanilla markdown (with file extension ".md") is the subject of the chapter {ref}`wrkflow-markdown`, and if you haven't yet looked at that, you may want to have a quick skim before reading the rest of this chapter. Quarto markdown is a superset of the markdown syntax, the main difference being that quarto has executable code blocks in addition to the usual markdown features.
+
+To create technical reports using quarto markdown, you will need Jupyter Lab (which can be installed using `pip install jupyterlab`), an installation of a programme called [Quarto](https://quarto.org/), and the other Python packages as used below or for your outputs. For some types of output, you’ll also need to have an installation of the typesetting language LaTeX, for which this book recommends the [MikTeX](https://miktex.org/) distribution. If you get stuck, the documentation on the Quarto website is very good. (Under the hood, quarto uses pandoc, so you may recognise some commands from pandoc in the below.)
 
 The template below can be put into a Jupyter Notebook (.ipynb file) instead but, as technical reports tend to be text-heavy, we'll be using a quarto markdown file (with extension .qmd) as the template. To use the template, you can copy the contents below and paste them into a new, empty file called `technical_report.qmd` which you then open in VS Code.
 
@@ -71,7 +75,7 @@ Once you've written your technical report as a quarto markdown file, you can exp
 quarto render technical_report_template.qmd --to docx --wrap=none
 ```
 
-on the command line. This will produce a Word document. Replace `--to docx` with `--to html` or `--to gfm` to produce HTML or Markdown output, respectively. PDF is possible too. The `--wrap=none` keyword argument stops the exported markdown having a newline after every link.
+on the command line. This will produce a Word document. Replace `--to docx` with `--to html` or `--to gfm` or `--to pdf` to produce HTML, Markdown, or PDF output, respectively. The `--wrap=none` keyword argument stops the exported markdown having a newline after every link.
 
 Let's now run through the sections in the template below.
 
@@ -142,7 +146,7 @@ To show the code and outputs, use
 ```{python}
 #| echo: true
 
-print("Hellow World")
+print("Hello World")
 ```
 
 or 
@@ -150,7 +154,7 @@ or
 ```{python}
 #| echo: false
 
-print("Hellow World")
+print("Hello World")
 ```
 
 for just the outputs. Note that instead of the usual `python` at the start of the blocks, it's `{python}` for executable code.

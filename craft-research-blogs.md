@@ -53,7 +53,7 @@ In this view of dissemination, you can think of a research blog post as a poster
 
 Alongside the inverted pyramid of dissemination, above, there is another inverted pyramid that gives a suggested structure for research blog posts. This following the classic inverted pyramid of news as used by journalists. Just as with dissemination of research more broadly, more eyeballs will reach the top layer than the bottom, and more of the detail will emerge in the bottom layers.
 
-If it is to effective, your blog post cannot be too long; 800 words a good target, and definitely no more than 1500. Many places that you would want to publish the blog will have limits anyway, but even if it's on your own website, if you're summarising a research project you probably want to make it *substantially* shorter than the paper.
+If it is to be effective, your blog post cannot be too long; 800 words is a good target, and definitely no more than 1500 words. Many places that you would want to publish the blog will have limits anyway, but even if it's on your own website, if you're summarising a research project you probably want to make it *substantially* shorter than the paper.
 
 Let's run over some other general tips for writing good research blog posts:
 
