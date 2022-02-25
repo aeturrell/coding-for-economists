@@ -42,7 +42,7 @@ To run all of the examples in the book, you may need to install additional packa
 Try going to the {ref}`code-basics` chapter now and clicking on the rocketship symbol (🚀), then select "Colab". Try running the first few code cells.
 ```
 
-Note that if you're on a secure network, you may find that options 2 and 3 don't work for you. However, as long as you can download and run files locally, option 1 should always work.
+Note that if you're on a secure network, you may find that option 2 doesn't work for you because Colab is blocked. If you have a local installation of Python, and can download and run files locally too, option 1 should work. If you're using a secure computer on a network that *won't* allow you to install Python or its packages, there's some advice at the end of the {ref}`code-preliminaries` chapter.
 
 For a small number of the examples using data, you may need to download the relevant files from this book's Github [repository](https://github.com/aeturrell/coding-for-economists/tree/main/data), but this will always be explained in the relevant subsections.
 
