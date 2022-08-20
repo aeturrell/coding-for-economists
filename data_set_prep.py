@@ -151,6 +151,29 @@ def prep_air_quality_data():
     df.to_csv(Path("data/beijing_pm.csv"))
 
 
+def create_smaller_cut_flights_data():
+    url = "https://raw.githubusercontent.com/byuidatascience/data4python4ds/master/data-raw/flights/flights.csv"
+    flights = pd.read_csv(url)
+    flights["time_hour"] = pd.to_datetime(flights["time_hour"])
+    in_cols = ["year", "month", "day", "flight", "minute", "distance", "hour"]
+    for col in in_cols:
+        flights[col] = flights[col].astype("int")
+    cat_cols = ["carrier", "tailnum", "origin", "dest"]
+    for col in cat_cols:
+        flights[col] = flights[col].astype("category")
+    num_cols = [
+        "dep_time",
+        "sched_dep_time",
+        "dep_delay",
+        "arr_time",
+        "arr_delay",
+        "air_time",
+    ]
+    for col in num_cols:
+        flights[col] = flights[col].astype("float")
+    flights.sample(100000, random_state=78557).to_parquet("data/flights.parquet")
+
+
 if __name__ == "__main__":
     prep_river_data()
     star_wars_data()

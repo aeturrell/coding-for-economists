@@ -53,7 +53,7 @@ This is only a suggested structure, and even then only at a high level of detail
 
 ## A Template for Technical Reports
 
-This section covers how to easily write your technical reports while following all of the best practice detailed in the previous sections. Some of the content is similar to what is in {ref}`auto-reports`.
+This section covers how to easily write your technical reports while following all of the best practice detailed in the previous sections. Some of the content is similar to what is in {ref}`quarto`.
 
 One of the first choices you need to make when writing a technical report is what tech to use.
 
