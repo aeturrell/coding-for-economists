@@ -26,13 +26,21 @@ Coding is like a superpower; it's both fun and powerful! Head to the first secti
 
 ## Reading guide
 
-You can read this book in any order depending on your experience. Check the section headings and numbered chapter headings to find out what would be most valuable for you.
+You can read this book in any order depending on your experience; check the chapter titles to find out what would be most valuable for you. But if you want to start getting to grips with using code for economics, the first four sections are designed to help you get as far as possible as quickly as possible.
 
 ## Using the book interactively
 
-As well as reading the book, you can also run the code examples for yourself (this is a great way to learn). There are two ways to run code from the book:
+As well as reading the book, you can also run the code examples for yourself (this is a great way to learn). You can either copy and paste examples into Python scripts and run them yourself, or you can use some of the interactive options we provide.
 
-1. All pages that have code on can be downloaded to your desktop and run as *Jupyter Notebooks*. Click the download symbol in the top right hand corner of the page and select '.ipynb', which stands for 'ipython notebook'. You will need to install software on your computer to run Jupyter Notebooks. This book recommends the Anaconda distribution of Python, which provides an installation of the Python language for your computer. To write and run code and notebooks, this book recommends [Visual Studio Code](https://code.visualstudio.com/docs/python/python-tutorial) (plus its Python extension). There's more on how to get started with Anaconda Python and Visual Studio Code together in the next chapter.
+### Running examples in scripts
+
+For this, you just need to copy and paste examples into a Python script in Visual Studio Code and run it in an *interactive window* (once you have a working Python environment—more on how to set this up in {ref}`code-preliminaries`). If you're finding it difficult to set up your Python environment, you can always use a cloud service version of Visual Studio Code instead: [Github Codespaces](https://github.com/features/codespaces) and [Gitpod](https://www.gitpod.io/) both provide cheap or free access to a ready-made Visual Studio Code development environment in your browser window. Gitpod has a free tier.
+
+### Running the code from the book directly
+
+There are two ways to run code directly from the book:
+
+1. All pages that have code on can be downloaded to your desktop and run as *Jupyter Notebooks* (which you'll find out more about in {ref}`code-where`). Click the download symbol in the top right hand corner of the page and select '.ipynb', which stands for 'ipython notebook'. You will need to install software on your computer to run Jupyter Notebooks. This book recommends the Anaconda distribution of Python, which provides an installation of the Python language for your computer. To write and run code and notebooks, this book recommends [Visual Studio Code](https://code.visualstudio.com/docs/python/python-tutorial) (plus its Python extension). There's more on how to get started with Anaconda Python and Visual Studio Code together in the next chapter.
 
 2. Most pages that have code on can be run as a *Google Colab* notebook with a single click on `Colab`, found under the rocket button at the top of the page. If you need to install any extra packages in a Google Colab session, the syntax is `!pip install packagename` to install a library called 'packagename'. Colab notebooks are run in a browser window.
 
@@ -42,13 +50,4 @@ To run all of the examples in the book, you may need to install additional packa
 Try going to the {ref}`code-basics` chapter now and clicking on the rocketship symbol (🚀), then select "Colab". Try running the first few code cells.
 ```
 
-Note that if you're on a secure network, you may find that option 2 doesn't work for you because Colab is blocked. If you have a local installation of Python, and can download and run files locally too, option 1 should work. If you're using a secure computer on a network that *won't* allow you to install Python or its packages, there's some advice at the end of the {ref}`code-preliminaries` chapter.
-
 For a small number of the examples using data, you may need to download the relevant files from this book's Github [repository](https://github.com/aeturrell/coding-for-economists/tree/main/data), but this will always be explained in the relevant subsections.
-
-```{admonition} Tip
-:class: tip
-Every page with code can be downloaded and run as a Jupyter notebook--just click <i class="fas fa-download"></i> at the top of the page and select '.ipynb'.
-
-Most pages with code can be run in Google Colab --just click <i class="fas fa-rocket"></i> at the top of the page and select 'Colab'.
-```

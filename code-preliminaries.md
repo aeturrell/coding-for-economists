@@ -144,18 +144,6 @@ To run code the other way, in the terminal, right-click and select 'Run Python f
 Create a new script that, when run, prints "Welcome to coding for economists" and run it in both the terminal and an interactive window.
 ```
 
-### Writing Your First Notebook
-
-Notebooks are another popular way to write code, in addition to scripts (`.py` files). Notebooks can mix code and a type of plain text called Markdown by having "cells" that are either code or Markdown. This chapter was written in Markdown; many other chapters in the book are written as notebooks, and you can download them to run them on your own computer. Look for the download symbol at the top of each page; ".ipynb" means ipython notebook. We'll be seeing more of notebooks and markdown in subsequent chapters.
-
-```{admonition} Exercise
-In Visual Studio Code, click new file. Save the file as "hello_world.ipynb". Close the file, then re-open it within VS Code to make Code recognise that it's a notebook. Try adding `print("hello world!")` to the first cell and hitting the play symbol on the left-hand side of the cell. You will be prompted to select a "kernel", a version of Python on your system. It doesn't matter which you use.
-
-Now add a markdown cell ("+ Markdown") and enter `# This is title` followed by a blank line and then another line with `## This is a subtitle`. Click the tick that appears at the top of this cell.
-
-What happens when you press "clear outputs"? What about "run all?".
-```
-
 ## Packages and How to Install Them
 
 Packages (also called libraries) are key to extending the functionality of Python. The default installation of Anaconda comes with many (around 250) of the packages you'll need, but it won't be long before you'll need to install some extra ones. There are packages for geoscience, for building websites, for analysing genetic data, and, yes, of course, for economics. Packages are typically not written by the core maintainers of the Python language but by enthusiasts, firms, researchers, academics, all sorts! Because anyone can write packages, they vary widely in their quality and usefulness. There are some that are key for an economics workflow, though, and you'll be seeing them again and again.

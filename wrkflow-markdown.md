@@ -32,7 +32,7 @@ The standard extension for files that only contain markdown is `.md`, but you ma
 There are plenty of situations where you may wish to use markdown:
 
 - repositories for software or research paper replications
-- to create websites, reports, and slides; see {ref}`auto-reports` for more on this
+- to create websites, reports, and slides; see {ref}`quarto` for more on this
 - in the text cells of Jupyter Notebooks; see {ref}`code-where` for more on this
 - as a base format that tools like **pandoc** and **Quarto** can turn into other document types
 - to write books about coding for economists!
@@ -190,7 +190,7 @@ df = pd.DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),
                   columns=['a', 'b', 'c'])
 ```
 
-Note that there is syntax highlighting of data types and reserved keywords. The syntax highlighting supports a wide range of languages. Also note that the syntax is quite similar to what's used for code blocks that will be executed by **quarto** when using markdown for publishing automated reports (see {ref}`auto-reports` for more on this).
+Note that there is syntax highlighting of data types and reserved keywords. The syntax highlighting supports a wide range of languages. Also note that the syntax is quite similar to what's used for code blocks that will be executed by **quarto** when using markdown for publishing automated reports (see {ref}`quarto` for more on this).
 
 Display maths is rendered by double dollar signs, like so:
 

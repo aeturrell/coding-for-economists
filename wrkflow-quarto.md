@@ -43,7 +43,7 @@ Quarto can be used to create *output* documents and slides in a wide variety of 
 
 You can write the *input* documents (include code snippets) in two possible ways:
 
-1. A special kind of markdown file, with file extension `.qmd`. For more on markdown, see {ref}`markdown`. Code blocks that have a special syntax get executed and their results are included in any outputs.
+1. A special kind of markdown file, with file extension `.qmd`. For more on markdown, see {ref}`wrkflow-markdown`. Code blocks that have a special syntax get executed and their results are included in any outputs.
   
 2. Jupyter Notebooks, with file extension `.ipynb`. Code cells are executed and their results are included in any outputs.
 
