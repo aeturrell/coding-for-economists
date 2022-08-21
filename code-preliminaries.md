@@ -242,20 +242,19 @@ So, if you have:
 - ✅ installed Python, using the Anaconda distribution of Python;
 - ✅ installed Visual Studio Code, and its Python extension;
 - ✅ written and saved 'hello_world.py' with `print('Hello World!')` in it;
-- ✅ run 'hello_world.py' both in the terminal and in the Visual Studio Code interactive window
-- ✅ run code in a Jupyter Notebook; and
+- ✅ run 'hello_world.py' in the Visual Studio Code interactive window; and
 - ✅ installed packages in the terminal using both `conda install` and `pip install`, then
 
-you are ready to move on to the next chapter! :rocket:
+you are ready to move on to the next chapter! 🚀
 
 ## Extras
 
-These can be safely skipped if you just want to get on with some coding.
+The rest if this chapter contains extras that could be helpful to some people. However, if you just want to get on with some coding or you don't think they apply to you, skip them and move on to the next chapter.
 
 ### Coding on your work computer
 
 ```{note}
-If you're not planning to code at work, or your place of work allows you to install whatever programmes you like, you can safely skip this section.
+If you're not planning to code at work, or your place of work allows you to install whatever programmes you like, this section won't be relevant to you.
 ```
 
 Ideally, you want to have full flexibility over the coding languages, IDEs, and tools that you can install and use. Unfortunately for anyone who wants to code at work, some work computer systems are locked down to the point where programming languages and the tools needed to use them are not able to be installed (often for extremely good reason). Even very big, well-funded organisations can struggle with the problem of providing a good platform for coding, analysis, and data science while also ensuring that the core systems are secure. IT departments faced with this trade-off are increasingly opting to separate out the base environment (where you receive your emails and so on) from the 'developer environment' (the computers that you code on) because it's usually safer to access a less secure computing environment from a more secure computing environment (rather than the other way around). For example, you might use your secure laptop to access a separate data science platform remotely. Although this setup can be frustrating, it can actually enforce lots of good practice too, so it's not all bad—and it does mean you have a chance of accessing more powerful systems with the latest software and hardware.
@@ -264,7 +263,7 @@ Organisations that are further along their coding and automation journey will li
 
 Let's explore some options for coding platforms 'in a box' that do not require any installation, and can be accessed via the internet. Note that your IT department may still have blocked the URLs of the websites of these services, but you can always make a case for unblocking them until the same capabilities are available in-house.
 
-[Google Colab](https://research.google.com/colaboratory/) is a great way to start learning and trying out the exercises in this book remotely without having to install anything on your computer. Most pages in this book that have code on are just a click away from launching a Colab notebook—just click the <i class="fas fa-rocket"></i> at the top of a page with code on and select 'Colab'. Google Colab is fantastic for trying things out, sharing tinkering with others, and generally having a first go at some coding, but it only supports notebooks.
+[Google Colab](https://research.google.com/colaboratory/) is a great way to start learning and trying out the exercises in this book remotely without having to install anything on your computer. Most pages in this book that have code on are just a click away from launching a Colab notebook—just click the 🚀 at the top of a page with code on and select 'Colab'. Google Colab is fantastic for trying things out, sharing tinkering with others, and generally having a first go at some coding, but it only supports notebooks.
 
 If you need the full power of Visual Studio Code, which supports scripts and notebooks, the easiest way is to use [Github Codespaces](https://github.com/features/codespaces) or [Gitpod](https://www.gitpod.io/). Codespaces provides cheap access to a ready-made Visual Studio Code development environment in your browser window. Gitpod is similar, but also has a free tier. Many IT departments will use Github themselves, so you may find your organisation already has a subscription to GitHub (and therefore Codespaces) can use. Another advantage of using a Github subscription is that you can use Github for version control too (if 'version control' is new to you, don't worry—it's just a way of efficiently working with files that have code in).
 
@@ -273,7 +272,7 @@ Finally, if you're just starting to learn and don't need to save any data or cod
 ### Fine-tuning Visual Studio Code
 
 ```{note}
-If you just want to get on with some coding, you can skip this section.
+If you're not using Visual Studio Code or you're not ready to delve deeper into its settings, you can safely ignore this section.
 ```
 
 Once you've downloaded and installed *Visual Studio Code*, and installed the Python extension, you'll have enough to get going but VS Code can do a whole lot more with some extra add-ons. You can install these using the extensions tab on the left hand side of VS Code. Here are the ones this book recommends and why:
