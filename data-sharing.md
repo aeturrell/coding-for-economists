@@ -13,6 +13,7 @@ kernelspec:
   name: python3
 ---
 
+(data-sharing)
 # Sharing Data
 
 There are many times when you want to share data with a much wider audience. In this chapter, we'll find out about some ways to share data in ways that are *fast*, *easy for users*, and follow *best practices*. Because it's by far the most common case, we'll focus on sharing *tabular data*.
