@@ -472,9 +472,303 @@ foldername/*
 
 and run `touch foldername/.gitkeep`. This preserves the structure but doesn't track anything in the folder---highly useful for folders containing data.
 
-## Remote and local
+## Branches
 
-![](https://merely-useful.tech/py-rse/figures/git-cmdline/git-remote.png)
+We've seen a little sneak preview of branches. In essence, they allow you and your co-authors to independently and simultaneously work on multiple features.
+
+Branches are one of git's most powerful tools. They allow you to try out a whole new idea without affecting the default branch (usually this default branch is called called "main"). Only once you're satisfied that you want to keep those new developments do you need to merge it back into the "main" branch. And, if you're *not* satisfied and it doesn't work, you can just delete the experimental branch.
+
+This is how most new features in modern software and apps are developed. It is also how bugs are caught and diagnosed.
+
+For researchers and analysts, it's also a good way option for trying out new ideas, adding extra robustness checks, doing revisions, and more.
+
+### A walkthrough using a branch
+
+Let's revisit our example with the `test-repo` project. We're going to create a branch to develop an experimental feature. We'll use the `-b` optional argument to do this. Let's create a new branch called experimental:
+
+```bash
+git checkout -b experimental
+```
+
+You should get a message saying "Switched to a new branch 'experimental'". Let's make a change in this experimental branch, creating a new file, `personalised_hello.py`.
+
+```python
+value = input("Enter your name: ")
+print(f"Hello {value}!")
+```
+
+You can create this on the command line with `echo "value = input('Enter your name: ')\nprint(f'Hello {value}!')" > personalised_hello.py`.
+
+You can run this code on the command line by typing `python personalised_hello.py`.
+
+Let's commit this new script to the branch by doing `git add personalised_hello.py` followed by `git commit -m 'personalised hello script added'`.
+
+Congratulations! You just made your first commit to a new branch!
+
+#### Merging
+
+This is about merging locally; you can also merge on the remote via a pull request, but we'll cover that later.
+
+Now, in this case, the new branch we made is fairly easy to merge in: it just adds an extra file. But what if we had a merge that was a bit more interesting? Something more like this:
+
+```text
+	  A---B---C experimental
+	 /         \
+    D---E---F---G---H master
+```
+
+where letters represent commits.
+
+Let's first move "main" on by one commit by adding a (very boring) .gitignore file with an exclusion for any csv files.
+
+```bash
+git checkout main
+echo "*.csv" > .gitignore
+git add .gitignore
+git commit -m 'git ignore for the project'
+```
+
+Now let's go back to the "experimental" branch, with `git checkout experimental`, and change the main script to say "hey world!" instead. On the command line, this is `echo "print('hey world!')" > script.py`. To commit it, `git add script.py` and then `git commit -m 'hey instead of hello'`. Now we have several changes on the branch: a new file, `personalised_hello.py`, and a different line in `script.py`.
+
+We're now going to try and merge the two different branches we have: "main" and "experimental". To do this we need a special "merge commit".
+
+![Diagram showing a merge commit of a feature.](https://wac-cdn.atlassian.com/dam/jcr:c6db91c1-1343-4d45-8c93-bdba910b9506/02%20Branch-1%20kopiera.png?cdnVersion=600)
+
+*Diagram showing a merge commit of a feature.*
+
+First, we checkout "main" using `git checkout main`. Then we say which branch we want to merge in and add a message about it:
+
+```bash
+git merge experimental
+```
+
+This will ask you for a merge message in git's favoured editor, which is called "vi". This can be confusing to use, to say the least, but some info that will help you is:
+
+1. press `i` (i for insert)
+2. write your merge message
+3. press `esc` (escape)
+4. write `:wq` (write & quit)
+5. then press enter
+
+Once you're done, you can look at the git graph, `git log --graph`, to see your "merge commit" and how it has become part of main.
+
+If you run `cat script.py`, you'll see that script.py now contains "print('hey world!')", so that the commit from the more recent branch is picked up. And the `personalised_hello.py` script is also there, inherited from our "experimental" branch.
+
+To list all the branches on your machine, run `git branch`. To delete branches that you have finished with, it's
+
+```bash
+git branch -d branch-name
+```
+
+where `-d` means "delete".
+
+#### Merge Conflicts
+
+Sometimes when merging, it's not plain sailing. Though git tries to do all of the resolving of conflicts that it can, there may be disagreements at the line level of what the code should say.
+
+When this happens, you will see something like the following:
+
+
+```bash
+# README
+Some text here.
+<<<<<<<HEAD
+Text added by Person 2.
+=======
+Text added by Person 2.
+*>>>>>>> ac22bd20a39b68f0bc4a49594a56d3d2421feb2c.
+More text here.
+```
+
+What do these symbols mean?
+
+- `<<<<<<< HEAD`Indicates the start of the merge conflict.
+- `=======`Indicates the break point used for comparison.
+- `>>>>>>> <commit ID>`Indicates the end of the lines that had a merge conflict.
+
+Fixing these conflicts is a simple matter of (manually) editing the README file by deleting the lines of the text that you don't want; essentially manually resolving the conflict. You need to delete the special Git merge conflict symbols too.
+
+Once that's done, you should be able to stage, commit, pull and even push your changes to a remote repository without any errors.
+
+Some things to note:
+
+- Person 1 gets to decide what to keep because they are fixing the merge conflict.
+- The full commit history is preserved, so person 2 can always recover their changes if desired.
+
+## Remote and local repositories
+
+If you only use git for *local* version control, then you are going to lose all of your work if something happens to your computer! For this reason, most people also work with a *remote repository* that acts as something like a mirror of your local repository. You can *push* commits to that remote repository or *pull* commits down from it.
+
+![Diagram showing how a remote repo relates to your project directory, staging area, and local repository](https://merely-useful.tech/py-rse/figures/git-cmdline/git-remote.png)
+
+*Diagram showing how a remote repo relates to your project directory, staging area, and local repository*
+
+There are other benefits of remote repositories: the main one being that you can work with collaborators who can push and pull to the same remote; they enable you to work with others. And, for open source code, you may not even *know* those other collaborators---so this is a very powerful feature.
+
+Note that you will need to decide whether you will make your remote repository public or private. This largely depends on whether you want to share the work, and invite collaboration, from people you don't know. You can share a private repo with known collaborators via adding their username.
+
+There are several remote, cloud-based repositories out there that you can use but the three of the most popular are *GitHub*, *GitLab*, and *BitBucket*. In the next section, we'll find out more about working with *GitHub*.
 
 ### GitHub
 
+GitHub is not git; it is a remote repository for git projects. It is, if you like, Dropbox for git repositories, but the way you use it is quite different. Although you don't need GitHub or other remote repository providers to use git, it's a lot more powerful if you do. And GitHub has a slew of other useful features for version control and managing projects.
+
+Some of those features include:
+- a way to [manage projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects) with kanban boards
+- a way to manage [issues](https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues) for your repository, which you and others can use to make requests for new features, to record bugs that need fixing, and more. For example, you can raise and see issues on the "Coding for Economists" repo [here](https://github.com/aeturrell/coding-for-economists/issues). If you're using Visual Studio Code, you can automatically convert the text "#todo" into an issue without ever leaving your code editor.
+- GitHub stars, a way to track the popularity of open source repositories. You can see the history of stars for "Coding for Economists" [here](https://star-history.com/#aeturrell/coding-for-economists&Date). Do give "Coding for Economists" a star if you like it!
+- A live text editor for remote repositories. Just go onto any repo's home page when logged in and hit the `.` button to load up the text editor.
+- [Codespaces](https://github.com/features/codespaces), a cloud service that you can use to do development on, including running code.  Codespaces uses Visual Studio Code in the browser as its editor and code-runner.
+
+There are free and paid tiers of Github, with different functionality. But you can make as many public or private repos as you like on the free tier.
+
+#### Workflow using GitHub as a remote repository
+
+You can either add an existing local repository to a remote one or `git clone` a remote one that you've just created to pull down a local version from GitHub. We'll look at the latter.
+
+Head over to GitHub, sign in and use the `+` symbol in the top right to create a new repository. You'll need to set:
+
+- a name
+- a .gitignore
+- a license
+- a description
+- say whether you wish to create a README.md
+- say whether it should be public or private
+
+Once you've created your new repository, go to its homepage (usually "https://github.com/your-username/repo-name") and then click "code", "local", then copy the HTTPS link. This will usually be something like "https://github.com/your-usernmae/repo-name.git".
+
+Back on your local machine's command line, type `git clone` then paste in the link:
+
+```bash
+git clone https://github.com/your-usernmae/repo-name.git
+```
+
+You should get a message like "Cloning into 'repo-name'". What's happening is that a local copy of what's on the server (aka the "remote") is being made on your computer. You can then follow your usual git workflow. The only difference is when you want to sync the remote.
+
+When you're ready to sync with the remote, you can run `git push` to push your recent commits up to GitHub. This can include branches.
+
+To pull down other peoples' changes, use `git pull`.
+
+So the complete workflow is:
+
+1. `git pull` any changes on the remote
+2. Stage files using `git add`: tell Git that you want to add changes to the repo history (file edits, additions, deletions, etc)
+3. Commit using `git commit -m "your commit message"`
+4. `git push` any commited local changes to the remote GitHub repo.
+
+### The remote merge, aka a pull request
+
+As well as doing local merges, you can merge on the remote via something called a *pull request*. A pull request, also referred to as a merge request, takes place when a contributor/developer wants to merge new code changes from a branch into the main project repository.
+
+There is an advantage of a pull request relative to a local merge: collaboration. Others can review, comment on, and even edit your pull request before it gets merged in.
+
+The way to create a pull request is to push a branch you'd like to merge in then go on to your repository's branches page. This will usually be "https://github.com/user-name/project-name/branches". Then, next to the branch you'd like to merge in, use the "New pull request" button.
+
+After initialising a pull request, you'll see a review page that shows a high-level overview of the changes between your branch (the compare branch) and the repository's base branch. You can add a summary of the proposed changes, review the changes made by commits, add labels, milestones, and assignees, and @mention individual contributors or teams. For more information, see the GitHub docs for ["Creating a pull request"](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
+
+Once you have lodged your pull request, other contributors can review your proposed changes, add review comments, contribute to the pull request discussion, and even add commits to the pull request. By default, in public repositories, any user can submit reviews that approve or request changes to a pull request.
+
+After you're happy with the proposed changes, you can merge the pull request. If you're working in a shared repository model, you create a pull request and you, or someone else, will merge your changes from your feature branch into the base branch you specify in your pull request.
+
+You can find a lot more about pull requests and merging on the [GitHub documentation](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests).
+
+## Using Visual Studio Code for version control with git
+
+Although we've seen a lot of how to use git on the command line, it's not the only option! Visual Studio Code has a ton of functionality to help you with version control.
+
+![Typical layout of Visual Studio Code](img/vscode_layout.png)
+
+*Typical layout of Visual Studio Code*
+
+On the left-hand side of the Visual Studio Code panel (to the left of "1" and "2" on the image above), you can see some icons. The one that looks like dots connected by lines that are branching is a tab that brings up Visual Studio Code's git functionality. This exposes buttons and tools that carry out the commands we saw above for you automatically.
+
+Rather than staging with `git add`, you can just click the `+` icon next to any files that have changed. And, once changes are staged, you can simply type your commit message and hit the "commit" button.
+
+There are also convenient buttons to synchronise between remote and local repositories, to push and pull, and to create and work with new branches.
+
+There are also some excellent extensions for Visual Studio Code to help you with version control:
+
+- [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph), which allows you to view a graph of your repository 
+- [Git History](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory), which allows you to view and search git log along with the graph and details
+- [Git Blame](https://marketplace.visualstudio.com/items?itemName=waderyan.gitblame), which shows information in the status bar on who wrote the currently selected line and when they wrote it.
+
+Some of these create extra buttons on the source control panel in Visual Studio Code.
+
+## The magic of pre-commit
+
+Your code should run properly when you commit a change, but wouldn't it be nice if there was a way to check? Happily, there is a technology that does this. It's called "pre-commit" and it's a game-changer for ensuring code does what you want.
+
+[Pre-commit](https://pre-commit.com/) is a framework for managing and maintaining multi-language pre-commit hooks, that is things that happen to your code---like checking it runs---before the code is committed. These "git hook scripts" are useful for identifying simple issues before submission of code.
+
+You can install pre-commit as a Python package using `pip install pre-commit`. You can check it's installed by running `pre-commit --version`.
+
+The kind of things you can do with pre-commit includes:
+
+- checking for any large files that have been committed by mistake
+- *linting* code to look for, and even fix, bad code style
+- check the formatting of other standard file types, like TOML and YAML
+- remove any trailing whitespace from text files
+- stripping out data from Jupyter Notebooks leaving just the code and text
+- re-order Python imports according to whether they are from external or built-in packages
+
+The way that pre-commit works is that you create a special file, `.pre-commit-config`, that lists what pre-commit "hooks" you want to use on your code.
+
+Here's the output from running
+
+```bash
+pre-commit run --all-files
+```
+
+```text
+Check for added large files..............................................Passed
+nbstripout...............................................................Passed
+black....................................................................Passed
+flake8...................................................................Passed
+```
+
+For more information on pre-commit hooks, look at the [official website](https://pre-commit.com/) and [this blog](https://ericmjl.github.io/data-science-bootstrap-notes/set-up-pre-commit-hooks-to-automate-checks-before-making-git-commits/) on using pre-commit to automate checks.
+
+## Command line reference
+
+Here are all of the commands you might ever need for git on the command line!
+
+| Command 	| What the command does| Category |
+|:----------|:----|:----:|
+| `git help COMMAND` | get help for a git command | Basics |
+| `git init`| creates a new git repo, with data stored in the .git directory | Basics |
+| `git status`| tells you what’s going on | Basics |
+| `git add FILENAME` | adds files to staging area | Basics |
+| `git commit`| creates a new commit | Basics |
+|` git log` | shows a flattened log of history | Basics |
+| `git log --all --graph --decorate` | visualises git history as a DAG | Basics |
+| `git diff FILENAME` | show changes you made relative to the staging area | Basics |
+| `git diff REVISION FILENAME` | shows differences in a file between snapshots | Basics |
+| `git checkout REVISION` | updates HEAD and current branch | Basics |
+| `git branch`| shows branches | Branching and merging |
+| `git branch BRANCH-NAME` | creates a branch | Branching and merging |
+| `git checkout -b BRANCH-NAME` | creates a branch and switches to it | Branching and merging |
+| `git merge REVISION`| merges into current branch | Branching and merging |
+| `git mergetool`| use a fancy tool to help resolve merge conflicts | Branching and merging |
+| `git rebase`| rebase set of patches onto a new base | Branching and merging |
+| `git remote`| list remotes | Remotes
+| `git remote add BRANCH-NAME URL` | add a remote | Remotes
+| `git push REMOTE LOCAL-BRANCH REMOTE-BRANCH` | send objects to remote  | Remotes
+| `git fetch` | retrieve objects/references from a remote | Remotes
+| `git pull` | same as git fetch; git merge | Remotes
+| `git clone` | download repository from remote | Remotes
+| `git commit --amend` | edit a commit’s contents/message | Undo |
+| `git reset HEAD FILENAME` | unstage a file | Undo |
+| `git checkout -- FILENAME` | discard changes | Undo |
+| `git config`| Git is highly customizable | Undo |
+| `git blame`| show who last edited which line | Undo |
+
+## Further Resources
+
+These are some other good git and GitHub resources.
+
+- [Pro Git](https://git-scm.com/book/en/v2) is highly recommended and very thorough. Going through Chapters 1–5 should teach you most of what you need.
+- [Oh Shit, Git!?!](https://ohshitgit.com/) is a short guide on how to recover from some common Git mistakes
+- [GitHub Skills](https://skills.github.com/) will help you learn how to use GitHub with interactive courses designed for beginners and experts.
+- [Learn Git Branching](https://learngitbranching.js.org/) is a browser-based game that teaches you Git.
+- [Visualizing Git Concepts with D3](https://onlywei.github.io/explain-git-with-d3) helps you understand some common git commands with visualisations.
+- [Git Explorer](https://gitexplorer.com/) lets you explore which git commands you might need.
