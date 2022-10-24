@@ -15,19 +15,19 @@ kernelspec:
 (wrkflow-version-control)=
 # Version Control
 
-In this chapter, you're going to learn about version control. This will enable you to keep track of any code you write, down to the lin, following best software development practices. It can be a challenging topic as it requires a different mindset to the one you're probably used to where you just save a file. But I promise you that it's worth it---and it will really help you ensure that your analysis is reproducible, and easily packaged up into a replication packet.
+In this chapter, you're going to learn about version control. This will enable you to keep track of any code you write, down to the line, following best software development practices. It can be a challenging topic as it requires a different mindset to the one you're probably used to where you just save a file. But I promise you that it's worth it---and it will really help you ensure that your analysis is reproducible, and easily packaged up into a replication packet.
 
-This chapter has benefitted from a wide range of sources, including [Research Software Engineering with Python](https://merely-useful.tech/py-rse/), the free online book [Pro Git](https://git-scm.com/book/en/v2), and the Alan Turing Institute's [Research Software Engineering with Python](https://alan-turing-institute.github.io/).
+This chapter has benefitted from a wide range of sources, including [Research Software Engineering with Python](https://merely-useful.tech/py-rse/), the free online book [Pro Git](https://git-scm.com/book/en/v2), Grant McDermott's [ever excellent notes](https://raw.githack.com/uo-ec607/lectures/master/02-git/02-Git.html#1), and the Alan Turing Institute's [Research Software Engineering with Python](https://alan-turing-institute.github.io/).
 
 ## What is version control?
 
-Version control means keep tracking of the versions of the assets (code, data, models) that you are working with to produce analysis. In this chapter, we'll mainly be looking at version control for code (and text such as latex), but if you're working with data or models that are changing a lot, there are technologies for version control of data and models (for example, [DVC](https://dvc.org/) and [pachyderm](https://www.pachyderm.com/)) too.
+Version control means keep tracking of the versions of the assets (code, data, models) that you are working with to produce analysis. In this chapter, we'll mainly be looking at version control for plain text files (this includes code but also other text files, such as latex files).
 
-When coders talk about version control though, they're usually referring to the ability records changes to a file or set of files over time. Furthermore, they're usually talking about a specific technology for version control---a programme called git, that we'll see more of later in the chapter.
+Note that, if you're working with data or models that are changing a lot, there are technologies for version control of data and models (for example, [DVC](https://dvc.org/) and [pachyderm](https://www.pachyderm.com/)) too---but we don't cover these here.
+
+When coders talk about version control, they're usually referring to the ability to record changes to a file or set of files over time. Furthermore, they're usually talking about a specific technology for version control---a programme called git, that we'll see more of later in the chapter.
 
 You should also know right up front that there's a distinction between git---the tool that can do version control, and GitHub---a central repository that can save the record of your version history on the cloud.
-
-Version control as we'll see it in this chapter works at the project-folder level, keeping everything you need for one project in one structure called a *repository*.
 
 One of the most important things to get your head around with version control is that it offers **much more** than Dropbox or Google Drive. Those do not offer you:
 
@@ -41,9 +41,11 @@ We'll find out more about these abilities later in the chapter.
 
 Version control *doesn't* do some things that Dropbox and Google Drive do though: it doesn't automatically save your files, or even sync them, automatically; you have to manually say when you wish to lodge a more recent version of a file.
 
-The point about reproducibility applies to future you (if your computer gets busted), to your co-authors (who can "clone" your repository), and perhaps even to the world at large (if you open source your code). By putting your repository under version control at the project-folder level, you make it *much* easier for others to work with it and make changes. (As an example of this, the guidelines for contributing to "Coding for Economists" can be found [here](https://github.com/aeturrell/coding-for-economists#dev).)
+Version control based on git is also different in that it works at the project-folder level, keeping everything you need for one project in one structure called a *repository*.
 
-Finally, version control is the de facto standard for managing code. It's a very important part of coding, so if you can learn even a little bit, it's well worth it
+One benefit of version control is that it aids reproducibility. This helps future you (if your computer gets busted), your co-authors (who can "clone" your repository), and perhaps even to the world at large (if you open up your source code). By putting your repository under version control at the project-folder level, you make it *much* easier for others to work with it and make changes. (As an example of this, the guidelines for contributing to "Coding for Economists" can be found [here](https://github.com/aeturrell/coding-for-economists#dev)--though be warned it's a particularly complicated repository as we cover so much ground in this book!)
+
+Finally, version control is the de facto standard for managing code. It's a very important part of coding, so if you can learn to use even a little bit, it's well worth it.
 
 ### Why do you need version control?
 
@@ -713,11 +715,13 @@ The kind of things you can do with pre-commit includes:
 
 The way that pre-commit works is that you create a special file, `.pre-commit-config`, that lists what pre-commit "hooks" you want to use on your code.
 
-Here's the output from running
+Below, you can see the output from running
 
 ```bash
 pre-commit run --all-files
 ```
+
+on the Coding for Economists repository:
 
 ```text
 Check for added large files..............................................Passed
