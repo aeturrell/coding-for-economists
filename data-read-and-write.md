@@ -12,8 +12,7 @@ kernelspec:
   language: python
   name: python3
 ---
-
-(data-read-write)=
+(data-read-and-write)=
 # Reading and Writing Files
 
 In this chapter, you'll learn about reading and writing data.

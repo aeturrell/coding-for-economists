@@ -1,12 +1,9 @@
 # coding-for-economists
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/aeturrell/coding-for-economists/HEAD)
-
 This readme is intended to help those contributing to or editing the book, not those trying to follow it. To read or use the book, head to the [coding for economists website](https://aeturrell.github.io/coding-for-economists/intro.html). You can use the book interactively via the following options, all available via the link above:
 
 - download pages to your computer as jupyter notebooks
 - run pages in Google Colab through your browser
-- run pages in Binder through your browser—this should work but will likely be slow to start.
 
 ## Dev
 
@@ -36,7 +33,7 @@ You can check that this has worked by running `which python` on the command line
 
 If you don't, and you get something like `/usr/bin/python` instead, then you need to following the instructions for the command line version of Python being incorrect below.
 
-Some extra assets associated with packages are required. You will need to run `python3 -m spacy download en_core_web_sm` to download the spacy model, and `python3 -m nltk.downloader all` for the **nltk** models.
+Some extra assets associated with packages are required. You will need to run `python -m spacy download en_core_web_sm` to download the spacy model, and `python3 -m nltk.downloader all` for the **nltk** models.
 
 ### Using the docker image
 
@@ -51,7 +48,7 @@ There is a Dockerfile for the environment, which is the easiest way to set up a 
 
 Warning: if you are building the dockerfile with the environment, it will take some time to build. There is a pre-built image available on Dockerhub [here](https://hub.docker.com/repository/docker/aeturrell/codingforeconomists/general).
 
-There is a bug inbetween all the dependencies that sees a list index error arise. You can squish this manually by commenting out `token.children[1].content = token.children[1].content[3:]` in `"/opt/conda/envs/codeforecon/lib/python3.8/site-packages/mdit_py_plugins/tasklists/__init__.py"`, line 84, in todoify. However, the commenting out is done automatically by the Dockerfile. (Generally, there have been version issues between markdown-it-py, myst-nb, and myst-parser.)
+There is a bug inbetween all the dependencies that sees a list index error arise. You can squish this manually by commenting out `token.children[1].content = token.children[1].content[3:]` in `"/opt/conda/envs/codeforecon/lib/python3.8/site-packages/mdit_py_plugins/tasklists/__init__.py"`, line 84, in todoify. However, the commenting out is done automatically by the Dockerfile. (Generally, there have been version issues between markdown-it-py, myst-nb, and myst-parser.) On a Mac, this line will likely be at `"/Users/USERNAME/opt/anaconda3/envs/codeforecon/lib/python3.8/site-packages/mdit_py_plugins/tasklists/__init__.py"`.
 
 ### Building the Book
 
@@ -119,3 +116,11 @@ This will overwrite the existing notebook!
 ### Command line version of python is incorrect
 
 Deactivate the conda environment (until even the base environment is deactivated) using `conda deactivate`. Then activate your environment with `conda activate your_env_name_goes_here`.
+
+### Special Fonts
+
+This book uses some special fonts, such as Varta. If you install these manually, you may need to refresh your Matplotlib font cache before you can see the new fonts at work:
+
+```bash
+rm ~/.matplotlib/fontlist-v330.json
+```

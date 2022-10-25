@@ -84,7 +84,7 @@ Once you have written them, market test your title and abstract. The title and a
 
 Many people find it useful to write the abstract of a paper last. By the time you have thought about the overall contribution and written the rest of the paper (particularly the introduction and conclusion), the abstract will be far easier. Abstracts are usually limited to 150—250 words, but can be as few as 100 words for some journals.
 
-For an example of an abstract that really nails it, take a look at "The tradeoff between knowledge of mandated benefits and moral hazard" by Dr Jessica Brown {cite:t}`brown2022tradeoff`:
+For an example of an abstract that really nails it, take a look at "The tradeoff between knowledge of mandated benefits and moral hazard" by Dr Jessica Brown {cite:p}`brown2022tradeoff`:
 
 > When workers are not aware of a mandated benefit, they cannot take it into account in their employment decision, leading to deadweight loss. On the other hand, lack of awareness of a benefit reduces moral hazard, decreasing deadweight loss. I incorporate these trade‐offs into a model of mandated benefits and apply the model to Temporary Disability Insurance, an employment benefit mandated in five states. First, using data collected through an original survey, I provide evidence that there is low awareness of this benefit. Second, I use the updated mandated benefits model to show that over a broad range of reasonable assumptions, the additional employee valuation of the benefit outweighs the additional program cost from moral hazard, and thus a public information campaign would increase employment.
 
