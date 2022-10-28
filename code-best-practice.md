@@ -12,9 +12,8 @@ kernelspec:
   language: python
   name: python3
 ---
-
 (code-best-practice)=
-# Tips for Better Coding
+# Code in Style
 
 In this chapter, you'll learn some of the easiest and most impactful tips for better coding. This chapter has benefitted from the [Clean Code In Python](https://testdriven.io/blog/clean-code-python/) guide by Nik Tomazic and the UK Government Statistical Service's [Quality Assurance of Code for Analysis and Research](https://best-practice-and-impact.github.io/qa-of-code-guidance/intro.html) guidance (which is well worth checking out).
 
