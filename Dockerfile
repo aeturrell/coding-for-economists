@@ -33,7 +33,7 @@ SHELL ["conda", "run", "-n", "codeforecon", "/bin/bash", "-c"]
 RUN mamba list
 
 # Install NLP models
-RUN python3 -m spacy download en
+RUN python3 -m spacy download en_core_web_sm
 RUN python3 -m nltk.downloader all
 
 # Comment out the offending line in todoify
