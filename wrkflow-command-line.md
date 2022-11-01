@@ -17,7 +17,7 @@ kernelspec:
 
 In this chapter, you'll meet the *command line* and learn how to use it. Beyond a few key commands like `pip install <packagename>`, `conda activate <environmentname>`, and `jupyter lab`, you don't strictly need to know how to use the command line to follow the rest of this book. However, even a tiny bit of knowledge of the command line goes a long way in coding and will serve you well.
 
-To try out any of the commands in this chapter on your machine, you can select 'New Terminal' from the menu bar in Visual Studio Code (Mac and Linux), use the Windows Subsystem for Linux or git bash (Windows), or use a free [online terminal](https://cocalc.com/doc/terminal.html).
+To try out any of the commands in this chapter on your machine, you can select 'New Terminal' from the menu bar in Visual Studio Code (Mac and Linux), use the Windows Subsystem for Linux or git bash (Windows), or use a free online terminal such as [WebVM](https://webvm.io/) or [tutorials point](https://www.tutorialspoint.com/linux_terminal_online.php).
 
 This chapter has benefited from numerous sources, including absolutely excellent notes by [Grant McDermott](https://grantmcdermott.com/), Melanie Walsh's [Introduction to Cultural Analytics & Python](https://melaniewalsh.github.io/Intro-Cultural-Analytics/welcome.html), [Data Science Bootstrap](https://ericmjl.github.io/data-science-bootstrap-notes/), [calmcode.io](https://calmcode.io/), and [Research Software Engineering with Python](https://merely-useful.tech/py-rse/). A promising resource that, at the time of writing, was still being compiled is [Data Science at the Command Line](https://www.datascienceatthecommandline.com/2e/).
 
