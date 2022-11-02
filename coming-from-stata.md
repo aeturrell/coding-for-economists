@@ -23,13 +23,15 @@ Another difference is that, in Stata, there is one dataset in memory that is rep
 
 Finally, Python and its data analysis packages are free.
 
-Regardless of Python not being a programming language solely dedicated to data analysis, it really does have first class support for data analysis via its **pandas** package.
+Regardless of Python not being a programming language solely dedicated to data analysis, it really does have first class support for data analysis via its **pandas** package. Support for doing regressions is perhaps less good than **Stata**, and certainly a bit more verbose---but you can still do pretty much every standard operation you can think of.
 
 ## Stata <==> Python
 
-What follows is a giant table of translations between Stata code and Python's [**pandas**](https://pandas.pydata.org/)(panel-data-analysis) package. The econometrics examples below use Daniel M Sullivan's [**econtools**](https://www.danielmsullivan.com/econtools/metrics.html) package, but you could also use [**statsmodels**](https://www.statsmodels.org/). Bear in mind, it's certainly not meant to be exhaustive but it should give you a flavour of the syntax differences and, in some cases, I've pointed out where to find further information.
+What follows is a giant table of translations between Stata code and Python's [**pandas**](https://pandas.pydata.org/)(panel-data-analysis) package. Some of the econometrics examples below use Daniel M Sullivan's [**econtools**](https://www.danielmsullivan.com/econtools/metrics.html) package, but you could also use [**statsmodels**](https://www.statsmodels.org/). It's not meant to be exhaustive but it should give you a flavour of the syntax differences and, in some cases, I've pointed out where to find further information.
 
-Following Daniel's treatment, the Stata-to-Python translations assume that, in Python, you have a **pandas** DataFrame called `df`. We will use placeholders like `varname` for Stata variables and `df['varname']` for the Python equivalent. Remember that you need to `import pandas as pd` before running any of the examples that use `pd`. For the econometrics examples, you will need `import econtools.metrics as mt`.
+Following Daniel's treatment, the Stata-to-Python translations assume that, in Python, you have a **pandas** DataFrame called `df`. We will use placeholders like `varname` for Stata variables and `df['varname']` for the Python equivalent. Remember that you need to `import pandas as pd` before running any of the examples that use `pd`. For the econometrics examples, you will need `import econtools.metrics as mt` or other package imports as specified below.
+
+You can find more on (frequentist) regressions in {ref}`econmt-regression`.
 
 | Stata      | Python (pandas) |
 | ----------- | ----------- |
@@ -76,5 +78,17 @@ Following Daniel's treatment, the Stata-to-Python translations assume that, in P
 | `test varlist, equal`  | `results.Ftest(varlist, equal=True)` |
 | `ivreg2`  | `mt.ivreg` |
 | `outreg2`  | `econtools.outreg` |
-| `binscatter`  | `binsreg` from the [**binsreg**](https://pypi.org/project/binsreg/) package |
+| `binscatter`  | `binsreg` from the [**binsreg**](https://pypi.org/project/binsreg/) package; see {ref}`econmt-regression` |
 | `twoway scatter var1 var2`  | `df.scatter(var2, var1)` |
+
+The table below presents further examples of doing regression with both the **statsmodels** and [**linearmodels**](https://bashtage.github.io/linearmodels) packages. Where it is available, we've specified regressions with a formula API.
+
+| Command | Stata      | Python |
+| ----------- | ----------- | ----------- |
+| Fixed Effects (absorbing) | `reghdfe y x, absorb(fe)` | Using the **linearmodels** package:<br><code>from linearmodels.iv.absorbing import AbsorbingLS <br> mod = AbsorbingLS(data["y"], data["x"]], absorb=sim["fe"]) <br> print(mod.fit())</code>|
+| Categorical regression | `reghdfe y x i.cat` | Using the **statsmodels** package:<br><code>import statsmodels.formula.api as smf <br> results = smf.ols("y ~ x + C(cat)", data=df).fit() <br> print(results.summary())</code><br> But if `cat` is of type categorical it can be run with `y ~ x + cat`|
+| Interacting categoricals | `reghdfe y x i.cat#i.cat2` | Using the **statsmodels** package:<br><code>import statsmodels.formula.api as smf <br> results = smf.ols("y ~ x + C(cat):C(cat2)", data=df).fit() <br> print(results.summary())</code> <br> Note that `a*b` is a short-hand for `a + b + a:b`, with the last term representing the interaction.|
+| Robust standard errors | `reghdfe y x, r` | Using the **statsmodels** package:<br><code>import statsmodels.formula.api as smf <br> results = smf.ols("y ~ x", data=df).fit(cov_type="HC0") <br> print(results.summary())</code> <br> Note that a range of heteroskedasticity robust standard errors are available: 'HC0', 'HC1', 'HC2', and 'HC3'.|
+| Clustered standard errors | `reghdfe y x, cluster(clust)` | Using the **statsmodels** package:<br><code>import statsmodels.formula.api as smf <br> results = smf.ols("y ~ x", data=df).fit(cov_type="cluster", cov_kwds={"groups": df["clust"]}) <br> print(results.summary())</code> <br>|
+| Two-way clustered standard errors | `reghdfe y x, cluster(clust1 clust2)` | Using the **statsmodels** package:<br><code>import statsmodels.formula.api as smf <br>two_way_clusters = np.array(df\[["clust1", "clust2"]]) <br> results = smf.ols("y ~ x", data=df).fit(cov_type="cluster", cov_kwds={"groups": two_way_clusters}) <br> print(results.summary())</code> <br>|
+| Instrumental variables | `ivreghdfe 2sls y exog (endog = instrument)` | Using the **linearmodels** package:<br><code>from linearmodels.iv import IV2SLS<br>mod = IV2SLS.from_formula("y ~ exog + [endog ~ instrument]", data=df)<br> print(mod.fit(cov_type="robust").summary())</code> <br>|
