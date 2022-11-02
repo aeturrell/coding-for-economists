@@ -76,5 +76,5 @@ Following Daniel's treatment, the Stata-to-Python translations assume that, in P
 | `test varlist, equal`  | `results.Ftest(varlist, equal=True)` |
 | `ivreg2`  | `mt.ivreg` |
 | `outreg2`  | `econtools.outreg` |
-| `binscatter`  | `econtools.binscatter` |
+| `binscatter`  | `binsreg` from the [**binsreg**](https://pypi.org/project/binsreg/) package |
 | `twoway scatter var1 var2`  | `df.scatter(var2, var1)` |
