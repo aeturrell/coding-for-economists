@@ -31,7 +31,7 @@ What follows is a giant table of translations between Stata code and Python's [*
 
 Following Daniel's treatment, the Stata-to-Python translations assume that, in Python, you have a **pandas** DataFrame called `df`. We will use placeholders like `varname` for Stata variables and `df['varname']` for the Python equivalent. Remember that you need to `import pandas as pd` before running any of the examples that use `pd`. For the econometrics examples, you will need `import econtools.metrics as mt` or other package imports as specified below.
 
-You can find more on (frequentist) regressions in {ref}`econmt-regression`.
+You can find more on (frequentist) regressions in {ref}`regression`.
 
 | Stata      | Python (pandas) |
 | ----------- | ----------- |
@@ -78,7 +78,7 @@ You can find more on (frequentist) regressions in {ref}`econmt-regression`.
 | `test varlist, equal`  | `results.Ftest(varlist, equal=True)` |
 | `ivreg2`  | `mt.ivreg` |
 | `outreg2`  | `econtools.outreg` |
-| `binscatter`  | `binsreg` from the [**binsreg**](https://pypi.org/project/binsreg/) package; see {ref}`econmt-regression` |
+| `binscatter`  | `binsreg` from the [**binsreg**](https://pypi.org/project/binsreg/) package; see {ref}`regression` |
 | `twoway scatter var1 var2`  | `df.scatter(var2, var1)` |
 
 The table below presents further examples of doing regression with both the **statsmodels** and [**linearmodels**](https://bashtage.github.io/linearmodels) packages. Where it is available, we've specified regressions with a formula API.
