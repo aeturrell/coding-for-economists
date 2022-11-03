@@ -43,8 +43,9 @@ There is a Dockerfile for the environment, which is the easiest way to set up a 
 2. In VS Code, right click on the Dockerfile and hit "build image". Switch to the docker tab and hit "Run interactive". Switch to the VS Code Remote tab, then click "Attach in new window" on the running container.
 3. Once you are in the container via VS Code remote, you may need to install the Python extension (within the container version of VS Code).
 4. If you're using the pre-built image from Dockerhub, you will need to ensure that you have the latest git commit of the code (for now, the Dockerhub image isn't automatically updated when a new commit is made).
-5. Once you are in the container, you'll need to use `conda activate codeforecon` to switch to the right conda environment to build files and run notebooks.
-6. To ping back the built HTML files, use `docker cp running-container-name:app/_build/ .` from your local command line (not the docker container) within the folder where you want to move all of the build files. We suggest creating a "scratch" folder and running the command from within it, or transferring directly to your local "_build" folder. You can partially view the HTML within the docker container using a HTML preview extension but note that MathJax and internal book links won't work in this.
+5. Open up the relevant folder, "app", in VS Code remote.
+6. Once you are in the container, you'll need to use `conda activate codeforecon` to switch to the right conda environment to build files and run notebooks.
+7. To ping back the built HTML files, use `docker cp running-container-name:app/_build/ .` from your local command line (not the docker container) within the folder where you want to move all of the build files. We suggest creating a "scratch" folder and running the command from within it, or transferring directly to your local "_build" folder. You can partially view the HTML within the docker container using a HTML preview extension but note that MathJax and internal book links won't work in this.
 
 Warning: if you are building the dockerfile with the environment, it will take some time to build. There is a pre-built image available on Dockerhub [here](https://hub.docker.com/repository/docker/aeturrell/codingforeconomists/general).
 

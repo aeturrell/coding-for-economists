@@ -9,7 +9,15 @@ WORKDIR /app
 # Update Linux package list and install some key libraries, including latex
 RUN apk update && apk add openssl graphviz \
     nano texlive alpine-sdk build-base graphviz-dev \
-    bash
+    bash unzip R
+
+# Install special fonts
+RUN mkdir -p /usr/share/fonts/truetype/
+RUN wget https://www.wfonts.com/download/data/2015/10/08/varta/varta.zip
+RUN unzip varta.zip
+RUN install -m644 *.ttf /usr/share/fonts/truetype/
+RUN rm *.ttf
+RUN rm varta.zip
 
 # change default shell from ash to bash
 RUN sed -i -e "s/bin\/ash/bin\/bash/" /etc/passwd
