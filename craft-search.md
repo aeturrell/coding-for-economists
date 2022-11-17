@@ -1,11 +1,11 @@
 (craft-search)=
 # Putting the Search in Research
 
-This chapter has tips for engaging with the vast amount of economic literature out there.
+This chapter has tips for engaging with the vast amount of economic (and other) literature out there.
 
 ## Searching and connecting the literature
 
-### General Tips for using Search Engines
+### General tips for using search engines
 
 Let's start with the basics: how to write good queries for search engines. You don't need to remember much from this section to improve your ability to filter search results to what you're actually looking for. While these tips are written with Google in mind, many of them will work with other good search engines.
 
@@ -49,10 +49,6 @@ Semantic Scholar also comes with useful extras:
 - a way to find related articles (click through to the paper)
 - a list of papers that are referenced in the paper of interest
 
-### Connected Papers
-
-[Connected Papers](https://www.connectedpapers.com/) is a paid service that displays network diagrams of papers that are connected by citations (inward or outward). With a free account, you can make a small number of graphs per month.
-
 ### The RePEc Family of Resources
 
 First, RePEc (Research Papers in Economics) is an initiative that seeks to enhance the dissemination of research in Economics and related areas. It's another scholarly database, with various services built on top.
@@ -75,10 +71,48 @@ First, RePEc (Research Papers in Economics) is an initiative that seeks to enhan
 
 You use Consensus by asking a question, for example "what are the main effects of micro credit?". What [you get](https://consensus.app/results/?q=what%20are%20the%20main%20effects%20of%20micro%20credit) are lines and paragraphs drawn from papers that get at the given question. We've been quite impressed by the results.
 
-### Scite
-
-[Scite](https://www.scite.ai/home) is a paid service that pulls related citations and the context in which the paper was cited. It then sorts those citations of the paper you're interested in based on whether the context was just a mention, an expression of support, and or a contrasting statement.
-
 ### Talk to Books
 
 Not everything you need is in journal articles! Google provides a service called [Talk to Books](https://books.google.com/talktobooks/) that allows you to ask questions of books and get reasonable-ish answers. But, if you use this, do remember to use the filters to remove fiction!
+
+### Some other services
+
+These other services have some similarities to those we've seen already. It feels like there's a lot of evolution and churn in large database and machine learning powered searching-the-research tools that will likely see some consolidation and stability in the medium term but, right now, it's hard to say which of these tools will persist and become the most helpful.
+
+- [Connected Papers](https://www.connectedpapers.com/) is a paid service that displays network diagrams of papers that are connected by citations (inward or outward). With a free account, you can make a small number of graphs per month.
+
+ - [Scite](https://www.scite.ai/home) is a paid service that pulls related citations and the context in which the paper was cited. It then sorts those citations of the paper you're interested in based on whether the context was just a mention, an expression of support, and or a contrasting statement.
+
+ - [Scholarcy](https://www.scholarcy.com/) is an online article summariser tool that uses machine learning to pull out the key points of scientific articles. There's a free browser extension but if you want to build up a library, it costs.
+
+- [Elicit](https://elicit.org/) uses language models to help with research. It claims to be able to find relevant papers, summarise takeaways them, and extract key information.
+
+- [lens](https://www.lens.org/) "serves global patent and scholarly knowledge as a public good to inform science and technology enabled problem solving." No account required. There are paid versions for commercial users, but it looks like the core functionality is available for free.
+
+- [researchrabbit](https://www.researchrabbit.ai/) requires a sign-up. Its tag line is "We’re rethinking everything: literature search, alerts, and more". It offers visualisation of a knowledge graph of papers. A sign up is required to start using it.
+
+- [Litmaps](https://app.litmaps.co/) is an online platform for visualising, expanding, and sharing collections of research. You can find an example [here](https://app.litmaps.co/shared/map/41246E1D-CB8B-4F8E-9588-283D94020753).
+
+## Summaries and Reviews
+
+When you want to get on top of a whole literature quickly, reviews and summaries are your friend. Here are some resources that can aid you.
+
+### What is already known about the effectiveness of policies
+
+[Policy Impacts](https://www.policyimpacts.org/) is dedicated to improving the quality of government decision-making by promoting standardisation in policy analysis. The goal is to help policymakers and practitioners better understand and compare the long-term costs and benefits of a wide range of policies by providing a standardised database of MVPF---Marginal Value of Public Funds---estimates. If you're starting a new research project on a policy intervention, it's quite useful to check this database to see what the closest state of the art estimate suggests the benefit is. Note that MVPF is computed as the ratio of benefits to net government cost.
+
+### Finding review articles
+
+Review articles are a great way to get on top of a topic quickly, but finding those can be as tricky as finding the original sources! Here are some tips to locate review articles on a topic.
+
+If you're using a scholarly search engine such as Google Scholar, you can use prompts to retrieve content that's more likely to be a review. For example, if you were interested in literature reviews on the gender pay gap, you could try:
+
+> 'gender pay gap intitle:review OR intitle:meta-analysis OR intitle:"a survey"'
+
+Some popular scholarly search engines have specific filters for this type of content. In Web of Science, Scopus, and Semantic Scholar, choose “Review Article”, “Document type — Review“, and “Publication Type — Review or Meta Analysis” respectively.
+
+Some journals specifically focus on economics reviews. The [*Journal of Economic Literature*](https://www.aeaweb.org/journals/JEL) (JEL) is designed to help economists keep abreast of and synthesise the vast flow of literature. If you want something a bit lighter or only need a general understanding than the [*Journal of Economic Perspectives*] (JEP) fills the gap between the general interest press and academic journals.
+
+Of course, if you work across disciplines, you will often find that other fields have their own review journals too.
+
+Sadly, there isn't nearly enough content that bridges the gap between primary research papers and people who just want to get the gist of the state of the art in a particular topic. As the amount of literature on every topic explodes, we will need more content that aggregates and summarises it in order to keep up---and to inform policymakers. The brilliant [New Things Under the Sun](https://www.newthingsunderthesun.com/), which summarises the state of our knowledge on innovation, is a great example of the kind of content that's needed.
