@@ -77,6 +77,7 @@ import streamlit as st
 st.title("My first dashboard")
 st.write("Hello World!")
 ```
+
 Now, open the command line (remember there's an integrated command line in Visual Studio Code—see the chapter on {ref}`wrkflow-command-line` for more) and (with the relevant Python environment activated) type
 
 ```bash
@@ -118,15 +119,9 @@ prng = np.random.default_rng(seed_for_prng)  # prng=probabilistic random number 
 x = np.linspace(0, 8, 16)
 y1 = 3 + 4*x/8 + prng.uniform(0.0, 0.5, len(x))
 y2 = 1 + 2*x/8 + prng.uniform(0.0, 0.5, len(x))
-
-df = pd.DataFrame(
-     prng.standard_normal(size=(200, 3)),
-     columns=['a', 'b', 'c'])
 ```
 
-Not all data is in **pandas** dataframes though! Support for plenty of data types is available, even [timelines](https://github.com/giswqs/streamlit-timeline).
-
-Here's an example of a chart using **matplotlib**. Within your script, create the chart using the code almost as normal. The only difference is that to display the created chart you'll need to use the special method `st.pyplot`.
+Here's an example of a chart of this data using **matplotlib**. Within your script, create the chart using the code almost as normal. The only difference is that to display the created chart you'll need to use the special method `st.pyplot`.
 
 ```python
 # usual code for plot
@@ -149,7 +144,8 @@ df = pd.DataFrame(
      prng.standard_normal(size=(200, 3)),
      columns=['a', 'b', 'c'])
 alt_chart = alt.Chart(df).mark_circle().encode(
-     x='a', y='b', size='c', color='c', tooltip=['a', 'b', 'c'])
+     x='a', y='b', size='c', color='c', tooltip=['a', 'b', 'c']
+     )
 st.altair_chart(alt_chart, use_container_width=True)
 ```
 
@@ -171,7 +167,7 @@ What's quite amazing is how simple this interactivity is to implement. For examp
 
 ```python
 if st.button('Say Hello'):
-	st.write('Hello!')
+    st.write('Hello!')
 ```
 
 There's some magic going on here: if a user clicks the button marked "Say Hello" then `st.button("Say Hello")` returns true and `st.write("Hello!")` is executed. While this is a simple example, you could execute anything in that block.
@@ -205,8 +201,10 @@ There are lots of different input widgets that provide interactivity. A few of t
 - Date
 - Image upload
 - File upload
+- custom widgets made by other users, eg [timelines](https://github.com/giswqs/streamlit-timeline) ()
 
 To give you some ideas of how you might use some of these elements, you could:
+
 - Use a multi-select box to decide what sectors to include in a stacked area chart of output
 - Use a checkbox to switch between linear and log scales
 - Use the file upload to get users to upload data which is then used to make a forecast, which users can then download using the download button.
