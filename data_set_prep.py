@@ -6,6 +6,7 @@ import urllib.request
 import geopandas as gpd
 import shapely.geometry
 from pathlib import Path
+from skimpy import clean_columns
 
 
 def star_wars_data():
@@ -174,8 +175,49 @@ def create_smaller_cut_flights_data():
     flights.sample(100000, random_state=78557).to_parquet("data/flights.parquet")
 
 
+def prep_kaggle_data_on_tfl_trips():
+    """Prep a sliver of Kaggle data on tfl trips for the tables page.
+    Note that this uses data from this url: https://www.kaggle.com/code/benivitai/tfl-oyster-card-journeys-analysis
+    This function expects that the csv file, Nov09JnyExport.csv, has been extracted and downloaded
+    to data/data_not_stored/
+    """
+
+    tfl = pd.read_csv(Path("data/data_not_stored/Nov09JnyExport.csv"))
+    tfl = clean_columns(tfl)
+    # cast columns
+    data_type_dict = {
+        "downo": "int",
+        "daytype": "category",
+        "sub_system": "category",
+        "start_stn": "category",
+        "end_station": "category",
+        "ent_time": "int",
+        "ex_time": "int",
+        "final_product": "category",
+    }
+    better_names_dict = {
+        "downo": "dayofweek_num",
+        "daytype": "day",
+        "sub_system": "mode",
+        "ent_time": "ent_mins_post_midnight",
+        "ex_time": "ex_time_mins_post_midnight",
+        "final_product": "pay_method",
+    }
+    names_to_remove = [x for x in tfl.columns if x not in data_type_dict.keys()]
+    tfl = tfl.drop(names_to_remove, axis=1)
+    tfl = tfl.astype(data_type_dict)
+    tfl = tfl.rename(columns=better_names_dict)
+    # filter out all bus journeys
+    tfl = tfl.loc[~tfl["mode"] != "LTB", :]
+    # filter all unstarted journeys (no start station)
+    tfl = tfl.loc[tfl["start_stn"] != "Unstarted", :]
+    tfl = tfl.sample(frac=0.1, random_state=4434)
+    tfl.to_parquet(Path("data/tfl_small.parquet"))
+
+
 if __name__ == "__main__":
     prep_river_data()
     star_wars_data()
     save_smith_book()
     prep_gapminder_data()
+    prep_kaggle_data_on_tfl_trips()
