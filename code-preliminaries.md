@@ -1,8 +1,7 @@
 (code-preliminaries)=
 # Preliminaries
 
-Congratulations on starting your coding for economics journey! In this chapter, we're going to help you install or access the tools you need. This chapter is unlikely to be as fun as subsequent ones, but we recommend you read and follow it because it's key to being able to run cod
-First, we're going to give you some background on key concepts for coding. Then, we'll give you an option to either follow instructions to start coding on your own computer or use a popular online cloud service for coding.
+Congratulations on starting your coding for economics journey! In this chapter, we're going to help you install or access the tools you need. This chapter is unlikely to be as fun as subsequent ones, but we recommend you read and follow it because it's key to being able to run code. First, we're going to give you some background on key concepts for coding. Then, we'll give you an option to either follow instructions to start coding on your own computer or use a popular online cloud service for coding. Either way, by the end of this chapter, you will be running code!
 
 ## Choice of programming language for the book
 
@@ -39,9 +38,9 @@ If you have Windows and you want to use Linux or Mac but don't want to shell out
 
 ### Python interpreter
 
-You'll need to install a *Python interpreter*. Python is both a programming language that you can read, and a language that computers can read, interpret, and then carry out instructions based on. For a computer to be able to read and execute Python code, you will need to get a Python interpreter installed on it. There are lots of ways to install a Python "interpreter" on your own computer, this book recommends the Anaconda distribution of Python for its flexibility and simplicity.
+Python is both a programming language that you can read, and a language that computers can read, interpret, and then carry out instructions based on. For a computer to be able to read and execute Python code, you will need to get a Python interpreter installed on it. There are lots of ways to install a Python "interpreter" on your own computer, this book recommends the Anaconda distribution of Python for its flexibility and simplicity. We'll see later how to install Python on your own computer; cloud services typically already have it installed.
 
-### An Integrated development environment, or IDE
+### An Integrated Development Environment, or IDE
 
 An integrated development environment (IDE) is a software application that provides a few tools to make coding easier. The most important of these is a way to write the code itself! IDEs are not the only way to programme, but they are perhaps the most useful. If you have used **Stata** or **Matlab**, you may not have realised it, but these package up the language and the IDE together. But they are separate things: the language is a way of processing your instructions, the IDE is where you write those instructions.
 
@@ -57,7 +56,7 @@ There are a lot of integrated development environments (IDEs) out there. This bo
 
 ### Packages
 
-A Python package is a collection of functions, data, and documentation that extends the capabilities of an installed version of Python. Using packages is key to most data science because most of the functionality we'll need comes from extra packages. You'll see statements like `import numpy as np` at the start of many Python code scripts—these are instructions to use an installed package (here one called `numpy`) and to give it a shortened name (`np`, for convenience) in the rest of the script. The functions in the numpy package are then accessed through syntax like `np.`; for example, you can take logs with `np.log(x)` where `x` is a variable containing a number. You need only install packages once, but you must import them into each script you need to use them in.
+A Python package is a collection of functions, data, and documentation that extends the capabilities of an installed version of Python. Using packages is key to most data science because most of the functionality we'll need comes from extra packages. You'll see statements like `import numpy as np` at the start of many Python code scripts—these are instructions to use an installed package (here one called **numpy**) and to give it a shortened name (`np`, for convenience) in the rest of the script. The functions in the **numpy** package are then accessed through syntax like `np.`; for example, you can take logs with `np.log(x)` where `x` is a variable containing a number. You need only install packages once, but you must import them into each script you need to use them in.
 
 ### Typical workflow
 
@@ -71,11 +70,13 @@ The typical workflow for analysis with code might be something like this:
 We'll see two ways to achieve this workflow:
 
 1. Installing an IDE, Python, and any extra packages on your own computer
-2. Using a computer in the cloud that you access through your internet browser. The cloud computer has an IDE and Python built-in, and you can easily install extra packages in it too. However, the free version is limited to 60 hours / month.
+2. Using a computer in the cloud that you access through your internet browser. The cloud computer has an IDE and Python built-in, and you can easily install extra packages in it too. However, you should be aware that the cloud service we recommend has a 60 hours / month free tier—beyond this, you'll need to pay for extra hours.
 
 You should pick whichever you're more comfortable with! Eventually, you'll probably try both.
 
 ## How to get started on your own computer
+
+These instructions are for if you've decided to code on your own computer.
 
 ### Installing Python
 
@@ -112,6 +113,13 @@ If you go over the free tier hours on Github Codespaces, your credit card will b
 Once you've signed up for a Github account, head to [Github Codespaces](https://github.com/codespaces) and click on "Get Started for Free". You should see a menu of "quick start templates". Under where it says "Jupyter Notebook", hit "Use this template".
 
 You will find that a new page loads with several panels in. This is an online version of Visual Studio Code that works much like if you had installed it on your own computer. It will already have a version of Python installed—you can check which one by running `python --version` in the terminal. The terminal is usually found in the lowest panel of Visual Studio Code, and, in Codespaces, will typically display a welcome message.
+
+## Alternative ways to run the code from the book
+
+As well as following this book using your own computer or on the cloud via Github Codespaces, you can run the code online through a few other options. The first is the easiest to get started with.
+
+1. [Google Colab notebooks](https://research.google.com/colaboratory/). Free for most use. You can launch most pages in this book interactively by using the 'Colab' button under the rocket symbol at the top of the page. It will be in the form of a notebook (which mixes code and text) rather than a script (.py file) but the code you write is the same. Note that Colab doesn't use Visual Studio Code.
+2. [Gitpod Workspace](https://www.gitpod.io/). An alternative to Codespaces. This is a remote, cloud-based version of Visual Studio Code with Python installed and will run Python scripts. Note that the free tier covers 50 hours per month.
 
 ## Running your first Python code
 
@@ -198,43 +206,6 @@ In Visual Studio Code, you can ensure that the interactive window starts in the 
 
 ```{admonition} Exercise
 Create a new script that, when run, prints "Welcome to Coding for Economists" and run it in an interactive window.
-```
-
-### Installing Packages
-
-## Alternative ways to run the code from the book
-
-As well as following this book using your own computer or on the cloud via Github Codespaces, you can run the code online through a few other options. The first is the easiest to get started with.
-
-1. [Google Colab notebooks](https://research.google.com/colaboratory/). Free for most use. You can launch most pages in this book interactively by using the 'Colab' button under the rocket symbol at the top of the page. It will be in the form of a notebook (which mixes code and text) rather than a script (.py file) but the code you write is the same.
-2. [Gitpod Workspace](https://www.gitpod.io/). An alternative to Codespaces. This is a remote, cloud-based version of Visual Studio Code with Python installed and will run Python scripts. Note that the free tier covers 50 hours per month.
-
-## Getting help and learning more
-
-This book is not an island; there is no single resource that will allow you to master Python. As you start to apply the techniques described in this book to your own data you will soon find questions that we do not answer. This section describes a few tips on how to get help, and to help you keep learning.
-
-Some other resources for learning are:
-
-- [The Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
-- [Real Python](https://realpython.com/), which has excellent short tutorials that cover Python more broadly (not just data science)
-- [freeCodeCamp's Python courses](https://www.freecodecamp.org/news/search?query=data%20science%20python), though take care to select one that's at the right level for you
-- [Coding for Economists](https://aeturrell.github.io/coding-for-economists), which has similar content to this book but is more in depth and aimed at analysts (particularly in economics)
-
-If you get stuck with a particular bit of code, start with Google. Typically adding “Python” to a query is enough to restrict it to relevant results. Google is particularly useful for error messages. If you get an error message and you have no idea what it means, try googling it! Chances are that someone else has been confused by it in the past, and there will be help somewhere on the web.
-
-If Google doesn’t help, try [stackoverflow](https://stackoverflow.com/). Start by spending a little time searching for an existing answer, including [Python] to restrict your search to questions and answers that use Python. If you don’t find anything useful, prepare a minimal reproducible example or "reprex". A good reprex makes it easier for other people to help you, and often you’ll figure out the problem yourself in the course of making it.
-
-There are three things you need to include to make your example reproducible: required packages, data, and code.
-
-Packages should be loaded at the top of the script, so it’s easy to see which ones the example needs. This is a good time to check that you’re using the latest version of each package; it’s possible you’ve discovered a bug that’s been fixed since you installed the package.
-
-You should also spend some time preparing yourself to solve problems before they occur. Investing a little time in learning Python each day will pay off handsomely in the long run.
-
-To keep up with the Python data science community more broadly, we recommend following the (#pydata) and (#python) hashtags on Twitter.
-
-
-```{admonition} Exercise
-Create a new script that, when run, prints "Welcome to coding for economists" and run it in both the terminal and an interactive window.
 ```
 
 ## Packages and How to Install Them
