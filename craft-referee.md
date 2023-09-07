@@ -17,6 +17,8 @@ kernelspec:
 
 In this chapter, you'll learn tips and tricks for writing referee reports. Much of this chapter is advisory: some of it might work for you, some of it might not. It's not intended to be a foolproof guide, or to cover everyone's preferences--but it is designed to help you get started on writing good referee reports.
 
+This chapter very much stands on the shoulders of giants. Those giants include [The Turing Way](https://the-turing-way.netlify.app/)'s [Guidance on Peer Review](https://the-turing-way.netlify.app/communication/peer-review/peer-review-guidance.html), {cite:ts}`nyhan2015checklist`, {cite:ts}`berk2017write`, {cite:ts}`nicholas2011quick`, Econometrica's [guidelines for referees](https://www.econometricsociety.org/publications/econometrica/guidelines-referees), Marc Bellemare's [20 Rules for Refereeing](http://marcfbellemare.com/wordpress/5542), Tyler Cowan's [how to be a good referee](https://marginalrevolution.com/marginalrevolution/2006/10/how_to_be_a_goo.html), and Tatyana Deryugina's [how to be a constructive referee](https://deryugina.com/how-to-be-a-constructive-referee/).
+
 What is the purpose of a referee report? We think there are two:
 
 1. to help the editor make a decision about whether to publish the paper in their journal
