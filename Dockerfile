@@ -45,7 +45,10 @@ RUN python3 -m spacy download en_core_web_sm
 RUN python3 -m nltk.downloader all
 
 # Comment out the offending line in todoify
-RUN sed -i '84 s/^/#/' /opt/conda/envs/codeforecon/lib/python3.8/site-packages/mdit_py_plugins/tasklists/__init__.py
+RUN sed -i '84 s/^/#/' /opt/conda/envs/codeforecon/lib/python3.10/site-packages/mdit_py_plugins/tasklists/__init__.py
+
+# On Mac, this is going to be something like
+# sed -i '84 s/^/#/' /Users/YOUR-USERNAME/mambaforge/envs/codeforecon/lib/python3.10/site-packages/mdit_py_plugins/tasklists/__init__.py
 
 # Copy the current directory contents into the container at /app
 COPY . /app

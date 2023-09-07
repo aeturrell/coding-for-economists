@@ -22,11 +22,13 @@ Given so much of economics is quantitative, coding is an essential skill for man
 
 As a skill, programming is enormously valuable *beyond economics* too because it's used across a wide range of domains (this is especially true for general purpose programming languages). Code is widely used across industry, academia, and the public sector in everything from computer games to websites, data science to software applications. And learning basic programming concepts in any language is useful for almost any other programming language. So learning to code is good for your human capital.
 
-Coding is like a superpower; it's both fun and powerful! Head to the first section to get started.
+Coding is like a superpower; it's both fun and powerful!
 
 ## Reading guide
 
-You can read this book in any order depending on your experience; check the chapter titles to find out what would be most valuable for you. But if you want to start getting to grips with using code for economics, the first four sections are designed to help you get as far as possible as quickly as possible.
+You can read this book in any order depending on your experience. If you want to start getting to grips with using code, the first four sections are designed to help you get started quickly while also giving you a solid foundation.
+
+The rest of the book is split into sections that present topics but differentiate between the level at which they address them; for example, there's "Essential Coding" and "Coding". The idea of these demarcations is to help guide you as to what is accessible and essential versus what is powerful and useful but ultimately not strictly necessary. It also points to a possible order for you to arrange your learning by. Of course, the needs of people reading this book will be very heterogeneous, so you should absolutely dip into whatever chapter is most useful to you, and use whatever order makes sense. Do also note that just because a chapter doesn't appear in an "essential" section, doesn't it mean it's not useful! Although they are not in an "essential" section, having used testing, linting, and pre-commit (see {ref}`code-advcd-best-practice`) in anger in research, we cannot now imagine any other way of working with code in economics.
 
 ## Using the book interactively
 
