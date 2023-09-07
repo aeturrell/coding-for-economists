@@ -121,6 +121,10 @@ As well as following this book using your own computer or on the cloud via Githu
 1. [Google Colab notebooks](https://research.google.com/colaboratory/). Free for most use. You can launch most pages in this book interactively by using the 'Colab' button under the rocket symbol at the top of the page. It will be in the form of a notebook (which mixes code and text) rather than a script (.py file) but the code you write is the same. Note that Colab doesn't use Visual Studio Code.
 2. [Gitpod Workspace](https://www.gitpod.io/). An alternative to Codespaces. This is a remote, cloud-based version of Visual Studio Code with Python installed and will run Python scripts. Note that the free tier covers 50 hours per month.
 
+```{admonition} Exercise
+Try going to the {ref}`code-basics` chapter now, click on the rocketship symbol (🚀) and then select "Colab". When the Colab notebook opens, select the first code cell and hit shift + enter to run it.
+```
+
 ## Running your first Python code
 
 ### Getting to grips with Visual Studio Code

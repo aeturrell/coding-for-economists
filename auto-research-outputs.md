@@ -8,7 +8,7 @@ jupytext:
     format_version: '0.8'
     jupytext_version: 1.5.0
 kernelspec:
-  display_name: 'Python 3.8.12 64-bit (''codeforecon'': conda)'
+  display_name: 'Python 3.10.12 64-bit (''codeforecon'': conda)'
   language: python
   name: python3
 ---
@@ -86,7 +86,7 @@ import pandas as pd
 
 tips = sns.load_dataset("tips")
 
-table = tips.groupby(["smoker", "time"]).mean()["tip"].unstack().round(2)
+table = tips.groupby(["smoker", "time"], observed=True)["tip"].mean().unstack().round(2)
 table
 ```
 
