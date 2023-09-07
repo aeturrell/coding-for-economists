@@ -35,7 +35,7 @@ If you follow the guidelines in this chapter you will find that your code will b
 
 The first thing to think about is code style, ie the way you write equivalent valid code.
 
-Feeling lazy? Don't worry, because in the next chapter we'll find out how to get the computer to apply style to your code *automatically*.
+Feeling lazy? Don't worry, because in {ref}`code-advcd-best-practice` we'll find out how to get the computer to apply style to your code *automatically*.
 
 Python has a whole set of conventions about good style called ['PEP8'](https://www.python.org/dev/peps/pep-0008/), which it's worth taking a quick look at. It includes advice like indentation should always be 4 spaces (not tabs) per level and that you should surround top-level function and class definitions with two blank lines.
 
@@ -309,7 +309,7 @@ import this
 If you are just learning to code you should feel free to skip this section for now.
 ```
 
-There are many other coding tips that are useful but that make use of concepts or tools that we haven't met yet. To be comprehensive, they are included here.
+There are many other coding tips that are useful but that make use of concepts or tools that we haven't met yet. To be comprehensive, they are included here—but we'll be seeing most of them in the other coding chapters.
 
 ### Version Control
 
