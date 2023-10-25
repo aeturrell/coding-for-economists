@@ -1,3 +1,17 @@
+---
+jupytext:
+  cell_metadata_filter: -all
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: '0.8'
+    jupytext_version: 1.5.0
+kernelspec:
+  display_name: 'Python 3.10.12 64-bit (''codeforecon'': conda)'
+  language: python
+  name: python3
+---
 (code-preliminaries)=
 # Preliminaries
 
@@ -39,6 +53,16 @@ If you have Windows and you want to use Linux or Mac but don't want to shell out
 ### Python interpreter
 
 Python is both a programming language that humans can read, and a language that computers can read, interpret, and then carry out instructions based on. For a computer to be able to read and execute Python code, it needs to have a Python interpreter installed. There are lots of ways to install a Python "interpreter" on your own computer, this book recommends the Anaconda distribution of Python for its flexibility, simplicity, and large community. Cloud services often come with a Python interpreter installed, and we'll see shortly how to install one on your own computer.
+
+In the box below, you can see which version of Python was used to compile this book:
+
+```{code-cell} ipython3
+:tags: [remove-input]
+
+import sys
+
+print("Compiled with Python version:", sys.version)
+```
 
 ### An Integrated Development Environment, or IDE
 
