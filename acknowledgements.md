@@ -6,6 +6,7 @@ Contributors:
 
 - [aeturrell](https://github.com/aeturrell)
 - [lukestein](https://github.com/lukestein)
+- [Artem Smirnov](https://github.com/ASmirnov-HORIS), who did a wonderful job of improving the figures made using the [**Lets-Plot**](https://lets-plot.org/) package.
 
 Please note that this book does not represent the views of any employer of its contributors.
 
