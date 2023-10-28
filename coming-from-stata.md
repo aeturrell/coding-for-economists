@@ -27,17 +27,17 @@ Regardless of Python not being a programming language solely dedicated to data a
 
 ## Stata <==> Python
 
-What follows is a giant table of translations between Stata code and Python's [**pandas**](https://pandas.pydata.org/)(panel-data-analysis) package. Some of the econometrics examples below use Daniel M Sullivan's [**econtools**](https://www.danielmsullivan.com/econtools/metrics.html) package, but you could also use [**statsmodels**](https://www.statsmodels.org/). It's not meant to be exhaustive but it should give you a flavour of the syntax differences and, in some cases, I've pointed out where to find further information.
+What follows is a giant table of translations between Stata code and Python's [**pandas**](https://pandas.pydata.org/)(panel-data-analysis) package. We're going to rely on a few packages for econometrics in the below. They are [**statsmodels**](https://www.statsmodels.org/) as your general purpose and flexible regression library, [**pyfixest**](https://s3alfisc.github.io/pyfixest/) for when you need high dimensional fixed effects, and [**binsreg**](https://nppackages.github.io/binsreg/) for bin scatter.
 
-Following Daniel's treatment, the Stata-to-Python translations assume that, in Python, you have a **pandas** DataFrame called `df`. We will use placeholders like `varname` for Stata variables and `df['varname']` for the Python equivalent. Remember that you need to `import pandas as pd` before running any of the examples that use `pd`. For the econometrics examples, you will need `import econtools.metrics as mt` or other package imports as specified below.
+Many of the examples below assume that, in Python, you have a **pandas** DataFrame called `df`. We will use placeholders like `varname` for Stata variables and `df['varname']` for the Python equivalent. Remember that you need to `import pandas as pd` before running any of the examples that use `pd`. For the econometrics examples, you will need to import the relevant package.
 
 You can find more on (frequentist) regressions in {ref}`regression`.
 
 | Stata      | Python (pandas) |
 | ----------- | ----------- |
 | `help command`      | `help(command)`       |
-| `cd directory`   | <code>import os<br>os.chdir('directory') </code> <br> Best practice: don't do this; bring the data to you!        |
-| `use dtafile`   | `df = pd.read_stata('dtafile')`       |
+| `cd directory`   | <code>import os<br>os.chdir('directory') </code> <br> Best practice: don't do this; bring the data to you by opening Visual Studio Code in a project root folder and using relative paths.        |
+| `use file.dta`   | `df = pd.read_stata('file.dta')`       |
 | `use varlist using dtafile`   | <code>df = pd.read_stata('dtafile', columns=varlist) </code>       |
 | `import excel using excelfile`   | <code>df = pd.read_excel('excelfile') </code>       |
 | `import delimited using csvfile`   | <code>df = pd.read_csv('csvfile') </code>       |
@@ -67,28 +67,25 @@ You can find more on (frequentist) regressions in {ref}`regression`.
 | `merge 1:1 vars using filename`  | `df = pd.merge(df1, df2, on=vars)` but there are very rich options for merging dataframes (Python is similar to SQL in this respect) and you should check the [full documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/merging.html).     |
 | `reshape <wide/long> <stubs>, i(<vars>) j(<var>)`  | **pandas** has several reshaping functions, including `df.unstack('level')` for going to wide, `df.stack('column_level')` for going to long, `pd.melt`, and `df.pivot`. It's best to check the excellent [reshaping](https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html) documentation to find what best suits your needs.    |
 | `xi: i.var`  | `pd.get_dummies(df['var'])`|
-| `reg yvar xvar if condition, r`  | <code>import econtools.metrics as mt<br> results = mt.reg(df[condition], 'yvar', 'xvar', robust=True) </code> |
-| `reg yvar xvar if condition, vce(cluster clustervar)`  | `results = mt.reg(df[condition], 'yvar', 'xvar', cluster='clustervar')` |
-| `reg yvar xvar if condition, vce(cluster clustervar)`  | `results = mt.reg(df[condition], 'yvar', 'xvar', cluster='clustervar')` |
-| `areg yvar xvar, absorb(fe_var)`  | `results = mt.reg(df, 'yvar', 'xvar', a_name=fe_var)` |
-| `predict newvar, resid`  | `newvar = results.resid` |
-| `predict newvar, xb`  | `newvar = results.yhat` |
-| `_b[var], _se[var]`  | `results.beta['var'], results.se['var']` |
-| `test varlist`  | `results.Ftest(varlist)` |
-| `test varlist, equal`  | `results.Ftest(varlist, equal=True)` |
-| `ivreg2`  | `mt.ivreg` |
-| `outreg2`  | `econtools.outreg` |
+| `reg yvar xvar if condition, r`  | <code>from pyfixest.estimation import feols<br> fit = feols("yvar ~ xvar", data=df["condition"], vcov="HC2") </code> |
+| `reg yvar xvar if condition, vce(cluster clustervar)`  | <code>from pyfixest.estimation import feols<br> fit = feols("yvar ~ xvar", data=df["condition"], vcov={"CRV1": "clustervar"}) </code> |
+| `areg yvar xvar, absorb(fe_var)`  | <code>from pyfixest.estimation import feols<br> fit = feols("yvar ~ xvar \| fe_var", data=df) </code> |
+| `_b[var], _se[var]`  | `results_sw.coef()["var"], results_sw.se()["var"]` following creation of `results` via `results = feols(...)` |
+| `ivreg2 lwage exper expersq (educ=age)`  | <code> feols("lwage ~ exper + expersq \| educ ~ age", data=dfiv) </code> |
+| `outreg2`  | `results = feols(...)` then `results.tidy()` |
 | `binscatter`  | `binsreg` from the [**binsreg**](https://pypi.org/project/binsreg/) package; see {ref}`regression` |
 | `twoway scatter var1 var2`  | `df.scatter(var2, var1)` |
 
-The table below presents further examples of doing regression with both the **statsmodels** and [**linearmodels**](https://bashtage.github.io/linearmodels) packages. Where it is available, we've specified regressions with a formula API.
+The table below presents further examples of doing regression with both the **statsmodels** and [**pyfixest**](https://bashtage.github.io/linearmodels) packages.
+
+Note that, in the below, you need only import `feols` once in each Python session, and the syntax for looking at results is `results = feols(...)` and then `results.summary()`.
 
 | Command | Stata      | Python |
 | ----------- | ----------- | ----------- |
-| Fixed Effects (absorbing) | `reghdfe y x, absorb(fe)` | Using the **linearmodels** package:<br><code>from linearmodels.iv.absorbing import AbsorbingLS <br> mod = AbsorbingLS(data["y"], data["x"]], absorb=sim["fe"]) <br> print(mod.fit())</code>|
-| Categorical regression | `reghdfe y x i.cat` | Using the **statsmodels** package:<br><code>import statsmodels.formula.api as smf <br> results = smf.ols("y ~ x + C(cat)", data=df).fit() <br> print(results.summary())</code><br> But if `cat` is of type categorical it can be run with `y ~ x + cat`|
-| Interacting categoricals | `reghdfe y x i.cat#i.cat2` | Using the **statsmodels** package:<br><code>import statsmodels.formula.api as smf <br> results = smf.ols("y ~ x + C(cat):C(cat2)", data=df).fit() <br> print(results.summary())</code> <br> Note that `a*b` is a short-hand for `a + b + a:b`, with the last term representing the interaction.|
-| Robust standard errors | `reghdfe y x, r` | Using the **statsmodels** package:<br><code>import statsmodels.formula.api as smf <br> results = smf.ols("y ~ x", data=df).fit(cov_type="HC0") <br> print(results.summary())</code> <br> Note that a range of heteroskedasticity robust standard errors are available: 'HC0', 'HC1', 'HC2', and 'HC3'.|
-| Clustered standard errors | `reghdfe y x, cluster(clust)` | Using the **statsmodels** package:<br><code>import statsmodels.formula.api as smf <br> results = smf.ols("y ~ x", data=df).fit(cov_type="cluster", cov_kwds={"groups": df["clust"]}) <br> print(results.summary())</code> <br>|
-| Two-way clustered standard errors | `reghdfe y x, cluster(clust1 clust2)` | Using the **statsmodels** package:<br><code>import statsmodels.formula.api as smf <br>two_way_clusters = np.array(df\[["clust1", "clust2"]]) <br> results = smf.ols("y ~ x", data=df).fit(cov_type="cluster", cov_kwds={"groups": two_way_clusters}) <br> print(results.summary())</code> <br>|
-| Instrumental variables | `ivreghdfe 2sls y exog (endog = instrument)` | Using the **linearmodels** package:<br><code>from linearmodels.iv import IV2SLS<br>mod = IV2SLS.from_formula("y ~ exog + [endog ~ instrument]", data=df)<br> print(mod.fit(cov_type="robust").summary())</code> <br>|
+| Fixed Effects (absorbing) | `reghdfe y x, absorb(fe)` | <code>from pyfixest.estimation import feols<br> fit = feols("y ~ x \| fe", data=df) </code>|
+| Categorical regression | `reghdfe y x i.cat` | <code>from pyfixest.estimation import feols<br> fit = feols("y ~ x + C(cat)", data=df) </code><br> But if `cat` is of type categorical it can be run with `y ~ x + cat`|
+| Interacting categoricals | `reghdfe y x i.cat#i.cat2` | <code>from pyfixest.estimation import feols<br> fit = feols("yvar ~ xvar + C(cat):C(cat2)", data=df) </code> <br> Note that `a*b` is a short-hand for `a + b + a:b`, with the last term representing the interaction.|
+| Robust standard errors | `reghdfe y x, r` | <code>from pyfixest.estimation import feols<br> fit = feols("y ~ x, data=df, vcov="HC0") </code> <br> Note that a range of heteroskedasticity robust standard errors are available: 'HC0', 'HC1', 'HC2', and 'HC3'.|
+| Clustered standard errors | `reghdfe y x, cluster(clust)` | <code>from pyfixest.estimation import feols<br> fit = feols("y ~ x", data=df, vcov={"CRV1": "clust"}) </code>|
+| Two-way clustered standard errors | `reghdfe y x, cluster(clust1 clust2)` |<code>from pyfixest.estimation import feols<br> fit = feols("y ~ x", data=df, vcov={"CRV1": "clust1" + "clust2"}) </code>|
+| Instrumental variables | `ivreghdfe 2sls y exog (endog = instrument)` | <code>from pyfixest.estimation import feols<br> fit = feols("y ~ exog \| endog ~ instrument", data=df) </code>|
