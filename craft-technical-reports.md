@@ -41,7 +41,7 @@ This is only a suggested structure, and even then only at a high level of detail
 
 - Background or Context: Cover the context of the work, as briefly as possible. Can have, at most, a couple of paragraphs on prior art (don't bother with a full literature review). If you need to give details on how the report was commissioned that goes beyond what is in the Executive Summary, this is the place.
 
-- The sections that make up the body of the report: we now move on to the nitty gritty details. This is where you may wish to have one section or multiple sections, for example, you may want to cover "Methology", "Data", "Data Linkage". What you will cover in the section and sub-section headings will depend on your project, but the key point is to be generous in providing them so that a reader who is skimming the report can find what they're looking for quickly.
+- The sections that make up the body of the report: we now move on to the nitty gritty details. This is where you may wish to have one section or multiple sections, for example, you may want to cover "Methodology", "Data", "Data Linkage". What you will cover in the section and sub-section headings will depend on your project, but the key point is to be generous in providing them so that a reader who is skimming the report can find what they're looking for quickly.
 
 - Conclusions: this is a summary of what you have said in the body sections *without* going over the same ground as the Executive Summary or Background. At the risk of stating the obvious, it is the place to provide, in prose, conclusions on the benefit/effectiveness/difficulty/etc of the methods or processes.
 
