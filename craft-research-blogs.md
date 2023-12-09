@@ -44,7 +44,7 @@ Each stage of the inverted pyramid is valuable, but it's important to recognise 
 
 - without the bottom layers, the top layers might not be very solid, so be wary of putting out arguments and conclusions that don't rest on deeper analysis
 - most people will only ever engage with the upper layers; they don't have time to read your paper but they might read a thread or blog post
-- more people will know about your work if those upper laters exist, and they will push more people down to lower layers
+- more people will know about your work if those upper layers exist, and they will push more people down to lower layers
 - most people doing analysis or research want people to read it and be influenced by it
 
 In this view of dissemination, you can think of a research blog post as a poster for your deeper analysis: it is a punchier, shorter, and likely more exciting version that can also signposts people to your paper should you catch their attention. Popular blog site VoxEU uses the description "research-based policy analysis and commentary".
