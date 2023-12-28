@@ -8,7 +8,7 @@ jupytext:
     format_version: '0.8'
     jupytext_version: 1.5.0
 kernelspec:
-  display_name: 'Python 3.8.12 64-bit (''codeforecon'': conda)'
+  display_name: 'Python 3.10.12 64-bit (''codeforecon'': conda)'
   language: python
   name: python3
 ---
@@ -21,7 +21,7 @@ There are, however, some fundamental differences between the two languages. The 
 
 Actually, the biggest practical difference in the context of packages for economics and data science is that Python has more of a flavour of the bazaar—there are lots of people, and you can find everything under the Sun, but it can be a *little bit* chaotic—while R has the feel of a curated garden—there is a chief gardener (RStudio) tending a smaller number of more beautiful things, but the garden has boundaries. As an example of this dynamic, there are around 20,000 packages on CRAN, R's official and strict package server; there are 350,000+ on PyPI, the Python equivalent (but it's easier to get a package accepted).
 
-For those coming from the 'tidyverse' set of packages produced by RStudio, there are very direct Python equivalents. For example, Python has **plotnine** which has the same syntax to R's **ggplot2**. There's also **plydata**, which has the same syntax as R's **dplyr** package. In Python, **matplotlib** and **pandas** are more popular packages for plotting and data analysis, respectively, but those R-style packages are absolutely there if you prefer them. More on other similar packages below.
+For those coming from the 'tidyverse' set of packages produced by RStudio, there are very direct Python equivalents. For example, Python has **lets-plot** which has almost exactly the same syntax to R's **ggplot2**. There's also **plydata**, which has the same syntax as R's **dplyr** package, and **polars**, which is our recommended substitute for **dplr** as it has a consistent syntax and, wow, is it fast. In Python, **matplotlib** and **pandas** are more popular packages for plotting and data analysis, respectively, but those R-style packages are absolutely there if you prefer them. More on other similar packages below.
 
 There's a list of more fundamental differences between R and Python as programming languages at the end of this chapter, but a couple of important gotchas to be aware of up front: first, R uses vectors, arrays, etc., that are indexed from 1. Like C++, Python is numbered from zero, with, eg, `a[0]` as the first element. Second, `<-` is the preferred assignment operator in R but in Python it's `=` (and `<-` isn't used). In fact, in R `a<-5` assigns `a` the value `5`, while `a<-5` in Python would return `True` or `False` based on whether `a` was less than `-5` or not!
 
@@ -30,14 +30,15 @@ There's a list of more fundamental differences between R and Python as programmi
 If you are coming from R, you're likely familiar with **dplyr** for data analysis and **ggplot2** for plotting. There are Python equivalents that have very similar syntax to these that you can use to help you to become productive quickly in Python--though these libraries are not so popular in Python. Here are the Python equivalents to those R libraries:
 
 - **dplyr**: This book recommends learning at least some [**pandas**](https://pandas.pydata.org/pandas-docs/stable/index.html) for data analysis in Python because it is a package that is comprehensive and ubiquitous, and it's the most popular Python library that performs similar functions to **dplyr**. **pandas** also has unrivaled documentation. However, if you want something closer to **dplyr** in terms of philosophy and syntax, there are a host of options available to you:
-  - a Python package that is very similar to **dplyr** is [**plydata**](https://plydata.readthedocs.io/en/stable/index.html). It is created to be consistent with visualisation package **plotnine** (featured below).
-  - another library that gets close to **dplylr** is [**datar**](https://github.com/pwwang/datar). Because it uses a consistent framework for data piping under the hood called [**pipda**](https://github.com/pwwang/pipda), **datar** seems highly extensible too. It also integrates with **plotnine** for visualisation.
+  - the package we recommend is the blisteringly fast [**polars**](https://www.pola.rs/). It has different syntax to **dplyr** but has a very consistent API that will be familiar to those coming from the R package.
   - [**tidypolars**](https://tidypolars.readthedocs.io/) combines the syntax of **dplyr** with the best-in-class speed of Python package [**polars**](https://www.pola.rs/)
+  - a Python package that is very similar to **dplyr** is [**plydata**](https://plydata.readthedocs.io/en/stable/index.html). It is created to be consistent with visualisation package **plotnine**.
+  - another library that gets close to **dplylr** is [**datar**](https://github.com/pwwang/datar). Because it uses a consistent framework for data piping under the hood called [**pipda**](https://github.com/pwwang/pipda), **datar** seems highly extensible too. It also integrates with **plotnine** for visualisation.
   - [**siuba**](https://siuba.readthedocs.io/en/latest/) is a port of dplyr, tidyr, and other R libraries for data analysis.
   - [**dfplyr**](https://github.com/kieferk/dfply) is another attempt to replicate the syntax of **dplyr**, but it doesn't seem to be maintained.
   - [**pyjanitor**](https://pyjanitor-devs.github.io/pyjanitor/) builds a range of extra features on top of **pandas**. Two of the things it adds are likely to make anyone coming from **dplyr** feel a bit more at home: better support for method chaining and some functions with the same names as the ones in **dplyr** and which do the same things.
 
-- **ggplot2**: the most similar Python version of this library is [**plotnine**](https://plotnine.readthedocs.io/en/stable/index.html), while the most popular Python library that performs similar functions is a combination of [**matplolib**](https://matplotlib.org/) and [**seaborn**](https://seaborn.pydata.org/), which builds on **matplotlib**. I think either those two together or **plotnine** are good choices, though **plotnine**'s documentation is not (yet) as good and it's certainly not as widely used. (It's gaining popularity though.)
+- **ggplot2**: the most similar Python version of this library is [**lets-plot**](https://lets-plot.org/), and it is indeed *extremely* similar. So much so that you'll be able to write in it in about five seconds if you're already familiar with **ggplot2**. This isn't the only option for you: [**plotnine**](https://plotnine.readthedocs.io/en/stable/index.html) is another choice for declarative plotting, as is [**seaborn**](https://seaborn.pydata.org/)'s object API. R doesn't have a core imperative plotting package, but in Python this role is fulfilled by the astonishingly versatile [**matplolib**](https://matplotlib.org/).
 
 - **data.table**: if you use this library instead of **dplyr**, have no fear as there's an almost identical library in Python called [**datatable**](https://datatable.readthedocs.io/en/latest/). It's not nearly as popular in Python as **data.table** is in R, but it's a very high quality library.
 

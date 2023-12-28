@@ -8,7 +8,7 @@ jupytext:
     format_version: '0.8'
     jupytext_version: 1.5.0
 kernelspec:
-  display_name: 'Python 3.8.12 64-bit (''codeforecon'': conda)'
+  display_name: 'Python 3.10.12 64-bit (''codeforecon'': conda)'
   language: python
   name: python3
 ---
@@ -35,7 +35,7 @@ If you follow the guidelines in this chapter you will find that your code will b
 
 The first thing to think about is code style, ie the way you write equivalent valid code.
 
-Feeling lazy? Don't worry, because in the next chapter we'll find out how to get the computer to apply style to your code *automatically*.
+Feeling lazy? Don't worry, because in {ref}`code-advcd-best-practice` we'll find out how to get the computer to apply style to your code *automatically*.
 
 Python has a whole set of conventions about good style called ['PEP8'](https://www.python.org/dev/peps/pep-0008/), which it's worth taking a quick look at. It includes advice like indentation should always be 4 spaces (not tabs) per level and that you should surround top-level function and class definitions with two blank lines.
 
@@ -234,7 +234,7 @@ First: **do not** store your data in Excel file formats. Ever. First, it's not a
 
 ![jpg](https://pbs.twimg.com/media/D8z-M_dVUAA6NOh?format=jpg&name=medium)
 
-If you want examples of what can go wrong using Excel, look no further than the famous [Reinhart and Rogoff Excel error](https://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646_), where they didn't select all cells (it's harder to make this kind of mistake with real programming languages, though of course not impossible), the time when a first-year law associate [added an extra 179 contracts](https://www.abajournal.com/news/article/excel_error_by_a_cleary_gottlieb_associate_alters_lehman_asset_deal1) to an agreement to buy Lehman Brothers assets, or when the UK [under-counted the number](https://www.bbc.co.uk/news/technology-54423988) of coronavirus cases by *16,000* because their Excel spreedsheet wasn't big enough. In programming, the dataset limitation is the size of your computer's hard drive (and even then, you can jump onto the cloud).
+If you want examples of what can go wrong using Excel, look no further than the famous [Reinhart and Rogoff Excel error](https://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646_), where they didn't select all cells (it's harder to make this kind of mistake with real programming languages, though of course not impossible), the time when a first-year law associate [added an extra 179 contracts](https://www.abajournal.com/news/article/excel_error_by_a_cleary_gottlieb_associate_alters_lehman_asset_deal1) to an agreement to buy Lehman Brothers assets, or when the UK [under-counted the number](https://www.bbc.co.uk/news/technology-54423988) of coronavirus cases by *16,000* because their Excel spreadsheet wasn't big enough. In programming, the dataset limitation is the size of your computer's hard drive (and even then, you can jump onto the cloud).
 
 In the majority of cases, the best data file format for your project is CSV--certainly for outputting final results. Everyone can open a CSV file, no matter what analytical tool or operating system they are using. As a storage format, it’s unlikely to change. Without going into the mire of [different encodings](http://kunststube.net/encoding/), save it with the UTF-8 encoding (note that this is not the default encoding in Windows).
 
@@ -309,7 +309,7 @@ import this
 If you are just learning to code you should feel free to skip this section for now.
 ```
 
-There are many other coding tips that are useful but that make use of concepts or tools that we haven't met yet. To be comprehensive, they are included here.
+There are many other coding tips that are useful but that make use of concepts or tools that we haven't met yet. To be comprehensive, they are included here—but we'll be seeing most of them in the other coding chapters.
 
 ### Version Control
 

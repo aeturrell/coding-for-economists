@@ -8,7 +8,7 @@ jupytext:
     format_version: '0.8'
     jupytext_version: 1.5.0
 kernelspec:
-  display_name: 'Python 3.8.12 64-bit (''codeforecon'': conda)'
+  display_name: 'Python 3.10.12 64-bit (''codeforecon'': conda)'
   language: python
   name: python3
 ---
@@ -232,6 +232,8 @@ If you would prefer another deployment solution, there are plenty of others; for
 
 **streamlit** is not the only option for building dashboards.
 
-The most popular alternative is [**Dash**](https://plotly.com/dash/), made by Plotly. It supports Python and R. Dash has a steeper learning curve than streamlit but offers more customisation in style in return. You can find a Plotly tutorial [here](https://dash.plotly.com/introduction), or a tutorial on RealPython [here](https://realpython.com/python-dash/). There are further resources over at [**awesome dash**](https://github.com/ucg8j/awesome-dash).
+A really good alternative choice, which has some purported advantages, is [Shiny for Python](https://shiny.posit.co/py/). Shiny began as the most popular dashboard solution in the popular statistical programming language R, but is now available for Python too, and its creators have moved it on a lot in a very short space of time: well worth checking out.
 
-Another Python dashboarding solution is [**Panel**](https://panel.holoviz.org/), for which you can find examples over at [**awesome panel**](https://awesome-panel.org/gallery).
+Another alternative is [**Dash**](https://plotly.com/dash/), made by Plotly. It supports Python and R. Dash has a steeper learning curve than streamlit but offers more customisation in style in return. You can find a Plotly tutorial [here](https://dash.plotly.com/introduction), or a tutorial on RealPython [here](https://realpython.com/python-dash/). There are further resources over at [**awesome dash**](https://github.com/ucg8j/awesome-dash).
+
+Yet another Python dashboarding solution is [**Panel**](https://panel.holoviz.org/), for which you can find examples over at [**awesome panel**](https://awesome-panel.org/gallery).
