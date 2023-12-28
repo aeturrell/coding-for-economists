@@ -30,8 +30,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Set seed for reproducibility
-np.random.seed(10)
 # Set pandas max rows displayed for readability
 pd.set_option('display.max_rows', 6)
 # Plot settings

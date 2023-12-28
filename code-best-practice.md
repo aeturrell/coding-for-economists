@@ -27,39 +27,40 @@ Remember, most of the time, you are going to be writing code that someone else w
 
 If you follow the guidelines in this chapter you will find that your code will be:
 
- - easier to understand
- - more efficient
- - easier to maintain, scale, debug, and refactor
+- easier to understand
+- more efficient
+- easier to maintain, scale, debug, and refactor
 
-## Code in Style
+## How to Code in Style
 
 The first thing to think about is code style, ie the way you write equivalent valid code.
 
-Feeling lazy? Don't worry, because in {ref}`code-advcd-best-practice` we'll find out how to get the computer to apply style to your code *automatically*.
+Don't worry if this all seems like a lot to take in though, because in {ref}`code-advcd-best-practice` we'll find out how to get the computer to apply style to your code *automatically*.
 
 Python has a whole set of conventions about good style called ['PEP8'](https://www.python.org/dev/peps/pep-0008/), which it's worth taking a quick look at. It includes advice like indentation should always be 4 spaces (not tabs) per level and that you should surround top-level function and class definitions with two blank lines.
 
 Most programming languages have a style guide, or at least some conventions! PEP8 is not the only Python style guide around: another popular one is the [Google style guide](https://google.github.io/styleguide/pyguide.html). But PEP8 is the most popular.
 
-Learning *all* of the PEP8 conventions would be tedious beyond belief. The good news is that a combination of packages and Visual Studio Code will do a lot of them for you. Packages can re-style and even re-write your code automatically; we'll see how to do a lot styling automatically in Chapter on {ref}`code-advcd-best-practice`.
+Learning *all* of the PEP8 conventions would be tedious beyond belief. The good news is that a combination of packages and Visual Studio Code will do a lot of them for you. Packages can re-style and even re-write your code automatically (more on that in Chapter on {ref}`code-advcd-best-practice`).
 
 ![Code quality](https://imgs.xkcd.com/comics/code_quality.png)
 
 ### What's in a name?
 
-First, name matter. Use meaningful names for variables, functions, or whatever it is you're naming. Avoid abbreviations that you understand *now* but which will be unclear to others, or future you. For example, use `real_wage_hourly` over `re_wg_ph`. I know it's tempting to use `temp` but you'll feel silly later when you can't for the life of you remember what `temp` does or is. A good trick when naming booleans (variables that are either true or false) is to use `is` followed by what the boolean variable refers to, for example `is_married`.
+First, names matter. Use meaningful names for variables, functions, or whatever it is you're naming. Avoid abbreviations that you understand *now* but which will be unclear to others, or future you. For example, use `real_wage_hourly` over `re_wg_ph`. I know it's tempting to use `temp` but you'll feel silly later when you can't for the life of you remember what `temp` does or is. A good trick when naming booleans (variables that are either true or false) is to use `is` followed by what the boolean variable refers to, for example `is_married`.
 
 As well as this general tip, Python has conventions on naming different kinds of variables. The naming convention for almost all objects is lower case separated by underscores, e.g. `a_variable=10` or ‘this_is_a_script.py’. This style of naming is also known as snake case. There are different naming conventions though—[Allison Horst](https://twitter.com/allison_horst) made this fantastic cartoon of the different conventions that are in use.
 
 ![Different naming conventions. Artwork by @allison_horst.](https://github.com/aeturrell/coding-for-economists/raw/main/img/in_that_case.jpg) Different naming conventions. Artwork by @allison_horst.
 
-There are three exceptions to the snake case convention: classes, which should be in camel case, eg `ThisIsAClass`; constants, which are in capital snake case, eg `THIS_IS_A_CONSTANT`; and packages, which are typically without spaces or underscores and are lowercase `thisisapackage`.
+There are three exceptions to the snake case convention in Python: classes, which should be in camel case, eg `ThisIsAClass`; constants, which are in capital snake case, eg `THIS_IS_A_CONSTANT`; and packages, which are typically without spaces or underscores and are lowercase `thisisapackage`.
 
-For some quick shortcuts to re-naming columns in **pandas** dataframes or other string variables, try the unicode-friendly [**slugify**](https://github.com/un33k/python-slugify) library or the `clean_headers` function from the [**dataprep**](https://docs.dataprep.ai/index.html) library.
+For some quick shortcuts to re-naming columns in **pandas** dataframes or string variables, try the unicode-friendly [**slugify**](https://github.com/un33k/python-slugify) library or the `clean_headers` function from the [**dataprep**](https://docs.dataprep.ai/index.html) library.
 
 The better named your variables, the clearer your code will be--and the fewer comments you will need to write!
 
 In summary:
+
 - use descriptive variable names that reveal your intention, eg `days_since_treatment`
 - avoid using ambiguous abbreviations in names, eg use `real_wage_hourly` over `rw_ph`
 - always use the same vocabulary, eg don't switch from `worker_type` to `employee_type`
@@ -80,11 +81,11 @@ In summary:
 - use verbs for function names, eg `get_regression`
 - use consistent verbs for function names, don't use `get_score` and `grab_results` (instead use `get` for both)
 - variable names should be snake_case and all lowercase, eg `first_name`
- - class names should be CamelCase, eg `MyClass`
-function names should be snake_case and all lowercase, eg `quick_sort()`
- - constants should be snake_case and all uppercase, eg `PI = 3.14159`
- - modules should have short, snake_case names and all lowercase, eg `pandas`
- - single quotes and double quotes are equivalent so pick one and be consistent—most automatic formatters prefer `"`
+- class names should be CamelCase, eg `MyClass`
+- function names should be snake_case and all lowercase, eg `quick_sort()`
+- constants should be snake_case and all uppercase, eg `PI = 3.14159`
+- modules should have short, snake_case names and all lowercase, eg `pandas`
+- single quotes and double quotes are equivalent so pick one and be consistent—most automatic formatters prefer `"`
 
 ### Whitespace
 
@@ -119,12 +120,12 @@ There are packages that can re-organise your whitespace for you; these are featu
 
 In summary,
 
- - indent using 4 spaces (spaces are preferred over tabs)
- - lines should not be longer than 79 characters
- - avoid multiple statements on the same line
- - top-level function and class definitions are surrounded with two blank lines
- - method definitions inside a class are surrounded by a single blank line
- - imports should be on separate lines
+- indent using 4 spaces (spaces are preferred over tabs)
+- lines should not be longer than 79 characters
+- avoid multiple statements on the same line
+- top-level function and class definitions are surrounded with two blank lines
+- method definitions inside a class are surrounded by a single blank line
+- imports should be on separate lines
 
 ### Line width and line continuation
 
@@ -144,7 +145,7 @@ Again, automatic formatters, which we'll meet in the {ref}`code-advcd-best-pract
 
 ## Principles of Clean Code
 
-While automation can help apply style, it can't help you write *clean code*. Clean code is a set of rules and principles that helps to keep your code readable, maintainable, and extendable. Writing code is easy; writing clean code is hard! However, if you follow these principles, you won't go far wong.
+While automation can help apply style, it can't help you write *clean code*. Clean code is a set of rules and principles that helps to keep your code readable, maintainable, and extendable. Writing code is easy; writing clean code is hard! However, if you follow these principles, you won't go far wrong.
 
 ### Do not repeat yourself (DRY)
 
@@ -152,7 +153,7 @@ The DRY principle is 'Every piece of knowledge or logic must have a single, unam
 
 This saves having to repeat code, having no idea whether it's this or that version of the same function doing the work, and will help your debugging efforts no end.
 
-Some practical ways to apply DRY in practice are to use functions, to put functions or code that needs to be executed multiple times by multiple different scripts into another script (eg called `utilities.py`) and then import it, and to think carefully if another way of writing your code would be more concise (yet still readable).
+Some practical ways to apply DRY in practice are to use functions, to put functions or code that needs to be executed multiple times by multiple different scripts into another script (eg called `text_cleaning_utilities.py`) and then import it, and to think carefully if another way of writing your code would be more concise (yet still readable).
 
 ```{admonition} Tip
 :class: tip
@@ -165,7 +166,7 @@ Most systems work best if they are kept simple, rather than made complicated. Th
 
 ## SoC (Separation of Concerns) / Make it Modular
 
-Do not have a single file that does everything. If you split your code into separate, independent modules it will be easier to read, debug, test, and use. You can check the basics of coding chapter to see how to create and import functions from other scripts. But even within a script, you can still make your code modular by defining functions that have clear inputs and outputs.
+Depending on your project, it's usually best to not have a single file that does everything. If you split your code into separate, independent modules it will be easier to read, debug, test, and use. You can check the basics of coding chapter to see how to create and import functions from other scripts. But even within a script, you can still make your code modular by defining functions that have clear inputs and outputs.
 
 A good rule of thumb is that if a code that achieves one end goes longer than about 30 lines, it should probably go into a function. Scripts longer than about 500 lines are ripe for splitting up too.
 
@@ -195,9 +196,9 @@ def lowercase(text):
 
 ## Code Comments
 
-Code comments, extra information that is not executed when the code is run, can be added by a preceding hash character `# This is a comment`. Use code comments to provide extra contextual information that *isn't* conveyed by function and variable names.
+Code comments (extra information that is not executed when the code is run) can be added by a preceding hash character `# This is a comment`. Use code comments to provide extra contextual information that *isn't* conveyed by function and variable names.
 
-Actually, well-written code needs *fewer* comments because it's more evidence what's going on. And it's tempting not to update comments even when code changes. So do comment, but see if you can make the code tell its own story first.
+Actually, well-written code needs *fewer* comments because you make what's going on *more* evident to the reader. And it's tempting not to update comments even when code changes. So do comment, but see if you can make the code tell its own story first.
 
 Also, avoid "noise" comments that tell you what you already know from just looking at the code.
 
@@ -218,7 +219,7 @@ def round_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     return df
 ```
 
-### Code review
+### Code Review
 
 Perform code reviews: give what you’ve done to a colleague and ask them to go through it line-by-line to check it works as intended. If they do this properly and don’t find any mistakes or issues then I’d be very surprised. Return the favour to magically become a better coder yourself.
 
@@ -271,7 +272,7 @@ import pandas as pd
 df = pd.read_csv('data/raw/file.csv')
 ```
 
-This works great on Mac and Linux, but it's not going to work on Windows; Windows uses backwards slashes, which unfortunately tend to do other things in programming too. To ensure relative paths work across operating systems, the best way is to wrap the file path in a call to the `Path` method in the **pathlib** module:
+This works great on Mac and Linux, but it's not going to work on Windows; Windows uses backwards slashes, and back slashes unfortunately tend to do other things in programming too. To ensure relative paths work *across* operating systems, the best way is to wrap the file path in a call to the `Path` method in the **pathlib** module:
 
 ```python
 from pathlib import Path
@@ -313,21 +314,21 @@ There are many other coding tips that are useful but that make use of concepts o
 
 ### Version Control
 
- - Control versions of your code using Git, which is the standard for research, industry, and everyone on planet Earth.
+- Control versions of your code using Git, which is the standard for research, industry, and everyone on planet Earth.
 
- - Code should be committed regularly, preferably when a discrete unit of work has been completed.
+- Code should be committed regularly, preferably when a discrete unit of work has been completed.
 
- - Continuous integration, for example using tools such as GitHub Actions, should be used to ensure that each change is integrated into the workflow smoothly.
+- Continuous integration, for example using tools such as GitHub Actions, should be used to ensure that each change is integrated into the workflow smoothly.
 
 ### Configuration
 
- - Credentials and other secrets are not written in code but are configured as environment variables.
+- Credentials and other secrets are not written in code but are configured as environment variables.
 
- - Configuration as applied to code or simulations is written as code, but is clearly separated from code used for analysis.
+- Configuration as applied to code or simulations is written as code, but is clearly separated from code used for analysis.
 
- - The configuration used to generate particular outputs, releases and publications is recorded.
+- The configuration used to generate particular outputs, releases and publications is recorded.
 
- - If appropriate, multiple configuration files are used and interchangeable depending on system/local/user.
+- If appropriate, multiple configuration files are used and interchangeable depending on system/local/user.
 
 ### Environments
 

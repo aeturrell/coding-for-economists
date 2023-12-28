@@ -83,7 +83,6 @@ There are some files you *wouldn't* or shouldn't put under version control:
 - passwords and other files with secrets in
 - larger data files
 - binary (non-text) files
-- 
 
 ### Git, the most popular version control tool
 
@@ -102,7 +101,7 @@ There are two main ways to use git:
 - The command line.[^a]
 - A graphical user interface, eg Visual Studio Code
 
-[^a]: Some 'shells' that provide a command line, like Oh My Zsh---which this book recommends, come with git integration and will show information about the repository of the current folder.
+[^a]: Some 'shells' that provide a command line, like [Oh My Zsh](https://ohmyz.sh/)---which this book recommends, come with git integration and will show information about the repository of the current folder.
 
 In this chapter, we'll try to equip you with:
 

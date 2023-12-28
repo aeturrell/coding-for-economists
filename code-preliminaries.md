@@ -1,7 +1,21 @@
+---
+jupytext:
+  cell_metadata_filter: -all
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: '0.8'
+    jupytext_version: 1.5.0
+kernelspec:
+  display_name: 'Python 3.10.12 64-bit (''codeforecon'': conda)'
+  language: python
+  name: python3
+---
 (code-preliminaries)=
 # Preliminaries
 
-Congratulations on starting your coding for economics journey! In this chapter, we're going to help you install or access the tools you need. This chapter is unlikely to be as fun as subsequent ones, but we recommend you read and follow it because it's key to being able to run code. First, we're going to give you some background on key concepts for coding. Then, we'll give you an option to either follow instructions to start coding on your own computer or use a popular online cloud service for coding. Either way, by the end of this chapter, you will be running code!
+Congratulations on starting your coding for economics journey! In this chapter, we're going to help you install or access the tools you need. This chapter is unlikely to be as fun as subsequent ones, but we recommend that you read and follow it because it's key to being able to run code. First, we're going to give you some background on key concepts for coding. Then, we'll give you an option to either follow instructions to start coding on your own computer or use a popular online cloud service for coding. Either way, by the end of this chapter, you will be running code!
 
 ## Choice of programming language for the book
 
@@ -13,13 +27,13 @@ As an economist, you will know that this means Python benefits from strong posit
 
 *Python*, from [xkcd](https://xkcd.com).
 
-Different languages have different strengths and weaknesses; Python's strengths are being easy to write; having depth and flexibility; being ubiquitous; and having an amazing line-up of packages for doing just about anything in analysis, plus tons of other fields too. You may hear that Python is slow; and indeed it is compared to compiled languages like C++, Fortran, or Rust, but the trade-off we make here is that Python is *far* easier to write, and is "dynamic", meaning we can see results right away. For analysis, this trade-off is no brainer, and you will rarely run into speed issues (and, when you do, it will likely be solvable with structuring the code differently). I think Python's two greatest weaknesses currently are actually that there are too many different ways to manage packages, and that there are too many different ways to install it.
+Different languages have different strengths and weaknesses; Python's strengths are being easy to write; having depth and flexibility; being ubiquitous; and having an amazing line-up of packages for doing just about anything in analysis, plus tons of other fields too. You may hear that Python is slow; and indeed it is compared to compiled languages like C++, Fortran, or Rust, but the trade-off we make here is that Python is *far* easier to write, and is "dynamic", meaning we can see results right away. For analysis, this trade-off is a no-brainer, and you will rarely run into speed issues (and, when you do, it will likely be solvable with structuring the code differently). I think Python's two greatest weaknesses currently are actually that there are too many different ways to manage packages, and that there are too many different ways to install it.
 
 Overall, Python is a brilliant language to code in, especially for analysis, data science, and economics, and it's no wonder that it's one of the world's most popular languages!
 
 ## Concepts
 
-In this section, we're going to help you understand the key elements of a computational environment for coding. The combination of the version of the language you're using (eg Python 3.8), the packages (add-ons to the language) and their versions (eg numpy 1.19), and the operating system the code is being run on (eg MacOS Catalina) is called the computational environment. So, to create a computational environment to run code, you'll need:
+In this section, we're going to help you understand the key elements of a computational environment for coding. The combination of the version of the language you're using (eg Python 3.10), the packages (add-ons to the language) and their versions (eg pandas 2.1.0), and the operating system the code is being run on (eg MacOS Catalina) is called the computational environment. So, to create a computational environment to run code, you'll need:
 
 - a computer with an *operating system*. This could be your computer or one on the cloud.
 - an installation of *Python*, so that the computer can interpret and execute Python code
@@ -30,33 +44,43 @@ Let's talk through each of these in a bit more detail.
 
 ### Operating System
 
-Almost all the code you'll see can be run on all three of the major operating systems: Windows, MacOS, and Linux, so it doesn't matter much what operating system you're using. Most cloud services use Linux.
+Almost all the code you'll see can be run on all three of the major operating systems: Windows, MacOS, and Linux, so it doesn't matter much what operating system you're using. Almost all cloud services use Linux.
 
 If you haven't yet decided which operating system to use, this book recommends either Linux or MacOS because, in a very small number of cases, you'll find it easier to run the most advanced code on them rather than on Windows. Don't panic if you have Windows already though—most things will work just fine and it tends to be power users who run into this problem. (If you're not familiar with Linux, it's a free operating system that is also widely used for cloud services and, while it used to have a reputation as being fearsomely difficult for beginners, some modern Linux distributions, such as Ubuntu, are pretty user-friendly.)
 
-If you have Windows and you want to use Linux or Mac but don't want to shell out for a new computer, there are a couple of options. One is to use the [*Windows Subsystem for Linux*](https://pbpython.com/wsl-python.html). It's essentially a Linux operating system that installs alongside and integrates with your existing Windows operating system. This allows you to run code as if you were using Linux. You can get WSL [for free from Microsoft](https://docs.microsoft.com/en-us/windows/wsl/install-win10). Another option is to use an online cloud service, an option we'll return to shortly.
+If you have Windows and you want to use Linux or Mac but don't want to shell out for a new computer, there are a couple of options. One is to use the [*Windows Subsystem for Linux*](https://pbpython.com/wsl-python.html). It's essentially a Linux operating system that installs alongside and integrates with your existing Windows operating system. This allows you to run code as if you were using Linux. You can get WSL [for free from Microsoft](https://docs.microsoft.com/en-us/windows/wsl/install-win10). Another option (easier but can be more expensive) is to use an online cloud service, an option we'll return to shortly.
 
 ### Python interpreter
 
-Python is both a programming language that you can read, and a language that computers can read, interpret, and then carry out instructions based on. For a computer to be able to read and execute Python code, you will need to get a Python interpreter installed on it. There are lots of ways to install a Python "interpreter" on your own computer, this book recommends the Anaconda distribution of Python for its flexibility and simplicity. We'll see later how to install Python on your own computer; cloud services typically already have it installed.
+Python is both a programming language that humans can read, and a language that computers can read, interpret, and then carry out instructions based on. For a computer to be able to read and execute Python code, it needs to have a Python interpreter installed. There are lots of ways to install a Python "interpreter" on your own computer, this book recommends the Anaconda distribution of Python for its flexibility, simplicity, and large community. Cloud services often come with a Python interpreter installed, and we'll see shortly how to install one on your own computer.
+
+In the box below, you can see which version of Python was used to compile this book:
+
+```{code-cell} ipython3
+:tags: [remove-input]
+
+import sys
+
+print("Compiled with Python version:", sys.version)
+```
 
 ### An Integrated Development Environment, or IDE
 
-An integrated development environment (IDE) is a software application that provides a few tools to make coding easier. The most important of these is a way to write the code itself! IDEs are not the only way to programme, but they are perhaps the most useful. If you have used **Stata** or **Matlab**, you may not have realised it, but these package up the language and the IDE together. But they are separate things: the language is a way of processing your instructions, the IDE is where you write those instructions.
+An integrated development environment (IDE) is a software application that provides a few tools to make coding easier. The most important of these is a way to write the code itself! IDEs are not the only way to programme, but they are perhaps the most useful. If you have used **Stata** or **Matlab**, you may not have realised it, but these analytical tools bundle the interpreter and the IDE together. But they are separate things: the interpreter is a way of processing your instructions, the IDE is where you write those instructions.
 
-There are a lot of integrated development environments (IDEs) out there. This book strongly recommends Microsoft's Visual Studio Code, which works on all major operating systems and is one of the most popular. Here are some of the useful features that Visual Studio Code provides:
+There are a lot of integrated development environments (IDEs) out there. This book strongly recommends Microsoft's Visual Studio Code, which works on all major operating systems and is one of the most popular. Here are some of the most useful features that Visual Studio Code provides:
 
 - a way to run your code interactively (line-by-line) or all at once
 - a way to debug (look for errors) in your code
 - a quick way to access helpful information about commonly used software packages
-- automatic code formatting, so that your code follows best practice guidelines
+- easy ways to initiate automatic code formatting, so that your code follows best practice guidelines
 - auto-completion of your code when you hit <kbd>TAB</kbd>
 - automatic code checking for basic errors
 - colouring your brackets in pairs so you can keep track of the logical order of execution of your code!
 
 ### Packages
 
-A Python package is a collection of functions, data, and documentation that extends the capabilities of an installed version of Python. Using packages is key to most data science because most of the functionality we'll need comes from extra packages. You'll see statements like `import numpy as np` at the start of many Python code scripts—these are instructions to use an installed package (here one called **numpy**) and to give it a shortened name (`np`, for convenience) in the rest of the script. The functions in the **numpy** package are then accessed through syntax like `np.`; for example, you can take logs with `np.log(x)` where `x` is a variable containing a number. You need only install packages once, but you must import them into each script you need to use them in.
+A Python package is a collection of functions, data, and documentation that extends the capabilities of an installed version of Python. Using packages is key to most data science because most of the functionality we'll need comes from extra packages. You'll see statements like `import numpy as np` at the start of many Python code scripts—these are instructions to use an installed package (here one called **numpy**) and to give it a shortened name (`np`, for convenience) in the rest of the script. The functions in the **numpy** package are then accessed through syntax like `np.`; for example, you can take logs with `np.log(x)` where `x` is a variable containing a number. You need only install packages once, but you must import them into each script you need to use them in. We'll see more on how to both install and use packages in subsequent chapters.
 
 ### Typical workflow
 
@@ -66,11 +90,12 @@ The typical workflow for analysis with code might be something like this:
 - Write some code in a script (a text file with code in) in your IDE
 - If necessary for the analysis that you're doing, install any extra packages
 - Use the IDE to send bits of code from the script, or the entire script, to be executed by Python and add-on packages, and to display results
+- (once the project is complete) ensure the script can be run from top to bottom to re-produce your analysis
 
 We'll see two ways to achieve this workflow:
 
-1. Installing an IDE, Python, and any extra packages on your own computer
-2. Using a computer in the cloud that you access through your internet browser. The cloud computer has an IDE and Python built-in, and you can easily install extra packages in it too. However, you should be aware that the cloud service we recommend has a 60 hours / month free tier—beyond this, you'll need to pay for extra hours.
+1. Installing an IDE, a Python interpreter, and any extra Python packages on your own computer
+2. Using a computer in the cloud that you access through your internet browser. Cloud computers often have an IDE and Python built-in, and you can easily install extra packages in them too. However, you should be aware that the cloud service we recommend has a 60 hours / month free tier—beyond this, so you'll need to pay for extra hours.
 
 You should pick whichever you're more comfortable with! Eventually, you'll probably try both.
 
@@ -104,7 +129,7 @@ Download and install Visual Studio Code. If you need some help, there is a video
 
 ## Coding in the cloud
 
-These instructions are for if you wish to code in the cloud rather than on your own computer. There are many ways to do data science in the cloud, but we're going to share with you the absolute simplest. For this, you will need to sign up for a [Github Account](https://github.com/). Github is an organisation that's owned by Microsoft and which provides a range of services including a way to back-up code on the cloud, and cloud computing. One of the services offered is *Github Codespaces*. A GitHub Codespace is an online cloud computer that you connect to from your browser window. It has a generous 60 hours free of computing per month.
+These instructions are for if you wish to code in the cloud rather than on your own computer. There are many ways to do data science in the cloud, but we're going to share with you the absolute simplest. For this, you will need to sign up for a [Github Account](https://github.com/). GitHub is an organisation that's owned by Microsoft and which provides a range of services including a way to back-up code on the cloud, and cloud computing. One of the services offered is *Github Codespaces*. A GitHub Codespace is an online cloud computer that you connect to from your browser window. It has a generous 60 hours free of computing per month.
 
 ```{note}
 If you go over the free tier hours on Github Codespaces, your credit card will be charged for any further hours of GitHub Codespaces you use.
@@ -118,7 +143,7 @@ You will find that a new page loads with several panels in. This is an online ve
 
 As well as following this book using your own computer or on the cloud via Github Codespaces, you can run the code online through a few other options. The first is the easiest to get started with.
 
-1. [Google Colab notebooks](https://research.google.com/colaboratory/). Free for most use. You can launch most pages in this book interactively by using the 'Colab' button under the rocket symbol at the top of the page. It will be in the form of a notebook (which mixes code and text) rather than a script (.py file) but the code you write is the same. Note that Colab doesn't use Visual Studio Code.
+1. [Google Colab notebooks](https://research.google.com/colaboratory/). Free for most use. You can launch most pages in this book interactively by using the 'Colab' button under the rocket symbol at the top of most pages in this book. It will be in the form of a notebook (which mixes code and text) rather than a script (.py file) but the code you write is the same. Note that Colab doesn't use Visual Studio Code.
 2. [Gitpod Workspace](https://www.gitpod.io/). An alternative to Codespaces. This is a remote, cloud-based version of Visual Studio Code with Python installed and will run Python scripts. Note that the free tier covers 50 hours per month.
 
 ```{admonition} Exercise
@@ -129,7 +154,7 @@ Try going to the {ref}`code-basics` chapter now, click on the rocketship symbol 
 
 ### Getting to grips with Visual Studio Code
 
-Once you have Visual Studio Code installed and opened (either on your own computer or in the cloud), navigate to the 'extensions' tab on the left hand side vertical bar of icons (it's the one that looks like 4 squares). You'll need to install the *Python extension for VS Code*, which you can search for by using the text box within VS Code's extensions panel. If you're using the cloud version, you may find that it's already installed.
+Once you have Visual Studio Code installed and opened (either on your own computer or in the cloud), navigate to the 'extensions' tab on the left hand side vertical bar of icons (it's the one that looks like 4 squares). You'll need to install the *Python* extension, which you can search for by using the text box within VS Code's extensions panel. If you're using the cloud version, you may find that it's already installed.
 
 There are some other extensions it's useful to have and install (if they aren't already):
 
@@ -212,7 +237,7 @@ In Visual Studio Code, you can ensure that the interactive window starts in the 
 Create a new script that, when run, prints "Welcome to Coding for Economists" and run it in an interactive window.
 ```
 
-## Packages and How to Install Them
+## Packages and how to install them
 
 Packages (also called libraries) are key to extending the functionality of Python. The default installation of Anaconda comes with many (around 250) of the packages you'll need, but it won't be long before you'll need to install some extra ones. There are packages for geoscience, for building websites, for analysing genetic data, and, yes, of course, for economics. Packages are typically not written by the core maintainers of the Python language but by enthusiasts, firms, researchers, academics, all sorts! Because anyone can write packages, they vary widely in their quality and usefulness. There are some that are key for an economics workflow, though, and you'll be seeing them again and again.
 
@@ -278,44 +303,4 @@ In true programming-humour style, pip is a recursive acronym that stands for 'pi
 
 You're ready to move on to the next chapter! 🚀
 
-Well done if you made this far: starting is the hardest bit. There are some extra bits below for if you're adding all the bells and whistles to Visual Studio Code, but you can safely skip these if you prefer.
-
-## Extra: fine-tuning Visual Studio Code
-
-This section has tips on making your IDE, *Visual Studio Code*, even more effective.
-
-VS Code can do a whole lot more with some extra add-ons. You can install these using the extensions tab on the left hand side of VS Code. Here are the ones this book recommends and why:
-
-- Markdown extensions - markdown is a simple text language that is often used to provide READMEs for code repositories. It comes with the file extension .md
-  - *Markdown All in One*, to help writing Markdown docs.
-  - *Markdown Preview Enhanced*, to view rendered markdown as you type it (right click and select 'Open Preview...').
-- Coding extensions
-  - *Jupyter* provides support for Jupyter Notebooks
-  - *indent-rainbow*, gives different levels of indentation different colours for ease of reading.
-  - *Path Intellisense*, autocompletes filenames in code.
-- Version control
-  - *Git History*, view and search your git log along and show a graph of git commits with details.
-  - *GitLens*, helps to visualise code authorship at a glance via 'Git blame' annotations, navigate and explore Git repositories, and more.
-  - *Code Spell Checker*, does exactly what it says, really useful for avoiding mangled variable name errors. If you need it to use, for example, 'British English', change the 'C Spell: Language' text from 'en' to 'en-GB' in VS Code's settings. Other languages are available as separate extensions.
-- General
-  - *Rainbow CSV*, uses colour to make plain old CSV files much more readable in VS Code.
-  - *vscode-icons*, intelligent icons for your files as seen in the VS Code file explorer, eg a folder called data gets an icon showing a disc drive superimposed onto a folder.
-  - *polacode*, take pictures of code snippets to share on social media
-  - *Excel viewer*, does what it says
-  - *Selection Word Count*, calculates and displays the word count of a document and, when there is a selection, the word count of a selection (both are shown in the status bar)
-  - *LiveShare*, to collaborate on code with someone else in real-time
-- LaTeX - it's a bit of surprise, but VS Code is one of the best LaTeX editors out there. You will need LaTeX installed already though and initial setup of a compilation 'recipe' is a bit fiddly (though, once it works, it's dreamy).
-  - *LaTeX Workshop*, provides core features for LaTeX typesetting with Visual Studio Code.
-  - *LaTeX Preview*, both in-line and side-by-side previews of LaTeX code. A really fantastic extension.
-
-There are some extensions that most people won't need but which experienced coders may find useful:
-
-- *Github Pull Request* — allows you to review and manage GitHub pull requests and issues in Visual Studio Code
-- *Remote development* — allows you to open any folder in: a container, a remote machine, or the Windows Subsystem for Linux (WSL)
-- *Remote - WSL* — run VS Code in the Windows Subsystem for Linux
-- *Remote - SSH* — run VS Code over an SSH connection, eg in the cloud
-- *Remote - Container* — run VS Code in a Docker container
-- *Python Docstring Generator* — automatically generates part of the documentation for your Python functions
-- *Docker* - makes it easy to build, manage, and deploy Docker containers from Visual Studio Code
-
-A useful setting (under the cog icon, then settings) for coding is to change the 'Editor: Render Whitespace', aka `editor.renderWhitespace`, from 'selection' to 'boundary'. This will now show any boundary whitespace, or more than one instance of whitespace contiguously, as a grey dot. This might seem odd but it's really useful because the wrong amount of whitespace can create problems with code.
+Well done if you made this far: starting is the hardest bit. (If you want to tweak your Visual Studio Code setup even more, there's some tips at the end of {ref`code-further-advanced`}.)
