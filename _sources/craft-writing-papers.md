@@ -48,7 +48,7 @@ For example, here is a figure summarising a fairly complex precipitation nowcast
 
 In one fell swoop, they tell us about the structure of the model, what it's useful for (UK rain nowcasting, for which there is a strong need), and how their model, DGMR, compares against both observations and the leading alternative code, PySTEPS. (You can even find the Python code over at their [Github page](https://github.com/deepmind/deepmind-research/tree/master/nowcasting).)
 
-Another good example is from "Inferring the effectiveness of government interventions against COVID-19", {cite:t}`brauner2021inferring`. This summarises the fairly complex results of a Bayesian model of non-pharmaceutical interventions into a single summary figure that policymakers can read off the results from in a second. This papers uses the Bayesian package PyMC, which you find out more about in the {ref}`econmt-bayesian` chapter.
+Another good example is from "Inferring the effectiveness of government interventions against COVID-19", {cite:ps}`brauner2021inferring`. This summarises the fairly complex results of a Bayesian model of non-pharmaceutical interventions into a single summary figure that policymakers can read off the results from in a second. This papers uses the Bayesian package PyMC, which you find out more about in the {ref}`econmt-bayesian` chapter.
 
 ![](https://www.science.org/cms/10.1126/science.abd9338/asset/3ae0348b-6d8b-439c-8815-556bda63b789/assets/graphic/371_abd9338_f2.jpeg)
 
@@ -177,7 +177,7 @@ You may find it useful to first remind the reader about the research question, a
 
 You are likely to want to report the following about your data: when, where, why, how and by whom was it collected? What is the sample size and how does it compare to the population of interest? Did you drop any observations and, if so, why? Did you have to impute any values and, if so, how did you do it? Are any variables proxies for the real thing? What does each variable measure, exactly, and how was it constructed?
 
-You should also ask yourself whether you have any 'dark data' {cite:t}`hand2020dark` and what limitations this might introduce to the analysis (and perhaps what mitigating steps you took). These are the types of dark data to consider:
+You should also ask yourself whether you have any 'dark data' {cite:ps}`hand2020dark` and what limitations this might introduce to the analysis (and perhaps what mitigating steps you took). These are the types of dark data to consider:
 
 1. Data we know are missing, eg a missing survey response
 

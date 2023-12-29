@@ -210,6 +210,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="econmt-probability-random.html">Probability and Random Processes</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Statistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="econmt-regression.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-generalised-models.html">Generalised regression models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-diagnostics.html">Regression diagnostics and visualisations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="econmt-causal-inference.html">Causal Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="econmt-bayesian.html">Bayesian Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="econmt-bayes-bambi.html">Bayesian Inference Made Easier</a></li>
@@ -229,6 +231,13 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="code-further-advanced.html">Advanced Coding</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
@@ -247,19 +256,17 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="text-regex.html">Regular Expressions, aka regex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="text-nlp.html">Natural Language Processing</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ml-intro.html">Introduction to Machine Learning and AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-sup.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-data.html">Data for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-unsup.html">Unsupervised Machine Learning</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Geospatial</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="geo-intro.html">Intro to Geo-Spatial Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="geo-vis.html">Geo-Spatial Visualisation</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
 <ul class="nav bd-sidenav">
@@ -275,6 +282,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="craft-referee.html">Writing Referee Reports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="craft-technical-reports.html">Writing Technical Reports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="craft-extended-abstracts.html">Extended Abstracts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coming from ...</span></p>
 <ul class="nav bd-sidenav">
@@ -556,7 +568,7 @@ document.write(`
 <h1>Statistics<a class="headerlink" href="#statistics" title="Permalink to this heading">#</a></h1>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
-<p>In this chapter, you’ll learn about how to do statistics with code. We already saw some statistics in the chapter on probability and random processes: here we’ll focus on computing basic statistics and using statistical tests. We’ll make use of the excellent <a class="reference external" href="https://pingouin-stats.org/index.html"><em>pingouin</em></a> statistics package and its documentation for many of the examples and methods in this chapter <span id="id1">Vallat [<a class="reference internal" href="zreferences.html#id4" title="Raphael Vallat. Pingouin: statistics in python. Journal of Open Source Software, 3(31):1026, 2018.">2018</a>]</span>. This chapter also draws on Open Intro Statistics <span id="id2">Diez <em>et al.</em> [<a class="reference internal" href="zreferences.html#id15" title="David M Diez, Christopher D Barr, and Mine Cetinkaya-Rundel. OpenIntro statistics. OpenIntro, 2012.">2012</a>]</span>.</p>
+<p>In this chapter, you’ll learn about how to do statistics with code. We already saw some statistics in the chapter on probability and random processes: here we’ll focus on computing basic statistics and using statistical tests. We’ll make use of the excellent <a class="reference external" href="https://pingouin-stats.org/index.html"><em>pingouin</em></a> statistics package and its documentation for many of the examples and methods in this chapter <span id="id1">[<a class="reference internal" href="zreferences.html#id4" title="Raphael Vallat. Pingouin: statistics in python. Journal of Open Source Software, 3(31):1026, 2018.">Vallat, 2018</a>]</span>. This chapter also draws on Open Intro Statistics <span id="id2">[<a class="reference internal" href="zreferences.html#id15" title="David M Diez, Christopher D Barr, and Mine Cetinkaya-Rundel. OpenIntro statistics. OpenIntro, 2012.">Diez, Barr, and Cetinkaya-Rundel, 2012</a>]</span>.</p>
 <section id="notation-and-basic-definitions">
 <h3>Notation and basic definitions<a class="headerlink" href="#notation-and-basic-definitions" title="Permalink to this heading">#</a></h3>
 <p>Greek letters, like <span class="math notranslate nohighlight">\(\beta\)</span>, are the truth and represent parameters. Modified Greek letters are an estimate of the truth, for example <span class="math notranslate nohighlight">\(\hat{\beta}\)</span>. Sometimes Greek letters will stand in for vectors of parameters. Most of the time, upper case Latin characters such as <span class="math notranslate nohighlight">\(X\)</span> will represent random variables (which could have more than one dimension). Lower case letters from the Latin alphabet denote realised data, for instance <span class="math notranslate nohighlight">\(x\)</span> (which again could be multi-dimensional).  Modified Latin alphabet letters denote computations performed on data, for instance <span class="math notranslate nohighlight">\(\bar{x} = \frac{1}{n} \displaystyle\sum_{i} x_i\)</span> where <span class="math notranslate nohighlight">\(n\)</span> is number of samples. Parameters are given following a vertical bar, for example if <span class="math notranslate nohighlight">\(f(x|\mu, \sigma)\)</span> is a probability density function, the vertical line indicates that its parameters are <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>. The set of distributions with densities <span class="math notranslate nohighlight">\(f_\theta(x)\)</span>, <span class="math notranslate nohighlight">\(\theta \in \Theta\)</span> is called a parametric family, eg there is a family of different distributions that are parametrised by <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
@@ -567,7 +579,7 @@ document.write(`
 <p>An estimator <em>W</em> is <strong>efficient</strong> relative to another estimator <span class="math notranslate nohighlight">\(V\)</span> if <span class="math notranslate nohighlight">\(\text{Var}(W) &lt; \text{Var}(V)\)</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(\alpha\)</span> be the ‘significance level’ of a test statistic <span class="math notranslate nohighlight">\(T\)</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(\gamma(X)\)</span> and <span class="math notranslate nohighlight">\(\delta(X)\)</span> be two statistics satisfying <span class="math notranslate nohighlight">\(\gamma(X) &lt; \delta(X)\)</span> for all <span class="math notranslate nohighlight">\(X\)</span>. If on observing <span class="math notranslate nohighlight">\(X = x\)</span>, the inference can be made that <span class="math notranslate nohighlight">\(\gamma(x) \leq \theta \leq \delta(x)\)</span>. Then <span class="math notranslate nohighlight">\([\delta(x), \gamma(x)]\)</span> is an <strong>interval estimate</strong> and <span class="math notranslate nohighlight">\([\delta(X), \gamma(X)]\)</span> is an <strong>interval estimator</strong>. The random interval (random because the <em>endpoints</em> are random variables) <span class="math notranslate nohighlight">\([\delta(X), \gamma(X)]\)</span> is called a <span class="math notranslate nohighlight">\(100\cdot\alpha \%\)</span> <strong>confidence interval</strong> for <span class="math notranslate nohighlight">\(\theta\)</span>. Of course, there is a true <span class="math notranslate nohighlight">\(\theta\)</span>, so either it is in this interval or it is not. But if the confidence interval was constructed many times over using samples, <span class="math notranslate nohighlight">\(\theta\)</span> would be contained within it <span class="math notranslate nohighlight">\(100\cdot\alpha \%\)</span> of the times.</p>
-<p>A <strong>hypothesis test</strong> is a conjecture about the distribution of one or more random variables, and a test of a hypothesis is a procedure for deciding whether or not to reject that conjecture. The <strong>null hypothesis</strong>, <span class="math notranslate nohighlight">\(H_0\)</span>, is only ever conservatively rejected and represents the default positiion. The <strong>alternative hypothesis</strong>, <span class="math notranslate nohighlight">\(H_1\)</span>, is the conclusion contrary to this.</p>
+<p>A <strong>hypothesis test</strong> is a conjecture about the distribution of one or more random variables, and a test of a hypothesis is a procedure for deciding whether or not to reject that conjecture. The <strong>null hypothesis</strong>, <span class="math notranslate nohighlight">\(H_0\)</span>, is only ever conservatively rejected and represents the default position. The <strong>alternative hypothesis</strong>, <span class="math notranslate nohighlight">\(H_1\)</span>, is the conclusion contrary to this.</p>
 <p>A type I error occurs when <span class="math notranslate nohighlight">\(H_0\)</span> is rejected when it is true, ie when a <em>true</em> null hypothesis is rejected. Mistakenly failing to reject a false null hypothesis is called a type II error.</p>
 <p>In the most simple situations, the upper bound on the probability of a type I error is called the size or <strong>significance level</strong> of the <em>test</em>. The <strong>p-value</strong> of a random variable <span class="math notranslate nohighlight">\(X\)</span> is the smallest value of the significance level (denoted <span class="math notranslate nohighlight">\(\alpha\)</span>) for which <span class="math notranslate nohighlight">\(H_0\)</span> would be rejected on the basis of seeing <span class="math notranslate nohighlight">\(x\)</span>. The p-value is sometimes called the significance level of <span class="math notranslate nohighlight">\(X\)</span>. The probability that a test will reject the null is called the power of the test. The probability of a type II error is equal to 1 minus the power of the test.</p>
 <p>Recall that there are two types of statistics out there: parametrised, eg by <span class="math notranslate nohighlight">\(\theta\)</span>, and non-parametrised. The latter are often distribution free (ie don’t involve a PDF) or don’t require parameters to be specified.</p>
@@ -810,7 +822,7 @@ T = \frac{\sqrt{n}(\bar{x}-\mu)}{\hat{\sigma}} \thicksim t_{n-1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4e88477c60bbe28d73e11b0d7016940b136200d3947a8658d05cef097e7e0e29.svg" src="_images/4e88477c60bbe28d73e11b0d7016940b136200d3947a8658d05cef097e7e0e29.svg" /></div>
+<img alt="_images/cef9120479865ca76939c042f3e03732fafb9332ed083af81ba54f7be946bfeb.svg" src="_images/cef9120479865ca76939c042f3e03732fafb9332ed083af81ba54f7be946bfeb.svg" /></div>
 </div>
 <p>In this case, we would reject the alternative hypothesis. You can see why from the plot; the test statistic we have constructed lies within the interval where we cannot reject the null hypothesis. <span class="math notranslate nohighlight">\(\bar{x}-\mu\)</span> is close enough to zero to give us cause for concern. (You can also see from the plot why this is a two-tailed test: we don’t care if <span class="math notranslate nohighlight">\(\bar{x}\)</span> is greater or less than <span class="math notranslate nohighlight">\(\mu\)</span>, just that it’s different–and so the test statistic could appear in either tail of the distribution for us to accept <span class="math notranslate nohighlight">\(H_1\)</span>.)</p>
 <p>We accept the null here, but about if there were many more data points? Let’s try adding some generated data (pretend it is from making extra observations).</p>
@@ -879,7 +891,7 @@ T = \frac{\sqrt{n}(\bar{x}-\mu)}{\hat{\sigma}} \thicksim t_{n-1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ae1ed44d27d4cff123cb56273c8d121fc448f7c303a0dd70a53179d76d2ee629.svg" src="_images/ae1ed44d27d4cff123cb56273c8d121fc448f7c303a0dd70a53179d76d2ee629.svg" /></div>
+<img alt="_images/209d1a5fc76cde98c0f70ec396bccb33e4bd72e744e4c5af8c3f83f707a8f8e2.svg" src="_images/209d1a5fc76cde98c0f70ec396bccb33e4bd72e744e4c5af8c3f83f707a8f8e2.svg" /></div>
 </div>
 <p>Now our test statistic is safely outside the interval.</p>
 <section id="connection-to-linear-regression">
@@ -1552,7 +1564,7 @@ X_{ij} = \mu_i + \epsilon_{ij} \quad j=1, \dots, n_i \quad i=1, \dots, k.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e599977d9e3ca7a8f5ae04d9382f69c121fb7a08ff025dd3152abc930f933802.svg" src="_images/e599977d9e3ca7a8f5ae04d9382f69c121fb7a08ff025dd3152abc930f933802.svg" /></div>
+<img alt="_images/c226817799a812083227190aa1d99752168f250b9afc4188121109e4d876ec5a.svg" src="_images/c226817799a812083227190aa1d99752168f250b9afc4188121109e4d876ec5a.svg" /></div>
 </div>
 <p>From this, we can see we need a sample size of at least 200 in order to have a power of 0.8.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">pg.power_ttest</span></code> function takes any three of the four of <code class="docutils literal notranslate"><span class="pre">d</span></code>, <code class="docutils literal notranslate"><span class="pre">n</span></code>, <code class="docutils literal notranslate"><span class="pre">power</span></code>, and <code class="docutils literal notranslate"><span class="pre">alpha</span></code> (ie leave one of these out), and then returns what the missing parameter should be. We passed in <code class="docutils literal notranslate"><span class="pre">d</span></code>, <code class="docutils literal notranslate"><span class="pre">n</span></code>, and <code class="docutils literal notranslate"><span class="pre">alpha</span></code>, and so the <code class="docutils literal notranslate"><span class="pre">power</span></code> was returned.</p>
@@ -1845,15 +1857,14 @@ X_{ij} = \mu_i + \epsilon_{ij} \quad j=1, \dots, n_i \quad i=1, \dots, k.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sex
-0     96
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     96
 1    207
-Name: count, dtype: int64
+Name: sex, dtype: int64
 </pre></div>
 </div>
 </div>
 </div>
-<p>If gender is <em>not</em> a predictor, we would expect a roughly similar split between those who have heart disease and those who do not. Let’s look at the observerd versus the expected split once we categorise by gender and ‘target’ (heart disease or not).</p>
+<p>If gender is <em>not</em> a predictor, we would expect a roughly similar split between those who have heart disease and those who do not. Let’s look at the observed versus the expected split once we categorise by gender and ‘target’ (heart disease or not).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expected</span><span class="p">,</span> <span class="n">observed</span><span class="p">,</span> <span class="n">stats</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">chi2_independence</span><span class="p">(</span><span class="n">chi_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;target&quot;</span><span class="p">)</span>

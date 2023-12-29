@@ -208,6 +208,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="econmt-probability-random.html">Probability and Random Processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="econmt-statistics.html">Statistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="econmt-regression.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-generalised-models.html">Generalised regression models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-diagnostics.html">Regression diagnostics and visualisations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="econmt-causal-inference.html">Causal Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="econmt-bayesian.html">Bayesian Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="econmt-bayes-bambi.html">Bayesian Inference Made Easier</a></li>
@@ -227,6 +229,13 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="code-further-advanced.html">Advanced Coding</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
@@ -245,19 +254,17 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="text-regex.html">Regular Expressions, aka regex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="text-nlp.html">Natural Language Processing</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ml-intro.html">Introduction to Machine Learning and AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-sup.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-data.html">Data for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-unsup.html">Unsupervised Machine Learning</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Geospatial</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="geo-intro.html">Intro to Geo-Spatial Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="geo-vis.html">Geo-Spatial Visualisation</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
 <ul class="nav bd-sidenav">
@@ -273,6 +280,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="craft-referee.html">Writing Referee Reports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="craft-technical-reports.html">Writing Technical Reports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="craft-extended-abstracts.html">Extended Abstracts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coming from ...</span></p>
 <ul class="nav bd-sidenav">
@@ -546,15 +558,14 @@ document.write(`
 <span id="id1"></span><h1>Data Transformation<a class="headerlink" href="#data-transformation" title="Permalink to this heading">#</a></h1>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
-<p>The previous chapter showed how to access different parts of a data frame and create new rows or columns. In this chapter, you’ll learn how to do more interesting transformations of data including aggregations and groupbys.</p>
-<p>This chapter is hugely indebted to the fantastic <a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/">Python Data Science Handbook</a> by Jake Vanderplas. Remember, if you get stuck with pandas, there is brilliant <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/index.html">documentation</a> and a fantastic set of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/index.html">introductory tutorials</a> on the <strong>pandas</strong> website. These notes are heavily indebted to those introductory tutorials.</p>
+<p>The previous chapter showed how to access different parts of a dataframe and create new rows or columns. In this chapter, you’ll learn how to do more interesting transformations of data including aggregations and groupbys.</p>
+<p>This chapter is hugely indebted to the fantastic <a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/">Python Data Science Handbook</a> by Jake Vanderplas. Remember, if you get stuck with <strong>pandas</strong>, there is brilliant <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/index.html">documentation</a> and a fantastic set of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/index.html">introductory tutorials</a> on the <strong>pandas</strong> website. These notes are heavily indebted to those introductory tutorials.</p>
 <section id="prerequisites">
 <h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h3>
-<p>This chapter uses the <strong>pandas</strong>, <strong>seaborn</strong>, and <strong>numpy</strong> packages. If you’re running this code, you may need to install these packages, which you can do using either <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">packagename</span></code> or <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">packagename</span></code> on your computer’s command line. If you’re running this page in Google Colab, you can install new packages by running <code class="docutils literal notranslate"><span class="pre">!pip</span> <span class="pre">install</span> <span class="pre">packagename</span></code> in a new code cell but you will need to restart the Colab notebook for the change to take effect. There’s a brief guide on installing packages in the Chapter on <a class="reference internal" href="code-preliminaries.html#code-preliminaries"><span class="std std-ref">Preliminaries</span></a>.</p>
+<p>This chapter uses the <strong>pandas</strong> and <strong>numpy</strong> packages. If you’re running this code, you may need to install these packages, which you can do using either <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">packagename</span></code> or <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">packagename</span></code> on your computer’s command line. If you’re running this page in Google Colab, you can install new packages by running <code class="docutils literal notranslate"><span class="pre">!pip</span> <span class="pre">install</span> <span class="pre">packagename</span></code> in a new code cell but you will need to restart the Colab notebook for the change to take effect. There’s a brief guide on installing packages in the Chapter on <a class="reference internal" href="code-preliminaries.html#code-preliminaries"><span class="std std-ref">Preliminaries</span></a>. Remember, you only need to install them once!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
@@ -645,24 +656,24 @@ document.write(`
     <tr>
       <th>0</th>
       <td>4</td>
-      <td>3</td>
-      <td>3</td>
-      <td>3</td>
-      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>1</td>
+      <td>1</td>
       <td>2</td>
-      <td>4</td>
-      <td>0</td>
-      <td>2</td>
+      <td>1</td>
       <td>3</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>3</td>
       <td>1</td>
-      <td>4</td>
-      <td>1</td>
+      <td>0</td>
       <td>4</td>
       <td>2</td>
     </tr>
@@ -677,11 +688,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A     7
-B    11
-C     4
-D     9
-E     7
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A    8
+B    3
+C    2
+D    6
+E    9
 dtype: int64
 </pre></div>
 </div>
@@ -694,11 +705,11 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A     7
-B    11
-C     4
-D     9
-E     7
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A    8
+B    3
+C    2
+D    6
+E    9
 dtype: int64
 </pre></div>
 </div>
@@ -718,7 +729,7 @@ dtype: int64
 <p>Let’s first see a really simple example of splitting a dataset into groups and finding the mean across those groups using the <em>penguins</em> dataset. We’ll group the data by island and look at the means.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;penguins&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mwaskom/seaborn-data/master/penguins.csv&quot;</span><span class="p">)</span>
 <span class="n">penguins</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -760,7 +771,7 @@ dtype: int64
       <td>18.7</td>
       <td>181.0</td>
       <td>3750.0</td>
-      <td>Male</td>
+      <td>MALE</td>
     </tr>
     <tr>
       <th>1</th>
@@ -770,7 +781,7 @@ dtype: int64
       <td>17.4</td>
       <td>186.0</td>
       <td>3800.0</td>
-      <td>Female</td>
+      <td>FEMALE</td>
     </tr>
     <tr>
       <th>2</th>
@@ -780,7 +791,7 @@ dtype: int64
       <td>18.0</td>
       <td>195.0</td>
       <td>3250.0</td>
-      <td>Female</td>
+      <td>FEMALE</td>
     </tr>
     <tr>
       <th>3</th>
@@ -800,7 +811,7 @@ dtype: int64
       <td>19.3</td>
       <td>193.0</td>
       <td>3450.0</td>
-      <td>Female</td>
+      <td>FEMALE</td>
     </tr>
   </tbody>
 </table>
@@ -880,7 +891,7 @@ dtype: int64
 <p>You can also pass multiple functions via the <code class="docutils literal notranslate"><span class="pre">agg</span></code> method (short for aggregation). Here we pass two numpy functions (these two functions have built-in equivalents <code class="docutils literal notranslate"><span class="pre">std()</span></code> and <code class="docutils literal notranslate"><span class="pre">mean()</span></code> so this is just for illustrative purposes):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;species&quot;</span><span class="p">)[</span><span class="n">penguins</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s2">&quot;number&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;species&quot;</span><span class="p">)[</span><span class="n">penguins</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s2">&quot;number&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -975,7 +986,7 @@ dtype: int64
 </div>
 <div class="admonition-exercise admonition">
 <p class="admonition-title">Exercise</p>
-<p>Using <code class="docutils literal notranslate"><span class="pre">numpy</span></code> functions, find the max and min of all columns grouping by <code class="docutils literal notranslate"><span class="pre">island</span></code>.</p>
+<p>Trying the obvious keywords, find the max and min of all columns grouping by <code class="docutils literal notranslate"><span class="pre">island</span></code>.</p>
 </div>
 <p>Multiple aggregations can also be performed at once on the entire dataframe by using a dictionary to map columns into functions. You can also group by as many variables as you like by passing the groupby method a list of variables. Here’s an example that combines both of these features:</p>
 <div class="cell docutils container">
@@ -1188,7 +1199,7 @@ dtype: int64
       <td>17.9</td>
       <td>192.0</td>
       <td>3500.0</td>
-      <td>Female</td>
+      <td>FEMALE</td>
     </tr>
     <tr>
       <th>153</th>
@@ -1198,7 +1209,7 @@ dtype: int64
       <td>19.5</td>
       <td>196.0</td>
       <td>3900.0</td>
-      <td>Male</td>
+      <td>MALE</td>
     </tr>
     <tr>
       <th>154</th>
@@ -1208,7 +1219,7 @@ dtype: int64
       <td>19.2</td>
       <td>193.0</td>
       <td>3650.0</td>
-      <td>Male</td>
+      <td>MALE</td>
     </tr>
     <tr>
       <th>155</th>
@@ -1218,7 +1229,7 @@ dtype: int64
       <td>18.7</td>
       <td>188.0</td>
       <td>3525.0</td>
-      <td>Female</td>
+      <td>FEMALE</td>
     </tr>
     <tr>
       <th>156</th>
@@ -1228,7 +1239,7 @@ dtype: int64
       <td>19.8</td>
       <td>197.0</td>
       <td>3725.0</td>
-      <td>Male</td>
+      <td>MALE</td>
     </tr>
   </tbody>
 </table>
@@ -1237,7 +1248,7 @@ dtype: int64
 </section>
 <section id="transform">
 <h3>Transform<a class="headerlink" href="#transform" title="Permalink to this heading">#</a></h3>
-<p>Transforms return a transformed version of the data, typically with an intermediate groupby, that has the same shape as the input. Think of it as split-apply-combine but without the ‘combine’ part! This is useful when creating new columns that depend on some grouped data, for instance creating group-wise means. Here’s an example using the datetime group to subtract a yearly mean. First let’s create a synthetic example with some data, a datetime index, and some groups:</p>
+<p>Transforms return a transformed version of the data that has the same shape as the input (typically with an intermediate groupby). Think of it as split-apply-combine but without the ‘combine’ part! This is useful when creating new columns that depend on some grouped data, for instance creating group-wise means. Below is a synthetic example using the datetime group to subtract a yearly mean. We’ll create our synthetic example using some data, a datetime index, and some groups:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;1/1/2000&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>
@@ -1275,63 +1286,63 @@ dtype: int64
   <tbody>
     <tr>
       <th>2000-03-31</th>
-      <td>1</td>
-      <td>6</td>
-      <td>group1</td>
-    </tr>
-    <tr>
-      <th>2000-06-30</th>
-      <td>2</td>
-      <td>0</td>
-      <td>group2</td>
-    </tr>
-    <tr>
-      <th>2000-09-30</th>
-      <td>7</td>
-      <td>1</td>
-      <td>group1</td>
-    </tr>
-    <tr>
-      <th>2000-12-31</th>
-      <td>2</td>
+      <td>4</td>
       <td>3</td>
       <td>group2</td>
     </tr>
     <tr>
-      <th>2001-03-31</th>
-      <td>9</td>
-      <td>9</td>
+      <th>2000-06-30</th>
+      <td>4</td>
+      <td>0</td>
+      <td>group0</td>
+    </tr>
+    <tr>
+      <th>2000-09-30</th>
+      <td>8</td>
+      <td>4</td>
       <td>group1</td>
     </tr>
     <tr>
-      <th>2001-06-30</th>
+      <th>2000-12-31</th>
+      <td>5</td>
       <td>9</td>
+      <td>group2</td>
+    </tr>
+    <tr>
+      <th>2001-03-31</th>
+      <td>7</td>
       <td>7</td>
       <td>group2</td>
     </tr>
     <tr>
+      <th>2001-06-30</th>
+      <td>5</td>
+      <td>0</td>
+      <td>group1</td>
+    </tr>
+    <tr>
       <th>2001-09-30</th>
-      <td>2</td>
+      <td>4</td>
+      <td>3</td>
+      <td>group1</td>
+    </tr>
+    <tr>
+      <th>2001-12-31</th>
+      <td>3</td>
+      <td>5</td>
+      <td>group1</td>
+    </tr>
+    <tr>
+      <th>2002-03-31</th>
+      <td>7</td>
       <td>8</td>
       <td>group2</td>
     </tr>
     <tr>
-      <th>2001-12-31</th>
-      <td>2</td>
-      <td>2</td>
-      <td>group2</td>
-    </tr>
-    <tr>
-      <th>2002-03-31</th>
-      <td>6</td>
-      <td>2</td>
-      <td>group0</td>
-    </tr>
-    <tr>
       <th>2002-06-30</th>
-      <td>9</td>
-      <td>0</td>
-      <td>group0</td>
+      <td>8</td>
+      <td>1</td>
+      <td>group2</td>
     </tr>
   </tbody>
 </table>
@@ -1375,73 +1386,73 @@ dtype: int64
   <tbody>
     <tr>
       <th>2000-03-31</th>
-      <td>1</td>
-      <td>6</td>
-      <td>group1</td>
-      <td>-3.000000</td>
+      <td>4</td>
+      <td>3</td>
+      <td>group2</td>
+      <td>-0.5</td>
     </tr>
     <tr>
       <th>2000-06-30</th>
-      <td>2</td>
+      <td>4</td>
       <td>0</td>
-      <td>group2</td>
-      <td>0.000000</td>
+      <td>group0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>2000-09-30</th>
-      <td>7</td>
-      <td>1</td>
+      <td>8</td>
+      <td>4</td>
       <td>group1</td>
-      <td>3.000000</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>2000-12-31</th>
-      <td>2</td>
-      <td>3</td>
+      <td>5</td>
+      <td>9</td>
       <td>group2</td>
-      <td>0.000000</td>
+      <td>0.5</td>
     </tr>
     <tr>
       <th>2001-03-31</th>
-      <td>9</td>
-      <td>9</td>
-      <td>group1</td>
-      <td>0.000000</td>
+      <td>7</td>
+      <td>7</td>
+      <td>group2</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>2001-06-30</th>
-      <td>9</td>
-      <td>7</td>
-      <td>group2</td>
-      <td>4.666667</td>
+      <td>5</td>
+      <td>0</td>
+      <td>group1</td>
+      <td>1.0</td>
     </tr>
     <tr>
       <th>2001-09-30</th>
-      <td>2</td>
-      <td>8</td>
-      <td>group2</td>
-      <td>-2.333333</td>
+      <td>4</td>
+      <td>3</td>
+      <td>group1</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>2001-12-31</th>
-      <td>2</td>
-      <td>2</td>
-      <td>group2</td>
-      <td>-2.333333</td>
+      <td>3</td>
+      <td>5</td>
+      <td>group1</td>
+      <td>-1.0</td>
     </tr>
     <tr>
       <th>2002-03-31</th>
-      <td>6</td>
-      <td>2</td>
-      <td>group0</td>
-      <td>-1.500000</td>
+      <td>7</td>
+      <td>8</td>
+      <td>group2</td>
+      <td>-0.5</td>
     </tr>
     <tr>
       <th>2002-06-30</th>
-      <td>9</td>
-      <td>0</td>
-      <td>group0</td>
-      <td>1.500000</td>
+      <td>8</td>
+      <td>1</td>
+      <td>group2</td>
+      <td>0.5</td>
     </tr>
   </tbody>
 </table>
@@ -1498,83 +1509,83 @@ dtype: int64
   <tbody>
     <tr>
       <th>2000-03-31</th>
-      <td>-3.000000</td>
-      <td>6</td>
-      <td>group1</td>
-      <td>-3.000000</td>
-      <td>-18.000000</td>
+      <td>-0.5</td>
+      <td>3</td>
+      <td>group2</td>
+      <td>-0.5</td>
+      <td>-1.5</td>
     </tr>
     <tr>
       <th>2000-06-30</th>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>0</td>
-      <td>group2</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>group0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>2000-09-30</th>
-      <td>3.000000</td>
-      <td>1</td>
+      <td>0.0</td>
+      <td>4</td>
       <td>group1</td>
-      <td>3.000000</td>
-      <td>3.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>2000-12-31</th>
-      <td>0.000000</td>
-      <td>3</td>
+      <td>0.5</td>
+      <td>9</td>
       <td>group2</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.5</td>
+      <td>4.5</td>
     </tr>
     <tr>
       <th>2001-03-31</th>
-      <td>0.000000</td>
-      <td>9</td>
-      <td>group1</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>7</td>
+      <td>group2</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>2001-06-30</th>
-      <td>4.666667</td>
-      <td>7</td>
-      <td>group2</td>
-      <td>4.666667</td>
-      <td>32.666667</td>
+      <td>1.0</td>
+      <td>0</td>
+      <td>group1</td>
+      <td>1.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>2001-09-30</th>
-      <td>-2.333333</td>
-      <td>8</td>
-      <td>group2</td>
-      <td>-2.333333</td>
-      <td>-18.666667</td>
+      <td>0.0</td>
+      <td>3</td>
+      <td>group1</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>2001-12-31</th>
-      <td>-2.333333</td>
-      <td>2</td>
-      <td>group2</td>
-      <td>-2.333333</td>
-      <td>-4.666667</td>
+      <td>-1.0</td>
+      <td>5</td>
+      <td>group1</td>
+      <td>-1.0</td>
+      <td>-5.0</td>
     </tr>
     <tr>
       <th>2002-03-31</th>
-      <td>-1.500000</td>
-      <td>2</td>
-      <td>group0</td>
-      <td>-1.500000</td>
-      <td>-3.000000</td>
+      <td>-0.5</td>
+      <td>8</td>
+      <td>group2</td>
+      <td>-0.5</td>
+      <td>-4.0</td>
     </tr>
     <tr>
       <th>2002-06-30</th>
-      <td>1.500000</td>
-      <td>0</td>
-      <td>group0</td>
-      <td>1.500000</td>
-      <td>0.000000</td>
+      <td>0.5</td>
+      <td>1</td>
+      <td>group2</td>
+      <td>0.5</td>
+      <td>0.5</td>
     </tr>
   </tbody>
 </table>
@@ -1710,39 +1721,39 @@ dtype: int64
   </thead>
   <tbody>
     <tr>
-      <th>14</th>
-      <td>2000-05-31</td>
-      <td>B</td>
-      <td>type3</td>
-      <td>-1.851338</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>2000-08-31</td>
-      <td>A</td>
-      <td>type2</td>
-      <td>-0.319177</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2000-03-31</td>
-      <td>A</td>
-      <td>type2</td>
-      <td>0.114823</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>2000-06-30</td>
-      <td>A</td>
-      <td>type2</td>
-      <td>0.755644</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>2000-09-30</td>
+      <th>0</th>
+      <td>2000-01-31</td>
       <td>A</td>
       <td>type1</td>
-      <td>0.706815</td>
+      <td>0.432074</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2000-07-31</td>
+      <td>A</td>
+      <td>type2</td>
+      <td>0.973556</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2000-10-31</td>
+      <td>A</td>
+      <td>type1</td>
+      <td>1.182053</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2000-04-30</td>
+      <td>A</td>
+      <td>type3</td>
+      <td>0.669562</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2000-02-29</td>
+      <td>A</td>
+      <td>type4</td>
+      <td>2.483088</td>
     </tr>
   </tbody>
 </table>
@@ -1791,48 +1802,48 @@ dtype: int64
     </tr>
     <tr>
       <th>2000-02-29</th>
-      <td>-0.776445</td>
-      <td>-0.724846</td>
+      <td>0.432074</td>
+      <td>0.161018</td>
     </tr>
     <tr>
       <th>2000-03-31</th>
-      <td>-1.071143</td>
-      <td>-0.313866</td>
+      <td>2.483088</td>
+      <td>2.504103</td>
     </tr>
     <tr>
       <th>2000-04-30</th>
-      <td>0.114823</td>
-      <td>2.805459</td>
+      <td>0.743854</td>
+      <td>0.961670</td>
     </tr>
     <tr>
       <th>2000-05-31</th>
-      <td>0.015639</td>
-      <td>1.744335</td>
+      <td>0.669562</td>
+      <td>-1.290608</td>
     </tr>
     <tr>
       <th>2000-06-30</th>
-      <td>-0.458332</td>
-      <td>-1.851338</td>
+      <td>-0.840457</td>
+      <td>-0.344066</td>
     </tr>
     <tr>
       <th>2000-07-31</th>
-      <td>0.755644</td>
-      <td>-0.949163</td>
+      <td>1.265156</td>
+      <td>-0.576811</td>
     </tr>
     <tr>
       <th>2000-08-31</th>
-      <td>1.957301</td>
-      <td>1.725237</td>
+      <td>0.973556</td>
+      <td>-0.104524</td>
     </tr>
     <tr>
       <th>2000-09-30</th>
-      <td>-0.319177</td>
-      <td>-0.274864</td>
+      <td>-0.915909</td>
+      <td>-0.818736</td>
     </tr>
     <tr>
       <th>2000-10-31</th>
-      <td>0.706815</td>
-      <td>0.181985</td>
+      <td>-1.745437</td>
+      <td>-0.719787</td>
     </tr>
   </tbody>
 </table>
@@ -1988,7 +1999,7 @@ dtype: int64
       <td>d</td>
       <td>2.5</td>
       <td>3.2</td>
-      <td>-0.452317</td>
+      <td>-0.950191</td>
       <td>0</td>
     </tr>
     <tr>
@@ -1997,7 +2008,7 @@ dtype: int64
       <td>e</td>
       <td>1.2</td>
       <td>1.3</td>
-      <td>-0.313246</td>
+      <td>0.223333</td>
       <td>1</td>
     </tr>
     <tr>
@@ -2006,7 +2017,7 @@ dtype: int64
       <td>f</td>
       <td>0.7</td>
       <td>0.1</td>
-      <td>0.949391</td>
+      <td>0.178017</td>
       <td>2</td>
     </tr>
   </tbody>
@@ -2056,42 +2067,42 @@ dtype: int64
     <tr>
       <th>0</th>
       <th>1970</th>
-      <td>-0.452317</td>
+      <td>-0.950191</td>
       <td>a</td>
       <td>2.5</td>
     </tr>
     <tr>
       <th>1</th>
       <th>1970</th>
-      <td>-0.313246</td>
+      <td>0.223333</td>
       <td>b</td>
       <td>1.2</td>
     </tr>
     <tr>
       <th>2</th>
       <th>1970</th>
-      <td>0.949391</td>
+      <td>0.178017</td>
       <td>c</td>
       <td>0.7</td>
     </tr>
     <tr>
       <th>0</th>
       <th>1980</th>
-      <td>-0.452317</td>
+      <td>-0.950191</td>
       <td>d</td>
       <td>3.2</td>
     </tr>
     <tr>
       <th>1</th>
       <th>1980</th>
-      <td>-0.313246</td>
+      <td>0.223333</td>
       <td>e</td>
       <td>1.3</td>
     </tr>
     <tr>
       <th>2</th>
       <th>1980</th>
-      <td>0.949391</td>
+      <td>0.178017</td>
       <td>f</td>
       <td>0.1</td>
     </tr>
@@ -2157,46 +2168,46 @@ dtype: int64
     <tr>
       <th rowspan="2" valign="top">bar</th>
       <th>one</th>
-      <td>1.277663</td>
-      <td>-0.071214</td>
+      <td>0.646496</td>
+      <td>-0.069932</td>
     </tr>
     <tr>
       <th>two</th>
-      <td>-0.082948</td>
-      <td>0.464004</td>
+      <td>-0.212259</td>
+      <td>-0.024250</td>
     </tr>
     <tr>
       <th rowspan="2" valign="top">baz</th>
       <th>one</th>
-      <td>0.023831</td>
-      <td>-0.517562</td>
+      <td>0.128547</td>
+      <td>-0.016447</td>
     </tr>
     <tr>
       <th>two</th>
-      <td>-0.383079</td>
-      <td>1.189581</td>
+      <td>-0.177846</td>
+      <td>0.376514</td>
     </tr>
     <tr>
       <th rowspan="2" valign="top">foo</th>
       <th>one</th>
-      <td>0.299568</td>
-      <td>1.158018</td>
+      <td>-0.835671</td>
+      <td>0.285248</td>
     </tr>
     <tr>
       <th>two</th>
-      <td>-1.618195</td>
-      <td>0.437520</td>
+      <td>0.130540</td>
+      <td>1.261794</td>
     </tr>
     <tr>
       <th rowspan="2" valign="top">qux</th>
       <th>one</th>
-      <td>-1.178384</td>
-      <td>-0.232130</td>
+      <td>-0.880270</td>
+      <td>-0.118521</td>
     </tr>
     <tr>
       <th>two</th>
-      <td>1.264688</td>
-      <td>-0.282770</td>
+      <td>1.914932</td>
+      <td>1.230809</td>
     </tr>
   </tbody>
 </table>
@@ -2212,22 +2223,22 @@ dtype: int64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>first  second   
-bar    one     A    1.277663
-               B   -0.071214
-       two     A   -0.082948
-               B    0.464004
-baz    one     A    0.023831
-               B   -0.517562
-       two     A   -0.383079
-               B    1.189581
-foo    one     A    0.299568
-               B    1.158018
-       two     A   -1.618195
-               B    0.437520
-qux    one     A   -1.178384
-               B   -0.232130
-       two     A    1.264688
-               B   -0.282770
+bar    one     A    0.646496
+               B   -0.069932
+       two     A   -0.212259
+               B   -0.024250
+baz    one     A    0.128547
+               B   -0.016447
+       two     A   -0.177846
+               B    0.376514
+foo    one     A   -0.835671
+               B    0.285248
+       two     A    0.130540
+               B    1.261794
+qux    one     A   -0.880270
+               B   -0.118521
+       two     A    1.914932
+               B    1.230809
 dtype: float64
 </pre></div>
 </div>
@@ -2281,32 +2292,32 @@ dtype: float64
     <tr>
       <th rowspan="2" valign="top">one</th>
       <th>A</th>
-      <td>1.277663</td>
-      <td>0.023831</td>
-      <td>0.299568</td>
-      <td>-1.178384</td>
+      <td>0.646496</td>
+      <td>0.128547</td>
+      <td>-0.835671</td>
+      <td>-0.880270</td>
     </tr>
     <tr>
       <th>B</th>
-      <td>-0.071214</td>
-      <td>-0.517562</td>
-      <td>1.158018</td>
-      <td>-0.232130</td>
+      <td>-0.069932</td>
+      <td>-0.016447</td>
+      <td>0.285248</td>
+      <td>-0.118521</td>
     </tr>
     <tr>
       <th rowspan="2" valign="top">two</th>
       <th>A</th>
-      <td>-0.082948</td>
-      <td>-0.383079</td>
-      <td>-1.618195</td>
-      <td>1.264688</td>
+      <td>-0.212259</td>
+      <td>-0.177846</td>
+      <td>0.130540</td>
+      <td>1.914932</td>
     </tr>
     <tr>
       <th>B</th>
-      <td>0.464004</td>
-      <td>1.189581</td>
-      <td>0.437520</td>
-      <td>-0.282770</td>
+      <td>-0.024250</td>
+      <td>0.376514</td>
+      <td>1.261794</td>
+      <td>1.230809</td>
     </tr>
   </tbody>
 </table>
@@ -2369,25 +2380,25 @@ dtype: float64
       <th>0</th>
       <td>c</td>
       <td>1</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>c</td>
       <td>2</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>b</td>
       <td>3</td>
-      <td>False</td>
-      <td>False</td>
-      <td>True</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -2442,31 +2453,31 @@ dtype: float64
   <tbody>
     <tr>
       <th>2000-01-31</th>
-      <td>0.253487</td>
+      <td>0.048169</td>
     </tr>
     <tr>
       <th>2000-02-29</th>
-      <td>0.821493</td>
+      <td>0.876815</td>
     </tr>
     <tr>
       <th>2000-03-31</th>
-      <td>0.833908</td>
+      <td>1.245852</td>
     </tr>
     <tr>
       <th>2000-04-30</th>
-      <td>0.832131</td>
+      <td>1.282269</td>
     </tr>
     <tr>
       <th>2000-05-31</th>
-      <td>1.116401</td>
+      <td>1.403288</td>
     </tr>
     <tr>
       <th>2000-06-30</th>
-      <td>2.529751</td>
+      <td>1.330920</td>
     </tr>
     <tr>
       <th>2000-07-31</th>
-      <td>4.095256</td>
+      <td>2.896549</td>
     </tr>
     <tr>
       <th>2000-08-31</th>
@@ -2474,19 +2485,19 @@ dtype: float64
     </tr>
     <tr>
       <th>2000-09-30</th>
-      <td>6.715195</td>
+      <td>5.357122</td>
     </tr>
     <tr>
       <th>2000-10-31</th>
-      <td>7.236421</td>
+      <td>6.947567</td>
     </tr>
     <tr>
       <th>2000-11-30</th>
-      <td>7.041016</td>
+      <td>8.672782</td>
     </tr>
     <tr>
       <th>2000-12-31</th>
-      <td>7.953212</td>
+      <td>9.983110</td>
     </tr>
   </tbody>
 </table>
@@ -2537,75 +2548,75 @@ dtype: float64
   <tbody>
     <tr>
       <th>2000-02-01</th>
-      <td>0.253487</td>
+      <td>0.048169</td>
       <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>2000-03-01</th>
-      <td>0.821493</td>
-      <td>0.568006</td>
+      <td>0.876815</td>
+      <td>0.828647</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>2000-04-01</th>
-      <td>0.833908</td>
-      <td>0.012414</td>
-      <td>0.568006</td>
+      <td>1.245852</td>
+      <td>0.369037</td>
+      <td>0.828647</td>
     </tr>
     <tr>
       <th>2000-05-01</th>
-      <td>0.832131</td>
-      <td>-0.001777</td>
-      <td>0.012414</td>
+      <td>1.282269</td>
+      <td>0.036416</td>
+      <td>0.369037</td>
     </tr>
     <tr>
       <th>2000-06-01</th>
-      <td>1.116401</td>
-      <td>0.284270</td>
-      <td>-0.001777</td>
+      <td>1.403288</td>
+      <td>0.121019</td>
+      <td>0.036416</td>
     </tr>
     <tr>
       <th>2000-07-01</th>
-      <td>2.529751</td>
-      <td>1.413349</td>
-      <td>0.284270</td>
+      <td>1.330920</td>
+      <td>-0.072368</td>
+      <td>0.121019</td>
     </tr>
     <tr>
       <th>2000-08-01</th>
-      <td>4.095256</td>
-      <td>1.565505</td>
-      <td>1.413349</td>
+      <td>2.896549</td>
+      <td>1.565629</td>
+      <td>-0.072368</td>
     </tr>
     <tr>
       <th>2000-09-01</th>
-      <td>5.426700</td>
-      <td>1.331444</td>
-      <td>1.565505</td>
+      <td>4.147004</td>
+      <td>1.250455</td>
+      <td>1.565629</td>
     </tr>
     <tr>
       <th>2000-10-01</th>
-      <td>6.715195</td>
-      <td>1.288495</td>
-      <td>1.331444</td>
+      <td>5.357122</td>
+      <td>1.210118</td>
+      <td>1.250455</td>
     </tr>
     <tr>
       <th>2000-11-01</th>
-      <td>7.236421</td>
-      <td>0.521227</td>
-      <td>1.288495</td>
+      <td>6.947567</td>
+      <td>1.590445</td>
+      <td>1.210118</td>
     </tr>
     <tr>
       <th>2000-12-01</th>
-      <td>7.041016</td>
-      <td>-0.195405</td>
-      <td>0.521227</td>
+      <td>8.672782</td>
+      <td>1.725215</td>
+      <td>1.590445</td>
     </tr>
     <tr>
       <th>2001-01-01</th>
-      <td>7.953212</td>
-      <td>0.912196</td>
-      <td>-0.195405</td>
+      <td>9.983110</td>
+      <td>1.310328</td>
+      <td>1.725215</td>
     </tr>
   </tbody>
 </table>
@@ -2629,15 +2640,15 @@ dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-02-01         NaN
 2000-03-01         NaN
 2000-04-01         NaN
-2000-05-01    0.192881
-2000-06-01    0.098303
-2000-07-01    0.565281
-2000-08-01    1.087708
-2000-09-01    1.436766
-2000-10-01    1.395148
-2000-11-01    1.047055
-2000-12-01    0.538105
-2001-01-01    0.412673
+2000-05-01    0.411367
+2000-06-01    0.175491
+2000-07-01    0.028356
+2000-08-01    0.538094
+2000-09-01    0.914572
+2000-10-01    1.342067
+2000-11-01    1.350339
+2000-12-01    1.508593
+2001-01-01    1.541996
 Name: diff_values, dtype: float64
 </pre></div>
 </div>
@@ -2958,7 +2969,7 @@ Name: diff_values, dtype: float64
 </div>
 <p>Sometimes, rather than splitting operations out into multiple lines, it can be more concise and clear to chain methods together. A typical time you might do this is when reading in a dataset and perfoming all of the initial cleaning. Tom Augsperger has a <a class="reference external" href="https://tomaugspurger.github.io/method-chaining">great tutorial</a> on this, which I’ve reproduced parts of here. For more info on the <code class="docutils literal notranslate"><span class="pre">pipe</span></code> function used below, check out these short <a class="reference external" href="https://calmcode.io/pandas-pipe/introduction.html">video tutorials</a>.</p>
 <p>To chain methods together, both the input and output must be a pandas dataframe. Many functions already do input and output these, for example the <code class="docutils literal notranslate"><span class="pre">df.rename(columns={'old_col':</span> <span class="pre">'new_col'})</span></code> takes in <code class="docutils literal notranslate"><span class="pre">df</span></code> and outputs a dataframe with one column name changed.</p>
-<p>But occassionally, we’ll want to use a function that we’ve defined (rather than an already existing one). For that, we need the <code class="docutils literal notranslate"><span class="pre">pipe</span></code> method; it ‘pipes’ the result of one operation to the next operation. When objects are being passed through multiple functions, this can be much clearer. Compare, for example,</p>
+<p>But occasionally, we’ll want to use a function that we’ve defined (rather than an already existing one). For that, we need the <code class="docutils literal notranslate"><span class="pre">pipe</span></code> method; it ‘pipes’ the result of one operation to the next operation. When objects are being passed through multiple functions, this can be much clearer. Compare, for example,</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">h</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="n">g_arg</span><span class="o">=</span><span class="n">a</span><span class="p">),</span> <span class="n">f_arg</span><span class="o">=</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -3105,7 +3116,7 @@ Name: diff_values, dtype: float64
 </table>
 </div></div></div>
 </div>
-<p>We’ll try and do a number of operations in one go: putting column titles in lower case, discarding useless columns, creating precise depature and arrival times, turning some of the variables into categoricals, creating a demeaned delay time, and creating a new categorical column for distances according to quantiles that will be called ‘near’, ‘less near’, ‘far’, and ‘furthest’. Some of these operations require a separate function, so we first define those. When we do the cleaning, we’ll pipe our dataframe to those functions (optionally passing any arguments).</p>
+<p>We’ll try and do a number of operations in one go: putting column titles in lower case, discarding useless columns, creating precise departure and arrival times, turning some of the variables into categoricals, creating a demeaned delay time, and creating a new categorical column for distances according to quantiles that will be called ‘near’, ‘less near’, ‘far’, and ‘furthest’. Some of these operations require a separate function, so we first define those. When we do the cleaning, we’ll pipe our dataframe to those functions (optionally passing any arguments).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">extract_city_name</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
@@ -3169,6 +3180,12 @@ Name: diff_values, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x6/ffnr59f116l96_y0q0bjfz7c0000gn/T/ipykernel_54952/1424200124.py:23: FutureWarning: The default value of regex will change from True to False in a future version.
+  .str.replace(&quot;\.0$&quot;, &quot;&quot;)  # NaNs force float dtype
+/var/folders/x6/ffnr59f116l96_y0q0bjfz7c0000gn/T/ipykernel_54952/1424200124.py:23: FutureWarning: The default value of regex will change from True to False in a future version.
+  .str.replace(&quot;\.0$&quot;, &quot;&quot;)  # NaNs force float dtype
+</pre></div>
+</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -3268,8 +3285,8 @@ Name: diff_values, dtype: float64
       <td>Savannah</td>
       <td>DTW</td>
       <td>Detroit</td>
-      <td>NaT</td>
-      <td>NaT</td>
+      <td>2020-01-04 06:53:00</td>
+      <td>2020-01-04 08:44:00</td>
       <td>-26.0</td>
       <td>NaN</td>
       <td>91.0</td>
@@ -3286,8 +3303,8 @@ Name: diff_values, dtype: float64
       <td>San Diego</td>
       <td>TUS</td>
       <td>Tucson</td>
-      <td>NaT</td>
-      <td>NaT</td>
+      <td>2020-01-05 07:32:00</td>
+      <td>2020-01-05 09:41:00</td>
       <td>-19.0</td>
       <td>NaN</td>
       <td>53.0</td>

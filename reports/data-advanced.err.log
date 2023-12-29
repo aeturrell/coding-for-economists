@@ -15,153 +15,137 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import matplotlib_inline.backend_inline
+import pandera as pa
 
-# Plot settings
-plt.style.use(
-    "https://github.com/aeturrell/coding-for-economists/raw/main/plot_style.txt"
+# data to validate
+df = pd.DataFrame(
+    {
+        "column1": [1, 4, 0, 10, 9],
+        "column2": [-1.3, -1.4, -2.9, -10.1, -20.4],
+        "column3": ["value_1", "value_2", "value_3", "value_2", "value_1"],
+    }
 )
-matplotlib_inline.backend_inline.set_matplotlib_formats("svg")
 
-# Set max rows displayed for readability
-pd.set_option("display.max_rows", 6)
+df
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mTimeoutError[0m                              Traceback (most recent call last)
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/urllib/request.py:1348[0m, in [0;36mAbstractHTTPHandler.do_open[0;34m(self, http_class, req, **http_conn_args)[0m
-[1;32m   1347[0m [38;5;28;01mtry[39;00m:
-[0;32m-> 1348[0m     [43mh[49m[38;5;241;43m.[39;49m[43mrequest[49m[43m([49m[43mreq[49m[38;5;241;43m.[39;49m[43mget_method[49m[43m([49m[43m)[49m[43m,[49m[43m [49m[43mreq[49m[38;5;241;43m.[39;49m[43mselector[49m[43m,[49m[43m [49m[43mreq[49m[38;5;241;43m.[39;49m[43mdata[49m[43m,[49m[43m [49m[43mheaders[49m[43m,[49m
-[1;32m   1349[0m [43m              [49m[43mencode_chunked[49m[38;5;241;43m=[39;49m[43mreq[49m[38;5;241;43m.[39;49m[43mhas_header[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mTransfer-encoding[39;49m[38;5;124;43m'[39;49m[43m)[49m[43m)[49m
-[1;32m   1350[0m [38;5;28;01mexcept[39;00m [38;5;167;01mOSError[39;00m [38;5;28;01mas[39;00m err: [38;5;66;03m# timeout error[39;00m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[3], line 1[0m
+[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandera[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpa[39;00m
+[1;32m      3[0m [38;5;66;03m# data to validate[39;00m
+[1;32m      4[0m df [38;5;241m=[39m pd[38;5;241m.[39mDataFrame(
+[1;32m      5[0m     {
+[1;32m      6[0m         [38;5;124m"[39m[38;5;124mcolumn1[39m[38;5;124m"[39m: [[38;5;241m1[39m, [38;5;241m4[39m, [38;5;241m0[39m, [38;5;241m10[39m, [38;5;241m9[39m],
+[0;32m   (...)[0m
+[1;32m      9[0m     }
+[1;32m     10[0m )
 
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/http/client.py:1283[0m, in [0;36mHTTPConnection.request[0;34m(self, method, url, body, headers, encode_chunked)[0m
-[1;32m   1282[0m [38;5;250m[39m[38;5;124;03m"""Send a complete request to the server."""[39;00m
-[0;32m-> 1283[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_send_request[49m[43m([49m[43mmethod[49m[43m,[49m[43m [49m[43murl[49m[43m,[49m[43m [49m[43mbody[49m[43m,[49m[43m [49m[43mheaders[49m[43m,[49m[43m [49m[43mencode_chunked[49m[43m)[49m
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/pandera/__init__.py:4[0m
+[1;32m      1[0m [38;5;124;03m"""A flexible and expressive pandas validation library."""[39;00m
+[1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mplatform[39;00m
+[0;32m----> 4[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandera[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbackends[39;00m
+[1;32m      5[0m [38;5;28;01mfrom[39;00m [38;5;21;01mpandera[39;00m [38;5;28;01mimport[39;00m errors, external_config, typing
+[1;32m      6[0m [38;5;28;01mfrom[39;00m [38;5;21;01mpandera[39;00m[38;5;21;01m.[39;00m[38;5;21;01maccessors[39;00m [38;5;28;01mimport[39;00m pandas_accessor
 
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/http/client.py:1329[0m, in [0;36mHTTPConnection._send_request[0;34m(self, method, url, body, headers, encode_chunked)[0m
-[1;32m   1328[0m     body [38;5;241m=[39m _encode(body, [38;5;124m'[39m[38;5;124mbody[39m[38;5;124m'[39m)
-[0;32m-> 1329[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mendheaders[49m[43m([49m[43mbody[49m[43m,[49m[43m [49m[43mencode_chunked[49m[38;5;241;43m=[39;49m[43mencode_chunked[49m[43m)[49m
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/pandera/backends/__init__.py:6[0m
+[1;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandera[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbackends[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbase[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbuiltin_checks[39;00m
+[1;32m      5[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandera[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbackends[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbase[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbuiltin_hypotheses[39;00m
+[0;32m----> 6[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandera[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbackends[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpandas[39;00m
 
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/http/client.py:1278[0m, in [0;36mHTTPConnection.endheaders[0;34m(self, message_body, encode_chunked)[0m
-[1;32m   1277[0m     [38;5;28;01mraise[39;00m CannotSendHeader()
-[0;32m-> 1278[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_send_output[49m[43m([49m[43mmessage_body[49m[43m,[49m[43m [49m[43mencode_chunked[49m[38;5;241;43m=[39;49m[43mencode_chunked[49m[43m)[49m
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/pandera/backends/pandas/__init__.py:12[0m
+[1;32m      9[0m [38;5;28;01mfrom[39;00m [38;5;21;01mpandera[39;00m[38;5;21;01m.[39;00m[38;5;21;01mapi[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcontainer[39;00m [38;5;28;01mimport[39;00m DataFrameSchema
+[1;32m     10[0m [38;5;28;01mfrom[39;00m [38;5;21;01mpandera[39;00m[38;5;21;01m.[39;00m[38;5;21;01mapi[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcomponents[39;00m [38;5;28;01mimport[39;00m Column, Index, MultiIndex
+[0;32m---> 12[0m [38;5;28;01mfrom[39;00m [38;5;21;01mpandera[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbackends[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpandas[39;00m [38;5;28;01mimport[39;00m builtin_checks, builtin_hypotheses
+[1;32m     13[0m [38;5;28;01mfrom[39;00m [38;5;21;01mpandera[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbackends[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mchecks[39;00m [38;5;28;01mimport[39;00m PandasCheckBackend
+[1;32m     14[0m [38;5;28;01mfrom[39;00m [38;5;21;01mpandera[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbackends[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mhypotheses[39;00m [38;5;28;01mimport[39;00m PandasHypothesisBackend
 
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/http/client.py:1038[0m, in [0;36mHTTPConnection._send_output[0;34m(self, message_body, encode_chunked)[0m
-[1;32m   1037[0m [38;5;28;01mdel[39;00m [38;5;28mself[39m[38;5;241m.[39m_buffer[:]
-[0;32m-> 1038[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43msend[49m[43m([49m[43mmsg[49m[43m)[49m
-[1;32m   1040[0m [38;5;28;01mif[39;00m message_body [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
-[1;32m   1041[0m 
-[1;32m   1042[0m     [38;5;66;03m# create a consistent interface to message_body[39;00m
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/pandera/backends/pandas/builtin_hypotheses.py:14[0m
+[1;32m      6[0m [38;5;28;01mfrom[39;00m [38;5;21;01mpandera[39;00m[38;5;21;01m.[39;00m[38;5;21;01mapi[39;00m[38;5;21;01m.[39;00m[38;5;21;01mextensions[39;00m [38;5;28;01mimport[39;00m register_builtin_hypothesis
+[1;32m      7[0m [38;5;28;01mfrom[39;00m [38;5;21;01mpandera[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbackends[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbuiltin_checks[39;00m [38;5;28;01mimport[39;00m PandasData
+[1;32m     10[0m [38;5;129;43m@register_builtin_hypothesis[39;49m[43m([49m
+[1;32m     11[0m [43m    [49m[43merror[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mfailed two sample ttest between [39;49m[38;5;124;43m'[39;49m[38;5;132;43;01m{sample1}[39;49;00m[38;5;124;43m'[39;49m[38;5;124;43m and [39;49m[38;5;124;43m'[39;49m[38;5;132;43;01m{sample2}[39;49;00m[38;5;124;43m'[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m     12[0m [43m    [49m[43msamples_kwtypes[49m[38;5;241;43m=[39;49m[43m{[49m[38;5;124;43m"[39;49m[38;5;124;43msample1[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;28;43mstr[39;49m[43m,[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43msample2[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;28;43mstr[39;49m[43m}[49m[43m,[49m
+[1;32m     13[0m [43m)[49m
+[0;32m---> 14[0m [38;5;28;43;01mdef[39;49;00m[43m [49m[38;5;21;43mtwo_sample_ttest[39;49m[43m([49m
+[1;32m     15[0m [43m    [49m[38;5;241;43m*[39;49m[43msamples[49m[43m:[49m[43m [49m[43mTuple[49m[43m[[49m[43mPandasData[49m[43m,[49m[43m [49m[38;5;241;43m.[39;49m[38;5;241;43m.[39;49m[38;5;241;43m.[39;49m[43m][49m[43m,[49m
+[1;32m     16[0m [43m    [49m[43mequal_var[49m[43m:[49m[43m [49m[38;5;28;43mbool[39;49m[43m [49m[38;5;241;43m=[39;49m[43m [49m[38;5;28;43;01mTrue[39;49;00m[43m,[49m
+[1;32m     17[0m [43m    [49m[43mnan_policy[49m[43m:[49m[43m [49m[38;5;28;43mstr[39;49m[43m [49m[38;5;241;43m=[39;49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mpropagate[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m     18[0m [43m)[49m[43m [49m[38;5;241;43m-[39;49m[38;5;241;43m>[39;49m[43m [49m[43mTuple[49m[43m[[49m[38;5;28;43mfloat[39;49m[43m,[49m[43m [49m[38;5;28;43mfloat[39;49m[43m][49m[43m:[49m
+[1;32m     19[0m [43m    [49m[38;5;28;43;01mfrom[39;49;00m[43m [49m[38;5;21;43;01mscipy[39;49;00m[43m [49m[38;5;28;43;01mimport[39;49;00m[43m [49m[43mstats[49m[43m  [49m[38;5;66;43;03m# pylint: disable=import-outside-toplevel[39;49;00m
+[1;32m     21[0m [43m    [49m[38;5;28;43;01massert[39;49;00m[43m [49m[43m([49m
+[1;32m     22[0m [43m        [49m[38;5;28;43mlen[39;49m[43m([49m[43msamples[49m[43m)[49m[43m [49m[38;5;241;43m==[39;49m[43m [49m[38;5;241;43m2[39;49m
+[1;32m     23[0m [43m    [49m[43m)[49m[43m,[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mExpected two sample ttest data to contain exactly two samples[39;49m[38;5;124;43m"[39;49m
 
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/http/client.py:976[0m, in [0;36mHTTPConnection.send[0;34m(self, data)[0m
-[1;32m    975[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39mauto_open:
-[0;32m--> 976[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mconnect[49m[43m([49m[43m)[49m
-[1;32m    977[0m [38;5;28;01melse[39;00m:
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/pandera/api/extensions.py:88[0m, in [0;36mregister_builtin_check[0;34m(fn, strategy, _check_cls, **outer_kwargs)[0m
+[1;32m     78[0m [38;5;28;01mif[39;00m check_fn [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:  [38;5;66;03m# pragma: no cover[39;00m
+[1;32m     79[0m     [38;5;28;01mraise[39;00m BuiltinCheckRegistrationError(
+[1;32m     80[0m         [38;5;124mf[39m[38;5;124m"[39m[38;5;124mCheck [39m[38;5;124m'[39m[38;5;132;01m{[39;00mname[38;5;132;01m}[39;00m[38;5;124m'[39m[38;5;124m doesn[39m[38;5;124m'[39m[38;5;124mt have a base check implementation. [39m[38;5;124m"[39m
+[1;32m     81[0m         [38;5;124mf[39m[38;5;124m"[39m[38;5;124mYou need to create a stub method in the [39m[38;5;132;01m{[39;00m_check_cls[38;5;132;01m}[39;00m[38;5;124m class and [39m[38;5;124m"[39m
+[0;32m   (...)[0m
+[1;32m     85[0m         [38;5;124m"[39m[38;5;124m`pandera.backends.pandas.builtin_checks` modules as an example.[39m[38;5;124m"[39m
+[1;32m     86[0m     )
+[0;32m---> 88[0m [43mcheck_fn[49m[38;5;241;43m.[39;49m[43mregister[49m[43m([49m[43mfn[49m[43m)[49m  [38;5;66;03m# type: ignore[39;00m
+[1;32m     90[0m [38;5;28;01mreturn[39;00m fn
 
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/http/client.py:1448[0m, in [0;36mHTTPSConnection.connect[0;34m(self)[0m
-[1;32m   1446[0m [38;5;124m"[39m[38;5;124mConnect to a host on a given (SSL) port.[39m[38;5;124m"[39m
-[0;32m-> 1448[0m [38;5;28;43msuper[39;49m[43m([49m[43m)[49m[38;5;241;43m.[39;49m[43mconnect[49m[43m([49m[43m)[49m
-[1;32m   1450[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39m_tunnel_host:
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/multimethod/__init__.py:131[0m, in [0;36mmultimethod.register[0;34m(self, *args)[0m
+[1;32m    126[0m [38;5;250m[39m[38;5;124;03m"""Decorator for registering a function.[39;00m
+[1;32m    127[0m 
+[1;32m    128[0m [38;5;124;03mOptionally call with types to return a decorator for unannotated functions.[39;00m
+[1;32m    129[0m [38;5;124;03m"""[39;00m
+[1;32m    130[0m [38;5;28;01mif[39;00m [38;5;28mlen[39m(args) [38;5;241m==[39m [38;5;241m1[39m [38;5;129;01mand[39;00m [38;5;28mhasattr[39m(args[[38;5;241m0[39m], [38;5;124m'[39m[38;5;124m__annotations__[39m[38;5;124m'[39m):
+[0;32m--> 131[0m     [38;5;28;01mreturn[39;00m [43moverload[49m[38;5;241;43m.[39;49m[43mregister[49m[43m([49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[43margs[49m[43m)[49m
+[1;32m    132[0m [38;5;28;01mreturn[39;00m [38;5;28;01mlambda[39;00m func: [38;5;28mself[39m[38;5;241m.[39m[38;5;21m__setitem__[39m(args, func) [38;5;129;01mor[39;00m func
 
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/http/client.py:942[0m, in [0;36mHTTPConnection.connect[0;34m(self)[0m
-[1;32m    941[0m sys[38;5;241m.[39maudit([38;5;124m"[39m[38;5;124mhttp.client.connect[39m[38;5;124m"[39m, [38;5;28mself[39m, [38;5;28mself[39m[38;5;241m.[39mhost, [38;5;28mself[39m[38;5;241m.[39mport)
-[0;32m--> 942[0m [38;5;28mself[39m[38;5;241m.[39msock [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_create_connection[49m[43m([49m
-[1;32m    943[0m [43m    [49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mhost[49m[43m,[49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mport[49m[43m)[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mtimeout[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43msource_address[49m[43m)[49m
-[1;32m    944[0m [38;5;66;03m# Might fail in OSs that don't implement TCP_NODELAY[39;00m
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/multimethod/__init__.py:276[0m, in [0;36moverload.register[0;34m(self, func)[0m
+[1;32m    274[0m [38;5;28;01mdef[39;00m [38;5;21mregister[39m([38;5;28mself[39m, func: Callable) [38;5;241m-[39m[38;5;241m>[39m Callable:
+[1;32m    275[0m [38;5;250m    [39m[38;5;124;03m"""Decorator for registering a function."""[39;00m
+[0;32m--> 276[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[38;5;21;43m__init__[39;49m[43m([49m[43mfunc[49m[43m)[49m  [38;5;66;03m# type: ignore[39;00m
+[1;32m    277[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39m[38;5;18m__name__[39m [38;5;241m==[39m func[38;5;241m.[39m[38;5;18m__name__[39m [38;5;28;01melse[39;00m func
 
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/socket.py:845[0m, in [0;36mcreate_connection[0;34m(address, timeout, source_address)[0m
-[1;32m    844[0m [38;5;28;01mtry[39;00m:
-[0;32m--> 845[0m     [38;5;28;01mraise[39;00m err
-[1;32m    846[0m [38;5;28;01mfinally[39;00m:
-[1;32m    847[0m     [38;5;66;03m# Break explicitly a reference cycle[39;00m
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/multimethod/__init__.py:121[0m, in [0;36mmultimethod.__init__[0;34m(self, func)[0m
+[1;32m    119[0m [38;5;28;01mdef[39;00m [38;5;21m__init__[39m([38;5;28mself[39m, func: Callable):
+[1;32m    120[0m     [38;5;28;01mtry[39;00m:
+[0;32m--> 121[0m         [38;5;28;43mself[39;49m[43m[[49m[43mget_types[49m[43m([49m[43mfunc[49m[43m)[49m[43m][49m [38;5;241m=[39m func
+[1;32m    122[0m     [38;5;28;01mexcept[39;00m [38;5;167;01mNameError[39;00m:
+[1;32m    123[0m         [38;5;28mself[39m[38;5;241m.[39mpending[38;5;241m.[39madd(func)
 
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/socket.py:833[0m, in [0;36mcreate_connection[0;34m(address, timeout, source_address)[0m
-[1;32m    832[0m     sock[38;5;241m.[39mbind(source_address)
-[0;32m--> 833[0m [43msock[49m[38;5;241;43m.[39;49m[43mconnect[49m[43m([49m[43msa[49m[43m)[49m
-[1;32m    834[0m [38;5;66;03m# Break explicitly a reference cycle[39;00m
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/multimethod/__init__.py:151[0m, in [0;36mmultimethod.__setitem__[0;34m(self, types, func)[0m
+[1;32m    149[0m [38;5;28mself[39m[38;5;241m.[39mclean()
+[1;32m    150[0m types [38;5;241m=[39m signature(types)
+[0;32m--> 151[0m parents [38;5;241m=[39m types[38;5;241m.[39mparents [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mparents[49m[43m([49m[43mtypes[49m[43m)[49m
+[1;32m    152[0m [38;5;28;01mfor[39;00m key [38;5;129;01min[39;00m [38;5;28mself[39m:
+[1;32m    153[0m     [38;5;28;01mif[39;00m types [38;5;241m<[39m key [38;5;129;01mand[39;00m ([38;5;129;01mnot[39;00m parents [38;5;129;01mor[39;00m parents [38;5;241m&[39m key[38;5;241m.[39mparents):
 
-[0;31mTimeoutError[0m: [Errno 60] Operation timed out
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/multimethod/__init__.py:139[0m, in [0;36mmultimethod.parents[0;34m(self, types)[0m
+[1;32m    137[0m [38;5;28;01mdef[39;00m [38;5;21mparents[39m([38;5;28mself[39m, types: [38;5;28mtuple[39m) [38;5;241m-[39m[38;5;241m>[39m [38;5;28mset[39m:
+[1;32m    138[0m [38;5;250m    [39m[38;5;124;03m"""Find immediate parents of potential key."""[39;00m
+[0;32m--> 139[0m     parents [38;5;241m=[39m {key [38;5;28;01mfor[39;00m key [38;5;129;01min[39;00m [38;5;28mself[39m [38;5;28;01mif[39;00m [38;5;28misinstance[39m(key, signature) [38;5;129;01mand[39;00m key [38;5;241m<[39m types}
+[1;32m    140[0m     [38;5;28;01mreturn[39;00m parents [38;5;241m-[39m {ancestor [38;5;28;01mfor[39;00m parent [38;5;129;01min[39;00m parents [38;5;28;01mfor[39;00m ancestor [38;5;129;01min[39;00m parent[38;5;241m.[39mparents}
 
-During handling of the above exception, another exception occurred:
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/multimethod/__init__.py:139[0m, in [0;36m<setcomp>[0;34m(.0)[0m
+[1;32m    137[0m [38;5;28;01mdef[39;00m [38;5;21mparents[39m([38;5;28mself[39m, types: [38;5;28mtuple[39m) [38;5;241m-[39m[38;5;241m>[39m [38;5;28mset[39m:
+[1;32m    138[0m [38;5;250m    [39m[38;5;124;03m"""Find immediate parents of potential key."""[39;00m
+[0;32m--> 139[0m     parents [38;5;241m=[39m {key [38;5;28;01mfor[39;00m key [38;5;129;01min[39;00m [38;5;28mself[39m [38;5;28;01mif[39;00m [38;5;28misinstance[39m(key, signature) [38;5;129;01mand[39;00m [43mkey[49m[43m [49m[38;5;241;43m<[39;49m[43m [49m[43mtypes[49m}
+[1;32m    140[0m     [38;5;28;01mreturn[39;00m parents [38;5;241m-[39m {ancestor [38;5;28;01mfor[39;00m parent [38;5;129;01min[39;00m parents [38;5;28;01mfor[39;00m ancestor [38;5;129;01min[39;00m parent[38;5;241m.[39mparents}
 
-[0;31mURLError[0m                                  Traceback (most recent call last)
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/style/core.py:166[0m, in [0;36muse[0;34m(style)[0m
-[1;32m    165[0m [38;5;28;01mtry[39;00m:
-[0;32m--> 166[0m     style [38;5;241m=[39m [43m_rc_params_in_file[49m[43m([49m[43mstyle[49m[43m)[49m
-[1;32m    167[0m [38;5;28;01mexcept[39;00m [38;5;167;01mIOError[39;00m [38;5;28;01mas[39;00m err:
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/multimethod/__init__.py:99[0m, in [0;36msignature.__lt__[0;34m(self, other)[0m
+[1;32m     98[0m [38;5;28;01mdef[39;00m [38;5;21m__lt__[39m([38;5;28mself[39m, other) [38;5;241m-[39m[38;5;241m>[39m [38;5;28mbool[39m:
+[0;32m---> 99[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m [38;5;241m!=[39m other [38;5;129;01mand[39;00m [38;5;28;43mself[39;49m[43m [49m[38;5;241;43m<[39;49m[38;5;241;43m=[39;49m[43m [49m[43mother[49m
 
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/__init__.py:854[0m, in [0;36m_rc_params_in_file[0;34m(fname, transform, fail_on_error)[0m
-[1;32m    853[0m rc_temp [38;5;241m=[39m {}
-[0;32m--> 854[0m [38;5;28;01mwith[39;00m _open_file_or_url(fname) [38;5;28;01mas[39;00m fd:
-[1;32m    855[0m     [38;5;28;01mtry[39;00m:
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/multimethod/__init__.py:96[0m, in [0;36msignature.__le__[0;34m(self, other)[0m
+[1;32m     95[0m [38;5;28;01mdef[39;00m [38;5;21m__le__[39m([38;5;28mself[39m, other) [38;5;241m-[39m[38;5;241m>[39m [38;5;28mbool[39m:
+[0;32m---> 96[0m     [38;5;28;01mreturn[39;00m [38;5;28mlen[39m([38;5;28mself[39m) [38;5;241m<[39m[38;5;241m=[39m [38;5;28mlen[39m(other) [38;5;129;01mand[39;00m [38;5;28;43mall[39;49m[43m([49m[38;5;28;43mmap[39;49m[43m([49m[38;5;28;43missubclass[39;49m[43m,[49m[43m [49m[43mother[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[43m)[49m[43m)[49m
 
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/contextlib.py:135[0m, in [0;36m_GeneratorContextManager.__enter__[0;34m(self)[0m
-[1;32m    134[0m [38;5;28;01mtry[39;00m:
-[0;32m--> 135[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mnext[39;49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mgen[49m[43m)[49m
-[1;32m    136[0m [38;5;28;01mexcept[39;00m [38;5;167;01mStopIteration[39;00m:
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/multimethod/__init__.py:76[0m, in [0;36msubtype.__subclasscheck__[0;34m(self, subclass)[0m
+[1;32m     71[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39m__origin__ [38;5;129;01mis[39;00m typing[38;5;241m.[39mUnion:
+[1;32m     72[0m     [38;5;28;01mreturn[39;00m [38;5;28missubclass[39m(subclass, [38;5;28mself[39m[38;5;241m.[39m__args__)
+[1;32m     73[0m [38;5;28;01mreturn[39;00m (  [38;5;66;03m# check args first to avoid a recursion error in ABCMeta[39;00m
+[1;32m     74[0m     [38;5;28mlen[39m(args) [38;5;241m==[39m [38;5;28mlen[39m([38;5;28mself[39m[38;5;241m.[39m__args__)
+[1;32m     75[0m     [38;5;129;01mand[39;00m [38;5;28missubclass[39m(origin, [38;5;28mself[39m[38;5;241m.[39m__origin__)
+[0;32m---> 76[0m     [38;5;129;01mand[39;00m [38;5;28;43mall[39;49m[43m([49m[38;5;28;43mmap[39;49m[43m([49m[38;5;28;43missubclass[39;49m[43m,[49m[43m [49m[43margs[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m__args__[49m[43m)[49m[43m)[49m
+[1;32m     77[0m )
 
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/__init__.py:827[0m, in [0;36m_open_file_or_url[0;34m(fname)[0m
-[1;32m    824[0m     _log[38;5;241m.[39mdebug(
-[1;32m    825[0m         [38;5;124m"[39m[38;5;124mCould not get certifi ssl context, https may not work.[39m[38;5;124m"[39m
-[1;32m    826[0m     )
-[0;32m--> 827[0m [38;5;28;01mwith[39;00m [43murllib[49m[38;5;241;43m.[39;49m[43mrequest[49m[38;5;241;43m.[39;49m[43murlopen[49m[43m([49m[43mfname[49m[43m,[49m[43m [49m[43mcontext[49m[38;5;241;43m=[39;49m[43mssl_ctx[49m[43m)[49m [38;5;28;01mas[39;00m f:
-[1;32m    828[0m     [38;5;28;01myield[39;00m (line[38;5;241m.[39mdecode([38;5;124m'[39m[38;5;124mutf-8[39m[38;5;124m'[39m) [38;5;28;01mfor[39;00m line [38;5;129;01min[39;00m f)
-
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/urllib/request.py:216[0m, in [0;36murlopen[0;34m(url, data, timeout, cafile, capath, cadefault, context)[0m
-[1;32m    215[0m     opener [38;5;241m=[39m _opener
-[0;32m--> 216[0m [38;5;28;01mreturn[39;00m [43mopener[49m[38;5;241;43m.[39;49m[43mopen[49m[43m([49m[43murl[49m[43m,[49m[43m [49m[43mdata[49m[43m,[49m[43m [49m[43mtimeout[49m[43m)[49m
-
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/urllib/request.py:519[0m, in [0;36mOpenerDirector.open[0;34m(self, fullurl, data, timeout)[0m
-[1;32m    518[0m sys[38;5;241m.[39maudit([38;5;124m'[39m[38;5;124murllib.Request[39m[38;5;124m'[39m, req[38;5;241m.[39mfull_url, req[38;5;241m.[39mdata, req[38;5;241m.[39mheaders, req[38;5;241m.[39mget_method())
-[0;32m--> 519[0m response [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_open[49m[43m([49m[43mreq[49m[43m,[49m[43m [49m[43mdata[49m[43m)[49m
-[1;32m    521[0m [38;5;66;03m# post-process response[39;00m
-
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/urllib/request.py:536[0m, in [0;36mOpenerDirector._open[0;34m(self, req, data)[0m
-[1;32m    535[0m protocol [38;5;241m=[39m req[38;5;241m.[39mtype
-[0;32m--> 536[0m result [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_call_chain[49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mhandle_open[49m[43m,[49m[43m [49m[43mprotocol[49m[43m,[49m[43m [49m[43mprotocol[49m[43m [49m[38;5;241;43m+[39;49m
-[1;32m    537[0m [43m                          [49m[38;5;124;43m'[39;49m[38;5;124;43m_open[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43mreq[49m[43m)[49m
-[1;32m    538[0m [38;5;28;01mif[39;00m result:
-
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/urllib/request.py:496[0m, in [0;36mOpenerDirector._call_chain[0;34m(self, chain, kind, meth_name, *args)[0m
-[1;32m    495[0m func [38;5;241m=[39m [38;5;28mgetattr[39m(handler, meth_name)
-[0;32m--> 496[0m result [38;5;241m=[39m [43mfunc[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m)[49m
-[1;32m    497[0m [38;5;28;01mif[39;00m result [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
-
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/urllib/request.py:1391[0m, in [0;36mHTTPSHandler.https_open[0;34m(self, req)[0m
-[1;32m   1390[0m [38;5;28;01mdef[39;00m [38;5;21mhttps_open[39m([38;5;28mself[39m, req):
-[0;32m-> 1391[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mdo_open[49m[43m([49m[43mhttp[49m[38;5;241;43m.[39;49m[43mclient[49m[38;5;241;43m.[39;49m[43mHTTPSConnection[49m[43m,[49m[43m [49m[43mreq[49m[43m,[49m
-[1;32m   1392[0m [43m        [49m[43mcontext[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_context[49m[43m,[49m[43m [49m[43mcheck_hostname[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_check_hostname[49m[43m)[49m
-
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/urllib/request.py:1351[0m, in [0;36mAbstractHTTPHandler.do_open[0;34m(self, http_class, req, **http_conn_args)[0m
-[1;32m   1350[0m [38;5;28;01mexcept[39;00m [38;5;167;01mOSError[39;00m [38;5;28;01mas[39;00m err: [38;5;66;03m# timeout error[39;00m
-[0;32m-> 1351[0m     [38;5;28;01mraise[39;00m URLError(err)
-[1;32m   1352[0m r [38;5;241m=[39m h[38;5;241m.[39mgetresponse()
-
-[0;31mURLError[0m: <urlopen error [Errno 60] Operation timed out>
-
-The above exception was the direct cause of the following exception:
-
-[0;31mOSError[0m                                   Traceback (most recent call last)
-Cell [0;32mIn[2], line 4[0m
-[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib_inline[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbackend_inline[39;00m
-[1;32m      3[0m [38;5;66;03m# Plot settings[39;00m
-[0;32m----> 4[0m [43mplt[49m[38;5;241;43m.[39;49m[43mstyle[49m[38;5;241;43m.[39;49m[43muse[49m[43m([49m
-[1;32m      5[0m [43m    [49m[38;5;124;43m"[39;49m[38;5;124;43mhttps://github.com/aeturrell/coding-for-economists/raw/main/plot_style.txt[39;49m[38;5;124;43m"[39;49m
-[1;32m      6[0m [43m)[49m
-[1;32m      7[0m matplotlib_inline[38;5;241m.[39mbackend_inline[38;5;241m.[39mset_matplotlib_formats([38;5;124m"[39m[38;5;124msvg[39m[38;5;124m"[39m)
-[1;32m      9[0m [38;5;66;03m# Set max rows displayed for readability[39;00m
-
-File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/style/core.py:168[0m, in [0;36muse[0;34m(style)[0m
-[1;32m    166[0m         style [38;5;241m=[39m _rc_params_in_file(style)
-[1;32m    167[0m     [38;5;28;01mexcept[39;00m [38;5;167;01mIOError[39;00m [38;5;28;01mas[39;00m err:
-[0;32m--> 168[0m         [38;5;28;01mraise[39;00m [38;5;167;01mIOError[39;00m(
-[1;32m    169[0m             [38;5;124mf[39m[38;5;124m"[39m[38;5;132;01m{[39;00mstyle[38;5;132;01m!r}[39;00m[38;5;124m is not a valid package style, path of style [39m[38;5;124m"[39m
-[1;32m    170[0m             [38;5;124mf[39m[38;5;124m"[39m[38;5;124mfile, URL of style file, or library style name (library [39m[38;5;124m"[39m
-[1;32m    171[0m             [38;5;124mf[39m[38;5;124m"[39m[38;5;124mstyles are listed in `style.available`)[39m[38;5;124m"[39m) [38;5;28;01mfrom[39;00m [38;5;21;01merr[39;00m
-[1;32m    172[0m filtered [38;5;241m=[39m {}
-[1;32m    173[0m [38;5;28;01mfor[39;00m k [38;5;129;01min[39;00m style:  [38;5;66;03m# don't trigger RcParams.__getitem__('backend')[39;00m
-
-[0;31mOSError[0m: 'https://github.com/aeturrell/coding-for-economists/raw/main/plot_style.txt' is not a valid package style, path of style file, URL of style file, or library style name (library styles are listed in `style.available`)
+[0;31mTypeError[0m: issubclass() arg 1 must be a class
 

@@ -208,6 +208,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="econmt-probability-random.html">Probability and Random Processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="econmt-statistics.html">Statistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="econmt-regression.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-generalised-models.html">Generalised regression models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-diagnostics.html">Regression diagnostics and visualisations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="econmt-causal-inference.html">Causal Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="econmt-bayesian.html">Bayesian Inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="econmt-bayes-bambi.html">Bayesian Inference Made Easier</a></li>
@@ -227,6 +229,13 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="code-further-advanced.html">Advanced Coding</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
@@ -245,19 +254,17 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="text-regex.html">Regular Expressions, aka regex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="text-nlp.html">Natural Language Processing</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ml-intro.html">Introduction to Machine Learning and AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-sup.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-data.html">Data for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-unsup.html">Unsupervised Machine Learning</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Geospatial</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="geo-intro.html">Intro to Geo-Spatial Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="geo-vis.html">Geo-Spatial Visualisation</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
 <ul class="nav bd-sidenav">
@@ -273,6 +280,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="craft-referee.html">Writing Referee Reports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="craft-technical-reports.html">Writing Technical Reports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="craft-extended-abstracts.html">Extended Abstracts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coming from ...</span></p>
 <ul class="nav bd-sidenav">
@@ -565,31 +577,30 @@ document.write(`
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>The previous chapter was just a quick tour of what can be done with a single tabular dataset (a ‘dataframe’). Dataframes are the most frequently used structure for working with data; they do everything a spreadsheet does and a whole lot more——as you’ll see! In this chapter, we’ll go deeper into working with data and dataframes.</p>
-<p>In this chapter, you’ll get really good overview to the <a class="reference external" href="https://pandas.pydata.org/"><strong>pandas</strong></a> package, the core data manipulation library in Python. The name is derived from ‘panel data’ but it’s suited to any tabular data, and can be used to work with more complex data structures too. We <em>won’t</em> cover reading in or writing data here; see the next chapter for that.</p>
-<p>This chapter is hugely indebted to the fantastic <a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/">Python Data Science Handbook</a> by Jake Vanderplas. Remember, if you get stuck with pandas, there is brilliant <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/index.html">documentation</a> and a fantastic set of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/index.html">introductory tutorials</a> on the <strong>pandas</strong> website. These notes are heavily indebted to those introductory tutorials.</p>
+<p>In this chapter, you’ll get really good overview to the <a class="reference external" href="https://pandas.pydata.org/"><strong>pandas</strong></a> package, the core data manipulation library in Python. There are other excellent packages for working with data in Python, for example <strong>polars</strong>, but there’s none as ubiquitous. The name is derived from ‘panel data’ but it’s suited to any tabular data, and can be used to work with more complex data structures too. We <em>won’t</em> cover reading in or writing data here; see the next chapter for that.</p>
+<p>This chapter is hugely indebted to the fantastic <a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/">Python Data Science Handbook</a> by Jake Vanderplas. Remember, if you get stuck with <strong>pandas</strong>, there is brilliant <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/index.html">documentation</a> and a fantastic set of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/index.html">introductory tutorials</a> on the <strong>pandas</strong> website. These notes are heavily indebted to those introductory tutorials.</p>
 <section id="prerequisites">
 <h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h3>
-<p>This chapter uses the <strong>pandas</strong>, <strong>seaborn</strong>, and <strong>numpy</strong> packages. If you’re running this code, you may need to install these packages, which you can do using either <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">packagename</span></code> or <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">packagename</span></code> on your computer’s command line. If you’re running this page in Google Colab, you can install new packages by running <code class="docutils literal notranslate"><span class="pre">!pip</span> <span class="pre">install</span> <span class="pre">packagename</span></code> in a new code cell but you will need to restart the Colab notebook for the change to take effect. There’s a brief guide on installing packages in the Chapter on <a class="reference internal" href="code-preliminaries.html#code-preliminaries"><span class="std std-ref">Preliminaries</span></a>.</p>
+<p>This chapter mainly uses the <strong>pandas</strong> and <strong>numpy</strong> packages. If you’re running this code, you may need to install these packages, which you can do using either <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">packagename</span></code> or <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">packagename</span></code> on your computer’s command line. If you’re running this page in Google Colab, you can install new packages by running <code class="docutils literal notranslate"><span class="pre">!pip</span> <span class="pre">install</span> <span class="pre">packagename</span></code> in a new code cell but you will need to restart the Colab notebook for the change to take effect. There’s a brief guide to installing packages in the Chapter on <a class="reference internal" href="code-preliminaries.html#code-preliminaries"><span class="std std-ref">Preliminaries</span></a>.</p>
 </section>
 <section id="using-tidy-data">
 <h3>Using tidy data<a class="headerlink" href="#using-tidy-data" title="Permalink to this heading">#</a></h3>
 <p>As an aside, if you’re working with tabular data, it’s good to try and use a so-called ‘tidy data’ format. This is data with one observation per row, and one variable per column, like so:</p>
-<p><img alt="" src="https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png" /></p>
-<p>Tidy data aren’t going to be appropriate <em>every</em> time and in every case, but they’re a really, really good default for tabular data. Once you use it as your default, it’s easier to think about how to perform subsequent operations. Some plotting libraries, such as <strong>seaborn</strong>, take that your data are in tidy format as a given. And many operations that you can perform on dataframes (the objects that hold tabular data within many programming languages) are easier when you have tidy data. If you’re writing out data to file to share, putting it in tidy format is a really good idea.</p>
-<p>Of course, <em>getting</em> your messy dataset into a tidy format may take a bit of work… but we’re about to enter the exciting world of coding for data analysis and the tools you’ll see in the rest of this chapter will help you to ‘wrangle’ even the most messy of datasets.</p>
+<p><img alt="Diagram showing tidy data" src="https://d33wubrfki0l68.cloudfront.net/6f1ddb544fc5c69a2478e444ab8112fb0eea23f8/91adc/images/tidy-1.png" /></p>
+<p>Tidy data aren’t going to be appropriate <em>every</em> time and in every case, but they’re a really, really good default for tabular data. Once you use it as your default, it’s easier to think about how to perform subsequent operations. Some plotting libraries (eg <strong>plotnine</strong>) take that your data are in tidy format as a given. And many operations that you can perform on dataframes (the objects that hold tabular data within many programming languages) are easier when you have tidy data. If you’re writing out data to file to share, putting it in tidy format is a really good idea.</p>
+<p>Of course, <em>getting</em> your messy dataset into a tidy format may take a bit of work… but we’re about to enter the exciting world of coding for data analysis: the tools you’ll see in the rest of this chapter will help you to ‘wrangle’ even the most messy of datasets.</p>
 <p>Having said that tidy data are great, and they are, one of standard data library <strong>pandas</strong>’ advantages relative to other data analysis libraries is that it isn’t <em>too</em> tied to tidy data and can navigate awkward non-tidy data manipulation tasks happily too.</p>
 </section>
 </section>
 <section id="dataframes-and-series">
 <h2>Dataframes and Series<a class="headerlink" href="#dataframes-and-series" title="Permalink to this heading">#</a></h2>
-<p>Let’s start with the absolute basics. The most basic <strong>pandas</strong> object is a dataframe. A DataFrame is a 2-dimensional data structure that can store data of different types (including characters, integers, floating point values, categorical data, even lists) in columns.</p>
+<p>Let’s start with the absolute basics. The most basic <strong>pandas</strong> object is a dataframe. A dataframe is a 2-dimensional data structure that can store data of different types (including characters, integers, floating point values, categorical data, even lists) in columns.</p>
 <p><img alt="" src="https://pandas.pydata.org/docs/_images/01_table_dataframe.svg" /></p>
 <p>Perhaps the single most important feature of <strong>pandas</strong> dataframes to remember is that the <em>index</em>, the special column on the left hand side that tracks the rows of data, is all important. Keep in mind the question, “what is the index doing in this operation” for every process you apply to a <strong>pandas</strong> dataframe and you won’t go far wrong.</p>
 <p>We’ll now import the packages we’ll need for this chapter and set a random number seed (some examples use randomly generated data).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
@@ -600,11 +611,11 @@ document.write(`
 </div>
 </div>
 </div>
-<p>We’ll look at a dataframe of the <em>penguins</em> dataset <span id="id2">[<a class="reference internal" href="zreferences.html#id36" title="Allison Marie Horst, Alison Presmanes Hill, and Kristen B Gorman. Palmerpenguins: palmer archipelago (antarctica) penguin data. R package version 0.1.0, 2020.">Horst <em>et al.</em>, 2020</a>]</span>, which comes build in to the <strong>seaborn</strong> package (which we imported into our session as <code class="docutils literal notranslate"><span class="pre">sns</span></code>). To show just the first 5 rows, we’ll be using the <code class="docutils literal notranslate"><span class="pre">head()</span></code> method (there’s also a <code class="docutils literal notranslate"><span class="pre">tail()</span></code> method).</p>
+<p>We’ll look at a dataframe of the <em>penguins</em> dataset <span id="id2">[<a class="reference internal" href="zreferences.html#id36" title="Allison Marie Horst, Alison Presmanes Hill, and Kristen B Gorman. Palmerpenguins: palmer archipelago (antarctica) penguin data. R package version 0.1.0, 2020.">Horst <em>et al.</em>, 2020</a>]</span>, which comes built in to the <strong>seaborn</strong> package (which we imported into our session as <code class="docutils literal notranslate"><span class="pre">sns</span></code>). To show just the first 5 rows, we’ll be using the <code class="docutils literal notranslate"><span class="pre">head()</span></code> method (there’s also a <code class="docutils literal notranslate"><span class="pre">tail()</span></code> method).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now let&#39;s load up a dataset from the seaborn package (imported as sns)</span>
-<span class="n">penguins</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;penguins&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now let&#39;s load up a dataset from the internet</span>
+<span class="n">penguins</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mwaskom/seaborn-data/master/penguins.csv&quot;</span><span class="p">)</span>
 <span class="n">penguins</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -646,7 +657,7 @@ document.write(`
       <td>18.7</td>
       <td>181.0</td>
       <td>3750.0</td>
-      <td>Male</td>
+      <td>MALE</td>
     </tr>
     <tr>
       <th>1</th>
@@ -656,7 +667,7 @@ document.write(`
       <td>17.4</td>
       <td>186.0</td>
       <td>3800.0</td>
-      <td>Female</td>
+      <td>FEMALE</td>
     </tr>
     <tr>
       <th>2</th>
@@ -666,7 +677,7 @@ document.write(`
       <td>18.0</td>
       <td>195.0</td>
       <td>3250.0</td>
-      <td>Female</td>
+      <td>FEMALE</td>
     </tr>
     <tr>
       <th>3</th>
@@ -686,7 +697,7 @@ document.write(`
       <td>19.3</td>
       <td>193.0</td>
       <td>3450.0</td>
-      <td>Female</td>
+      <td>FEMALE</td>
     </tr>
   </tbody>
 </table>
@@ -994,7 +1005,7 @@ dtype: int64
 <section id="values-columns-and-the-index">
 <h3>Values, Columns, and the Index<a class="headerlink" href="#values-columns-and-the-index" title="Permalink to this heading">#</a></h3>
 <p>You’ll have seen that there are three different things that make up a dataframe: the values that are in the cells, the column names, and the index. The column and index can take on values that are the same as the values in a dataframe; string, int, float, datetime, and more.</p>
-<p>It’s pretty obvious what role the columns play: they keep track of the name of different sets of values. But for people who may have seen other dataframe-like libraries, the role played by the index may be less familiar. The easiest way to think about a <strong>pandas</strong> index is that it does for row values what the columns do for columnar values: it’s a way of keeping track of what individual roles are and it <em>doesn’t</em> get used for calculations (just as summing a column ignores the name of the row).</p>
+<p>It’s pretty obvious what role the columns play: they keep track of the name of different sets of values. But for people who may have seen other dataframe-like libraries, the role played by the index may be less familiar. The easiest way to think about a <strong>pandas</strong> index is that it does for row values what the column titles do for columnar values: it’s a way of keeping track of what individual roles are and it <em>doesn’t</em> get used for calculations (just as summing a column ignores the name of the row).</p>
 <p>Here’s an example to show this. Let’s first create a simple dataframe:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1213,7 +1224,7 @@ dtype: int64
 <p>An index can be useful for keeping track of what’s going on, and it’s particularly convenient for some datetime operations.</p>
 <div class="admonition-exercise admonition">
 <p class="admonition-title">Exercise</p>
-<p>Working with the dataframe above add the phrase ” more text” onto the two string columns, <code class="docutils literal notranslate"><span class="pre">col3</span></code> and <code class="docutils literal notranslate"><span class="pre">col4</span></code>. Remember that strings respect the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator.</p>
+<p>Working with the dataframe above, add the phrase ” more text” onto the two string columns, <code class="docutils literal notranslate"><span class="pre">col3</span></code> and <code class="docutils literal notranslate"><span class="pre">col4</span></code>. Remember that strings respect the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator.</p>
 </div>
 <p>Whenever you use <code class="docutils literal notranslate"><span class="pre">groupby</span></code> (and some other operations), the columns you use to perform the operation are set as the index of the returned dataframe (you can have multiple index columns). To get back those back to being columns, use the <code class="docutils literal notranslate"><span class="pre">reset_index()</span></code> method like so:</p>
 <div class="cell docutils container">
@@ -1339,8 +1350,8 @@ dtype: int64
 </section>
 <section id="datatypes">
 <h2>Datatypes<a class="headerlink" href="#datatypes" title="Permalink to this heading">#</a></h2>
-<p>Pandas has some built-in datatypes (some are the basic Python datatypes) that will make your life a <em>lot</em> easier if you work with them. Why bother specifying datatypes? Languages like Python let you get away with having pretty much anything in your columns. But this can be a problem: sometimes you’ll end up mixing integers, strings, the generic ‘object’ datatype, and more by mistake. By ensuring that columns conform to a datatype, you can save yourself from some of the trials that come with these mixed datatypes. Some of the most important datatypes for dataframe are string, float, categorical, datetime, int, and boolean.</p>
-<p>Typically, you’ll read in a dataset where the dataypes of the columns are a mess. One of the first things you’ll want to do is sort these out. Here’s an example dataset showing how to set the datatypes:</p>
+<p><strong>Pandas</strong> has some built-in datatypes (some are the basic Python datatypes) that will make your life a <em>lot</em> easier if you work with them. Why bother specifying datatypes? Languages like Python let you get away with having pretty much anything in your columns. But this can be a problem: sometimes you’ll end up mixing integers, strings, the generic ‘object’ datatype, and more by mistake. By ensuring that columns conform to a datatype, you can save yourself from some of the trials that come with these mixed datatypes. Some of the most important datatypes for dataframe are string, float, categorical, datetime, int, and boolean.</p>
+<p>Typically, you’ll read in a dataset where the datatypes of the columns are a mess. One of the first things you’ll want to do is sort these out. Here’s an example dataset showing how to set the datatypes:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
@@ -1439,18 +1450,24 @@ memory usage: 320.0 bytes
 │                                │ bool        │ 1     │                                                          │
 │                                └─────────────┴───────┘                                                          │
 │ <span style="font-style: italic">                                                    number                                                    </span>  │
-│ ┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━┳━━━━━━━━┳━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━┓  │
-│ ┃<span style="font-weight: bold"> column_name         </span>┃<span style="font-weight: bold"> NA    </span>┃<span style="font-weight: bold"> NA %     </span>┃<span style="font-weight: bold"> mean    </span>┃<span style="font-weight: bold"> sd      </span>┃<span style="font-weight: bold"> p0     </span>┃<span style="font-weight: bold"> p25    </span>┃<span style="font-weight: bold"> p75    </span>┃<span style="font-weight: bold"> p100    </span>┃<span style="font-weight: bold"> hist     </span>┃  │
-│ ┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━╇━━━━━━━━╇━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━┩  │
-│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">double_col         </span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">       0</span> │ <span style="color: #008080; text-decoration-color: #008080">    2.3</span> │ <span style="color: #008080; text-decoration-color: #008080">    1.6</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.2</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.8</span> │ <span style="color: #008080; text-decoration-color: #008080">   2.8</span> │ <span style="color: #008080; text-decoration-color: #008080">    3.4</span> │ <span style="color: #008000; text-decoration-color: #008000"> █    █ </span> │  │
-│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">integer_col        </span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">       0</span> │ <span style="color: #008080; text-decoration-color: #008080">    1.5</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.71</span> │ <span style="color: #008080; text-decoration-color: #008080">     1</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.2</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.8</span> │ <span style="color: #008080; text-decoration-color: #008080">      2</span> │ <span style="color: #008000; text-decoration-color: #008000"> █    █ </span> │  │
-│ └─────────────────────┴───────┴──────────┴─────────┴─────────┴────────┴────────┴────────┴─────────┴──────────┘  │
+│ ┏━━━━━━━━━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━━━━┓  │
+│ ┃<span style="font-weight: bold"> column_name       </span>┃<span style="font-weight: bold"> NA   </span>┃<span style="font-weight: bold"> NA %    </span>┃<span style="font-weight: bold"> mean    </span>┃<span style="font-weight: bold"> sd      </span>┃<span style="font-weight: bold"> p0    </span>┃<span style="font-weight: bold"> p25   </span>┃<span style="font-weight: bold"> p50   </span>┃<span style="font-weight: bold"> p75   </span>┃<span style="font-weight: bold"> p100   </span>┃<span style="font-weight: bold"> hist     </span>┃  │
+│ ┡━━━━━━━━━━━━━━━━━━━╇━━━━━━╇━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━╇━━━━━━━━━━┩  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">double_col       </span> │ <span style="color: #008080; text-decoration-color: #008080">   0</span> │ <span style="color: #008080; text-decoration-color: #008080">      0</span> │ <span style="color: #008080; text-decoration-color: #008080">    2.3</span> │ <span style="color: #008080; text-decoration-color: #008080">    1.6</span> │ <span style="color: #008080; text-decoration-color: #008080">  1.2</span> │ <span style="color: #008080; text-decoration-color: #008080">  1.8</span> │ <span style="color: #008080; text-decoration-color: #008080">  2.3</span> │ <span style="color: #008080; text-decoration-color: #008080">  2.8</span> │ <span style="color: #008080; text-decoration-color: #008080">   3.4</span> │ <span style="color: #008000; text-decoration-color: #008000"> ▇    ▇ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">integer_col      </span> │ <span style="color: #008080; text-decoration-color: #008080">   0</span> │ <span style="color: #008080; text-decoration-color: #008080">      0</span> │ <span style="color: #008080; text-decoration-color: #008080">    1.5</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.71</span> │ <span style="color: #008080; text-decoration-color: #008080">    1</span> │ <span style="color: #008080; text-decoration-color: #008080">  1.2</span> │ <span style="color: #008080; text-decoration-color: #008080">  1.5</span> │ <span style="color: #008080; text-decoration-color: #008080">  1.8</span> │ <span style="color: #008080; text-decoration-color: #008080">     2</span> │ <span style="color: #008000; text-decoration-color: #008000"> ▇    ▇ </span> │  │
+│ └───────────────────┴──────┴─────────┴─────────┴─────────┴───────┴───────┴───────┴───────┴────────┴──────────┘  │
 │ <span style="font-style: italic">                                                   category                                                   </span>  │
 │ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓  │
 │ ┃<span style="font-weight: bold"> column_name                        </span>┃<span style="font-weight: bold"> NA        </span>┃<span style="font-weight: bold"> NA %          </span>┃<span style="font-weight: bold"> ordered               </span>┃<span style="font-weight: bold"> unique            </span>┃  │
 │ ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━┩  │
 │ │ <span style="color: #af87ff; text-decoration-color: #af87ff">category_col                      </span> │ <span style="color: #008080; text-decoration-color: #008080">        0</span> │ <span style="color: #008080; text-decoration-color: #008080">            0</span> │ <span style="color: #00d7ff; text-decoration-color: #00d7ff">False                </span> │ <span style="color: #008080; text-decoration-color: #008080">                2</span> │  │
 │ └────────────────────────────────────┴───────────┴───────────────┴───────────────────────┴───────────────────┘  │
+│ <span style="font-style: italic">                                                     bool                                                     </span>  │
+│ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓  │
+│ ┃<span style="font-weight: bold"> column_name                        </span>┃<span style="font-weight: bold"> true            </span>┃<span style="font-weight: bold"> true rate                     </span>┃<span style="font-weight: bold"> hist                </span>┃  │
+│ ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">bool_col                          </span> │ <span style="color: #008080; text-decoration-color: #008080">              2</span> │ <span style="color: #008080; text-decoration-color: #008080">                            1</span> │ <span style="color: #008000; text-decoration-color: #008000">          ▇        </span> │  │
+│ └────────────────────────────────────┴─────────────────┴───────────────────────────────┴─────────────────────┘  │
 │ <span style="font-style: italic">                                                   datetime                                                   </span>  │
 │ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┓  │
 │ ┃<span style="font-weight: bold"> column_name                   </span>┃<span style="font-weight: bold"> NA      </span>┃<span style="font-weight: bold"> NA %        </span>┃<span style="font-weight: bold"> first                    </span>┃<span style="font-weight: bold"> last                    </span>┃  │
@@ -1463,12 +1480,6 @@ memory usage: 320.0 bytes
 │ ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━┩  │
 │ │ <span style="color: #af87ff; text-decoration-color: #af87ff">string_col               </span> │ <span style="color: #008080; text-decoration-color: #008080">      0</span> │ <span style="color: #008080; text-decoration-color: #008080">         0</span> │ <span style="color: #008080; text-decoration-color: #008080">                           1</span> │ <span style="color: #008080; text-decoration-color: #008080">                       2</span> │  │
 │ └───────────────────────────┴─────────┴────────────┴──────────────────────────────┴──────────────────────────┘  │
-│ <span style="font-style: italic">                                                     bool                                                     </span>  │
-│ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓  │
-│ ┃<span style="font-weight: bold"> column_name                        </span>┃<span style="font-weight: bold"> true            </span>┃<span style="font-weight: bold"> true rate                     </span>┃<span style="font-weight: bold"> hist                </span>┃  │
-│ ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩  │
-│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">bool_col                          </span> │ <span style="color: #008080; text-decoration-color: #008080">              2</span> │ <span style="color: #008080; text-decoration-color: #008080">                            1</span> │ <span style="color: #008000; text-decoration-color: #008000">          █        </span> │  │
-│ └────────────────────────────────────┴─────────────────┴───────────────────────────────┴─────────────────────┘  │
 ╰────────────────────────────────────────────────────── End ──────────────────────────────────────────────────────╯
 </pre>
 </div></div>
@@ -2388,7 +2399,7 @@ Name: a, dtype: object
 <p><code class="docutils literal notranslate"><span class="pre">query</span></code> can also be used to pick out rows based on relationships between columns (we’ll use the penguins dataset to show this).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;penguins&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mwaskom/seaborn-data/master/penguins.csv&quot;</span><span class="p">)</span>
 <span class="n">penguins</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -2430,7 +2441,7 @@ Name: a, dtype: object
       <td>18.7</td>
       <td>181.0</td>
       <td>3750.0</td>
-      <td>Male</td>
+      <td>MALE</td>
     </tr>
     <tr>
       <th>1</th>
@@ -2440,7 +2451,7 @@ Name: a, dtype: object
       <td>17.4</td>
       <td>186.0</td>
       <td>3800.0</td>
-      <td>Female</td>
+      <td>FEMALE</td>
     </tr>
     <tr>
       <th>2</th>
@@ -2450,7 +2461,7 @@ Name: a, dtype: object
       <td>18.0</td>
       <td>195.0</td>
       <td>3250.0</td>
-      <td>Female</td>
+      <td>FEMALE</td>
     </tr>
     <tr>
       <th>3</th>
@@ -2470,7 +2481,7 @@ Name: a, dtype: object
       <td>19.3</td>
       <td>193.0</td>
       <td>3450.0</td>
-      <td>Female</td>
+      <td>FEMALE</td>
     </tr>
   </tbody>
 </table>
@@ -2519,7 +2530,7 @@ Name: a, dtype: object
       <td>21.1</td>
       <td>198.0</td>
       <td>4400.0</td>
-      <td>Male</td>
+      <td>MALE</td>
     </tr>
     <tr>
       <th>70</th>
@@ -2529,7 +2540,7 @@ Name: a, dtype: object
       <td>19.0</td>
       <td>190.0</td>
       <td>3600.0</td>
-      <td>Female</td>
+      <td>FEMALE</td>
     </tr>
   </tbody>
 </table>
@@ -2580,7 +2591,7 @@ Name: a, dtype: object
       <td>21.2</td>
       <td>191.0</td>
       <td>3800.0</td>
-      <td>Male</td>
+      <td>MALE</td>
     </tr>
     <tr>
       <th>14</th>
@@ -2590,7 +2601,7 @@ Name: a, dtype: object
       <td>21.1</td>
       <td>198.0</td>
       <td>4400.0</td>
-      <td>Male</td>
+      <td>MALE</td>
     </tr>
     <tr>
       <th>19</th>
@@ -2600,7 +2611,7 @@ Name: a, dtype: object
       <td>21.5</td>
       <td>194.0</td>
       <td>4200.0</td>
-      <td>Male</td>
+      <td>MALE</td>
     </tr>
     <tr>
       <th>35</th>
@@ -2610,7 +2621,7 @@ Name: a, dtype: object
       <td>21.1</td>
       <td>196.0</td>
       <td>4150.0</td>
-      <td>Male</td>
+      <td>MALE</td>
     </tr>
     <tr>
       <th>49</th>
@@ -2620,7 +2631,7 @@ Name: a, dtype: object
       <td>21.2</td>
       <td>191.0</td>
       <td>4150.0</td>
-      <td>Male</td>
+      <td>MALE</td>
     </tr>
     <tr>
       <th>61</th>
@@ -2630,7 +2641,7 @@ Name: a, dtype: object
       <td>21.1</td>
       <td>195.0</td>
       <td>4400.0</td>
-      <td>Male</td>
+      <td>MALE</td>
     </tr>
   </tbody>
 </table>
@@ -4735,56 +4746,6 @@ dtype: float64
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>220</th>
-      <td>Gentoo</td>
-      <td>Biscoe</td>
-      <td>46.1</td>
-      <td>13.2</td>
-      <td>211.0</td>
-      <td>4500.0</td>
-      <td>Female</td>
-    </tr>
-    <tr>
-      <th>222</th>
-      <td>Gentoo</td>
-      <td>Biscoe</td>
-      <td>48.7</td>
-      <td>14.1</td>
-      <td>210.0</td>
-      <td>4450.0</td>
-      <td>Female</td>
-    </tr>
-    <tr>
-      <th>225</th>
-      <td>Gentoo</td>
-      <td>Biscoe</td>
-      <td>46.5</td>
-      <td>13.5</td>
-      <td>210.0</td>
-      <td>4550.0</td>
-      <td>Female</td>
-    </tr>
-    <tr>
-      <th>226</th>
-      <td>Gentoo</td>
-      <td>Biscoe</td>
-      <td>45.4</td>
-      <td>14.6</td>
-      <td>211.0</td>
-      <td>4800.0</td>
-      <td>Female</td>
-    </tr>
-    <tr>
-      <th>228</th>
-      <td>Gentoo</td>
-      <td>Biscoe</td>
-      <td>43.3</td>
-      <td>13.4</td>
-      <td>209.0</td>
-      <td>4400.0</td>
-      <td>Female</td>
-    </tr>
   </tbody>
 </table>
 </div></div></div>
@@ -5555,99 +5516,99 @@ dtype: float64
   <tbody>
     <tr>
       <th>2000-03-31</th>
-      <td>5</td>
-      <td>7</td>
+      <td>8</td>
       <td>9</td>
+      <td>3</td>
       <td>4</td>
-      <td>6</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>2000-06-30</th>
-      <td>7</td>
-      <td>3</td>
+      <td>0</td>
       <td>1</td>
-      <td>6</td>
-      <td>6</td>
+      <td>7</td>
+      <td>1</td>
+      <td>8</td>
     </tr>
     <tr>
       <th>2000-09-30</th>
-      <td>8</td>
-      <td>2</td>
-      <td>4</td>
       <td>2</td>
       <td>8</td>
+      <td>1</td>
+      <td>9</td>
+      <td>9</td>
     </tr>
     <tr>
       <th>2000-12-31</th>
-      <td>5</td>
-      <td>5</td>
-      <td>5</td>
+      <td>2</td>
+      <td>6</td>
+      <td>3</td>
+      <td>1</td>
       <td>8</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>2001-03-31</th>
-      <td>7</td>
-      <td>8</td>
-      <td>0</td>
+      <td>2</td>
       <td>9</td>
-      <td>8</td>
+      <td>0</td>
+      <td>2</td>
+      <td>5</td>
     </tr>
     <tr>
       <th>2001-06-30</th>
-      <td>7</td>
-      <td>7</td>
-      <td>7</td>
+      <td>2</td>
+      <td>9</td>
+      <td>3</td>
       <td>6</td>
-      <td>4</td>
+      <td>8</td>
     </tr>
     <tr>
       <th>2001-09-30</th>
-      <td>0</td>
+      <td>8</td>
+      <td>9</td>
+      <td>7</td>
       <td>1</td>
       <td>5</td>
-      <td>9</td>
-      <td>3</td>
     </tr>
     <tr>
       <th>2001-12-31</th>
-      <td>7</td>
-      <td>9</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
       <td>6</td>
-      <td>9</td>
-      <td>9</td>
+      <td>7</td>
     </tr>
     <tr>
       <th>2002-03-31</th>
-      <td>3</td>
-      <td>7</td>
-      <td>6</td>
       <td>5</td>
       <td>1</td>
+      <td>0</td>
+      <td>7</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>2002-06-30</th>
-      <td>2</td>
       <td>9</td>
+      <td>0</td>
+      <td>3</td>
       <td>6</td>
-      <td>1</td>
       <td>3</td>
     </tr>
     <tr>
       <th>2002-09-30</th>
-      <td>4</td>
+      <td>5</td>
       <td>7</td>
-      <td>1</td>
-      <td>6</td>
+      <td>3</td>
       <td>4</td>
+      <td>9</td>
     </tr>
     <tr>
       <th>2002-12-31</th>
-      <td>7</td>
       <td>0</td>
-      <td>1</td>
+      <td>2</td>
       <td>7</td>
-      <td>5</td>
+      <td>9</td>
+      <td>7</td>
     </tr>
   </tbody>
 </table>
@@ -5689,67 +5650,67 @@ dtype: float64
   <tbody>
     <tr>
       <th>2000-03-31</th>
-      <td>5</td>
-      <td>7</td>
+      <td>8</td>
       <td>9</td>
+      <td>3</td>
       <td>4</td>
-      <td>6</td>
+      <td>3</td>
     </tr>
     <tr>
       <th>2000-06-30</th>
-      <td>7</td>
-      <td>3</td>
+      <td>0</td>
       <td>1</td>
-      <td>6</td>
-      <td>6</td>
+      <td>7</td>
+      <td>1</td>
+      <td>8</td>
     </tr>
     <tr>
       <th>2000-09-30</th>
-      <td>8</td>
-      <td>2</td>
-      <td>4</td>
       <td>2</td>
       <td>8</td>
+      <td>1</td>
+      <td>9</td>
+      <td>9</td>
     </tr>
     <tr>
       <th>2000-12-31</th>
-      <td>5</td>
-      <td>5</td>
-      <td>5</td>
+      <td>2</td>
+      <td>6</td>
+      <td>3</td>
+      <td>1</td>
       <td>8</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>2001-03-31</th>
-      <td>7</td>
-      <td>8</td>
-      <td>0</td>
+      <td>2</td>
       <td>9</td>
-      <td>8</td>
+      <td>0</td>
+      <td>2</td>
+      <td>5</td>
     </tr>
     <tr>
       <th>2001-06-30</th>
-      <td>7</td>
-      <td>7</td>
-      <td>7</td>
+      <td>2</td>
+      <td>9</td>
+      <td>3</td>
       <td>6</td>
-      <td>4</td>
+      <td>8</td>
     </tr>
     <tr>
       <th>2001-09-30</th>
-      <td>0</td>
+      <td>8</td>
+      <td>9</td>
+      <td>7</td>
       <td>1</td>
       <td>5</td>
-      <td>9</td>
-      <td>3</td>
     </tr>
     <tr>
       <th>2001-12-31</th>
-      <td>7</td>
-      <td>9</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
       <td>6</td>
-      <td>9</td>
-      <td>9</td>
+      <td>7</td>
     </tr>
   </tbody>
 </table>
@@ -5799,26 +5760,26 @@ dtype: float64
   <tbody>
     <tr>
       <th>0</th>
-      <td>1</td>
       <td>4</td>
-      <td>0</td>
-      <td>2</td>
       <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
       <td>3</td>
+      <td>2</td>
+      <td>3</td>
+      <td>0</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
       <td>3</td>
-      <td>3</td>
-      <td>1</td>
       <td>3</td>
     </tr>
   </tbody>
@@ -5862,30 +5823,30 @@ dtype: float64
   <tbody>
     <tr>
       <th>0</th>
-      <td>1</td>
       <td>4</td>
-      <td>0</td>
-      <td>2</td>
       <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
       <td>4</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0</td>
-      <td>0</td>
+      <td>3</td>
       <td>2</td>
-      <td>0</td>
       <td>3</td>
       <td>0</td>
+      <td>4</td>
+      <td>6</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
       <td>3</td>
       <td>3</td>
-      <td>1</td>
-      <td>3</td>
-      <td>12</td>
+      <td>0</td>
     </tr>
   </tbody>
 </table>
@@ -5939,32 +5900,32 @@ dtype: float64
   <tbody>
     <tr>
       <th>0</th>
+      <td>4</td>
       <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>4</td>
       <td>4</td>
       <td>0</td>
-      <td>2</td>
-      <td>1</td>
-      <td>4</td>
-      <td>-3</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0</td>
-      <td>0</td>
+      <td>3</td>
       <td>2</td>
-      <td>0</td>
       <td>3</td>
       <td>0</td>
-      <td>-1</td>
+      <td>4</td>
+      <td>6</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>4</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
       <td>3</td>
       <td>3</td>
-      <td>1</td>
-      <td>3</td>
-      <td>12</td>
+      <td>0</td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -5990,23 +5951,23 @@ dtype: float64
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Dataframe:
    A  B  C  D  E
-0  2  3  2  2  2
-1  3  1  4  3  1
-2  3  4  1  2  3
+0  1  4  3  3  3
+1  1  3  2  1  0
+2  2  0  3  2  4
 
  Exponentiation:
-           A          B          C          D          E
-0   7.389056  20.085537   7.389056   7.389056   7.389056
-1  20.085537   2.718282  54.598150  20.085537   2.718282
-2  20.085537  54.598150   2.718282   7.389056  20.085537
+          A          B          C          D          E
+0  2.718282  54.598150  20.085537  20.085537  20.085537
+1  2.718282  20.085537   7.389056   2.718282   1.000000
+2  7.389056   1.000000  20.085537   7.389056  54.598150
 
  Transpose:
    0  1  2
-A  2  3  3
-B  3  1  4
-C  2  4  1
-D  2  3  2
-E  2  1  3
+A  1  1  2
+B  4  3  0
+C  3  2  3
+D  3  1  2
+E  3  0  4
 </pre></div>
 </div>
 </div>
