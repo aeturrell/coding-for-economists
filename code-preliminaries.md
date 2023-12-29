@@ -303,4 +303,4 @@ In true programming-humour style, pip is a recursive acronym that stands for 'pi
 
 You're ready to move on to the next chapter! 🚀
 
-Well done if you made this far: starting is the hardest bit. (If you want to tweak your Visual Studio Code setup even more, there's some tips at the end of {ref`code-further-advanced`}.)
+Well done if you made this far: starting is the hardest bit. (If you want to tweak your Visual Studio Code setup even more, there's some tips at the end of {ref}`code-further-advanced`.)

@@ -111,7 +111,7 @@ If you're using a scholarly search engine such as Google Scholar, you can use pr
 
 Some popular scholarly search engines have specific filters for this type of content. In Web of Science, Scopus, and Semantic Scholar, choose “Review Article”, “Document type — Review“, and “Publication Type — Review or Meta Analysis” respectively.
 
-Some journals specifically focus on economics reviews. The [*Journal of Economic Literature*](https://www.aeaweb.org/journals/JEL) (JEL) is designed to help economists keep abreast of and synthesise the vast flow of literature. If you want something a bit lighter or only need a general understanding than the [*Journal of Economic Perspectives*] (JEP) fills the gap between the general interest press and academic journals.
+Some journals specifically focus on economics reviews. The [*Journal of Economic Literature*](https://www.aeaweb.org/journals/JEL) (JEL) is designed to help economists keep abreast of and synthesise the vast flow of literature. If you want something a bit lighter or only need a general understanding than the [*Journal of Economic Perspectives*](https://www.aeaweb.org/journals/jep) (JEP) fills the gap between the general interest press and academic journals.
 
 Of course, if you work across disciplines, you will often find that other fields have their own review journals too.
 

@@ -31,7 +31,7 @@ What follows is a giant table of translations between Stata code and Python's [*
 
 Many of the examples below assume that, in Python, you have a **pandas** DataFrame called `df`. We will use placeholders like `varname` for Stata variables and `df['varname']` for the Python equivalent. Remember that you need to `import pandas as pd` before running any of the examples that use `pd`. For the econometrics examples, you will need to import the relevant package.
 
-You can find more on (frequentist) regressions in {ref}`regression`.
+You can find more on (frequentist) regressions in {ref}`regression`, Bayesian regressions using formulae appear in {ref}`econmt-bayes-bambi`, generalised regression models appear in {ref}`generalised-models`, and regression diagnostics and visualisation are in {ref}`regression-diagnostics`.
 
 | Stata      | Python (pandas) |
 | ----------- | ----------- |
@@ -70,10 +70,10 @@ You can find more on (frequentist) regressions in {ref}`regression`.
 | `reg yvar xvar if condition, r`  | <code>from pyfixest.estimation import feols<br> fit = feols("yvar ~ xvar", data=df["condition"], vcov="HC2") </code> |
 | `reg yvar xvar if condition, vce(cluster clustervar)`  | <code>from pyfixest.estimation import feols<br> fit = feols("yvar ~ xvar", data=df["condition"], vcov={"CRV1": "clustervar"}) </code> |
 | `areg yvar xvar, absorb(fe_var)`  | <code>from pyfixest.estimation import feols<br> fit = feols("yvar ~ xvar \| fe_var", data=df) </code> |
-| `_b[var], _se[var]`  | `results_sw.coef()["var"], results_sw.se()["var"]` following creation of `results` via `results = feols(...)` |
+| `_b[var], _se[var]`  | `results_sw.coef()["var"], results_sw.se()["var"]` following creation of `results_sw` via `results_sw = feols(...)` |
 | `ivreg2 lwage exper expersq (educ=age)`  | <code> feols("lwage ~ exper + expersq \| educ ~ age", data=dfiv) </code> |
 | `outreg2`  | `results = feols(...)` then `results.tidy()` |
-| `binscatter`  | `binsreg` from the [**binsreg**](https://pypi.org/project/binsreg/) package; see {ref}`regression` |
+| `binscatter`  | `binsreg` from the [**binsreg**](https://pypi.org/project/binsreg/) package; see {ref}`regression-diagnostics`. |
 | `twoway scatter var1 var2`  | `df.scatter(var2, var1)` |
 
 The table below presents further examples of doing regression with both the **statsmodels** and [**pyfixest**](https://bashtage.github.io/linearmodels) packages.
@@ -85,7 +85,7 @@ Note that, in the below, you need only import `feols` once in each Python sessio
 | Fixed Effects (absorbing) | `reghdfe y x, absorb(fe)` | <code>from pyfixest.estimation import feols<br> fit = feols("y ~ x \| fe", data=df) </code>|
 | Categorical regression | `reghdfe y x i.cat` | <code>from pyfixest.estimation import feols<br> fit = feols("y ~ x + C(cat)", data=df) </code><br> But if `cat` is of type categorical it can be run with `y ~ x + cat`|
 | Interacting categoricals | `reghdfe y x i.cat#i.cat2` | <code>from pyfixest.estimation import feols<br> fit = feols("yvar ~ xvar + C(cat):C(cat2)", data=df) </code> <br> Note that `a*b` is a short-hand for `a + b + a:b`, with the last term representing the interaction.|
-| Robust standard errors | `reghdfe y x, r` | <code>from pyfixest.estimation import feols<br> fit = feols("y ~ x, data=df, vcov="HC0") </code> <br> Note that a range of heteroskedasticity robust standard errors are available: 'HC0', 'HC1', 'HC2', and 'HC3'.|
+| Robust standard errors | `reghdfe y x, r` | <code>from pyfixest.estimation import feols<br> fit = feols("y ~ x, data=df, vcov="HC0") </code> <br> Note that a range of heteroskedasticity robust standard errors are available: see {ref}`regression` for more.|
 | Clustered standard errors | `reghdfe y x, cluster(clust)` | <code>from pyfixest.estimation import feols<br> fit = feols("y ~ x", data=df, vcov={"CRV1": "clust"}) </code>|
 | Two-way clustered standard errors | `reghdfe y x, cluster(clust1 clust2)` |<code>from pyfixest.estimation import feols<br> fit = feols("y ~ x", data=df, vcov={"CRV1": "clust1" + "clust2"}) </code>|
 | Instrumental variables | `ivreghdfe 2sls y exog (endog = instrument)` | <code>from pyfixest.estimation import feols<br> fit = feols("y ~ exog \| endog ~ instrument", data=df) </code>|
