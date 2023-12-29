@@ -57,7 +57,7 @@ On your second read-through, you will likely want to start to dig into details, 
   - Does the author present a clear description of the data? Is there a summary statistics table?
   - Does the author's choice of a dataset seem well suited to answering the question posed?
   - If you had to replicate the author's study five years from now, is there sufficient information in the paper about the source of the data and sample used that you could do it?
-  - Does the author discuss issues that may affect the data, for example "dark data" {cite:t}`hand2020dark` (see {ref}`craft-writing-papers` for more on the types of dark data)?
+  - Does the author discuss issues that may affect the data, for example "dark data" {cite:ps}`hand2020dark` (see {ref}`craft-writing-papers` for more on the types of dark data)?
 - The model, if there is one:
   - Is there a clear description of what it does and what its assumptions are?
   - Does the model incorporate those aspects of reality that the author seems to think are important?
