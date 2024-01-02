@@ -112,7 +112,7 @@ If you want to follow a full example of serving up data end-to-end, take a look 
   - SQL,`select rowid, local_authority_code, pm_anthropogenic, pm_total, pm_non_anthropogenic, local_authority_name, year, region, country from uk_particulate_matter where "local_authority_name" like '%southwark%' and "year" = '2018' order by rowid limit 101`
   - JSON, `df = pd.read_json("https://particulatematter-fsx2r7puuq-nw.a.run.app/uk_particulate_matter/uk_particulate_matter.json?_sort=rowid&local_authority_name__contains=southwark&year__exact=2018&_shape=array")`
 
-- By integrating with github or other tools, datasette can be automated so that when the raw data change, the instance being served online is updated too. (For an example github action that does this, [see here](https://github.com/simonw/global-power-plants-datasette/actions/runs/843939473/workflow).)
+- By integrating with GitHub or other tools, datasette can be automated so that when the raw data change, the instance being served online is updated too. (For an example github action that does this, [see here](https://github.com/simonw/global-power-plants-datasette/actions/runs/843939473/workflow).)
 
 - If you are building dashboards that are also deployed on the web, you can use a datasette website as the back-end to serve up the data to the dashboard (making use of the automatic API features of datasette).
 
@@ -144,11 +144,11 @@ So the canonical use case for a data repository is static data that's associated
 
 If you're interested in exploring some data repositories, there are lists [here](https://authorservices.taylorandfrancis.com/data-sharing-policies/repositories/) and [here](https://www.springernature.com/gp/authors/research-data-policy/repositories/12327124). If you'd like to see how one works, [check out Zenodo](https://zenodo.org/) which, at the time of writing, accepts up to 50GB per dataset and may accept larger files following discussion. Zenodo accepts both code and data, and gives each repo a DOI. Zenodo is run and hosted by CERN, the European Organization for Nuclear Research.
 
-## Github Flat Data
+## GitHub Flat Data
 
-Github recently launched its [Flat Data tool](https://octo.github.com/projects/flat-data). In the launch document they explain that *they* were inspired by Simon Willison, the creator of the **Datasette** package featured above. Flat Data actually comprises three different tools: ['flat action'](https://github.com/marketplace/actions/flat-data), which fetches and transforms data using Github Actions (don't worry if you don't know what that is), ['flat editor'](https://marketplace.visualstudio.com/items?itemName=GitHubOCTO.flat) which is a Visual Studio Code-based graphical interface for creating workflows with flat actions, and 'flat viewer' which allows anyone to browse, filter, and access data from flat files stored in a Github repo.
+GitHub, the remote code repository service, recently launched its [Flat Data tool](https://octo.github.com/projects/flat-data). In the launch document they explain that *they* were inspired by Simon Willison, the creator of the **Datasette** package featured above. Flat Data actually comprises three different tools: ['flat action'](https://github.com/marketplace/actions/flat-data), which fetches and transforms data using GitHub Actions (don't worry if you don't know what that is), ['flat editor'](https://marketplace.visualstudio.com/items?itemName=GitHubOCTO.flat) which is a Visual Studio Code-based graphical interface for creating workflows with flat actions, and 'flat viewer' which allows anyone to browse, filter, and access data from flat files stored in a GitHub repo.
 
-The genius of Flat Data viewer is that any Github repository that has a file in the compatible format can be viewed using the tool by using the prefix "flatgithub.com" instead of the usual path to the file. To take a specific example using the particulate matter that we've already seen in this chapter,
+The genius of Flat Data viewer is that any GitHub repository that has a file in the compatible format can be viewed using the tool by using the prefix "flatgithub.com" instead of the usual path to the file. To take a specific example using the particulate matter that we've already seen in this chapter,
 
 [https://github.com/aeturrell/datasette_particulate_matter/blob/main/uk_particulate_matter.csv](https://github.com/aeturrell/datasette_particulate_matter/blob/main/uk_particulate_matter.csv)
 
@@ -158,4 +158,4 @@ becomes
 
 Not only that but, just as with datasette, you can easily download the data in a format that suits you, and perform rudimentary data filtering.
 
-Some useful features of **flat data viewer** are that it integrates with your existing Github workflow and that it is free. However, the maximum size of dataset that you can lodge in a Github repo is limited to 100 Mb.
+Some useful features of **flat data viewer** are that it integrates with your existing GitHub workflow and that it is free. However, the maximum size of dataset that you can lodge in a GitHub repo is limited to 100 Mb.

@@ -114,7 +114,7 @@ Let's get started with version control.
 
 ### Installing git
 
-If you're working through this book on Google Colab, Github Codespaces, or other prepared systems, then you're likely to find that git is already installed. You can check this by running
+If you're working through this book on Google Colab, GitHub Codespaces, or other prepared systems, then you're likely to find that git is already installed. You can check this by running
 
 ```bash
 git --version
@@ -451,9 +451,9 @@ Then there are files that are associated with the code having run, but which are
 - `_build/*`, which says to ignore any (this is what `*` does) file in the `_build` directory
 - `coverage.xml`, which is an automatically generated file that tracks how much of a code base is covered by tests, but which doesn't need to be tracked as part of the project.
 
-You can create a `.gitignore` file by running `touch .gitignore` on the command line and then adding contents with a text editor. Or, if you're using Github to initialise a repository, then it will suggest `.gitignore` files from a big roster of templates.
+You can create a `.gitignore` file by running `touch .gitignore` on the command line and then adding contents with a text editor. Or, if you're using GitHub to initialise a repository, then it will suggest `.gitignore` files from a big roster of templates.
 
-A typical `.gitignore` file for a Python project, that excludes some files that get generated when Python runs but don't contain the code from your scripts, can be found [here](https://github.com/github/gitignore/blob/main/Python.gitignore). This is what Github will offer if you choose their Python template.
+A typical `.gitignore` file for a Python project, that excludes some files that get generated when Python runs but don't contain the code from your scripts, can be found [here](https://github.com/github/gitignore/blob/main/Python.gitignore). This is what GitHub will offer if you choose their Python template.
 
 These are the rules for ignoring files; they should be written on different lines in the `.gitignore` file:
 

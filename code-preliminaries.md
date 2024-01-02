@@ -95,7 +95,7 @@ The typical workflow for analysis with code might be something like this:
 We'll see two ways to achieve this workflow:
 
 1. Installing an IDE, a Python interpreter, and any extra Python packages on your own computer
-2. Using a computer in the cloud that you access through your internet browser. Cloud computers often have an IDE and Python built-in, and you can easily install extra packages in them too. However, you should be aware that the cloud service we recommend has a 60 hours / month free tier—beyond this, so you'll need to pay for extra hours.
+2. Using a computer in the cloud that you access through your internet browser. Cloud computers often have an IDE and Python built-in, and you can easily install extra packages in them too. However, you should be aware that the cloud service we recommend has a 60 hours / month free tier. Beyond this you'll need to pay for extra hours.
 
 You should pick whichever you're more comfortable with! Eventually, you'll probably try both.
 
@@ -132,16 +132,16 @@ Download and install Visual Studio Code. If you need some help, there is a video
 These instructions are for if you wish to code in the cloud rather than on your own computer. There are many ways to do data science in the cloud, but we're going to share with you the absolute simplest. For this, you will need to sign up for a [Github Account](https://github.com/). GitHub is an organisation that's owned by Microsoft and which provides a range of services including a way to back-up code on the cloud, and cloud computing. One of the services offered is *Github Codespaces*. A GitHub Codespace is an online cloud computer that you connect to from your browser window. It has a generous 60 hours free of computing per month.
 
 ```{note}
-If you go over the free tier hours on Github Codespaces, your credit card will be charged for any further hours of GitHub Codespaces you use.
+If you go over the free tier hours on GitHub Codespaces, your credit card will be charged for any further hours of GitHub Codespaces you use.
 ```
 
-Once you've signed up for a Github account, head to [Github Codespaces](https://github.com/codespaces) and click on "Get Started for Free". You should see a menu of "quick start templates". Under where it says "Jupyter Notebook", hit "Use this template".
+Once you've signed up for a GitHub account, head to [Github Codespaces](https://github.com/codespaces) and click on "Get Started for Free". You should see a menu of "quick start templates". Under where it says "Jupyter Notebook", hit "Use this template".
 
 You will find that a new page loads with several panels in. This is an online version of Visual Studio Code that works much like if you had installed it on your own computer. It will already have a version of Python installed—you can check which one by running `python --version` in the terminal. The terminal is usually found in the lowest panel of Visual Studio Code, and, in Codespaces, will typically display a welcome message.
 
 ## Alternative ways to run the code from the book
 
-As well as following this book using your own computer or on the cloud via Github Codespaces, you can run the code online through a few other options. The first is the easiest to get started with.
+As well as following this book using your own computer or on the cloud via GitHub Codespaces, you can run the code online through a few other options. The first is the easiest to get started with.
 
 1. [Google Colab notebooks](https://research.google.com/colaboratory/). Free for most use. You can launch most pages in this book interactively by using the 'Colab' button under the rocket symbol at the top of most pages in this book. It will be in the form of a notebook (which mixes code and text) rather than a script (.py file) but the code you write is the same. Note that Colab doesn't use Visual Studio Code.
 2. [Gitpod Workspace](https://www.gitpod.io/). An alternative to Codespaces. This is a remote, cloud-based version of Visual Studio Code with Python installed and will run Python scripts. Note that the free tier covers 50 hours per month.
@@ -243,7 +243,7 @@ Packages (also called libraries) are key to extending the functionality of Pytho
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Name a more iconic trio, I&#39;ll wait. <a href="https://t.co/pGaLuUxQ3r">pic.twitter.com/pGaLuUxQ3r</a></p>&mdash; Vicki Boykis (@vboykis) <a href="https://twitter.com/vboykis/status/1032631145035427840?ref_src=twsrc%5Etfw">August 23, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-The three Python packages **numpy**, **pandas**, and **maplotlib**, which respectively provide numerical, data analysis, and plotting functionality, are ubiquitous. So many scripts begin by importing all three of them, as in the tweet above!
+The three Python packages **numpy**, **pandas**, and **maplotlib**, which respectively cover provide numerical, data, and plotting functionality, are ubiquitous. So many scripts begin by importing them, as in the tweet above!
 
 Python packages don't come built-in (by definition) so you need to install them (just once, like installing any other application), and then import them into your scripts (whenever you use them in a script). When you issue an install command for a specific package, it is automatically downloaded from the internet and installed in the appropriate place on your computer.
 
@@ -263,10 +263,10 @@ Windows users may find it easiest to use the Anaconda Prompt as their terminal, 
 If you want to open up the command line independently of Visual Studio Code, search for "Terminal" on Mac and Linux, and "Anaconda Prompt" on Windows. 
 ```
 
-Firstly, everything you can do by clicking on icons to launch programmes on your computer, you can also do via the terminal, also known as the command line. For many programmes, a lot of their functionality can be accessed using the command line, and other programmes *only* have a command line interface (CLI), including some that are used for data science.
+Firstly, everything you can do by clicking on icons to launch programmes on your computer, you can also do via the terminal (also known as the command line). The functionality of a lot of programmes can be accessed using the command line, and some programmes *only* have a command line interface (CLI). This includes some that are used for data science.
 
 ```{tip}
-The command line interacts with your operating system and is used to create, activate, or change python installations.
+The command line interacts with your operating system and can be used to create, activate, or change python installations.
 ```
 
 Use Visual Studio Code to open a terminal window by clicking Terminal -> New Terminal on the list of commands at the very top of the window. If you have installed the Anaconda distribution of Python on your own computer, your terminal should look something like this as your 'command prompt':
@@ -289,15 +289,34 @@ You can find out more about the terminal in the chapter on {ref}`wrkflow-command
 
 ### Installing Packages
 
-Install packages on the command line by typing
+You need only do this first part once as it configures your Anaconda environment for good. On the command line or Anaconda prompt, enter the following:
+
+```bash
+conda config --add channels conda-forge
+conda config --set channel_priority strict
+```
+
+This tells `conda` to only use packages from the completely free and open `conda-forge` channel.
+
+Now, to install any packages on the command line in future, use
+
+```bash
+conda install package-name
+```
+
+and hit return. In the above, `package-name` might be `pandas`, for example. If you have problems installing, make sure that you are connected to the internet, and that [PyPI](https://pypi.org/) (the Python package index) isn't blocked by your firewall or proxy.
+
+While most packages are available on conda-forge, some are not, and you'll see a message about that package not existing. For those packages that aren't provided by conda-forge, you'll need to run the following command:
 
 ```bash
 pip install package-name
 ```
 
-and hitting return, where `package-name` might be `pandas`. If you have problems installing, make sure that you are connected to the internet, and that [PyPI](https://pypi.org/) (the Python package index) isn't blocked by your firewall or proxy.
+In true programming-humour style, pip is a recursive acronym that stands for 'pip install packages'.
 
-In true programming-humour style, pip is a recursive acronym that stands for 'pip install packages'. You can see what packages you have installed by entering `conda list` into the command line.
+Why are there two ways to install packages? It's because conda-forge offers some extras that pip does not; in particular, conda-forge carries pre-compiled versions of packages that should work right away with your computer and it solves any complicated dependency issues you might have between different packages. pip does a little of this, but not as much. So it's better to use the conda-forge version of a package if it exists, but fall back on `pip install` where this is not available. As a general rule of thumb, the biggest and most widely used packages are on conda-forge.
+
+You can see what packages you have previously installed by entering `conda list` into the command line.
 
 ## Review
 
