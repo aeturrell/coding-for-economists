@@ -35,11 +35,19 @@ def plot_pyramid():
     fig, ax = plt.subplots(figsize=(8, 3), dpi=200)
     # add a Polygon
     diss = mpatches.RegularPolygon(
-        [start_x, start_y], 3, height, alpha=0.4, orientation=np.pi
+        xy=[start_x, start_y],
+        numVertices=3,
+        radius=height,
+        alpha=0.4,
+        orientation=np.pi,
     )
     base_blog_triangle = 4 * start_x + delta_blog
     blog = mpatches.RegularPolygon(
-        [base_blog_triangle, start_y], 3, height, alpha=0.4, orientation=np.pi
+        xy=[base_blog_triangle, start_y],
+        numVertices=3,
+        radius=height,
+        orientation=np.pi,
+        alpha=0.4,
     )
     ax.add_patch(diss)
     ax.add_patch(blog)
