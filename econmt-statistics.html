@@ -836,7 +836,268 @@ T = \frac{\sqrt{n}(\bar{x}-\mu)}{\hat{\sigma}} \thicksim t_{n-1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cef9120479865ca76939c042f3e03732fafb9332ed083af81ba54f7be946bfeb.svg" src="_images/cef9120479865ca76939c042f3e03732fafb9332ed083af81ba54f7be946bfeb.svg" /></div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/IPython/core/formatters.py:340, in BaseFormatter.__call__(self, obj)
+    338     pass
+    339 else:
+--&gt; 340     return printer(obj)
+    341 # Finally look for special method names
+    342 method = get_real_method(obj, self.print_method)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/IPython/core/pylabtools.py:152, in print_figure(fig, fmt, bbox_inches, base64, **kwargs)
+    149     from matplotlib.backend_bases import FigureCanvasBase
+    150     FigureCanvasBase(fig)
+--&gt; 152 fig.canvas.print_figure(bytes_io, **kw)
+    153 data = bytes_io.getvalue()
+    154 if fmt == &#39;svg&#39;:
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/backend_bases.py:2164, in FigureCanvasBase.print_figure(self, filename, dpi, facecolor, edgecolor, orientation, format, bbox_inches, pad_inches, bbox_extra_artists, backend, **kwargs)
+   2161     # we do this instead of `self.figure.draw_without_rendering`
+   2162     # so that we can inject the orientation
+   2163     with getattr(renderer, &quot;_draw_disabled&quot;, nullcontext)():
+-&gt; 2164         self.figure.draw(renderer)
+   2165 if bbox_inches:
+   2166     if bbox_inches == &quot;tight&quot;:
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/artist.py:95, in _finalize_rasterization.&lt;locals&gt;.draw_wrapper(artist, renderer, *args, **kwargs)
+     93 @wraps(draw)
+     94 def draw_wrapper(artist, renderer, *args, **kwargs):
+---&gt; 95     result = draw(artist, renderer, *args, **kwargs)
+     96     if renderer._rasterizing:
+     97         renderer.stop_rasterizing()
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/artist.py:72, in allow_rasterization.&lt;locals&gt;.draw_wrapper(artist, renderer)
+     69     if artist.get_agg_filter() is not None:
+     70         renderer.start_filter()
+---&gt; 72     return draw(artist, renderer)
+     73 finally:
+     74     if artist.get_agg_filter() is not None:
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/figure.py:3154, in Figure.draw(self, renderer)
+   3151         # ValueError can occur when resizing a window.
+   3153 self.patch.draw(renderer)
+-&gt; 3154 mimage._draw_list_compositing_images(
+   3155     renderer, self, artists, self.suppressComposite)
+   3157 for sfig in self.subfigs:
+   3158     sfig.draw(renderer)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/image.py:132, in _draw_list_compositing_images(renderer, parent, artists, suppress_composite)
+    130 if not_composite or not has_images:
+    131     for a in artists:
+--&gt; 132         a.draw(renderer)
+    133 else:
+    134     # Composite any adjacent images together
+    135     image_group = []
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/artist.py:72, in allow_rasterization.&lt;locals&gt;.draw_wrapper(artist, renderer)
+     69     if artist.get_agg_filter() is not None:
+     70         renderer.start_filter()
+---&gt; 72     return draw(artist, renderer)
+     73 finally:
+     74     if artist.get_agg_filter() is not None:
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/axes/_base.py:3070, in _AxesBase.draw(self, renderer)
+   3067 if artists_rasterized:
+   3068     _draw_rasterized(self.figure, artists_rasterized, renderer)
+-&gt; 3070 mimage._draw_list_compositing_images(
+   3071     renderer, self, artists, self.figure.suppressComposite)
+   3073 renderer.close_group(&#39;axes&#39;)
+   3074 self.stale = False
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/image.py:132, in _draw_list_compositing_images(renderer, parent, artists, suppress_composite)
+    130 if not_composite or not has_images:
+    131     for a in artists:
+--&gt; 132         a.draw(renderer)
+    133 else:
+    134     # Composite any adjacent images together
+    135     image_group = []
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/artist.py:72, in allow_rasterization.&lt;locals&gt;.draw_wrapper(artist, renderer)
+     69     if artist.get_agg_filter() is not None:
+     70         renderer.start_filter()
+---&gt; 72     return draw(artist, renderer)
+     73 finally:
+     74     if artist.get_agg_filter() is not None:
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/legend.py:769, in Legend.draw(self, renderer)
+    765     self._legend_box.set_width(self.get_bbox_to_anchor().width - pad)
+    767 # update the location and size of the legend. This needs to
+    768 # be done in any case to clip the figure right.
+--&gt; 769 bbox = self._legend_box.get_window_extent(renderer)
+    770 self.legendPatch.set_bounds(bbox.bounds)
+    771 self.legendPatch.set_mutation_scale(fontsize)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:399, in OffsetBox.get_window_extent(self, renderer)
+    397 if renderer is None:
+    398     renderer = self.figure._get_renderer()
+--&gt; 399 bbox = self.get_bbox(renderer)
+    400 try:  # Some subclasses redefine get_offset to take no args.
+    401     px, py = self.get_offset(bbox, renderer)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:366, in OffsetBox.get_bbox(self, renderer)
+    364 def get_bbox(self, renderer):
+    365     &quot;&quot;&quot;Return the bbox of the offsetbox, ignoring parent offsets.&quot;&quot;&quot;
+--&gt; 366     bbox, offsets = self._get_bbox_and_child_offsets(renderer)
+    367     return bbox
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:484, in VPacker._get_bbox_and_child_offsets(self, renderer)
+    481         if isinstance(c, PackerBase) and c.mode == &quot;expand&quot;:
+    482             c.set_width(self.width)
+--&gt; 484 bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+    485 (x0, x1), xoffsets = _get_aligned_offsets(
+    486     [bbox.intervalx for bbox in bboxes], self.width, self.align)
+    487 height, yoffsets = _get_packed_offsets(
+    488     [bbox.height for bbox in bboxes], self.height, sep, self.mode)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:484, in &lt;listcomp&gt;(.0)
+    481         if isinstance(c, PackerBase) and c.mode == &quot;expand&quot;:
+    482             c.set_width(self.width)
+--&gt; 484 bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+    485 (x0, x1), xoffsets = _get_aligned_offsets(
+    486     [bbox.intervalx for bbox in bboxes], self.width, self.align)
+    487 height, yoffsets = _get_packed_offsets(
+    488     [bbox.height for bbox in bboxes], self.height, sep, self.mode)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:366, in OffsetBox.get_bbox(self, renderer)
+    364 def get_bbox(self, renderer):
+    365     &quot;&quot;&quot;Return the bbox of the offsetbox, ignoring parent offsets.&quot;&quot;&quot;
+--&gt; 366     bbox, offsets = self._get_bbox_and_child_offsets(renderer)
+    367     return bbox
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:511, in HPacker._get_bbox_and_child_offsets(self, renderer)
+    508 pad = self.pad * dpicor
+    509 sep = self.sep * dpicor
+--&gt; 511 bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+    512 if not bboxes:
+    513     return Bbox.from_bounds(0, 0, 0, 0).padded(pad), []
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:511, in &lt;listcomp&gt;(.0)
+    508 pad = self.pad * dpicor
+    509 sep = self.sep * dpicor
+--&gt; 511 bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+    512 if not bboxes:
+    513     return Bbox.from_bounds(0, 0, 0, 0).padded(pad), []
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:366, in OffsetBox.get_bbox(self, renderer)
+    364 def get_bbox(self, renderer):
+    365     &quot;&quot;&quot;Return the bbox of the offsetbox, ignoring parent offsets.&quot;&quot;&quot;
+--&gt; 366     bbox, offsets = self._get_bbox_and_child_offsets(renderer)
+    367     return bbox
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:484, in VPacker._get_bbox_and_child_offsets(self, renderer)
+    481         if isinstance(c, PackerBase) and c.mode == &quot;expand&quot;:
+    482             c.set_width(self.width)
+--&gt; 484 bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+    485 (x0, x1), xoffsets = _get_aligned_offsets(
+    486     [bbox.intervalx for bbox in bboxes], self.width, self.align)
+    487 height, yoffsets = _get_packed_offsets(
+    488     [bbox.height for bbox in bboxes], self.height, sep, self.mode)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:484, in &lt;listcomp&gt;(.0)
+    481         if isinstance(c, PackerBase) and c.mode == &quot;expand&quot;:
+    482             c.set_width(self.width)
+--&gt; 484 bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+    485 (x0, x1), xoffsets = _get_aligned_offsets(
+    486     [bbox.intervalx for bbox in bboxes], self.width, self.align)
+    487 height, yoffsets = _get_packed_offsets(
+    488     [bbox.height for bbox in bboxes], self.height, sep, self.mode)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:366, in OffsetBox.get_bbox(self, renderer)
+    364 def get_bbox(self, renderer):
+    365     &quot;&quot;&quot;Return the bbox of the offsetbox, ignoring parent offsets.&quot;&quot;&quot;
+--&gt; 366     bbox, offsets = self._get_bbox_and_child_offsets(renderer)
+    367     return bbox
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:511, in HPacker._get_bbox_and_child_offsets(self, renderer)
+    508 pad = self.pad * dpicor
+    509 sep = self.sep * dpicor
+--&gt; 511 bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+    512 if not bboxes:
+    513     return Bbox.from_bounds(0, 0, 0, 0).padded(pad), []
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:511, in &lt;listcomp&gt;(.0)
+    508 pad = self.pad * dpicor
+    509 sep = self.sep * dpicor
+--&gt; 511 bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+    512 if not bboxes:
+    513     return Bbox.from_bounds(0, 0, 0, 0).padded(pad), []
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:799, in TextArea.get_bbox(self, renderer)
+    794 def get_bbox(self, renderer):
+    795     _, h_, d_ = renderer.get_text_width_height_descent(
+    796         &quot;lp&quot;, self._text._fontproperties,
+    797         ismath=&quot;TeX&quot; if self._text.get_usetex() else False)
+--&gt; 799     bbox, info, yd = self._text._get_layout(renderer)
+    800     w, h = bbox.size
+    802     self._baseline_transform.clear()
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/text.py:381, in Text._get_layout(self, renderer)
+    379 clean_line, ismath = self._preprocess_math(line)
+    380 if clean_line:
+--&gt; 381     w, h, d = _get_text_metrics_with_cache(
+    382         renderer, clean_line, self._fontproperties,
+    383         ismath=ismath, dpi=self.figure.dpi)
+    384 else:
+    385     w = h = d = 0
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/text.py:69, in _get_text_metrics_with_cache(renderer, text, fontprop, ismath, dpi)
+     66 &quot;&quot;&quot;Call ``renderer.get_text_width_height_descent``, caching the results.&quot;&quot;&quot;
+     67 # Cached based on a copy of fontprop so that later in-place mutations of
+     68 # the passed-in argument do not mess up the cache.
+---&gt; 69 return _get_text_metrics_with_cache_impl(
+     70     weakref.ref(renderer), text, fontprop.copy(), ismath, dpi)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/text.py:77, in _get_text_metrics_with_cache_impl(renderer_ref, text, fontprop, ismath, dpi)
+     73 @functools.lru_cache(4096)
+     74 def _get_text_metrics_with_cache_impl(
+     75         renderer_ref, text, fontprop, ismath, dpi):
+     76     # dpi is unused, but participates in cache invalidation (via the renderer).
+---&gt; 77     return renderer_ref().get_text_width_height_descent(text, fontprop, ismath)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/backends/backend_svg.py:1287, in RendererSVG.get_text_width_height_descent(self, s, prop, ismath)
+   1285 def get_text_width_height_descent(self, s, prop, ismath):
+   1286     # docstring inherited
+-&gt; 1287     return self._text2path.get_text_width_height_descent(s, prop, ismath)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/textpath.py:60, in TextToPath.get_text_width_height_descent(self, s, prop, ismath)
+     57     prop = prop.copy()
+     58     prop.set_size(self.FONT_SCALE)
+     59     width, height, descent, *_ = \
+---&gt; 60         self.mathtext_parser.parse(s, 72, prop)
+     61     return width * scale, height * scale, descent * scale
+     63 font = self._get_font(prop)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/mathtext.py:79, in MathTextParser.parse(self, s, dpi, prop, antialiased)
+     77 prop = prop.copy() if prop is not None else None
+     78 antialiased = mpl._val_or_rc(antialiased, &#39;text.antialiased&#39;)
+---&gt; 79 return self._parse_cached(s, dpi, prop, antialiased)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/mathtext.py:100, in MathTextParser._parse_cached(self, s, dpi, prop, antialiased)
+     97 if self._parser is None:  # Cache the parser globally.
+     98     self.__class__._parser = _mathtext.Parser()
+--&gt; 100 box = self._parser.parse(s, fontset, fontsize, dpi)
+    101 output = _mathtext.ship(box)
+    102 if self._output_type == &quot;vector&quot;:
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/_mathtext.py:2165, in Parser.parse(self, s, fonts_object, fontsize, dpi)
+   2162     result = self._expression.parseString(s)
+   2163 except ParseBaseException as err:
+   2164     # explain becomes a plain method on pyparsing 3 (err.explain(0)).
+-&gt; 2165     raise ValueError(&quot;\n&quot; + ParseException.explain(err, 0)) from None
+   2166 self._state_stack = []
+   2167 self._in_subscript_or_superscript = False
+
+ValueError: 
+$\sqrt{n}(\bar{x} - \mu)/\hat{\sigma}}$
+^
+ParseException: Expected end of text, found &#39;$&#39;  (at char 0), (line:1, col:1)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 1200x600 with 1 Axes&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <p>In this case, we would reject the alternative hypothesis. You can see why from the plot; the test statistic we have constructed lies within the interval where we cannot reject the null hypothesis. <span class="math notranslate nohighlight">\(\bar{x}-\mu\)</span> is close enough to zero to give us cause for concern. (You can also see from the plot why this is a two-tailed test: we don’t care if <span class="math notranslate nohighlight">\(\bar{x}\)</span> is greater or less than <span class="math notranslate nohighlight">\(\mu\)</span>, just that it’s different–and so the test statistic could appear in either tail of the distribution for us to accept <span class="math notranslate nohighlight">\(H_1\)</span>.)</p>
 <p>We accept the null here, but about if there were many more data points? Let’s try adding some generated data (pretend it is from making extra observations).</p>
@@ -905,7 +1166,268 @@ T = \frac{\sqrt{n}(\bar{x}-\mu)}{\hat{\sigma}} \thicksim t_{n-1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/209d1a5fc76cde98c0f70ec396bccb33e4bd72e744e4c5af8c3f83f707a8f8e2.svg" src="_images/209d1a5fc76cde98c0f70ec396bccb33e4bd72e744e4c5af8c3f83f707a8f8e2.svg" /></div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/IPython/core/formatters.py:340, in BaseFormatter.__call__(self, obj)
+    338     pass
+    339 else:
+--&gt; 340     return printer(obj)
+    341 # Finally look for special method names
+    342 method = get_real_method(obj, self.print_method)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/IPython/core/pylabtools.py:152, in print_figure(fig, fmt, bbox_inches, base64, **kwargs)
+    149     from matplotlib.backend_bases import FigureCanvasBase
+    150     FigureCanvasBase(fig)
+--&gt; 152 fig.canvas.print_figure(bytes_io, **kw)
+    153 data = bytes_io.getvalue()
+    154 if fmt == &#39;svg&#39;:
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/backend_bases.py:2164, in FigureCanvasBase.print_figure(self, filename, dpi, facecolor, edgecolor, orientation, format, bbox_inches, pad_inches, bbox_extra_artists, backend, **kwargs)
+   2161     # we do this instead of `self.figure.draw_without_rendering`
+   2162     # so that we can inject the orientation
+   2163     with getattr(renderer, &quot;_draw_disabled&quot;, nullcontext)():
+-&gt; 2164         self.figure.draw(renderer)
+   2165 if bbox_inches:
+   2166     if bbox_inches == &quot;tight&quot;:
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/artist.py:95, in _finalize_rasterization.&lt;locals&gt;.draw_wrapper(artist, renderer, *args, **kwargs)
+     93 @wraps(draw)
+     94 def draw_wrapper(artist, renderer, *args, **kwargs):
+---&gt; 95     result = draw(artist, renderer, *args, **kwargs)
+     96     if renderer._rasterizing:
+     97         renderer.stop_rasterizing()
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/artist.py:72, in allow_rasterization.&lt;locals&gt;.draw_wrapper(artist, renderer)
+     69     if artist.get_agg_filter() is not None:
+     70         renderer.start_filter()
+---&gt; 72     return draw(artist, renderer)
+     73 finally:
+     74     if artist.get_agg_filter() is not None:
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/figure.py:3154, in Figure.draw(self, renderer)
+   3151         # ValueError can occur when resizing a window.
+   3153 self.patch.draw(renderer)
+-&gt; 3154 mimage._draw_list_compositing_images(
+   3155     renderer, self, artists, self.suppressComposite)
+   3157 for sfig in self.subfigs:
+   3158     sfig.draw(renderer)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/image.py:132, in _draw_list_compositing_images(renderer, parent, artists, suppress_composite)
+    130 if not_composite or not has_images:
+    131     for a in artists:
+--&gt; 132         a.draw(renderer)
+    133 else:
+    134     # Composite any adjacent images together
+    135     image_group = []
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/artist.py:72, in allow_rasterization.&lt;locals&gt;.draw_wrapper(artist, renderer)
+     69     if artist.get_agg_filter() is not None:
+     70         renderer.start_filter()
+---&gt; 72     return draw(artist, renderer)
+     73 finally:
+     74     if artist.get_agg_filter() is not None:
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/axes/_base.py:3070, in _AxesBase.draw(self, renderer)
+   3067 if artists_rasterized:
+   3068     _draw_rasterized(self.figure, artists_rasterized, renderer)
+-&gt; 3070 mimage._draw_list_compositing_images(
+   3071     renderer, self, artists, self.figure.suppressComposite)
+   3073 renderer.close_group(&#39;axes&#39;)
+   3074 self.stale = False
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/image.py:132, in _draw_list_compositing_images(renderer, parent, artists, suppress_composite)
+    130 if not_composite or not has_images:
+    131     for a in artists:
+--&gt; 132         a.draw(renderer)
+    133 else:
+    134     # Composite any adjacent images together
+    135     image_group = []
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/artist.py:72, in allow_rasterization.&lt;locals&gt;.draw_wrapper(artist, renderer)
+     69     if artist.get_agg_filter() is not None:
+     70         renderer.start_filter()
+---&gt; 72     return draw(artist, renderer)
+     73 finally:
+     74     if artist.get_agg_filter() is not None:
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/legend.py:769, in Legend.draw(self, renderer)
+    765     self._legend_box.set_width(self.get_bbox_to_anchor().width - pad)
+    767 # update the location and size of the legend. This needs to
+    768 # be done in any case to clip the figure right.
+--&gt; 769 bbox = self._legend_box.get_window_extent(renderer)
+    770 self.legendPatch.set_bounds(bbox.bounds)
+    771 self.legendPatch.set_mutation_scale(fontsize)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:399, in OffsetBox.get_window_extent(self, renderer)
+    397 if renderer is None:
+    398     renderer = self.figure._get_renderer()
+--&gt; 399 bbox = self.get_bbox(renderer)
+    400 try:  # Some subclasses redefine get_offset to take no args.
+    401     px, py = self.get_offset(bbox, renderer)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:366, in OffsetBox.get_bbox(self, renderer)
+    364 def get_bbox(self, renderer):
+    365     &quot;&quot;&quot;Return the bbox of the offsetbox, ignoring parent offsets.&quot;&quot;&quot;
+--&gt; 366     bbox, offsets = self._get_bbox_and_child_offsets(renderer)
+    367     return bbox
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:484, in VPacker._get_bbox_and_child_offsets(self, renderer)
+    481         if isinstance(c, PackerBase) and c.mode == &quot;expand&quot;:
+    482             c.set_width(self.width)
+--&gt; 484 bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+    485 (x0, x1), xoffsets = _get_aligned_offsets(
+    486     [bbox.intervalx for bbox in bboxes], self.width, self.align)
+    487 height, yoffsets = _get_packed_offsets(
+    488     [bbox.height for bbox in bboxes], self.height, sep, self.mode)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:484, in &lt;listcomp&gt;(.0)
+    481         if isinstance(c, PackerBase) and c.mode == &quot;expand&quot;:
+    482             c.set_width(self.width)
+--&gt; 484 bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+    485 (x0, x1), xoffsets = _get_aligned_offsets(
+    486     [bbox.intervalx for bbox in bboxes], self.width, self.align)
+    487 height, yoffsets = _get_packed_offsets(
+    488     [bbox.height for bbox in bboxes], self.height, sep, self.mode)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:366, in OffsetBox.get_bbox(self, renderer)
+    364 def get_bbox(self, renderer):
+    365     &quot;&quot;&quot;Return the bbox of the offsetbox, ignoring parent offsets.&quot;&quot;&quot;
+--&gt; 366     bbox, offsets = self._get_bbox_and_child_offsets(renderer)
+    367     return bbox
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:511, in HPacker._get_bbox_and_child_offsets(self, renderer)
+    508 pad = self.pad * dpicor
+    509 sep = self.sep * dpicor
+--&gt; 511 bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+    512 if not bboxes:
+    513     return Bbox.from_bounds(0, 0, 0, 0).padded(pad), []
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:511, in &lt;listcomp&gt;(.0)
+    508 pad = self.pad * dpicor
+    509 sep = self.sep * dpicor
+--&gt; 511 bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+    512 if not bboxes:
+    513     return Bbox.from_bounds(0, 0, 0, 0).padded(pad), []
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:366, in OffsetBox.get_bbox(self, renderer)
+    364 def get_bbox(self, renderer):
+    365     &quot;&quot;&quot;Return the bbox of the offsetbox, ignoring parent offsets.&quot;&quot;&quot;
+--&gt; 366     bbox, offsets = self._get_bbox_and_child_offsets(renderer)
+    367     return bbox
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:484, in VPacker._get_bbox_and_child_offsets(self, renderer)
+    481         if isinstance(c, PackerBase) and c.mode == &quot;expand&quot;:
+    482             c.set_width(self.width)
+--&gt; 484 bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+    485 (x0, x1), xoffsets = _get_aligned_offsets(
+    486     [bbox.intervalx for bbox in bboxes], self.width, self.align)
+    487 height, yoffsets = _get_packed_offsets(
+    488     [bbox.height for bbox in bboxes], self.height, sep, self.mode)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:484, in &lt;listcomp&gt;(.0)
+    481         if isinstance(c, PackerBase) and c.mode == &quot;expand&quot;:
+    482             c.set_width(self.width)
+--&gt; 484 bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+    485 (x0, x1), xoffsets = _get_aligned_offsets(
+    486     [bbox.intervalx for bbox in bboxes], self.width, self.align)
+    487 height, yoffsets = _get_packed_offsets(
+    488     [bbox.height for bbox in bboxes], self.height, sep, self.mode)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:366, in OffsetBox.get_bbox(self, renderer)
+    364 def get_bbox(self, renderer):
+    365     &quot;&quot;&quot;Return the bbox of the offsetbox, ignoring parent offsets.&quot;&quot;&quot;
+--&gt; 366     bbox, offsets = self._get_bbox_and_child_offsets(renderer)
+    367     return bbox
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:511, in HPacker._get_bbox_and_child_offsets(self, renderer)
+    508 pad = self.pad * dpicor
+    509 sep = self.sep * dpicor
+--&gt; 511 bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+    512 if not bboxes:
+    513     return Bbox.from_bounds(0, 0, 0, 0).padded(pad), []
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:511, in &lt;listcomp&gt;(.0)
+    508 pad = self.pad * dpicor
+    509 sep = self.sep * dpicor
+--&gt; 511 bboxes = [c.get_bbox(renderer) for c in self.get_visible_children()]
+    512 if not bboxes:
+    513     return Bbox.from_bounds(0, 0, 0, 0).padded(pad), []
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/offsetbox.py:799, in TextArea.get_bbox(self, renderer)
+    794 def get_bbox(self, renderer):
+    795     _, h_, d_ = renderer.get_text_width_height_descent(
+    796         &quot;lp&quot;, self._text._fontproperties,
+    797         ismath=&quot;TeX&quot; if self._text.get_usetex() else False)
+--&gt; 799     bbox, info, yd = self._text._get_layout(renderer)
+    800     w, h = bbox.size
+    802     self._baseline_transform.clear()
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/text.py:381, in Text._get_layout(self, renderer)
+    379 clean_line, ismath = self._preprocess_math(line)
+    380 if clean_line:
+--&gt; 381     w, h, d = _get_text_metrics_with_cache(
+    382         renderer, clean_line, self._fontproperties,
+    383         ismath=ismath, dpi=self.figure.dpi)
+    384 else:
+    385     w = h = d = 0
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/text.py:69, in _get_text_metrics_with_cache(renderer, text, fontprop, ismath, dpi)
+     66 &quot;&quot;&quot;Call ``renderer.get_text_width_height_descent``, caching the results.&quot;&quot;&quot;
+     67 # Cached based on a copy of fontprop so that later in-place mutations of
+     68 # the passed-in argument do not mess up the cache.
+---&gt; 69 return _get_text_metrics_with_cache_impl(
+     70     weakref.ref(renderer), text, fontprop.copy(), ismath, dpi)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/text.py:77, in _get_text_metrics_with_cache_impl(renderer_ref, text, fontprop, ismath, dpi)
+     73 @functools.lru_cache(4096)
+     74 def _get_text_metrics_with_cache_impl(
+     75         renderer_ref, text, fontprop, ismath, dpi):
+     76     # dpi is unused, but participates in cache invalidation (via the renderer).
+---&gt; 77     return renderer_ref().get_text_width_height_descent(text, fontprop, ismath)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/backends/backend_svg.py:1287, in RendererSVG.get_text_width_height_descent(self, s, prop, ismath)
+   1285 def get_text_width_height_descent(self, s, prop, ismath):
+   1286     # docstring inherited
+-&gt; 1287     return self._text2path.get_text_width_height_descent(s, prop, ismath)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/textpath.py:60, in TextToPath.get_text_width_height_descent(self, s, prop, ismath)
+     57     prop = prop.copy()
+     58     prop.set_size(self.FONT_SCALE)
+     59     width, height, descent, *_ = \
+---&gt; 60         self.mathtext_parser.parse(s, 72, prop)
+     61     return width * scale, height * scale, descent * scale
+     63 font = self._get_font(prop)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/mathtext.py:79, in MathTextParser.parse(self, s, dpi, prop, antialiased)
+     77 prop = prop.copy() if prop is not None else None
+     78 antialiased = mpl._val_or_rc(antialiased, &#39;text.antialiased&#39;)
+---&gt; 79 return self._parse_cached(s, dpi, prop, antialiased)
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/mathtext.py:100, in MathTextParser._parse_cached(self, s, dpi, prop, antialiased)
+     97 if self._parser is None:  # Cache the parser globally.
+     98     self.__class__._parser = _mathtext.Parser()
+--&gt; 100 box = self._parser.parse(s, fontset, fontsize, dpi)
+    101 output = _mathtext.ship(box)
+    102 if self._output_type == &quot;vector&quot;:
+
+File ~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/_mathtext.py:2165, in Parser.parse(self, s, fonts_object, fontsize, dpi)
+   2162     result = self._expression.parseString(s)
+   2163 except ParseBaseException as err:
+   2164     # explain becomes a plain method on pyparsing 3 (err.explain(0)).
+-&gt; 2165     raise ValueError(&quot;\n&quot; + ParseException.explain(err, 0)) from None
+   2166 self._state_stack = []
+   2167 self._in_subscript_or_superscript = False
+
+ValueError: 
+$\sqrt{n}(\bar{x} - \mu)/\hat{\sigma}}$
+^
+ParseException: Expected end of text, found &#39;$&#39;  (at char 0), (line:1, col:1)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 1200x600 with 1 Axes&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <p>Now our test statistic is safely outside the interval.</p>
 <section id="connection-to-linear-regression">
@@ -1578,7 +2100,7 @@ X_{ij} = \mu_i + \epsilon_{ij} \quad j=1, \dots, n_i \quad i=1, \dots, k.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c226817799a812083227190aa1d99752168f250b9afc4188121109e4d876ec5a.svg" src="_images/c226817799a812083227190aa1d99752168f250b9afc4188121109e4d876ec5a.svg" /></div>
+<img alt="_images/4a2bc04d84c2c0a774092642e61f2faff452ca44af9905c7e46c55e08fa08c6e.svg" src="_images/4a2bc04d84c2c0a774092642e61f2faff452ca44af9905c7e46c55e08fa08c6e.svg" /></div>
 </div>
 <p>From this, we can see we need a sample size of at least 200 in order to have a power of 0.8.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">pg.power_ttest</span></code> function takes any three of the four of <code class="docutils literal notranslate"><span class="pre">d</span></code>, <code class="docutils literal notranslate"><span class="pre">n</span></code>, <code class="docutils literal notranslate"><span class="pre">power</span></code>, and <code class="docutils literal notranslate"><span class="pre">alpha</span></code> (ie leave one of these out), and then returns what the missing parameter should be. We passed in <code class="docutils literal notranslate"><span class="pre">d</span></code>, <code class="docutils literal notranslate"><span class="pre">n</span></code>, and <code class="docutils literal notranslate"><span class="pre">alpha</span></code>, and so the <code class="docutils literal notranslate"><span class="pre">power</span></code> was returned.</p>
@@ -1871,9 +2393,10 @@ X_{ij} = \mu_i + \epsilon_{ij} \quad j=1, \dots, n_i \quad i=1, \dots, k.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     96
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sex
+0     96
 1    207
-Name: sex, dtype: int64
+Name: count, dtype: int64
 </pre></div>
 </div>
 </div>

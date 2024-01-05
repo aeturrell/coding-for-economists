@@ -1,0 +1,176 @@
+Traceback (most recent call last):
+  File "/Users/aet/mambaforge/envs/codeforecon/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/aet/mambaforge/envs/codeforecon/lib/python3.10/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/aet/mambaforge/envs/codeforecon/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 162, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Users/aet/mambaforge/envs/codeforecon/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/Users/aet/mambaforge/envs/codeforecon/lib/python3.10/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Users/aet/mambaforge/envs/codeforecon/lib/python3.10/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/aet/mambaforge/envs/codeforecon/lib/python3.10/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import joypy
+from matplotlib import cm
+
+final_year = df["Year"].max()
+first_year = df["Year"].min()
+
+labels = [y if y % 10 == 0 else None for y in list(df.Year.unique())]
+fig, axes = joypy.joyplot(
+    df,
+    by="Year",
+    column="Anomaly",
+    labels=labels,
+    range_style="own",
+    grid="y",
+    linewidth=1,
+    legend=False,
+    title=f"Global daily temperature anomaly {first_year}-{final_year} \n(°C above 1951-80 average)",
+    colormap=cm.inferno,
+)
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mIndexError[0m                                Traceback (most recent call last)
+Cell [0;32mIn[115], line 8[0m
+[1;32m      5[0m first_year [38;5;241m=[39m df[[38;5;124m"[39m[38;5;124mYear[39m[38;5;124m"[39m][38;5;241m.[39mmin()
+[1;32m      7[0m labels [38;5;241m=[39m [y [38;5;28;01mif[39;00m y [38;5;241m%[39m [38;5;241m10[39m [38;5;241m==[39m [38;5;241m0[39m [38;5;28;01melse[39;00m [38;5;28;01mNone[39;00m [38;5;28;01mfor[39;00m y [38;5;129;01min[39;00m [38;5;28mlist[39m(df[38;5;241m.[39mYear[38;5;241m.[39munique())]
+[0;32m----> 8[0m fig, axes [38;5;241m=[39m [43mjoypy[49m[38;5;241;43m.[39;49m[43mjoyplot[49m[43m([49m
+[1;32m      9[0m [43m    [49m[43mdf[49m[43m,[49m
+[1;32m     10[0m [43m    [49m[43mby[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mYear[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m     11[0m [43m    [49m[43mcolumn[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mAnomaly[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m     12[0m [43m    [49m[43mlabels[49m[38;5;241;43m=[39;49m[43mlabels[49m[43m,[49m
+[1;32m     13[0m [43m    [49m[43mrange_style[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mown[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m     14[0m [43m    [49m[43mgrid[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43my[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m     15[0m [43m    [49m[43mlinewidth[49m[38;5;241;43m=[39;49m[38;5;241;43m1[39;49m[43m,[49m
+[1;32m     16[0m [43m    [49m[43mlegend[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m
+[1;32m     17[0m [43m    [49m[43mtitle[49m[38;5;241;43m=[39;49m[38;5;124;43mf[39;49m[38;5;124;43m"[39;49m[38;5;124;43mGlobal daily temperature anomaly [39;49m[38;5;132;43;01m{[39;49;00m[43mfirst_year[49m[38;5;132;43;01m}[39;49;00m[38;5;124;43m-[39;49m[38;5;132;43;01m{[39;49;00m[43mfinal_year[49m[38;5;132;43;01m}[39;49;00m[38;5;124;43m [39;49m[38;5;130;43;01m\n[39;49;00m[38;5;124;43m(°C above 1951-80 average)[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m     18[0m [43m    [49m[43mcolormap[49m[38;5;241;43m=[39;49m[43mcm[49m[38;5;241;43m.[39;49m[43minferno[49m[43m,[49m
+[1;32m     19[0m [43m)[49m
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/joypy/joyplot.py:237[0m, in [0;36mjoyplot[0;34m(data, column, by, grid, xlabelsize, xrot, ylabelsize, yrot, ax, figsize, hist, bins, fade, ylim, fill, linecolor, overlap, background, labels, xlabels, ylabels, range_style, x_range, title, colormap, color, **kwds)[0m
+[1;32m    233[0m [38;5;28;01mif[39;00m [38;5;28many[39m([38;5;28mlen[39m(subg)[38;5;241m==[39m[38;5;241m0[39m [38;5;28;01mfor[39;00m g [38;5;129;01min[39;00m converted [38;5;28;01mfor[39;00m subg [38;5;129;01min[39;00m g):
+[1;32m    234[0m     warn([38;5;124m"[39m[38;5;124mAt least a column/group has no numeric values.[39m[38;5;124m"[39m)
+[0;32m--> 237[0m [38;5;28;01mreturn[39;00m [43m_joyplot[49m[43m([49m[43mconverted[49m[43m,[49m[43m [49m[43mlabels[49m[38;5;241;43m=[39;49m[43mlabels[49m[43m,[49m[43m [49m[43msublabels[49m[38;5;241;43m=[39;49m[43msublabels[49m[43m,[49m
+[1;32m    238[0m [43m                [49m[43mgrid[49m[38;5;241;43m=[39;49m[43mgrid[49m[43m,[49m
+[1;32m    239[0m [43m                [49m[43mxlabelsize[49m[38;5;241;43m=[39;49m[43mxlabelsize[49m[43m,[49m[43m [49m[43mxrot[49m[38;5;241;43m=[39;49m[43mxrot[49m[43m,[49m[43m [49m[43mylabelsize[49m[38;5;241;43m=[39;49m[43mylabelsize[49m[43m,[49m[43m [49m[43myrot[49m[38;5;241;43m=[39;49m[43myrot[49m[43m,[49m
+[1;32m    240[0m [43m                [49m[43max[49m[38;5;241;43m=[39;49m[43max[49m[43m,[49m[43m [49m[43mfigsize[49m[38;5;241;43m=[39;49m[43mfigsize[49m[43m,[49m
+[1;32m    241[0m [43m                [49m[43mhist[49m[38;5;241;43m=[39;49m[43mhist[49m[43m,[49m[43m [49m[43mbins[49m[38;5;241;43m=[39;49m[43mbins[49m[43m,[49m
+[1;32m    242[0m [43m                [49m[43mfade[49m[38;5;241;43m=[39;49m[43mfade[49m[43m,[49m[43m [49m[43mylim[49m[38;5;241;43m=[39;49m[43mylim[49m[43m,[49m
+[1;32m    243[0m [43m                [49m[43mfill[49m[38;5;241;43m=[39;49m[43mfill[49m[43m,[49m[43m [49m[43mlinecolor[49m[38;5;241;43m=[39;49m[43mlinecolor[49m[43m,[49m
+[1;32m    244[0m [43m                [49m[43moverlap[49m[38;5;241;43m=[39;49m[43moverlap[49m[43m,[49m[43m [49m[43mbackground[49m[38;5;241;43m=[39;49m[43mbackground[49m[43m,[49m
+[1;32m    245[0m [43m                [49m[43mxlabels[49m[38;5;241;43m=[39;49m[43mxlabels[49m[43m,[49m
+[1;32m    246[0m [43m                [49m[43mrange_style[49m[38;5;241;43m=[39;49m[43mrange_style[49m[43m,[49m[43m [49m[43mx_range[49m[38;5;241;43m=[39;49m[43mx_range[49m[43m,[49m
+[1;32m    247[0m [43m                [49m[43mtitle[49m[38;5;241;43m=[39;49m[43mtitle[49m[43m,[49m
+[1;32m    248[0m [43m                [49m[43mcolormap[49m[38;5;241;43m=[39;49m[43mcolormap[49m[43m,[49m
+[1;32m    249[0m [43m                [49m[43mcolor[49m[38;5;241;43m=[39;49m[43mcolor[49m[43m,[49m
+[1;32m    250[0m [43m                [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwds[49m[43m)[49m
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/joypy/joyplot.py:482[0m, in [0;36m_joyplot[0;34m(data, grid, labels, sublabels, xlabels, xlabelsize, xrot, ylabelsize, yrot, ax, figsize, hist, bins, fade, xlim, ylim, fill, linecolor, overlap, background, range_style, x_range, tails, title, legend, loc, colormap, color, **kwargs)[0m
+[1;32m    480[0m [38;5;66;03m# Setup the current axis: transparency, labels, spines.[39;00m
+[1;32m    481[0m col_name [38;5;241m=[39m [38;5;28;01mNone[39;00m [38;5;28;01mif[39;00m labels [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m [38;5;28;01melse[39;00m labels[i]
+[0;32m--> 482[0m [43m_setup_axis[49m[43m([49m[43ma[49m[43m,[49m[43m [49m[43mglobal_x_range[49m[43m,[49m[43m [49m[43mcol_name[49m[38;5;241;43m=[39;49m[43mcol_name[49m[43m,[49m[43m [49m[43mgrid[49m[38;5;241;43m=[39;49m[43mygrid[49m[43m,[49m
+[1;32m    483[0m [43m        [49m[43mylabelsize[49m[38;5;241;43m=[39;49m[43mylabelsize[49m[43m,[49m[43m [49m[43myrot[49m[38;5;241;43m=[39;49m[43myrot[49m[43m)[49m
+[1;32m    485[0m [38;5;66;03m# When needed, draw the legend[39;00m
+[1;32m    486[0m [38;5;28;01mif[39;00m legend [38;5;129;01mand[39;00m i [38;5;241m==[39m legend_axis:
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/joypy/joyplot.py:50[0m, in [0;36m_setup_axis[0;34m(ax, x_range, col_name, grid, ylabelsize, yrot)[0m
+[1;32m     42[0m [38;5;250m[39m[38;5;124;03m""" Setup the axis for the joyplot:[39;00m
+[1;32m     43[0m [38;5;124;03m    - add the y label if required (as an ytick)[39;00m
+[1;32m     44[0m [38;5;124;03m    - add y grid if required[39;00m
+[0;32m   (...)[0m
+[1;32m     47[0m [38;5;124;03m    - hide the xaxis and the spines[39;00m
+[1;32m     48[0m [38;5;124;03m"""[39;00m
+[1;32m     49[0m [38;5;28;01mif[39;00m col_name [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[0;32m---> 50[0m     [43max[49m[38;5;241;43m.[39;49m[43mset_yticks[49m[43m([49m[43m[[49m[38;5;241;43m0[39;49m[43m][49m[43m)[49m
+[1;32m     51[0m     ax[38;5;241m.[39mset_yticklabels([col_name], fontsize[38;5;241m=[39mylabelsize, rotation[38;5;241m=[39myrot)
+[1;32m     52[0m     ax[38;5;241m.[39myaxis[38;5;241m.[39mgrid(grid)
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/axes/_base.py:73[0m, in [0;36m_axis_method_wrapper.__set_name__.<locals>.wrapper[0;34m(self, *args, **kwargs)[0m
+[1;32m     72[0m [38;5;28;01mdef[39;00m [38;5;21mwrapper[39m([38;5;28mself[39m, [38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs):
+[0;32m---> 73[0m     [38;5;28;01mreturn[39;00m [43mget_method[49m[43m([49m[38;5;28;43mself[39;49m[43m)[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/axis.py:2138[0m, in [0;36mAxis.set_ticks[0;34m(self, ticks, labels, minor, **kwargs)[0m
+[1;32m   2133[0m     first_key [38;5;241m=[39m [38;5;28mnext[39m([38;5;28miter[39m(kwargs))
+[1;32m   2134[0m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(
+[1;32m   2135[0m         [38;5;124mf[39m[38;5;124m"[39m[38;5;124mIncorrect use of keyword argument [39m[38;5;132;01m{[39;00mfirst_key[38;5;132;01m!r}[39;00m[38;5;124m. Keyword arguments [39m[38;5;124m"[39m
+[1;32m   2136[0m         [38;5;124m"[39m[38;5;124mother than [39m[38;5;124m'[39m[38;5;124mminor[39m[38;5;124m'[39m[38;5;124m modify the text labels and can only be used if [39m[38;5;124m"[39m
+[1;32m   2137[0m         [38;5;124m"[39m[38;5;124m'[39m[38;5;124mlabels[39m[38;5;124m'[39m[38;5;124m are passed as well.[39m[38;5;124m"[39m)
+[0;32m-> 2138[0m result [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_set_tick_locations[49m[43m([49m[43mticks[49m[43m,[49m[43m [49m[43mminor[49m[38;5;241;43m=[39;49m[43mminor[49m[43m)[49m
+[1;32m   2139[0m [38;5;28;01mif[39;00m labels [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[1;32m   2140[0m     [38;5;28mself[39m[38;5;241m.[39mset_ticklabels(labels, minor[38;5;241m=[39mminor, [38;5;241m*[39m[38;5;241m*[39mkwargs)
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/axis.py:2082[0m, in [0;36mAxis._set_tick_locations[0;34m(self, ticks, minor)[0m
+[1;32m   2079[0m [38;5;28;01mif[39;00m [38;5;28mlen[39m(ticks):
+[1;32m   2080[0m     [38;5;28;01mfor[39;00m axis [38;5;129;01min[39;00m [38;5;28mself[39m[38;5;241m.[39m_get_shared_axis():
+[1;32m   2081[0m         [38;5;66;03m# set_view_interval maintains any preexisting inversion.[39;00m
+[0;32m-> 2082[0m         [43maxis[49m[38;5;241;43m.[39;49m[43mset_view_interval[49m[43m([49m[38;5;28;43mmin[39;49m[43m([49m[43mticks[49m[43m)[49m[43m,[49m[43m [49m[38;5;28;43mmax[39;49m[43m([49m[43mticks[49m[43m)[49m[43m)[49m
+[1;32m   2083[0m [38;5;28mself[39m[38;5;241m.[39maxes[38;5;241m.[39mstale [38;5;241m=[39m [38;5;28;01mTrue[39;00m
+[1;32m   2084[0m [38;5;28;01mif[39;00m minor:
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/axis.py:2274[0m, in [0;36m_make_getset_interval.<locals>.setter[0;34m(self, vmin, vmax, ignore)[0m
+[1;32m   2272[0m     [38;5;28msetattr[39m([38;5;28mgetattr[39m([38;5;28mself[39m[38;5;241m.[39maxes, lim_name), attr_name, (vmin, vmax))
+[1;32m   2273[0m [38;5;28;01melse[39;00m:
+[0;32m-> 2274[0m     oldmin, oldmax [38;5;241m=[39m [43mgetter[49m[43m([49m[38;5;28;43mself[39;49m[43m)[49m
+[1;32m   2275[0m     [38;5;28;01mif[39;00m oldmin [38;5;241m<[39m oldmax:
+[1;32m   2276[0m         setter([38;5;28mself[39m, [38;5;28mmin[39m(vmin, vmax, oldmin), [38;5;28mmax[39m(vmin, vmax, oldmax),
+[1;32m   2277[0m                ignore[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/axis.py:2267[0m, in [0;36m_make_getset_interval.<locals>.getter[0;34m(self)[0m
+[1;32m   2265[0m [38;5;28;01mdef[39;00m [38;5;21mgetter[39m([38;5;28mself[39m):
+[1;32m   2266[0m     [38;5;66;03m# docstring inherited.[39;00m
+[0;32m-> 2267[0m     [38;5;28;01mreturn[39;00m [38;5;28mgetattr[39m([38;5;28;43mgetattr[39;49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43maxes[49m[43m,[49m[43m [49m[43mlim_name[49m[43m)[49m, attr_name)
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/axes/_base.py:849[0m, in [0;36m_AxesBase.viewLim[0;34m(self)[0m
+[1;32m    847[0m [38;5;129m@property[39m
+[1;32m    848[0m [38;5;28;01mdef[39;00m [38;5;21mviewLim[39m([38;5;28mself[39m):
+[0;32m--> 849[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_unstale_viewLim[49m[43m([49m[43m)[49m
+[1;32m    850[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_viewLim
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/axes/_base.py:844[0m, in [0;36m_AxesBase._unstale_viewLim[0;34m(self)[0m
+[1;32m    842[0m     [38;5;28;01mfor[39;00m ax [38;5;129;01min[39;00m [38;5;28mself[39m[38;5;241m.[39m_shared_axes[name][38;5;241m.[39mget_siblings([38;5;28mself[39m):
+[1;32m    843[0m         ax[38;5;241m.[39m_stale_viewlims[name] [38;5;241m=[39m [38;5;28;01mFalse[39;00m
+[0;32m--> 844[0m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mautoscale_view[49m[43m([49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43m{[49m[38;5;124;43mf[39;49m[38;5;124;43m"[39;49m[38;5;124;43mscale[39;49m[38;5;132;43;01m{[39;49;00m[43mname[49m[38;5;132;43;01m}[39;49;00m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mscale[49m
+[1;32m    845[0m [43m                       [49m[38;5;28;43;01mfor[39;49;00m[43m [49m[43mname[49m[43m,[49m[43m [49m[43mscale[49m[43m [49m[38;5;129;43;01min[39;49;00m[43m [49m[43mneed_scale[49m[38;5;241;43m.[39;49m[43mitems[49m[43m([49m[43m)[49m[43m}[49m[43m)[49m
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/axes/_base.py:2939[0m, in [0;36m_AxesBase.autoscale_view[0;34m(self, tight, scalex, scaley)[0m
+[1;32m   2934[0m     [38;5;66;03m# End of definition of internal function 'handle_single_axis'.[39;00m
+[1;32m   2936[0m handle_single_axis(
+[1;32m   2937[0m     scalex, [38;5;28mself[39m[38;5;241m.[39m_shared_axes[[38;5;124m"[39m[38;5;124mx[39m[38;5;124m"[39m], [38;5;124m'[39m[38;5;124mx[39m[38;5;124m'[39m, [38;5;28mself[39m[38;5;241m.[39mxaxis, [38;5;28mself[39m[38;5;241m.[39m_xmargin,
+[1;32m   2938[0m     x_stickies, [38;5;28mself[39m[38;5;241m.[39mset_xbound)
+[0;32m-> 2939[0m [43mhandle_single_axis[49m[43m([49m
+[1;32m   2940[0m [43m    [49m[43mscaley[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_shared_axes[49m[43m[[49m[38;5;124;43m"[39;49m[38;5;124;43my[39;49m[38;5;124;43m"[39;49m[43m][49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43my[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43myaxis[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_ymargin[49m[43m,[49m
+[1;32m   2941[0m [43m    [49m[43my_stickies[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mset_ybound[49m[43m)[49m
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/axes/_base.py:2932[0m, in [0;36m_AxesBase.autoscale_view.<locals>.handle_single_axis[0;34m(scale, shared_axes, name, axis, margin, stickies, set_bound)[0m
+[1;32m   2929[0m     x1 [38;5;241m=[39m [38;5;28mmin[39m(x1, x1bound)
+[1;32m   2931[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28mself[39m[38;5;241m.[39m_tight:
+[0;32m-> 2932[0m     x0, x1 [38;5;241m=[39m [43mlocator[49m[38;5;241;43m.[39;49m[43mview_limits[49m[43m([49m[43mx0[49m[43m,[49m[43m [49m[43mx1[49m[43m)[49m
+[1;32m   2933[0m set_bound(x0, x1)
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/ticker.py:2168[0m, in [0;36mMaxNLocator.view_limits[0;34m(self, dmin, dmax)[0m
+[1;32m   2164[0m dmin, dmax [38;5;241m=[39m mtransforms[38;5;241m.[39mnonsingular(
+[1;32m   2165[0m     dmin, dmax, expander[38;5;241m=[39m[38;5;241m1e-12[39m, tiny[38;5;241m=[39m[38;5;241m1e-13[39m)
+[1;32m   2167[0m [38;5;28;01mif[39;00m mpl[38;5;241m.[39mrcParams[[38;5;124m'[39m[38;5;124maxes.autolimit_mode[39m[38;5;124m'[39m] [38;5;241m==[39m [38;5;124m'[39m[38;5;124mround_numbers[39m[38;5;124m'[39m:
+[0;32m-> 2168[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_raw_ticks[49m[43m([49m[43mdmin[49m[43m,[49m[43m [49m[43mdmax[49m[43m)[49m[[[38;5;241m0[39m, [38;5;241m-[39m[38;5;241m1[39m]]
+[1;32m   2169[0m [38;5;28;01melse[39;00m:
+[1;32m   2170[0m     [38;5;28;01mreturn[39;00m dmin, dmax
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/matplotlib/ticker.py:2112[0m, in [0;36mMaxNLocator._raw_ticks[0;34m(self, vmin, vmax)[0m
+[1;32m   2109[0m     large_steps [38;5;241m=[39m large_steps [38;5;241m&[39m (floored_vmaxs [38;5;241m>[39m[38;5;241m=[39m _vmax)
+[1;32m   2111[0m [38;5;66;03m# Find index of smallest large step[39;00m
+[0;32m-> 2112[0m istep [38;5;241m=[39m [43mnp[49m[38;5;241;43m.[39;49m[43mnonzero[49m[43m([49m[43mlarge_steps[49m[43m)[49m[43m[[49m[38;5;241;43m0[39;49m[43m][49m[43m[[49m[38;5;241;43m0[39;49m[43m][49m
+[1;32m   2114[0m [38;5;66;03m# Start at smallest of the steps greater than the raw step, and check[39;00m
+[1;32m   2115[0m [38;5;66;03m# if it provides enough ticks. If not, work backwards through[39;00m
+[1;32m   2116[0m [38;5;66;03m# smaller steps until one is found that provides enough ticks.[39;00m
+[1;32m   2117[0m [38;5;28;01mfor[39;00m step [38;5;129;01min[39;00m steps[:istep[38;5;241m+[39m[38;5;241m1[39m][::[38;5;241m-[39m[38;5;241m1[39m]:
+
+[0;31mIndexError[0m: index 0 is out of bounds for axis 0 with size 0
+

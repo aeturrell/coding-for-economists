@@ -1,0 +1,109 @@
+Traceback (most recent call last):
+  File "/Users/aet/mambaforge/envs/codeforecon/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/aet/mambaforge/envs/codeforecon/lib/python3.10/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/aet/mambaforge/envs/codeforecon/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 162, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Users/aet/mambaforge/envs/codeforecon/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/Users/aet/mambaforge/envs/codeforecon/lib/python3.10/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Users/aet/mambaforge/envs/codeforecon/lib/python3.10/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/aet/mambaforge/envs/codeforecon/lib/python3.10/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from pyfixest.summarize import etable
+
+etable([results_ln, res_poly, res_inter], type="df")
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[25], line 3[0m
+[1;32m      1[0m [38;5;28;01mfrom[39;00m [38;5;21;01mpyfixest[39;00m[38;5;21;01m.[39;00m[38;5;21;01msummarize[39;00m [38;5;28;01mimport[39;00m etable
+[0;32m----> 3[0m [43metable[49m[43m([49m[43m[[49m[43mresults_ln[49m[43m,[49m[43m [49m[43mres_poly[49m[43m,[49m[43m [49m[43mres_inter[49m[43m][49m[43m,[49m[43m [49m[38;5;28;43mtype[39;49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mdf[39;49m[38;5;124;43m"[39;49m[43m)[49m
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/pyfixest/summarize.py:97[0m, in [0;36metable[0;34m(models, digits, type)[0m
+[1;32m     94[0m     model [38;5;241m=[39m model[38;5;241m.[39mdrop([38;5;124m"[39m[38;5;124mMetric[39m[38;5;124m"[39m, axis[38;5;241m=[39m[38;5;241m1[39m)[38;5;241m.[39mset_index([38;5;124m"[39m[38;5;124mCoefficient[39m[38;5;124m"[39m)
+[1;32m     95[0m     etable_list[38;5;241m.[39mappend(model)
+[0;32m---> 97[0m res [38;5;241m=[39m [43mpd[49m[38;5;241;43m.[39;49m[43mconcat[49m[43m([49m[43metable_list[49m[43m,[49m[43m [49m[43maxis[49m[38;5;241;43m=[39;49m[38;5;241;43m1[39;49m[43m)[49m[38;5;241;43m.[39;49m[43mfillna[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43m"[39;49m[43m)[49m[38;5;241m.[39mreset_index()
+[1;32m     99[0m res[38;5;241m.[39mrename(columns[38;5;241m=[39m{[38;5;124m"[39m[38;5;124mCoefficient[39m[38;5;124m"[39m: [38;5;124m"[39m[38;5;124mindex[39m[38;5;124m"[39m}, inplace[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
+[1;32m    100[0m nobs_fixef_df[38;5;241m.[39mcolumns [38;5;241m=[39m res[38;5;241m.[39mcolumns
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/pandas/core/generic.py:7297[0m, in [0;36mNDFrame.fillna[0;34m(self, value, method, axis, inplace, limit, downcast)[0m
+[1;32m   7295[0m         new_data [38;5;241m=[39m result[38;5;241m.[39m_mgr
+[1;32m   7296[0m     [38;5;28;01melse[39;00m:
+[0;32m-> 7297[0m         new_data [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_mgr[49m[38;5;241;43m.[39;49m[43mfillna[49m[43m([49m
+[1;32m   7298[0m [43m            [49m[43mvalue[49m[38;5;241;43m=[39;49m[43mvalue[49m[43m,[49m[43m [49m[43mlimit[49m[38;5;241;43m=[39;49m[43mlimit[49m[43m,[49m[43m [49m[43minplace[49m[38;5;241;43m=[39;49m[43minplace[49m[43m,[49m[43m [49m[43mdowncast[49m[38;5;241;43m=[39;49m[43mdowncast[49m
+[1;32m   7299[0m [43m        [49m[43m)[49m
+[1;32m   7300[0m [38;5;28;01melif[39;00m [38;5;28misinstance[39m(value, ABCDataFrame) [38;5;129;01mand[39;00m [38;5;28mself[39m[38;5;241m.[39mndim [38;5;241m==[39m [38;5;241m2[39m:
+[1;32m   7301[0m     new_data [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mwhere([38;5;28mself[39m[38;5;241m.[39mnotna(), value)[38;5;241m.[39m_mgr
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/pandas/core/internals/base.py:173[0m, in [0;36mDataManager.fillna[0;34m(self, value, limit, inplace, downcast)[0m
+[1;32m    169[0m [38;5;28;01mif[39;00m limit [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[1;32m    170[0m     [38;5;66;03m# Do this validation even if we go through one of the no-op paths[39;00m
+[1;32m    171[0m     limit [38;5;241m=[39m libalgos[38;5;241m.[39mvalidate_limit([38;5;28;01mNone[39;00m, limit[38;5;241m=[39mlimit)
+[0;32m--> 173[0m [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mapply_with_block[49m[43m([49m
+[1;32m    174[0m [43m    [49m[38;5;124;43m"[39;49m[38;5;124;43mfillna[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m    175[0m [43m    [49m[43mvalue[49m[38;5;241;43m=[39;49m[43mvalue[49m[43m,[49m
+[1;32m    176[0m [43m    [49m[43mlimit[49m[38;5;241;43m=[39;49m[43mlimit[49m[43m,[49m
+[1;32m    177[0m [43m    [49m[43minplace[49m[38;5;241;43m=[39;49m[43minplace[49m[43m,[49m
+[1;32m    178[0m [43m    [49m[43mdowncast[49m[38;5;241;43m=[39;49m[43mdowncast[49m[43m,[49m
+[1;32m    179[0m [43m    [49m[43musing_cow[49m[38;5;241;43m=[39;49m[43musing_copy_on_write[49m[43m([49m[43m)[49m[43m,[49m
+[1;32m    180[0m [43m[49m[43m)[49m
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/pandas/core/internals/managers.py:354[0m, in [0;36mBaseBlockManager.apply[0;34m(self, f, align_keys, **kwargs)[0m
+[1;32m    352[0m         applied [38;5;241m=[39m b[38;5;241m.[39mapply(f, [38;5;241m*[39m[38;5;241m*[39mkwargs)
+[1;32m    353[0m     [38;5;28;01melse[39;00m:
+[0;32m--> 354[0m         applied [38;5;241m=[39m [38;5;28;43mgetattr[39;49m[43m([49m[43mb[49m[43m,[49m[43m [49m[43mf[49m[43m)[49m[43m([49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m    355[0m     result_blocks [38;5;241m=[39m extend_blocks(applied, result_blocks)
+[1;32m    357[0m out [38;5;241m=[39m [38;5;28mtype[39m([38;5;28mself[39m)[38;5;241m.[39mfrom_blocks(result_blocks, [38;5;28mself[39m[38;5;241m.[39maxes)
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/pandas/core/internals/blocks.py:2008[0m, in [0;36mExtensionBlock.fillna[0;34m(self, value, limit, inplace, downcast, using_cow)[0m
+[1;32m   2005[0m [38;5;28;01mexcept[39;00m [38;5;167;01mTypeError[39;00m:
+[1;32m   2006[0m     [38;5;66;03m# 3rd party EA that has not implemented copy keyword yet[39;00m
+[1;32m   2007[0m     refs [38;5;241m=[39m [38;5;28;01mNone[39;00m
+[0;32m-> 2008[0m     new_values [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mvalues[49m[38;5;241;43m.[39;49m[43mfillna[49m[43m([49m[43mvalue[49m[38;5;241;43m=[39;49m[43mvalue[49m[43m,[49m[43m [49m[43mmethod[49m[38;5;241;43m=[39;49m[38;5;28;43;01mNone[39;49;00m[43m,[49m[43m [49m[43mlimit[49m[38;5;241;43m=[39;49m[43mlimit[49m[43m)[49m
+[1;32m   2009[0m     [38;5;66;03m# issue the warning *after* retrying, in case the TypeError[39;00m
+[1;32m   2010[0m     [38;5;66;03m#  was caused by an invalid fill_value[39;00m
+[1;32m   2011[0m     warnings[38;5;241m.[39mwarn(
+[1;32m   2012[0m         [38;5;66;03m# GH#53278[39;00m
+[1;32m   2013[0m         [38;5;124m"[39m[38;5;124mExtensionArray.fillna added a [39m[38;5;124m'[39m[38;5;124mcopy[39m[38;5;124m'[39m[38;5;124m keyword in pandas [39m[38;5;124m"[39m
+[0;32m   (...)[0m
+[1;32m   2019[0m         stacklevel[38;5;241m=[39mfind_stack_level(),
+[1;32m   2020[0m     )
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/pandas/core/arrays/_mixins.py:359[0m, in [0;36mNDArrayBackedExtensionArray.fillna[0;34m(self, value, method, limit, copy)[0m
+[1;32m    357[0m         [38;5;28;01melse[39;00m:
+[1;32m    358[0m             new_values [38;5;241m=[39m [38;5;28mself[39m[:]
+[0;32m--> 359[0m         [43mnew_values[49m[43m[[49m[43mmask[49m[43m][49m [38;5;241m=[39m value
+[1;32m    360[0m [38;5;28;01melse[39;00m:
+[1;32m    361[0m     [38;5;66;03m# We validate the fill_value even if there is nothing to fill[39;00m
+[1;32m    362[0m     [38;5;28;01mif[39;00m value [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/pandas/core/arrays/_mixins.py:253[0m, in [0;36mNDArrayBackedExtensionArray.__setitem__[0;34m(self, key, value)[0m
+[1;32m    251[0m [38;5;28;01mdef[39;00m [38;5;21m__setitem__[39m([38;5;28mself[39m, key, value) [38;5;241m-[39m[38;5;241m>[39m [38;5;28;01mNone[39;00m:
+[1;32m    252[0m     key [38;5;241m=[39m check_array_indexer([38;5;28mself[39m, key)
+[0;32m--> 253[0m     value [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_validate_setitem_value[49m[43m([49m[43mvalue[49m[43m)[49m
+[1;32m    254[0m     [38;5;28mself[39m[38;5;241m.[39m_ndarray[key] [38;5;241m=[39m value
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/pandas/core/arrays/categorical.py:1562[0m, in [0;36mCategorical._validate_setitem_value[0;34m(self, value)[0m
+[1;32m   1560[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_validate_listlike(value)
+[1;32m   1561[0m [38;5;28;01melse[39;00m:
+[0;32m-> 1562[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_validate_scalar[49m[43m([49m[43mvalue[49m[43m)[49m
+
+File [0;32m~/mambaforge/envs/codeforecon/lib/python3.10/site-packages/pandas/core/arrays/categorical.py:1587[0m, in [0;36mCategorical._validate_scalar[0;34m(self, fill_value)[0m
+[1;32m   1585[0m     fill_value [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_unbox_scalar(fill_value)
+[1;32m   1586[0m [38;5;28;01melse[39;00m:
+[0;32m-> 1587[0m     [38;5;28;01mraise[39;00m [38;5;167;01mTypeError[39;00m(
+[1;32m   1588[0m         [38;5;124m"[39m[38;5;124mCannot setitem on a Categorical with a new [39m[38;5;124m"[39m
+[1;32m   1589[0m         [38;5;124mf[39m[38;5;124m"[39m[38;5;124mcategory ([39m[38;5;132;01m{[39;00mfill_value[38;5;132;01m}[39;00m[38;5;124m), set the categories first[39m[38;5;124m"[39m
+[1;32m   1590[0m     ) [38;5;28;01mfrom[39;00m [38;5;28;01mNone[39;00m
+[1;32m   1591[0m [38;5;28;01mreturn[39;00m fill_value
+
+[0;31mTypeError[0m: Cannot setitem on a Categorical with a new category (), set the categories first
+

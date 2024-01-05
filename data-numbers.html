@@ -613,7 +613,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ORD    5263
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dest
+ORD    5263
 ATL    5085
 LAX    4824
 BOS    4504
@@ -624,7 +625,7 @@ EYW       3
 ANC       2
 LEX       0
 LGA       0
-Name: dest, Length: 105, dtype: int64
+Name: count, Length: 105, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -644,6 +645,10 @@ Name: dest, Length: 105, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x6/ffnr59f116l96_y0q0bjfz7c0000gn/T/ipykernel_24155/1578814691.py:2: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  flights.groupby([&quot;dest&quot;])
+</pre></div>
+</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -740,6 +745,10 @@ Name: dest, Length: 105, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x6/ffnr59f116l96_y0q0bjfz7c0000gn/T/ipykernel_24155/858708856.py:1: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  (flights.groupby(&quot;tailnum&quot;).agg(miles=(&quot;distance&quot;, &quot;sum&quot;)))
+</pre></div>
+</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -823,6 +832,10 @@ Name: dest, Length: 105, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/x6/ffnr59f116l96_y0q0bjfz7c0000gn/T/ipykernel_24155/1055382385.py:1: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  (flights.groupby(&quot;dest&quot;).agg(n_cancelled=(&quot;dep_time&quot;, lambda x: x.isnull().sum())))
+</pre></div>
+</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -982,10 +995,10 @@ Name: dest, Length: 105, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    1.0
-1    2.0
-2    7.0
-dtype: float64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    1
+1    2
+2    7
+dtype: object
 </pre></div>
 </div>
 </div>
@@ -1392,7 +1405,7 @@ divisions:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/367285d175a290531d4804c562f97097e60dd363f373eaab17091c61eac308dc.svg" src="_images/367285d175a290531d4804c562f97097e60dd363f373eaab17091c61eac308dc.svg" /></div>
+<img alt="_images/8622ea3639e9016e99cf74f615e8f745d01ae5eeb24216454e7c35520d042646.svg" src="_images/8622ea3639e9016e99cf74f615e8f745d01ae5eeb24216454e7c35520d042646.svg" /></div>
 </div>
 <p>Log transforming the y-axis gives a straight line:</p>
 <div class="cell docutils container">
@@ -1402,7 +1415,7 @@ divisions:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b38deff2e6681b64996b0b1ef66f11990835d6a338000fb0cb0d2d1935ff3fbc.svg" src="_images/b38deff2e6681b64996b0b1ef66f11990835d6a338000fb0cb0d2d1935ff3fbc.svg" /></div>
+<img alt="_images/e4b69990037acf1341430d3da1f36d303867871391017c0a6203061959397a50.svg" src="_images/e4b69990037acf1341430d3da1f36d303867871391017c0a6203061959397a50.svg" /></div>
 </div>
 <p>This a straight line because <code class="docutils literal notranslate"><span class="pre">log(money)</span> <span class="pre">=</span> <span class="pre">log(starting)</span> <span class="pre">+</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">log(interest)</span></code> matches the pattern for a line, <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">m</span> <span class="pre">*</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">b</span></code>. This is a useful pattern: if you see a (roughly) straight line after log-transforming the y-axis, you know that there’s underlying exponential growth.</p>
 <p>If you’re log-transforming your data you have a choice of a lot of logarithms provided by <strong>numpy</strong> but there are three ones you’ll want to commonly use: assuming you’ve imported it using <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code>, you have <code class="docutils literal notranslate"><span class="pre">np.log()</span></code> (the natural log, base e), <code class="docutils literal notranslate"><span class="pre">np.log2()</span></code> (base 2), and <code class="docutils literal notranslate"><span class="pre">np.log10()</span></code> (base 10).</p>
@@ -1630,8 +1643,8 @@ Name: money, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([71.41532951, 37.03228837, 68.86949976, 59.38283487, 35.96730193,
-       22.35896257, 10.97445412, 83.32021967, 91.51751581, 36.55371078])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([89.70201773, 56.68402082, 75.24092922, 77.35565445, 86.74855133,
+       27.58485623, 55.81704932, 60.54935417, 82.62090591, 60.57827114])
 </pre></div>
 </div>
 </div>
@@ -1643,7 +1656,7 @@ Name: money, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([72., 38., 69., 60., 36., 23., 11., 84., 92., 37.])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([90., 57., 76., 78., 87., 28., 56., 61., 83., 61.])
 </pre></div>
 </div>
 </div>
@@ -1655,7 +1668,7 @@ Name: money, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([71., 37., 68., 59., 35., 22., 10., 83., 91., 36.])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([89., 56., 75., 77., 86., 27., 55., 60., 82., 60.])
 </pre></div>
 </div>
 </div>
@@ -1870,7 +1883,7 @@ Name: money, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ed88da98c274a18f939de9a050f953a81d6ddf668889e15fe5e6b5de27c6bce7.svg" src="_images/ed88da98c274a18f939de9a050f953a81d6ddf668889e15fe5e6b5de27c6bce7.svg" /></div>
+<img alt="_images/b718af055ee4e7e07967b68c197b1bfd9f2ce1e7d09f79cd2409816e7b7167a8.svg" src="_images/b718af055ee4e7e07967b68c197b1bfd9f2ce1e7d09f79cd2409816e7b7167a8.svg" /></div>
 </div>
 </section>
 <section id="exercises">
@@ -1996,7 +2009,7 @@ Two commonly used summaries are the standard deviation, <code class="docutils li
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3ecc7543469a64e843cf805cb500167a25330cdb5eeefa68d9025470622a0f81.svg" src="_images/3ecc7543469a64e843cf805cb500167a25330cdb5eeefa68d9025470622a0f81.svg" /></div>
+<img alt="_images/2a647dae80c7a1efb312dd9d4359ef7045dea54f23b8d39e8d3b13ada7730f35.svg" src="_images/2a647dae80c7a1efb312dd9d4359ef7045dea54f23b8d39e8d3b13ada7730f35.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2007,7 +2020,7 @@ Two commonly used summaries are the standard deviation, <code class="docutils li
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7f8a78749d496de22f3c1b224d96f2ce17b8edf77a744f0a7391a0def1b4fa63.svg" src="_images/7f8a78749d496de22f3c1b224d96f2ce17b8edf77a744f0a7391a0def1b4fa63.svg" /></div>
+<img alt="_images/8699e8bd23e116ae569002093721455a55cbdef3a57774b10d7f5082e5ed2fb8.svg" src="_images/8699e8bd23e116ae569002093721455a55cbdef3a57774b10d7f5082e5ed2fb8.svg" /></div>
 </div>
 <p>Two histograms of <code class="docutils literal notranslate"><span class="pre">&quot;dep_delay&quot;</span></code>. On the former, it’s very hard to see any pattern except that there’s a very large spike around zero, the bars rapidly decay in height, and for most of the plot, you can’t see any bars because they are too short to see. On the latter, where we’ve discarded delays of greater than two hours, we can see that the spike occurs slightly below zero (i.e. most flights leave a couple of minutes early), but there’s still a very steep decay after that.</p>
 <p>Don’t be afraid to explore your own custom summaries specifically tailored for the data that you’re working with. In this case, that might mean separately summarising the flights that left early vs the flights that left late, or given that the values are so heavily skewed, you might try a log-transformation. Finally, don’t forget that it’s always a good idea to include the number of observations in each group when creating summaries.</p>
