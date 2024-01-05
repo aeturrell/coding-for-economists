@@ -29,7 +29,7 @@ For example, a use case would be a technical report exploring recent trade stati
 
 - creating automatically updated websites relatively easily——we won’t cover that in this chapter, but you can find some information on this [here](https://quarto.org/docs/websites/).
 
-**Quarto** is a really convenient wrapper for a bunch of other tools that makes it convenient to produce automated reports. You should check the latest [documentation](https://quarto.org/docs/getting-started/quarto-basics.html) for an up to date guide on use——here, we're going to see the basics and introduce a couple of templates that will serve you well.
+**Quarto** is a really convenient wrapper for a bunch of other tools that makes it convenient to produce automated reports. You should check the latest [documentation](https://quarto.org/) for an up to date guide on use——here, we're going to see the basics and introduce a couple of templates that will serve you well.
 
 ### Prerequisites
 

@@ -110,12 +110,12 @@ table
 Our options for export of the `table` variable (which has datatype `pandas.core.frame.DataFrame`) are varied. For instance, we could use
 
 ```python
-table.to_latex(caption='A Table', label='tab:descriptive')
+table.to_markdown()
 ```
 
-to create data suitable for putting in a .tex file, `table.to_string()` to get plain text, and `table.to_markdown()` for md content. There's even a `table.to_html()`!
+to create data suitable for putting in a markdown file, `table.to_string()` to get plain text, and `table.style.latex()` for latex (note that latex output includes the `.style` part). There's even a `table.to_html()`!
 
-Each of these export options accepts a filepath to write to, eg one can write `table.to_latex(os.path.join('path', 'to', 'file.md'))`.
+Each of these export options accepts a filepath to write to, eg one can write `table.style.to_latex(os.path.join('path', 'to', 'file.md'))`.
 
 ```{note}
 `.to_markdown()` has a dependency on another package, [**tabulate**](https://github.com/astanin/python-tabulate), which is for pretty-printing tables in Python and on the command line. You can install it using `pip install tabulate`.

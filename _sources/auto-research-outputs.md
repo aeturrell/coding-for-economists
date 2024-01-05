@@ -93,7 +93,7 @@ table
 This can be turned into a $\LaTeX$ table using the following command
 
 ```{code-cell} ipython3
-table.to_latex(caption='A Table', label='tab:descriptive')
+table.style.to_latex(caption='A Table', label='tab:descriptive')
 ```
 
 Or perhaps you have a regression table, for example
@@ -123,7 +123,7 @@ We'd like to export tables like this into files that can be picked up by our $\L
 ```python
 from pathlib import Path
 with open(Path('outputs/tables/reg_table.tex'), 'w') as f:
-    f.write(table.to_latex(caption='A Table', label='tab:descriptive'))
+    f.write(table.style.to_latex(caption='A Table', label='tab:descriptive'))
 ```
 
 in the first example, and
@@ -202,23 +202,7 @@ Create a .tex file from the tex code above and convert it to a word document usi
 
 What's surprising is how effective the conversion to word is: even if you have figures, equations, and other non-text features.
 
-You can get quite fancy with **pandoc**, for example you can translate a whole book's worth of latex into a Word doc complete with a Word style, a bibliography via biblatex, equations, and figures. Nothing can save Word from being painful to use, but **pandoc** certainly helps.
-
-Here's a real example of doing all of that, taken from an open source [**cookie-cutter-latex-book-manuscript**](https://github.com/aeturrell/cookie-cutter-latex-book-manuscript) written by a contributor to Coding for Economists:
-
-```bash
-pandoc -s -N --reference-doc ref.docx -F pandoc-crossref -Mchapters book_compiler.tex --bibliography=book_bibliography.bib --csl=nature.csl -o exported_word/book.docx
-```
-
-- `-s` tells pandoc to make a standalone document
-- `-N` enforces numbering (though not in docx, it's included here in case of other output formats being used)
-- `--reference-doc` tells pandoc to use styles from a reference word doc (can also be used with .odt)
-- `-F` calls a pandoc filter, in this case pandoc-crossref
-- `-Mchapters` tells this filter to use chapters
-- `*.tex` is the input file
-- `--bibliography=*.bib` tells pandoc where to find citations
-- `--csl=*.csl` is the name of the style file for citations, here one based on the style of the journal *Nature*
-- `-o` means output, in this case a word document
+You can get quite fancy with **pandoc**, for example you can translate a whole book's worth of latex into a Word doc complete with a Word style, a bibliography via biblatex, equations, and figures. Nothing can save Word from being painful to use, but **pandoc** certainly helps. If you want to see a couple of examples, you could check out [**cookie-cutter-latex-book-manuscript**](https://github.com/aeturrell/cookie-cutter-latex-book-manuscript).
 
 ### Converting Slides
 

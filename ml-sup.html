@@ -214,7 +214,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="auto-research-outputs.html">Automating Research Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wrkflow-markdown.html">Markdown</a></li>
-<li class="toctree-l1"><a class="reference internal" href="wrkflow-quarto.html">Combining Code and Text in Quarto Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wrkflow-version-control.html">Version Control</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Econometrics</span></p>
@@ -252,7 +252,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-quarto.html">Combining Code and Text in Quarto Markdown</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wrkflow-environments.html">Virtual Code Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wrkflow-rap.html">Reproducible Analysis</a></li>
 </ul>
@@ -309,7 +309,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="acknowledgements.html">Acknowledgements and Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zreferences.html">Bibliography</a></li>
 </ul>
 
@@ -604,9 +604,13 @@ y = \hat{y} + \varepsilon = \hat{f}(\mathbf{x}) + \varepsilon
 <h3>Linear, penalised regression<a class="headerlink" href="#linear-penalised-regression" title="Permalink to this heading">#</a></h3>
 <p>Penalised regression introduces some kind of penalty to reduce the tendency to overfit, and is the first stop-off for machine learning. In the below, <span class="math notranslate nohighlight">\(w\)</span> represents weights and <span class="math notranslate nohighlight">\(\alpha\)</span> a <em>hyper-parameter</em> that the user must set (we’ll talk about how to set it later). The key algorithms are:</p>
 <ul class="simple">
-<li><p>Lasso. Think of this as ‘lassoing’ a small number of variables by shrinking the coefficients on other variables to zero. Gives sparse models. Solves $<span class="math notranslate nohighlight">\(\min_{w} { \frac{1}{2n_{\text{samples}}} ||X w - y||_2 ^ 2 + \alpha ||w||_1}\)</span>$</p></li>
-<li><p>Ridge. Think of this as similar to the lasso but instead pushing coefficients more naturally to <em>small</em> (but not zero) values. Solves $<span class="math notranslate nohighlight">\(\min_{w} || X w - y||_2^2 + \alpha ||w||_2^2\)</span>$</p></li>
-<li><p>ElasticNet. Think of this as combining the strengths of Lasso and Ridge; it’s essentially a combination of both. Solves $<span class="math notranslate nohighlight">\(\min_{w} { \frac{1}{2n_{\text{samples}}} ||X w - y||_2 ^ 2 + \alpha \rho ||w||_1 + \frac{\alpha(1-\rho)}{2} ||w||_2 ^ 2}\)</span><span class="math notranslate nohighlight">\( where \)</span>\rho$ controls how much like Lasso it is vs Ridge.</p></li>
+<li><p>Lasso. Think of this as ‘lassoing’ a small number of variables by shrinking the coefficients on other variables to zero. Gives sparse models. Solves
+$<span class="math notranslate nohighlight">\(\min_{w} { \frac{1}{2n_{\text{samples}}} ||X w - y||_2 ^ 2 + \alpha ||w||_1}\)</span>$</p></li>
+<li><p>Ridge. Think of this as similar to the lasso but instead pushing coefficients more naturally to <em>small</em> (but not zero) values. Solves
+$<span class="math notranslate nohighlight">\(\min_{w} || X w - y||_2^2 + \alpha ||w||_2^2\)</span>$</p></li>
+<li><p>ElasticNet. Think of this as combining the strengths of Lasso and Ridge; it’s essentially a combination of both. Solves
+$<span class="math notranslate nohighlight">\(\min_{w} { \frac{1}{2n_{\text{samples}}} ||X w - y||_2 ^ 2 + \alpha \rho ||w||_1 + \frac{\alpha(1-\rho)}{2} ||w||_2 ^ 2}\)</span><span class="math notranslate nohighlight">\(
+      where \)</span>\rho$ controls how much like Lasso it is vs Ridge.</p></li>
 </ul>
 <p>One of the advantages of penalised regression is that it does still produce coefficients, if you happen to need those. But it’s essentially a linear model, and comes with the pros and cons of those too.</p>
 <p>Let’s now look at all of these in code!</p>

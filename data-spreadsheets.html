@@ -212,7 +212,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="auto-research-outputs.html">Automating Research Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wrkflow-markdown.html">Markdown</a></li>
-<li class="toctree-l1"><a class="reference internal" href="wrkflow-quarto.html">Combining Code and Text in Quarto Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wrkflow-version-control.html">Version Control</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Econometrics</span></p>
@@ -250,7 +250,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-quarto.html">Combining Code and Text in Quarto Markdown</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wrkflow-environments.html">Virtual Code Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wrkflow-rap.html">Reproducible Analysis</a></li>
 </ul>
@@ -307,7 +307,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="acknowledgements.html">Acknowledgements and Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zreferences.html">Bibliography</a></li>
 </ul>
 
@@ -574,8 +574,8 @@ document.write(`
 <section id="reading-excel-and-similar-files">
 <h2>Reading Excel (and Similar) Files<a class="headerlink" href="#reading-excel-and-similar-files" title="Permalink to this heading">#</a></h2>
 <p><strong>pandas</strong> can read in xls, xlsx, xlsm, xlsb, odf, ods, and odt files from your local filesystem or from a URL. It also supports an option to read a single sheet or a list of sheets.</p>
-<p>To show how this works, we’ll work with an example spreadsheet called “students.xlsx”. The figure below shows what the spreadsheet looks like.</p>
-<p><img alt="A look at the students spreadsheet in Excel. The spreadsheet contains information on 6 students, their ID, full name, favourite food, meal plan, and age." src="https://github.com/hadley/r4ds/raw/main/images/import-spreadsheets-students.png" /></p>
+<p>To show how this works, we’ll work with an example spreadsheet called “students.xlsx”. (With thanks to Hadley Wickham’s R4DS for the example.) The figure below shows what the spreadsheet looks like.</p>
+<p><img alt="A look at the students spreadsheet in Excel. The spreadsheet contains information on 6 students, their ID, full name, favourite food, meal plan, and age." src="https://github.com/hadley/r4ds/raw/main/screenshots/import-spreadsheets-students.png" /></p>
 <p>The first argument to <code class="docutils literal notranslate"><span class="pre">pd.read_excel()</span></code> is the path to the file to read. If you have downloaded the <span class="xref myst">file</span> onto your computer and put it in a subfolder called “data” then you would want to use the path “data/students.xlsx” but we can also load it directly from the URL.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -889,7 +889,7 @@ memory usage: 462.0 bytes
 <p>It took multiple steps and trial-and-error to load the data in exactly the format we want, and this is not unexpected. Data science is an iterative process. There is no way to know exactly what the data will look like until you load it and take a look at it. The general pattern we used is load the data, take a peek, make adjustments to your code, load it again, and repeat until you’re happy with the result.</p>
 <section id="reading-individual-sheets">
 <h3>Reading Individual Sheets<a class="headerlink" href="#reading-individual-sheets" title="Permalink to this heading">#</a></h3>
-<p>An important feature that distinguishes spreadsheets from flat files is the notion of multiple sheets. The figure below shows an Excel spreadsheet with multiple sheets. The data come from the <strong>palmerpenguins</strong> dataset <span id="id2">Horst <em>et al.</em> [<a class="reference internal" href="zreferences.html#id36" title="Allison Marie Horst, Alison Presmanes Hill, and Kristen B Gorman. Palmerpenguins: palmer archipelago (antarctica) penguin data. R package version 0.1.0, 2020.">2020</a>]</span>. Each sheet contains information on penguins from a different island where data were collected.</p>
+<p>An important feature that distinguishes spreadsheets from flat files is the notion of multiple sheets. The figure below shows an Excel spreadsheet with multiple sheets. The data come from the <strong>palmerpenguins</strong> dataset <span id="id2">[<a class="reference internal" href="zreferences.html#id36" title="Allison Marie Horst, Alison Presmanes Hill, and Kristen B Gorman. Palmerpenguins: palmer archipelago (antarctica) penguin data. R package version 0.1.0, 2020.">Horst, Hill, and Gorman, 2020</a>]</span>. Each sheet contains information on penguins from a different island where data were collected.</p>
 <p><img alt="A look at the penguins spreadsheet in Excel. The spreadsheet contains has three sheets: Torgersen Island, Biscoe Island, and Dream Island." src="https://github.com/hadley/r4ds/raw/main/screenshots/import-spreadsheets-penguins-islands.png" /></p>
 <p>You can read a single sheet using the following command (so as not to show the whole file, we’ll use <code class="docutils literal notranslate"><span class="pre">.head()</span></code> to just show the first 5 rows):</p>
 <div class="cell docutils container">
@@ -990,7 +990,7 @@ memory usage: 462.0 bytes
 </table>
 </div></div></div>
 </div>
-<p>Now this relies on us knowing the names of the sheets in advance. There will be situations where you can to read in data without peeking into the Excel spreadsheet. To read all sheets in, use <code class="docutils literal notranslate"><span class="pre">sheet_name=None</span></code>. The object that’s created is a dictionary with key value pairs that are sheet names and data frames respectively. Let’s look at the second key value pair (note that we have to convert the keys() and values() objects to list to then retrieve the second element of each using a subscript, ie <code class="docutils literal notranslate"><span class="pre">list(dictionary.keys())[&lt;element</span> <span class="pre">number&gt;]</span></code>).</p>
+<p>Now this relies on us knowing the names of the sheets in advance. There will be situations where you wish to read in data without peeking into the Excel spreadsheet. To read all sheets in, use <code class="docutils literal notranslate"><span class="pre">sheet_name=None</span></code>. The object that’s created is a dictionary with key value pairs that are sheet names and data frames respectively. Let’s look at the second key value pair (note that we have to convert the keys() and values() objects to list to then retrieve the second element of each using a subscript, ie <code class="docutils literal notranslate"><span class="pre">list(dictionary.keys())[&lt;element</span> <span class="pre">number&gt;]</span></code>).</p>
 <p>To give a sense of how this works, let’s first print all of the retrieved keys:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

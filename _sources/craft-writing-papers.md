@@ -44,13 +44,13 @@ You should have one **killer chart** per paper, a single plot that tells the sto
 
 For example, here is a figure summarising a fairly complex precipitation nowcasting paper, "Skillful Precipitation Nowcasting Using Deep Generative Models of Radar", written by Deepmind {cite:t}`ravuris2021skillful`:
 
-![](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-021-03854-z/MediaObjects/41586_2021_3854_Fig1_HTML.png?as=webp)
+![Summary figure from Deepmind paper on nowcasting](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-021-03854-z/MediaObjects/41586_2021_3854_Fig1_HTML.png?as=webp)
 
 In one fell swoop, they tell us about the structure of the model, what it's useful for (UK rain nowcasting, for which there is a strong need), and how their model, DGMR, compares against both observations and the leading alternative code, PySTEPS. (You can even find the Python code over at their [Github page](https://github.com/deepmind/deepmind-research/tree/master/nowcasting).)
 
 Another good example is from "Inferring the effectiveness of government interventions against COVID-19", {cite:ps}`brauner2021inferring`. This summarises the fairly complex results of a Bayesian model of non-pharmaceutical interventions into a single summary figure that policymakers can read off the results from in a second. This papers uses the Bayesian package PyMC, which you find out more about in the {ref}`econmt-bayesian` chapter.
 
-![](https://www.science.org/cms/10.1126/science.abd9338/asset/3ae0348b-6d8b-439c-8815-556bda63b789/assets/graphic/371_abd9338_f2.jpeg)
+![Figure summarising effectiveness of different interventions for Covid-19.](https://www.science.org/cms/10.1126/science.abd9338/asset/3ae0348b-6d8b-439c-8815-556bda63b789/assets/graphic/371_abd9338_f2.jpeg)
 
 Perhaps you feel that these aren't serious or technical looking enough? Even serious, technical people have limited bandwidth: help them out with an easy to understand visual summary of your findings.
 
@@ -116,7 +116,8 @@ You should avoid doing the following with your hook:
 
 - "all my friends are doing it": presenting no other motivation for a topic than that other people have written papers on it.
 
-![](https://pbs.twimg.com/media/DxJVkF5XcAAQ8TP.jpg)
+![Abstract vs the paper, with pizza](https://pbs.twimg.com/media/DxJVkF5XcAAQ8TP.jpg)
+
 *The bait and switch*
 
 ### The Question
@@ -209,7 +210,7 @@ You should also ask yourself whether you have any 'dark data' {cite:ps}`hand2020
 
 15. Extrapolation, ie going beyond the time, space, or group for which you have data (aka external validity)
 
-For some internal (as opposed to external) data issues, tools such as [**pandas-profiling**](https://pandas-profiling.github.io/pandas-profiling/docs/master/rtd/index.html), [**dataprep**](https://dataprep.ai/), or [**skimpy**](https://aeturrell.github.io/skimpy/) can help find problems (eg variables with high numbers of missing values).
+For some internal (as opposed to external) data issues, tools such as [**ydata-profiling**](https://docs.profiling.ydata.ai/), [**dataprep**](https://dataprep.ai/), or [**skimpy**](https://aeturrell.github.io/skimpy/) can help find problems (eg variables with high numbers of missing values).
 
 Descriptive statistics are easy to overlook but really help make something that is intangible (the full dataset you used) more tangible to readers. The most helpful way of reporting these often includes a table of basic numbers such as count, mean, median, etc. If you are imputing or dropping observations, and this is likely to be important for the results, you may want to report the numbers before and after that processing. If you choose to describe the contents of your table of descriptive statistics, tell a story about them, don't just write up a boring enumeration of means.
 

@@ -40,7 +40,7 @@ Two alerts come by default, *recommended articles* and *new articles in my profi
 
 ### Semantic Scholar
 
-Google Scholar isn't the only free scholarly search engine in town.[Semantic Scholar](https://www.semanticscholar.org/) provides free, AI-driven search and discovery tools, and open resources for the global research community. It indexes over 200 million academic papers sourced from publisher partnerships, data providers, and web crawls. Note that Semantic Scholar makes use of a publicly available corpus.
+Google Scholar isn't the only free scholarly search engine in town. [Semantic Scholar](https://www.semanticscholar.org/) provides free, AI-driven search and discovery tools, and open resources for the global research community. It indexes over 200 million academic papers sourced from publisher partnerships, data providers, and web crawls. Note that Semantic Scholar makes use of a publicly available corpus.
 
 Semantic Scholar also comes with useful extras:
 

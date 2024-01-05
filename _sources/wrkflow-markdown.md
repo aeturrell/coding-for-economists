@@ -42,7 +42,7 @@ Some of the advantages of markdown are:
 - Markdown files can be opened using by any plain text editor
 - Markdown is operating system independent
 - Markdown is very readable, even when not being rendered
-- Many websites support markdown syntax, eg Github (called Github-flavoured markdown) and Reddit.
+- Many websites support markdown syntax, eg GitHub (called Github-flavoured markdown) and Reddit.
 
 The rest of this chapter will cover most of the markdown syntax.
 
