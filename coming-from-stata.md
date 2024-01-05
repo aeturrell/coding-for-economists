@@ -19,7 +19,7 @@ This chapter has benefitted enormously from [Daniel M. Sullivan's](http://www.da
 
 The biggest difference between Python and Stata is that Python is a fully-fledged programming language, which means it can do *lots* of things, while Stata is really just for data analysis. What this means in practice is that sometimes the notation to do this or that operation in Python (or any other general purpose programming language) is less concise than in Stata. There is greater competition for each command in Python because it does many more things.
 
-Another difference is that, in Stata, there is one dataset in memory that is represented as matrix where each column is a "variable" with a unique name. In Python, variables can be anything, even functions! But most data analysis in Python is done using dataframes, which are objects that are somewhat similar to a single dataset in Stata. In Python, you can have as many DataFrames as you like in action at once. This causes the first major notational differences; in Python, you need to specify *which* dataframe you want to perform an operation on, in addition to which column (or row, or entry).
+Another difference is that, in Stata, there is one dataset in memory that is represented as matrix where each column is a "variable" with a unique name. In Python, variables can be anything, even functions! But most data analysis in Python is done using dataframes, which are objects that are somewhat similar to a single dataset in Stata. In Python, you can have as many dataframes as you like in action at once. This causes the first major notational differences; in Python, you need to specify *which* dataframe you want to perform an operation on, in addition to which column (or row, or entry).
 
 Finally, Python and its data analysis packages are free.
 
@@ -27,11 +27,11 @@ Regardless of Python not being a programming language solely dedicated to data a
 
 ## Stata <==> Python
 
-What follows is a giant table of translations between Stata code and Python's [**pandas**](https://pandas.pydata.org/)(panel-data-analysis) package. We're going to rely on a few packages for econometrics in the below. They are [**statsmodels**](https://www.statsmodels.org/) as your general purpose and flexible regression library, [**pyfixest**](https://s3alfisc.github.io/pyfixest/) for when you need high dimensional fixed effects, and [**binsreg**](https://nppackages.github.io/binsreg/) for bin scatter.
+What follows is a giant table of translations between Stata code and Python, leaning heavily on Python's [**pandas**](https://pandas.pydata.org/) (panel-data-analysis) package. We're going to rely on a few packages for econometrics in the below. They are [**statsmodels**](https://www.statsmodels.org/) as your general purpose and flexible regression library, [**pyfixest**](https://s3alfisc.github.io/pyfixest/) for when you need high dimensional fixed effects, and [**binsreg**](https://nppackages.github.io/binsreg/) for bin scatter.
 
 Many of the examples below assume that, in Python, you have a **pandas** DataFrame called `df`. We will use placeholders like `varname` for Stata variables and `df['varname']` for the Python equivalent. Remember that you need to `import pandas as pd` before running any of the examples that use `pd`. For the econometrics examples, you will need to import the relevant package.
 
-You can find more on (frequentist) regressions in {ref}`regression`, Bayesian regressions using formulae appear in {ref}`econmt-bayes-bambi`, generalised regression models appear in {ref}`generalised-models`, and regression diagnostics and visualisation are in {ref}`regression-diagnostics`.
+You can find more on (frequentist) regressions in {ref}`regression`, Bayesian regressions using formulae appear in {ref}`econmt-bayes-bambi`, generalised regression models appear in {ref}`generalised-models`, and regression diagnostics and visualisation are in {ref}`regression-diagnostics`. For Bayesian regressions, Python is very strong: check out {ref}`econmt-bayes-bambi`.
 
 | Stata      | Python (pandas) |
 | ----------- | ----------- |

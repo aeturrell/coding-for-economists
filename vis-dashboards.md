@@ -201,7 +201,7 @@ There are lots of different input widgets that provide interactivity. A few of t
 - Date
 - Image upload
 - File upload
-- custom widgets made by other users, eg [timelines](https://github.com/giswqs/streamlit-timeline) ()
+- custom widgets made by other users, eg [timelines](https://github.com/giswqs/streamlit-timeline)
 
 To give you some ideas of how you might use some of these elements, you could:
 

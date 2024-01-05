@@ -179,21 +179,21 @@ Now we'll see some useful commands for the terminal.
 | `>> <filename>` | Redirects output from screen to the end of `<filename>`, ie appends output rather than overwrites it |
 | `|` | The pipe symbol: uses output from one command as input into another. For example, `head -n 10 data.csv | > hello_world.txt` would write the first 10 lines of data.csv into a file called hello_world.txt
 | `less <filename>` | Print out the contents of a file in paginated form. Use `ctrl+v` and `Alt+v` (or `⌘+v` and `⌥+v` on Mac) to move up and down. Press `q` to quit.|
-| `wc -l` | Returns number of lines in input, for example `cat <filename> | wc -l`. Use `wc` alone for word count. |
+| `wc -l` | Returns number of lines in input, for example `cat <filename> \| wc -l`. Use `wc` alone for word count. |
 | `sort` | Arrange lines in a file in alphabetical order |
-| `uniq` | Remove duplicate lines from input, for example `cat <filename> | uniq` or `uniq -d` to show duplicate files |
+| `uniq` | Remove duplicate lines from input, for example `cat <filename> \| uniq` or `uniq -d` to show duplicate files |
 | `mv` | Move or rename a file; for example, `mv file1 file2` would rename `file1` to `file2` while `mv file1 ~` would move `file1` to the home directory|
 | `cp` | Copy a file; for example, `cp file1 file2` would copy `file1` to `file2` while `cp file1 ~` would make a copy of `file1` in the home directory|
 | `rm <filename>` | Permanently remove a file |
 | `rmdir <directory>` | Permanently remove an empty directory |
 | `rm -rf <directory>` | ⚠ Permanently remove everything in a directory ⚠ |
-| `grep <searchterm>` | Search for a given term, for example `cat hello_world.txt | grep world` |
+| `grep <searchterm>` | Search for a given term, for example `cat hello_world.txt \| grep world` |
 | `ls` | Basically, this means list stuff (files and folders) in the current directory |
 | `ls -a` | List stuff in the current directory even if it's hidden |
 | `ls -l` | List stuff in a more readable format and show permissions |
 | `ls -S` | List stuff by size |
 | `file <filename>` | Give information on the file type of `<filename>`|
-| `find` | Find specific files on your computer, can be piped into other commands for example `find *.md -size +5k -type f | xargs wc -l` will count the number of lines `wc -l` of all files, `-type f`, ending in `.md` that are greater than 5 kilobytes in size, `-size +5k`. |
+| `find` | Find specific files on your computer, can be piped into other commands for example `find *.md -size +5k -type f \| xargs wc -l` will count the number of lines `wc -l` of all files, `-type f`, ending in `.md` that are greater than 5 kilobytes in size, `-size +5k`. |
 | `diff -u <filename1> <filename2>` | Show a single summary of the differences between two files. |
 
 ![More details of the grep command](https://pbs.twimg.com/media/DcPeD_CW0AEkSar?format=jpg&name=small)
@@ -314,22 +314,6 @@ pandoc mydoc.tex -o mydoc.docx
 This is an example where the input is a .tex document and the output, `-o`, is a Microsoft Word docx file.
 
 You can get quite fancy with **pandoc**, for example you can translate a whole book's worth of latex into a Word doc complete with a Word style, a bibliography via biblatex, equations, and figures. Nothing can save Word from being painful to use, but **pandoc** certainly helps.
-
-Here's a real example of doing all of that, taken from an open source [**cookie-cutter-latex-book-manuscript**](https://github.com/aeturrell/cookie-cutter-latex-book-manuscript) that I wrote:
-
-```bash
-pandoc -s -N --reference-doc ref.docx -F pandoc-crossref -Mchapters book_compiler.tex --bibliography=book_bibliography.bib --csl=nature.csl -o exported_word/book.docx
-```
-
-- `-s` tells pandoc to make a standalone document
-- `-N` enforces numbering (though not in docx, it's included here in case of other output formats being used)
-- `--reference-doc` tells pandoc to use styles from a reference word doc (can also be used with .odt)
-- `-F` calls a pandoc filter, in this case pandoc-crossref
-- `-Mchapters` tells this filter to use chapters
-- `*.tex` is the input file
-- `--bibliography=*.bib` tells pandoc where to find citations
-- `--csl=*.csl` is the name of the style file for citations
-- `-o` means output, in this case a word document
 
 [**exa**](https://the.exa.website/) is an upgrade on the `ls` command. It is designed to be an improved file lister with more features and better defaults. It uses colours to distinguish file types and metadata. Follow the instructions on the website to install it on your operating system. To replace `ls` with `exa`, you can use a terminal *alias*. There's a good guide [available here](https://ericmjl.github.io/data-science-bootstrap-notes/create-shell-command-aliases-for-your-commonly-used-commands/).
 
