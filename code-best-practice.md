@@ -55,7 +55,7 @@ As well as this general tip, Python has conventions on naming different kinds of
 
 There are three exceptions to the snake case convention in Python: classes, which should be in camel case, eg `ThisIsAClass`; constants, which are in capital snake case, eg `THIS_IS_A_CONSTANT`; and packages, which are typically without spaces or underscores and are lowercase `thisisapackage`.
 
-For some quick shortcuts to re-naming columns in **pandas** dataframes or string variables, try the unicode-friendly [**slugify**](https://github.com/un33k/python-slugify) library or the `clean_headers` function from the [**dataprep**](https://docs.dataprep.ai/index.html) library.
+For some quick shortcuts to re-naming columns in **pandas** dataframes or string variables, try the unicode-friendly [**slugify**](https://github.com/un33k/python-slugify) library or the `clean_columns` function from the [**skimpy**](https://aeturrell.github.io/skimpy) library.
 
 The better named your variables, the clearer your code will be--and the fewer comments you will need to write!
 

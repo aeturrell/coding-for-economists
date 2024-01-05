@@ -39,11 +39,11 @@ One of the most important things to get your head around with version control is
 
 We'll find out more about these abilities later in the chapter.
 
-Version control *doesn't* do some things that Dropbox and Google Drive do though: it doesn't automatically save your files, or even sync them, automatically; you have to manually say when you wish to lodge a more recent version of a file.
+Version control *doesn't* do some things that Dropbox and Google Drive do though: it doesn't save your files, or even sync them, automatically; you have to manually say when you wish to lodge a more recent version of a file.
 
 Version control based on git is also different in that it works at the project-folder level, keeping everything you need for one project in one structure called a *repository*.
 
-One benefit of version control is that it aids reproducibility. This helps future you (if your computer gets busted), your co-authors (who can "clone" your repository), and perhaps even to the world at large (if you open up your source code). By putting your repository under version control at the project-folder level, you make it *much* easier for others to work with it and make changes. (As an example of this, the guidelines for contributing to "Coding for Economists" can be found [here](https://github.com/aeturrell/coding-for-economists#dev)--though be warned it's a particularly complicated repository as we cover so much ground in this book!)
+One benefit of version control is that it aids reproducibility. This helps future you (if your computer gets busted), your co-authors (who can "clone" your repository), and perhaps even the world at large (if you open up your source code). By putting your repository under version control at the project-folder level, you make it *much* easier for others to work with it and make changes. (As an example of this, the guidelines for contributing to "Coding for Economists" can be found [here](https://github.com/aeturrell/coding-for-economists#dev)--though be warned it's a particularly complicated repository as we cover so much ground in this book!)
 
 Finally, version control is the de facto standard for managing code. It's a very important part of coding, so if you can learn to use even a little bit, it's well worth it.
 
@@ -515,7 +515,7 @@ Now, in this case, the new branch we made is fairly easy to merge in: it just ad
 ```text
 	  A---B---C experimental
 	 /         \
-    D---E---F---G---H master
+    D---E---F---G---H main
 ```
 
 where letters represent commits.
@@ -641,7 +641,7 @@ Once you've created your new repository, go to its homepage (usually "https://gi
 Back on your local machine's command line, type `git clone` then paste in the link:
 
 ```bash
-git clone https://github.com/your-usernmae/repo-name.git
+git clone https://github.com/your-username/repo-name.git
 ```
 
 You should get a message like "Cloning into 'repo-name'". What's happening is that a local copy of what's on the server (aka the "remote") is being made on your computer. You can then follow your usual git workflow. The only difference is when you want to sync the remote.
