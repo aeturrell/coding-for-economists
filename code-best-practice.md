@@ -55,7 +55,7 @@ As well as this general tip, Python has conventions on naming different kinds of
 
 There are three exceptions to the snake case convention in Python: classes, which should be in camel case, eg `ThisIsAClass`; constants, which are in capital snake case, eg `THIS_IS_A_CONSTANT`; and packages, which are typically without spaces or underscores and are lowercase `thisisapackage`.
 
-For some quick shortcuts to re-naming columns in **pandas** dataframes or string variables, try the unicode-friendly [**slugify**](https://github.com/un33k/python-slugify) library or the `clean_headers` function from the [**dataprep**](https://docs.dataprep.ai/index.html) library.
+For some quick shortcuts to re-naming columns in **pandas** dataframes or string variables, try the unicode-friendly [**slugify**](https://github.com/un33k/python-slugify) library or the `clean_columns` function from the [**skimpy**](https://aeturrell.github.io/skimpy) library.
 
 The better named your variables, the clearer your code will be--and the fewer comments you will need to write!
 
@@ -235,7 +235,7 @@ First: **do not** store your data in Excel file formats. Ever. First, it's not a
 
 ![jpg](https://pbs.twimg.com/media/D8z-M_dVUAA6NOh?format=jpg&name=medium)
 
-If you want examples of what can go wrong using Excel, look no further than the famous [Reinhart and Rogoff Excel error](https://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646_), where they didn't select all cells (it's harder to make this kind of mistake with real programming languages, though of course not impossible), the time when a first-year law associate [added an extra 179 contracts](https://www.abajournal.com/news/article/excel_error_by_a_cleary_gottlieb_associate_alters_lehman_asset_deal1) to an agreement to buy Lehman Brothers assets, or when the UK [under-counted the number](https://www.bbc.co.uk/news/technology-54423988) of coronavirus cases by *16,000* because their Excel spreadsheet wasn't big enough. In programming, the dataset limitation is the size of your computer's hard drive (and even then, you can jump onto the cloud).
+If you want examples of what can go wrong using Excel, look no further than the famous [Reinhart and Rogoff Excel error](https://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646), where they didn't select all cells (it's harder to make this kind of mistake with real programming languages, though of course not impossible), the time when a first-year law associate [added an extra 179 contracts](https://www.abajournal.com/news/article/excel_error_by_a_cleary_gottlieb_associate_alters_lehman_asset_deal1) to an agreement to buy Lehman Brothers assets, or when the UK [under-counted the number](https://www.bbc.co.uk/news/technology-54423988) of coronavirus cases by *16,000* because their Excel spreadsheet wasn't big enough. In programming, the dataset limitation is the size of your computer's hard drive (and even then, you can jump onto the cloud).
 
 In the majority of cases, the best data file format for your project is CSV--certainly for outputting final results. Everyone can open a CSV file, no matter what analytical tool or operating system they are using. As a storage format, it’s unlikely to change. Without going into the mire of [different encodings](http://kunststube.net/encoding/), save it with the UTF-8 encoding (note that this is not the default encoding in Windows).
 

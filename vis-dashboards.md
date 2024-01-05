@@ -201,7 +201,7 @@ There are lots of different input widgets that provide interactivity. A few of t
 - Date
 - Image upload
 - File upload
-- custom widgets made by other users, eg [timelines](https://github.com/giswqs/streamlit-timeline) ()
+- custom widgets made by other users, eg [timelines](https://github.com/giswqs/streamlit-timeline)
 
 To give you some ideas of how you might use some of these elements, you could:
 
@@ -224,7 +224,7 @@ The real value of a dashboard can only be unlocked if other people can access it
 
 Streamlit the company (who make the package) offer free hosting for some dashboards, at least at the time of writing. The easiest way to deploy using their hosting service is to create a github repository with your code in a file called `app.py` along with a reproducible package file such as a requirements.txt or an environment.yml if you're using the Anaconda distribution of Python (which this book uses throughout). You can find out more about environment.yml files in the chapter on {ref}`wrkflow-environments`.
 
-Once your app is written, head to the [streamlit cloud](https://docs.streamlit.io/streamlit-cloud) documentation and follow the instructions to launch an app. Typically, the process will be to create an account with streamlit the company, point them at the Github repo that contains the code you'd like to deploy, and then hit 'go!'.
+Once your app is written, head to the [streamlit cloud](https://docs.streamlit.io/streamlit-cloud) documentation and follow the instructions to launch an app. Typically, the process will be to create an account with streamlit the company, point them at the GitHub repo that contains the code you'd like to deploy, and then hit 'go!'.
 
 If you would prefer another deployment solution, there are plenty of others; for example, Google App Engine, Heroku, and Azure.
 
@@ -236,4 +236,4 @@ A really good alternative choice, which has some purported advantages, is [Shiny
 
 Another alternative is [**Dash**](https://plotly.com/dash/), made by Plotly. It supports Python and R. Dash has a steeper learning curve than streamlit but offers more customisation in style in return. You can find a Plotly tutorial [here](https://dash.plotly.com/introduction), or a tutorial on RealPython [here](https://realpython.com/python-dash/). There are further resources over at [**awesome dash**](https://github.com/ucg8j/awesome-dash).
 
-Yet another Python dashboarding solution is [**Panel**](https://panel.holoviz.org/), for which you can find examples over at [**awesome panel**](https://awesome-panel.org/gallery).
+Yet another Python dashboarding solution is [**Panel**](https://panel.holoviz.org/).
