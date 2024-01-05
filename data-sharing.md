@@ -112,7 +112,7 @@ If you want to follow a full example of serving up data end-to-end, take a look 
   - SQL,`select rowid, local_authority_code, pm_anthropogenic, pm_total, pm_non_anthropogenic, local_authority_name, year, region, country from uk_particulate_matter where "local_authority_name" like '%southwark%' and "year" = '2018' order by rowid limit 101`
   - JSON, `df = pd.read_json("https://particulatematter-fsx2r7puuq-nw.a.run.app/uk_particulate_matter/uk_particulate_matter.json?_sort=rowid&local_authority_name__contains=southwark&year__exact=2018&_shape=array")`
 
-- By integrating with GitHub or other tools, datasette can be automated so that when the raw data change, the instance being served online is updated too. (For an example github action that does this, [see here](https://github.com/simonw/global-power-plants-datasette/actions/runs/843939473/workflow).)
+- By integrating with GitHub or other tools, datasette can be automated so that when the raw data change, the instance being served online is updated too.
 
 - If you are building dashboards that are also deployed on the web, you can use a datasette website as the back-end to serve up the data to the dashboard (making use of the automatic API features of datasette).
 

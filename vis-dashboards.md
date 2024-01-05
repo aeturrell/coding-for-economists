@@ -236,4 +236,4 @@ A really good alternative choice, which has some purported advantages, is [Shiny
 
 Another alternative is [**Dash**](https://plotly.com/dash/), made by Plotly. It supports Python and R. Dash has a steeper learning curve than streamlit but offers more customisation in style in return. You can find a Plotly tutorial [here](https://dash.plotly.com/introduction), or a tutorial on RealPython [here](https://realpython.com/python-dash/). There are further resources over at [**awesome dash**](https://github.com/ucg8j/awesome-dash).
 
-Yet another Python dashboarding solution is [**Panel**](https://panel.holoviz.org/), for which you can find examples over at [**awesome panel**](https://awesome-panel.org/gallery).
+Yet another Python dashboarding solution is [**Panel**](https://panel.holoviz.org/).

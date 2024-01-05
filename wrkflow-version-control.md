@@ -43,7 +43,7 @@ Version control *doesn't* do some things that Dropbox and Google Drive do though
 
 Version control based on git is also different in that it works at the project-folder level, keeping everything you need for one project in one structure called a *repository*.
 
-One benefit of version control is that it aids reproducibility. This helps future you (if your computer gets busted), your co-authors (who can "clone" your repository), and perhaps even the world at large (if you open up your source code). By putting your repository under version control at the project-folder level, you make it *much* easier for others to work with it and make changes. (As an example of this, the guidelines for contributing to "Coding for Economists" can be found [here](https://github.com/aeturrell/coding-for-economists#dev)--though be warned it's a particularly complicated repository as we cover so much ground in this book!)
+One benefit of version control is that it aids reproducibility. This helps future you (if your computer gets busted), your co-authors (who can "clone" your repository), and perhaps even the world at large (if you open up your source code). By putting your repository under version control at the project-folder level, you make it *much* easier for others to work with it and make changes.
 
 Finally, version control is the de facto standard for managing code. It's a very important part of coding, so if you can learn to use even a little bit, it's well worth it.
 
@@ -199,7 +199,7 @@ nothing to commit (create/copy files and use "git add" to track)
 
 Let's now put a file under tracking by version control.
 
-First we need a file to track! We'll create a markdown file that you often find in a code repository, `README.md`. This tells others (and future you) about what's in the project and how to use the code in it. (For an example, look at the `README.md` of the [skimpy package](https://github.com/aeturrell/skimpy#skimpy).) We can create this file on the command line.
+First we need a file to track! We'll create a markdown file that you often find in a code repository, `README.md`. This tells others (and future you) about what's in the project and how to use the code in it. (For an example, look at the `README.md` of the [skimpy package](https://github.com/aeturrell/skimpy).) We can create this file on the command line.
 
 ```bash
 echo "# my test repo" > README.md

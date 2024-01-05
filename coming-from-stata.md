@@ -76,7 +76,7 @@ You can find more on (frequentist) regressions in {ref}`regression`, Bayesian re
 | `binscatter`  | `binsreg` from the [**binsreg**](https://pypi.org/project/binsreg/) package; see {ref}`regression-diagnostics`. |
 | `twoway scatter var1 var2`  | `df.scatter(var2, var1)` |
 
-The table below presents further examples of doing regression with both the **statsmodels** and [**pyfixest**](https://bashtage.github.io/linearmodels) packages.
+The table below presents further examples of doing regression with both the **statsmodels** and [**pyfixest**](https://s3alfisc.github.io/pyfixest/) packages.
 
 Note that, in the below, you need only import `feols` once in each Python session, and the syntax for looking at results is `results = feols(...)` and then `results.summary()`.
 
