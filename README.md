@@ -1,6 +1,8 @@
-# coding-for-economists
+# Coding for Economists
 
-This readme is intended to help those contributing to or editing the book, not those trying to follow it. To read or use the book, head to the [coding for economists website](https://aeturrell.github.io/coding-for-economists/intro.html). You can use the book interactively via the following options, all available via the link above:
+[![DOI](https://zenodo.org/badge/316842103.svg)](https://zenodo.org/doi/10.5281/zenodo.10465358)  ![GitHub Release](https://img.shields.io/github/v/release/aeturrell/coding-for-economists)
+
+This readme is intended to help those contributing to or editing the book, not those trying to follow it. To read or use the book, head to the [* website](https://aeturrell.github.io/coding-for-economists/intro.html). You can use the book interactively via the following options, all available via the link above:
 
 - download pages to your computer as jupyter notebooks
 - run pages in Google Colab through your browser
