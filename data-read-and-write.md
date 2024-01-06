@@ -64,7 +64,7 @@ df = pd.read_csv(Path('research/files/data.csv'))
 
 Quite often, you have a case where you need to read in data from many files at once. There are two tools that will help with this: glob and concatenate.
 
-Imagine you have a directory full of files with names like 'Jan-2001-data.csv', 'Feb-2001-data.csv', and so on. The `glob` command can help you grab the names of all of these files. Imagine your files are in 'research/data', then you would use:
+Imagine you have a directory full of files with names like 'Jan-2001-data.csv', 'Feb-2001-data.csv', and so on. The `glob()` command can help you grab the names of all of these files. Imagine your files are in 'research/data', then you would use:
 
 ```python
 p = Path("research/data")
@@ -73,7 +73,7 @@ list_of_files = list(p.glob('*-data.csv'))
 
 Here, the `*` character is a wildcard that can match to anything (including any number of characters). You can keep it more specific by, for example, searching for a single wildcard character with `?` or any single digit with `[0-9]`.
 
-Okay, so you have a big list of file paths: now what!? Assuming that the files have the same structure (eg the same columns), we can use `pd.read_csv` in a list followed by `pd.concat` to collapse these down either by index or by column (typically it's by index):
+Okay, so you have a big list of file paths: now what!? Assuming that the files have the same structure (eg the same columns), we can use `pd.read_csv()` in a list followed by `pd.concat()` to collapse these down either by index or by column (typically it's by index):
 
 ```python
 df = pd.concat([pd.read_csv(x) for x in list_of_files], axis=0)
@@ -81,7 +81,7 @@ df = pd.concat([pd.read_csv(x) for x in list_of_files], axis=0)
 
 ## Writing data to file
 
-The syntax for writing to a file is also very consistent, taking the form `df.to_*` where `*` might be `csv`, `stata`, or a number of output formats (you can even output to your computer's clipboard!).
+The syntax for writing to a file is also very consistent, taking the form `df.to_*()` where `*` might be `csv`, `stata`, or a number of output formats (you can even output to your computer's clipboard!).
 
 In general, you *do* need to specify the file extension though, i.e. when saving data you should specify `df.to_csv('dataout.csv')` rather than `df.to_csv('dataout')`. As with reading in, there are plenty of options for how to output data, and you can find more on outputs in the **pandas** [documentation](https://pandas.pydata.org/docs/user_guide/io.html).
 
