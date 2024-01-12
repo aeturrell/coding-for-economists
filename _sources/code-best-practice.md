@@ -55,7 +55,7 @@ As well as this general tip, Python has conventions on naming different kinds of
 
 There are three exceptions to the snake case convention in Python: classes, which should be in camel case, eg `ThisIsAClass`; constants, which are in capital snake case, eg `THIS_IS_A_CONSTANT`; and packages, which are typically without spaces or underscores and are lowercase `thisisapackage`.
 
-For some quick shortcuts to re-naming columns in **pandas** dataframes or string variables, try the unicode-friendly [**slugify**](https://github.com/un33k/python-slugify) library or the `clean_columns` function from the [**skimpy**](https://aeturrell.github.io/skimpy) library.
+For some quick shortcuts to re-naming columns in **pandas** dataframes or string variables, try the unicode-friendly [**slugify**](https://github.com/un33k/python-slugify) library or the `clean_columns()` function from the [**skimpy**](https://aeturrell.github.io/skimpy) library.
 
 The better named your variables, the clearer your code will be--and the fewer comments you will need to write!
 
@@ -78,8 +78,8 @@ In summary:
     def roll():
         return random.randint(0, MAX_INT_VALUE)
   ```
-- use verbs for function names, eg `get_regression`
-- use consistent verbs for function names, don't use `get_score` and `grab_results` (instead use `get` for both)
+- use verbs for function names, eg `get_regression()`
+- use consistent verbs for function names, don't use `get_score()` and `grab_results()` (instead use `get()` for both)
 - variable names should be snake_case and all lowercase, eg `first_name`
 - class names should be CamelCase, eg `MyClass`
 - function names should be snake_case and all lowercase, eg `quick_sort()`
@@ -272,7 +272,7 @@ import pandas as pd
 df = pd.read_csv('data/raw/file.csv')
 ```
 
-This works great on Mac and Linux, but it's not going to work on Windows; Windows uses backwards slashes, and back slashes unfortunately tend to do other things in programming too. To ensure relative paths work *across* operating systems, the best way is to wrap the file path in a call to the `Path` method in the **pathlib** module:
+This works great on Mac and Linux, but it's not going to work on Windows; Windows uses backwards slashes, and back slashes unfortunately tend to do other things in programming too. To ensure relative paths work *across* operating systems, the best way is to wrap the file path in a call to the `Path()` method in the **pathlib** module:
 
 ```python
 from pathlib import Path

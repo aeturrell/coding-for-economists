@@ -92,7 +92,7 @@ As we take this simple dashboard and add more features, if you kept your app run
 
 ### Text, Data, and Visualisations
 
-There are a large number of "widgets" or "components" available that offer different functionality. You can find a full list of all the widgets [here](https://docs.streamlit.io/library/api-reference). You've already seen two widgets that [add text](https://docs.streamlit.io/library/api-reference/text). Three extra text widgets that are useful are `st.markdown`, `st.latex`, and `st.code`. For example, to add some latex to the page, it would be
+There are a large number of "widgets" or "components" available that offer different functionality. You can find a full list of all the widgets [here](https://docs.streamlit.io/library/api-reference). You've already seen two widgets that [add text](https://docs.streamlit.io/library/api-reference/text). Three extra text widgets that are useful are `st.markdown()`, `st.latex()`, and `st.code()`. For example, to add some latex to the page, it would be
 
 ```python
 st.latex(r"Y = \beta_0 + \beta_1X + \varepsilon")
@@ -121,7 +121,7 @@ y1 = 3 + 4*x/8 + prng.uniform(0.0, 0.5, len(x))
 y2 = 1 + 2*x/8 + prng.uniform(0.0, 0.5, len(x))
 ```
 
-Here's an example of a chart of this data using **matplotlib**. Within your script, create the chart using the code almost as normal. The only difference is that to display the created chart you'll need to use the special method `st.pyplot`.
+Here's an example of a chart of this data using **matplotlib**. Within your script, create the chart using the code almost as normal. The only difference is that to display the created chart you'll need to use the special method `st.pyplot()`.
 
 ```python
 # usual code for plot

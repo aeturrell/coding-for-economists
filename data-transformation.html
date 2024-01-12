@@ -541,13 +541,13 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation">Aggregation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby-and-then-aggregate-aka-split-apply-combine">Groupby and then aggregate (aka split, apply, combine)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-functions-using-agg">Multiple Functions using <code class="docutils literal notranslate"><span class="pre">agg</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-functions-using-agg">Multiple Functions using <code class="docutils literal notranslate"><span class="pre">agg()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter">Filter</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transform">Transform</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assign">Assign</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agg-transform-and-apply-when-to-use-each-with-a-groupby"><code class="docutils literal notranslate"><span class="pre">agg</span></code>, <code class="docutils literal notranslate"><span class="pre">transform</span></code>, and <code class="docutils literal notranslate"><span class="pre">apply</span></code>: when to use each with a groupby</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agg-transform-and-apply-when-to-use-each-with-a-groupby"><code class="docutils literal notranslate"><span class="pre">agg()</span></code>, <code class="docutils literal notranslate"><span class="pre">transform()</span></code>, and <code class="docutils literal notranslate"><span class="pre">apply()</span></code>: when to use each with a groupby</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reshaping-data">Reshaping Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting-data-from-tidy-to-err-untidy">Pivoting data from tidy to, err, untidy</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#melt">Melt</a></li>
@@ -632,7 +632,7 @@ document.write(`
 </tr>
 </tbody>
 </table>
-<p>these can applied to all entries in a dataframe, or optionally to rows or columns using <code class="docutils literal notranslate"><span class="pre">axis=0</span></code> or <code class="docutils literal notranslate"><span class="pre">axis=1</span></code> (or <code class="docutils literal notranslate"><span class="pre">&quot;rows&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;columns&quot;</span></code>) respectively. Here are a couple of examples using the <code class="docutils literal notranslate"><span class="pre">sum</span></code> function (note that we aggregate <em>over</em> rows leaving only columns):</p>
+<p>these can applied to all entries in a dataframe, or optionally to rows or columns using <code class="docutils literal notranslate"><span class="pre">axis=0</span></code> or <code class="docutils literal notranslate"><span class="pre">axis=1</span></code> (or <code class="docutils literal notranslate"><span class="pre">&quot;rows&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;columns&quot;</span></code>) respectively. Here are a couple of examples using the <code class="docutils literal notranslate"><span class="pre">sum()</span></code> function (note that we aggregate <em>over</em> rows leaving only columns):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)),</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s2">&quot;ABCDE&quot;</span><span class="p">))</span>
@@ -733,13 +733,13 @@ dtype: int64
 <p class="admonition-title">Exercise</p>
 <p>Find the mean values of each column (eg leaving only column headers so aggregating over rows using <code class="docutils literal notranslate"><span class="pre">axis=0</span></code>) and the mean values of each row (eg leaving only row headers and therefore aggregating over columns using <code class="docutils literal notranslate"><span class="pre">axis=1</span></code>)</p>
 </div>
-<p>If you want to create custom aggregations, you can of course do that too using the <code class="docutils literal notranslate"><span class="pre">apply</span></code> method from <a class="reference internal" href="data-intro.html#working-with-data"><span class="std std-ref">Working with Data</span></a>.</p>
+<p>If you want to create custom aggregations, you can of course do that too using the <code class="docutils literal notranslate"><span class="pre">apply()</span></code> method from <a class="reference internal" href="data-intro.html#working-with-data"><span class="std std-ref">Working with Data</span></a>.</p>
 </section>
 <section id="groupby-and-then-aggregate-aka-split-apply-combine">
 <h2>Groupby and then aggregate (aka split, apply, combine)<a class="headerlink" href="#groupby-and-then-aggregate-aka-split-apply-combine" title="Permalink to this heading">#</a></h2>
 <p>Splitting a dataset, applying a function, and combining the results are three key operations that we’ll want to use together again and again. Splitting means differentiating between rows or columns of data based on some conditions, for instance different categories or different values. Applying means applying a function, for example finding the mean or sum. Combine means putting the results of these operations back into the dataframe, or into a variable. The figure gives an example</p>
 <p><img alt="" src="https://jakevdp.github.io/PythonDataScienceHandbook/figures/03.08-split-apply-combine.png" /></p>
-<p>A very common way of doing this is using the <code class="docutils literal notranslate"><span class="pre">groupby</span></code> operation to group rows according to come common property. The classic use-case would be to find the mean by a particular characteristic, perhaps the mean height by gender. Note that the ‘combine’ part at the end doesn’t always have to result in a new dataframe; it could create new columns in an existing dataframe (but the new column is the result of a groupby operation, eg subtracting a group mean).</p>
+<p>A very common way of doing this is using the <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> operation to group rows according to come common property. The classic use-case would be to find the mean by a particular characteristic, perhaps the mean height by gender. Note that the ‘combine’ part at the end doesn’t always have to result in a new dataframe; it could create new columns in an existing dataframe (but the new column is the result of a groupby operation, eg subtracting a group mean).</p>
 <p>Let’s first see a really simple example of splitting a dataset into groups and finding the mean across those groups using the <em>penguins</em> dataset. We’ll group the data by island and look at the means.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -902,8 +902,8 @@ dtype: int64
 <p>Using a groupby, find the standard deviation of different penguin species’ body measurements. (Hint: standard deviation has its own aggregation/combine function given by <code class="docutils literal notranslate"><span class="pre">std()</span></code>)</p>
 </div>
 <section id="multiple-functions-using-agg">
-<h3>Multiple Functions using <code class="docutils literal notranslate"><span class="pre">agg</span></code><a class="headerlink" href="#multiple-functions-using-agg" title="Permalink to this heading">#</a></h3>
-<p>You can also pass multiple functions via the <code class="docutils literal notranslate"><span class="pre">agg</span></code> method (short for aggregation). Here we pass two numpy functions (these two functions have built-in equivalents <code class="docutils literal notranslate"><span class="pre">std()</span></code> and <code class="docutils literal notranslate"><span class="pre">mean()</span></code> so this is just for illustrative purposes):</p>
+<h3>Multiple Functions using <code class="docutils literal notranslate"><span class="pre">agg()</span></code><a class="headerlink" href="#multiple-functions-using-agg" title="Permalink to this heading">#</a></h3>
+<p>You can also pass multiple functions via the <code class="docutils literal notranslate"><span class="pre">agg()</span></code> method (short for aggregation). Here we pass two numpy functions (these two functions have built-in equivalents <code class="docutils literal notranslate"><span class="pre">std()</span></code> and <code class="docutils literal notranslate"><span class="pre">mean()</span></code> so this is just for illustrative purposes):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;species&quot;</span><span class="p">)[</span><span class="n">penguins</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s2">&quot;number&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">])</span>
@@ -1075,9 +1075,9 @@ dtype: int64
 </div>
 <div class="admonition-exercise admonition">
 <p class="admonition-title">Exercise</p>
-<p>Using a two-column <code class="docutils literal notranslate"><span class="pre">groupby</span></code> on species and island and an <code class="docutils literal notranslate"><span class="pre">agg</span></code>, use a dictionary to find the min of <code class="docutils literal notranslate"><span class="pre">bill_depth_mm</span></code> and the max of <code class="docutils literal notranslate"><span class="pre">flipper_length_mm</span></code></p>
+<p>Using a two-column <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> on species and island and an <code class="docutils literal notranslate"><span class="pre">agg</span></code>, use a dictionary to find the min of <code class="docutils literal notranslate"><span class="pre">bill_depth_mm</span></code> and the max of <code class="docutils literal notranslate"><span class="pre">flipper_length_mm</span></code></p>
 </div>
-<p>Sometimes, inheriting the column names using <code class="docutils literal notranslate"><span class="pre">agg</span></code> is problematic. There’s a slightly fussy syntax to help with that. It uses <em>tuples</em>, which are values within parenthesis (eg <code class="docutils literal notranslate"><span class="pre">(</span></code>) that have the pattern <code class="docutils literal notranslate"><span class="pre">(column</span> <span class="pre">name,</span> <span class="pre">function</span> <span class="pre">name)</span></code>. To the left of the tuple, you can specify a new name for the resulting column. Here’s an example:</p>
+<p>Sometimes, inheriting the column names using <code class="docutils literal notranslate"><span class="pre">agg()</span></code> is problematic. There’s a slightly fussy syntax to help with that. It uses <em>tuples</em>, which are values within parenthesis (eg <code class="docutils literal notranslate"><span class="pre">(</span></code>) that have the pattern <code class="docutils literal notranslate"><span class="pre">(column</span> <span class="pre">name,</span> <span class="pre">function</span> <span class="pre">name)</span></code>. To the left of the tuple, you can specify a new name for the resulting column. Here’s an example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="s2">&quot;island&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
@@ -1160,13 +1160,13 @@ dtype: int64
 </div>
 <div class="admonition-exercise admonition">
 <p class="admonition-title">Exercise</p>
-<p>Using a two-column <code class="docutils literal notranslate"><span class="pre">groupby</span></code> on species and island and a named <code class="docutils literal notranslate"><span class="pre">agg</span></code>, create a new column called <code class="docutils literal notranslate"><span class="pre">mean_flipper</span></code> that gives the mean of <code class="docutils literal notranslate"><span class="pre">flipper_length_mm</span></code>.</p>
+<p>Using a two-column <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> on species and island and a named <code class="docutils literal notranslate"><span class="pre">agg()</span></code>, create a new column called <code class="docutils literal notranslate"><span class="pre">mean_flipper</span></code> that gives the mean of <code class="docutils literal notranslate"><span class="pre">flipper_length_mm</span></code>.</p>
 </div>
 </section>
 <section id="filter">
 <h3>Filter<a class="headerlink" href="#filter" title="Permalink to this heading">#</a></h3>
 <p>Filtering does exactly what it sounds like, but it can make use of group-by commands. In the example below, all but one species is filtered out.</p>
-<p>In the example below, <code class="docutils literal notranslate"><span class="pre">filter</span></code> passes a grouped version of the dataframe into the <code class="docutils literal notranslate"><span class="pre">filter_func</span></code> we’ve defined (imagine that a dataframe is passed for each group). Because the passed variable is a dataframe, and variable <code class="docutils literal notranslate"><span class="pre">x</span></code> is defined in the function, the <code class="docutils literal notranslate"><span class="pre">x</span></code> within <code class="docutils literal notranslate"><span class="pre">filter_func</span></code> body behaves like our dataframe–including having the same columns.</p>
+<p>In the example below, <code class="docutils literal notranslate"><span class="pre">filter()</span></code> passes a grouped version of the dataframe into the <code class="docutils literal notranslate"><span class="pre">filter_func()</span></code> we’ve defined (imagine that a dataframe is passed for each group). Because the passed variable is a dataframe, and variable <code class="docutils literal notranslate"><span class="pre">x</span></code> is defined in the function, the <code class="docutils literal notranslate"><span class="pre">x</span></code> within <code class="docutils literal notranslate"><span class="pre">filter_func()</span></code> body behaves like our dataframe–including having the same columns.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">filter_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -1613,14 +1613,14 @@ dtype: int64
 </section>
 </section>
 <section id="agg-transform-and-apply-when-to-use-each-with-a-groupby">
-<h2><code class="docutils literal notranslate"><span class="pre">agg</span></code>, <code class="docutils literal notranslate"><span class="pre">transform</span></code>, and <code class="docutils literal notranslate"><span class="pre">apply</span></code>: when to use each with a groupby<a class="headerlink" href="#agg-transform-and-apply-when-to-use-each-with-a-groupby" title="Permalink to this heading">#</a></h2>
-<p>With all of the different options available, it can be confusing to know when to use the different functions available for performing groupby operations, namely: <code class="docutils literal notranslate"><span class="pre">.agg</span></code>, <code class="docutils literal notranslate"><span class="pre">.transform</span></code>, and <code class="docutils literal notranslate"><span class="pre">.apply</span></code>. Here are the key points to remember:</p>
+<h2><code class="docutils literal notranslate"><span class="pre">agg()</span></code>, <code class="docutils literal notranslate"><span class="pre">transform()</span></code>, and <code class="docutils literal notranslate"><span class="pre">apply()</span></code>: when to use each with a groupby<a class="headerlink" href="#agg-transform-and-apply-when-to-use-each-with-a-groupby" title="Permalink to this heading">#</a></h2>
+<p>With all of the different options available, it can be confusing to know when to use the different functions available for performing groupby operations, namely: <code class="docutils literal notranslate"><span class="pre">.agg()</span></code>, <code class="docutils literal notranslate"><span class="pre">.transform()</span></code>, and <code class="docutils literal notranslate"><span class="pre">.apply()</span></code>. Here are the key points to remember:</p>
 <ul class="simple">
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">.agg</span></code> when using a groupby, but you want your groups to become the new index</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">.transform</span></code> when using a groupby, but you want to retain your original index</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">.apply</span></code> when using a groupby, but you want to perform operations that will leave neither the original index nor an index of groups</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">.agg()</span></code> when using a groupby, but you want your groups to become the new index</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">.transform()</span></code> when using a groupby, but you want to retain your original index</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">.apply()</span></code> when using a groupby, but you want to perform operations that will leave neither the original index nor an index of groups</p></li>
 </ul>
-<p>Let’s see an example of all three on a series (<code class="docutils literal notranslate"><span class="pre">pd.Series</span></code>) to really highlight the differences. First, let’s create the series:</p>
+<p>Let’s see an example of all three on a series (<code class="docutils literal notranslate"><span class="pre">pd.Series()</span></code>) to really highlight the differences. First, let’s create the series:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">len_s</span> <span class="o">=</span> <span class="mi">1000</span>
@@ -1641,7 +1641,7 @@ Freq: D, dtype: int64
 </div>
 </div>
 </div>
-<p>Okay, now we can try these three operations out successively with some example functions. We’ll use <code class="docutils literal notranslate"><span class="pre">skew</span></code> for the first two, <code class="docutils literal notranslate"><span class="pre">.agg</span></code> and <code class="docutils literal notranslate"><span class="pre">.transform</span></code>, in order to highlight that the only difference between these is in the index that is returned. For <code class="docutils literal notranslate"><span class="pre">.agg</span></code>, using <code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">x.skew()</span></code> would return the same as <code class="docutils literal notranslate"><span class="pre">.agg</span></code> in this case so we’ll opt for a more interesting example: only using values greater than zero and then taking their cumulative sum. Note that what is returned in this third case is an object with a <em>multi-index</em>: the first index tracks the <code class="docutils literal notranslate"><span class="pre">groupby</span></code> groups while the second tracks the original rows that survived the filtering to values greater than zero.</p>
+<p>Okay, now we can try these three operations out successively with some example functions. We’ll use <code class="docutils literal notranslate"><span class="pre">skew</span></code> for the first two, <code class="docutils literal notranslate"><span class="pre">.agg()</span></code> and <code class="docutils literal notranslate"><span class="pre">.transform</span></code>, in order to highlight that the only difference between these is in the index that is returned. For <code class="docutils literal notranslate"><span class="pre">.agg()</span></code>, using <code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">x.skew()</span></code> would return the same as <code class="docutils literal notranslate"><span class="pre">.agg()</span></code> in this case so we’ll opt for a more interesting example: only using values greater than zero and then taking their cumulative sum. Note that what is returned in this third case is an object with a <em>multi-index</em>: the first index tracks the <code class="docutils literal notranslate"><span class="pre">groupby</span></code> groups while the second tracks the original rows that survived the filtering to values greater than zero.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">`.agg` following `.groupby`: groups provide index&quot;</span><span class="p">)</span>
@@ -1687,12 +1687,12 @@ dtype: int64
 </section>
 <section id="reshaping-data">
 <h2>Reshaping Data<a class="headerlink" href="#reshaping-data" title="Permalink to this heading">#</a></h2>
-<p>The main options for reshaping data are <code class="docutils literal notranslate"><span class="pre">pivot</span></code>, <code class="docutils literal notranslate"><span class="pre">melt</span></code>, <code class="docutils literal notranslate"><span class="pre">stack</span></code>, <code class="docutils literal notranslate"><span class="pre">unstack</span></code>, <code class="docutils literal notranslate"><span class="pre">pivot_table</span></code>, <code class="docutils literal notranslate"><span class="pre">get_dummies</span></code>, <code class="docutils literal notranslate"><span class="pre">cross_tab</span></code>, and <code class="docutils literal notranslate"><span class="pre">explode</span></code>. We’ll look at some of these here.</p>
+<p>The main options for reshaping data are <code class="docutils literal notranslate"><span class="pre">pivot()</span></code>, <code class="docutils literal notranslate"><span class="pre">melt()</span></code>, <code class="docutils literal notranslate"><span class="pre">stack()</span></code>, <code class="docutils literal notranslate"><span class="pre">unstack()</span></code>, <code class="docutils literal notranslate"><span class="pre">pivot_table()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_dummies()</span></code>, <code class="docutils literal notranslate"><span class="pre">cross_tab()</span></code>, and <code class="docutils literal notranslate"><span class="pre">explode()</span></code>. We’ll look at some of these here.</p>
 <section id="pivoting-data-from-tidy-to-err-untidy">
 <h3>Pivoting data from tidy to, err, untidy<a class="headerlink" href="#pivoting-data-from-tidy-to-err-untidy" title="Permalink to this heading">#</a></h3>
-<p>In a previous chapter, we said you should use tidy data–one row per observation, one column per variable–whenever you can. But there are times when you will want to take your lovingly prepared tidy data and pivot it into a wider format. <code class="docutils literal notranslate"><span class="pre">pivot</span></code> and <code class="docutils literal notranslate"><span class="pre">pivot_table</span></code> help you to do that.</p>
+<p>In a previous chapter, we said you should use tidy data–one row per observation, one column per variable–whenever you can. But there are times when you will want to take your lovingly prepared tidy data and pivot it into a wider format. <code class="docutils literal notranslate"><span class="pre">pivot()</span></code> and <code class="docutils literal notranslate"><span class="pre">pivot_table()</span></code> help you to do that.</p>
 <p><img alt="" src="https://pandas.pydata.org/docs/_images/reshaping_pivot.png" /></p>
-<p>This can be especially useful for time series data, where operations like <code class="docutils literal notranslate"><span class="pre">shift</span></code> or <code class="docutils literal notranslate"><span class="pre">diff</span></code> are typically applied assuming that an entry in one row follows (in time) from the one above. Here’s an example:</p>
+<p>This can be especially useful for time series data, where operations like <code class="docutils literal notranslate"><span class="pre">shift()</span></code> or <code class="docutils literal notranslate"><span class="pre">diff()</span></code> are typically applied assuming that an entry in one row follows (in time) from the one above. Here’s an example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
@@ -1774,7 +1774,7 @@ dtype: int64
 </table>
 </div></div></div>
 </div>
-<p>If we just run <code class="docutils literal notranslate"><span class="pre">shift</span></code> on this, it’s going to shift variable B’s and A’s together even though these overlap in time. So we pivot to a wider format (and then we can shift safely).</p>
+<p>If we just run <code class="docutils literal notranslate"><span class="pre">shift()</span></code> on this, it’s going to shift variable B’s and A’s together even though these overlap in time. So we pivot to a wider format (and then we can shift safely).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;variable&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -1872,7 +1872,7 @@ dtype: int64
 </section>
 <section id="melt">
 <h3>Melt<a class="headerlink" href="#melt" title="Permalink to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">melt</span></code> can help you go from untidy to tidy data (from wide data to long data), and is a <em>really</em> good one to remember. Of course, if you’re a normal human, you’ll have to look back at the documentation most times you use this!</p>
+<p><code class="docutils literal notranslate"><span class="pre">melt()</span></code> can help you go from untidy to tidy data (from wide data to long data), and is a <em>really</em> good one to remember. Of course, if you’re a normal human, you’ll have to look back at the documentation most times you use this!</p>
 <p><img alt="" src="https://pandas.pydata.org/docs/_images/reshaping_melt.png" /></p>
 <p>Here’s an example of it in action:</p>
 <div class="cell docutils container">
@@ -1963,7 +1963,7 @@ dtype: int64
 <p class="admonition-title">Exercise</p>
 <p>Perform a melt that uses <code class="docutils literal notranslate"><span class="pre">job</span></code> as the id instead of <code class="docutils literal notranslate"><span class="pre">first</span></code> and <code class="docutils literal notranslate"><span class="pre">last</span></code>.</p>
 </div>
-<p>If you don’t wan the headscratching of melt, there’s also <code class="docutils literal notranslate"><span class="pre">wide_to_long</span></code>, which is really useful for typical data cleaning cases where you have data like this:</p>
+<p>If you don’t wan the headscratching of melt, there’s also <code class="docutils literal notranslate"><span class="pre">wide_to_long()</span></code>, which is really useful for typical data cleaning cases where you have data like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
@@ -2642,7 +2642,7 @@ dtype: float64
 <p class="admonition-title">Exercise</p>
 <p>Add a lead that is 3 months ahead of <code class="docutils literal notranslate"><span class="pre">values</span></code>.</p>
 </div>
-<p>Two other useful time series functions to be aware of are <code class="docutils literal notranslate"><span class="pre">resample</span></code> and <code class="docutils literal notranslate"><span class="pre">rolling</span></code>. <code class="docutils literal notranslate"><span class="pre">resample</span></code> can upsample or downsample time series. Downsampling is by aggregation, eg <code class="docutils literal notranslate"><span class="pre">df['values].resample('Q').mean()</span></code> to downsample to quarterly (‘Q’) frequency by taking the mean within each quarter. Upsampling involves a choice about how to fill in the missing values; examples of options are <code class="docutils literal notranslate"><span class="pre">bfill</span></code> (backfill) and <code class="docutils literal notranslate"><span class="pre">ffill</span></code> (forwards fill).</p>
+<p>Two other useful time series functions to be aware of are <code class="docutils literal notranslate"><span class="pre">resample()</span></code> and <code class="docutils literal notranslate"><span class="pre">rolling()</span></code>. <code class="docutils literal notranslate"><span class="pre">resample()</span></code> can upsample or downsample time series. Downsampling is by aggregation, eg <code class="docutils literal notranslate"><span class="pre">df['values].resample('Q').mean()</span></code> to downsample to quarterly (‘Q’) frequency by taking the mean within each quarter. Upsampling involves a choice about how to fill in the missing values; examples of options are <code class="docutils literal notranslate"><span class="pre">bfill()</span></code> (backfill) and <code class="docutils literal notranslate"><span class="pre">ffill()</span></code> (forwards fill).</p>
 <p>Rolling is for taking rolling aggregations, as you’d expect; for example, the 3-month rolling mean of our first difference time series:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2766,7 +2766,7 @@ Name: diff_values, dtype: float64
 </table>
 </div></div></div>
 </div>
-<p>Note that we added a datetime index above; this is because <code class="docutils literal notranslate"><span class="pre">.rolling</span></code> likes to have a datetime index to work on.</p>
+<p>Note that we added a datetime index above; this is because <code class="docutils literal notranslate"><span class="pre">.rolling()</span></code> likes to have a datetime index to work on.</p>
 <p>What we’ll do now is proceed in two steps:</p>
 <ol class="arabic simple">
 <li><p>Group the data with <code class="docutils literal notranslate"><span class="pre">.groupby()</span></code>. Each grouped set will have an index attached and we’re getting a grouped-series object because we’re only selecting the births column.</p></li>
@@ -3397,13 +3397,13 @@ Name: diff_values, dtype: float64
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation">Aggregation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby-and-then-aggregate-aka-split-apply-combine">Groupby and then aggregate (aka split, apply, combine)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-functions-using-agg">Multiple Functions using <code class="docutils literal notranslate"><span class="pre">agg</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-functions-using-agg">Multiple Functions using <code class="docutils literal notranslate"><span class="pre">agg()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter">Filter</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transform">Transform</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assign">Assign</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agg-transform-and-apply-when-to-use-each-with-a-groupby"><code class="docutils literal notranslate"><span class="pre">agg</span></code>, <code class="docutils literal notranslate"><span class="pre">transform</span></code>, and <code class="docutils literal notranslate"><span class="pre">apply</span></code>: when to use each with a groupby</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agg-transform-and-apply-when-to-use-each-with-a-groupby"><code class="docutils literal notranslate"><span class="pre">agg()</span></code>, <code class="docutils literal notranslate"><span class="pre">transform()</span></code>, and <code class="docutils literal notranslate"><span class="pre">apply()</span></code>: when to use each with a groupby</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reshaping-data">Reshaping Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting-data-from-tidy-to-err-untidy">Pivoting data from tidy to, err, untidy</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#melt">Melt</a></li>

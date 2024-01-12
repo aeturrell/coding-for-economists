@@ -930,7 +930,7 @@ More recently, there’s been much development of <strong>column-oriented</stron
 </section>
 <section id="sql-with-pandas">
 <h2>SQL with <strong>pandas</strong><a class="headerlink" href="#sql-with-pandas" title="Permalink to this heading">#</a></h2>
-<p><strong>pandas</strong> is well-equipped for working with SQL. We can simply push the query we just created straight through using its <code class="docutils literal notranslate"><span class="pre">read_sql</span></code> function—but bear in mind we need to pass in the connection we created to the database too:</p>
+<p><strong>pandas</strong> is well-equipped for working with SQL. We can simply push the query we just created straight through using its <code class="docutils literal notranslate"><span class="pre">read_sql()</span></code> function—but bear in mind we need to pass in the connection we created to the database too:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">sql_join</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
@@ -1002,7 +1002,7 @@ More recently, there’s been much development of <strong>column-oriented</stron
 <section id="sql-with-ibis">
 <h2>SQL with <strong>ibis</strong><a class="headerlink" href="#sql-with-ibis" title="Permalink to this heading">#</a></h2>
 <p>It’s not exactly satisfactory to have to write out your SQL queries in text. What if we could create commands directly from <strong>pandas</strong> commands? You can’t <em>quite</em> do that, but there’s a package that gets you pretty close and it’s called <a class="reference external" href="https://ibis-project.org/"><strong>ibis</strong></a>. <strong>ibis</strong> is particularly useful when you are reading from a database and want to query it just like you would a <strong>pandas</strong> dataframe.</p>
-<p><strong>Ibis</strong> can connect to local databases (eg a SQLite database), server-based databases (eg Postgres), or cloud-based databased (eg Google’s BigQuery). The syntax to make a connection is, for example, <code class="docutils literal notranslate"><span class="pre">ibis.bigquery.connect</span></code>.</p>
+<p><strong>Ibis</strong> can connect to local databases (eg a SQLite database), server-based databases (eg Postgres), or cloud-based databased (eg Google’s BigQuery). The syntax to make a connection is, for example, <code class="docutils literal notranslate"><span class="pre">ibis.bigquery.connect()</span></code>.</p>
 <p>Let’s see <strong>ibis</strong> in action by reproducing the commands we’ve already seen on the Chinook database, a locally hosted database. First we import it and make a connection to the database.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1053,7 +1053,7 @@ More recently, there’s been much development of <strong>column-oriented</stron
 </div>
 </div>
 </div>
-<p>Okay, now let’s reproduce the following query: “SELECT albumid, AVG(milliseconds)/1e3/60 FROM track GROUP BY albumid ORDER BY AVG(milliseconds) ASC LIMIT 5;”. We’ll use a groupby, a mutate (which you can think of like <strong>pandas</strong>’ assign statement), a sort, and then <code class="docutils literal notranslate"><span class="pre">limit</span></code> to only show the first five entries.</p>
+<p>Okay, now let’s reproduce the following query: “SELECT albumid, AVG(milliseconds)/1e3/60 FROM track GROUP BY albumid ORDER BY AVG(milliseconds) ASC LIMIT 5;”. We’ll use a groupby, a mutate (which you can think of like <strong>pandas</strong>’ assign statement), a sort, and then <code class="docutils literal notranslate"><span class="pre">limit()</span></code> to only show the first five entries.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">track</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">&quot;AlbumId&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">mean_mins_track</span><span class="o">=</span><span class="n">track</span><span class="o">.</span><span class="n">Milliseconds</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">/</span><span class="mf">1e3</span><span class="o">/</span><span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s2">&quot;mean_mins_track&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>

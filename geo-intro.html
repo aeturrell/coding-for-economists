@@ -881,7 +881,7 @@ Name: geometry, dtype: geometry
 </div>
 </div>
 <p>The object is a multipolygon. Remember that we have points (0D), lines (1D), and polygons (aka areas, 2D) that we can embed in a projection. A line is at least 2 vertices that are connected; a polygon is the area contained within 3 or more vertices. Multipolygons are the union of two or more non-contiguous polygons: in this case, the Italian mainland, Sicily, and Sardinia.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">plot</span></code> function works just as happily if our basic objects are points rather than polygons though. In the below example, we’ll grab the centroid (the spatial midpoint) of each country as a point and plot them:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function works just as happily if our basic objects are points rather than polygons though. In the below example, we’ll grab the centroid (the spatial midpoint) of each country as a point and plot them:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We are going to round-trip the data through a flat projection that preserves</span>
@@ -915,7 +915,7 @@ Name: geometry, dtype: geometry
 <img alt="_images/8107fff351d6544abe2eb9587f74bf13782798aad686c77c5b7257fc1085d16b.svg" src="_images/8107fff351d6544abe2eb9587f74bf13782798aad686c77c5b7257fc1085d16b.svg" /></div>
 </div>
 <p>A point doesn’t have much other than a single position in 2D space. But lines have length, and polygons have area.</p>
-<p>There are different kinds of lines but the simplest is the <code class="docutils literal notranslate"><span class="pre">LineString</span></code> which can be constructed from a sequence of points.</p>
+<p>There are different kinds of lines but the simplest is the <code class="docutils literal notranslate"><span class="pre">LineString()</span></code> which can be constructed from a sequence of points.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">LineString</span>
@@ -1027,7 +1027,7 @@ Name: geometry, dtype: geometry
 <div class="cell_output docutils container">
 <img alt="_images/0b6849ccbcfa522b4b7d810dbb995864b554ad7ee258bbea11744a4a73496004.svg" src="_images/0b6849ccbcfa522b4b7d810dbb995864b554ad7ee258bbea11744a4a73496004.svg" /></div>
 </div>
-<p>We can now combine these for a view on how these rivers goes through the UK. We will use <code class="docutils literal notranslate"><span class="pre">buffer</span></code> to modify how easy it is to visualise the river by asking for everything within 1.5 km from the river.</p>
+<p>We can now combine these for a view on how these rivers goes through the UK. We will use <code class="docutils literal notranslate"><span class="pre">buffer()</span></code> to modify how easy it is to visualise the river by asking for everything within 1.5 km from the river.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
@@ -1207,7 +1207,7 @@ Name: geometry, dtype: geometry
 </section>
 <section id="neighbours">
 <h3>Neighbours<a class="headerlink" href="#neighbours" title="Permalink to this heading">#</a></h3>
-<p>It’s really useful to have a way to determine all of the adjacent geometries to a given geometry. The <code class="docutils literal notranslate"><span class="pre">touch</span></code> geospatial operation is the best for this <em>but</em> do be careful because the level of the detail in polygons varies for different maps and you may find that they sometimes overlap rather than simply touch. So, in the example of finding all of the neighbours for all of the local authority districts in the UK below, not only do we include those LADs that touch, we also include those that overlap.</p>
+<p>It’s really useful to have a way to determine all of the adjacent geometries to a given geometry. The <code class="docutils literal notranslate"><span class="pre">touches</span></code> geospatial operation is the best for this <em>but</em> do be careful because the level of the detail in polygons varies for different maps and you may find that they sometimes overlap rather than simply touch. So, in the example of finding all of the neighbours for all of the local authority districts in the UK below, not only do we include those LADs that touch, we also include those that overlap.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Empty list of lists</span>
@@ -1402,7 +1402,7 @@ Name: geometry, dtype: geometry
 <section id="dissolve">
 <h3>Dissolve<a class="headerlink" href="#dissolve" title="Permalink to this heading">#</a></h3>
 <p>A useful common map operation is to aggregate by spatial region: i.e. to eliminate some of the granularity of a map by combining smaller regions into larger regions. This is called a ‘dissolve’ because it dissolves the boundaries between regions to form larger ones.</p>
-<p>To demonstrate it, let’s take the many UK local authority districts and <code class="docutils literal notranslate"><span class="pre">dissolve</span></code> them into the UK countries. We can do this using the <code class="docutils literal notranslate"><span class="pre">LAD20CD</span></code> column because the code used for it always begins with a letter that represents the country: E for England, W for Wales, N for Northern Ireland, and S for Scotland. So to do the dissolve, we first create a new column just like we would do for a <code class="docutils literal notranslate"><span class="pre">groupby</span></code> in a regular <strong>pandas</strong> dataframe. But instead of using <code class="docutils literal notranslate"><span class="pre">groupby</span></code>, we <code class="docutils literal notranslate"><span class="pre">dissolve</span></code> by the new column. This will give us a new map that is made up of only 4 polygons.</p>
+<p>To demonstrate it, let’s take the many UK local authority districts and <code class="docutils literal notranslate"><span class="pre">dissolve()</span></code> them into the UK countries. We can do this using the <code class="docutils literal notranslate"><span class="pre">LAD20CD</span></code> column because the code used for it always begins with a letter that represents the country: E for England, W for Wales, N for Northern Ireland, and S for Scotland. So to do the dissolve, we first create a new column just like we would do for a <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> in a regular <strong>pandas</strong> dataframe. But instead of using <code class="docutils literal notranslate"><span class="pre">groupby()</span></code>, we <code class="docutils literal notranslate"><span class="pre">dissolve()</span></code> by the new column. This will give us a new map that is made up of only 4 polygons.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;country&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;LAD20CD&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
@@ -1483,7 +1483,7 @@ Name: geometry, dtype: geometry
 </section>
 <section id="aggregation">
 <h3>Aggregation<a class="headerlink" href="#aggregation" title="Permalink to this heading">#</a></h3>
-<p>Because <strong>geopandas</strong> builds on <strong>pandas</strong>, all the usual operations (i.e. <code class="docutils literal notranslate"><span class="pre">groupby</span></code>) that you might do on a <strong>pandas</strong> dataframe also work for non-geometry columns.</p>
+<p>Because <strong>geopandas</strong> builds on <strong>pandas</strong>, all the usual operations (i.e. <code class="docutils literal notranslate"><span class="pre">groupby()</span></code>) that you might do on a <strong>pandas</strong> dataframe also work for non-geometry columns.</p>
 </section>
 </section>
 <section id="merging-data">
@@ -1494,7 +1494,7 @@ Name: geometry, dtype: geometry
 </section>
 <section id="spatial-joins">
 <h3>Spatial Joins<a class="headerlink" href="#spatial-joins" title="Permalink to this heading">#</a></h3>
-<p>Spatial joins are more complex because we take two different sets of geometries and say how to combine them. The key to this is i) ensuring that the datasets have the same CRS and ii) using <code class="docutils literal notranslate"><span class="pre">sjoin</span></code> to perform the spatial join. We’ll show how to do a spatial join that is an inner intersection using <code class="docutils literal notranslate"><span class="pre">op=intersects</span></code>.</p>
+<p>Spatial joins are more complex because we take two different sets of geometries and say how to combine them. The key to this is i) ensuring that the datasets have the same CRS and ii) using <code class="docutils literal notranslate"><span class="pre">sjoin()</span></code> to perform the spatial join. We’ll show how to do a spatial join that is an inner intersection using <code class="docutils literal notranslate"><span class="pre">op=intersects</span></code>.</p>
 <p>We’ll take some data on, and a map of, the world, which has per country geometries in plus columns for, eg, gdp per capita, and we’ll merge it with a dataframe with the names and positions of cities in. Our intersects spatial join will combine each city (a lat/lon point) with the shapes of countries and determine which city goes in which country (even if it’s on the boundary).</p>
 <p>This is just one example of a spatial join: the other possible arguments to <code class="docutils literal notranslate"><span class="pre">op</span></code> are <code class="docutils literal notranslate"><span class="pre">within</span></code> and <code class="docutils literal notranslate"><span class="pre">contains</span></code>.</p>
 <div class="cell docutils container">
@@ -2007,7 +2007,7 @@ Name: geometry, dtype: geometry
 </table>
 </div></div></div>
 </div>
-<p>Next we carry out the geocoding step using <code class="docutils literal notranslate"><span class="pre">gpd.tools.geocode</span></code> and pass an entire column of values that we would like to get <code class="docutils literal notranslate"><span class="pre">POINT</span></code> geometries and address for:</p>
+<p>Next we carry out the geocoding step using <code class="docutils literal notranslate"><span class="pre">gpd.tools.geocode()</span></code> and pass an entire column of values that we would like to get <code class="docutils literal notranslate"><span class="pre">POINT</span></code> geometries and address for:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boros_df</span><span class="p">[[</span><span class="s2">&quot;geometry&quot;</span><span class="p">,</span> <span class="s2">&quot;address&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">geocode</span><span class="p">(</span><span class="n">boros_df</span><span class="o">.</span><span class="n">boro_name</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;photon&quot;</span><span class="p">)</span>
@@ -2083,7 +2083,7 @@ Name: geometry, dtype: geometry
 <section id="openstreetmap-and-osmnx">
 <h2>OpenStreetMap and Osmnx<a class="headerlink" href="#openstreetmap-and-osmnx" title="Permalink to this heading">#</a></h2>
 <p>OpenStreetMap (OSM) is a crowd-sourced project that aims to create a free map of the world containing information about streets, buildings, landmarks, landuse, and more. Its users regularly update the information it holds. Think Wikipedia but for a world map. It excels at highly detailed and freely available renderings of streets.</p>
-<p><a class="reference external" href="https://geoffboeing.com/publications/osmnx-complex-street-networks/"><strong>Osmnx</strong></a> is a package that can retrieve, construct, analyze, and visualize street networks from OpenStreetMap <span id="id2">[<a class="reference internal" href="zreferences.html#id13" title="Geoff Boeing. Osmnx: new methods for acquiring, constructing, analyzing, and visualizing complex street networks. Computers, Environment and Urban Systems, 65:126–139, 2017.">Boeing, 2017</a>]</span>. It also does some geocoding on the fly. Let’s see it in action and feed in the address we obtained in the geocoding example from earlier; using the <code class="docutils literal notranslate"><span class="pre">graph_from_point</span></code> method will give us the network of streets around a location.</p>
+<p><a class="reference external" href="https://geoffboeing.com/publications/osmnx-complex-street-networks/"><strong>Osmnx</strong></a> is a package that can retrieve, construct, analyze, and visualize street networks from OpenStreetMap <span id="id2">[<a class="reference internal" href="zreferences.html#id13" title="Geoff Boeing. Osmnx: new methods for acquiring, constructing, analyzing, and visualizing complex street networks. Computers, Environment and Urban Systems, 65:126–139, 2017.">Boeing, 2017</a>]</span>. It also does some geocoding on the fly. Let’s see it in action and feed in the address we obtained in the geocoding example from earlier; using the <code class="docutils literal notranslate"><span class="pre">graph_from_point()</span></code> method will give us the network of streets around a location.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">osmnx</span> <span class="k">as</span> <span class="nn">ox</span>
@@ -2154,7 +2154,7 @@ Name: geometry, dtype: geometry
 <div class="cell_output docutils container">
 <img alt="_images/74ad96cb6ed2ed2e423a82641154bf07d8d043ac59919e77443fa5e95dced0a9.svg" src="_images/74ad96cb6ed2ed2e423a82641154bf07d8d043ac59919e77443fa5e95dced0a9.svg" /></div>
 </div>
-<p>Okay, you’re in Borough Market but you need to decide where exactly to get your lunch from. OpenStreetMap includes information on many kinds of nearby amenities, including <code class="docutils literal notranslate"><span class="pre">bar</span></code>, <code class="docutils literal notranslate"><span class="pre">cafe</span></code>, and <code class="docutils literal notranslate"><span class="pre">pub</span></code>. We can retrieve this information and put it straight into a <strong>geopandas</strong> dataframe using the <code class="docutils literal notranslate"><span class="pre">geometries_from_place</span></code> function.</p>
+<p>Okay, you’re in Borough Market but you need to decide where exactly to get your lunch from. OpenStreetMap includes information on many kinds of nearby amenities, including <code class="docutils literal notranslate"><span class="pre">bar</span></code>, <code class="docutils literal notranslate"><span class="pre">cafe</span></code>, and <code class="docutils literal notranslate"><span class="pre">pub</span></code>. We can retrieve this information and put it straight into a <strong>geopandas</strong> dataframe using the <code class="docutils literal notranslate"><span class="pre">geometries_from_place()</span></code> function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">restaurants</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">features_from_place</span><span class="p">(</span>

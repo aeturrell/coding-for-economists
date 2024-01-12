@@ -683,7 +683,7 @@ cube applied to 4 is 64
 </section>
 <section id="iterators">
 <h2>Iterators<a class="headerlink" href="#iterators" title="Permalink to this heading">#</a></h2>
-<p>An iterator is an object that contains a countable number of values that a single command, <code class="docutils literal notranslate"><span class="pre">next</span></code>, iterates through. Before that’s possible though, we need to take a countable group of some kind and use the <code class="docutils literal notranslate"><span class="pre">iter</span></code> keyword on it to turn it into an iterator. Let’s see an example with some text:</p>
+<p>An iterator is an object that contains a countable number of values that a single command, <code class="docutils literal notranslate"><span class="pre">next()</span></code>, iterates through. Before that’s possible though, we need to take a countable group of some kind and use the <code class="docutils literal notranslate"><span class="pre">iter()</span></code> keyword on it to turn it into an iterator. Let’s see an example with some text:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_lst</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Mumbai&quot;</span><span class="p">,</span> <span class="s2">&quot;Delhi&quot;</span><span class="p">,</span> <span class="s2">&quot;Bangalore&quot;</span><span class="p">]</span>
@@ -693,7 +693,7 @@ cube applied to 4 is 64
 </div>
 </div>
 </div>
-<p>Okay, nothing has happened yet, but that’s because we didn’t call it yet. To get the next iteration, whatever it is, use <code class="docutils literal notranslate"><span class="pre">next</span></code>:</p>
+<p>Okay, nothing has happened yet, but that’s because we didn’t call it yet. To get the next iteration, whatever it is, use <code class="docutils literal notranslate"><span class="pre">next()</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">next</span><span class="p">(</span><span class="n">myiterator</span><span class="p">)</span>
@@ -742,7 +742,7 @@ cube applied to 4 is 64
 <span class="ne">StopIteration</span><span class="p">:</span> 
 </pre></div>
 </div>
-<p>Iterating beyond the end raises a <code class="docutils literal notranslate"><span class="pre">StopIteration</span></code> error because we reached the end. To keep going, use <code class="docutils literal notranslate"><span class="pre">cycle</span></code> in place of <code class="docutils literal notranslate"><span class="pre">iter</span></code>. Note that you can build your own iterators (here we used a built-in object type, the <code class="docutils literal notranslate"><span class="pre">list</span></code>, to create an iterator of type <code class="docutils literal notranslate"><span class="pre">list_iterator</span></code>).</p>
+<p>Iterating beyond the end raises a <code class="docutils literal notranslate"><span class="pre">StopIteration</span></code> error because we reached the end. To keep going, use <code class="docutils literal notranslate"><span class="pre">cycle()</span></code> in place of <code class="docutils literal notranslate"><span class="pre">iter()</span></code>. Note that you can build your own iterators (here we used a built-in object type, the <code class="docutils literal notranslate"><span class="pre">list</span></code>, to create an iterator of type <code class="docutils literal notranslate"><span class="pre">list_iterator</span></code>).</p>
 </section>
 <section id="generators">
 <h2>Generators<a class="headerlink" href="#generators" title="Permalink to this heading">#</a></h2>
@@ -793,7 +793,7 @@ cube applied to 4 is 64
 </div>
 </div>
 </div>
-<p>Now, instead of creating an enormous list that has to be stored in memory, we <code class="docutils literal notranslate"><span class="pre">yield</span></code> up each number as it is ‘generated’. The cleverness that’s going on here is that  the ‘state’ of the function is remembered from one call to the next. This means that when <code class="docutils literal notranslate"><span class="pre">next</span></code> is called on a generator object (either explicitly or implicitly, as in this example), the previously yielded variable <code class="docutils literal notranslate"><span class="pre">num</span></code> is incremented, and then yielded again.</p>
+<p>Now, instead of creating an enormous list that has to be stored in memory, we <code class="docutils literal notranslate"><span class="pre">yield</span></code> up each number as it is ‘generated’. The cleverness that’s going on here is that  the ‘state’ of the function is remembered from one call to the next. This means that when <code class="docutils literal notranslate"><span class="pre">next()</span></code> is called on a generator object (either explicitly or implicitly, as in this example), the previously yielded variable <code class="docutils literal notranslate"><span class="pre">num</span></code> is incremented, and then yielded again.</p>
 <p>That was a fairly contrived example but there are plenty of practical ones. Working with pipelines that process very large datasets is a classic use case. For example, imagine you have a csv file that’s far too big to fit in memory, i.e. open all at once, but you’d like to check the contents of each row and perhaps process them. The code below would <code class="docutils literal notranslate"><span class="pre">yield</span></code> each row in turn.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">csv_reader</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">):</span>
@@ -831,7 +831,7 @@ cube applied to 4 is 64
 </div>
 </div>
 </div>
-<p>The latter is a generator object and we can only access individual values calling <code class="docutils literal notranslate"><span class="pre">next</span></code> on it.</p>
+<p>The latter is a generator object and we can only access individual values calling <code class="docutils literal notranslate"><span class="pre">next()</span></code> on it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">next</span><span class="p">(</span><span class="n">sq_nums_gc</span><span class="p">)</span>
@@ -870,7 +870,7 @@ cube applied to 4 is 64
 </div>
 </div>
 </div>
-<p>This is fine for a one-off but a bit tedious if we’re going to be using <code class="docutils literal notranslate"><span class="pre">add_ten</span></code> a lot, and on many functions. Decorators allow for a more general solution that can be applied, in this case, to any <code class="docutils literal notranslate"><span class="pre">inner</span></code> function that has two arguments and returns a numeric value.</p>
+<p>This is fine for a one-off but a bit tedious if we’re going to be using <code class="docutils literal notranslate"><span class="pre">add_ten()</span></code> a lot, and on many functions. Decorators allow for a more general solution that can be applied, in this case, to any <code class="docutils literal notranslate"><span class="pre">inner()</span></code> function that has two arguments and returns a numeric value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_ten</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
@@ -1027,7 +1027,7 @@ Adding ten...
 </div>
 </div>
 </div>
-<p>When we check <code class="docutils literal notranslate"><span class="pre">type</span></code>, that’s when it gets <em>really</em> interesting</p>
+<p>When we check <code class="docutils literal notranslate"><span class="pre">type()</span></code>, that’s when it gets <em>really</em> interesting</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
@@ -1347,7 +1347,7 @@ Adding ten...
 <p>Map, filter, and reduce are built-in higher order functions. Lambda functions, featured in the basics of coding chapter, can be passed as into each of these as an argument and some of the best use cases of lambda functions are in conjunction with map, filter, and reduce.</p>
 <section id="map">
 <h3>Map<a class="headerlink" href="#map" title="Permalink to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">map</span></code> takes a function and an iterable as arguments, ie the syntax is <code class="docutils literal notranslate"><span class="pre">map(function,</span> <span class="pre">iterable)</span></code>. An iterable is a type that is composed of elements that can be iterated over. The map essentially applies the function to each entry in the iterable. Here’s an example where a list of strings is cast to integers via <code class="docutils literal notranslate"><span class="pre">map</span></code>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">map()</span></code> takes a function and an iterable as arguments, ie the syntax is <code class="docutils literal notranslate"><span class="pre">map(function,</span> <span class="pre">iterable)</span></code>. An iterable is a type that is composed of elements that can be iterated over. The map essentially applies the function to each entry in the iterable. Here’s an example where a list of strings is cast to integers via <code class="docutils literal notranslate"><span class="pre">map()</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numbers_str</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">]</span>
@@ -1380,7 +1380,7 @@ Adding ten...
 </section>
 <section id="filter">
 <h3>Filter<a class="headerlink" href="#filter" title="Permalink to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">filter</span></code> calls a specified function and returns a boolean for each item of the specified iterable. It filters the items that satisfy the given boolean criteria. It uses the <code class="docutils literal notranslate"><span class="pre">filter(function,</span> <span class="pre">iterable)</span></code> syntax. In the example below, we take all the numbers from zero to five and filter them according to whether they are divisible by 2:</p>
+<p><code class="docutils literal notranslate"><span class="pre">filter()</span></code> calls a specified function and returns a boolean for each item of the specified iterable. It filters the items that satisfy the given boolean criteria. It uses the <code class="docutils literal notranslate"><span class="pre">filter(function,</span> <span class="pre">iterable)</span></code> syntax. In the example below, we take all the numbers from zero to five and filter them according to whether they are divisible by 2:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
@@ -1398,7 +1398,7 @@ Adding ten...
 </section>
 <section id="reduce">
 <h3>Reduce<a class="headerlink" href="#reduce" title="Permalink to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">reduce</span></code> is defined in the built-in <code class="docutils literal notranslate"><span class="pre">functools</span></code> module. Like <code class="docutils literal notranslate"><span class="pre">map</span></code> and <code class="docutils literal notranslate"><span class="pre">filter</span></code>, <code class="docutils literal notranslate"><span class="pre">reduce</span></code> takes two parameters, a function and an iterable. However, it returns a single value rather than another iterable. The way <code class="docutils literal notranslate"><span class="pre">reduce</span></code> works is to apply operations successively so that the example below effectively first sums 2 and 3 to make 5, then 5 and 5 to make 10, then 10 and 15 to make 25, and, finally, 25 and 20 to make the final result of 45.</p>
+<p><code class="docutils literal notranslate"><span class="pre">reduce()</span></code> is defined in the built-in <code class="docutils literal notranslate"><span class="pre">functools</span></code> module. Like <code class="docutils literal notranslate"><span class="pre">map()</span></code> and <code class="docutils literal notranslate"><span class="pre">filter()</span></code>, <code class="docutils literal notranslate"><span class="pre">reduce()</span></code> takes two parameters, a function and an iterable. However, it returns a single value rather than another iterable. The way <code class="docutils literal notranslate"><span class="pre">reduce()</span></code> works is to apply operations successively so that the example below effectively first sums 2 and 3 to make 5, then 5 and 5 to make 10, then 10 and 15 to make 25, and, finally, 25 and 20 to make the final result of 45.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>

@@ -609,7 +609,7 @@ p(x_i) = P(X=x_i) = P(\underbrace{\{\omega\in \Omega\ |\ X(\omega) = x_i\}}_{\te
 <p>Another useful object is the <strong>cumulative distribution function</strong>, which is defined generally as <span class="math notranslate nohighlight">\(\text{cdf}(x) = P(X \leq x)\quad \forall x \in \mathbb{R}\)</span>. For probability mass functions, this becomes</p>
 <div class="math notranslate nohighlight">
 \[
-\text{cdf}(x) = P(X\leq x) = \sum_{x_i\leq x} p(x_i)
+\text{cdf}(x) = P(X\leq x) = \sum_{x_i\leq x} p(x_i).
 \]</div>
 </section>
 <section id="continuous-random-variables">
@@ -624,7 +624,7 @@ P(a \leq X \leq b) = \displaystyle\int_a^b f(x) dx
 <p>Cumulative distribution functions are also defined for pdfs:</p>
 <div class="math notranslate nohighlight">
 \[
-\text{cdf}(x) = P(X\leq x) = \int\limits^x_{-\infty}\! f(x')\, dx'
+\text{cdf}(x) = P(X\leq x) = \int\limits^x_{-\infty}\! f(x')\, dx'.
 \]</div>
 </section>
 </section>
@@ -636,7 +636,7 @@ P(a \leq X \leq b) = \displaystyle\int_a^b f(x) dx
 f(k; n, p) = \binom{n}{k} p^k q^{n-k}
 \]</div>
 <p>with <span class="math notranslate nohighlight">\(q=1-p\)</span>. Say we have a process with a 30% chance of success; <span class="math notranslate nohighlight">\(f\)</span> tells us how likely it is to get <span class="math notranslate nohighlight">\(k\)</span> successes out of <span class="math notranslate nohighlight">\(n\)</span> independent trials.</p>
-<p><strong>scipy</strong> has analytical functions for a really wide range of distributions and probability mass functions; you can <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html">find them here</a>. To get the binomial, we’ll use <code class="docutils literal notranslate"><span class="pre">scipy.stats.binom</span></code>.</p>
+<p><strong>scipy</strong> has analytical functions for a really wide range of distributions and probability mass functions; you can <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html">find them here</a>. To get the binomial, we’ll use <code class="docutils literal notranslate"><span class="pre">scipy.stats.binom()</span></code>.</p>
 <p>There are two ways to call different distributions. You can declare a random variable object first, for example, <code class="docutils literal notranslate"><span class="pre">rv</span> <span class="pre">=</span> <span class="pre">binom(n,</span> <span class="pre">p)</span></code>, and then call <code class="docutils literal notranslate"><span class="pre">rv.pmf(k)</span></code> on it. Or you can call it all in one go via <code class="docutils literal notranslate"><span class="pre">binom.pmf(k,</span> <span class="pre">n,</span> <span class="pre">p)</span></code>. Here it is using the former:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -840,7 +840,7 @@ f(k; n, p) = \binom{n}{k} p^k q^{n-k}
 </div>
 </div>
 </div>
-<p>To make it easy to see what happened, we’ll use the in-built collections library’s <code class="docutils literal notranslate"><span class="pre">Counter</span></code> function to go from a long list of all of the letters to a dictionary of letters and counts of how frequently they occurred. We’d like to have the bars in order but <code class="docutils literal notranslate"><span class="pre">Counter</span></code> doesn’t do that automatically, so we have to do a few things around the <code class="docutils literal notranslate"><span class="pre">counts</span></code> dictionary to change this.</p>
+<p>To make it easy to see what happened, we’ll use the in-built collections library’s <code class="docutils literal notranslate"><span class="pre">Counter()</span></code> function to go from a long list of all of the letters to a dictionary of letters and counts of how frequently they occurred. We’d like to have the bars in order but <code class="docutils literal notranslate"><span class="pre">Counter()</span></code> doesn’t do that automatically, so we have to do a few things around the <code class="docutils literal notranslate"><span class="pre">counts</span></code> dictionary to change this.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">OrderedDict</span>
@@ -854,7 +854,7 @@ f(k; n, p) = \binom{n}{k} p^k q^{n-k}
 <img alt="_images/131b195bbf498d437ac06df47f437a57f4577acb93b91aaf4aab4810e82cebcb.svg" src="_images/131b195bbf498d437ac06df47f437a57f4577acb93b91aaf4aab4810e82cebcb.svg" /></div>
 </div>
 <p>As expected, ‘a’ was chosen many more times than ‘b’, and so on. In fact, if we divided the counts by <code class="docutils literal notranslate"><span class="pre">num_draws</span></code>, we would find that the probability of each letter was converging toward the probabilities we provided in <code class="docutils literal notranslate"><span class="pre">prob</span></code>.</p>
-<p>Another useful random function to know about is <code class="docutils literal notranslate"><span class="pre">shuffle</span></code>, and you can probably guess what it does! But note that it does the shuffling to the list you put in, rather than returning a new, modified list. Here’s an example:</p>
+<p>Another useful random function to know about is <code class="docutils literal notranslate"><span class="pre">shuffle()</span></code>, and you can probably guess what it does! But note that it does the shuffling to the list you put in, rather than returning a new, modified list. Here’s an example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plain_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;This&quot;</span><span class="p">,</span> <span class="s2">&quot;list&quot;</span><span class="p">,</span> <span class="s2">&quot;is&quot;</span><span class="p">,</span> <span class="s2">&quot;well&quot;</span><span class="p">,</span> <span class="s2">&quot;ordered.&quot;</span><span class="p">]</span>
@@ -903,7 +903,7 @@ f(k; n, p) = \binom{n}{k} p^k q^{n-k}
 </section>
 <section id="random-numbers-drawn-from-distributions">
 <h3>Random numbers drawn from distributions<a class="headerlink" href="#random-numbers-drawn-from-distributions" title="Permalink to this heading">#</a></h3>
-<p>Using <strong>numpy</strong>, we can draw samples from distributions using the <code class="docutils literal notranslate"><span class="pre">prng.distribution</span></code> syntax. One of the most common distributions you might like to draw from is the uniform, for example</p>
+<p>Using <strong>numpy</strong>, we can draw samples from distributions using the <code class="docutils literal notranslate"><span class="pre">prng.distribution()</span></code> syntax. One of the most common distributions you might like to draw from is the uniform, for example</p>
 <div class="math notranslate nohighlight">
 \[
 x \thicksim \mathcal{U}(0, 10)
@@ -963,9 +963,9 @@ x \thicksim \mathcal{U}(0, 10)
 </section>
 <section id="the-monte-carlo-method">
 <h3>The Monte Carlo Method<a class="headerlink" href="#the-monte-carlo-method" title="Permalink to this heading">#</a></h3>
-<p>Monte Carlo is the name of a part of Monaco that harbours a famous casino, yes, but it’s also the name given to a bunch of techniques that rely on generating random numbers in order to solve problems. It’s a really useful technique that entire textbooks cover and we can’t hope to give it the love and attention it requires here, covering as it does Bayesian statistics, random walks, Markov switching models, Markov Chain Monte Carlo, bootstrapping, and optimisation! But what we can do is take a quick look at the very, very core code tools that can support these applications. The bottom line is that between the drawing of random variables from given <strong>scipy</strong> distributions we’ve already seen, the use of <code class="docutils literal notranslate"><span class="pre">prng.choice()</span></code>, and the use of <code class="docutils literal notranslate"><span class="pre">prng.uniform</span></code>, a lot of Monte Carlo methods are covered.</p>
+<p>Monte Carlo is the name of a part of Monaco that harbours a famous casino, yes, but it’s also the name given to a bunch of techniques that rely on generating random numbers in order to solve problems. It’s a really useful technique that entire textbooks cover and we can’t hope to give it the love and attention it requires here, covering as it does Bayesian statistics, random walks, Markov switching models, Markov Chain Monte Carlo, bootstrapping, and optimisation! But what we can do is take a quick look at the very, very core code tools that can support these applications. The bottom line is that between the drawing of random variables from given <strong>scipy</strong> distributions we’ve already seen, the use of <code class="docutils literal notranslate"><span class="pre">prng.choice()</span></code>, and the use of <code class="docutils literal notranslate"><span class="pre">prng.uniform()</span></code>, a lot of Monte Carlo methods are covered.</p>
 <p>We already covered drawing random numbers from distributions already included in <strong>scipy</strong>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">prng.uniform</span></code> is helpful in the following case: in the (extremely unlikely) event that there isn’t a pre-built distribution available for a case where you know the analytical expression of a PDF and its CDF, a quick way to get random numbers distributed according to that PDF is to plug random numbers into the inverse cumulative distribution function. ie you plug random numbers <span class="math notranslate nohighlight">\(r\)</span> into <span class="math notranslate nohighlight">\(\text{cdf}^{-1}(r)\)</span> in order to generate <span class="math notranslate nohighlight">\(x \thicksim \text{pdf}\)</span>. The random numbers you plug in must come from a uniform distribution between 0 and 1.</p>
+<p><code class="docutils literal notranslate"><span class="pre">prng.uniform()</span></code> is helpful in the following case: in the (extremely unlikely) event that there isn’t a pre-built distribution available for a case where you know the analytical expression of a PDF and its CDF, a quick way to get random numbers distributed according to that PDF is to plug random numbers into the inverse cumulative distribution function. ie you plug random numbers <span class="math notranslate nohighlight">\(r\)</span> into <span class="math notranslate nohighlight">\(\text{cdf}^{-1}(r)\)</span> in order to generate <span class="math notranslate nohighlight">\(x \thicksim \text{pdf}\)</span>. The random numbers you plug in must come from a uniform distribution between 0 and 1.</p>
 <p><code class="docutils literal notranslate"><span class="pre">prng.choice()</span></code> comes into its own for simulation, one of the many applications of Monte Carlo techniques in economics. (I mean simulation loosely here; it could be an agent-based model, it could be simulating an econometric relationship.)</p>
 <p>Let’s do a very simple and canonical example of a simulation using <code class="docutils literal notranslate"><span class="pre">.choice()</span></code>: rolling a 6-sided die…</p>
 <p>..but we want to make it a <em>bit</em> more exciting than that! Let’s see two die, one that’s fair (equal probability of getting any value in 1 to 6) and one that’s loaded (in this case, we’ll make a 6 twice as likely as other values).</p>
@@ -975,7 +975,7 @@ x \thicksim \mathcal{U}(0, 10)
 \hat{p}_\omega = \frac{\text{Counts}_\omega}{\text{Total counts}}
 \]</div>
 <p>with <span class="math notranslate nohighlight">\(\omega \in \{1, 2, 3, 4, 5, 6\}\)</span>.</p>
-<p>To simulate this, we’ll use the <code class="docutils literal notranslate"><span class="pre">choice</span></code> function fed with the six values, 1 to 6, on some dice. Then we’ll count the occurrences of each, creating a dictionary of keys and values with <code class="docutils literal notranslate"><span class="pre">Counter</span></code>, and then plot those.</p>
+<p>To simulate this, we’ll use the <code class="docutils literal notranslate"><span class="pre">choice()</span></code> function fed with the six values, 1 to 6, on some dice. Then we’ll count the occurrences of each, creating a dictionary of keys and values with <code class="docutils literal notranslate"><span class="pre">Counter()</span></code>, and then plot those.</p>
 <p>To work out the (estimate of) probability based on the simulation, we’ve divided the number of throws per value by the total number of throws. You can see that with so many throws, there’s quite a wedge between the chance of obtaining a six in both cases. Meanwhile, the fair die is converging to the dotted line, which is <span class="math notranslate nohighlight">\(1/6\)</span>. Note that because of the individual probabilities summing to unity, a higher probability of a six on the loaded die means that values 1 to 5 must have a lower probability than with the fair die; and you can see that emerging in the chart too.</p>
 <p>In doing this for every possible outcome, we’re effectively estimating a probability mass function.</p>
 <div class="cell docutils container">
@@ -1016,7 +1016,7 @@ x \thicksim \mathcal{U}(0, 10)
 <div class="cell_output docutils container">
 <img alt="_images/401f3516dfef8d316586b46b03cc751920f1f7074103eb90b3649f6668084c35.svg" src="_images/401f3516dfef8d316586b46b03cc751920f1f7074103eb90b3649f6668084c35.svg" /></div>
 </div>
-<p>Let’s estimate the probability mass functions for our dice using the <code class="docutils literal notranslate"><span class="pre">cumsum</span></code> function:</p>
+<p>Let’s estimate the probability mass functions for our dice using the <code class="docutils literal notranslate"><span class="pre">cumsum()</span></code> function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>

@@ -650,7 +650,7 @@ document.write(`
 </section>
 <section id="maps">
 <h2>Maps<a class="headerlink" href="#maps" title="Permalink to this heading">#</a></h2>
-<p>If you’ve looked at the introductory page on geospatial analysis, you’ll know it’s easy to make basic maps: you just need to load a shapefile and use the <code class="docutils literal notranslate"><span class="pre">.plot</span></code> method.</p>
+<p>If you’ve looked at the introductory page on geospatial analysis, you’ll know it’s easy to make basic maps: you just need to load a shapefile and use the <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> method.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To run this example, you will need to download the files at this url:</span>
@@ -677,7 +677,7 @@ document.write(`
 <div class="cell_output docutils container">
 <img alt="_images/8373cbf08fc5fb822f9e0cb8f23487b6a2d4996363ae78dea307ccca8b6142c2.svg" src="_images/8373cbf08fc5fb822f9e0cb8f23487b6a2d4996363ae78dea307ccca8b6142c2.svg" /></div>
 </div>
-<p>The lines that divide up the different local authority districts are faint. They can be controlled with the <code class="docutils literal notranslate"><span class="pre">edgecolor</span></code> and <code class="docutils literal notranslate"><span class="pre">linewidth</span></code> keywords. We can also change the background using the <code class="docutils literal notranslate"><span class="pre">fig.patch.set_facecolor</span></code> method, and add a scale using an extra package, <a class="reference external" href="https://github.com/ppinard/matplotlib-scalebar"><strong>matplotlib-scalebar</strong></a>.</p>
+<p>The lines that divide up the different local authority districts are faint. They can be controlled with the <code class="docutils literal notranslate"><span class="pre">edgecolor</span></code> and <code class="docutils literal notranslate"><span class="pre">linewidth</span></code> keywords. We can also change the background using the <code class="docutils literal notranslate"><span class="pre">fig.patch.set_facecolor()</span></code> method, and add a scale using an extra package, <a class="reference external" href="https://github.com/ppinard/matplotlib-scalebar"><strong>matplotlib-scalebar</strong></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib_scalebar.scalebar</span> <span class="kn">import</span> <span class="n">ScaleBar</span>
@@ -875,7 +875,7 @@ document.write(`
 </div>
 <p>A cartogram is a thematic map in which the geographic size of regions is altered to be proportional to a variable. The shape of the region is warped or shrunk. They can be especially useful when trying to reflect the fact that regions with the largest area do not always have proportionate variable values. Actually, due to the tendency of the shape of political regions to reflect choices made 100s or 1000s of years previously, and for urban areas to be under separate political arrangements, quite often economic variables are anti-correlated with areas.</p>
 <p>A cartogram of pay in Wales demonstrates this. Some areas with higer median incomes, such as Monmouthshire and Conwy, almost completely fill their potential region areas. But others, including Blaenau Gwent and Powys, are shown much smaller than their actual areas.</p>
-<p>The important part of the plot below is the <code class="docutils literal notranslate"><span class="pre">gplt.cartogram</span></code> but, along with other bits to make the plot look better, we’re adding <code class="docutils literal notranslate"><span class="pre">gplt.polyplot</span></code> to show what the true size of each region is when it is not proportional to another variable.</p>
+<p>The important part of the plot below is the <code class="docutils literal notranslate"><span class="pre">gplt.cartogram()</span></code> but, along with other bits to make the plot look better, we’re adding <code class="docutils literal notranslate"><span class="pre">gplt.polyplot()</span></code> to show what the true size of each region is when it is not proportional to another variable.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unfortunately this isn&#39;t currently working: an issue has been raised at https://github.com/ResidentMario/geoplot/issues/288</span>
@@ -921,7 +921,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Now let’s project this onto a background of NY’s boroughs. Because this is computationally expensive, we’ll use the <code class="docutils literal notranslate"><span class="pre">simplify</span></code> method to reduce the complexity of the geometries we’re using.</p>
+<p>Now let’s project this onto a background of NY’s boroughs. Because this is computationally expensive, we’ll use the <code class="docutils literal notranslate"><span class="pre">simplify()</span></code> method to reduce the complexity of the geometries we’re using.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boroughs</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">gplt</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s2">&quot;nyc_boroughs&quot;</span><span class="p">))</span>
@@ -1127,7 +1127,7 @@ document.write(`
 </table>
 </div></div></div>
 </div>
-<p>Now we will create the small multiple chart. There’s quite a lot going on in the below so let’s talk through the moving pieces. There’s a perceptually uniform heatmap from the <strong>colorcet</strong> package that ranges between a min of 0 and max of 250 as set by <code class="docutils literal notranslate"><span class="pre">vmin</span></code> and <code class="docutils literal notranslate"><span class="pre">vmax</span></code>. To plot every one of the 12 time periods, <code class="docutils literal notranslate"><span class="pre">plt.subplots</span></code> is called with <code class="docutils literal notranslate"><span class="pre">nrows=4</span></code> and <code class="docutils literal notranslate"><span class="pre">ncols=3</span></code> for 12 axes in total. We <code class="docutils literal notranslate"><span class="pre">.flatten()</span></code> the axes to make it easier to iterate over them. We turn the legend off for all but one axis. With all of this set up, we iterate through the unique values of the date column, which is at monthly frequency, and plot each in turn on a separate axis oject. For each, we also add a title that is the month and year.</p>
+<p>Now we will create the small multiple chart. There’s quite a lot going on in the below so let’s talk through the moving pieces. There’s a perceptually uniform heatmap from the <strong>colorcet</strong> package that ranges between a min of 0 and max of 250 as set by <code class="docutils literal notranslate"><span class="pre">vmin</span></code> and <code class="docutils literal notranslate"><span class="pre">vmax</span></code>. To plot every one of the 12 time periods, <code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code> is called with <code class="docutils literal notranslate"><span class="pre">nrows=4</span></code> and <code class="docutils literal notranslate"><span class="pre">ncols=3</span></code> for 12 axes in total. We <code class="docutils literal notranslate"><span class="pre">.flatten()</span></code> the axes to make it easier to iterate over them. We turn the legend off for all but one axis. With all of this set up, we iterate through the unique values of the date column, which is at monthly frequency, and plot each in turn on a separate axis oject. For each, we also add a title that is the month and year.</p>
 <p>The overall effect is quite powerful: you can really see how deaths peaked around April 2020 and January 2021, having begun to pick up in November, but you can also see the long period of relatively few deaths 28 days after diagnosis during the summer months.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1159,7 +1159,7 @@ document.write(`
 <div class="cell_output docutils container">
 <img alt="_images/3d1ed84621c92cfb4273c395c55eb8414b6c0a04fdb6c23125c9acb610d67fb2.svg" src="_images/3d1ed84621c92cfb4273c395c55eb8414b6c0a04fdb6c23125c9acb610d67fb2.svg" /></div>
 </div>
-<p>Another way to show time and space is using a heatmap. The easiest way to plot a heatmap is to put the data into wide format first. To ensure we have nice labels though, we’re going to cast the datetime variable in a month and year in the format ‘Jan 20’ using <code class="docutils literal notranslate"><span class="pre">strftime</span></code> first.</p>
+<p>Another way to show time and space is using a heatmap. The easiest way to plot a heatmap is to put the data into wide format first. To ensure we have nice labels though, we’re going to cast the datetime variable in a month and year in the format ‘Jan 20’ using <code class="docutils literal notranslate"><span class="pre">strftime()</span></code> first.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%b </span><span class="se">\n</span><span class="s2"> %y&quot;</span><span class="p">))</span>
@@ -1298,7 +1298,7 @@ document.write(`
 </table>
 </div></div></div>
 </div>
-<p>Now we have the data where we want it, we can call the <code class="docutils literal notranslate"><span class="pre">ax.imshow</span></code> method with a colourmap and set the labels to the index and columns in order to show how, for each London Borough, the number of deaths has changed over time. Note that, unlike the geospatial map, this does not capture the linkages in space very well: but it arguably does a better job of capturing linkages in time.</p>
+<p>Now we have the data where we want it, we can call the <code class="docutils literal notranslate"><span class="pre">ax.imshow()</span></code> method with a colourmap and set the labels to the index and columns in order to show how, for each London Borough, the number of deaths has changed over time. Note that, unlike the geospatial map, this does not capture the linkages in space very well: but it arguably does a better job of capturing linkages in time.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>

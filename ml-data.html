@@ -653,7 +653,7 @@ The std of X is:
 </div>
 </div>
 </div>
-<p>And we can use it as a <em>function</em> to scale other data. Well, technically, we’re using the <code class="docutils literal notranslate"><span class="pre">transform</span></code> <em>method</em>, which is available to scaler objects.</p>
+<p>And we can use it as a <em>function</em> to scale other data. Well, technically, we’re using the <code class="docutils literal notranslate"><span class="pre">transform()</span></code> <em>method</em>, which is available to scaler objects.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -728,7 +728,7 @@ The max is 1.000
 </section>
 <section id="robust-scaler">
 <h3>Robust Scaler<a class="headerlink" href="#robust-scaler" title="Permalink to this heading">#</a></h3>
-<p>So what about the situation where you have some outliers? Of course, if they’re truly erroneous you may wish to remove them  before you start working with the data (just remember that the test data may have some too!). The other option is to use <code class="docutils literal notranslate"><span class="pre">RobustScaler()</span></code>. What does “robust” mean here? Basically that the addition or removal of outliers will not significantly change the character of the transformation. In particular, the centering and scaling statistics of <code class="docutils literal notranslate"><span class="pre">RobustScaler</span></code> are based on percentiles and are therefore not influenced by a small number of very large marginal outliers. Consequently, the resulting range of the transformed feature values is larger than for the previous scalers. Note that the outliers are retained.</p>
+<p>So what about the situation where you have some outliers? Of course, if they’re truly erroneous you may wish to remove them  before you start working with the data (just remember that the test data may have some too!). The other option is to use <code class="docutils literal notranslate"><span class="pre">RobustScaler()</span></code>. What does “robust” mean here? Basically that the addition or removal of outliers will not significantly change the character of the transformation. In particular, the centering and scaling statistics of <code class="docutils literal notranslate"><span class="pre">RobustScaler()</span></code> are based on percentiles and are therefore not influenced by a small number of very large marginal outliers. Consequently, the resulting range of the transformed feature values is larger than for the previous scalers. Note that the outliers are retained.</p>
 <p>Let’s see an example straight out of the excellent <strong>scikit-learn</strong> <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_all_scaling.html#plot-all-scaling-minmax-scaler-section">documentation</a> with occupancy and income data for housing.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -737,7 +737,7 @@ The max is 1.000
 </section>
 <section id="power-transformations">
 <h3>Power Transformations<a class="headerlink" href="#power-transformations" title="Permalink to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">PowerTransformer</span></code> applies a power transformation to each feature to make the data more Gaussian-like in order to stabilise variance and minimise skewness. Currently the Yeo-Johnson and Box-Cox transforms are supported in <strong>scikit-learn</strong> and the optimal scaling factor is determined via maximum likelihood estimation in both methods (see the <a class="reference internal" href="time-series.html#time-series"><span class="std std-ref">Time Series</span></a> chapter for how to estimate <span class="math notranslate nohighlight">\(\lambda\)</span> yourself). By default, <code class="docutils literal notranslate"><span class="pre">PowerTransformer</span></code> applies zero-mean, unit variance normalisation. Note that Box-Cox can only be applied to strictly positive data.</p>
+<p><code class="docutils literal notranslate"><span class="pre">PowerTransformer()</span></code> applies a power transformation to each feature to make the data more Gaussian-like in order to stabilise variance and minimise skewness. Currently the Yeo-Johnson and Box-Cox transforms are supported in <strong>scikit-learn</strong> and the optimal scaling factor is determined via maximum likelihood estimation in both methods (see the <a class="reference internal" href="time-series.html#time-series"><span class="std std-ref">Time Series</span></a> chapter for how to estimate <span class="math notranslate nohighlight">\(\lambda\)</span> yourself). By default, <code class="docutils literal notranslate"><span class="pre">PowerTransformer()</span></code> applies zero-mean, unit variance normalisation. Note that Box-Cox can only be applied to strictly positive data.</p>
 <section id="the-box-cox-transform">
 <h4>The Box-Cox Transform<a class="headerlink" href="#the-box-cox-transform" title="Permalink to this heading">#</a></h4>
 <p>This transform actually nests power transforms and logarithms, depending on the value of a parameter that is usually denoted <span class="math notranslate nohighlight">\(\lambda\)</span>. The transform is given by</p>
@@ -774,7 +774,7 @@ y_i =
 </section>
 <section id="quantile-transform">
 <h3>Quantile Transform<a class="headerlink" href="#quantile-transform" title="Permalink to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">QuantileTransformer</span></code> applies a non-linear transformation such that the probability density function of each feature will be mapped to a uniform or Gaussian distribution. In this case, all the data, including outliers, will be mapped to a uniform distribution with the range [0, 1], making outliers indistinguishable from inliers. (Remember, <code class="docutils literal notranslate"><span class="pre">RobustScaler</span></code> and <code class="docutils literal notranslate"><span class="pre">QuantileTransformer</span></code> are robust to outliers in the sense that adding or removing outliers in the training set will yield approximately the same transformation.) A quantile transform smooths out unusual distributions and is less influenced by outliers than scaling methods—it does, however, distort correlations and distances within and across features.</p>
+<p><code class="docutils literal notranslate"><span class="pre">QuantileTransformer()</span></code> applies a non-linear transformation such that the probability density function of each feature will be mapped to a uniform or Gaussian distribution. In this case, all the data, including outliers, will be mapped to a uniform distribution with the range [0, 1], making outliers indistinguishable from inliers. (Remember, <code class="docutils literal notranslate"><span class="pre">RobustScaler()</span></code> and <code class="docutils literal notranslate"><span class="pre">QuantileTransformer()</span></code> are robust to outliers in the sense that adding or removing outliers in the training set will yield approximately the same transformation.) A quantile transform smooths out unusual distributions and is less influenced by outliers than scaling methods—it does, however, distort correlations and distances within and across features.</p>
 <p>Quantile transformations work by first creating an estimate of the cumulative distribution function of a feature and then using it to map the original values to a uniform or Gaussian distribution. Features values of new or unseen data that fall below or above the fitted range will be mapped to the bounds of the output distribution.</p>
 <p>You can see examples of what happens to an input distribution when quantised in the figure above.</p>
 </section>
@@ -790,7 +790,7 @@ y_i =
 <li><p>K-Nearest Neighbor Imputation: Predict the missing values by averaging or interpolating using the values of the missing value’s nearest neighbors.</p></li>
 </ul>
 <p>Note that the first and last use the feature only; the second relies on other features too.</p>
-<p>The most basic approach, the first, is covered by the <code class="docutils literal notranslate"><span class="pre">SimpleImputer</span></code> class in <strong>scikit-learn</strong>. Missing values can be imputed with a provided constant value, or using the statistics (mean, median or most frequent) of each column in which the missing values are located. This class also allows for different missing values encodings. Here’s an example of using the <code class="docutils literal notranslate"><span class="pre">SimpleImputer</span></code> class:</p>
+<p>The most basic approach, the first, is covered by the <code class="docutils literal notranslate"><span class="pre">SimpleImputer()</span></code> class in <strong>scikit-learn</strong>. Missing values can be imputed with a provided constant value, or using the statistics (mean, median or most frequent) of each column in which the missing values are located. This class also allows for different missing values encodings. Here’s an example of using the <code class="docutils literal notranslate"><span class="pre">SimpleImputer()</span></code> class:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
@@ -1016,7 +1016,7 @@ y_i =
 </table>
 </div></div></div>
 </div>
-<p>Now, we use the <code class="docutils literal notranslate"><span class="pre">MathFeatures</span></code> class to generate a transformer, and then <code class="docutils literal notranslate"><span class="pre">fit_transform</span></code> to generate new downstream features:</p>
+<p>Now, we use the <code class="docutils literal notranslate"><span class="pre">MathFeatures</span></code> class to generate a transformer, and then <code class="docutils literal notranslate"><span class="pre">fit_transform()</span></code> to generate new downstream features:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transformer</span> <span class="o">=</span> <span class="n">MathFeatures</span><span class="p">(</span>
@@ -1433,7 +1433,7 @@ dtype: object
 </section>
 <section id="discretisation-of-continuous-features">
 <h3>Discretisation of continuous features<a class="headerlink" href="#discretisation-of-continuous-features" title="Permalink to this heading">#</a></h3>
-<p>We already saw one way to discretise continuous features using <code class="docutils literal notranslate"><span class="pre">pd.cut</span></code> and <code class="docutils literal notranslate"><span class="pre">pd.qcut</span></code>: you can read more about these in the Chapters on <a class="reference internal" href="data-categorical.html#categorical-data"><span class="std std-ref">Categorical Data</span></a> and <a class="reference internal" href="data-transformation.html#data-transformation"><span class="std std-ref">Data Transformation</span></a>.</p>
+<p>We already saw one way to discretise continuous features using <code class="docutils literal notranslate"><span class="pre">pd.cut()</span></code> and <code class="docutils literal notranslate"><span class="pre">pd.qcut()</span></code>: you can read more about these in the Chapters on <a class="reference internal" href="data-categorical.html#categorical-data"><span class="std std-ref">Categorical Data</span></a> and <a class="reference internal" href="data-transformation.html#data-transformation"><span class="std std-ref">Data Transformation</span></a>.</p>
 <p><strong>scikit-learn</strong> also offers some ways to do this, for example k-bins discretiser. It is used as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

@@ -544,12 +544,12 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sort-rows-or-columns-with-sort-values">Sort rows or columns with <code class="docutils literal notranslate"><span class="pre">.sort_values()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-multiple-rows-or-columns-using-slices">Choose multiple rows or columns using slices</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomly-selecting-a-sample-using-sample">Randomly selecting a sample using <code class="docutils literal notranslate"><span class="pre">.sample</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rename-with-rename">Rename with <code class="docutils literal notranslate"><span class="pre">.rename</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-new-columns-with-assign-or-assignment">Add new columns with <code class="docutils literal notranslate"><span class="pre">.assign</span></code> or assignment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rename-with-rename">Rename with <code class="docutils literal notranslate"><span class="pre">.rename()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-new-columns-with-assign-or-assignment">Add new columns with <code class="docutils literal notranslate"><span class="pre">.assign()</span></code> or assignment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summarise-numerical-values-with-describe">Summarise numerical values with <code class="docutils literal notranslate"><span class="pre">.describe()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group-variables-values-with-groupby">Group variables values with <code class="docutils literal notranslate"><span class="pre">.groupby()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-transformed-columns-using-transform">Add transformed columns using <code class="docutils literal notranslate"><span class="pre">.transform()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-quick-charts-with-plot">Make quick charts with <code class="docutils literal notranslate"><span class="pre">.plot.*</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-quick-charts-with-plot">Make quick charts with <code class="docutils literal notranslate"><span class="pre">.plot.*()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#export-results-and-descriptive-statistics">Export results and descriptive statistics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
@@ -929,7 +929,7 @@ memory usage: 5.8+ KB
 </div>
 <div class="admonition-exercise admonition">
 <p class="admonition-title">Exercise</p>
-<p>Using <code class="docutils literal notranslate"><span class="pre">sort_values</span></code>, sort the dataframe by the <code class="docutils literal notranslate"><span class="pre">name</span></code> column.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">sort_values()</span></code>, sort the dataframe by the <code class="docutils literal notranslate"><span class="pre">name</span></code> column.</p>
 </div>
 </section>
 <section id="choose-multiple-rows-or-columns-using-slices">
@@ -1205,11 +1205,11 @@ memory usage: 5.8+ KB
 </div>
 <div class="admonition-exercise admonition">
 <p class="admonition-title">Exercise</p>
-<p>Use <code class="docutils literal notranslate"><span class="pre">.sample</span></code> to sample 5% of the dataframe.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">.sample()</span></code> to sample 5% of the dataframe.</p>
 </div>
 </section>
 <section id="rename-with-rename">
-<h2>Rename with <code class="docutils literal notranslate"><span class="pre">.rename</span></code><a class="headerlink" href="#rename-with-rename" title="Permalink to this heading">#</a></h2>
+<h2>Rename with <code class="docutils literal notranslate"><span class="pre">.rename()</span></code><a class="headerlink" href="#rename-with-rename" title="Permalink to this heading">#</a></h2>
 <p>You can rename all columns by passing a function, for instance <code class="docutils literal notranslate"><span class="pre">df.rename(columns=str.lower)</span></code> to put all columns in lower case. Alternatively, use a dictionary to say which columns should be mapped to what:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1331,13 +1331,13 @@ memory usage: 5.8+ KB
 </div>
 </section>
 <section id="add-new-columns-with-assign-or-assignment">
-<h2>Add new columns with <code class="docutils literal notranslate"><span class="pre">.assign</span></code> or assignment<a class="headerlink" href="#add-new-columns-with-assign-or-assignment" title="Permalink to this heading">#</a></h2>
+<h2>Add new columns with <code class="docutils literal notranslate"><span class="pre">.assign()</span></code> or assignment<a class="headerlink" href="#add-new-columns-with-assign-or-assignment" title="Permalink to this heading">#</a></h2>
 <p>Very often you will want to create new columns based on existing columns.</p>
 <p><img alt="" src="https://pandas.pydata.org/docs/_images/05_newcolumn_1.svg" /></p>
 <p>There are two ways to do this. Let’s see them both with an example where we’d like to create a new column that contains height in metres, called <code class="docutils literal notranslate"><span class="pre">&quot;height_m:</span></code>.</p>
 <ul class="simple">
 <li><p>The first, and most commonly used, is called <em>assignment</em> and involves just entering the new column name within your dataframe and putting it on the left-hand side of an assignment expression that has an operation based on existing dataframe columns on the right-hand side. For example, <code class="docutils literal notranslate"><span class="pre">df['height_m']</span> <span class="pre">=</span> <span class="pre">df['height']/100</span></code>.</p></li>
-<li><p>The second is to use the <code class="docutils literal notranslate"><span class="pre">assign</span></code> method on a dataframe directly. In this case, the assignment statement appears inside the brackets but you don’t need to write as much text because it’s clear from the context that, on the left-hand side of the assignment, we’re talking about the given dataframe. An example is <code class="docutils literal notranslate"><span class="pre">df.assign(height_m=df[&quot;height&quot;]</span> <span class="pre">/</span> <span class="pre">100)</span></code>.</p></li>
+<li><p>The second is to use the <code class="docutils literal notranslate"><span class="pre">assign()</span></code> method on a dataframe directly. In this case, the assignment statement appears inside the brackets but you don’t need to write as much text because it’s clear from the context that, on the left-hand side of the assignment, we’re talking about the given dataframe. An example is <code class="docutils literal notranslate"><span class="pre">df.assign(height_m=df[&quot;height&quot;]</span> <span class="pre">/</span> <span class="pre">100)</span></code>.</p></li>
 </ul>
 <p>Let’s see working examples of both of these assignment methods.</p>
 <p>First let’s use the assignment approach:</p>
@@ -1443,7 +1443,7 @@ memory usage: 5.8+ KB
 </table>
 </div></div></div>
 </div>
-<p>And now with the <code class="docutils literal notranslate"><span class="pre">.assign</span></code> function:</p>
+<p>And now with the <code class="docutils literal notranslate"><span class="pre">.assign()</span></code> function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">height_m</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;height&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
@@ -1960,7 +1960,7 @@ memory usage: 5.8+ KB
 </div>
 </section>
 <section id="make-quick-charts-with-plot">
-<h2>Make quick charts with <code class="docutils literal notranslate"><span class="pre">.plot.*</span></code><a class="headerlink" href="#make-quick-charts-with-plot" title="Permalink to this heading">#</a></h2>
+<h2>Make quick charts with <code class="docutils literal notranslate"><span class="pre">.plot.*()</span></code><a class="headerlink" href="#make-quick-charts-with-plot" title="Permalink to this heading">#</a></h2>
 <p>Including scatter, area, bar, box, density, hexbin, histogram, kde, and line.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2165,12 +2165,12 @@ std &amp; 170.810183 &amp; 34.483629 \\
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sort-rows-or-columns-with-sort-values">Sort rows or columns with <code class="docutils literal notranslate"><span class="pre">.sort_values()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-multiple-rows-or-columns-using-slices">Choose multiple rows or columns using slices</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#randomly-selecting-a-sample-using-sample">Randomly selecting a sample using <code class="docutils literal notranslate"><span class="pre">.sample</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rename-with-rename">Rename with <code class="docutils literal notranslate"><span class="pre">.rename</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-new-columns-with-assign-or-assignment">Add new columns with <code class="docutils literal notranslate"><span class="pre">.assign</span></code> or assignment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rename-with-rename">Rename with <code class="docutils literal notranslate"><span class="pre">.rename()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-new-columns-with-assign-or-assignment">Add new columns with <code class="docutils literal notranslate"><span class="pre">.assign()</span></code> or assignment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summarise-numerical-values-with-describe">Summarise numerical values with <code class="docutils literal notranslate"><span class="pre">.describe()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group-variables-values-with-groupby">Group variables values with <code class="docutils literal notranslate"><span class="pre">.groupby()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-transformed-columns-using-transform">Add transformed columns using <code class="docutils literal notranslate"><span class="pre">.transform()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-quick-charts-with-plot">Make quick charts with <code class="docutils literal notranslate"><span class="pre">.plot.*</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-quick-charts-with-plot">Make quick charts with <code class="docutils literal notranslate"><span class="pre">.plot.*()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#export-results-and-descriptive-statistics">Export results and descriptive statistics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>

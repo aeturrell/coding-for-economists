@@ -750,7 +750,7 @@ Y \mid \alpha, \beta, \sigma \stackrel{\text{ind}}{\thicksim} \mathcal{N}(\mu, \
 </div>
 </div>
 <p>So what just happened? The ‘NUTS sampler’ was auto-assigned. NUTS stands for the ‘No-U-turn sampler’. This is a just a fancy way of picking the points to sample <span class="math notranslate nohighlight">\(p({\boldsymbol{y}}|{\boldsymbol{\theta }})p({\boldsymbol{\theta }})\)</span> to build up a picture of <span class="math notranslate nohighlight">\(p({\boldsymbol{\theta }}|{\boldsymbol{y}})\)</span>. It’s a good default option for sampling.</p>
-<p>Let’s take a quick look at the model we just estimated using the <code class="docutils literal notranslate"><span class="pre">model_to_graphviz</span></code> method—though note that this is a very simple model, and this method comes into its own in more complex cases.</p>
+<p>Let’s take a quick look at the model we just estimated using the <code class="docutils literal notranslate"><span class="pre">model_to_graphviz()</span></code> method—though note that this is a very simple model, and this method comes into its own in more complex cases.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">model_to_graphviz</span><span class="p">(</span><span class="n">linear_model</span><span class="p">)</span>
@@ -2392,7 +2392,7 @@ dl.xr-attrs {
 <p>This looks like fairly meaningless noise, so let’s walk through what we’re seeing here. On the left-hand side, we can see the results of the two chains we ran for each of the three parameters. The x-axis is the parameter value, the y-axis is the probability density (no values shown). We’re actually looking at the posterior distributions here! We’ll come on to whether they make sense or not later, but for now we just know we’ve got some estimates of the posterior.</p>
 <p>On the right-hand side, we have some traces, with the sample number on the x-axis and the parameter value on the y axis. Just looking at these gives our first sense of whether the sampling has gone well or not. Trace plots can give a sense of whether the model converged (you should see a trace that is a random scatter around a mean value), whether the chains are mixing (they should overlap randomly on the plot), and whether there are specific parameters that the model is struggling to estimate. If the sampling is not going well, neither of these will be true and the chains will not converge to occupy a small area, nor will they mix together.</p>
 <p>From the above chart, it looks like we successfully created some well-behaved samples and have what appears to be a good estimate of the posterior.</p>
-<p>Now let’s look at our actual estimates of these parameters by running the <code class="docutils literal notranslate"><span class="pre">summary</span></code> function:</p>
+<p>Now let’s look at our actual estimates of these parameters by running the <code class="docutils literal notranslate"><span class="pre">summary()</span></code> function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">round_to</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>

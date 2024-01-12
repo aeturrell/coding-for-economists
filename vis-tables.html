@@ -690,7 +690,7 @@ document.write(`
 </section>
 <section id="preparing-and-creating-your-table-in-pandas">
 <h3>Preparing and creating your table in <strong>pandas</strong><a class="headerlink" href="#preparing-and-creating-your-table-in-pandas" title="Permalink to this heading">#</a></h3>
-<p>There are a few operations that you’ll want to do again, and again, and again to create tables. A cross-tab is one such operation! A cross-tab is just a count of the number of elements split by two groupings. Rather than just display this using the <code class="docutils literal notranslate"><span class="pre">pd.crosstab</span></code> function, we can add totals or percentages using the <code class="docutils literal notranslate"><span class="pre">margins=</span></code> and <code class="docutils literal notranslate"><span class="pre">normalize=</span></code> commands.</p>
+<p>There are a few operations that you’ll want to do again, and again, and again to create tables. A cross-tab is one such operation! A cross-tab is just a count of the number of elements split by two groupings. Rather than just display this using the <code class="docutils literal notranslate"><span class="pre">pd.crosstab()</span></code> function, we can add totals or percentages using the <code class="docutils literal notranslate"><span class="pre">margins=</span></code> and <code class="docutils literal notranslate"><span class="pre">normalize=</span></code> commands.</p>
 <p>In the below, we’ll use margins and normalisation so that each row sums to 1, and the last row shows the probability mass over islands.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -853,7 +853,7 @@ document.write(`
 </div>
 </div>
 <p>The table we just saw, <code class="docutils literal notranslate"><span class="pre">pen_summary</span></code>, is not what you’d call publication quality. The numbers have lots of superfluous digits. The names are useful for when you’re doing analysis, but might not be so obvious to someone coming to this table for the first time. So let’s see what we can do to clean it up a bit.</p>
-<p>First, those numbers. We can apply number rounding quickly using <code class="docutils literal notranslate"><span class="pre">.round</span></code>.</p>
+<p>First, those numbers. We can apply number rounding quickly using <code class="docutils literal notranslate"><span class="pre">.round()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pen_summary</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -1019,7 +1019,7 @@ document.write(`
 <p>Behind the scenes, when a table is displayed on a webpage like the one you’re reading right now, HTML (the language most of the internet is in) is used. Styling is a way of modifying the default HTML for showing tables so that they look nicer or better.</p>
 <p>In the example below, you can see some of the options that are available:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">precision</span></code> is like <code class="docutils literal notranslate"><span class="pre">.round</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">precision</span></code> is like <code class="docutils literal notranslate"><span class="pre">.round()</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">na_rep</span></code> sets how missing values are rendered</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">thousands</span></code> sets the separator between every thousand (for readability)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">formatter</span></code> gives fine-grained control over the formatting of individual columns</p></li>
@@ -1345,17 +1345,17 @@ document.write(`
 <h3>Writing <strong>pandas</strong> tables to file<a class="headerlink" href="#writing-pandas-tables-to-file" title="Permalink to this heading">#</a></h3>
 <p>Writing <strong>pandas</strong> tables to file is fairly straightforward: just use one of <strong>pandas</strong> many, many output functions. These typically begin with <code class="docutils literal notranslate"><span class="pre">.to_</span></code> and then the output name. The most useful output formats will be:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">to_html</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">to_latex</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">to_string</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">to_markdown</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to_html()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to_latex()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to_string()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to_markdown()</span></code></p></li>
 </ul>
 <p>Add the filename you’d like to write to within the brackets following these method names. For example, to write a latex table it would be:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pen_styled</span><span class="o">.</span><span class="n">to_latex</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;outputs/table_one.tex&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>These files can then be picked up by other documents. Note that, sometimes, when exporting to Latex, the code will have “escape” characters, for example extra backslashes. In some versions of <strong>pandas</strong> you can turn these off with an <code class="docutils literal notranslate"><span class="pre">escape=False</span></code> keyword argument.</p>
-<p>It’s not perfect, but if you’re writing a table to latex and want footnotes and source notes, you can make use of the <code class="docutils literal notranslate"><span class="pre">to_latex</span></code> method’s <code class="docutils literal notranslate"><span class="pre">caption=</span></code> keyword argument.</p>
+<p>It’s not perfect, but if you’re writing a table to latex and want footnotes and source notes, you can make use of the <code class="docutils literal notranslate"><span class="pre">to_latex()</span></code> method’s <code class="docutils literal notranslate"><span class="pre">caption=</span></code> keyword argument.</p>
 </section>
 <section id="limitations-to-pandas-tables">
 <h3>Limitations to <strong>pandas</strong> tables<a class="headerlink" href="#limitations-to-pandas-tables" title="Permalink to this heading">#</a></h3>
