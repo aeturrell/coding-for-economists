@@ -90,8 +90,6 @@ This will create a docker container and deploy it to the Cloud Run service. You 
 
 If you want to follow a full example of serving up data end-to-end, take a look at the [particulate matter datasette](https://github.com/aeturrell/datasette_particulate_matter) github repo. These data were constructed by downloading files of estimates of 2.5 micron particulate matter concentration in the UK from the DEFRA website and combining them into a CSV.
 
-**You can see how the data in this repo get served up by datasette at [this link](https://particulatematter-fsx2r7puuq-nw.a.run.app/).**
-
 ```{admonition} Exercises
 1. Download the CSV file from the [particulate matter repo](https://github.com/aeturrell/datasette_particulate_matter) and run it as a datasette locally on your own computer.
 2. (Advanced) Run the same set of data via a datasette instance on the web using Google Cloud Run. (This requires a Google Cloud Account; you may be billed for excessive use of this service so remember to shut it down via the Google Cloud Console once you're done.)
