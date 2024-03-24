@@ -67,25 +67,25 @@ You can find more on (frequentist) regressions in {ref}`regression`, Bayesian re
 | `merge 1:1 vars using filename`  | `df = pd.merge(df1, df2, on=vars)` but there are very rich options for merging dataframes (Python is similar to SQL in this respect) and you should check the [full documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/merging.html).     |
 | `reshape <wide/long> <stubs>, i(<vars>) j(<var>)`  | **pandas** has several reshaping functions, including `df.unstack('level')` for going to wide, `df.stack('column_level')` for going to long, `pd.melt`, and `df.pivot`. It's best to check the excellent [reshaping](https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html) documentation to find what best suits your needs.    |
 | `xi: i.var`  | `pd.get_dummies(df['var'])`|
-| `reg yvar xvar if condition, r`  | <code>from pyfixest.estimation import feols<br> fit = feols("yvar ~ xvar", data=df["condition"], vcov="HC2") </code> |
-| `reg yvar xvar if condition, vce(cluster clustervar)`  | <code>from pyfixest.estimation import feols<br> fit = feols("yvar ~ xvar", data=df["condition"], vcov={"CRV1": "clustervar"}) </code> |
-| `areg yvar xvar, absorb(fe_var)`  | <code>from pyfixest.estimation import feols<br> fit = feols("yvar ~ xvar \| fe_var", data=df) </code> |
-| `_b[var], _se[var]`  | `results_sw.coef()["var"], results_sw.se()["var"]` following creation of `results_sw` via `results_sw = feols(...)` |
-| `ivreg2 lwage exper expersq (educ=age)`  | <code> feols("lwage ~ exper + expersq \| educ ~ age", data=dfiv) </code> |
-| `outreg2`  | `results = feols(...)` then `results.tidy()` |
+| `reg yvar xvar if condition, r`  | <code>import pyfixest as pf<br> fit = pf.feols("yvar ~ xvar", data=df["condition"], vcov="HC2") </code> |
+| `reg yvar xvar if condition, vce(cluster clustervar)`  | <code>import pyfixest as pf<br> fit = pf.feols("yvar ~ xvar", data=df["condition"], vcov={"CRV1": "clustervar"}) </code> |
+| `areg yvar xvar, absorb(fe_var)`  | <code>import pyfixest as pf<br> fit = pf.feols("yvar ~ xvar \| fe_var", data=df) </code> |
+| `_b[var], _se[var]`  | `results_sw.coef()["var"], results_sw.se()["var"]` following creation of `results_sw` via `results_sw = pf.feols(...)` |
+| `ivreg2 lwage exper expersq (educ=age)`  | <code> pf.feols("lwage ~ exper + expersq \| educ ~ age", data=dfiv) </code> |
+| `outreg2`  | `results = pf.feols(...)` then `results.tidy()` |
 | `binscatter`  | `binsreg` from the [**binsreg**](https://pypi.org/project/binsreg/) package; see {ref}`regression-diagnostics`. |
 | `twoway scatter var1 var2`  | `df.scatter(var2, var1)` |
 
 The table below presents further examples of doing regression with both the **statsmodels** and [**pyfixest**](https://s3alfisc.github.io/pyfixest/) packages.
 
-Note that, in the below, you need only import `feols` once in each Python session, and the syntax for looking at results is `results = feols(...)` and then `results.summary()`.
+Note that, in the below, you need only import `pf.feols` once in each Python session, and the syntax for looking at results is `results = pf.feols(...)` and then `results.summary()`.
 
 | Command | Stata      | Python |
 | ----------- | ----------- | ----------- |
-| Fixed Effects (absorbing) | `reghdfe y x, absorb(fe)` | <code>from pyfixest.estimation import feols<br> fit = feols("y ~ x \| fe", data=df) </code>|
-| Categorical regression | `reghdfe y x i.cat` | <code>from pyfixest.estimation import feols<br> fit = feols("y ~ x + C(cat)", data=df) </code><br> But if `cat` is of type categorical it can be run with `y ~ x + cat`|
-| Interacting categoricals | `reghdfe y x i.cat#i.cat2` | <code>from pyfixest.estimation import feols<br> fit = feols("yvar ~ xvar + C(cat):C(cat2)", data=df) </code> <br> Note that `a*b` is a short-hand for `a + b + a:b`, with the last term representing the interaction.|
-| Robust standard errors | `reghdfe y x, r` | <code>from pyfixest.estimation import feols<br> fit = feols("y ~ x, data=df, vcov="HC1") </code> <br> Note that a range of heteroskedasticity robust standard errors are available: see {ref}`regression` for more.|
-| Clustered standard errors | `reghdfe y x, cluster(clust)` | <code>from pyfixest.estimation import feols<br> fit = feols("y ~ x", data=df, vcov={"CRV1": "clust"}) </code>|
-| Two-way clustered standard errors | `reghdfe y x, cluster(clust1 clust2)` |<code>from pyfixest.estimation import feols<br> fit = feols("y ~ x", data=df, vcov={"CRV1": "clust1 + clust2"}) </code>|
-| Instrumental variables | `ivreghdfe 2sls y exog (endog = instrument)` | <code>from pyfixest.estimation import feols<br> fit = feols("y ~ exog \| endog ~ instrument", data=df) </code>|
+| Fixed Effects (absorbing) | `reghdfe y x, absorb(fe)` | <code>import pyfixest as pf<br> fit = pf.feols("y ~ x \| fe", data=df) </code>|
+| Categorical regression | `reghdfe y x i.cat` | <code>import pyfixest as pf<br> fit = pf.feols("y ~ x + C(cat)", data=df) </code><br> But if `cat` is of type categorical it can be run with `y ~ x + cat`|
+| Interacting categoricals | `reghdfe y x i.cat#i.cat2` | <code>import pyfixest as pf<br> fit = pf.feols("yvar ~ xvar + C(cat):C(cat2)", data=df) </code> <br> Note that `a*b` is a short-hand for `a + b + a:b`, with the last term representing the interaction.|
+| Robust standard errors | `reghdfe y x, r` | <code>import pyfixest as pf<br> fit = pf.feols("y ~ x, data=df, vcov="HC1") </code> <br> Note that a range of heteroskedasticity robust standard errors are available: see {ref}`regression` for more.|
+| Clustered standard errors | `reghdfe y x, cluster(clust)` | <code>import pyfixest as pf<br> fit = pf.feols("y ~ x", data=df, vcov={"CRV1": "clust"}) </code>|
+| Two-way clustered standard errors | `reghdfe y x, cluster(clust1 clust2)` |<code>import pyfixest as pf<br> fit = pf.feols("y ~ x", data=df, vcov={"CRV1": "clust1 + clust2"}) </code>|
+| Instrumental variables | `ivreghdfe 2sls y exog (endog = instrument)` | <code>import pyfixest as pf<br> fit = pf.feols("y ~ exog \| endog ~ instrument", data=df) </code>|
