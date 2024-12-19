@@ -1,11 +1,12 @@
-import pandas as pd
 import os
+import urllib.request
+from pathlib import Path
+
+import geopandas as gpd
+import pandas as pd
+import shapely.geometry
 from bs4 import BeautifulSoup
 from bs4.element import Comment
-import urllib.request
-import geopandas as gpd
-import shapely.geometry
-from pathlib import Path
 from skimpy import clean_columns
 
 
