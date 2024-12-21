@@ -130,35 +130,21 @@ There are several ways in which the command line is useful for Python (and these
 Of course, packages are installed at the command line, for example to install Jupyter Lab (for running notebooks), the command is
 
 ```bash
-pip install jupyterlab
+uv add jupyterlab
 ```
-
-and many packages can also be installed with `conda install packagename` too.
 
 Say you have a script called `analysis.py`, you can run it with Python on the command line using
 
 ```bash
-python analysis.py
+uv run python analysis.py
 ```
 
-which calls Python as a programme and gives it `analysis.py` as the argument. If you have multiple versions of Python, which you should do if you're following best practice and using a version per project, then you can see *which* version of Python is being used with
-
-```bash
-which python
-```
-
-Remember, if you're using Anaconda to manage your Python environments, you can switch between the version of Python that is called using, for an env called `projectenv`
-
-```bash
-conda activate projectenv
-```
-
-Try switching between Python environments and running `which python` to see how this works.
+which calls Python as a programme and gives it `analysis.py` as the argument.
 
 Jupyter Notebooks are also run from the command line. If you have Jupyter Lab installed, you can start a notebook server with
 
 ```bash
-jupyter lab
+uv run jupyter lab
 ```
 
 ## Useful commands for the terminal
