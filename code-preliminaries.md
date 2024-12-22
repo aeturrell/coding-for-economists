@@ -52,7 +52,7 @@ If you have Windows and you want to use Linux or Mac but don't want to shell out
 
 ### Python interpreter
 
-Python is both a programming language that humans can read, and a language that computers can read, interpret, and then carry out instructions based on. For a computer to be able to read and execute Python code, it needs to have a Python interpreter installed. There are lots of ways to install a Python "interpreter" on your own computer, this book recommends the Anaconda distribution of Python for its flexibility, simplicity, and large community. Cloud services often come with a Python interpreter installed, and we'll see shortly how to install one on your own computer.
+Python is both a programming language that humans can read, and a language that computers can read, interpret, and then carry out instructions based on. For a computer to be able to read and execute Python code, it needs to have a Python interpreter installed. There are lots of ways to install a Python "interpreter" on your own computer, this book recommends the uv distribution of Python for its flexibility, simplicity, and features. Cloud services often come with a Python interpreter installed, and we'll see shortly how to install one on your own computer.
 
 In the box below, you can see which version of Python was used to compile this book:
 
@@ -105,23 +105,29 @@ These instructions are for if you've decided to code on your own computer.
 
 ### Installing Python
 
-To download and install Python, we'll use the Anaconda "distribution" of Python, which is available on all major operating systems. To install it, follow the instructions below or watch this video on *[how to install Python using the Anaconda distribution of Python](https://www.youtube.com/watch?v=ZWQwGR5ppnk)*.
+To download and install Python, we'll use the uv "distribution" of Python, which is available on all major operating systems. To install it, follow the instructions at [this website](https://docs.astral.sh/uv/getting-started/installation/#installation-methods). Unlike installing normal programmes, we're going to use the *command line* to install Python. Linux, Mac, and Windows all have built-in command lines: search for *Terminal* on Mac or Linux, and *Powershell* on Windows. These apps will bring up boxes that you can type commands in. As of the time of writing, the commands are:
 
-<iframe width="700" height="394" src="https://www.youtube.com/embed/ZWQwGR5ppnk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-Download the individual edition of the [Anaconda distribution](https://www.anaconda.com/) of Python for your operating system and install it. This will provide you with a Python installation and a host of the most useful libraries. If you get stuck, there are more detailed instructions available for installing the Anaconda distribution of Python [on Windows](https://docs.anaconda.com/anaconda/install/windows/), [on Mac](https://docs.anaconda.com/anaconda/install/mac-os/), and [on Linux](https://docs.anaconda.com/anaconda/install/linux/).
-
-You can confirm that you've set up Anaconda correctly by following the [verify installation instructions](https://docs.anaconda.com/free/anaconda/install/verify-install/#conda) on the Anaconda website.
-
-```{note}
-If you're using Windows, you can check if Anaconda has installed properly by opening the 'Anaconda prompt' (a special text-based way to issue commands to your computer) and type `where python`. You should see a path rendered as text in the prompt that includes "Anaconda3", for example something like `C:\Users\<your-username>\Anaconda3\...`. On Mac and Linux you may need to run `conda init` on your command line to activate your Anaconda Python environment. You can check you've got the right Python with `which python`, which should result in a message back saying `/Users/<your-username>/opt/anaconda3/bin/python`.
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
+
+for Linux and Mac, and
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+for Windows. Hit return to execute the commands.
+
+Once you have installed uv, you can check it's installed properly by running `uv --version`. You should see a message pop up that says "uv" and then the latest version number.
 
 ### Installing your integrated development environment, Visual Studio Code
 
 [Visual Studio Code](https://code.visualstudio.com/) is a free and open source IDE from Microsoft that is available on all major operating systems. Just like Python itself, Visual Studio can be extended with packages, and it is those packages, called extensions in this case, that make it so useful. As well as Python, Visual Studio Code supports a ton of other languages.
 
 Download and install Visual Studio Code. If you need some help, there is a video below that will walk you through downloading and installing Visual Studio Code, and then using it to run Python code in both scripts and in notebooks. We'll go through these instructions in detail in the rest of this chapter.
+
+Note that if you are testing out notebooks and the interactive window, you will need to create a new folder and work in it in Visual Studio Code. Once you've opened a folder explicitly in VS Code, open the command line within Visual Studio Code then run `uv init` to create a Python installation, and `uv add jupyter` to provide this nascent Python environment with the means to create interactive windows.
 
 <iframe width="700" height="394" src="https://www.youtube.com/embed/1kKTYsQdaPw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -182,7 +188,9 @@ Now you will create and run your first code. If you get stuck, there's a more in
 
 In Visual Studio Code, click on the "Explorer" symbol (some files on the left-hand side of the screen) to bring up a file explorer. Check you're in a good location on your computer to try things out and, if not, change the folder you're in using File -> Open Folder until you're happy.
 
-Now, still with the explorer panel open, click on the symbol that looks like a blank piece of paper with a "+" sign on it. This will create a new file, and your cursor should move to name it. Name it `hello_world.py`. The file extension, `.py`, is very important as it implicitly tells Visual Studio Code that this is a Python script.
+Now open up a terminal *within* Visual Studio Code. Make sure it's the same type of terminal that you installed uv in, eg use Powershell on Windows (you can select to use different types of terminals.) The shortcut to open the terminal panel is Ctrl + \` on Linux and Windows, and Cmd + \` on Mac. The terminal panel appears along the bottom of VS Code. Run `uv init` in the terminal to initiate an installation of Python. **This Python installation only lives in your current folder**. Then, to install the package we need for this section run `uv add jupyer`. (We will cover the terminal and installing packages in much more detail shortly.)
+
+Now, still with the explorer panel open on the left hand side, click on the symbol that looks like a blank piece of paper with a "+" sign on it. This will create a new file, and your cursor should move to name it. Name it `hello_world.py`. The file extension, `.py`, is very important as it implicitly tells Visual Studio Code that this is a Python script.
 
 In the Visual Studio Code editor, add a single line to the file:
 
@@ -201,6 +209,7 @@ This should cause a new 'interactive' panel to appear within Visual Studio Code,
 ```python
 print("Hello world!")
 ```
+
 ```text
 Hello world!
 ```
@@ -239,7 +248,7 @@ Create a new script that, when run, prints "Welcome to Coding for Economists" an
 
 ## Packages and how to install them
 
-Packages (also called libraries) are key to extending the functionality of Python. The default installation of Anaconda comes with many (around 250) of the packages you'll need, but it won't be long before you'll need to install some extra ones. There are packages for geoscience, for building websites, for analysing genetic data, and, yes, of course, for economics. Packages are typically not written by the core maintainers of the Python language but by enthusiasts, firms, researchers, academics, all sorts! Because anyone can write packages, they vary widely in their quality and usefulness. There are some that are key for an economics workflow, though, and you'll be seeing them again and again.
+Packages (also called libraries) are key to extending the functionality of Python and it won't be long before you'll need to install some extra ones! There are packages for geoscience, for building websites, for analysing genetic data, and, yes, of course, for economics. Packages are typically not written by the core maintainers of the Python language but by enthusiasts, firms, researchers, academics, all sorts! Because anyone can write packages, they vary widely in their quality and usefulness. There are some that are key for an economics workflow, though, and you'll be seeing them again and again.
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Name a more iconic trio, I&#39;ll wait. <a href="https://t.co/pGaLuUxQ3r">pic.twitter.com/pGaLuUxQ3r</a></p>&mdash; Vicki Boykis (@vboykis) <a href="https://twitter.com/vboykis/status/1032631145035427840?ref_src=twsrc%5Etfw">August 23, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
@@ -253,14 +262,12 @@ To install extra Python packages, you issue install commands to a text-based win
 
 ### The Terminal in Brief
 
-The *terminal* is also known as the *command line* and sometimes the *command prompt*. It was labelled 4 in the screenshot of Visual Studio Code from earlier in the chapter. The terminal is a text-based way to issue all kinds of commands to your computer (not just Python commands) and knowing a little bit about it is really useful for coding (and more) because managing packages, environments (which we haven't yet discussed), and version control (ditto) can all be done via the terminal. We'll come to these in due course, but for now, a little background on what the terminal is and what it does.
+The *terminal* is also known as the *command line* and sometimes the *command prompt*. It was labelled 4 in the screenshot of Visual Studio Code from earlier in the chapter. The terminal is a text-based way to issue all kinds of commands to your computer (not just Python commands) and knowing a little bit about it is really useful for coding (and more) because managing packages, environments (which we haven't yet discussed), and version control (ditto) can all be done via the terminal.
 
 ```{note}
 To open up the command line within Visual Studio Code, use the <kbd>⌃</kbd> + <kbd>\`</kbd> keyboard shortcut (Mac) or <kbd>ctrl</kbd> + <kbd>\`</kbd> (Windows/Linux), or click "View > Terminal".
 
-Windows users may find it easiest to use the Anaconda Prompt as their terminal, at least for installing Python packages.
-
-If you want to open up the command line independently of Visual Studio Code, search for "Terminal" on Mac and Linux, and "Anaconda Prompt" on Windows. 
+If you want to open up the command line independently of Visual Studio Code, search for "Terminal" on Mac and Linux, and "Powershell" on Windows. 
 ```
 
 Firstly, everything you can do by clicking on icons to launch programmes on your computer, you can also do via the terminal (also known as the command line). The functionality of a lot of programmes can be accessed using the command line, and some programmes *only* have a command line interface (CLI). This includes some that are used for data science.
@@ -269,54 +276,39 @@ Firstly, everything you can do by clicking on icons to launch programmes on your
 The command line interacts with your operating system and can be used to create, activate, or change python installations.
 ```
 
-Use Visual Studio Code to open a terminal window by clicking Terminal -> New Terminal on the list of commands at the very top of the window. If you have installed the Anaconda distribution of Python on your own computer, your terminal should look something like this as your 'command prompt':
+Use Visual Studio Code to open a terminal window by clicking Terminal -> New Terminal on the list of commands at the very top of the window. If you have installed uv on your computer, your terminal should look something like this as your 'command prompt':
 
 ```bash
-(base) your-username@your-computer current-directory %
+your-username@your-computer current-directory %
 ```
 
-on Mac, and the same but with '%' replaced by '$' on linux, and (using the Anaconda Prompt)
+on Mac, and the same but with '%' replaced by '$' on linux, and (using Powershell)
+
+```powershell
+PS C:\Windows\System32>
+```
+
+on Windows.
+
+You can check that uv has successfully installed Python in your current project's folder by running
 
 ```bash
-(base) C:\Users\YourUsername>
+uv run python --version
 ```
-
-on Windows. If you don't see the word `(base)` at the start of the line, you may need to type `conda activate` first.
-
-The `(base)` part is saying that your current Python environment is the base one (eventually, we'll see how to add others for reproducibility and to isolate projects).
 
 You can find out more about the terminal in the chapter on {ref}`wrkflow-command-line`.
 
 ### Installing Packages
 
-You need only do this first part once as it configures your Anaconda environment for good. On the command line or Anaconda prompt, enter the following:
+To install any packages within the Python environment in the folder you're using in Visual Studio Code, enter the following in Visual Studio Code's terminal (the same place where you just ran `uv run python --version`).
 
 ```bash
-conda config --add channels conda-forge
-conda config --set channel_priority strict
+uv add packagename
 ```
 
-This tells `conda` to only use packages from the completely free and open `conda-forge` channel.
+and hit return. In the above, `packagename` might be `pandas`, for example. If you have problems installing, make sure that you are connected to the internet, and that [PyPI](https://pypi.org/) (the Python package index) isn't blocked by your firewall or proxy.
 
-Now, to install any packages on the command line in future, use
-
-```bash
-conda install package-name
-```
-
-and hit return. In the above, `package-name` might be `pandas`, for example. If you have problems installing, make sure that you are connected to the internet, and that [PyPI](https://pypi.org/) (the Python package index) isn't blocked by your firewall or proxy.
-
-While most packages are available on conda-forge, some are not, and you'll see a message about that package not existing. For those packages that aren't provided by conda-forge, you'll need to run the following command:
-
-```bash
-pip install package-name
-```
-
-In true programming-humour style, pip is a recursive acronym that stands for 'pip install packages'.
-
-Why are there two ways to install packages? It's because conda-forge offers some extras that pip does not; in particular, conda-forge carries pre-compiled versions of packages that should work right away with your computer and it solves any complicated dependency issues you might have between different packages. pip does a little of this, but not as much. So it's better to use the conda-forge version of a package if it exists, but fall back on `pip install` where this is not available. As a general rule of thumb, the biggest and most widely used packages are on conda-forge.
-
-You can see what packages you have previously installed by entering `conda list` into the command line.
+You can see what packages you have previously installed by entering `uv pip list` into the command line.
 
 ## Review
 

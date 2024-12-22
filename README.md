@@ -63,7 +63,9 @@ There is a Dockerfile for the environment, which is the easiest way to set up a 
 
 Warning: if you are building the Dockerfile with the environment, it will take some time to build.
 
-There is a bug that arises during builds due to the many dependencies of the book—this is automatically addressed by the Dockerfile but you may be interested in what is going on. It comes from a list index error. You can squish this manually by commenting out `token.children[1].content = token.children[1].content[3:]` in `"/opt/conda/envs/codeforecon/lib/python3.10/site-packages/mdit_py_plugins/tasklists/__init__.py"`, usually line 90, in todoify. (This is due to version issues between **markdown-it-py**, **myst-nb**, and **myst-parser**.) On a Mac, this line will likely be at `"/Users/USERNAME/opt/anaconda3/envs/codeforecon/lib/python3.10/site-packages/mdit_py_plugins/tasklists/__init__.py"`.
+There is a bug that arises during builds due to the many dependencies of the book—this is automatically addressed by the Dockerfile but you may be interested in what is going on. It comes from a list index error. You can squish this manually by commenting out `token.children[1].content = token.children[1].content[3:]` in `"/opt/conda/envs/codeforecon/lib/python3.10/site-packages/mdit_py_plugins/tasklists/__init__.py"`, usually line 90, in todoify. (This is due to version issues between **markdown-it-py**, **myst-nb**, and **myst-parser**.) On a Mac, this line will likely be at `"/Users/USERNAME/mambaforge/envs/codeforecon/lib/python3.10/site-packages/mdit_py_plugins/tasklists/__init__.py"`.
+
+
 
 ### Building the Book
 

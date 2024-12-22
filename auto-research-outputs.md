@@ -116,9 +116,39 @@ reg_results = Stargazer([est, est2])
 reg_results
 ```
 
-which can similarly be cast into $\LaTeX$ using `reg_results.render_latex()`.
+```{code-cell} ipython3
+import numpy as np
+import pandas as pd
+#import pylatex as pl  # for the latex table; note: not a dependency of pyfixest - needs manual installation
+from great_tables import loc, style
+from IPython.display import FileLink, display
 
-We'd like to export tables like this into files that can be picked up by our $\LaTeX$ document. We must first save it to the right place from Python. This would be
+import pyfixest as pf
+
+data = pf.get_data()
+
+fit1 = pf.feols("Y ~ X1 + X2 | f1", data=data)
+fit2 = pf.feols("Y ~ X1 + X2 | f1 + f2", data=data)
+fit3 = pf.feols("Y2 ~ X1 + X2 | f1", data=data)
+fit4 = pf.feols("Y2 ~ X1 + X2 | f1 + f2", data=data)
+
+pf.etable([fit1, fit2, fit3, fit4,])
+```
+
+which can be cast into $\LaTeX$ using `type="tex"`.
+
+```{code-cell} ipython3
+tab = pf.etable(
+    [fit1, fit2, fit3, fit4],
+    digits=2,
+    type="tex",
+    print_tex=True,
+)
+
+tab
+```
+
+We'd like to export tables like this into files that can be picked up by our $\LaTeX$ document. We must first save it to the right place from Python. Assuming you have the folders "outputs/tables" relative to your working directory, this would be
 
 ```python
 from pathlib import Path
@@ -131,7 +161,7 @@ in the first example, and
 ```python
 from pathlib import Path
 with open(Path('outputs/tables/reg_table.tex'), 'w') as f:
-    f.write(reg_results.render_latex())
+    f.write(tab)
 ```
 
 in the second. Remember that `Path` is a clever module that will find the relevant file path regardless of which operating system you happen to be using at the time. This is especially useful when you have co-authors on different systems!

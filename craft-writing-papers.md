@@ -321,9 +321,6 @@ Once you've written a draft you're happy with, there are a bunch of checks you c
 
 - Look back at your figures and tables, and be brutal. Do you need them all? Do they all convey important messages that a reader cannot get from the text? In general, you can have up to approximately 10 floats before an editor or referee may wonder if they have picked up a picture book rather than a journal article. Naturally, in some special cases—for example, if the paper is about data visualisation—you may feel warranted in having more. But a good check is whether you can tell the story in just four floats, and the most important result in just one.
 
-![First drafts](https://quotesnhumor.com/wp-content/uploads/2018/04/Writing-memes7.jpg)
-*First drafts*
-
 ## Further Resources
 
 Two extremely good general resources on writing are {cite:t}`zinsser2006writing` and {cite:t}`white1972elements`. For a more in-depth take on writing papers (specific to applied economics papers), see {cite:t}`bellemare2020write`.
