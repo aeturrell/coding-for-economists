@@ -45,6 +45,7 @@ Contributors:
 - [Andy Banks](https://github.com/banksad)
 - [Zeki Akyol](https://github.com/zekiakyol)
 - [Dimitriy Masterov](https://github.com/dvmasterov)
+- [Tim Steeno](https://github.com/timsteeno)
 
 Please note that this book does not represent the views of any employer of its contributors, and the creators accept no liability for any mistakes. We are delighted to accept contributors: if you'd like to help make the book even better, see {ref}`contributing`.
 
