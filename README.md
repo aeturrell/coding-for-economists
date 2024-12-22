@@ -57,7 +57,7 @@ There is a Dockerfile for the environment, which is the easiest way to set up a 
 1. Ensure you have docker, the docker extension for VS Code, and the VS Code remote extension installed
 2. In VS Code, right-click on the Dockerfile and hit "build image". Switch to the docker tab and hit "Run interactive". Switch to the VS Code Remote tab, then click "Attach in new window" on the running container.
 3. Once you are in the container via VS Code remote, you may need to install the Python extension (within the container version of VS Code).
-4. Open up the relevant folder, "app", in VS Code remote.
+4. Open up the relevant folder, "app", in VS Code remote. It's usually in `../app`.
 5. Once you are in the container, you'll need to use `conda activate codeforecon` to switch to the right conda environment to build files and run notebooks. The build command is as usual for Jupyter Book: `jupyter-book build .`.
 6. To ping back the built HTML files, use `docker cp running-container-name:app/_build/ .` from your local command line (not the docker container) within the folder where you want to move all of the build files. We suggest creating a "scratch" folder and running the command from within it, or transferring directly to your local "_build" folder. You can partially view the HTML within the docker container using a HTML preview extension but note that MathJax and internal book links won't work.
 

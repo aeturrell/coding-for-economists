@@ -30,6 +30,7 @@ RUN pip install --upgrade setuptools wheel
 
 # Create the environment:
 COPY environment.yml .
+
 # Install everything at once:
 RUN mamba env create -f environment.yml
 # Do a debug or incremental env install (builds in under 3 min):
