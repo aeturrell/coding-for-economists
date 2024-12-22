@@ -65,8 +65,6 @@ Warning: if you are building the Dockerfile with the environment, it will take s
 
 There is a bug that arises during builds due to the many dependencies of the book—this is automatically addressed by the Dockerfile but you may be interested in what is going on. It comes from a list index error. You can squish this manually by commenting out `token.children[1].content = token.children[1].content[3:]` in `"/opt/conda/envs/codeforecon/lib/python3.10/site-packages/mdit_py_plugins/tasklists/__init__.py"`, usually line 90, in todoify. (This is due to version issues between **markdown-it-py**, **myst-nb**, and **myst-parser**.) On a Mac, this line will likely be at `"/Users/USERNAME/mambaforge/envs/codeforecon/lib/python3.10/site-packages/mdit_py_plugins/tasklists/__init__.py"`.
 
-
-
 ### Building the Book
 
 To build the book using **Jupyter Book** use
@@ -141,3 +139,7 @@ This book uses some special fonts, such as Varta. If you install these manually,
 ```bash
 rm ~/.matplotlib/fontlist-v330.json
 ```
+
+## Creating a release
+
+Head over to GitHub, and go to the releases page. Create a tag with the new version number, eg `v1.0.3`. Use the generate release notes button. Then publish. The Zenodo repository and version badge on the intro page will update automatically. The releases and the uploaded website should be consistent.
