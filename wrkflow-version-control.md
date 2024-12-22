@@ -253,10 +253,6 @@ git commit -m "Add readme; first commit"
 
 `git commit` takes everything that was staged using `git add` and stores a copy permanently inside the repository's .git directory. This permanent copy is called a commit or a revision. Git gives it a unique identifier, and the first line of output from git commit displays its short identifier 0dc5442, which is the first few characters of that unique label.
 
-The diagram below gives a flavour of the process we're going through here.
-
-![Diagram of how assets become tracked, from Research Software Engineering in Python.](https://merely-useful.tech/py-rse/figures/git-cmdline/staging-area.png)
-
 ### Reviewing changes
 
 We can now look at the git log to see all of the changes we made:

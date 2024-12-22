@@ -119,7 +119,7 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 
 for Windows. Hit return to execute the commands.
 
-Once you have installed uv, you can check it's in properly by running `uv --version`. You should see a message pop up that says "uv" and then the latest version number.
+Once you have installed uv, you can check it's installed properly by running `uv --version`. You should see a message pop up that says "uv" and then the latest version number.
 
 ### Installing your integrated development environment, Visual Studio Code
 

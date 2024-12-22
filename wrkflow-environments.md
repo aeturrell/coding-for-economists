@@ -25,10 +25,6 @@ In Python, there are multiple tools for managing different environments. Of thos
 
 If you're just getting going with coding, this book recommends that you use uv.
 
-## Using Miniconda to Manage Python Environments
-
-Much of these two subsections is covered by the Miniconda documentation on [managing virtual environments](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
-
 ## Using uv to Manage Environments
 
 [**uv**](https://docs.astral.sh/uv/) automatically creates a virtual environment per project folder so that each project you do gets its own distinct and independent Python installation. As well as providing virtual environments by default, it can:
@@ -79,6 +75,10 @@ To use the virtual environment to run scripts or tools installed using `uv add`,
 Visual Studio Code makes this easier though: just as with conda environments, you can set your interactive window or jupyter notebooks to execute with a specific uv environment. **uv environments are by default found in your project folder under the `.venv` directory.**
 
 uv is especially strong for reproducibility. Imagine you wish to have a co-author or colleague install everything they need for the project. If you send them the automatically generated `pyproject.toml` and `uv.lock` files then all they need is to run `uv sync --frozen`. This will install all of (*exactly* the same) packages needed to run the code!
+
+## Using Miniconda to Manage Python Environments
+
+Much of these two subsections is covered by the Miniconda documentation on [managing virtual environments](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
 
 ### Creating Environments
 
