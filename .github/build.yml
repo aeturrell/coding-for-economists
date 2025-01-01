@@ -1,0 +1,53 @@
+jobs:
+  release:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: install mamba
+        uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-file: environment.yml
+          init-shell: >-
+            bash
+          cache-environment: true
+          post-cleanup: 'all'
+      
+      - name: set timezone
+        run: |
+          TZ=$(Europe/London) &&
+          ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+      - name: install linux deps
+        run: |
+          sudo apt-get -y install openssl graphviz nano texlive graphviz-dev unzip
+
+      - name: install special fonts
+        run: |
+          mkdir -p /usr/share/fonts/truetype/ &&
+          wget https://www.wfonts.com/download/data/2015/10/08/varta/varta.zip &&
+          unzip varta.zip &&
+          install -m644 *.ttf /usr/share/fonts/truetype/ &&
+          rm *.ttf
+          rm varta.zip
+
+      - name: install text models
+        run: |
+          python3 -m spacy download en_core_web_sm &&
+          python3 -m nltk.downloader all
+
+      - name: special fix for todoify
+        run: |
+          sed -i '90 s/^/#/' /opt/conda/envs/codeforecon/lib/python3.10/site-packages/mdit_py_plugins/tasklists/__init__.py
+
+      - name: build the book
+        run: |
+          jupyter-book build . --verbose
+
+      - name: success
+        run: |
+          echo "success!"
