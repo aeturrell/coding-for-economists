@@ -50,16 +50,16 @@ jobs:
 
       - name: install text models
         run: |
-          python3 -m spacy download en_core_web_sm &&
-          python3 -m nltk.downloader all
+          micromamba run -n codeforecon python3 -m spacy download en_core_web_sm &&
+          micromamba run -n codeforecon python3 -m nltk.downloader all
 
       - name: special fix for todoify
         run: |
-          sed -i '90 s/^/#/' /opt/conda/envs/codeforecon/lib/python3.10/site-packages/mdit_py_plugins/tasklists/__init__.py
+          sed -i '90 s/^/#/' /home/runner/micromamba/envs/codeforecon/lib/python3.10/site-packages/mdit_py_plugins/tasklists/__init__.py
 
       - name: build the book
         run: |
-          jupyter-book build . --verbose
+          micromamba run -n codeforecon jupyter-book build . --verbose
 
       - name: success
         run: |
