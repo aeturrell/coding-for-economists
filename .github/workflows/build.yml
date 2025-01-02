@@ -56,6 +56,19 @@ jobs:
         run: |
           sed -i '90 s/^/#/' /home/runner/micromamba/envs/codeforecon/lib/python3.10/site-packages/mdit_py_plugins/tasklists/__init__.py
 
+      # Issue with pymc needing np<2.0 and skimpy needing >2.0, so pip install of latter causes upgrade to np
+      - name: special fix for numpy
+        run: |
+          sed -i 's/if np\.obj2sctype(dtype) is None:/if np.dtype(obj).type is None:/' ~/micromamba/envs/codeforecon/lib/python3.10/site-packages/pytensor/tensor/type.py
+
+      - name: Monkey patch for binsreg  # sets np.math = math
+        run: |
+          sed -i '/^import\|^from.*import/ { :a; n; /^import\|^from.*import/! { x; s/.*//; x; ba; }; }; a\import math\nnp.math = math' ~/micromamba/envs/codeforecon/lib/python3.10/site-packages/binsreg/funs.py
+
+      - name: set git config  # Needed as git config --get user.name is used in one example
+        run: |
+          git config --global user.name "Code for Econ GitHub Action user"
+
       - name: build the book
         run: |
           micromamba run -n codeforecon jupyter-book build . --verbose
