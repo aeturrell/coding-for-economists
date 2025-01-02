@@ -28,8 +28,10 @@ def bump_version(part: Literal["major", "minor", "patch"] = "patch") -> None:
     new_version = f"{major}.{minor}.{patch}"
     subprocess.run(
         [
-            "uvx",
-            "--from=toml-cli",
+            "micromamba",
+            "run",
+            "-n",
+            "codeforecon",
             "toml",
             "set",
             "--toml-path=pyproject.toml",
