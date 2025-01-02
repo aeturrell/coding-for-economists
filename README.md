@@ -69,7 +69,7 @@ There is a bug that arises during builds due to the many dependencies of the boo
 
 ### Building the Book
 
-To build the book using **Jupyter Book** use
+To build the book locally (using **Jupyter Book**), the command is:
 
 ```bash
 jupyter-book build .
@@ -81,13 +81,11 @@ Note that, due to package conflicts, several pages may not compile when taking t
 
 ### Uploading Built Files
 
-Only upload built files based on a successful commit or merge to the main branch. See [here](https://jupyterbook.org/publish/gh-pages.html) for how to upload revised HTML files, but the key command is
+You should not need to upload built files manually as there are GitHub Actions that auto build and auto publish when there's a new release. Sometimes it is useful to republish locally, however. See [here](https://jupyterbook.org/publish/gh-pages.html) for how to upload revised HTML files, but the key command is
 
 ```bash
 ghp-import -n -p -f _build/html
 ```
-
-Typically, only maintainers will need to upload built files.
 
 ### Pre-commit
 
@@ -101,9 +99,10 @@ Pre-commit is currently configured to:
 
 - check for large added files
 - strip outputs from notebooks
-- apply the [black](https://black.readthedocs.io/en/stable/) code formatter to .py and .ipnb scripts
+- apply the Ruff code formatter to .py and .ipynb scripts
+- sort imports
 
-If **black-nb** finds a pre-commit error that is difficult to diagnose, a tip is to convert it to a regular script to find the problem, using, for example,
+If there's a pre-commit error that is difficult to diagnose, a tip is to convert it to a regular script to find the problem, using, for example,
 
 ```bash
 jupytext --to py data-intro.ipynb
@@ -144,4 +143,15 @@ rm ~/.matplotlib/fontlist-v330.json
 
 ## Creating a release
 
-Head over to GitHub, and go to the releases page. Create a tag with the new version number, eg `v1.0.3`. Use the generate release notes button. Then publish. The Zenodo repository and version badge on the intro page will update automatically. The releases and the uploaded website should be consistent.
+There's a GitHub Action set up to help with releases (a release is a new version of the book). These are the steps:
+
+- Open a new branch with the new version name
+- Change the version in `pyproject.toml`
+- Commit the change with a new version label as the commit message (checking the tests pass)
+- Head to GitHub and (create a pull request and) merge into main (assuming tests etc pass)
+- A new release should be automatically drafted based on that most recent merge commit, and it should use the new version as the tag
+- The new release should automatically be published on GitHub
+- A new version of the book should automatically be uploaded
+- The Zenodo repository and version badge on the intro page will update automatically
+
+This process should mean the releases and the uploaded website (on GitHub pages) should be consistent
