@@ -59,11 +59,11 @@ jobs:
       # Issue with pymc needing np<2.0 and skimpy needing >2.0, so pip install of latter causes upgrade to np
       - name: special fix for numpy
         run: |
-          sed -i 's/if np\.obj2sctype(dtype) is None:/if np.dtype(obj).type is None:/' ~/micromamba/envs/codeforecon/lib/python3.10/site-packages/pytensor/tensor/type.py
+          sed -i 's/if np\.obj2sctype(dtype) is None:/if np.dtype(dtype).type is None:/' ~/micromamba/envs/codeforecon/lib/python3.10/site-packages/pytensor/tensor/type.py
 
       - name: Monkey patch for binsreg  # sets np.math = math
         run: |
-          sed -i '/^import\|^from.*import/ { :a; n; /^import\|^from.*import/! { x; s/.*//; x; ba; }; }; a\import math\nnp.math = math' ~/micromamba/envs/codeforecon/lib/python3.10/site-packages/binsreg/funs.py
+          sed -i '/^import\|^from.*import/ { :a; n; /^import\|^from.*import/! { x; s/.*//; x; ba; }; }; a\import math\nimport numpy as np\nnp.math = math' ~/micromamba/envs/codeforecon/lib/python3.10/site-packages/binsreg/funs.py
 
       - name: set git config  # Needed as git config --get user.name is used in one example
         run: |
