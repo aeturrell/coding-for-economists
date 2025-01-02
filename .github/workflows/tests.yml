@@ -1,0 +1,80 @@
+name: tests
+
+on:
+  pull_request:
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10.6'
+      - uses: pre-commit/action@v3.0.1
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: install mamba
+        uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-file: environment.yml
+          init-shell: >-
+            bash
+          cache-environment: true
+          post-cleanup: 'all'
+      
+      - name: set timezone
+        run: |
+          TZ="Europe/London" &&
+          sudo ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
+
+      - name: install linux deps
+        run: |
+          sudo apt-get -y install openssl graphviz nano texlive graphviz-dev unzip
+
+      - name: install special fonts
+        run: |
+          mkdir -p /usr/share/fonts/truetype/ &&
+          wget https://www.wfonts.com/download/data/2015/10/08/varta/varta.zip &&
+          unzip varta.zip &&
+          install -m644 *.ttf /usr/share/fonts/truetype/ &&
+          rm *.ttf
+          rm varta.zip
+
+      - name: install text models
+        run: |
+          micromamba run -n codeforecon python3 -m spacy download en_core_web_sm &&
+          micromamba run -n codeforecon python3 -m nltk.downloader all
+
+      - name: special fix for todoify
+        run: |
+          sed -i '90 s/^/#/' /home/runner/micromamba/envs/codeforecon/lib/python3.10/site-packages/mdit_py_plugins/tasklists/__init__.py
+
+      # Issue with pymc needing np<2.0 and skimpy needing >2.0, so pip install of latter causes upgrade to np
+      - name: special fix for numpy
+        run: |
+          micromamba run -n codeforecon pip install --force-reinstall -v "numpy==1.26"
+
+      - name: Monkey patch for binsreg  # sets np.math = math
+        run: |
+          sed -i '/^import\|^from.*import/ { :a; n; /^import\|^from.*import/! { x; s/.*//; x; ba; }; }; a\import math\nimport numpy as np\nnp.math = math' ~/micromamba/envs/codeforecon/lib/python3.10/site-packages/binsreg/funs.py
+
+      - name: git config  # Needed as git config --get user.name is used in one example
+        run: |
+          git config user.name "$(git log -n 1 --pretty=format:%an)" &&
+          git config user.email "$(git log -n 1 --pretty=format:%ae)"
+
+      - name: build the book
+        run: |
+          micromamba run -n codeforecon jupyter-book build . --verbose
+
+      - name: success
+        run: |
+          echo "Success in building book without errors!"

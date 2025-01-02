@@ -15,6 +15,10 @@ kernelspec:
 (auto-research-outputs)=
 # Automating Research Outputs
 
+```{code-cell} ipython3
+print(errrywerror)
+```
+
 In this chapter, you'll learn how to automate the inclusion of figures and tables in LaTeX-derived research outputs including PDFs and slides——plus how to convert those outputs to Microsoft Word documents and more. Much of what you'll see in this chapter applies to a wide range of coding languages.
 
 This chapter has some similarities with another chapter, on {ref}`quarto`. But this chapter puts the LaTeX typesetting language front and centre, because it's the *de facto* standard for preparing *research outputs* (most journals have a LaTeX template for submission, for example), and it gives you full control over every aspect of how your outputs look. However, if you don't already know LaTeX, there is a steep-ish learning curve and—if you're just looking to create some automated reports using code and text rather than write pre-prints, working papers, journal articles, or academic-talk style slide decks—the chapter on {ref}`quarto` is going to be a better and easier fit for you.

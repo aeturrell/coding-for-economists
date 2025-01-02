@@ -1,18 +1,17 @@
-name: build
+name: release
 
-# permissions:
-#   contents: write
-#   pages: write
+permissions:
+  contents: write
+  pages: write
 
 on:
   push:
     branches:
-      - build-book-action
-
+      - main
 
 jobs:
-  build:
-    name: build
+  release:
+    name: release
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
@@ -60,9 +59,6 @@ jobs:
       - name: special fix for numpy
         run: |
           micromamba run -n codeforecon pip install --force-reinstall -v "numpy==1.26"
-        #   sed -i 's/if np\.obj2sctype(dtype) is None:/if np.dtype(dtype).type is None:/' ~/micromamba/envs/codeforecon/lib/python3.10/site-packages/pytensor/tensor/type.py &&
-        #   sed -i 's/from numpy import e, euler_gamma, inf, infty, nan, newaxis, pi/from numpy import e, euler_gamma, inf, nan, newaxis, pi/' ~/micromamba/envs/codeforecon/lib/python3.10/site-packages/pytensor/tensor/__init__.py &&
-        #   sed -i 's/infty/inf/g' ~/micromamba/envs/codeforecon/lib/python3.10/site-packages/pytensor/tensor/__init__.py
 
       - name: Monkey patch for binsreg  # sets np.math = math
         run: |
@@ -77,6 +73,39 @@ jobs:
         run: |
           micromamba run -n codeforecon jupyter-book build . --verbose
 
-      - name: success
+      - name: Check if there is a parent commit
+        id: check-parent-commit
         run: |
-          echo "success!"
+          echo "::set-output name=sha::$(git rev-parse --verify --quiet HEAD^)"
+  
+      - name: Detect and tag new version
+        id: check-version
+        if: steps.check-parent-commit.outputs.sha
+        uses: salsify/action-detect-and-tag-new-version@v2.0.3
+        with:
+          version-command: |
+            micromamba run -n codeforecon toml get --toml-path=pyproject.toml project.version
+  
+      - name: Bump version for developmental release
+        if: "! steps.check-version.outputs.tag"
+        run: |
+          micromamba run -n codeforecon python version_bumper.py &&
+          version=$(micromamba run -n codeforecon toml get --toml-path=pyproject.toml project.version) &&
+          micromamba run -n codeforecon toml set --toml-path=pyproject.toml project.version $version.dev.$(date +%s)
+  
+      - name: Publish
+        if: steps.check-version.outputs.tag
+        run: ghp-import -n -p -f _build/html
+
+      - name: Publish the release notes
+        uses: release-drafter/release-drafter@v6.0.0
+        with:
+          publish: ${{ steps.check-version.outputs.tag != '' }}
+          tag: ${{ steps.check-version.outputs.tag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Success
+        if: steps.check-version.outputs.tag
+        run: |
+          echo "Success in releasing a new version of Coding for Economists!"

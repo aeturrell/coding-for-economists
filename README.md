@@ -6,6 +6,8 @@ To read or use the book, head to the [*Coding for Economists* website](https://a
 
 The rest of this readme is intended to help those who are contributing to the book, rather than readers.
 
+Note that there is a custom, non-compliant `pyproject.toml` file included in this project. Its main purpose is to provide the version of the book, and the version of Python.
+
 ## Dev
 
 These instructions are only for developers working on the book.
