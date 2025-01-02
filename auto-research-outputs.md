@@ -15,9 +15,6 @@ kernelspec:
 (auto-research-outputs)=
 # Automating Research Outputs
 
-```{code-cell} ipython3
-print(errrywerror)
-```
 
 In this chapter, you'll learn how to automate the inclusion of figures and tables in LaTeX-derived research outputs including PDFs and slides——plus how to convert those outputs to Microsoft Word documents and more. Much of what you'll see in this chapter applies to a wide range of coding languages.
 
