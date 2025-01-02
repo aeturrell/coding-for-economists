@@ -59,9 +59,10 @@ jobs:
       # Issue with pymc needing np<2.0 and skimpy needing >2.0, so pip install of latter causes upgrade to np
       - name: special fix for numpy
         run: |
-          sed -i 's/if np\.obj2sctype(dtype) is None:/if np.dtype(dtype).type is None:/' ~/micromamba/envs/codeforecon/lib/python3.10/site-packages/pytensor/tensor/type.py &&
-          sed -i 's/from numpy import e, euler_gamma, inf, infty, nan, newaxis, pi/from numpy import e, euler_gamma, inf, nan, newaxis, pi/' ~/micromamba/envs/codeforecon/lib/python3.10/site-packages/pytensor/tensor/__init__.py &&
-          sed -i 's/infty/inf/g' ~/micromamba/envs/codeforecon/lib/python3.10/site-packages/pytensor/tensor/__init__.py
+          micromamba run -n codeforecon pip install --force-reinstall -v "numpy==1.26"
+        #   sed -i 's/if np\.obj2sctype(dtype) is None:/if np.dtype(dtype).type is None:/' ~/micromamba/envs/codeforecon/lib/python3.10/site-packages/pytensor/tensor/type.py &&
+        #   sed -i 's/from numpy import e, euler_gamma, inf, infty, nan, newaxis, pi/from numpy import e, euler_gamma, inf, nan, newaxis, pi/' ~/micromamba/envs/codeforecon/lib/python3.10/site-packages/pytensor/tensor/__init__.py &&
+        #   sed -i 's/infty/inf/g' ~/micromamba/envs/codeforecon/lib/python3.10/site-packages/pytensor/tensor/__init__.py
 
       - name: Monkey patch for binsreg  # sets np.math = math
         run: |
