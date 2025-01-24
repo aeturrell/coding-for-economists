@@ -121,6 +121,12 @@ for Windows. Hit return to execute the commands.
 
 Once you have installed uv, you can check it's installed properly by running `uv --version`. You should see a message pop up that says "uv" and then the latest version number.
 
+We didn't actually download Python yet--we downloaded **uv**, which is going to manage our Python environment. So next we need to run
+
+```bash
+uv python install
+```
+
 ### Installing your integrated development environment, Visual Studio Code
 
 [Visual Studio Code](https://code.visualstudio.com/) is a free and open source IDE from Microsoft that is available on all major operating systems. Just like Python itself, Visual Studio can be extended with packages, and it is those packages, called extensions in this case, that make it so useful. As well as Python, Visual Studio Code supports a ton of other languages.
