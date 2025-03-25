@@ -771,3 +771,4 @@ These are some other good git and GitHub resources.
 - [Learn Git Branching](https://learngitbranching.js.org/) is a browser-based game that teaches you Git.
 - [Visualizing Git Concepts with D3](https://onlywei.github.io/explain-git-with-d3) helps you understand some common git commands with visualisations.
 - [Git Explorer](https://gitexplorer.com/) lets you explore which git commands you might need.
+- [Beej's Guide to Git](https://beej.us/guide/bggit/html/split/) is a long guide on Git and GitHub.
