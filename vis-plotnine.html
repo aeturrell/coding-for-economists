@@ -1,0 +1,955 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Data Visualisation using the Grammar of Graphics with Plotnine &#8212; Coding for Economists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-9FZQCPFXZJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vis-plotnine';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://aeturrell.github.io/coding-for-economists/vis-plotnine.html" />
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Data Visualisation with Seaborn" href="vis-seaborn.html" />
+    <link rel="prev" title="Extended Abstracts" href="craft-extended-abstracts.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/smith_lovelace.png" class="logo__image only-light" alt="Coding for Economists - Home"/>
+    <script>document.write(`<img src="_static/smith_lovelace.png" class="logo__image only-dark" alt="Coding for Economists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-basics.html">Coding Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow-basics.html">Workflow Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-where.html">Writing Code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-analysis-quickstart.html">Data Analysis Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-intro.html">Working with Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-transformation.html">Data Transformation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-read-and-write.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-numbers.html">Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-categorical.html">Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-spreadsheets.html">Spreadsheets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-best-practice.html">Code in Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advanced.html">Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advcd-best-practice.html">Shortcuts to Better Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-intro.html">Intro to Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-letsplot.html">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-matplotlib.html">Powerful Data Visualisation with <strong>Matplotlib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-one.html">Common Plots I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-two.html">Common Plots II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="auto-research-outputs.html">Automating Research Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-markdown.html">Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-version-control.html">Version Control</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Econometrics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="econmt-probability-random.html">Probability and Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-statistics.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-regression.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-generalised-models.html">Generalised regression models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-diagnostics.html">Regression diagnostics and visualisations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-causal-inference.html">Causal Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayesian.html">Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayes-bambi.html">Bayesian Inference Made Easier</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-boolean.html">Boolean Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-joining-data.html">Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-missing-values.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-exploratory-analysis.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-extraction.html">Getting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-databases.html">Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-advanced.html"><strong>pandas</strong> alternatives, validation, and orchestration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-sharing.html">Sharing Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-further-advanced.html">Advanced Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-quarto.html">Combining Code and Text in Quarto Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-environments.html">Virtual Code Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-rap.html">Reproducible Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Time</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="time-intro.html">Introduction to Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-fcasts-env.html">Forecasting Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Text Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="text-intro.html">Introduction to Text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-regex.html">Regular Expressions, aka regex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-nlp.html">Natural Language Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ml-intro.html">Introduction to Machine Learning and AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-sup.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-data.html">Data for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-unsup.html">Unsupervised Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Geospatial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geo-intro.html">Intro to Geo-Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geo-vis.html">Geo-Spatial Visualisation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="maths-abstract.html">Abstract Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maths-numerical.html">Numerical Mathematics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Craft</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="craft-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-search.html">Putting the Search in Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-generating-ideas.html">Generating and Accepting Research Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-writing-papers.html">Writing Papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-research-blogs.html">Research Blog Posts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-referee.html">Writing Referee Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-technical-reports.html">Writing Technical Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-extended-abstracts.html">Extended Abstracts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Data Visualisation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coming from ...</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="coming-from-stata.html">Coming from Stata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-matlab.html">Coming from Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-r.html">Coming from R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-excel.html">Coming from Excel</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zreferences.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aeturrell/coding-for-economists/blob/main/vis-plotnine.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists/issues/new?title=Issue%20on%20page%20%2Fvis-plotnine.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/vis-plotnine.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Data Visualisation using the Grammar of Graphics with Plotnine</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-visualisation-using-the-grammar-of-graphics-with-plotnine">
+<span id="vis-plotnine"></span><h1>Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong><a class="headerlink" href="#data-visualisation-using-the-grammar-of-graphics-with-plotnine" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Here you’ll see how to use declarative plotting library <strong>plotnine</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We recommend you use <strong>letsplot</strong> for declarative plotting but <strong>plotnine</strong> is an excellent alternative.</p>
+</div>
+<p><a class="reference external" href="https://plotnine.readthedocs.io/en/stable/"><strong>plotnine</strong></a> is, like <strong>seaborn</strong>, a declarative library. Unlike <strong>seaborn</strong>, it adopts the ‘grammar of graphics’ approach inspired by the book ‘The Grammar of Graphics’ by Leland Wilkinson. <strong>plotnine</strong> is heavily inspired by the API of the popular <strong>ggplot2</strong> plotting package in the statistical programming language R. The point behind the grammar of graphics approach is that users can compose plots by explicitly mapping data to the various elements that make up the plot. It is a particularly effective approach for a whole slew of standard plots created from tidy data.</p>
+<p>As ever, we’ll start by importing some key packages:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>  <span class="c1"># Just for some data</span>
+
+<span class="c1"># Set seed for random numbers</span>
+<span class="n">seed_for_prng</span> <span class="o">=</span> <span class="mi">78557</span>
+<span class="n">prng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span>
+    <span class="n">seed_for_prng</span>
+<span class="p">)</span>  <span class="c1"># prng=probabilistic random number generator</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s take a look at how to do a simple scatter plot in <strong>plotnine</strong>. We’ll use the <em>mtcars</em> dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">plotnine</span><span class="w"> </span><span class="kn">import</span> <span class="n">aes</span><span class="p">,</span> <span class="n">geom_point</span><span class="p">,</span> <span class="n">ggplot</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">plotnine.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">mtcars</span>
+
+<span class="p">(</span><span class="n">ggplot</span><span class="p">(</span><span class="n">mtcars</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="s2">&quot;wt&quot;</span><span class="p">,</span> <span class="s2">&quot;mpg&quot;</span><span class="p">))</span> <span class="o">+</span> <span class="n">geom_point</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/da41ee9bbbcd392d8f97338b0556c5d9462db6484e165fb085e339e8245c43f8.png"><img alt="_images/da41ee9bbbcd392d8f97338b0556c5d9462db6484e165fb085e339e8245c43f8.png" src="_images/da41ee9bbbcd392d8f97338b0556c5d9462db6484e165fb085e339e8245c43f8.png" style="width: 640px; height: 480px;" />
+</a>
+</div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">ggplot</span></code> is the organising framework for creating a plot and <code class="docutils literal notranslate"><span class="pre">mtcars</span></code> is a dataframe with the data in that we’d like to plot. <code class="docutils literal notranslate"><span class="pre">aes</span></code> stands for aesthetic mapping and it tells <strong>plotnine</strong> which columns of the dataframe to treat as the x and y axis (in that order). Finally, <code class="docutils literal notranslate"><span class="pre">geom_point()</span></code> tells <strong>plotnine</strong> to add scatter points to the plot.</p>
+<p>If we want to add colour, we pass a colour keyword argument to <code class="docutils literal notranslate"><span class="pre">aes</span></code> like so (with ‘factor’ meaning treat the variable like it’s a categorical):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">ggplot</span><span class="p">(</span><span class="n">mtcars</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="s2">&quot;wt&quot;</span><span class="p">,</span> <span class="s2">&quot;mpg&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;factor(gear)&quot;</span><span class="p">))</span> <span class="o">+</span> <span class="n">geom_point</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/6f398cc91a5c5b74d52910e38c6ae285a4110e1719d447186d371f0bbdc00658.png"><img alt="_images/6f398cc91a5c5b74d52910e38c6ae285a4110e1719d447186d371f0bbdc00658.png" src="_images/6f398cc91a5c5b74d52910e38c6ae285a4110e1719d447186d371f0bbdc00658.png" style="width: 640px; height: 480px;" />
+</a>
+</div>
+</div>
+<p>One of the nice aspects of the grammar of graphics approach, perhaps its best feature, is that switching to other types of ‘geom’ (aka chart type) is as easy as calling the same code but with a different ‘geom’ switched in. Note that, because we only imported one element at a time from <strong>plotnine</strong> we do need to explicitly import any other ‘geoms’ that we’d like to use, as in the next example below. But we <em>could</em> have just imported everything from <strong>plotnine</strong> instead using <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">plotnine</span> <span class="pre">import</span> <span class="pre">*</span></code>.</p>
+<p>The next example shows how easy it is to switch between ‘geoms’.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">plotnine</span><span class="w"> </span><span class="kn">import</span> <span class="n">geom_smooth</span>
+
+<span class="p">(</span><span class="n">ggplot</span><span class="p">(</span><span class="n">mtcars</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="s2">&quot;wt&quot;</span><span class="p">,</span> <span class="s2">&quot;mpg&quot;</span><span class="p">))</span> <span class="o">+</span> <span class="n">geom_smooth</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/micromamba/envs/codeforecon/lib/python3.10/site-packages/plotnine/stats/smoothers.py:347: PlotnineWarning: Confidence intervals are not yet implemented for lowess smoothings.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/94269417204bf898940a6398b958e818e28c71120d666526ae10a1b8bc5de6a2.png"><img alt="_images/94269417204bf898940a6398b958e818e28c71120d666526ae10a1b8bc5de6a2.png" src="_images/94269417204bf898940a6398b958e818e28c71120d666526ae10a1b8bc5de6a2.png" style="width: 640px; height: 480px;" />
+</a>
+</div>
+</div>
+<p>Furthermore, we can add <em>multiple</em> geoms to the same chart by layering them within the same call to the <code class="docutils literal notranslate"><span class="pre">ggplot()</span></code> function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">ggplot</span><span class="p">(</span><span class="n">mtcars</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="s2">&quot;wt&quot;</span><span class="p">,</span> <span class="s2">&quot;mpg&quot;</span><span class="p">))</span> <span class="o">+</span> <span class="n">geom_smooth</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">geom_point</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/micromamba/envs/codeforecon/lib/python3.10/site-packages/plotnine/stats/smoothers.py:347: PlotnineWarning: Confidence intervals are not yet implemented for lowess smoothings.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/e72ce37d77a93118522ba6ae94b467223d7674171aeb048693df0939f32784b6.png"><img alt="_images/e72ce37d77a93118522ba6ae94b467223d7674171aeb048693df0939f32784b6.png" src="_images/e72ce37d77a93118522ba6ae94b467223d7674171aeb048693df0939f32784b6.png" style="width: 640px; height: 480px;" />
+</a>
+</div>
+</div>
+<p>Just like <strong>seaborn</strong> and <strong>matplotlib</strong>, we can create facet plots too–but this time they’re just a variation on the same underlying call to <code class="docutils literal notranslate"><span class="pre">ggplot()</span></code>. Let’s see that same example of GDP by country rendered with <strong>plotnine</strong>. First, we need to grab the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandas_datareader</span><span class="w"> </span><span class="kn">import</span> <span class="n">wb</span>
+
+<span class="n">ts_start_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;1999-01-01&quot;</span><span class="p">)</span>
+<span class="n">ts_end_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">countries</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;GBR&quot;</span><span class="p">,</span> <span class="s2">&quot;USA&quot;</span><span class="p">]</span>
+<span class="n">gdf_const_2015_usd_code</span> <span class="o">=</span> <span class="s2">&quot;NY.GDP.MKTP.KD&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">download</span><span class="p">(</span>
+    <span class="n">indicator</span><span class="o">=</span><span class="n">gdf_const_2015_usd_code</span><span class="p">,</span>
+    <span class="n">country</span><span class="o">=</span><span class="n">countries</span><span class="p">,</span>
+    <span class="n">start</span><span class="o">=</span><span class="n">ts_start_date</span><span class="p">,</span>
+    <span class="n">end</span><span class="o">=</span><span class="n">ts_end_date</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;growth, %&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;country&quot;</span><span class="p">)[</span><span class="n">gdf_const_2015_usd_code</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">x</span><span class="o">.</span><span class="n">pct_change</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;year&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">)</span>  <span class="c1"># needed for plotnine</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_8215/681287435.py:9: FutureWarning: errors=&#39;ignore&#39; is deprecated and will raise in a future version. Use to_numeric without passing `errors` and catch exceptions explicitly instead
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country</th>
+      <th>year</th>
+      <th>NY.GDP.MKTP.KD</th>
+      <th>growth, %</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>United Kingdom</td>
+      <td>1999.0</td>
+      <td>2.196830e+12</td>
+      <td>-4.160980</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>United States</td>
+      <td>1999.0</td>
+      <td>1.318024e+13</td>
+      <td>-3.917833</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>United States</td>
+      <td>2000.0</td>
+      <td>1.371768e+13</td>
+      <td>-0.946494</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>United Kingdom</td>
+      <td>2000.0</td>
+      <td>2.292208e+12</td>
+      <td>-2.508249</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>United Kingdom</td>
+      <td>2001.0</td>
+      <td>2.351182e+12</td>
+      <td>-1.763986</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now we can get on with plotting it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">plotnine</span><span class="w"> </span><span class="kn">import</span> <span class="n">element_text</span><span class="p">,</span> <span class="n">facet_wrap</span><span class="p">,</span> <span class="n">geom_line</span><span class="p">,</span> <span class="n">theme</span>
+
+<span class="p">(</span>
+    <span class="n">ggplot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;growth, %&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;country&quot;</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">geom_line</span><span class="p">()</span>
+    <span class="o">+</span> <span class="n">facet_wrap</span><span class="p">(</span><span class="s2">&quot;country&quot;</span><span class="p">,</span> <span class="n">nrow</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">theme</span><span class="p">(</span><span class="n">axis_text_x</span><span class="o">=</span><span class="n">element_text</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">))</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/5fb74e6afcbabb4ed4a35be8146caad087c9a946f644e5307a64e1f5f54009e2.png"><img alt="_images/5fb74e6afcbabb4ed4a35be8146caad087c9a946f644e5307a64e1f5f54009e2.png" src="_images/5fb74e6afcbabb4ed4a35be8146caad087c9a946f644e5307a64e1f5f54009e2.png" style="width: 640px; height: 480px;" />
+</a>
+</div>
+</div>
+<p><strong>plotnine</strong> can do many of the same types of charts as <strong>seaborn</strong>; let’s see some similar examples:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">plotnine</span><span class="w"> </span><span class="kn">import</span> <span class="n">geom_violin</span><span class="p">,</span> <span class="n">scale_fill_manual</span>
+
+<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
+
+<span class="p">(</span>
+    <span class="n">ggplot</span><span class="p">(</span><span class="n">tips</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;smoker&quot;</span><span class="p">))</span>
+    <span class="o">+</span> <span class="n">geom_violin</span><span class="p">(</span><span class="n">tips</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">scale_fill_manual</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dodgerblue&quot;</span><span class="p">,</span> <span class="s2">&quot;darkorange&quot;</span><span class="p">])</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/cd9fb6b72fc246b089ceba50294bf20fe4323b1707600a719d1c120692e2745c.png"><img alt="_images/cd9fb6b72fc246b089ceba50294bf20fe4323b1707600a719d1c120692e2745c.png" src="_images/cd9fb6b72fc246b089ceba50294bf20fe4323b1707600a719d1c120692e2745c.png" style="width: 640px; height: 480px;" />
+</a>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">plotnine</span><span class="w"> </span><span class="kn">import</span> <span class="n">labs</span>
+
+<span class="n">penguins</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;penguins&quot;</span><span class="p">)</span>
+
+<span class="p">(</span>
+    <span class="n">ggplot</span><span class="p">(</span>
+        <span class="n">penguins</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;factor(species)&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="o">+</span> <span class="n">geom_point</span><span class="p">()</span>
+    <span class="o">+</span> <span class="n">geom_smooth</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;lm&quot;</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Bill length (mm)&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Bill depth (mm)&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/micromamba/envs/codeforecon/lib/python3.10/site-packages/plotnine/layer.py:364: PlotnineWarning: geom_point : Removed 2 rows containing missing values.
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/6d70aaf8891b1e8ffb7b32a937ba7c03c4a8b9f6467b5df2a229bd70d5eed642.png"><img alt="_images/6d70aaf8891b1e8ffb7b32a937ba7c03c4a8b9f6467b5df2a229bd70d5eed642.png" src="_images/6d70aaf8891b1e8ffb7b32a937ba7c03c4a8b9f6467b5df2a229bd70d5eed642.png" style="width: 640px; height: 480px;" />
+</a>
+</div>
+</div>
+<p>Finally, an example of great practical use during exploratory analysis, the kernel density plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">plotnine</span><span class="w"> </span><span class="kn">import</span> <span class="n">geom_density</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">plotnine.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">mpg</span>
+
+<span class="p">(</span><span class="n">ggplot</span><span class="p">(</span><span class="n">mpg</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;cty&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;drv&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;drv&quot;</span><span class="p">))</span> <span class="o">+</span> <span class="n">geom_density</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/afe5a746e7c15a9c47befe80ea518caed8c0e88f9589320c63ae63c18e49e477.png"><img alt="_images/afe5a746e7c15a9c47befe80ea518caed8c0e88f9589320c63ae63c18e49e477.png" src="_images/afe5a746e7c15a9c47befe80ea518caed8c0e88f9589320c63ae63c18e49e477.png" style="width: 640px; height: 480px;" />
+</a>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="craft-extended-abstracts.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Extended Abstracts</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="vis-seaborn.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Data Visualisation with <strong>Seaborn</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Arthur Turrell
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  This book is available under an MIT license.
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,739 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to Machine Learning and AI &#8212; Coding for Economists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-9FZQCPFXZJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ml-intro';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://aeturrell.github.io/coding-for-economists/ml-intro.html" />
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Supervised Machine Learning" href="ml-sup.html" />
+    <link rel="prev" title="Natural Language Processing" href="text-nlp.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/smith_lovelace.png" class="logo__image only-light" alt="Coding for Economists - Home"/>
+    <script>document.write(`<img src="_static/smith_lovelace.png" class="logo__image only-dark" alt="Coding for Economists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-basics.html">Coding Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow-basics.html">Workflow Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-where.html">Writing Code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-analysis-quickstart.html">Data Analysis Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-intro.html">Working with Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-transformation.html">Data Transformation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-read-and-write.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-numbers.html">Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-categorical.html">Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-spreadsheets.html">Spreadsheets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-best-practice.html">Code in Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advanced.html">Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advcd-best-practice.html">Shortcuts to Better Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-intro.html">Intro to Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-letsplot.html">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-matplotlib.html">Powerful Data Visualisation with <strong>Matplotlib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-one.html">Common Plots I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-two.html">Common Plots II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="auto-research-outputs.html">Automating Research Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-markdown.html">Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-version-control.html">Version Control</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Econometrics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="econmt-probability-random.html">Probability and Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-statistics.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-regression.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-generalised-models.html">Generalised regression models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-diagnostics.html">Regression diagnostics and visualisations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-causal-inference.html">Causal Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayesian.html">Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayes-bambi.html">Bayesian Inference Made Easier</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-boolean.html">Boolean Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-joining-data.html">Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-missing-values.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-exploratory-analysis.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-extraction.html">Getting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-databases.html">Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-advanced.html"><strong>pandas</strong> alternatives, validation, and orchestration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-sharing.html">Sharing Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-further-advanced.html">Advanced Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-quarto.html">Combining Code and Text in Quarto Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-environments.html">Virtual Code Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-rap.html">Reproducible Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Time</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="time-intro.html">Introduction to Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-fcasts-env.html">Forecasting Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Text Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="text-intro.html">Introduction to Text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-regex.html">Regular Expressions, aka regex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-nlp.html">Natural Language Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to Machine Learning and AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-sup.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-data.html">Data for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-unsup.html">Unsupervised Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Geospatial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geo-intro.html">Intro to Geo-Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geo-vis.html">Geo-Spatial Visualisation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="maths-abstract.html">Abstract Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maths-numerical.html">Numerical Mathematics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Craft</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="craft-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-search.html">Putting the Search in Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-generating-ideas.html">Generating and Accepting Research Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-writing-papers.html">Writing Papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-research-blogs.html">Research Blog Posts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-referee.html">Writing Referee Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-technical-reports.html">Writing Technical Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-extended-abstracts.html">Extended Abstracts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coming from ...</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="coming-from-stata.html">Coming from Stata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-matlab.html">Coming from Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-r.html">Coming from R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-excel.html">Coming from Excel</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zreferences.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aeturrell/coding-for-economists/blob/main/ml-intro.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists/issues/new?title=Issue%20on%20page%20%2Fml-intro.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/ml-intro.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Machine Learning and AI</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-ll-cover">What we’ll cover</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-machine-learning-is-useful-in-economics">When machine learning is useful in economics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#links-to-further-courses">Links to further courses</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-machine-learning-and-ai">
+<span id="ml-intro"></span><h1>Introduction to Machine Learning and AI<a class="headerlink" href="#introduction-to-machine-learning-and-ai" title="Link to this heading">#</a></h1>
+<p>This chapter sets the scene for the section on machine learning and AI.</p>
+<p>Machine learning or AI? Like many, ahem, older practioners in this field, we think AI is a niche subset of machine learning and that most stories that are about “AI” are actually not about anything we would recognise as “intelligence” at all, but are really about pattern recognition and therefore are more about machines learning to see patterns and repeat them. So we’ll use machine learning throughout, but we know we’re fighting a losing battle on AI being the dominant term. On the flip side, you’ll get some snobby, usually older economists claiming that all machine learning is just logistic regression. They’re wrong too, and that line of criticism seems to have gone fascinatingly silent following the release of large language models like ChatGPT.</p>
+<p>The truth is that machine learning, or AI, or whatever you want to call it is a tool like any other. A very powerful tool that can be enormously helpful in analysis and research, but a tool with pros and cons. It’s probably the most exciting methodological frontier in economics right now.</p>
+<section id="what-we-ll-cover">
+<h2>What we’ll cover<a class="headerlink" href="#what-we-ll-cover" title="Link to this heading">#</a></h2>
+<p>First, you should know that machine learning and AI (artificial intelligence) are huge fields in themselves and we can’t possibly hope to cover everything here! In particular we won’t cover the theory behind the tools or go into detail on when they’re appropriate to use, or talk about loss functions. Nor will we get to the cutting-edge in machine learning, for example transformers and large language models.</p>
+<p>What we will cover is examples of where to start in coding up machine learning models—the most standard algorithms via the most common packages. We’ll also see useful examples of machine learning code that covers the broad swathe of tasks it can perform. In particular, we’ll see examples of supervised and unsupervised machine learning; and how to prep data for machine learning. However, it is going to be about giving you a thread to pull on to find out more and get into the specifics of what you might need. There’s much more we won’t cover, such as “MLops”, interpretable machine learning, and theory.</p>
+<p>We’ll mainly be using the <a class="reference external" href="https://scikit-learn.org/">scikit-learn</a> package to do our machine learning because it has all of the standard algorithms and is a very high quality library with tons of support, and you can easily run it on a regular laptop. Power users of machine learning will likely want to branch out into tools like <a class="reference external" href="https://pytorch.org/">Pytorch</a>, especially for deep learning.</p>
+<p>We’ll also be pointing to lots of potentially useful further links where you can take your machine learning and AI to the next level.</p>
+</section>
+<section id="when-machine-learning-is-useful-in-economics">
+<h2>When machine learning is useful in economics<a class="headerlink" href="#when-machine-learning-is-useful-in-economics" title="Link to this heading">#</a></h2>
+<p>We said we’d try and avoid any theory, but there are some ideas that are hard to escape. We just want to spend a few moments thinking aloud about why and when machine learning is useful in economics. In the below, we assume that there is a function <span class="math notranslate nohighlight">\(f\)</span> that maps inputs <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> into <span class="math notranslate nohighlight">\(y\)</span> that we estimate as</p>
+<div class="math notranslate nohighlight">
+\[
+y = \hat{y} + \varepsilon = \hat{f}(\mathbb{x}) + \varepsilon
+\]</div>
+<p>So, very broadly, these are the times when you might reach for machine learning in economics:</p>
+<ul class="simple">
+<li><p>when you care more about prediction, ie <span class="math notranslate nohighlight">\(\hat{y}\)</span>, than coefficients, <span class="math notranslate nohighlight">\(\hat{\beta}\)</span>. In these cases, machine learning can outperform vanilla OLS in a wide range of empirical cases.</p></li>
+<li><p>when you want a model for <span class="math notranslate nohighlight">\(\hat{y}\)</span> and there are non-linearities such that an OLS solution of a linear regression equation is highly likely to be misspecified. Some non-linearities, eg a quadratic dependence on age, may be obvious—but there are many that are not.</p></li>
+<li><p>when <span class="math notranslate nohighlight">\((\mathbf{x})\)</span> is high-dimensional and it is not always possible to use OLS, or OLS ceases to become the most performant model.</p></li>
+<li><p>for causal inference in certain situations, such as when there are a large number of ‘nuisance’ variables</p></li>
+<li><p>when you wish to create data from an input source, eg digitising images of text, creating categorical groupings boiled down from a large number of other dimensions, web-scraping</p></li>
+</ul>
+<p>We’ll see some of these, albeit briefly, in subsequent chapters!</p>
+</section>
+<section id="links-to-further-courses">
+<h2>Links to further courses<a class="headerlink" href="#links-to-further-courses" title="Link to this heading">#</a></h2>
+<p>If you want <em>general</em> courses on machine learning that go deeper, you might find the following links useful. Note that, for many applications in economics, you may not need deep learning and the other links are probably better places to start.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://hastie.su.domains/publications.html">The excellent ‘An Introduction to Statistical Learning with applications in Python’</a></p></li>
+<li><p><a class="reference external" href="https://mlbook.explained.ai/">The Mechanics of Machine Learning</a></p></li>
+<li><p><a class="reference external" href="https://github.com/Atcold/NYU-DLSP20">Deep Learning course (uses Pytorch)</a></p></li>
+<li><p><a class="reference external" href="https://github.com/fastai/fastbook">FastAI Deep Learning book, ‘FastBook’</a></p></li>
+<li><p><a class="reference external" href="https://d2l.ai/index.html">Dive into deep learning</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="text-nlp.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Natural Language Processing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ml-sup.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Supervised Machine Learning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-ll-cover">What we’ll cover</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-machine-learning-is-useful-in-economics">When machine learning is useful in economics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#links-to-further-courses">Links to further courses</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Arthur Turrell
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  This book is available under an MIT license.
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

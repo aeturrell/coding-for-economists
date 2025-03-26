@@ -1,0 +1,894 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Coming from Stata &#8212; Coding for Economists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-9FZQCPFXZJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'coming-from-stata';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://aeturrell.github.io/coding-for-economists/coming-from-stata.html" />
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Coming from Matlab" href="coming-from-matlab.html" />
+    <link rel="prev" title="Data Visualisation with Seaborn" href="vis-seaborn.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/smith_lovelace.png" class="logo__image only-light" alt="Coding for Economists - Home"/>
+    <script>document.write(`<img src="_static/smith_lovelace.png" class="logo__image only-dark" alt="Coding for Economists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-basics.html">Coding Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow-basics.html">Workflow Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-where.html">Writing Code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-analysis-quickstart.html">Data Analysis Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-intro.html">Working with Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-transformation.html">Data Transformation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-read-and-write.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-numbers.html">Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-categorical.html">Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-spreadsheets.html">Spreadsheets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-best-practice.html">Code in Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advanced.html">Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advcd-best-practice.html">Shortcuts to Better Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-intro.html">Intro to Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-letsplot.html">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-matplotlib.html">Powerful Data Visualisation with <strong>Matplotlib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-one.html">Common Plots I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-two.html">Common Plots II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="auto-research-outputs.html">Automating Research Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-markdown.html">Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-version-control.html">Version Control</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Econometrics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="econmt-probability-random.html">Probability and Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-statistics.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-regression.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-generalised-models.html">Generalised regression models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-diagnostics.html">Regression diagnostics and visualisations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-causal-inference.html">Causal Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayesian.html">Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayes-bambi.html">Bayesian Inference Made Easier</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-boolean.html">Boolean Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-joining-data.html">Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-missing-values.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-exploratory-analysis.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-extraction.html">Getting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-databases.html">Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-advanced.html"><strong>pandas</strong> alternatives, validation, and orchestration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-sharing.html">Sharing Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-further-advanced.html">Advanced Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-quarto.html">Combining Code and Text in Quarto Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-environments.html">Virtual Code Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-rap.html">Reproducible Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Time</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="time-intro.html">Introduction to Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-fcasts-env.html">Forecasting Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Text Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="text-intro.html">Introduction to Text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-regex.html">Regular Expressions, aka regex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-nlp.html">Natural Language Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ml-intro.html">Introduction to Machine Learning and AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-sup.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-data.html">Data for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-unsup.html">Unsupervised Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Geospatial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geo-intro.html">Intro to Geo-Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geo-vis.html">Geo-Spatial Visualisation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="maths-abstract.html">Abstract Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maths-numerical.html">Numerical Mathematics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Craft</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="craft-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-search.html">Putting the Search in Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-generating-ideas.html">Generating and Accepting Research Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-writing-papers.html">Writing Papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-research-blogs.html">Research Blog Posts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-referee.html">Writing Referee Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-technical-reports.html">Writing Technical Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-extended-abstracts.html">Extended Abstracts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coming from ...</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Coming from Stata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-matlab.html">Coming from Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-r.html">Coming from R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-excel.html">Coming from Excel</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zreferences.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aeturrell/coding-for-economists/blob/main/coming-from-stata.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists/issues/new?title=Issue%20on%20page%20%2Fcoming-from-stata.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/coming-from-stata.ipynb" target="_blank"
+   class="btn btn-sm btn-download-notebook-button dropdown-item"
+   title="Download notebook file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="_sources/coming-from-stata.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Coming from Stata</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stata-python">Stata &lt;==&gt; Python</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="coming-from-stata">
+<h1>Coming from Stata<a class="headerlink" href="#coming-from-stata" title="Link to this heading">#</a></h1>
+<p>This chapter has benefitted enormously from <a class="reference external" href="http://www.danielmsullivan.com/pages/tutorial_stata_to_python.html">Daniel M. Sullivan’s</a> excellent notes.</p>
+<p>The biggest difference between Python and Stata is that Python is a fully-fledged programming language, which means it can do <em>lots</em> of things, while Stata is really just for data analysis. What this means in practice is that sometimes the notation to do this or that operation in Python (or any other general purpose programming language) is less concise than in Stata. There is greater competition for each command in Python because it does many more things.</p>
+<p>Another difference is that, in Stata, there is one dataset in memory that is represented as matrix where each column is a “variable” with a unique name. In Python, variables can be anything, even functions! But most data analysis in Python is done using dataframes, which are objects that are somewhat similar to a single dataset in Stata. In Python, you can have as many dataframes as you like in action at once. This causes the first major notational differences; in Python, you need to specify <em>which</em> dataframe you want to perform an operation on, in addition to which column (or row, or entry).</p>
+<p>Finally, Python and its data analysis packages are free.</p>
+<p>Regardless of Python not being a programming language solely dedicated to data analysis, it really does have first class support for data analysis via its <strong>pandas</strong> package. Support for doing regressions is perhaps less good than <strong>Stata</strong>, and certainly a bit more verbose—but you can still do pretty much every standard operation you can think of.</p>
+<section id="stata-python">
+<h2>Stata &lt;==&gt; Python<a class="headerlink" href="#stata-python" title="Link to this heading">#</a></h2>
+<p>What follows is a giant table of translations between Stata code and Python, leaning heavily on Python’s <a class="reference external" href="https://pandas.pydata.org/"><strong>pandas</strong></a> (panel-data-analysis) package. We’re going to rely on a few packages for econometrics in the below. They are <a class="reference external" href="https://www.statsmodels.org/"><strong>statsmodels</strong></a> as your general purpose and flexible regression library, <a class="reference external" href="https://s3alfisc.github.io/pyfixest/"><strong>pyfixest</strong></a> for when you need high dimensional fixed effects, and <a class="reference external" href="https://nppackages.github.io/binsreg/"><strong>binsreg</strong></a> for bin scatter.</p>
+<p>Many of the examples below assume that, in Python, you have a <strong>pandas</strong> DataFrame called <code class="docutils literal notranslate"><span class="pre">df</span></code>. We will use placeholders like <code class="docutils literal notranslate"><span class="pre">varname</span></code> for Stata variables and <code class="docutils literal notranslate"><span class="pre">df['varname']</span></code> for the Python equivalent. Remember that you need to <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pandas</span> <span class="pre">as</span> <span class="pre">pd</span></code> before running any of the examples that use <code class="docutils literal notranslate"><span class="pre">pd</span></code>. For the econometrics examples, you will need to import the relevant package.</p>
+<p>You can find more on (frequentist) regressions in <a class="reference internal" href="econmt-regression.html#regression"><span class="std std-ref">Regression</span></a>, Bayesian regressions using formulae appear in <a class="reference internal" href="econmt-bayes-bambi.html#econmt-bayes-bambi"><span class="std std-ref">Bayesian Inference Made Easier</span></a>, generalised regression models appear in <a class="reference internal" href="econmt-generalised-models.html#generalised-models"><span class="std std-ref">Generalised regression models</span></a>, and regression diagnostics and visualisation are in <a class="reference internal" href="econmt-diagnostics.html#regression-diagnostics"><span class="std std-ref">Regression diagnostics and visualisations</span></a>. For Bayesian regressions, Python is very strong: check out <a class="reference internal" href="econmt-bayes-bambi.html#econmt-bayes-bambi"><span class="std std-ref">Bayesian Inference Made Easier</span></a>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Stata</p></th>
+<th class="head"><p>Python (pandas)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">command</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">help(command)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">directory</span></code></p></td>
+<td><p><code>import os<br>os.chdir(‘directory’) </code> <br> Best practice: don’t do this; bring the data to you by opening Visual Studio Code in a project root folder and using relative paths.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">file.dta</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">pd.read_stata('file.dta')</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">varlist</span> <span class="pre">using</span> <span class="pre">dtafile</span></code></p></td>
+<td><p><code>df = pd.read_stata(‘dtafile’, columns=varlist) </code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">excel</span> <span class="pre">using</span> <span class="pre">excelfile</span></code></p></td>
+<td><p><code>df = pd.read_excel(‘excelfile’) </code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">delimited</span> <span class="pre">using</span> <span class="pre">csvfile</span></code></p></td>
+<td><p><code>df = pd.read_csv(‘csvfile’) </code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">save</span> <span class="pre">filename,</span> <span class="pre">replace</span></code></p></td>
+<td><p><code>df.to_stata(‘filename’) </code> <br> Best practice: don’t save data in .dta files.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">outsheet</span> <span class="pre">using</span> <span class="pre">filename,</span> <span class="pre">comma</span></code></p></td>
+<td><p><code>df.to_csv(‘filename’) </code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">excel</span> <span class="pre">using</span> <span class="pre">filename</span></code></p></td>
+<td><p><code>df.to_excel(‘filename’) </code> <br> Best practice: don’t save data in Excel files.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">keep</span> <span class="pre">if</span> <span class="pre">condition</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">df[condition]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">drop</span> <span class="pre">if</span> <span class="pre">condition</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">df[~condition]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">keep</span> <span class="pre">variable</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">df['variable']</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">keep</span> <span class="pre">varstem*</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">df.filter(like='varstem*')</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">drop</span> <span class="pre">variable</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">df.drop('variable',</span> <span class="pre">axis=1)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">drop</span> <span class="pre">varstem*</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">df.drop(df.filter(like='varstem*').columns,</span> <span class="pre">axis=1)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">describe</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.info()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">describe</span> <span class="pre">variable</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df['variable'].dtype</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">count</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">len(df)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">count</span> <span class="pre">if</span> <span class="pre">condition</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df[condition].shape[0]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">summ</span> <span class="pre">variable</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df['variable'].describe()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">summ</span> <span class="pre">variable</span> <span class="pre">if</span> <span class="pre">condition</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.loc[condition,</span> <span class="pre">'variable'].describe()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gen</span> <span class="pre">newvar</span> <span class="pre">=</span> <span class="pre">expression</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df['newvar']</span> <span class="pre">=</span> <span class="pre">expression</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gen</span> <span class="pre">newvar</span> <span class="pre">=</span> <span class="pre">expression</span> <span class="pre">if</span> <span class="pre">condition</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.loc[condition,</span> <span class="pre">'newvar']</span> <span class="pre">=</span> <span class="pre">expression</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">replace</span> <span class="pre">newvar</span> <span class="pre">=</span> <span class="pre">expression</span> <span class="pre">if</span> <span class="pre">condition</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.loc[condition,</span> <span class="pre">'newvar']</span> <span class="pre">=</span> <span class="pre">expression</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rename</span> <span class="pre">var</span> <span class="pre">newvar</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">df.rename(columns={var:</span> <span class="pre">newvar})</span></code> or <code class="docutils literal notranslate"><span class="pre">df.columns=list_new_columns</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">subinstr(string,</span> <span class="pre">&quot;</span> <span class="pre">&quot;,</span> <span class="pre">&quot;_&quot;,</span> <span class="pre">.)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df['var'].str.replace('</span> <span class="pre">',</span> <span class="pre">'_')</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">egen</span> <span class="pre">newvar</span> <span class="pre">=</span> <span class="pre">statistic(var),</span> <span class="pre">by(groupvars)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df['newvar']</span> <span class="pre">=</span> <span class="pre">df.groupby(groupvars)['var'].transform('statistic')</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">collapse</span> <span class="pre">(sd)</span> <span class="pre">var</span> <span class="pre">(median)</span> <span class="pre">var</span> <span class="pre">(max)</span> <span class="pre">var</span> <span class="pre">(min)</span> <span class="pre">&lt;var&gt;,</span> <span class="pre">by(groupvars)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.groupby(groupvars)['var'].agg(['std',</span> <span class="pre">'median',</span> <span class="pre">'min',</span> <span class="pre">'max',</span> <span class="pre">'sum'])</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">append</span> <span class="pre">using</span> <span class="pre">filename</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">df1.append(df2)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">merge</span> <span class="pre">1:1</span> <span class="pre">vars</span> <span class="pre">using</span> <span class="pre">filename</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">pd.merge(df1,</span> <span class="pre">df2,</span> <span class="pre">on=vars)</span></code> but there are very rich options for merging dataframes (Python is similar to SQL in this respect) and you should check the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/merging.html">full documentation</a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">reshape</span> <span class="pre">&lt;wide/long&gt;</span> <span class="pre">&lt;stubs&gt;,</span> <span class="pre">i(&lt;vars&gt;)</span> <span class="pre">j(&lt;var&gt;)</span></code></p></td>
+<td><p><strong>pandas</strong> has several reshaping functions, including <code class="docutils literal notranslate"><span class="pre">df.unstack('level')</span></code> for going to wide, <code class="docutils literal notranslate"><span class="pre">df.stack('column_level')</span></code> for going to long, <code class="docutils literal notranslate"><span class="pre">pd.melt</span></code>, and <code class="docutils literal notranslate"><span class="pre">df.pivot</span></code>. It’s best to check the excellent <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html">reshaping</a> documentation to find what best suits your needs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xi:</span> <span class="pre">i.var</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pd.get_dummies(df['var'])</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">reg</span> <span class="pre">yvar</span> <span class="pre">xvar</span> <span class="pre">if</span> <span class="pre">condition,</span> <span class="pre">r</span></code></p></td>
+<td><p><code>import pyfixest as pf<br> fit = pf.feols(“yvar ~ xvar”, data=df[“condition”], vcov=”HC2”) </code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">reg</span> <span class="pre">yvar</span> <span class="pre">xvar</span> <span class="pre">if</span> <span class="pre">condition,</span> <span class="pre">vce(cluster</span> <span class="pre">clustervar)</span></code></p></td>
+<td><p><code>import pyfixest as pf<br> fit = pf.feols(“yvar ~ xvar”, data=df[“condition”], vcov={“CRV1”: “clustervar”}) </code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">areg</span> <span class="pre">yvar</span> <span class="pre">xvar,</span> <span class="pre">absorb(fe_var)</span></code></p></td>
+<td><p><code>import pyfixest as pf<br> fit = pf.feols(“yvar ~ xvar | fe_var”, data=df) </code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">_b[var],</span> <span class="pre">_se[var]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">results_sw.coef()[&quot;var&quot;],</span> <span class="pre">results_sw.se()[&quot;var&quot;]</span></code> following creation of <code class="docutils literal notranslate"><span class="pre">results_sw</span></code> via <code class="docutils literal notranslate"><span class="pre">results_sw</span> <span class="pre">=</span> <span class="pre">pf.feols(...)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ivreg2</span> <span class="pre">lwage</span> <span class="pre">exper</span> <span class="pre">expersq</span> <span class="pre">(educ=age)</span></code></p></td>
+<td><p><code> pf.feols(“lwage ~ exper + expersq | educ ~ age”, data=dfiv) </code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">outreg2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">results</span> <span class="pre">=</span> <span class="pre">pf.feols(...)</span></code> then <code class="docutils literal notranslate"><span class="pre">results.tidy()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">binscatter</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">binsreg</span></code> from the <a class="reference external" href="https://pypi.org/project/binsreg/"><strong>binsreg</strong></a> package; see <a class="reference internal" href="econmt-diagnostics.html#regression-diagnostics"><span class="std std-ref">Regression diagnostics and visualisations</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">twoway</span> <span class="pre">scatter</span> <span class="pre">var1</span> <span class="pre">var2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.scatter(var2,</span> <span class="pre">var1)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The table below presents further examples of doing regression with both the <strong>statsmodels</strong> and <a class="reference external" href="https://s3alfisc.github.io/pyfixest/"><strong>pyfixest</strong></a> packages.</p>
+<p>Note that, in the below, you need only import <code class="docutils literal notranslate"><span class="pre">pf.feols</span></code> once in each Python session, and the syntax for looking at results is <code class="docutils literal notranslate"><span class="pre">results</span> <span class="pre">=</span> <span class="pre">pf.feols(...)</span></code> and then <code class="docutils literal notranslate"><span class="pre">results.summary()</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Stata</p></th>
+<th class="head"><p>Python</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Fixed Effects (absorbing)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">reghdfe</span> <span class="pre">y</span> <span class="pre">x,</span> <span class="pre">absorb(fe)</span></code></p></td>
+<td><p><code>import pyfixest as pf<br> fit = pf.feols(“y ~ x | fe”, data=df) </code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Categorical regression</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">reghdfe</span> <span class="pre">y</span> <span class="pre">x</span> <span class="pre">i.cat</span></code></p></td>
+<td><p><code>import pyfixest as pf<br> fit = pf.feols(“y ~ x + C(cat)”, data=df) </code><br> But if <code class="docutils literal notranslate"><span class="pre">cat</span></code> is of type categorical it can be run with <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">cat</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Interacting categoricals</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">reghdfe</span> <span class="pre">y</span> <span class="pre">x</span> <span class="pre">i.cat#i.cat2</span></code></p></td>
+<td><p><code>import pyfixest as pf<br> fit = pf.feols(“yvar ~ xvar + C(cat):C(cat2)”, data=df) </code> <br> Note that <code class="docutils literal notranslate"><span class="pre">a*b</span></code> is a short-hand for <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">+</span> <span class="pre">a:b</span></code>, with the last term representing the interaction.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Robust standard errors</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">reghdfe</span> <span class="pre">y</span> <span class="pre">x,</span> <span class="pre">r</span></code></p></td>
+<td><p><code>import pyfixest as pf<br> fit = pf.feols(“y ~ x, data=df, vcov=”HC1”) </code> <br> Note that a range of heteroskedasticity robust standard errors are available: see <a class="reference internal" href="econmt-regression.html#regression"><span class="std std-ref">Regression</span></a> for more.</p></td>
+</tr>
+<tr class="row-even"><td><p>Clustered standard errors</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">reghdfe</span> <span class="pre">y</span> <span class="pre">x,</span> <span class="pre">cluster(clust)</span></code></p></td>
+<td><p><code>import pyfixest as pf<br> fit = pf.feols(“y ~ x”, data=df, vcov={“CRV1”: “clust”}) </code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Two-way clustered standard errors</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">reghdfe</span> <span class="pre">y</span> <span class="pre">x,</span> <span class="pre">cluster(clust1</span> <span class="pre">clust2)</span></code></p></td>
+<td><p><code>import pyfixest as pf<br> fit = pf.feols(“y ~ x”, data=df, vcov={“CRV1”: “clust1 + clust2”}) </code></p></td>
+</tr>
+<tr class="row-even"><td><p>Instrumental variables</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ivreghdfe</span> <span class="pre">2sls</span> <span class="pre">y</span> <span class="pre">exog</span> <span class="pre">(endog</span> <span class="pre">=</span> <span class="pre">instrument)</span></code></p></td>
+<td><p><code>import pyfixest as pf<br> fit = pf.feols(“y ~ exog | endog ~ instrument”, data=df) </code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="vis-seaborn.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data Visualisation with <strong>Seaborn</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="coming-from-matlab.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Coming from Matlab</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stata-python">Stata &lt;==&gt; Python</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Arthur Turrell
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  This book is available under an MIT license.
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

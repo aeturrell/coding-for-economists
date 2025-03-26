@@ -1,0 +1,946 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Virtual Code Environments &#8212; Coding for Economists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-9FZQCPFXZJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'wrkflow-environments';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://aeturrell.github.io/coding-for-economists/wrkflow-environments.html" />
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reproducible Analysis" href="wrkflow-rap.html" />
+    <link rel="prev" title="Combining Code and Text in Quarto Markdown" href="wrkflow-quarto.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/smith_lovelace.png" class="logo__image only-light" alt="Coding for Economists - Home"/>
+    <script>document.write(`<img src="_static/smith_lovelace.png" class="logo__image only-dark" alt="Coding for Economists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-basics.html">Coding Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow-basics.html">Workflow Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-where.html">Writing Code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-analysis-quickstart.html">Data Analysis Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-intro.html">Working with Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-transformation.html">Data Transformation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-read-and-write.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-numbers.html">Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-categorical.html">Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-spreadsheets.html">Spreadsheets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-best-practice.html">Code in Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advanced.html">Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advcd-best-practice.html">Shortcuts to Better Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-intro.html">Intro to Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-letsplot.html">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-matplotlib.html">Powerful Data Visualisation with <strong>Matplotlib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-one.html">Common Plots I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-two.html">Common Plots II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="auto-research-outputs.html">Automating Research Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-markdown.html">Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-version-control.html">Version Control</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Econometrics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="econmt-probability-random.html">Probability and Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-statistics.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-regression.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-generalised-models.html">Generalised regression models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-diagnostics.html">Regression diagnostics and visualisations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-causal-inference.html">Causal Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayesian.html">Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayes-bambi.html">Bayesian Inference Made Easier</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-boolean.html">Boolean Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-joining-data.html">Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-missing-values.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-exploratory-analysis.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-extraction.html">Getting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-databases.html">Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-advanced.html"><strong>pandas</strong> alternatives, validation, and orchestration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-sharing.html">Sharing Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-further-advanced.html">Advanced Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-quarto.html">Combining Code and Text in Quarto Markdown</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Virtual Code Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-rap.html">Reproducible Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Time</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="time-intro.html">Introduction to Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-fcasts-env.html">Forecasting Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Text Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="text-intro.html">Introduction to Text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-regex.html">Regular Expressions, aka regex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-nlp.html">Natural Language Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ml-intro.html">Introduction to Machine Learning and AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-sup.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-data.html">Data for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-unsup.html">Unsupervised Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Geospatial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geo-intro.html">Intro to Geo-Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geo-vis.html">Geo-Spatial Visualisation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="maths-abstract.html">Abstract Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maths-numerical.html">Numerical Mathematics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Craft</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="craft-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-search.html">Putting the Search in Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-generating-ideas.html">Generating and Accepting Research Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-writing-papers.html">Writing Papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-research-blogs.html">Research Blog Posts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-referee.html">Writing Referee Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-technical-reports.html">Writing Technical Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-extended-abstracts.html">Extended Abstracts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coming from ...</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="coming-from-stata.html">Coming from Stata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-matlab.html">Coming from Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-r.html">Coming from R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-excel.html">Coming from Excel</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zreferences.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aeturrell/coding-for-economists/blob/main/wrkflow-environments.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists/issues/new?title=Issue%20on%20page%20%2Fwrkflow-environments.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/wrkflow-environments.ipynb" target="_blank"
+   class="btn btn-sm btn-download-notebook-button dropdown-item"
+   title="Download notebook file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="_sources/wrkflow-environments.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Virtual Code Environments</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-uv-to-manage-environments">Using uv to Manage Environments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-uv-environments">Using uv Environments</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-miniconda-to-manage-python-environments">Using Miniconda to Manage Python Environments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-environments">Creating Environments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-and-switching-between-conda-environments">Using and Switching Between Conda Environments</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="virtual-code-environments">
+<span id="wrkflow-environments"></span><h1>Virtual Code Environments<a class="headerlink" href="#virtual-code-environments" title="Link to this heading">#</a></h1>
+<p>In this chapter, you’re going to learn about virtual coding environments. These allow you to isolate all of the packages that you’re using to do analysis for one project from the set of packages you might need for a different project. They’re an important part of creating a reproducible analytical pipeline (more on that in <a class="reference internal" href="wrkflow-rap.html#wrkflow-rap"><span class="std std-ref">Reproducible Analysis</span></a> but a key benefit is that others can reproduce the environment you used) and it’s best practice to have an isolated environment per project.</p>
+<p>If you’re going through this book using uv, you are already using virtual environments even though you may not have realised it! uv creates a different Python installation (with its attendant packages) for each project folder you use.</p>
+<p>It may be easier to illustrate what separate environments are for with an example. Let’s say you’re using Python 3.8, statsmodels, and pandas for one project, project A. And, for project B, you’re using Python 3.9 with numpy and scikit-learn. Even with the same version of Python, best practice would be to have two separate virtual Python environments: environment A, with everything needed for project A, and environment B, with everything needed for project B. For the case where you’re using different versions of Python, this isn’t just best practice, it’s essential.</p>
+<p>In Python, there are multiple tools for managing different environments. Of those, the easiest to work with is <a class="reference external" href="https://docs.astral.sh/uv/">uv</a> as it handles Python, packages, and reproducibility. However, if you’re using complex packages such as <em>pymc</em> you may prefer to use <a class="reference external" href="https://docs.anaconda.com/miniconda/"><strong>Miniconda</strong></a> (<code class="docutils literal notranslate"><span class="pre">conda</span></code> for short) instead as this offers pre-compiled code.</p>
+<p>If you’re just getting going with coding, this book recommends that you use uv.</p>
+<section id="using-uv-to-manage-environments">
+<h2>Using uv to Manage Environments<a class="headerlink" href="#using-uv-to-manage-environments" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://docs.astral.sh/uv/"><strong>uv</strong></a> automatically creates a virtual environment per project folder so that each project you do gets its own distinct and independent Python installation. As well as providing virtual environments by default, it can:</p>
+<ul class="simple">
+<li><p>create virtual environments on a per project basis</p></li>
+<li><p>manage Python package dependencies, and logs them automatically</p></li>
+<li><p>manage Python package versions, and logs them automatically</p></li>
+<li><p>manager Python versions (ie the language itself)</p></li>
+<li><p>install all needed dependencies and packages from previously auto-generated (by uv) lists of versions</p></li>
+<li><p>(advanced) build Python packages</p></li>
+<li><p>(advanced) upload Python packages to PyPI where they can be installed (ie make your project pip installable by anyone in the world)</p></li>
+</ul>
+<p>The environment that uv creates is tied to your project folder. After navigating to your project folder on the command line (more on the command line in <a class="reference internal" href="wrkflow-command-line.html#wrkflow-command-line"><span class="std std-ref">The Command Line</span></a>), use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>init
+</pre></div>
+</div>
+<p>This will create a (human-readable) <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> file that lists the packages needed for your project. It will also create a virtual Python environment just for your project.</p>
+<p>To add and install packages, the command is <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">add</span> <span class="pre">package-name</span></code>. As you add packages, you will see that the <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> file automatically becomes populated with what you installed. Here’s an excerpt of a typical <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> file designed for reproducibility:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>requires-python = &quot;&gt;=3.9&quot;
+dependencies = [
+    &quot;click&gt;=8.1.7&quot;,
+    &quot;ipykernel&gt;=6.29.5&quot;,
+    &quot;numpy&gt;=2.0.2&quot;,
+    &quot;pandas-stubs&gt;=2.2.2.240807&quot;,
+    &quot;pandas&gt;=2.2.3&quot;,
+    &quot;polars&gt;=1.17.1&quot;,
+    &quot;pyarrow&gt;=18.1.0&quot;,
+    &quot;pygments&gt;=2.18.0&quot;,
+    &quot;rich&gt;=13.9.4&quot;,
+    &quot;typeguard&gt;=4.4.1&quot;,
+]
+</pre></div>
+</div>
+<p>The first line here says that this runs on any Python version greater than 3.9. The rest sets out the main dependencies, or packages directly needed for the project, and their minimum versions.</p>
+<p>A second file, <code class="docutils literal notranslate"><span class="pre">uv.lock</span></code>, is also created. This “locks” down the dependencies of your packages. It’s also human-readable, just not very compelling. Visual Studio Code will happily open both types of file. In that file is a list of every package directly used, the version that’s installed, and the dependencies of that package and what versions of <em>those</em> is installed.</p>
+<section id="using-uv-environments">
+<h3>Using uv Environments<a class="headerlink" href="#using-uv-environments" title="Link to this heading">#</a></h3>
+<p>To use the virtual environment to run scripts or tools installed using <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">add</span></code>, you will need to use <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">command-name</span></code> rather than the usual <code class="docutils literal notranslate"><span class="pre">command-name</span></code>. For example, if you have a script <code class="docutils literal notranslate"><span class="pre">analysis.py</span></code>, you would call it with <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">python</span> <span class="pre">analysis.py</span></code>.</p>
+<p>Visual Studio Code makes this easier though: just as with conda environments, you can set your interactive window or jupyter notebooks to execute with a specific uv environment. <strong>uv environments are by default found in your project folder under the <code class="docutils literal notranslate"><span class="pre">.venv</span></code> directory.</strong></p>
+<p>uv is especially strong for reproducibility. Imagine you wish to have a co-author or colleague install everything they need for the project. If you send them the automatically generated <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> and <code class="docutils literal notranslate"><span class="pre">uv.lock</span></code> files then all they need is to run <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">sync</span> <span class="pre">--frozen</span></code>. This will install all of (<em>exactly</em> the same) packages needed to run the code!</p>
+</section>
+</section>
+<section id="using-miniconda-to-manage-python-environments">
+<h2>Using Miniconda to Manage Python Environments<a class="headerlink" href="#using-miniconda-to-manage-python-environments" title="Link to this heading">#</a></h2>
+<p>Much of these two subsections is covered by the Miniconda documentation on <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">managing virtual environments</a>.</p>
+<section id="creating-environments">
+<h3>Creating Environments<a class="headerlink" href="#creating-environments" title="Link to this heading">#</a></h3>
+<p>If you’re using Miniconda for Python, you manage and change environments on the command line (more on the command line in <a class="reference internal" href="wrkflow-command-line.html#wrkflow-command-line"><span class="std std-ref">The Command Line</span></a>) too. Before following these instructions, check that you have Miniconda installed and activated. You should see something like <code class="docutils literal notranslate"><span class="pre">(base)</span> <span class="pre">username&#64;computername:~$</span></code> on the command line (base is the default conda environment).</p>
+<p>To create a new environment called “myenv” with a specific version of Python (but no extra packages installed), it’s</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>myenv<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
+</pre></div>
+</div>
+<p>where you can of course specify other versions of Python by changing the number. To throw in a package or two, just add them to the end, for example</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>myenv<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8<span class="w"> </span>pandas<span class="w"> </span>jupyter
+</pre></div>
+</div>
+<p>You can see a list of the currently installed environments by running</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>list
+</pre></div>
+</div>
+<p>Running <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code> within an environment will list the packages you’ve installed within that environment.</p>
+<p>When you install Miniconda, you will begin with a “base” environment. It’s a good idea not to use this for projects but to instead to create a new environment for each project.</p>
+<p>There are two downsides to installing environments directly from the command line. One is that you may have lots of packages. The second is that you may wish to keep a record of the environment you created. For both of these reasons, you can specify a conda environment using a file.</p>
+<p>The pandas example we saw above would look like</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myenv</span>
+<span class="nt">channels</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
+<span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python=3.8</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pandas</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jupyter</span>
+</pre></div>
+</div>
+<p>The environment is given by <code class="docutils literal notranslate"><span class="pre">name</span></code>, the channel (where to look for the packages) by <code class="docutils literal notranslate"><span class="pre">channels</span></code>, the specific packages by <code class="docutils literal notranslate"><span class="pre">dependencies</span></code>. Not all packages are available on conda’s channels, so sometimes extra ones are needed. And some packages are only available on pip; these can be specified with a sub-section of the file like so for the <strong>skimpy</strong> package:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myenv</span>
+<span class="nt">channels</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
+<span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python=3.8</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pandas</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jupyter</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pip</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skimpy</span>
+</pre></div>
+</div>
+<p>This goes into a file called <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code>, which can be installed by running</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
+</pre></div>
+</div>
+<p>This book is put together using an isolated <em>conda</em> environment specified in a file. It’s an unusually big one because there are a lot of packages, some of them with complex dependencies, featured in the book! Here they are:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rich</span><span class="w"> </span><span class="kn">import</span> <span class="nb">print</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;environment.yml&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+    <span class="n">data_loaded</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">data_loaded</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">name: codeforecon
+channels:
+  - conda-forge
+dependencies:
+  - jupyter
+  - numpy<span style="font-weight: bold">&lt;</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.0</span><span style="color: #ff00ff; text-decoration-color: #ff00ff; font-weight: bold">.</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>
+<span style="color: #000000; text-decoration-color: #000000">  - pandas&gt;=</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.1</span><span style="color: #000000; text-decoration-color: #000000">.</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>
+<span style="color: #000000; text-decoration-color: #000000">  - pip</span>
+<span style="color: #000000; text-decoration-color: #000000">  - </span><span style="color: #808000; text-decoration-color: #808000">python</span><span style="color: #000000; text-decoration-color: #000000">=</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3.10</span>
+<span style="color: #000000; text-decoration-color: #000000">  - matplotlib</span>
+<span style="color: #000000; text-decoration-color: #000000">  - pyyaml</span>
+<span style="color: #000000; text-decoration-color: #000000">  - scipy</span>
+<span style="color: #000000; text-decoration-color: #000000">  - seaborn</span>
+<span style="color: #000000; text-decoration-color: #000000">  - statsmodels</span>
+<span style="color: #000000; text-decoration-color: #000000">  - yaml</span>
+<span style="color: #000000; text-decoration-color: #000000">  - pyarrow</span>
+<span style="color: #000000; text-decoration-color: #000000">  - geopandas</span>
+<span style="color: #000000; text-decoration-color: #000000">  - geoplot</span>
+<span style="color: #000000; text-decoration-color: #000000">  - nltk</span>
+<span style="color: #000000; text-decoration-color: #000000">  - arrow</span>
+<span style="color: #000000; text-decoration-color: #000000">  - osmnx</span>
+<span style="color: #000000; text-decoration-color: #000000">  - pandas-datareader</span>
+<span style="color: #000000; text-decoration-color: #000000">  - pandasdmx</span>
+<span style="color: #000000; text-decoration-color: #000000">  - pdfminer.six</span>
+<span style="color: #000000; text-decoration-color: #000000">  - jupyter-book</span>
+<span style="color: #000000; text-decoration-color: #000000">  - pytest</span>
+<span style="color: #000000; text-decoration-color: #000000">  - rich</span>
+<span style="color: #000000; text-decoration-color: #000000">  - pyinstrument</span>
+<span style="color: #000000; text-decoration-color: #000000">  - loguru</span>
+<span style="color: #000000; text-decoration-color: #000000">  - pre-commit</span>
+<span style="color: #000000; text-decoration-color: #000000">  - pandera</span>
+<span style="color: #000000; text-decoration-color: #000000">  - sympy</span>
+<span style="color: #000000; text-decoration-color: #000000">  - pingouin</span>
+<span style="color: #000000; text-decoration-color: #000000">  - plotly</span>
+<span style="color: #000000; text-decoration-color: #000000">  - spacy</span>
+<span style="color: #000000; text-decoration-color: #000000">  - plotnine</span>
+<span style="color: #000000; text-decoration-color: #000000">  - altair</span>
+<span style="color: #000000; text-decoration-color: #000000">  - cerberus</span>
+<span style="color: #000000; text-decoration-color: #000000">  - waterfallcharts</span>
+<span style="color: #000000; text-decoration-color: #000000">  - matplotlib-venn</span>
+<span style="color: #000000; text-decoration-color: #000000">  - pywaffle</span>
+<span style="color: #000000; text-decoration-color: #000000">  - joypy</span>
+<span style="color: #000000; text-decoration-color: #000000">  - jupyterlab</span>
+<span style="color: #000000; text-decoration-color: #000000">  - textstat</span>
+<span style="color: #000000; text-decoration-color: #000000">  - nbstripout</span>
+<span style="color: #000000; text-decoration-color: #000000">  - vega_datasets</span>
+<span style="color: #000000; text-decoration-color: #000000">  - ghp-import</span>
+<span style="color: #000000; text-decoration-color: #000000">  - colorcet</span>
+<span style="color: #000000; text-decoration-color: #000000">  - requests-cache</span>
+<span style="color: #000000; text-decoration-color: #000000">  - pip</span>
+<span style="color: #000000; text-decoration-color: #000000">  - arch-py</span>
+<span style="color: #000000; text-decoration-color: #000000">  - workalendar</span>
+<span style="color: #000000; text-decoration-color: #000000">  - wordcloud</span>
+<span style="color: #000000; text-decoration-color: #000000">  - bambi</span>
+<span style="color: #000000; text-decoration-color: #000000">  - bottleneck</span>
+<span style="color: #000000; text-decoration-color: #000000">  - openpyxl</span>
+<span style="color: #000000; text-decoration-color: #000000">  - python-slugify</span>
+<span style="color: #000000; text-decoration-color: #000000">  - pymc</span>
+<span style="color: #000000; text-decoration-color: #000000">  - umap-learn</span>
+<span style="color: #000000; text-decoration-color: #000000">  - python-dotenv</span>
+<span style="color: #000000; text-decoration-color: #000000">  - ruff</span>
+<span style="color: #000000; text-decoration-color: #000000">  - ruptures</span>
+<span style="color: #000000; text-decoration-color: #000000">  - great_tables</span>
+<span style="color: #000000; text-decoration-color: #000000">  - polars</span>
+<span style="color: #000000; text-decoration-color: #000000">  - ibis-sqlite</span>
+<span style="color: #000000; text-decoration-color: #000000">  - sqlmodel</span>
+<span style="color: #000000; text-decoration-color: #000000">  - scikit-</span><span style="color: #808000; text-decoration-color: #808000">learn</span><span style="color: #000000; text-decoration-color: #000000">==</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1.5</span><span style="color: #000000; text-decoration-color: #000000">.</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>
+<span style="color: #000000; text-decoration-color: #000000">  - pip:</span>
+<span style="color: #000000; text-decoration-color: #000000">    - specification_curve</span>
+<span style="color: #000000; text-decoration-color: #000000">    - stargazer</span>
+<span style="color: #000000; text-decoration-color: #000000">    - matplotlib-scalebar</span>
+<span style="color: #000000; text-decoration-color: #000000">    - skimpy</span>
+<span style="color: #000000; text-decoration-color: #000000">    - graphviz</span>
+<span style="color: #000000; text-decoration-color: #000000">    - </span><span style="color: #808000; text-decoration-color: #808000">binsreg</span><span style="color: #000000; text-decoration-color: #000000">==</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2.1</span><span style="color: #000000; text-decoration-color: #000000">.</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>
+<span style="color: #000000; text-decoration-color: #000000">    - feature-engine</span>
+<span style="color: #000000; text-decoration-color: #000000">    - lets-plot&gt;=</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4.3</span><span style="color: #000000; text-decoration-color: #000000">.</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>
+<span style="color: #000000; text-decoration-color: #000000">    - palmerpenguins</span>
+<span style="color: #000000; text-decoration-color: #000000">    - pyfixest</span><span style="font-weight: bold">&gt;</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.17</span>.<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>
+    - watermark
+    - ydata_profiling
+    - toml-cli
+    - toml
+    - dayplot
+
+</pre>
+</div></div>
+</div>
+<p>Of course, you can install packages as you go too, you don’t have to specify them when you create the environment. With the relevant environment activated, use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">packagename</span></code> to do this. However, for any project not involving complex packages like <em>pymc</em>, we recommend using uv instead.</p>
+<p>Finally, to remove an environment, it’s</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>remove<span class="w"> </span>--name<span class="w"> </span>myenv<span class="w"> </span>--all
+</pre></div>
+</div>
+</section>
+<section id="using-and-switching-between-conda-environments">
+<h3>Using and Switching Between Conda Environments<a class="headerlink" href="#using-and-switching-between-conda-environments" title="Link to this heading">#</a></h3>
+<p>To switch between conda environments on the command line, for example from the base environment to an environment called “myenv”, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>myenv
+</pre></div>
+</div>
+<p>on the command line. However, this only switches the environment if you plan to run code on the command line!</p>
+<p>Fortunately, Visual Studio Code has you covered and makes it very easy to switch Python environments for a project at the click of a button.</p>
+<p><img alt="A typical user view in Visual Studio Code" src="https://github.com/aeturrell/coding-for-economists/blob/main/img/vscode_layout.png?raw=true" /></p>
+<p>In the screenshot above, you can see the project-environment in two places: on the blue bar at the bottom of the screen, and (in 5), at the top right hand side of the interactive window. Click on either to change the Python environment that will be used to execute code. A similar top right selector is present for Jupyter Notebooks too.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="wrkflow-quarto.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Combining Code and Text in Quarto Markdown</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="wrkflow-rap.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Reproducible Analysis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-uv-to-manage-environments">Using uv to Manage Environments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-uv-environments">Using uv Environments</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-miniconda-to-manage-python-environments">Using Miniconda to Manage Python Environments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-environments">Creating Environments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-and-switching-between-conda-environments">Using and Switching Between Conda Environments</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Arthur Turrell
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  This book is available under an MIT license.
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

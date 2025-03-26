@@ -1,0 +1,3525 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Data Transformation &#8212; Coding for Economists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-9FZQCPFXZJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'data-transformation';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://aeturrell.github.io/coding-for-economists/data-transformation.html" />
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reading and Writing Files" href="data-read-and-write.html" />
+    <link rel="prev" title="Working with Data" href="data-intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/smith_lovelace.png" class="logo__image only-light" alt="Coding for Economists - Home"/>
+    <script>document.write(`<img src="_static/smith_lovelace.png" class="logo__image only-dark" alt="Coding for Economists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-basics.html">Coding Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow-basics.html">Workflow Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-where.html">Writing Code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-analysis-quickstart.html">Data Analysis Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-intro.html">Working with Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Transformation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-read-and-write.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-numbers.html">Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-categorical.html">Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-spreadsheets.html">Spreadsheets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-best-practice.html">Code in Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advanced.html">Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advcd-best-practice.html">Shortcuts to Better Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-intro.html">Intro to Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-letsplot.html">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-matplotlib.html">Powerful Data Visualisation with <strong>Matplotlib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-one.html">Common Plots I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-two.html">Common Plots II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="auto-research-outputs.html">Automating Research Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-markdown.html">Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-version-control.html">Version Control</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Econometrics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="econmt-probability-random.html">Probability and Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-statistics.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-regression.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-generalised-models.html">Generalised regression models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-diagnostics.html">Regression diagnostics and visualisations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-causal-inference.html">Causal Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayesian.html">Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayes-bambi.html">Bayesian Inference Made Easier</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-boolean.html">Boolean Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-joining-data.html">Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-missing-values.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-exploratory-analysis.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-extraction.html">Getting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-databases.html">Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-advanced.html"><strong>pandas</strong> alternatives, validation, and orchestration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-sharing.html">Sharing Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-further-advanced.html">Advanced Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-quarto.html">Combining Code and Text in Quarto Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-environments.html">Virtual Code Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-rap.html">Reproducible Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Time</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="time-intro.html">Introduction to Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-fcasts-env.html">Forecasting Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Text Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="text-intro.html">Introduction to Text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-regex.html">Regular Expressions, aka regex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-nlp.html">Natural Language Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ml-intro.html">Introduction to Machine Learning and AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-sup.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-data.html">Data for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-unsup.html">Unsupervised Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Geospatial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geo-intro.html">Intro to Geo-Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geo-vis.html">Geo-Spatial Visualisation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="maths-abstract.html">Abstract Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maths-numerical.html">Numerical Mathematics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Craft</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="craft-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-search.html">Putting the Search in Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-generating-ideas.html">Generating and Accepting Research Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-writing-papers.html">Writing Papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-research-blogs.html">Research Blog Posts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-referee.html">Writing Referee Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-technical-reports.html">Writing Technical Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-extended-abstracts.html">Extended Abstracts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coming from ...</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="coming-from-stata.html">Coming from Stata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-matlab.html">Coming from Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-r.html">Coming from R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-excel.html">Coming from Excel</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zreferences.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aeturrell/coding-for-economists/blob/main/data-transformation.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists/issues/new?title=Issue%20on%20page%20%2Fdata-transformation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/data-transformation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Data Transformation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation">Aggregation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby-and-then-aggregate-aka-split-apply-combine">Groupby and then aggregate (aka split, apply, combine)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-functions-using-agg">Multiple Functions using <code class="docutils literal notranslate"><span class="pre">agg()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter">Filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transform">Transform</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assign">Assign</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agg-transform-and-apply-when-to-use-each-with-a-groupby"><code class="docutils literal notranslate"><span class="pre">agg()</span></code>, <code class="docutils literal notranslate"><span class="pre">transform()</span></code>, and <code class="docutils literal notranslate"><span class="pre">apply()</span></code>: when to use each with a groupby</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reshaping-data">Reshaping Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting-data-from-tidy-to-err-untidy">Pivoting data from tidy to, err, untidy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#melt">Melt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stack-and-unstack">Stack and unstack</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-dummies">Get dummies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-quick-look-at-time-series-and-rolling-windows">A quick look at time series and rolling windows</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-chaining">Method Chaining</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-transformation">
+<span id="id1"></span><h1>Data Transformation<a class="headerlink" href="#data-transformation" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>The previous chapter showed how to access different parts of a dataframe and create new rows or columns. In this chapter, you’ll learn how to do more interesting transformations of data including aggregations and groupbys.</p>
+<p>This chapter is hugely indebted to the fantastic <a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/">Python Data Science Handbook</a> by Jake Vanderplas. Remember, if you get stuck with <strong>pandas</strong>, there is brilliant <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/index.html">documentation</a> and a fantastic set of <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/index.html">introductory tutorials</a> on the <strong>pandas</strong> website. These notes are heavily indebted to those introductory tutorials.</p>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h3>
+<p>This chapter uses the <strong>pandas</strong> and <strong>numpy</strong> packages. If you’re running this code, you may need to install these packages, which you can do using either <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">packagename</span></code> or <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">packagename</span></code> on your computer’s command line. If you’re running this page in Google Colab, you can install new packages by running <code class="docutils literal notranslate"><span class="pre">!pip</span> <span class="pre">install</span> <span class="pre">packagename</span></code> in a new code cell but you will need to restart the Colab notebook for the change to take effect. There’s a brief guide on installing packages in the Chapter on <a class="reference internal" href="code-preliminaries.html#code-preliminaries"><span class="std std-ref">Preliminaries</span></a>. Remember, you only need to install them once!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Set seed for random numbers</span>
+<span class="n">seed_for_prng</span> <span class="o">=</span> <span class="mi">78557</span>
+<span class="n">prng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span>
+    <span class="n">seed_for_prng</span>
+<span class="p">)</span>  <span class="c1"># prng=probabilistic random number generator</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="aggregation">
+<h2>Aggregation<a class="headerlink" href="#aggregation" title="Link to this heading">#</a></h2>
+<p>Aggregation means taking some data and applying a statistical operation that <em>aggregates</em> the information into a smaller number of statistics. Because aggregations take many numbers and produce, typically, fewer numbers, they involve a function of some kind. While you can always write your own aggregation functions, <strong>pandas</strong> has some common ones built in—and these can be applied to rows or columns as we’ll see.</p>
+<p>The <strong>pandas</strong> built-in aggregation functions include:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aggregation</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">count()</span></code></p></td>
+<td><p>Number of items</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">first()</span></code>, <code class="docutils literal notranslate"><span class="pre">last()</span></code></p></td>
+<td><p>First and last item</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mean()</span></code>, <code class="docutils literal notranslate"><span class="pre">median()</span></code></p></td>
+<td><p>Mean and median</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">min()</span></code>, <code class="docutils literal notranslate"><span class="pre">max()</span></code></p></td>
+<td><p>Minimum and maximum</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">std()</span></code>, <code class="docutils literal notranslate"><span class="pre">var()</span></code></p></td>
+<td><p>Standard deviation and variance</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mad()</span></code></p></td>
+<td><p>Mean absolute deviation</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">prod()</span></code></p></td>
+<td><p>Product of all items</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sum()</span></code></p></td>
+<td><p>Sum of all items</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">value_counts()</span></code></p></td>
+<td><p>Counts of unique values</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>these can applied to all entries in a dataframe, or optionally to rows or columns using <code class="docutils literal notranslate"><span class="pre">axis=0</span></code> or <code class="docutils literal notranslate"><span class="pre">axis=1</span></code> (or <code class="docutils literal notranslate"><span class="pre">&quot;rows&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;columns&quot;</span></code>) respectively. Here are a couple of examples using the <code class="docutils literal notranslate"><span class="pre">sum()</span></code> function (note that we aggregate <em>over</em> rows leaving only columns):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)),</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s2">&quot;ABCDE&quot;</span><span class="p">))</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>E</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>3</td>
+      <td>4</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A    2
+B    7
+C    6
+D    2
+E    4
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;rows&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A    2
+B    7
+C    6
+D    2
+E    4
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Find the mean values of each column (eg leaving only column headers so aggregating over rows using <code class="docutils literal notranslate"><span class="pre">axis=0</span></code>) and the mean values of each row (eg leaving only row headers and therefore aggregating over columns using <code class="docutils literal notranslate"><span class="pre">axis=1</span></code>)</p>
+</div>
+<p>If you want to create custom aggregations, you can of course do that too using the <code class="docutils literal notranslate"><span class="pre">apply()</span></code> method from <a class="reference internal" href="data-intro.html#working-with-data"><span class="std std-ref">Working with Data</span></a>.</p>
+</section>
+<section id="groupby-and-then-aggregate-aka-split-apply-combine">
+<h2>Groupby and then aggregate (aka split, apply, combine)<a class="headerlink" href="#groupby-and-then-aggregate-aka-split-apply-combine" title="Link to this heading">#</a></h2>
+<p>Splitting a dataset, applying a function, and combining the results are three key operations that we’ll want to use together again and again. Splitting means differentiating between rows or columns of data based on some conditions, for instance different categories or different values. Applying means applying a function, for example finding the mean or sum. Combine means putting the results of these operations back into the dataframe, or into a variable. The figure gives an example</p>
+<p><img alt="" src="https://jakevdp.github.io/PythonDataScienceHandbook/figures/03.08-split-apply-combine.png" /></p>
+<p>A very common way of doing this is using the <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> operation to group rows according to come common property. The classic use-case would be to find the mean by a particular characteristic, perhaps the mean height by gender. Note that the ‘combine’ part at the end doesn’t always have to result in a new dataframe; it could create new columns in an existing dataframe (but the new column is the result of a groupby operation, eg subtracting a group mean).</p>
+<p>Let’s first see a really simple example of splitting a dataset into groups and finding the mean across those groups using the <em>penguins</em> dataset. We’ll group the data by island and look at the means.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;https://raw.githubusercontent.com/mwaskom/seaborn-data/master/penguins.csv&quot;</span>
+<span class="p">)</span>
+<span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+<span class="n">penguins</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>species</th>
+      <th>island</th>
+      <th>bill_length_mm</th>
+      <th>bill_depth_mm</th>
+      <th>flipper_length_mm</th>
+      <th>body_mass_g</th>
+      <th>sex</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>39.1</td>
+      <td>18.7</td>
+      <td>181.0</td>
+      <td>3750.0</td>
+      <td>Male</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>39.5</td>
+      <td>17.4</td>
+      <td>186.0</td>
+      <td>3800.0</td>
+      <td>Female</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>40.3</td>
+      <td>18.0</td>
+      <td>195.0</td>
+      <td>3250.0</td>
+      <td>Female</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Adelie</td>
+      <td>Torgersen</td>
+      <td>36.7</td>
+      <td>19.3</td>
+      <td>193.0</td>
+      <td>3450.0</td>
+      <td>Female</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;island&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bill_length_mm</th>
+      <th>bill_depth_mm</th>
+      <th>flipper_length_mm</th>
+      <th>body_mass_g</th>
+    </tr>
+    <tr>
+      <th>island</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Biscoe</th>
+      <td>45.257485</td>
+      <td>15.874850</td>
+      <td>209.706587</td>
+      <td>4716.017964</td>
+    </tr>
+    <tr>
+      <th>Dream</th>
+      <td>44.167742</td>
+      <td>18.344355</td>
+      <td>193.072581</td>
+      <td>3712.903226</td>
+    </tr>
+    <tr>
+      <th>Torgersen</th>
+      <td>38.950980</td>
+      <td>18.429412</td>
+      <td>191.196078</td>
+      <td>3706.372549</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The aggregations from the previous part all work on grouped data. An example is <code class="docutils literal notranslate"><span class="pre">df['body_mass_g'].groupby('island').median()</span></code> for the median body mass by island.</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Using a groupby, find the standard deviation of different penguin species’ body measurements. (Hint: standard deviation has its own aggregation/combine function given by <code class="docutils literal notranslate"><span class="pre">std()</span></code>)</p>
+</div>
+<section id="multiple-functions-using-agg">
+<h3>Multiple Functions using <code class="docutils literal notranslate"><span class="pre">agg()</span></code><a class="headerlink" href="#multiple-functions-using-agg" title="Link to this heading">#</a></h3>
+<p>You can also pass multiple functions via the <code class="docutils literal notranslate"><span class="pre">agg()</span></code> method (short for aggregation). Here we pass two numpy functions (these two functions have built-in equivalents <code class="docutils literal notranslate"><span class="pre">std()</span></code> and <code class="docutils literal notranslate"><span class="pre">mean()</span></code> so this is just for illustrative purposes):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;species&quot;</span><span class="p">)[</span><span class="n">penguins</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s2">&quot;number&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">bill_length_mm</th>
+      <th colspan="2" halign="left">bill_depth_mm</th>
+      <th colspan="2" halign="left">flipper_length_mm</th>
+      <th colspan="2" halign="left">body_mass_g</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>mean</th>
+      <th>std</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>mean</th>
+      <th>std</th>
+    </tr>
+    <tr>
+      <th>species</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Adelie</th>
+      <td>38.791391</td>
+      <td>2.663405</td>
+      <td>18.346358</td>
+      <td>1.216650</td>
+      <td>189.953642</td>
+      <td>6.539457</td>
+      <td>3700.662252</td>
+      <td>458.566126</td>
+    </tr>
+    <tr>
+      <th>Chinstrap</th>
+      <td>48.833824</td>
+      <td>3.339256</td>
+      <td>18.420588</td>
+      <td>1.135395</td>
+      <td>195.823529</td>
+      <td>7.131894</td>
+      <td>3733.088235</td>
+      <td>384.335081</td>
+    </tr>
+    <tr>
+      <th>Gentoo</th>
+      <td>47.504878</td>
+      <td>3.081857</td>
+      <td>14.982114</td>
+      <td>0.981220</td>
+      <td>217.186992</td>
+      <td>6.484976</td>
+      <td>5076.016260</td>
+      <td>504.116237</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Trying the obvious keywords, find the max and min of all columns grouping by <code class="docutils literal notranslate"><span class="pre">island</span></code>.</p>
+</div>
+<p>Multiple aggregations can also be performed at once on the entire dataframe by using a dictionary to map columns into functions. You can also group by as many variables as you like by passing the groupby method a list of variables. Here’s an example that combines both of these features:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="s2">&quot;island&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">:</span> <span class="s2">&quot;sum&quot;</span><span class="p">,</span> <span class="s2">&quot;bill_length_mm&quot;</span><span class="p">:</span> <span class="s2">&quot;mean&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>body_mass_g</th>
+      <th>bill_length_mm</th>
+    </tr>
+    <tr>
+      <th>species</th>
+      <th>island</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3" valign="top">Adelie</th>
+      <th>Biscoe</th>
+      <td>163225.0</td>
+      <td>38.975000</td>
+    </tr>
+    <tr>
+      <th>Dream</th>
+      <td>206550.0</td>
+      <td>38.501786</td>
+    </tr>
+    <tr>
+      <th>Torgersen</th>
+      <td>189025.0</td>
+      <td>38.950980</td>
+    </tr>
+    <tr>
+      <th>Chinstrap</th>
+      <th>Dream</th>
+      <td>253850.0</td>
+      <td>48.833824</td>
+    </tr>
+    <tr>
+      <th>Gentoo</th>
+      <th>Biscoe</th>
+      <td>624350.0</td>
+      <td>47.504878</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Using a two-column <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> on species and island and an <code class="docutils literal notranslate"><span class="pre">agg</span></code>, use a dictionary to find the min of <code class="docutils literal notranslate"><span class="pre">bill_depth_mm</span></code> and the max of <code class="docutils literal notranslate"><span class="pre">flipper_length_mm</span></code></p>
+</div>
+<p>Sometimes, inheriting the column names using <code class="docutils literal notranslate"><span class="pre">agg()</span></code> is problematic. There’s a slightly fussy syntax to help with that. It uses <em>tuples</em>, which are values within parenthesis (eg <code class="docutils literal notranslate"><span class="pre">(</span></code>) that have the pattern <code class="docutils literal notranslate"><span class="pre">(column</span> <span class="pre">name,</span> <span class="pre">function</span> <span class="pre">name)</span></code>. To the left of the tuple, you can specify a new name for the resulting column. Here’s an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">penguins</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="s2">&quot;island&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="n">count_bill</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">),</span>
+    <span class="n">mean_bill</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;mean&quot;</span><span class="p">),</span>
+    <span class="n">std_flipper</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count_bill</th>
+      <th>mean_bill</th>
+      <th>std_flipper</th>
+    </tr>
+    <tr>
+      <th>species</th>
+      <th>island</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3" valign="top">Adelie</th>
+      <th>Biscoe</th>
+      <td>44</td>
+      <td>38.975000</td>
+      <td>6.729247</td>
+    </tr>
+    <tr>
+      <th>Dream</th>
+      <td>56</td>
+      <td>38.501786</td>
+      <td>6.585083</td>
+    </tr>
+    <tr>
+      <th>Torgersen</th>
+      <td>51</td>
+      <td>38.950980</td>
+      <td>6.232238</td>
+    </tr>
+    <tr>
+      <th>Chinstrap</th>
+      <th>Dream</th>
+      <td>68</td>
+      <td>48.833824</td>
+      <td>7.131894</td>
+    </tr>
+    <tr>
+      <th>Gentoo</th>
+      <th>Biscoe</th>
+      <td>123</td>
+      <td>47.504878</td>
+      <td>6.484976</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Using a two-column <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> on species and island and a named <code class="docutils literal notranslate"><span class="pre">agg()</span></code>, create a new column called <code class="docutils literal notranslate"><span class="pre">mean_flipper</span></code> that gives the mean of <code class="docutils literal notranslate"><span class="pre">flipper_length_mm</span></code>.</p>
+</div>
+</section>
+<section id="filter">
+<h3>Filter<a class="headerlink" href="#filter" title="Link to this heading">#</a></h3>
+<p>Filtering does exactly what it sounds like, but it can make use of group-by commands. In the example below, all but one species is filtered out.</p>
+<p>In the example below, <code class="docutils literal notranslate"><span class="pre">filter()</span></code> passes a grouped version of the dataframe into the <code class="docutils literal notranslate"><span class="pre">filter_func()</span></code> we’ve defined (imagine that a dataframe is passed for each group). Because the passed variable is a dataframe, and variable <code class="docutils literal notranslate"><span class="pre">x</span></code> is defined in the function, the <code class="docutils literal notranslate"><span class="pre">x</span></code> within <code class="docutils literal notranslate"><span class="pre">filter_func()</span></code> body behaves like our dataframe–including having the same columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">filter_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">48</span>
+
+
+<span class="n">penguins</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;species&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filter_func</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>species</th>
+      <th>island</th>
+      <th>bill_length_mm</th>
+      <th>bill_depth_mm</th>
+      <th>flipper_length_mm</th>
+      <th>body_mass_g</th>
+      <th>sex</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>152</th>
+      <td>Chinstrap</td>
+      <td>Dream</td>
+      <td>46.5</td>
+      <td>17.9</td>
+      <td>192.0</td>
+      <td>3500.0</td>
+      <td>Female</td>
+    </tr>
+    <tr>
+      <th>153</th>
+      <td>Chinstrap</td>
+      <td>Dream</td>
+      <td>50.0</td>
+      <td>19.5</td>
+      <td>196.0</td>
+      <td>3900.0</td>
+      <td>Male</td>
+    </tr>
+    <tr>
+      <th>154</th>
+      <td>Chinstrap</td>
+      <td>Dream</td>
+      <td>51.3</td>
+      <td>19.2</td>
+      <td>193.0</td>
+      <td>3650.0</td>
+      <td>Male</td>
+    </tr>
+    <tr>
+      <th>155</th>
+      <td>Chinstrap</td>
+      <td>Dream</td>
+      <td>45.4</td>
+      <td>18.7</td>
+      <td>188.0</td>
+      <td>3525.0</td>
+      <td>Female</td>
+    </tr>
+    <tr>
+      <th>156</th>
+      <td>Chinstrap</td>
+      <td>Dream</td>
+      <td>52.7</td>
+      <td>19.8</td>
+      <td>197.0</td>
+      <td>3725.0</td>
+      <td>Male</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="transform">
+<h3>Transform<a class="headerlink" href="#transform" title="Link to this heading">#</a></h3>
+<p>Transforms return a transformed version of the data that has the same shape as the input (typically with an intermediate groupby). Think of it as split-apply-combine but without the ‘combine’ part! This is useful when creating new columns that depend on some grouped data, for instance creating group-wise means. Below is a synthetic example using the datetime group to subtract a yearly mean. We’ll create our synthetic example using some data, a datetime index, and some groups:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;1/1/2000&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;QE&quot;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;values1&quot;</span><span class="p">,</span> <span class="s2">&quot;values2&quot;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s2">&quot;group&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)],</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>values1</th>
+      <th>values2</th>
+      <th>type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2000-03-31</th>
+      <td>8</td>
+      <td>5</td>
+      <td>group0</td>
+    </tr>
+    <tr>
+      <th>2000-06-30</th>
+      <td>7</td>
+      <td>2</td>
+      <td>group2</td>
+    </tr>
+    <tr>
+      <th>2000-09-30</th>
+      <td>5</td>
+      <td>4</td>
+      <td>group2</td>
+    </tr>
+    <tr>
+      <th>2000-12-31</th>
+      <td>5</td>
+      <td>9</td>
+      <td>group2</td>
+    </tr>
+    <tr>
+      <th>2001-03-31</th>
+      <td>0</td>
+      <td>3</td>
+      <td>group1</td>
+    </tr>
+    <tr>
+      <th>2001-06-30</th>
+      <td>9</td>
+      <td>9</td>
+      <td>group0</td>
+    </tr>
+    <tr>
+      <th>2001-09-30</th>
+      <td>1</td>
+      <td>8</td>
+      <td>group2</td>
+    </tr>
+    <tr>
+      <th>2001-12-31</th>
+      <td>5</td>
+      <td>1</td>
+      <td>group2</td>
+    </tr>
+    <tr>
+      <th>2002-03-31</th>
+      <td>8</td>
+      <td>2</td>
+      <td>group2</td>
+    </tr>
+    <tr>
+      <th>2002-06-30</th>
+      <td>1</td>
+      <td>7</td>
+      <td>group1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now we take the yearly means by type. <code class="docutils literal notranslate"><span class="pre">pd.Grouper(freq='A')</span></code> is an instruction to take the <code class="docutils literal notranslate"><span class="pre">A</span></code>nnual mean using the given datetime index. You can group on as many coloumns and/or index properties as you like: this example groups by a property of the datetime index and on the <code class="docutils literal notranslate"><span class="pre">type</span></code> column, but performs the computation on the <code class="docutils literal notranslate"><span class="pre">values1</span></code> column.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;v1_demean_yr_and_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">Grouper</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">),</span> <span class="s2">&quot;type&quot;</span><span class="p">])[</span>
+    <span class="s2">&quot;values1&quot;</span>
+<span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6436/2763383649.py:1: FutureWarning: &#39;A&#39; is deprecated and will be removed in a future version, please use &#39;YE&#39; instead.
+  df[&quot;v1_demean_yr_and_type&quot;] = df.groupby([pd.Grouper(freq=&quot;A&quot;), &quot;type&quot;])[
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>values1</th>
+      <th>values2</th>
+      <th>type</th>
+      <th>v1_demean_yr_and_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2000-03-31</th>
+      <td>8</td>
+      <td>5</td>
+      <td>group0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2000-06-30</th>
+      <td>7</td>
+      <td>2</td>
+      <td>group2</td>
+      <td>1.333333</td>
+    </tr>
+    <tr>
+      <th>2000-09-30</th>
+      <td>5</td>
+      <td>4</td>
+      <td>group2</td>
+      <td>-0.666667</td>
+    </tr>
+    <tr>
+      <th>2000-12-31</th>
+      <td>5</td>
+      <td>9</td>
+      <td>group2</td>
+      <td>-0.666667</td>
+    </tr>
+    <tr>
+      <th>2001-03-31</th>
+      <td>0</td>
+      <td>3</td>
+      <td>group1</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2001-06-30</th>
+      <td>9</td>
+      <td>9</td>
+      <td>group0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2001-09-30</th>
+      <td>1</td>
+      <td>8</td>
+      <td>group2</td>
+      <td>-2.000000</td>
+    </tr>
+    <tr>
+      <th>2001-12-31</th>
+      <td>5</td>
+      <td>1</td>
+      <td>group2</td>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>2002-03-31</th>
+      <td>8</td>
+      <td>2</td>
+      <td>group2</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2002-06-30</th>
+      <td>1</td>
+      <td>7</td>
+      <td>group1</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Create a new column that gives <code class="docutils literal notranslate"><span class="pre">values2</span></code> normalised (minus the mean and divided by standard deviation) by <code class="docutils literal notranslate"><span class="pre">type</span></code>.</p>
+</div>
+</section>
+<section id="assign">
+<h3>Assign<a class="headerlink" href="#assign" title="Link to this heading">#</a></h3>
+<p>Assign is a method that allows you to return a new object with all the original columns in addition to new ones. Existing columns that are re-assigned will be overwritten. This is <em>really</em> useful when you want to perform a bunch of operations together in a concise way and keep the original columns. To show it in action, let’s generate some data:</p>
+<p>For instance, to demean the ‘values1’ column by year-type and to recompute the ‘val1_times_val2’ column using the newly demeaned ‘values1’ column:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+    <span class="n">values1</span><span class="o">=</span><span class="p">(</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">Grouper</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">),</span> <span class="s2">&quot;type&quot;</span><span class="p">])[</span><span class="s2">&quot;values1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="p">)</span>
+    <span class="p">),</span>
+    <span class="n">val1_times_val2</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;values1&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;values2&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6436/1721473601.py:3: FutureWarning: &#39;A&#39; is deprecated and will be removed in a future version, please use &#39;YE&#39; instead.
+  df.groupby([pd.Grouper(freq=&quot;A&quot;), &quot;type&quot;])[&quot;values1&quot;].transform(
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>values1</th>
+      <th>values2</th>
+      <th>type</th>
+      <th>v1_demean_yr_and_type</th>
+      <th>val1_times_val2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2000-03-31</th>
+      <td>0.000000</td>
+      <td>5</td>
+      <td>group0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2000-06-30</th>
+      <td>1.333333</td>
+      <td>2</td>
+      <td>group2</td>
+      <td>1.333333</td>
+      <td>2.666667</td>
+    </tr>
+    <tr>
+      <th>2000-09-30</th>
+      <td>-0.666667</td>
+      <td>4</td>
+      <td>group2</td>
+      <td>-0.666667</td>
+      <td>-2.666667</td>
+    </tr>
+    <tr>
+      <th>2000-12-31</th>
+      <td>-0.666667</td>
+      <td>9</td>
+      <td>group2</td>
+      <td>-0.666667</td>
+      <td>-6.000000</td>
+    </tr>
+    <tr>
+      <th>2001-03-31</th>
+      <td>0.000000</td>
+      <td>3</td>
+      <td>group1</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2001-06-30</th>
+      <td>0.000000</td>
+      <td>9</td>
+      <td>group0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2001-09-30</th>
+      <td>-2.000000</td>
+      <td>8</td>
+      <td>group2</td>
+      <td>-2.000000</td>
+      <td>-16.000000</td>
+    </tr>
+    <tr>
+      <th>2001-12-31</th>
+      <td>2.000000</td>
+      <td>1</td>
+      <td>group2</td>
+      <td>2.000000</td>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>2002-03-31</th>
+      <td>0.000000</td>
+      <td>2</td>
+      <td>group2</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2002-06-30</th>
+      <td>0.000000</td>
+      <td>7</td>
+      <td>group1</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Re-write the transform function from the transform exercise (creating a normalised column transformed by <code class="docutils literal notranslate"><span class="pre">type</span></code>) as an assign statement with a new column name <code class="docutils literal notranslate"><span class="pre">transformed_by_type</span></code>.</p>
+</div>
+</section>
+</section>
+<section id="agg-transform-and-apply-when-to-use-each-with-a-groupby">
+<h2><code class="docutils literal notranslate"><span class="pre">agg()</span></code>, <code class="docutils literal notranslate"><span class="pre">transform()</span></code>, and <code class="docutils literal notranslate"><span class="pre">apply()</span></code>: when to use each with a groupby<a class="headerlink" href="#agg-transform-and-apply-when-to-use-each-with-a-groupby" title="Link to this heading">#</a></h2>
+<p>With all of the different options available, it can be confusing to know when to use the different functions available for performing groupby operations, namely: <code class="docutils literal notranslate"><span class="pre">.agg()</span></code>, <code class="docutils literal notranslate"><span class="pre">.transform()</span></code>, and <code class="docutils literal notranslate"><span class="pre">.apply()</span></code>. Here are the key points to remember:</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">.agg()</span></code> when using a groupby, but you want your groups to become the new index</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">.transform()</span></code> when using a groupby, but you want to retain your original index</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">.apply()</span></code> when using a groupby, but you want to perform operations that will leave neither the original index nor an index of groups</p></li>
+</ul>
+<p>Let’s see an example of all three on a series (<code class="docutils literal notranslate"><span class="pre">pd.Series()</span></code>) to really highlight the differences. First, let’s create the series:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">len_s</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+    <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;2000-01-01&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="n">len_s</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;D&quot;</span><span class="p">),</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">prng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">len_s</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>date
+2000-01-01    7
+2000-01-02   -4
+2000-01-03   -9
+2000-01-04    7
+2000-01-05    0
+Freq: D, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Okay, now we can try these three operations out successively with some example functions. We’ll use <code class="docutils literal notranslate"><span class="pre">skew</span></code> for the first two, <code class="docutils literal notranslate"><span class="pre">.agg()</span></code> and <code class="docutils literal notranslate"><span class="pre">.transform</span></code>, in order to highlight that the only difference between these is in the index that is returned. For <code class="docutils literal notranslate"><span class="pre">.agg()</span></code>, using <code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">x.skew()</span></code> would return the same as <code class="docutils literal notranslate"><span class="pre">.agg()</span></code> in this case so we’ll opt for a more interesting example: only using values greater than zero and then taking their cumulative sum. Note that what is returned in this third case is an object with a <em>multi-index</em>: the first index tracks the <code class="docutils literal notranslate"><span class="pre">groupby</span></code> groups while the second tracks the original rows that survived the filtering to values greater than zero.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">`.agg` following `.groupby`: groups provide index&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="s2">&quot;M&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="s2">&quot;skew&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">`.transform` following `.groupby`: retain original index&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="s2">&quot;M&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s2">&quot;skew&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">`.apply` following `.groupby`: index entries can be new&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="s2">&quot;M&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">())</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>`.agg` following `.groupby`: groups provide index
+date
+2000-01    0.110284
+2000-02    0.223399
+2000-03    0.003857
+2000-04    0.122812
+2000-05   -0.039962
+Freq: M, dtype: float64
+
+`.transform` following `.groupby`: retain original index
+date
+2000-01-01    0.110284
+2000-01-02    0.110284
+2000-01-03    0.110284
+2000-01-04    0.110284
+2000-01-05    0.110284
+Freq: D, dtype: float64
+
+`.apply` following `.groupby`: index entries can be new
+date     date      
+2000-01  2000-01-01     7
+         2000-01-04    14
+         2000-01-06    23
+         2000-01-07    29
+         2000-01-12    38
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="reshaping-data">
+<h2>Reshaping Data<a class="headerlink" href="#reshaping-data" title="Link to this heading">#</a></h2>
+<p>The main options for reshaping data are <code class="docutils literal notranslate"><span class="pre">pivot()</span></code>, <code class="docutils literal notranslate"><span class="pre">melt()</span></code>, <code class="docutils literal notranslate"><span class="pre">stack()</span></code>, <code class="docutils literal notranslate"><span class="pre">unstack()</span></code>, <code class="docutils literal notranslate"><span class="pre">pivot_table()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_dummies()</span></code>, <code class="docutils literal notranslate"><span class="pre">cross_tab()</span></code>, and <code class="docutils literal notranslate"><span class="pre">explode()</span></code>. We’ll look at some of these here.</p>
+<section id="pivoting-data-from-tidy-to-err-untidy">
+<h3>Pivoting data from tidy to, err, untidy<a class="headerlink" href="#pivoting-data-from-tidy-to-err-untidy" title="Link to this heading">#</a></h3>
+<p>In a previous chapter, we said you should use tidy data–one row per observation, one column per variable–whenever you can. But there are times when you will want to take your lovingly prepared tidy data and pivot it into a wider format. <code class="docutils literal notranslate"><span class="pre">pivot()</span></code> and <code class="docutils literal notranslate"><span class="pre">pivot_table()</span></code> help you to do that.</p>
+<p><img alt="" src="https://pandas.pydata.org/docs/_images/reshaping_pivot.png" /></p>
+<p>This can be especially useful for time series data, where operations like <code class="docutils literal notranslate"><span class="pre">shift()</span></code> or <code class="docutils literal notranslate"><span class="pre">diff()</span></code> are typically applied assuming that an entry in one row follows (in time) from the one above. Here’s an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+    <span class="s2">&quot;variable&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="n">prng</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s2">&quot;type1&quot;</span><span class="p">,</span> <span class="s2">&quot;type2&quot;</span><span class="p">,</span> <span class="s2">&quot;type3&quot;</span><span class="p">,</span> <span class="s2">&quot;type4&quot;</span><span class="p">],</span> <span class="mi">20</span><span class="p">),</span>
+    <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="p">(</span>
+        <span class="nb">list</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;1/1/2000&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;M&quot;</span><span class="p">))</span>
+        <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;1/1/2000&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;M&quot;</span><span class="p">))</span>
+    <span class="p">),</span>
+<span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;variable&quot;</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6436/12375816.py:6: FutureWarning: &#39;M&#39; is deprecated and will be removed in a future version, please use &#39;ME&#39; instead.
+  list(pd.date_range(&quot;1/1/2000&quot;, periods=10, freq=&quot;M&quot;))
+/tmp/ipykernel_6436/12375816.py:7: FutureWarning: &#39;M&#39; is deprecated and will be removed in a future version, please use &#39;ME&#39; instead.
+  + list(pd.date_range(&quot;1/1/2000&quot;, periods=10, freq=&quot;M&quot;))
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date</th>
+      <th>variable</th>
+      <th>category</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>2000-04-30</td>
+      <td>A</td>
+      <td>type3</td>
+      <td>0.348448</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2000-08-31</td>
+      <td>A</td>
+      <td>type2</td>
+      <td>0.278257</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2000-04-30</td>
+      <td>B</td>
+      <td>type3</td>
+      <td>-2.186048</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2000-09-30</td>
+      <td>A</td>
+      <td>type1</td>
+      <td>-1.608404</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2000-02-29</td>
+      <td>B</td>
+      <td>type1</td>
+      <td>0.281816</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>If we just run <code class="docutils literal notranslate"><span class="pre">shift()</span></code> on this, it’s going to shift variable B’s and A’s together even though these overlap in time. So we pivot to a wider format (and then we can shift safely).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;variable&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>variable</th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2000-01-31</th>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2000-02-29</th>
+      <td>-0.036010</td>
+      <td>-1.155612</td>
+    </tr>
+    <tr>
+      <th>2000-03-31</th>
+      <td>-0.484181</td>
+      <td>0.281816</td>
+    </tr>
+    <tr>
+      <th>2000-04-30</th>
+      <td>1.098483</td>
+      <td>0.668628</td>
+    </tr>
+    <tr>
+      <th>2000-05-31</th>
+      <td>0.348448</td>
+      <td>-2.186048</td>
+    </tr>
+    <tr>
+      <th>2000-06-30</th>
+      <td>0.199571</td>
+      <td>-0.674724</td>
+    </tr>
+    <tr>
+      <th>2000-07-31</th>
+      <td>-0.620053</td>
+      <td>-1.369532</td>
+    </tr>
+    <tr>
+      <th>2000-08-31</th>
+      <td>0.593921</td>
+      <td>-0.358101</td>
+    </tr>
+    <tr>
+      <th>2000-09-30</th>
+      <td>0.278257</td>
+      <td>0.526473</td>
+    </tr>
+    <tr>
+      <th>2000-10-31</th>
+      <td>-1.608404</td>
+      <td>-1.361733</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>To go back to the original structure, albeit without the <code class="docutils literal notranslate"><span class="pre">category</span></code> columns, apply <code class="docutils literal notranslate"><span class="pre">.unstack().reset_index()</span></code>.</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Perform a pivot that applies to both the <code class="docutils literal notranslate"><span class="pre">variable</span></code> and <code class="docutils literal notranslate"><span class="pre">category</span></code> columns. (Hint: remember that you will need to pass multiple objects via a list.)</p>
+</div>
+</section>
+<section id="melt">
+<h3>Melt<a class="headerlink" href="#melt" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">melt()</span></code> can help you go from untidy to tidy data (from wide data to long data), and is a <em>really</em> good one to remember. Of course, if you’re a normal human, you’ll have to look back at the documentation most times you use this!</p>
+<p><img alt="" src="https://pandas.pydata.org/docs/_images/reshaping_melt.png" /></p>
+<p>Here’s an example of it in action:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;first&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;Mary&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;last&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Doe&quot;</span><span class="p">,</span> <span class="s2">&quot;Bo&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;job&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Nurse&quot;</span><span class="p">,</span> <span class="s2">&quot;Economist&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">],</span>
+        <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">130</span><span class="p">,</span> <span class="mi">150</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Unmelted: &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Melted: &quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;first&quot;</span><span class="p">,</span> <span class="s2">&quot;last&quot;</span><span class="p">],</span> <span class="n">var_name</span><span class="o">=</span><span class="s2">&quot;quantity&quot;</span><span class="p">,</span> <span class="n">value_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;height&quot;</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Unmelted: 
+  first last        job  height  weight
+0  John  Doe      Nurse     5.5     130
+1  Mary   Bo  Economist     6.0     150
+
+ Melted: 
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>first</th>
+      <th>last</th>
+      <th>quantity</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>John</td>
+      <td>Doe</td>
+      <td>height</td>
+      <td>5.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Mary</td>
+      <td>Bo</td>
+      <td>height</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>John</td>
+      <td>Doe</td>
+      <td>weight</td>
+      <td>130.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Mary</td>
+      <td>Bo</td>
+      <td>weight</td>
+      <td>150.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Perform a melt that uses <code class="docutils literal notranslate"><span class="pre">job</span></code> as the id instead of <code class="docutils literal notranslate"><span class="pre">first</span></code> and <code class="docutils literal notranslate"><span class="pre">last</span></code>.</p>
+</div>
+<p>If you don’t wan the headscratching of melt, there’s also <code class="docutils literal notranslate"><span class="pre">wide_to_long()</span></code>, which is really useful for typical data cleaning cases where you have data like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;A1970&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;c&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;A1980&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;f&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;B1970&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">},</span>
+        <span class="s2">&quot;B1980&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span>
+        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">))),</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A1970</th>
+      <th>A1980</th>
+      <th>B1970</th>
+      <th>B1980</th>
+      <th>X</th>
+      <th>id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>d</td>
+      <td>2.5</td>
+      <td>3.2</td>
+      <td>-1.498045</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>e</td>
+      <td>1.2</td>
+      <td>1.3</td>
+      <td>1.701202</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>c</td>
+      <td>f</td>
+      <td>0.7</td>
+      <td>0.1</td>
+      <td>-0.651344</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>i.e. data where there are different variables and time periods across the columns. Wide to long is going to let us give info on what the stubnames are (‘A’, ‘B’), the name of the variable that’s always across columns (here, a year), any values (X here), and an id column.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">wide_to_long</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">stubnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span> <span class="n">i</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="s2">&quot;year&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>X</th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+    <tr>
+      <th>id</th>
+      <th>year</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <th>1970</th>
+      <td>-1.498045</td>
+      <td>a</td>
+      <td>2.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <th>1970</th>
+      <td>1.701202</td>
+      <td>b</td>
+      <td>1.2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <th>1970</th>
+      <td>-0.651344</td>
+      <td>c</td>
+      <td>0.7</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <th>1980</th>
+      <td>-1.498045</td>
+      <td>d</td>
+      <td>3.2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <th>1980</th>
+      <td>1.701202</td>
+      <td>e</td>
+      <td>1.3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <th>1980</th>
+      <td>-0.651344</td>
+      <td>f</td>
+      <td>0.1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="stack-and-unstack">
+<h3>Stack and unstack<a class="headerlink" href="#stack-and-unstack" title="Link to this heading">#</a></h3>
+<p>Stack, <code class="docutils literal notranslate"><span class="pre">stack()</span></code> is a shortcut for taking a single type of wide data variable from columns and turning it into a long form dataset, but with an extra index.</p>
+<p><img alt="" src="https://pandas.pydata.org/docs/_images/reshaping_stack.png" /></p>
+<p>Unstack, <code class="docutils literal notranslate"><span class="pre">unstack()</span></code> unsurprisingly does the same operation, but in reverse.</p>
+<p><img alt="" src="https://pandas.pydata.org/docs/_images/reshaping_unstack.png" /></p>
+<p>Let’s define a multi-index dataframe to demonstrate this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tuples</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+    <span class="nb">zip</span><span class="p">(</span>
+        <span class="o">*</span><span class="p">[</span>
+            <span class="p">[</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="s2">&quot;baz&quot;</span><span class="p">,</span> <span class="s2">&quot;baz&quot;</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;qux&quot;</span><span class="p">,</span> <span class="s2">&quot;qux&quot;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s2">&quot;one&quot;</span><span class="p">,</span> <span class="s2">&quot;two&quot;</span><span class="p">,</span> <span class="s2">&quot;one&quot;</span><span class="p">,</span> <span class="s2">&quot;two&quot;</span><span class="p">,</span> <span class="s2">&quot;one&quot;</span><span class="p">,</span> <span class="s2">&quot;two&quot;</span><span class="p">,</span> <span class="s2">&quot;one&quot;</span><span class="p">,</span> <span class="s2">&quot;two&quot;</span><span class="p">],</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">(</span><span class="n">tuples</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;first&quot;</span><span class="p">,</span> <span class="s2">&quot;second&quot;</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">])</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">bar</th>
+      <th>one</th>
+      <td>0.277164</td>
+      <td>-0.043032</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-0.059287</td>
+      <td>2.134566</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">baz</th>
+      <th>one</th>
+      <td>0.346273</td>
+      <td>0.500452</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-0.792339</td>
+      <td>1.104687</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">foo</th>
+      <th>one</th>
+      <td>1.164947</td>
+      <td>-1.093952</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>1.138531</td>
+      <td>-1.141344</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">qux</th>
+      <th>one</th>
+      <td>1.491314</td>
+      <td>0.851070</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>1.021683</td>
+      <td>-0.514158</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Let’s stack this to create a tidy dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>first  second   
+bar    one     A    0.277164
+               B   -0.043032
+       two     A   -0.059287
+               B    2.134566
+baz    one     A    0.346273
+               B    0.500452
+       two     A   -0.792339
+               B    1.104687
+foo    one     A    1.164947
+               B   -1.093952
+       two     A    1.138531
+               B   -1.141344
+qux    one     A    1.491314
+               B    0.851070
+       two     A    1.021683
+               B   -0.514158
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>This has automatically created a multi-layered index but that can be reverted to a numbered index using <code class="docutils literal notranslate"><span class="pre">df.reset_index()</span></code></p>
+<p>Now let’s see unstack but, instead of unstacking the ‘A’, ‘B’ variables we began with, let’s unstack the ‘first’ column by passing <code class="docutils literal notranslate"><span class="pre">level=0</span></code> (the default is to unstack the innermost index). This diagram shows what’s going on:</p>
+<p><img alt="" src="https://pandas.pydata.org/docs/_images/reshaping_unstack_0.png" /></p>
+<p>And here’s the code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>first</th>
+      <th>bar</th>
+      <th>baz</th>
+      <th>foo</th>
+      <th>qux</th>
+    </tr>
+    <tr>
+      <th>second</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">one</th>
+      <th>A</th>
+      <td>0.277164</td>
+      <td>0.346273</td>
+      <td>1.164947</td>
+      <td>1.491314</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>-0.043032</td>
+      <td>0.500452</td>
+      <td>-1.093952</td>
+      <td>0.851070</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">two</th>
+      <th>A</th>
+      <td>-0.059287</td>
+      <td>-0.792339</td>
+      <td>1.138531</td>
+      <td>1.021683</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>2.134566</td>
+      <td>1.104687</td>
+      <td>-1.141344</td>
+      <td>-0.514158</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>What happens if you unstack to <code class="docutils literal notranslate"><span class="pre">level=1</span></code> instead? What about applying <code class="docutils literal notranslate"><span class="pre">unstack()</span></code> twice?</p>
+</div>
+</section>
+<section id="get-dummies">
+<h3>Get dummies<a class="headerlink" href="#get-dummies" title="Link to this heading">#</a></h3>
+<p>This is a really useful reshape command for when you want (explicit) dummies in your dataframe. When running simple regressions, you can achieve the same effect by declaring the column only be included as a fixed effect, but there are some machine learning packages where converting to dummies may be easier.</p>
+<p>Here’s an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;group_var&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;group1&quot;</span><span class="p">,</span> <span class="s2">&quot;group2&quot;</span><span class="p">,</span> <span class="s2">&quot;group3&quot;</span><span class="p">],</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]}</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;group_var&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  group_var  B  C
+0    group1  c  1
+1    group2  c  2
+2    group3  b  3
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>B</th>
+      <th>C</th>
+      <th>group_var_group1</th>
+      <th>group_var_group2</th>
+      <th>group_var_group3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>c</td>
+      <td>1</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>c</td>
+      <td>2</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>b</td>
+      <td>3</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="a-quick-look-at-time-series-and-rolling-windows">
+<h2>A quick look at time series and rolling windows<a class="headerlink" href="#a-quick-look-at-time-series-and-rolling-windows" title="Link to this heading">#</a></h2>
+<p>The support for time series and the datetime type is excellent in <strong>pandas</strong> and in Python in general; you can find more about this in <a class="reference internal" href="time-intro.html#time-intro"><span class="std std-ref">Introduction to Time</span></a> and more on how to use time series with <strong>pandas</strong> in <a class="reference internal" href="time-series.html#time-series"><span class="std std-ref">Time Series</span></a>.</p>
+<p>It is very easy to manipulate datetimes with <strong>pandas</strong>. The <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html">relevant part</a> of the documentation has more info; here we’ll just see a couple of the most important bits. First, let’s create some synthetic data to work with:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">recursive_ts</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">):</span>
+    <span class="n">shock</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">shock</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">recursive_ts</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">shock</span>
+
+
+<span class="n">t_series</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">([</span><span class="n">recursive_ts</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)])</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;1/1/2000&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;M&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">t_series</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2000-08-31&quot;</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6436/2804880687.py:10: FutureWarning: &#39;M&#39; is deprecated and will be removed in a future version, please use &#39;ME&#39; instead.
+  index = pd.date_range(&quot;1/1/2000&quot;, periods=12, freq=&quot;M&quot;)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>values</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2000-01-31</th>
+      <td>-0.468106</td>
+    </tr>
+    <tr>
+      <th>2000-02-29</th>
+      <td>0.015692</td>
+    </tr>
+    <tr>
+      <th>2000-03-31</th>
+      <td>-0.431407</td>
+    </tr>
+    <tr>
+      <th>2000-04-30</th>
+      <td>0.301669</td>
+    </tr>
+    <tr>
+      <th>2000-05-31</th>
+      <td>0.521973</td>
+    </tr>
+    <tr>
+      <th>2000-06-30</th>
+      <td>1.390425</td>
+    </tr>
+    <tr>
+      <th>2000-07-31</th>
+      <td>1.539950</td>
+    </tr>
+    <tr>
+      <th>2000-08-31</th>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2000-09-30</th>
+      <td>1.391324</td>
+    </tr>
+    <tr>
+      <th>2000-10-31</th>
+      <td>2.205708</td>
+    </tr>
+    <tr>
+      <th>2000-11-30</th>
+      <td>2.330276</td>
+    </tr>
+    <tr>
+      <th>2000-12-31</th>
+      <td>0.206768</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now let’s imagine that there are a number of issues with this time series. First, it’s been recorded wrong: it actually refers to the start of the next month, not the end of the previous as recorded; second, there’s a missing number we want to interpolate; third, we want to take the difference of it to get to something stationary; fourth, we’d like to add a lagged column. We can do all of those things!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change freq to next month start</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">+=</span> <span class="n">pd</span><span class="o">.</span><span class="n">tseries</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># impute the value that is NaN (Not a Number) above</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+
+<span class="c1"># Take first differences</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;diff_values&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Create a lag of the first differences</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;lag_diff_values&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;diff_values&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>values</th>
+      <th>diff_values</th>
+      <th>lag_diff_values</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2000-02-01</th>
+      <td>-0.468106</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2000-03-01</th>
+      <td>0.015692</td>
+      <td>0.483798</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2000-04-01</th>
+      <td>-0.431407</td>
+      <td>-0.447098</td>
+      <td>0.483798</td>
+    </tr>
+    <tr>
+      <th>2000-05-01</th>
+      <td>0.301669</td>
+      <td>0.733075</td>
+      <td>-0.447098</td>
+    </tr>
+    <tr>
+      <th>2000-06-01</th>
+      <td>0.521973</td>
+      <td>0.220304</td>
+      <td>0.733075</td>
+    </tr>
+    <tr>
+      <th>2000-07-01</th>
+      <td>1.390425</td>
+      <td>0.868452</td>
+      <td>0.220304</td>
+    </tr>
+    <tr>
+      <th>2000-08-01</th>
+      <td>1.539950</td>
+      <td>0.149525</td>
+      <td>0.868452</td>
+    </tr>
+    <tr>
+      <th>2000-09-01</th>
+      <td>1.464419</td>
+      <td>-0.075531</td>
+      <td>0.149525</td>
+    </tr>
+    <tr>
+      <th>2000-10-01</th>
+      <td>1.391324</td>
+      <td>-0.073095</td>
+      <td>-0.075531</td>
+    </tr>
+    <tr>
+      <th>2000-11-01</th>
+      <td>2.205708</td>
+      <td>0.814384</td>
+      <td>-0.073095</td>
+    </tr>
+    <tr>
+      <th>2000-12-01</th>
+      <td>2.330276</td>
+      <td>0.124568</td>
+      <td>0.814384</td>
+    </tr>
+    <tr>
+      <th>2001-01-01</th>
+      <td>0.206768</td>
+      <td>-2.123508</td>
+      <td>0.124568</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Having performed these operations, can you see why the <code class="docutils literal notranslate"><span class="pre">&quot;lag_diff_value&quot;</span></code> column has two entries that are NaN?</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Add a lead that is 3 months ahead of <code class="docutils literal notranslate"><span class="pre">values</span></code>.</p>
+</div>
+<p>Two other useful time series functions to be aware of are <code class="docutils literal notranslate"><span class="pre">resample()</span></code> and <code class="docutils literal notranslate"><span class="pre">rolling()</span></code>. <code class="docutils literal notranslate"><span class="pre">resample()</span></code> can upsample or downsample time series. Downsampling is by aggregation, eg <code class="docutils literal notranslate"><span class="pre">df['values].resample('Q').mean()</span></code> to downsample to quarterly (‘Q’) frequency by taking the mean within each quarter. Upsampling involves a choice about how to fill in the missing values; examples of options are <code class="docutils literal notranslate"><span class="pre">bfill()</span></code> (backfill) and <code class="docutils literal notranslate"><span class="pre">ffill()</span></code> (forwards fill).</p>
+<p>Rolling is for taking rolling aggregations, as you’d expect; for example, the 3-month rolling mean of our first difference time series:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;diff_values&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000-02-01         NaN
+2000-03-01         NaN
+2000-04-01         NaN
+2000-05-01    0.256592
+2000-06-01    0.168760
+2000-07-01    0.607277
+2000-08-01    0.412760
+2000-09-01    0.314149
+2000-10-01    0.000300
+2000-11-01    0.221919
+2000-12-01    0.288619
+2001-01-01   -0.394852
+Name: diff_values, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Rolling Groupby</strong></p>
+<p>Often there are times when you’d like to compute the rolling mean at the group level, for example for each state. Here’s a typical example of this, and how to compute the grouped rolling mean. This example comes from the excellent <a class="reference external" href="https://calmcode.io">calmcode</a> website.</p>
+<p>First, let’s pick up some data that we might want to apply this to and ensure the <code class="docutils literal notranslate"><span class="pre">&quot;date&quot;</span></code> column has the <code class="docutils literal notranslate"><span class="pre">datetime</span></code> datatype:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://calmcode.io/static/data/birthdays.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>wday</th>
+      <th>births</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1969-01-01</th>
+      <td>AK</td>
+      <td>1969</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Wed</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>1969-01-01</th>
+      <td>AL</td>
+      <td>1969</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Wed</td>
+      <td>174</td>
+    </tr>
+    <tr>
+      <th>1969-01-01</th>
+      <td>AR</td>
+      <td>1969</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Wed</td>
+      <td>78</td>
+    </tr>
+    <tr>
+      <th>1969-01-01</th>
+      <td>AZ</td>
+      <td>1969</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Wed</td>
+      <td>84</td>
+    </tr>
+    <tr>
+      <th>1969-01-01</th>
+      <td>CA</td>
+      <td>1969</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Wed</td>
+      <td>824</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Note that we added a datetime index above; this is because <code class="docutils literal notranslate"><span class="pre">.rolling()</span></code> likes to have a datetime index to work on.</p>
+<p>What we’ll do now is proceed in two steps:</p>
+<ol class="arabic simple">
+<li><p>Group the data with <code class="docutils literal notranslate"><span class="pre">.groupby()</span></code>. Each grouped set will have an index attached and we’re getting a grouped-series object because we’re only selecting the births column.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">.transform()</span></code> to perform an operation only within groups.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;rolling_births&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">)[</span><span class="s2">&quot;births&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="s2">&quot;30D&quot;</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>wday</th>
+      <th>births</th>
+      <th>rolling_births</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1969-01-01</th>
+      <td>AK</td>
+      <td>1969</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Wed</td>
+      <td>14</td>
+      <td>14.0</td>
+    </tr>
+    <tr>
+      <th>1969-01-01</th>
+      <td>AL</td>
+      <td>1969</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Wed</td>
+      <td>174</td>
+      <td>174.0</td>
+    </tr>
+    <tr>
+      <th>1969-01-01</th>
+      <td>AR</td>
+      <td>1969</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Wed</td>
+      <td>78</td>
+      <td>78.0</td>
+    </tr>
+    <tr>
+      <th>1969-01-01</th>
+      <td>AZ</td>
+      <td>1969</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Wed</td>
+      <td>84</td>
+      <td>84.0</td>
+    </tr>
+    <tr>
+      <th>1969-01-01</th>
+      <td>CA</td>
+      <td>1969</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Wed</td>
+      <td>824</td>
+      <td>824.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>To check that the result is something sensible, you can always sort the dataframe by date and group. Here, that lets us check that the rolling births are indeed following the births column in the way that we expect.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;state&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>wday</th>
+      <th>births</th>
+      <th>rolling_births</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1969-01-01</th>
+      <td>AK</td>
+      <td>1969</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Wed</td>
+      <td>14</td>
+      <td>14.000000</td>
+    </tr>
+    <tr>
+      <th>1985-02-20</th>
+      <td>AK</td>
+      <td>1985</td>
+      <td>2</td>
+      <td>20</td>
+      <td>Wed</td>
+      <td>45</td>
+      <td>34.100000</td>
+    </tr>
+    <tr>
+      <th>1981-03-15</th>
+      <td>AK</td>
+      <td>1981</td>
+      <td>3</td>
+      <td>15</td>
+      <td>Sun</td>
+      <td>20</td>
+      <td>26.633333</td>
+    </tr>
+    <tr>
+      <th>1976-10-20</th>
+      <td>AK</td>
+      <td>1976</td>
+      <td>10</td>
+      <td>20</td>
+      <td>Wed</td>
+      <td>16</td>
+      <td>22.000000</td>
+    </tr>
+    <tr>
+      <th>1972-11-12</th>
+      <td>AK</td>
+      <td>1972</td>
+      <td>11</td>
+      <td>12</td>
+      <td>Sun</td>
+      <td>22</td>
+      <td>18.466667</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>For a more in-depth look at combining groups with rolling aggregations, take a look at the <a class="reference external" href="https://calmcode.io/pandas-datetime/rolling-groupby.html">tutorial on calmcode</a>.</p>
+<p>There is much more on time series with <strong>pandas</strong> in the Chapter on <a class="reference internal" href="time-series.html#time-series"><span class="std std-ref">Time Series</span></a>.</p>
+</section>
+<section id="method-chaining">
+<h2>Method Chaining<a class="headerlink" href="#method-chaining" title="Link to this heading">#</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Method Chaining is a more advanced topic; feel free to skip it.</p>
+</div>
+<p>Sometimes, rather than splitting operations out into multiple lines, it can be more concise and clear to chain methods together. A typical time you might do this is when reading in a dataset and perfoming all of the initial cleaning. Tom Augsperger has a <a class="reference external" href="https://tomaugspurger.github.io/method-chaining">great tutorial</a> on this, which I’ve reproduced parts of here. For more info on the <code class="docutils literal notranslate"><span class="pre">pipe</span></code> function used below, check out these short <a class="reference external" href="https://calmcode.io/pandas-pipe/introduction.html">video tutorials</a>.</p>
+<p>To chain methods together, both the input and output must be a pandas dataframe. Many functions already do input and output these, for example the <code class="docutils literal notranslate"><span class="pre">df.rename(columns={'old_col':</span> <span class="pre">'new_col'})</span></code> takes in <code class="docutils literal notranslate"><span class="pre">df</span></code> and outputs a dataframe with one column name changed.</p>
+<p>But occasionally, we’ll want to use a function that we’ve defined (rather than an already existing one). For that, we need the <code class="docutils literal notranslate"><span class="pre">pipe</span></code> method; it ‘pipes’ the result of one operation to the next operation. When objects are being passed through multiple functions, this can be much clearer. Compare, for example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">h</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="n">g_arg</span><span class="o">=</span><span class="n">a</span><span class="p">),</span> <span class="n">f_arg</span><span class="o">=</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>that is, dataframe <code class="docutils literal notranslate"><span class="pre">df</span></code> is being passed to function <code class="docutils literal notranslate"><span class="pre">h</span></code>, and the results of that are being passed to a function <code class="docutils literal notranslate"><span class="pre">g</span></code> that needs a key word argument <code class="docutils literal notranslate"><span class="pre">g_arg</span></code>, and the results of <em>that</em> are being passed to a function <code class="docutils literal notranslate"><span class="pre">f</span></code> that needs keyword argument <code class="docutils literal notranslate"><span class="pre">f_arg</span></code>. The nested structure is barely readable. Compare this with</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+   <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">g_arg</span><span class="o">=</span><span class="n">a</span><span class="p">)</span>
+   <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">f_arg</span><span class="o">=</span><span class="n">b</span><span class="p">)</span>
+<span class="p">)</span>  
+</pre></div>
+</div>
+<p>Let’s see a method chain in action on a real dataset so you get a feel for it. We’ll use 1,000 rows of flight data from BTS (a popular online dataset for demos of data cleaning!). (For further info on method chaining in Python, <a class="reference external" href="https://calmcode.io/method-chains/introduction.html">see these videos</a>–but be aware they assume advanced knowledge of the language.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;https://github.com/aeturrell/coding-for-economists/raw/main/data/flights1kBTS.csv&quot;</span><span class="p">,</span>
+    <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>FL_DATE</th>
+      <th>OP_UNIQUE_CARRIER</th>
+      <th>TAIL_NUM</th>
+      <th>ORIGIN</th>
+      <th>ORIGIN_CITY_NAME</th>
+      <th>DEST</th>
+      <th>DEST_CITY_NAME</th>
+      <th>DEP_TIME</th>
+      <th>ARR_TIME</th>
+      <th>ARR_DELAY</th>
+      <th>CANCELLATION_CODE</th>
+      <th>AIR_TIME</th>
+      <th>DISTANCE</th>
+      <th>Unnamed: 13</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>403296</th>
+      <td>2020-01-20</td>
+      <td>G4</td>
+      <td>231NV</td>
+      <td>SFB</td>
+      <td>Sanford, FL</td>
+      <td>AVL</td>
+      <td>Asheville, NC</td>
+      <td>2011.0</td>
+      <td>2137.0</td>
+      <td>6.0</td>
+      <td>NaN</td>
+      <td>64.0</td>
+      <td>465.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>126199</th>
+      <td>2020-01-06</td>
+      <td>MQ</td>
+      <td>N687JS</td>
+      <td>ORD</td>
+      <td>Chicago, IL</td>
+      <td>MSN</td>
+      <td>Madison, WI</td>
+      <td>1837.0</td>
+      <td>1927.0</td>
+      <td>-16.0</td>
+      <td>NaN</td>
+      <td>26.0</td>
+      <td>109.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>417268</th>
+      <td>2020-01-20</td>
+      <td>YV</td>
+      <td>N516LR</td>
+      <td>IAD</td>
+      <td>Washington, DC</td>
+      <td>DTW</td>
+      <td>Detroit, MI</td>
+      <td>1738.0</td>
+      <td>1915.0</td>
+      <td>14.0</td>
+      <td>NaN</td>
+      <td>60.0</td>
+      <td>383.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>67589</th>
+      <td>2020-01-04</td>
+      <td>OO</td>
+      <td>N804SK</td>
+      <td>SAV</td>
+      <td>Savannah, GA</td>
+      <td>DTW</td>
+      <td>Detroit, MI</td>
+      <td>653.0</td>
+      <td>844.0</td>
+      <td>-26.0</td>
+      <td>NaN</td>
+      <td>91.0</td>
+      <td>705.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>102760</th>
+      <td>2020-01-05</td>
+      <td>WN</td>
+      <td>N789SW</td>
+      <td>SAN</td>
+      <td>San Diego, CA</td>
+      <td>TUS</td>
+      <td>Tucson, AZ</td>
+      <td>732.0</td>
+      <td>941.0</td>
+      <td>-19.0</td>
+      <td>NaN</td>
+      <td>53.0</td>
+      <td>368.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We’ll try and do a number of operations in one go: putting column titles in lower case, discarding useless columns, creating precise departure and arrival times, turning some of the variables into categoricals, creating a demeaned delay time, and creating a new categorical column for distances according to quantiles that will be called ‘near’, ‘less near’, ‘far’, and ‘furthest’. Some of these operations require a separate function, so we first define those. When we do the cleaning, we’ll pipe our dataframe to those functions (optionally passing any arguments).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">extract_city_name</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Chicago, IL -&gt; Chicago for origin_city_name and dest_city_name</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;origin_city_name&quot;</span><span class="p">,</span> <span class="s2">&quot;dest_city_name&quot;</span><span class="p">]</span>
+    <span class="n">city</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">&quot;(.*), \w</span><span class="si">{2}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;origin_city_name&quot;</span><span class="p">,</span> <span class="s2">&quot;dest_city_name&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">city</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">time_to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columns</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Combine all time items into datetimes.</span>
+
+<span class="sd">    2014-01-01,0914 -&gt; 2014-01-01 09:14:00</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">converter</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
+        <span class="n">timepart</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">col</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;\.0$&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># NaNs force float dtype</span>
+            <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">fillchar</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span>
+            <span class="n">df</span><span class="p">[</span><span class="s2">&quot;fl_date&quot;</span><span class="p">]</span>
+            <span class="o">+</span> <span class="s2">&quot; &quot;</span>
+            <span class="o">+</span> <span class="n">timepart</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="o">+</span> <span class="s2">&quot;:&quot;</span>
+            <span class="o">+</span> <span class="n">timepart</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+            <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">converter</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+
+<span class="n">df</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s2">&quot;Unnamed&quot;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">extract_city_name</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">time_to_datetime</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;dep_time&quot;</span><span class="p">,</span> <span class="s2">&quot;arr_time&quot;</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+        <span class="n">fl_date</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;fl_date&quot;</span><span class="p">]),</span>
+        <span class="n">dest</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;dest&quot;</span><span class="p">]),</span>
+        <span class="n">origin</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;origin&quot;</span><span class="p">]),</span>
+        <span class="n">tail_num</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;tail_num&quot;</span><span class="p">]),</span>
+        <span class="n">arr_delay</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;arr_delay&quot;</span><span class="p">]),</span>
+        <span class="n">op_unique_carrier</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;op_unique_carrier&quot;</span><span class="p">]),</span>
+        <span class="n">arr_delay_demean</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;arr_delay&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;arr_delay&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+        <span class="n">distance_group</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;distance&quot;</span><span class="p">],</span> <span class="mi">4</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;near&quot;</span><span class="p">,</span> <span class="s2">&quot;less near&quot;</span><span class="p">,</span> <span class="s2">&quot;far&quot;</span><span class="p">,</span> <span class="s2">&quot;furthest&quot;</span><span class="p">])</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fl_date</th>
+      <th>op_unique_carrier</th>
+      <th>tail_num</th>
+      <th>origin</th>
+      <th>origin_city_name</th>
+      <th>dest</th>
+      <th>dest_city_name</th>
+      <th>dep_time</th>
+      <th>arr_time</th>
+      <th>arr_delay</th>
+      <th>cancellation_code</th>
+      <th>air_time</th>
+      <th>distance</th>
+      <th>arr_delay_demean</th>
+      <th>distance_group</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>403296</th>
+      <td>2020-01-20</td>
+      <td>G4</td>
+      <td>231NV</td>
+      <td>SFB</td>
+      <td>Sanford</td>
+      <td>AVL</td>
+      <td>Asheville</td>
+      <td>2020-01-20 20:11:00</td>
+      <td>2020-01-20 21:37:00</td>
+      <td>6.0</td>
+      <td>NaN</td>
+      <td>64.0</td>
+      <td>465.0</td>
+      <td>8.544995</td>
+      <td>less near</td>
+    </tr>
+    <tr>
+      <th>126199</th>
+      <td>2020-01-06</td>
+      <td>MQ</td>
+      <td>N687JS</td>
+      <td>ORD</td>
+      <td>Chicago</td>
+      <td>MSN</td>
+      <td>Madison</td>
+      <td>2020-01-06 18:37:00</td>
+      <td>2020-01-06 19:27:00</td>
+      <td>-16.0</td>
+      <td>NaN</td>
+      <td>26.0</td>
+      <td>109.0</td>
+      <td>-13.455005</td>
+      <td>near</td>
+    </tr>
+    <tr>
+      <th>417268</th>
+      <td>2020-01-20</td>
+      <td>YV</td>
+      <td>N516LR</td>
+      <td>IAD</td>
+      <td>Washington</td>
+      <td>DTW</td>
+      <td>Detroit</td>
+      <td>2020-01-20 17:38:00</td>
+      <td>2020-01-20 19:15:00</td>
+      <td>14.0</td>
+      <td>NaN</td>
+      <td>60.0</td>
+      <td>383.0</td>
+      <td>16.544995</td>
+      <td>less near</td>
+    </tr>
+    <tr>
+      <th>67589</th>
+      <td>2020-01-04</td>
+      <td>OO</td>
+      <td>N804SK</td>
+      <td>SAV</td>
+      <td>Savannah</td>
+      <td>DTW</td>
+      <td>Detroit</td>
+      <td>2020-01-04 06:53:00</td>
+      <td>2020-01-04 08:44:00</td>
+      <td>-26.0</td>
+      <td>NaN</td>
+      <td>91.0</td>
+      <td>705.0</td>
+      <td>-23.455005</td>
+      <td>far</td>
+    </tr>
+    <tr>
+      <th>102760</th>
+      <td>2020-01-05</td>
+      <td>WN</td>
+      <td>N789SW</td>
+      <td>SAN</td>
+      <td>San Diego</td>
+      <td>TUS</td>
+      <td>Tucson</td>
+      <td>2020-01-05 07:32:00</td>
+      <td>2020-01-05 09:41:00</td>
+      <td>-19.0</td>
+      <td>NaN</td>
+      <td>53.0</td>
+      <td>368.0</td>
+      <td>-16.455005</td>
+      <td>less near</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="data-intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Working with Data</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="data-read-and-write.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Reading and Writing Files</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation">Aggregation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby-and-then-aggregate-aka-split-apply-combine">Groupby and then aggregate (aka split, apply, combine)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-functions-using-agg">Multiple Functions using <code class="docutils literal notranslate"><span class="pre">agg()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter">Filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transform">Transform</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assign">Assign</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agg-transform-and-apply-when-to-use-each-with-a-groupby"><code class="docutils literal notranslate"><span class="pre">agg()</span></code>, <code class="docutils literal notranslate"><span class="pre">transform()</span></code>, and <code class="docutils literal notranslate"><span class="pre">apply()</span></code>: when to use each with a groupby</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reshaping-data">Reshaping Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting-data-from-tidy-to-err-untidy">Pivoting data from tidy to, err, untidy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#melt">Melt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stack-and-unstack">Stack and unstack</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-dummies">Get dummies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-quick-look-at-time-series-and-rolling-windows">A quick look at time series and rolling windows</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method-chaining">Method Chaining</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Arthur Turrell
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  This book is available under an MIT license.
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

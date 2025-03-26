@@ -1,0 +1,882 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Intro to Data Visualisation &#8212; Coding for Economists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-9FZQCPFXZJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vis-intro';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://aeturrell.github.io/coding-for-economists/vis-intro.html" />
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Easy Data Visualisation for Tidy Data with Lets-Plot" href="vis-letsplot.html" />
+    <link rel="prev" title="Shortcuts to Better Coding" href="code-advcd-best-practice.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/smith_lovelace.png" class="logo__image only-light" alt="Coding for Economists - Home"/>
+    <script>document.write(`<img src="_static/smith_lovelace.png" class="logo__image only-dark" alt="Coding for Economists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-basics.html">Coding Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow-basics.html">Workflow Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-where.html">Writing Code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-analysis-quickstart.html">Data Analysis Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-intro.html">Working with Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-transformation.html">Data Transformation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-read-and-write.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-numbers.html">Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-categorical.html">Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-spreadsheets.html">Spreadsheets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-best-practice.html">Code in Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advanced.html">Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advcd-best-practice.html">Shortcuts to Better Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data Visualisation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Intro to Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-letsplot.html">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-matplotlib.html">Powerful Data Visualisation with <strong>Matplotlib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-one.html">Common Plots I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-two.html">Common Plots II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="auto-research-outputs.html">Automating Research Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-markdown.html">Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-version-control.html">Version Control</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Econometrics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="econmt-probability-random.html">Probability and Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-statistics.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-regression.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-generalised-models.html">Generalised regression models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-diagnostics.html">Regression diagnostics and visualisations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-causal-inference.html">Causal Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayesian.html">Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayes-bambi.html">Bayesian Inference Made Easier</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-boolean.html">Boolean Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-joining-data.html">Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-missing-values.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-exploratory-analysis.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-extraction.html">Getting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-databases.html">Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-advanced.html"><strong>pandas</strong> alternatives, validation, and orchestration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-sharing.html">Sharing Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-further-advanced.html">Advanced Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-quarto.html">Combining Code and Text in Quarto Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-environments.html">Virtual Code Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-rap.html">Reproducible Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Time</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="time-intro.html">Introduction to Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-fcasts-env.html">Forecasting Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Text Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="text-intro.html">Introduction to Text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-regex.html">Regular Expressions, aka regex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-nlp.html">Natural Language Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ml-intro.html">Introduction to Machine Learning and AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-sup.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-data.html">Data for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-unsup.html">Unsupervised Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Geospatial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geo-intro.html">Intro to Geo-Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geo-vis.html">Geo-Spatial Visualisation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="maths-abstract.html">Abstract Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maths-numerical.html">Numerical Mathematics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Craft</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="craft-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-search.html">Putting the Search in Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-generating-ideas.html">Generating and Accepting Research Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-writing-papers.html">Writing Papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-research-blogs.html">Research Blog Posts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-referee.html">Writing Referee Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-technical-reports.html">Writing Technical Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-extended-abstracts.html">Extended Abstracts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coming from ...</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="coming-from-stata.html">Coming from Stata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-matlab.html">Coming from Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-r.html">Coming from R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-excel.html">Coming from Excel</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zreferences.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aeturrell/coding-for-economists/blob/main/vis-intro.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists/issues/new?title=Issue%20on%20page%20%2Fvis-intro.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/vis-intro.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Intro to Data Visualisation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-visualisation">Exploratory Visualisation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scientific-visualisation">Scientific Visualisation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#narrative-visualisation">Narrative Visualisation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-guide-to-data-visualisation">Quick guide to data visualisation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colour">Colour</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-data">Categorical Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-colour-scales">Continuous Colour Scales</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libraries-for-data-visualisation">Libraries for Data Visualisation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-data-visualisation-tools">Other Data Visualisation Tools</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review">Review</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="intro-to-data-visualisation">
+<span id="vis-intro"></span><h1>Intro to Data Visualisation<a class="headerlink" href="#intro-to-data-visualisation" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>In this chapter, you’ll get a bit of background on data visualisation and lots of pointers to both further chapters and other visualisation resources.</p>
+<p>There are a plethora of options (and packages) for data visualisation using code. First, though a note about the different <em>philosophies</em> of data visualisation. There are broadly two categories of approach to using code to create data visualisations: <em>imperative</em>, where you build what you want, and <em>declarative</em>, where you say what you want. Choosing which to use involves a trade-off: imperative libraries offer you flexibility but at the cost of some verbosity; declarative libraries offer you a quick way to plot your data, but only if it’s in the right format to begin with, and customisation may be more difficult.</p>
+<p>There are also different purposes of data visualisation. It can be useful to bear in mind the three broad categories of visualisation that are out there:</p>
+<ul class="simple">
+<li><p>exploratory</p></li>
+<li><p>scientific</p></li>
+<li><p>narrative</p></li>
+</ul>
+<p>Python excels at exploratory and scientific visualisation. The tools for narrative visualisation are not as good as they could be for making common chart types efficiently, but did receive a big boost with the release of the <strong>lets-plot</strong> library, which is covered in Chapter <a class="reference internal" href="vis-letsplot.html#vis-letsplot"><span class="std std-ref">Easy Data Visualisation for Tidy Data with Lets-Plot</span></a>. And Python is blessed with perhaps the most powerfully flexible data visualisation package anywhere, <strong>matplotlib</strong>, in which you can always get the effect you want (with some work). <strong>matplotlib</strong> is covered in Chapter <a class="reference internal" href="vis-matplotlib.html#vis-matplotlib"><span class="std std-ref">Powerful Data Visualisation with Matplotlib</span></a>.</p>
+<section id="exploratory-visualisation">
+<h3>Exploratory Visualisation<a class="headerlink" href="#exploratory-visualisation" title="Link to this heading">#</a></h3>
+<p>The first of the three kinds of vis, <em>exploratory visualisation</em>, is the kind that you do when you’re looking and data and trying to understand it. Just plotting the data is a really good strategy for getting a feel for any issues there might be. This is perhaps most famously demonstrated by <em>Anscombe’s quartet</em>: four different datasets with the same mean, standard deviation, and correlation but <em>very</em> different data distributions.</p>
+<p>(First let’s import the packages we’ll need:)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Set seed for random numbers</span>
+<span class="n">seed_for_prng</span> <span class="o">=</span> <span class="mi">78557</span>
+<span class="n">prng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span>
+    <span class="n">seed_for_prng</span>
+<span class="p">)</span>  <span class="c1"># prng=probabilistic random number generator</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>Anscombe’s quartet</em>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/c9336b358cf724457a16d5b48d2cfca94fe34a03769e8912c35447504a2c0fcc.svg" src="_images/c9336b358cf724457a16d5b48d2cfca94fe34a03769e8912c35447504a2c0fcc.svg" />
+</div>
+</div>
+<p>Exploratory visualisation is usually quick and dirty, and flexible too. Some exploratory data viz can be automated, and some of the packages you’ll see later in the chapter on <a class="reference internal" href="data-exploratory-analysis.html#data-exploratory-analysis"><span class="std std-ref">Exploratory Data Analysis</span></a> can do this. Beyond you and perhaps your co-authors/collaborators, not many other people should be seeing your exploratory visualisation.</p>
+</section>
+<section id="scientific-visualisation">
+<h3>Scientific Visualisation<a class="headerlink" href="#scientific-visualisation" title="Link to this heading">#</a></h3>
+<p>The second kind, scientific visualisation, is the prime cut of your exploratory visualisation. It’s the kind of plot you might include in a more technical paper, the picture that says a thousand words. I often think of the first image of a black hole by <span id="id1">Akiyama <em>et al.</em> [<a class="reference internal" href="zreferences.html#id11" title="Kazunori Akiyama, Antxon Alberdi, Walter Alef, Keiichi Asada, Rebecca Azulay, Anne-Kathrin Baczko, David Ball, Mislav Baloković, John Barrett, Dan Bintley, and others. First m87 event horizon telescope results. iv. imaging the central supermassive black hole. The Astrophysical Journal Letters, 875(1):L4, 2019.">2019</a>]</span> as a prime example of this (made with <strong>matplotlib</strong>!) You can get away with having a high density of information in a scientific plot and, in short format journals, you may need to. The journal <em>Physical Review Letters</em>, which has an 8 page limit, has a classic of this genre in more or less every issue. Ensuring that important values can be accurately read from the plot is especially important in these kinds of charts. But they can also be the kind of plot that presents the killer results in a study; they might not be exciting to people who don’t look at charts for a living, but they might be exciting and, just as importantly, understandable by your peers.</p>
+</section>
+<section id="narrative-visualisation">
+<h3>Narrative Visualisation<a class="headerlink" href="#narrative-visualisation" title="Link to this heading">#</a></h3>
+<p>The third and final kind is narrative visualisation. This is the one that requires the most thought in the step where you go from the first view to the end product. It’s a visualisation that doesn’t just show a picture, but gives an insight. These are the kind of visualisations that you might see in the <em>Financial Times</em>, <em>The Economist</em>, or on the BBC News website. They come with aids that help the viewer focus on the aspects that the creator wanted them to (you can think of these aids or focuses as doing for visualisation what bold font does for text). They’re well worth using in your work, especially if you’re trying to communicate a particular narrative, and especially if the people you’re communicating with don’t have deep knowledge of the topic. You might use them in a paper that you hope will have a wide readership, in a blog post summarising your work, or in a report intended for a policymaker.</p>
+<p>You can find more information on the topic in the <a class="reference internal" href="vis-narrative.html#vis-narrative"><span class="std std-ref">Narrative Data Visualisation</span></a> chapter.</p>
+</section>
+</section>
+<section id="quick-guide-to-data-visualisation">
+<h2>Quick guide to data visualisation<a class="headerlink" href="#quick-guide-to-data-visualisation" title="Link to this heading">#</a></h2>
+<p>Addressing data visualisation, a huge topic in itself, is definitely out of scope for this book! But it’s worth discussing a few general pointers at the outset that will serve you very well if you follow them.</p>
+<p>A picture may tell a 1000 words, but you’ve got to be a bit careful about what those words are. The first question you should ask yourself when it comes to data visualisation is ‘what does this plot tell the viewer?’, ie what do you want people to take away from your chart. That nugget of information should be as apparent as possible from the plot. Then you want to ensure that people <em>do</em> take away what you meant them to; the viewer should be left in little doubt about what you are saying.</p>
+<p>Another factor to bear in mind is that papers typically don’t have more than, say, ten plots in them–and frequently fewer than that. So each one must count and advance the narrative of your work somehow. (Easier to say, hard to do in practice.) As an example, if you have data that are normally distributed, and you want to show this, it’s probably not worth showing it on a plot. But if you had two distributions whose differences were important for the overall story you were telling, that might be something to highlight.</p>
+<p>Then there are more practical matters: is this plot better done as a scatter plot or a line? Should I stack my bar chart or split out the contributions? Those questions address the <em>type</em> of plot you’re creating. For example, if you have observations that are independent from one another, with no auto-correlation along the x-axis, a scatter plot is more appropriate than a line chart. However, for time series, which tend to exhibit a high degree of auto-correlation, a line chart could be just the thing. As well as the overall type, for example scatter plot, you can think about adding more information through the use of colours, shapes, sizes, and so on. But my advice is always to be sparing with extra dimensions of information as it very quickly becomes difficult to read. In most cases, an x-axis, a y-axis, and, usually, one other dimension (eg colour) will be the best option.</p>
+<p>Once you’ve decided on the <em>type</em> of chart, you can then think about smaller details. Unfortunately, lack of labels is endemic in economics (“percent of what!?”, I cry at least three times a day). Always make what you’re plotting clear and, if it has units, express them (eg “Salary (2015 USD)”). Think carefully about the tick labels to use too; you’ll want something quite different for linear versus log plots. Titles can be helpful too, if the axes labels and the chart by themselves don’t tell the whole story.</p>
+<p>Then, if there are very specific features you’d like to draw attention to, you can achieve this with text labels (as used liberally in the data visualisations you’ll see in newspapers like the <em>Financial Times</em>), greying out all but the most interesting data point, etc.; anything that singles out one part of the chart as the interesting one. A common trick is to plot the less important features with greater transparency and the important line/point/bar with solid colour. These all have the effect of drawing the eye straight to where it should spend the most time.</p>
+<p>This is just the briefest of brief overviews of what you should bear in mind for good visualisation; I highly recommend the short and delightful <a class="reference external" href="https://clauswilke.com/dataviz/">Fundamentals of Data visualisation</a> if you’d like to know more.</p>
+<p>In terms of further resources to help you choose the right plot for the occassion, you can’t go too far wrong than the <a class="reference external" href="https://github.com/ft-interactive/chart-doctor/tree/master/visual-vocabulary"><em>Financial Times</em> Visual Vocabulary of charts</a>. And, please, please use <a class="reference external" href="https://clauswilke.com/dataviz/image-file-formats.html">vector graphics</a> whenever you can!</p>
+<section id="colour">
+<h3>Colour<a class="headerlink" href="#colour" title="Link to this heading">#</a></h3>
+<p>This section has benefitted from this <a class="reference external" href="https://blog.datawrapper.de/which-color-scale-to-use-in-data-vis/">blog piece</a> on visualisation and colour, and you can find more information there.</p>
+<p>Colours often make a chart come alive, but, when encoding differences with colour, think carefully about what would serve your audience and message best. It’s best not to use colour randomly, but to choose colours that either add information to the chart or get out of the way of the message. Often, you’ll want to draw your colours from a ‘colour palette’, a collection of different colours that work together to create a particular effect. The best colour palettes take into account that colour blindness is a problem for many people, and they remain informative even when converted to greyscale.</p>
+<p>One of the most popular Python visualisation libraries, <strong>matplotlib</strong>, comes with a wide range of colour palettes available <a class="reference external" href="https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html">here</a> and you can find another good package for colour palettes <a class="reference external" href="https://colorcet.holoviz.org/">here</a>.</p>
+<section id="categorical-data">
+<h4>Categorical Data<a class="headerlink" href="#categorical-data" title="Link to this heading">#</a></h4>
+<p>For (unordered) categorical data, visually distinct colour palettes (also known as qualitative palettes) are better. The basic rule is that you should use distinct hues when your values don’t have an inherent order or range. Note that this does not include Likert scales (“strongly agree, agree, neutral, disagree, strongly disagree”), because even though there are distinct categories, there is an order to the possible responses.</p>
+<p>Here are some examples of the qualitative hues available in the visualisation package <strong>matplotlib</strong>.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/77abd0d5b0fd1d5333b21362d86579993303eeffa4e9f4805d203ce9134c1341.svg" src="_images/77abd0d5b0fd1d5333b21362d86579993303eeffa4e9f4805d203ce9134c1341.svg" />
+</div>
+</div>
+</section>
+<section id="continuous-colour-scales">
+<h4>Continuous Colour Scales<a class="headerlink" href="#continuous-colour-scales" title="Link to this heading">#</a></h4>
+<p>Continuously varying data need a sequential colour scale, but there are two types: <em>sequential</em> and <em>diverging</em></p>
+<p>For data that vary from low to high, you can use a sequential colourmap. Best practice is to use a sequential colourmap that is perceptually uniform. The authors of the Python package <strong>matplotlib</strong> <a class="reference external" href="https://bids.github.io/colormap/">developed</a> several perceptually uniform colourmaps that are now widely used, not just in Python, but in other languages and contexts too <span id="id2">[<a class="reference internal" href="zreferences.html#id18" title="Jamie R Nuñez, Christopher R Anderton, and Ryan S Renslow. Optimizing colormaps with consideration for color vision deficiency to enable accurate interpretation of scientific data. PloS one, 13(7):e0199239, 2018.">Nuñez, Anderton, and Renslow, 2018</a>]</span>. These are the ones built-in to <strong>matplotlib</strong>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/b5ea5dd7584b3d8c39f3313daf7efea198bad3a8f385a0a40585a88d83e65685.svg" src="_images/b5ea5dd7584b3d8c39f3313daf7efea198bad3a8f385a0a40585a88d83e65685.svg" />
+</div>
+</div>
+<p>Do not use the JET colourmap: it is very much not perceptually uniform. If you do want a rainbow-like sequential and perceptually uniform colourmap, then turbo, <a class="reference external" href="https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html">developed by Google</a>, is as good a choice as you’re going to find. You can find turbo within matplotlib.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/ee8b78cf9983294fc967c69b77391baf5c00cf4911b5fba00f6259f03836fe1f.svg" src="_images/ee8b78cf9983294fc967c69b77391baf5c00cf4911b5fba00f6259f03836fe1f.svg" />
+</div>
+</div>
+<p>Sometimes a <em>diverging</em> colourmap will be more appropriate for your data. These are also called bipolar or double-ended color scales and, instead of just going from low to high, they tend to have a default middle value (often brighter) with values either side that are darker in different hues. Diverging color scales are often used to visualise negative and positive differences relative to zero, election results, or Likert scales (for example, “strongly agree, agree, neutral, disagree, strongly disagree”).</p>
+<p>These are the built-in ones in <strong>matplotlib</strong>:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/b68f8213b7f68dd829e6247c3d6d77d92edf2861aea1efbef5bff8006d9f8b0e.svg" src="_images/b68f8213b7f68dd829e6247c3d6d77d92edf2861aea1efbef5bff8006d9f8b0e.svg" />
+</div>
+</div>
+<p>So how do you choose between a diverging or sequential colour scale? Divering colour scales work better when i) there’s a meaningful middle point, ii) there are extremes that you want to emphasise, iii) when differences are more of the story than levels, and iv) when you don’t mind that people will have to put in a bit of extra effort to understand the chart relative to the typically more intuitive sequential colour scale.</p>
+<p>Finally, this book uses a colour-blind friendly qualitative scheme (you can find the list of colours in <a class="reference external" href="https://github.com/aeturrell/coding-for-economists/blob/main/plot_style.txt">this</a> file).</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/cc800618cea09b385388775565fc470ec2596b45eb9a2a9d84a951f9e889a3d9.svg" src="_images/cc800618cea09b385388775565fc470ec2596b45eb9a2a9d84a951f9e889a3d9.svg" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="libraries-for-data-visualisation">
+<h2>Libraries for Data Visualisation<a class="headerlink" href="#libraries-for-data-visualisation" title="Link to this heading">#</a></h2>
+<p>In subsequent chapters, we’ll take a look at making visualisations with several of these libraries. Our overall advice is to use <strong>lets-plot</strong> for declarative plotting and <strong>matplotlib</strong> for imperative plotting due to their high quality, flexibility, and likelihood of long term support. You can find lots of examples of the kinds of visualisations these packages produce side-by-side over in <a class="reference internal" href="vis-common-plots-one.html#vis-common-plots-one"><span class="std std-ref">Common Plots I</span></a>.</p>
+<p>The most important and widely used data visualisation library in Python is <a class="reference external" href="https://matplotlib.org/"><strong>matplotlib</strong></a>. It was used to make the first image of a black hole by <span id="id3">Akiyama <em>et al.</em> [<a class="reference internal" href="zreferences.html#id11" title="Kazunori Akiyama, Antxon Alberdi, Walter Alef, Keiichi Asada, Rebecca Azulay, Anne-Kathrin Baczko, David Ball, Mislav Baloković, John Barrett, Dan Bintley, and others. First m87 event horizon telescope results. iv. imaging the central supermassive black hole. The Astrophysical Journal Letters, 875(1):L4, 2019.">2019</a>]</span> and to image the first empirical evidence of gravitational waves by <span id="id4">Abbott <em>et al.</em> [<a class="reference internal" href="zreferences.html#id12" title="Benjamin P Abbott, Richard Abbott, TD Abbott, MR Abernathy, Fausto Acernese, Kendall Ackley, Carl Adams, Thomas Adams, Paolo Addesso, RX Adhikari, and others. Observation of gravitational waves from a binary black hole merger. Physical review letters, 116(6):061102, 2016.">2016</a>]</span>. <strong>matplotlib</strong> is an imperative visualisation library: you specify each part of what you want individually to build up an entire picture. It’s perhaps the easiest to get started with and the most difficult to master. As well as making plots, it can also be used to make diagrams, animations, and 3D visualisations (which you should use sparingly, if at all). Reach for it if you like to have very fine-grained control over your plots, for example, you’re making a bespoke or unusual chart, you need to control the look of a chart very carefully, you’re making something that requires more graphical design, or you prefer to build up your plots from elemental pieces. You can explore it further in <a class="reference internal" href="vis-matplotlib.html#vis-matplotlib"><span class="std std-ref">Powerful Data Visualisation with Matplotlib</span></a>.</p>
+<p><a class="reference external" href="https://lets-plot.org/"><strong>lets-plot</strong></a> is a fantastic and extremely high-quality declarative library that works especially well with data that are in a <em>tidy</em> format (one row per observation, one column per variable). It adopts a <em>grammar of graphics</em> approach. What this means is that <em>all</em> visualisations begin with the same command, <code class="docutils literal notranslate"><span class="pre">ggplot</span></code>, and are combinations of layers that address different aspects of a plot, for example points or lines, scale, labels, and so on. Use it if you want one of a long list of standard charts produced quickly and to a high standard, and if your data are in a tidy format. You can find out more about it in <a class="reference internal" href="vis-letsplot.html#vis-letsplot"><span class="std std-ref">Easy Data Visualisation for Tidy Data with Lets-Plot</span></a>.</p>
+<p><a class="reference external" href="https://plotly.com/python/plotly-express/"><strong>plotly</strong> express</a> is another declarative-leaning library that’s suited to web apps and dashboards.</p>
+<p><a class="reference external" href="https://seaborn.pydata.org"><strong>seaborn</strong></a> is a popular declarative library that builds on <strong>maplotlib</strong> and works especially well with data that are in a <em>tidy</em> format (one row per observation, one column per variable). <strong>seaborn</strong> is still a work in progress, but you can find information on it in <a class="reference internal" href="vis-seaborn.html#vis-seaborn"><span class="std std-ref">Data Visualisation with Seaborn</span></a>.</p>
+<p><a class="reference external" href="https://plotnine.readthedocs.io"><strong>plotnine</strong></a> is another declarative plotting library that adopts a <em>grammar of graphics</em> approach and uses a <code class="docutils literal notranslate"><span class="pre">ggplot</span></code> command, but it’s not quite as full featured as <strong>lets-plot</strong>. You can read more about it in <a class="reference internal" href="vis-plotnine.html#vis-plotnine"><span class="std std-ref">Data Visualisation using the Grammar of Graphics with Plotnine</span></a>.</p>
+<p><a class="reference external" href="https://altair-viz.github.io/"><strong>altair</strong></a> is yet another declarative plotting library for Python! It’s most suited to interactive graphics on the web, and produces really beautiful charts. Under the hood, it calls a javascript library named <strong>Vega-Lite</strong> that’s the sort of thing newspaper data visualisation units might use to make their infographics.</p>
+<p><strong>pandas</strong> also has <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html">built-in plotting functions</a> that you will have seen in the data analysis part of this book. They are of the form <code class="docutils literal notranslate"><span class="pre">df.plot.*</span></code> where <code class="docutils literal notranslate"><span class="pre">*</span></code> could be, for example, <code class="docutils literal notranslate"><span class="pre">scatter</span></code>. These are convenience functions for making a quick plot of your data and they actually use <strong>matplotlib</strong>; we won’t see much of these here but you can find them in the data analysis chapter.</p>
+<p>We’re going to start this chapter by finding out a little bit more about each of these data visualisation libraries before looking at some examples of how to make specific plots with all the main libraries. We’ll end by looking at some more interesting and advanced plots.</p>
+<section id="other-data-visualisation-tools">
+<h3>Other Data Visualisation Tools<a class="headerlink" href="#other-data-visualisation-tools" title="Link to this heading">#</a></h3>
+<p>There are tons of data visualisation libraries in Python, so many that most cannot be featured in great detail. Here are a few more that may be worth looking into depending on what you need.</p>
+<p>Here’s a quick run down of the other libraries that are available:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://proplot.readthedocs.io/en/latest/index.html"><strong>proplot</strong></a> aims to be “A lightweight matplotlib wrapper for making beautiful, publication-quality graphics”, though the style is more similar to how people might make plots in the hard sciences rather than the social sciences. The point of this library is to take some of the verbosity out of <strong>matplotlib</strong>.</p></li>
+<li><p>if you’re using very big data in machine learning models, it might be worth looking at Facebook’s <a class="reference external" href="https://github.com/facebookresearch/hiplot"><strong>hiplot</strong></a></p></li>
+<li><p><a class="reference external" href="https://seaborn-image.readthedocs.io/en/latest/">Seaborn image</a> does for image data what <strong>seaborn</strong> does for numerical and categorical data</p></li>
+<li><p><a class="reference external" href="https://pair-code.github.io/lit/">Lit</a> provides an open-source platform for visualization and understanding of NLP models (very impressive)</p></li>
+<li><p><a class="reference external" href="https://github.com/amueller/word_cloud">Wordcloud</a> does exactly what you’d expect (but use word clouds <em>very</em> sparingly!)</p></li>
+<li><p><a class="reference external" href="http://vispy.org">VisPy</a> for very large datasets plotted with WebGL and GPU acceleration.</p></li>
+<li><p><a class="reference external" href="http://www.pyqtgraph.org/">PyQtGraph</a>, a pure-Python graphics library for PyQt5/PySide2 and intended for use in (heavy) mathematics / scientific / engineering applications (not very user friendly).</p></li>
+<li><p><a class="reference external" href="https://docs.bokeh.org/en/latest/index.html#">bokeh</a> offers interactive web plotting in Python.</p></li>
+<li><p><a class="reference external" href="https://holoviews.org/">HoloViews</a>, a library dsigned to make data analysis and visualization seamless and simple with very concise commands (builds on bokeh and matplotlib).</p></li>
+<li><p><a class="reference external" href="https://www.scikit-yb.org/en/latest/">YellowBrick</a> for visualisations of machine learning models and metrics.</p></li>
+<li><p><a class="reference external" href="https://pair-code.github.io/facets/">facets</a> for quickly visualising machine learning features (aka regressors). Also useful for exploratory data analysis.</p></li>
+<li><p><a class="reference external" href="https://github.com/spotify/chartify">chartify</a>, Spotify’s quick plotting library for data scientists.</p></li>
+<li><p><a class="reference external" href="https://github.com/garrettj403/SciencePlots">scienceplots</a> provides scientific plotting styles–some associated with specific journals–for Matplotlib.</p></li>
+<li><p><a class="reference external" href="https://www.colour-science.org/">colour</a> provides professional level colour tools for Python.</p></li>
+<li><p><a class="reference external" href="https://jiffyclub.github.io/palettable/">palettable</a> has extra colour palettes that work well with Matplotlib.</p></li>
+<li><p><a class="reference external" href="https://colorcet.holoviz.org/">colorcet</a> is a collection of perceptually uniform colourmaps.</p></li>
+<li><p><a class="reference external" href="https://github.com/ResidentMario/missingno">missingno</a> for visualization of missing data.</p></li>
+</ul>
+<p>You can see an overview of all Python plotting tools at <a class="reference external" href="https://pyviz.org/tools.html">PyViz</a>.</p>
+</section>
+</section>
+<section id="review">
+<h2>Review<a class="headerlink" href="#review" title="Link to this heading">#</a></h2>
+<p>If you know:</p>
+<ul class="simple">
+<li><p>✅ a little bit about how to use data visualisation; and</p></li>
+<li><p>✅ what some of the most popular libraries for data vis are in Python</p></li>
+</ul>
+<p>then you are well on your way to being a whizz with data vis!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="code-advcd-best-practice.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Shortcuts to Better Coding</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="vis-letsplot.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-visualisation">Exploratory Visualisation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scientific-visualisation">Scientific Visualisation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#narrative-visualisation">Narrative Visualisation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-guide-to-data-visualisation">Quick guide to data visualisation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colour">Colour</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-data">Categorical Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-colour-scales">Continuous Colour Scales</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libraries-for-data-visualisation">Libraries for Data Visualisation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-data-visualisation-tools">Other Data Visualisation Tools</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review">Review</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Arthur Turrell
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  This book is available under an MIT license.
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

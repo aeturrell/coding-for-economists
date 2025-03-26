@@ -1,0 +1,1506 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Data Visualisation with Seaborn &#8212; Coding for Economists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-9FZQCPFXZJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vis-seaborn';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://aeturrell.github.io/coding-for-economists/vis-seaborn.html" />
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Coming from Stata" href="coming-from-stata.html" />
+    <link rel="prev" title="Data Visualisation using the Grammar of Graphics with Plotnine" href="vis-plotnine.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/smith_lovelace.png" class="logo__image only-light" alt="Coding for Economists - Home"/>
+    <script>document.write(`<img src="_static/smith_lovelace.png" class="logo__image only-dark" alt="Coding for Economists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-basics.html">Coding Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow-basics.html">Workflow Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-where.html">Writing Code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-analysis-quickstart.html">Data Analysis Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-intro.html">Working with Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-transformation.html">Data Transformation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-read-and-write.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-numbers.html">Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-categorical.html">Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-spreadsheets.html">Spreadsheets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-best-practice.html">Code in Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advanced.html">Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advcd-best-practice.html">Shortcuts to Better Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-intro.html">Intro to Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-letsplot.html">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-matplotlib.html">Powerful Data Visualisation with <strong>Matplotlib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-one.html">Common Plots I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-two.html">Common Plots II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="auto-research-outputs.html">Automating Research Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-markdown.html">Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-version-control.html">Version Control</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Econometrics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="econmt-probability-random.html">Probability and Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-statistics.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-regression.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-generalised-models.html">Generalised regression models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-diagnostics.html">Regression diagnostics and visualisations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-causal-inference.html">Causal Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayesian.html">Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayes-bambi.html">Bayesian Inference Made Easier</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-boolean.html">Boolean Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-joining-data.html">Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-missing-values.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-exploratory-analysis.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-extraction.html">Getting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-databases.html">Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-advanced.html"><strong>pandas</strong> alternatives, validation, and orchestration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-sharing.html">Sharing Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-further-advanced.html">Advanced Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-quarto.html">Combining Code and Text in Quarto Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-environments.html">Virtual Code Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-rap.html">Reproducible Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Time</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="time-intro.html">Introduction to Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-fcasts-env.html">Forecasting Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Text Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="text-intro.html">Introduction to Text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-regex.html">Regular Expressions, aka regex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-nlp.html">Natural Language Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ml-intro.html">Introduction to Machine Learning and AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-sup.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-data.html">Data for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-unsup.html">Unsupervised Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Geospatial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geo-intro.html">Intro to Geo-Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geo-vis.html">Geo-Spatial Visualisation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="maths-abstract.html">Abstract Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maths-numerical.html">Numerical Mathematics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Craft</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="craft-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-search.html">Putting the Search in Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-generating-ideas.html">Generating and Accepting Research Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-writing-papers.html">Writing Papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-research-blogs.html">Research Blog Posts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-referee.html">Writing Referee Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-technical-reports.html">Writing Technical Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-extended-abstracts.html">Extended Abstracts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Data Visualisation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Visualisation with <strong>Seaborn</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coming from ...</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="coming-from-stata.html">Coming from Stata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-matlab.html">Coming from Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-r.html">Coming from R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-excel.html">Coming from Excel</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zreferences.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aeturrell/coding-for-economists/blob/main/vis-seaborn.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists/issues/new?title=Issue%20on%20page%20%2Fvis-seaborn.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/vis-seaborn.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Data Visualisation with Seaborn</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-a-plot-and-mapping-data">Specifying a plot and mapping data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-properties">Setting properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-groups">Defining groups</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-data-before-plotting">Transforming data before plotting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-transformation">Statistical transformation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resolving-overplotting">Resolving overplotting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-variables-through-transformation">Creating variables through transformation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orienting-marks-and-transforms">Orienting marks and transforms</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-and-displaying-the-plot">Building and displaying the plot</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-multiple-layers">Adding Multiple Layers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layer-specific-mappings">Layer-specific mappings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#faceting-and-pairing-subplots">Faceting and pairing subplots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integrating-with-matplotlib">Integrating with matplotlib</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Building and displaying the plot</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customising-the-appearance">Customising the appearance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameterising-scales">Parameterising scales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customising-legends-and-ticks">Customising legends and ticks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customising-limits-labels-and-titles">Customising limits, labels, and titles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theme-customisation">Theme customisation</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-visualisation-with-seaborn">
+<span id="vis-seaborn"></span><h1>Data Visualisation with <strong>Seaborn</strong><a class="headerlink" href="#data-visualisation-with-seaborn" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>seaborn</strong>’s object API is still a work-in-progress, so check the version you’re using carefully and note that the API may change relative to what’s shown here.</p>
+</div>
+<p>Here you’ll see how to make plots quickly using the <em>declarative</em> plotting package <strong>seaborn</strong>. This package is good if you want to make a standard chart from so-called <em>tidy</em> data where you have one row per observation and one columnn per variable.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We recommend you use <strong>letsplot</strong> for declarative plotting but <strong>seaborn</strong> is an excellent alternative that builds on <strong>matplotlib</strong> and so is more customisable.</p>
+</div>
+<p><strong>seaborn</strong> is actually built on top of <strong>matplotlib</strong> so you can also mix code for the two packages.</p>
+<p>The rest of this chapter is indebted to the excellent <strong>seaborn</strong> object notation <a class="reference external" href="https://seaborn.pydata.org/tutorial/objects_interface.html">documentation</a>.</p>
+<p>As ever, we start by bringing in the packages we’ll need:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn.objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">so</span>
+
+<span class="c1"># Set seed for random numbers</span>
+<span class="n">seed_for_prng</span> <span class="o">=</span> <span class="mi">78557</span>
+<span class="n">prng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span>
+    <span class="n">seed_for_prng</span>
+<span class="p">)</span>  <span class="c1"># prng=probabilistic random number generator</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Quite a few of the examples we’ll see use a range of additional datasets, so let’s grab those straight away:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
+<span class="n">penguins</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;penguins&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">diamonds</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;diamonds&quot;</span><span class="p">)</span>
+<span class="n">healthexp</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;healthexp&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">&quot;Country&quot;</span><span class="p">,</span> <span class="s2">&quot;Year&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Year &lt;= 2020&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="specifying-a-plot-and-mapping-data">
+<h2>Specifying a plot and mapping data<a class="headerlink" href="#specifying-a-plot-and-mapping-data" title="Link to this heading">#</a></h2>
+<p>The most important command in <strong>seaborn</strong> is <code class="docutils literal notranslate"><span class="pre">Plot()</span></code>. You specify plots by instantiating a <code class="docutils literal notranslate"><span class="pre">Plot()</span></code> object and calling its methods. Let’s see a simple example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/c059127d7525e088f16663da56fac19daae809ac3af074f97b084986af5d65a2.png"><img alt="_images/c059127d7525e088f16663da56fac19daae809ac3af074f97b084986af5d65a2.png" src="_images/c059127d7525e088f16663da56fac19daae809ac3af074f97b084986af5d65a2.png" style="width: 509.15px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>This code, which produces a scatter plot, should look reasonably familiar. Just as when using <code class="docutils literal notranslate"><span class="pre">seaborn.scatterplot()</span></code>, we passed a tidy dataframe (<code class="docutils literal notranslate"><span class="pre">penguins</span></code>) and assigned two of its columns to the <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinates of the plot. But instead of starting with the type of chart and then adding some data assignments, here we started with the data assignments and then added a graphical element.</p>
+<section id="setting-properties">
+<h3>Setting properties<a class="headerlink" href="#setting-properties" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Dot</span></code> class is an example of a <code class="docutils literal notranslate"><span class="pre">Mark</span></code>: an object that graphically represents data values. Each mark will have a number of properties that can be set to change its appearance:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">pointsize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/6217e1c37924b03f03ec213013286cd7991d73016b832f40d05d0f04cfb20e7e.png"><img alt="_images/6217e1c37924b03f03ec213013286cd7991d73016b832f40d05d0f04cfb20e7e.png" src="_images/6217e1c37924b03f03ec213013286cd7991d73016b832f40d05d0f04cfb20e7e.png" style="width: 509.15px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>Mapping properties</p>
+<p>As with seaborn’s functions, it is also possible to <em>map</em> data values to various graphical properties:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span>
+        <span class="n">penguins</span><span class="p">,</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span>
+        <span class="n">pointsize</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">())</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/3962e4bac20619c0adcb5153b6d959b68358fe60140a70d9b70d8b4deaa38bbf.png"><img alt="_images/3962e4bac20619c0adcb5153b6d959b68358fe60140a70d9b70d8b4deaa38bbf.png" src="_images/3962e4bac20619c0adcb5153b6d959b68358fe60140a70d9b70d8b4deaa38bbf.png" style="width: 624.3249999999999px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>While this basic functionality is not novel, an important difference from the function API is that properties are mapped using the same parameter names that would set them directly (instead of having <code class="docutils literal notranslate"><span class="pre">hue</span></code> vs. <code class="docutils literal notranslate"><span class="pre">color</span></code>, etc.). What matters is <em>where</em> the property is defined: passing a value when you initialize <code class="docutils literal notranslate"><span class="pre">Dot</span></code> will set it directly, whereas assigning a variable when you set up the <code class="docutils literal notranslate"><span class="pre">Plot()</span></code> will <em>map</em> the corresponding data.</p>
+<p>Beyond this difference, the objects interface also allows a much wider range of mark properties to be mapped:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span>
+        <span class="n">penguins</span><span class="p">,</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">,</span>
+        <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span>
+        <span class="n">edgewidth</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;.8&quot;</span><span class="p">))</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/dea621537a9682cacf63bafe102ed94065be7c1fd0f2ef07027771f6b9a7211b.png"><img alt="_images/dea621537a9682cacf63bafe102ed94065be7c1fd0f2ef07027771f6b9a7211b.png" src="_images/dea621537a9682cacf63bafe102ed94065be7c1fd0f2ef07027771f6b9a7211b.png" style="width: 620.925px; height: 378.25px;" />
+</a>
+</div>
+</div>
+</section>
+<section id="defining-groups">
+<h3>Defining groups<a class="headerlink" href="#defining-groups" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Dot</span></code> mark represents each data point independently, so the assignment of a variable to a property only has the effect of changing each dot’s appearance. For marks that group or connect observations, such as <code class="docutils literal notranslate"><span class="pre">Line</span></code>, it also determines the number of distinct graphical elements:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">healthexp</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Life_Expectancy&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;Country&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/f5dabcba45adbf77cd58a8d86617c5a196bb651ec46069eea252255c14f02889.png"><img alt="_images/f5dabcba45adbf77cd58a8d86617c5a196bb651ec46069eea252255c14f02889.png" src="_images/f5dabcba45adbf77cd58a8d86617c5a196bb651ec46069eea252255c14f02889.png" style="width: 643.875px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>It is also possible to define a grouping without changing any visual properties, by using <code class="docutils literal notranslate"><span class="pre">group</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">healthexp</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Life_Expectancy&quot;</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s2">&quot;Country&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/6901252a25de890c26ba2dbe059138d8cb82bd5a427fb09cee488c4a32d1c6ef.png"><img alt="_images/6901252a25de890c26ba2dbe059138d8cb82bd5a427fb09cee488c4a32d1c6ef.png" src="_images/6901252a25de890c26ba2dbe059138d8cb82bd5a427fb09cee488c4a32d1c6ef.png" style="width: 509.15px; height: 378.25px;" />
+</a>
+</div>
+</div>
+</section>
+</section>
+<section id="transforming-data-before-plotting">
+<h2>Transforming data before plotting<a class="headerlink" href="#transforming-data-before-plotting" title="Link to this heading">#</a></h2>
+<section id="statistical-transformation">
+<h3>Statistical transformation<a class="headerlink" href="#statistical-transformation" title="Link to this heading">#</a></h3>
+<p>As with many seaborn functions, the objects interface supports statistical transformations. These are performed by <code class="docutils literal notranslate"><span class="pre">Stat</span></code> objects, such as <code class="docutils literal notranslate"><span class="pre">Agg()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Bar</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Agg</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/bebc0023fe26a216078d6809df3cedf5363c0ea54681ee7f6f7719ec1749d84d.png"><img alt="_images/bebc0023fe26a216078d6809df3cedf5363c0ea54681ee7f6f7719ec1749d84d.png" src="_images/bebc0023fe26a216078d6809df3cedf5363c0ea54681ee7f6f7719ec1749d84d.png" style="width: 509.15px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>In the function interface, statistical transformations are possible with some visual representations (e.g. <code class="docutils literal notranslate"><span class="pre">seaborn.barplot()</span></code>) but not others (e.g. <code class="docutils literal notranslate"><span class="pre">seaborn.scatterplot()</span></code>). The objects interface more cleanly separates representation and transformation, allowing you to compose <code class="docutils literal notranslate"><span class="pre">Mark</span></code> and <code class="docutils literal notranslate"><span class="pre">Stat</span></code> objects:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">pointsize</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span> <span class="n">so</span><span class="o">.</span><span class="n">Agg</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/ebc3c20c225102d9086a6f5c198dc6e35f93884fa99ca4f5e6f28f50c77637b7.png"><img alt="_images/ebc3c20c225102d9086a6f5c198dc6e35f93884fa99ca4f5e6f28f50c77637b7.png" src="_images/ebc3c20c225102d9086a6f5c198dc6e35f93884fa99ca4f5e6f28f50c77637b7.png" style="width: 509.15px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>When forming groups by mapping properties, the <code class="docutils literal notranslate"><span class="pre">Stat</span></code> transformation is applied to each group separately:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">pointsize</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span> <span class="n">so</span><span class="o">.</span><span class="n">Agg</span><span class="p">()</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/15632468ab91edf1326b7ce06cabd0d5f35c8a3ac518cb7621e8d4b7840fd442.png"><img alt="_images/15632468ab91edf1326b7ce06cabd0d5f35c8a3ac518cb7621e8d4b7840fd442.png" src="_images/15632468ab91edf1326b7ce06cabd0d5f35c8a3ac518cb7621e8d4b7840fd442.png" style="width: 609.4499999999999px; height: 378.25px;" />
+</a>
+</div>
+</div>
+</section>
+<section id="resolving-overplotting">
+<h3>Resolving overplotting<a class="headerlink" href="#resolving-overplotting" title="Link to this heading">#</a></h3>
+<p>Some seaborn functions also have mechanisms that automatically resolve overplotting, as when <code class="docutils literal notranslate"><span class="pre">seaborn.barplot</span></code> “dodges” bars once <code class="docutils literal notranslate"><span class="pre">hue</span></code> is assigned. The objects interface has less complex default behavior. Bars representing multiple groups will overlap by default:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Bar</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Agg</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/cb9f5ceb75d33ef7f26f5582babf871f1080776560b0c8afd3e0cfe5975e484b.png"><img alt="_images/cb9f5ceb75d33ef7f26f5582babf871f1080776560b0c8afd3e0cfe5975e484b.png" src="_images/cb9f5ceb75d33ef7f26f5582babf871f1080776560b0c8afd3e0cfe5975e484b.png" style="width: 609.4499999999999px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>Nevertheless, it is possible to compose the <code class="docutils literal notranslate"><span class="pre">Bar</span></code> mark with the <code class="docutils literal notranslate"><span class="pre">Agg</span></code> stat and a second transformation, implemented by <code class="docutils literal notranslate"><span class="pre">Dodge</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="n">so</span><span class="o">.</span><span class="n">Bar</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Agg</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Dodge</span><span class="p">()</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/b4aafc547373256ea79a45336edbebfac1ba577cf889f0d854e4ea15655344a3.png"><img alt="_images/b4aafc547373256ea79a45336edbebfac1ba577cf889f0d854e4ea15655344a3.png" src="_images/b4aafc547373256ea79a45336edbebfac1ba577cf889f0d854e4ea15655344a3.png" style="width: 609.4499999999999px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Dodge</span></code> class is an example of a <code class="docutils literal notranslate"><span class="pre">Move</span></code> transformation, which is like a <code class="docutils literal notranslate"><span class="pre">Stat</span></code> but only adjusts <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinates. The <code class="docutils literal notranslate"><span class="pre">Move</span></code> classes can be applied with any mark, and it’s not necessary to use a <code class="docutils literal notranslate"><span class="pre">Stat</span></code> first:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Dodge</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/09df2fab80434043025a350d3d4b785deee648e19183b170174057b788bb4f26.png"><img alt="_images/09df2fab80434043025a350d3d4b785deee648e19183b170174057b788bb4f26.png" src="_images/09df2fab80434043025a350d3d4b785deee648e19183b170174057b788bb4f26.png" style="width: 609.4499999999999px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>It’s also possible to apply multiple <code class="docutils literal notranslate"><span class="pre">Move</span></code> operations in sequence:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Dodge</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Jitter</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/4d472cb58c718b2793629639c1675571ae415a9b63d38c5cd62b6749ad1e065a.png"><img alt="_images/4d472cb58c718b2793629639c1675571ae415a9b63d38c5cd62b6749ad1e065a.png" src="_images/4d472cb58c718b2793629639c1675571ae415a9b63d38c5cd62b6749ad1e065a.png" style="width: 609.4499999999999px; height: 378.25px;" />
+</a>
+</div>
+</div>
+</section>
+<section id="creating-variables-through-transformation">
+<h3>Creating variables through transformation<a class="headerlink" href="#creating-variables-through-transformation" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Agg</span></code> stat requires both <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> to already be defined, but variables can also be <em>created</em> through statistical transformation. For example, the <code class="docutils literal notranslate"><span class="pre">Hist</span></code> stat requires only one of <code class="docutils literal notranslate"><span class="pre">x</span></code> <em>or</em> <code class="docutils literal notranslate"><span class="pre">y</span></code> to be defined, and it will create the other by counting observations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Bar</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Hist</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/0980a4f3aaf4294e9943be4f039891ffcb437697c5eb4658316185b363165f8c.png"><img alt="_images/0980a4f3aaf4294e9943be4f039891ffcb437697c5eb4658316185b363165f8c.png" src="_images/0980a4f3aaf4294e9943be4f039891ffcb437697c5eb4658316185b363165f8c.png" style="width: 509.15px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Hist</span></code> stat will also create new <code class="docutils literal notranslate"><span class="pre">x</span></code> values (by binning) when given numeric data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Bars</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Hist</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/d122eedab8516cd4aca077edb75fd8e8c5d9ee56bb1d4af4222cc48a832653c2.png"><img alt="_images/d122eedab8516cd4aca077edb75fd8e8c5d9ee56bb1d4af4222cc48a832653c2.png" src="_images/d122eedab8516cd4aca077edb75fd8e8c5d9ee56bb1d4af4222cc48a832653c2.png" style="width: 509.15px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>Notice how we used <code class="docutils literal notranslate"><span class="pre">Bars</span></code>, rather than <code class="docutils literal notranslate"><span class="pre">Bar</span></code> for the plot with the continuous <code class="docutils literal notranslate"><span class="pre">x</span></code> axis. These two marks are related, but <code class="docutils literal notranslate"><span class="pre">Bars</span></code> has different defaults and works better for continuous histograms. It also produces a different, more efficient matplotlib artist. You will find the pattern of singular/plural marks elsewhere. The plural version is typically optimized for cases with larger numbers of marks.</p>
+<p>Some transforms accept both <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>, but add <em>interval</em> data for each coordinate. This is particularly relevant for plotting error bars after aggregating:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Range</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Est</span><span class="p">(</span><span class="n">errorbar</span><span class="o">=</span><span class="s2">&quot;sd&quot;</span><span class="p">),</span> <span class="n">so</span><span class="o">.</span><span class="n">Dodge</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Agg</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Dodge</span><span class="p">())</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/7c4ead7b747a3e9042c45eb56666b07d68fe7ea5f1409c05803d317f85ee333e.png"><img alt="_images/7c4ead7b747a3e9042c45eb56666b07d68fe7ea5f1409c05803d317f85ee333e.png" src="_images/7c4ead7b747a3e9042c45eb56666b07d68fe7ea5f1409c05803d317f85ee333e.png" style="width: 609.4499999999999px; height: 378.25px;" />
+</a>
+</div>
+</div>
+</section>
+<section id="orienting-marks-and-transforms">
+<h3>Orienting marks and transforms<a class="headerlink" href="#orienting-marks-and-transforms" title="Link to this heading">#</a></h3>
+<p>When aggregating, dodging, and drawing a bar, the <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> variables are treated differently. Each operation has the concept of an <em>orientation</em>. The <code class="docutils literal notranslate"><span class="pre">Plot()</span></code> tries to determine the orientation automatically based on the data types of the variables. For instance, if we flip the assignment of <code class="docutils literal notranslate"><span class="pre">species</span></code> and <code class="docutils literal notranslate"><span class="pre">body_mass_g</span></code>, we’ll get the same plot, but oriented horizontally:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="n">so</span><span class="o">.</span><span class="n">Bar</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Agg</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Dodge</span><span class="p">()</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/42b0ab8939011136ed3d7ade2c59b2432e49e27dd25c6d7907ec85aced59e44a.png"><img alt="_images/42b0ab8939011136ed3d7ade2c59b2432e49e27dd25c6d7907ec85aced59e44a.png" src="_images/42b0ab8939011136ed3d7ade2c59b2432e49e27dd25c6d7907ec85aced59e44a.png" style="width: 609.4499999999999px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>Sometimes, the correct orientation is ambiguous, as when both the <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> variables are numeric. In these cases, you can be explicit by passing the <code class="docutils literal notranslate"><span class="pre">orient</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">Plot.add()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;size&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="n">so</span><span class="o">.</span><span class="n">Bar</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Agg</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Dodge</span><span class="p">(),</span> <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;y&quot;</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/247f02cb91cdc5619ef5f37160ffdc22164c9297145090fef7e2b16d62125cff.png"><img alt="_images/247f02cb91cdc5619ef5f37160ffdc22164c9297145090fef7e2b16d62125cff.png" src="_images/247f02cb91cdc5619ef5f37160ffdc22164c9297145090fef7e2b16d62125cff.png" style="width: 606.05px; height: 378.25px;" />
+</a>
+</div>
+</div>
+</section>
+</section>
+<section id="building-and-displaying-the-plot">
+<h2>Building and displaying the plot<a class="headerlink" href="#building-and-displaying-the-plot" title="Link to this heading">#</a></h2>
+<p>Each example thus far has produced a single subplot with a single kind of mark on it. But <code class="docutils literal notranslate"><span class="pre">Plot()</span></code> does not limit you to this.</p>
+<section id="adding-multiple-layers">
+<h3>Adding Multiple Layers<a class="headerlink" href="#adding-multiple-layers" title="Link to this heading">#</a></h3>
+<p>More complex single-subplot graphics can be created by calling <code class="docutils literal notranslate"><span class="pre">Plot.add()</span></code> repeatedly. Each time it is called, it defines a <em>layer</em> in the plot. For example, we may want to add a scatterplot (now using <code class="docutils literal notranslate"><span class="pre">Dots</span></code>) and then a regression fit:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">PolyFit</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/458767258eefce0b57623fc17dd8682855aa3c866197781a3fbee45a7ed46974.png"><img alt="_images/458767258eefce0b57623fc17dd8682855aa3c866197781a3fbee45a7ed46974.png" src="_images/458767258eefce0b57623fc17dd8682855aa3c866197781a3fbee45a7ed46974.png" style="width: 509.15px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>Variable mappings that are defined in the <code class="docutils literal notranslate"><span class="pre">Plot()</span></code> constructor will be used for all layers:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">PolyFit</span><span class="p">())</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/e53e3e9036ab1c8affb5d5572503f048e28d99b95b5395bde74bf54d14898828.png"><img alt="_images/e53e3e9036ab1c8affb5d5572503f048e28d99b95b5395bde74bf54d14898828.png" src="_images/e53e3e9036ab1c8affb5d5572503f048e28d99b95b5395bde74bf54d14898828.png" style="width: 606.05px; height: 378.25px;" />
+</a>
+</div>
+</div>
+</section>
+<section id="layer-specific-mappings">
+<h3>Layer-specific mappings<a class="headerlink" href="#layer-specific-mappings" title="Link to this heading">#</a></h3>
+<p>You can also define a mapping such that it is used only in a specific layer. This is accomplished by defining the mapping within the call to <code class="docutils literal notranslate"><span class="pre">Plot.add()</span></code> for the relevant layer:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;.2&quot;</span><span class="p">),</span> <span class="n">so</span><span class="o">.</span><span class="n">PolyFit</span><span class="p">())</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/79e6b3a391229cc1f25a32688b8de756d06e5eb7d44314caeadb1a4bbc619394.png"><img alt="_images/79e6b3a391229cc1f25a32688b8de756d06e5eb7d44314caeadb1a4bbc619394.png" src="_images/79e6b3a391229cc1f25a32688b8de756d06e5eb7d44314caeadb1a4bbc619394.png" style="width: 606.05px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>Alternatively, define the layer for the entire plot, but <em>remove</em> it from a specific layer by setting the variable to <code class="docutils literal notranslate"><span class="pre">None</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;.2&quot;</span><span class="p">),</span> <span class="n">so</span><span class="o">.</span><span class="n">PolyFit</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/79e6b3a391229cc1f25a32688b8de756d06e5eb7d44314caeadb1a4bbc619394.png"><img alt="_images/79e6b3a391229cc1f25a32688b8de756d06e5eb7d44314caeadb1a4bbc619394.png" src="_images/79e6b3a391229cc1f25a32688b8de756d06e5eb7d44314caeadb1a4bbc619394.png" style="width: 606.05px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>To recap, there are three ways to specify the value of a mark property: (1) by mapping a variable in all layers, (2) by mapping a variable in a specific layer, and (3) by setting the property directy:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringIO</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVG</span>
+
+<span class="n">C</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;deep&quot;</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">fontsize</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">mpl</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="mf">0.13</span><span class="p">,</span> <span class="mf">0.53</span><span class="p">),</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">mpl</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">),</span> <span class="mf">0.235</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">mpl</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="mf">0.49</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">),</span> <span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.55</span><span class="p">,</span> <span class="s2">&quot;Plot(data, &#39;x&#39;, &#39;y&#39;, color=&#39;var1&#39;)&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">fontsize</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;.2&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="s2">&quot;.add(Dot(pointsize=10), marker=&#39;var2&#39;)&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">fontsize</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;.2&quot;</span><span class="p">)</span>
+<span class="n">annots</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;Mapped</span><span class="se">\n</span><span class="s2">in all layers&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">&quot;Set directly&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">45</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">&quot;Mapped</span><span class="se">\n</span><span class="s2">in this layer&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.63</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">45</span><span class="p">)),</span>
+<span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">xy</span><span class="p">,</span> <span class="n">xytext</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">annots</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">text</span><span class="p">,</span>
+        <span class="n">xy</span><span class="p">,</span>
+        <span class="n">xytext</span><span class="p">,</span>
+        <span class="n">textcoords</span><span class="o">=</span><span class="s2">&quot;offset points&quot;</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+        <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+        <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+        <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+<span class="n">f</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">s</span> <span class="o">:=</span> <span class="n">StringIO</span><span class="p">(),</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span><span class="p">)</span>
+<span class="n">SVG</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/c70fcbbbdd05d9496cbaa5df17f72f121055665a6622e77a2d95a8814a4388e3.svg" src="_images/c70fcbbbdd05d9496cbaa5df17f72f121055665a6622e77a2d95a8814a4388e3.svg" />
+</div>
+</div>
+</section>
+<section id="faceting-and-pairing-subplots">
+<h3>Faceting and pairing subplots<a class="headerlink" href="#faceting-and-pairing-subplots" title="Link to this heading">#</a></h3>
+<p>As with seaborn’s figure-level functions (<code class="docutils literal notranslate"><span class="pre">seaborn.displot()</span></code>, <code class="docutils literal notranslate"><span class="pre">seaborn.catplot()</span></code>, etc.), the <code class="docutils literal notranslate"><span class="pre">Plot()</span></code> interface can also produce figures with multiple “facets”, or subplots containing subsets of data. This is accomplished with the <code class="docutils literal notranslate"><span class="pre">Plot.facet()</span></code> method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">facet</span><span class="p">(</span><span class="s2">&quot;species&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Bars</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Hist</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/caf2cb3261890d0a6b6351acdc316e61a0e58a22942a89021b6e5459e0996bf4.png"><img alt="_images/caf2cb3261890d0a6b6351acdc316e61a0e58a22942a89021b6e5459e0996bf4.png" src="_images/caf2cb3261890d0a6b6351acdc316e61a0e58a22942a89021b6e5459e0996bf4.png" style="width: 509.15px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>Call <code class="docutils literal notranslate"><span class="pre">Plot.facet()</span></code> with the variables that should be used to define the columns and/or rows of the plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">facet</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Bars</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Hist</span><span class="p">())</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/42c716ef8d038eac196e7e0d39ab113e13040318a8b78474e2da6f8d001c818f.png"><img alt="_images/42c716ef8d038eac196e7e0d39ab113e13040318a8b78474e2da6f8d001c818f.png" src="_images/42c716ef8d038eac196e7e0d39ab113e13040318a8b78474e2da6f8d001c818f.png" style="width: 509.15px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>You can facet using a variable with a larger number of levels by “wrapping” across the other dimension:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">healthexp</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Life_Expectancy&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">facet</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s2">&quot;Country&quot;</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">())</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/1af5a787079001438a7df81d79cce0bbc1d8d176590ba395de0a86396e2cd3d3.png"><img alt="_images/1af5a787079001438a7df81d79cce0bbc1d8d176590ba395de0a86396e2cd3d3.png" src="_images/1af5a787079001438a7df81d79cce0bbc1d8d176590ba395de0a86396e2cd3d3.png" style="width: 508.72499999999997px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>All layers will be faceted unless you explicitly exclude them, which can be useful for providing additional context on each subplot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">healthexp</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Life_Expectancy&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">facet</span><span class="p">(</span><span class="s2">&quot;Country&quot;</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">),</span> <span class="n">group</span><span class="o">=</span><span class="s2">&quot;Country&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/013b65373e0fcdc11798e36b2cd14ac9cde18a74b707d0b6e79553481a32ed1b.png"><img alt="_images/013b65373e0fcdc11798e36b2cd14ac9cde18a74b707d0b6e79553481a32ed1b.png" src="_images/013b65373e0fcdc11798e36b2cd14ac9cde18a74b707d0b6e79553481a32ed1b.png" style="width: 508.72499999999997px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>An alternate way to produce subplots is <code class="docutils literal notranslate"><span class="pre">Plot.pair()</span></code>. Like <code class="docutils literal notranslate"><span class="pre">seaborn.PairGrid()</span></code>, this draws all of the data on each subplot, using different variables for the x and/or y coordinates:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">pair</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/127b41d551da75e9c6806a83f522e8294b06cb0cd371a60839bf9c1fb4552a27.png"><img alt="_images/127b41d551da75e9c6806a83f522e8294b06cb0cd371a60839bf9c1fb4552a27.png" src="_images/127b41d551da75e9c6806a83f522e8294b06cb0cd371a60839bf9c1fb4552a27.png" style="width: 624.3249999999999px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>You can combine faceting and pairing so long as the operations add subplots on opposite dimensions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">pair</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">facet</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/358e53015dcf1e76eb062ddf702de607c32847c8703fca5852209598f72bb470.png"><img alt="_images/358e53015dcf1e76eb062ddf702de607c32847c8703fca5852209598f72bb470.png" src="_images/358e53015dcf1e76eb062ddf702de607c32847c8703fca5852209598f72bb470.png" style="width: 624.3249999999999px; height: 378.25px;" />
+</a>
+</div>
+</div>
+</section>
+<section id="integrating-with-matplotlib">
+<h3>Integrating with matplotlib<a class="headerlink" href="#integrating-with-matplotlib" title="Link to this heading">#</a></h3>
+<p>There may be cases where you want multiple subplots to appear in a figure with a more complex structure than what <code class="docutils literal notranslate"><span class="pre">Plot.facet()</span></code> or <code class="docutils literal notranslate"><span class="pre">Plot.pair()</span></code> can provide. The current solution is to delegate figure setup to matplotlib and to supply the matplotlib object that <code class="docutils literal notranslate"><span class="pre">Plot()</span></code> should use with the <code class="docutils literal notranslate"><span class="pre">Plot.on()</span></code> method. This object can be either a <code class="docutils literal notranslate"><span class="pre">matplotlib.axes.Axes</span></code>, <code class="docutils literal notranslate"><span class="pre">matplotlib.figure.Figure</span></code>, or <code class="docutils literal notranslate"><span class="pre">matplotlib.figure.SubFigure</span></code>; the latter is most useful for constructing bespoke subplot layouts:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">sf1</span><span class="p">,</span> <span class="n">sf2</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">subfigures</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">sf1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">facet</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Bars</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Hist</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">sf2</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/c3255e4497ce8347f0a2d29e031c763c3967497cce9ab47b73190366205d4489.png"><img alt="_images/c3255e4497ce8347f0a2d29e031c763c3967497cce9ab47b73190366205d4489.png" src="_images/c3255e4497ce8347f0a2d29e031c763c3967497cce9ab47b73190366205d4489.png" style="width: 648.125px; height: 325.125px;" />
+</a>
+</div>
+</div>
+</section>
+<section id="id1">
+<h3>Building and displaying the plot<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>An important thing to know is that <code class="docutils literal notranslate"><span class="pre">Plot()</span></code> methods clone the object they are called on and return that clone instead of updating the object in place. This means that you can define a common plot spec and then produce several variations on it.</p>
+<p>So, take this basic specification:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">healthexp</span><span class="p">,</span> <span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="s2">&quot;Spending_USD&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;Country&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We could use it to draw a line plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/0c32658769303ad4a4875125667a2951df1756db5e19a91b6375b91b9e594e87.png"><img alt="_images/0c32658769303ad4a4875125667a2951df1756db5e19a91b6375b91b9e594e87.png" src="_images/0c32658769303ad4a4875125667a2951df1756db5e19a91b6375b91b9e594e87.png" style="width: 643.875px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>Or perhaps a stacked area plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Area</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Stack</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/a872937191c05e16154e1553a3de5ce29ea26a853d75005475b429bf1315af31.png"><img alt="_images/a872937191c05e16154e1553a3de5ce29ea26a853d75005475b429bf1315af31.png" src="_images/a872937191c05e16154e1553a3de5ce29ea26a853d75005475b429bf1315af31.png" style="width: 643.875px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Plot</span></code> methods are fully declarative. Calling them updates the plot spec, but it doesn’t actually do any plotting. One consequence of this is that methods can be called in any order, and many of them can be called multiple times.</p>
+<p>When does the plot actually get rendered? <code class="docutils literal notranslate"><span class="pre">Plot</span></code> is optimized for use in notebook environments. The rendering is automatically triggered when the <code class="docutils literal notranslate"><span class="pre">Plot</span></code> gets displayed in the Jupyter REPL. That’s why we didn’t see anything in the example above, where we defined a <code class="docutils literal notranslate"><span class="pre">Plot</span></code> but assigned it to <code class="docutils literal notranslate"><span class="pre">p</span></code> rather than letting it return out to the REPL.</p>
+<p>To see a plot in a notebook, either return it from the final line of a cell or call Jupyter’s built-in <code class="docutils literal notranslate"><span class="pre">display</span></code> function on the object. The notebook integration bypasses :mod:<code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code> entirely, but you can use its figure-display machinery in other contexts by calling <code class="docutils literal notranslate"><span class="pre">Plot.show</span></code>.</p>
+<p>You can also save the plot to a file (or buffer) by calling <code class="docutils literal notranslate"><span class="pre">Plot.save</span></code>.</p>
+</section>
+</section>
+<section id="customising-the-appearance">
+<h2>Customising the appearance<a class="headerlink" href="#customising-the-appearance" title="Link to this heading">#</a></h2>
+<p>The new interface aims to support a deep amount of customisation through <code class="docutils literal notranslate"><span class="pre">Plot</span></code>, reducing the need to switch gears and use matplotlib functionality directly. (But please be patient; not all of the features needed to achieve this goal have been implemented!)</p>
+<section id="parameterising-scales">
+<h3>Parameterising scales<a class="headerlink" href="#parameterising-scales" title="Link to this heading">#</a></h3>
+<p>All of the data-dependent properties are controlled by the concept of a <code class="docutils literal notranslate"><span class="pre">Scale</span></code> and the <code class="docutils literal notranslate"><span class="pre">Plot.scale()</span></code> method. This method accepts several different types of arguments. One possibility, which is closest to the use of scales in matplotlib, is to pass the name of a function that transforms the coordinates:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">diamonds</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;carat&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;price&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/4a31be12baa9bf6b36248cd6f5246b182276b4272b8acaf6ce7474f00a8dbab0.png"><img alt="_images/4a31be12baa9bf6b36248cd6f5246b182276b4272b8acaf6ce7474f00a8dbab0.png" src="_images/4a31be12baa9bf6b36248cd6f5246b182276b4272b8acaf6ce7474f00a8dbab0.png" style="width: 509.15px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Plot.scale()</span></code> can also control the mappings for semantic properties like <code class="docutils literal notranslate"><span class="pre">color</span></code>. You can directly pass it any argument that you would pass to the <code class="docutils literal notranslate"><span class="pre">palette</span></code> parameter in seaborn’s function interface:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">diamonds</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;carat&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;clarity&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;flare&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/0caef75d60730fc320a49bf20a72d1a5c0e4ecaca89ec8537d71bcc0d807cfc5.png"><img alt="_images/0caef75d60730fc320a49bf20a72d1a5c0e4ecaca89ec8537d71bcc0d807cfc5.png" src="_images/0caef75d60730fc320a49bf20a72d1a5c0e4ecaca89ec8537d71bcc0d807cfc5.png" style="width: 597.125px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>Another option is to provide a tuple of <code class="docutils literal notranslate"><span class="pre">(min,</span> <span class="pre">max)</span></code> values, controlling the range that the scale should map into. This works both for numeric properties and for colors:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">diamonds</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;carat&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;clarity&quot;</span><span class="p">,</span> <span class="n">pointsize</span><span class="o">=</span><span class="s2">&quot;carat&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;#88c&quot;</span><span class="p">,</span> <span class="s2">&quot;#555&quot;</span><span class="p">),</span> <span class="n">pointsize</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/cfe25eeff5bfc2d39f3405bc092f5b09be9a1ff4a285107c09aca1f8b11d5697.png"><img alt="_images/cfe25eeff5bfc2d39f3405bc092f5b09be9a1ff4a285107c09aca1f8b11d5697.png" src="_images/cfe25eeff5bfc2d39f3405bc092f5b09be9a1ff4a285107c09aca1f8b11d5697.png" style="width: 597.125px; height: 378.25px;" />
+</a>
+</div>
+</div>
+<p>For additional control, you can pass a <code class="docutils literal notranslate"><span class="pre">Scale</span></code> object. There are several different types of <code class="docutils literal notranslate"><span class="pre">Scale</span></code>, each with appropriate parameters. For example, <code class="docutils literal notranslate"><span class="pre">Continuous</span></code> lets you define the input domain (<code class="docutils literal notranslate"><span class="pre">norm</span></code>), the output range (<code class="docutils literal notranslate"><span class="pre">values</span></code>), and the function that maps between them (<code class="docutils literal notranslate"><span class="pre">trans</span></code>), while <code class="docutils literal notranslate"><span class="pre">Nominal</span></code> allows you to specify an ordering:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">diamonds</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;carat&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;carat&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;cut&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">scale</span><span class="p">(</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">so</span><span class="o">.</span><span class="n">Continuous</span><span class="p">(</span><span class="s2">&quot;crest&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">trans</span><span class="o">=</span><span class="s2">&quot;sqrt&quot;</span><span class="p">),</span>
+        <span class="n">marker</span><span class="o">=</span><span class="n">so</span><span class="o">.</span><span class="n">Nominal</span><span class="p">([</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Ideal&quot;</span><span class="p">,</span> <span class="s2">&quot;Premium&quot;</span><span class="p">,</span> <span class="s2">&quot;Good&quot;</span><span class="p">]),</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/c74a3196cc496f1d3520088934d5bd3385ebb2752da954ab450eac7d8b8c6262.png"><img alt="_images/c74a3196cc496f1d3520088934d5bd3385ebb2752da954ab450eac7d8b8c6262.png" src="_images/c74a3196cc496f1d3520088934d5bd3385ebb2752da954ab450eac7d8b8c6262.png" style="width: 619.65px; height: 378.25px;" />
+</a>
+</div>
+</div>
+</section>
+<section id="customising-legends-and-ticks">
+<h3>Customising legends and ticks<a class="headerlink" href="#customising-legends-and-ticks" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Scale</span></code> objects are also how you specify which values should appear as tick labels / in the legend, along with how they appear. For example, the <code class="docutils literal notranslate"><span class="pre">Continuous.tick</span></code> method lets you control the density or locations of the ticks, and the <code class="docutils literal notranslate"><span class="pre">Continuous.label</span></code> method lets you modify the format:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">diamonds</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;carat&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;carat&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">scale</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">so</span><span class="o">.</span><span class="n">Continuous</span><span class="p">()</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="n">every</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">so</span><span class="o">.</span><span class="n">Continuous</span><span class="p">()</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">like</span><span class="o">=</span><span class="s2">&quot;$</span><span class="si">{x:.0f}</span><span class="s2">&quot;</span><span class="p">),</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">so</span><span class="o">.</span><span class="n">Continuous</span><span class="p">()</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="n">at</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/11328e882267895ed5575471a06192cf91cc0023b984eb9de99ca8619ad1837d.png"><img alt="_images/11328e882267895ed5575471a06192cf91cc0023b984eb9de99ca8619ad1837d.png" src="_images/11328e882267895ed5575471a06192cf91cc0023b984eb9de99ca8619ad1837d.png" style="width: 572.475px; height: 378.25px;" />
+</a>
+</div>
+</div>
+</section>
+<section id="customising-limits-labels-and-titles">
+<h3>Customising limits, labels, and titles<a class="headerlink" href="#customising-limits-labels-and-titles" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Plot()</span></code> has a number of methods for simple customisation, including <code class="docutils literal notranslate"><span class="pre">Plot.label()</span></code>, <code class="docutils literal notranslate"><span class="pre">Plot.limit()</span></code>, and <code class="docutils literal notranslate"><span class="pre">Plot.share()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;island&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">facet</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Jitter</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">share</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">label</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Body mass (g)&quot;</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">capitalize</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> penguins&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/56c787ce9e0195fc16d14ba95f116a307e1a5dffa7a7011d9abc066df57fa74e.png"><img alt="_images/56c787ce9e0195fc16d14ba95f116a307e1a5dffa7a7011d9abc066df57fa74e.png" src="_images/56c787ce9e0195fc16d14ba95f116a307e1a5dffa7a7011d9abc066df57fa74e.png" style="width: 625.175px; height: 378.25px;" />
+</a>
+</div>
+</div>
+</section>
+<section id="theme-customisation">
+<h3>Theme customisation<a class="headerlink" href="#theme-customisation" title="Link to this heading">#</a></h3>
+<p>Finally, <code class="docutils literal notranslate"><span class="pre">Plot()</span></code> supports data-independent theming through the <code class="docutils literal notranslate"><span class="pre">Plot.theme()</span></code> method. Currently, this method accepts a dictionary of matplotlib rc parameters. You can set them directly and/or pass a package of parameters from seaborn’s theming functions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="kn">import</span> <span class="n">axes_style</span>
+
+<span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">()</span><span class="o">.</span><span class="n">theme</span><span class="p">({</span><span class="o">**</span><span class="n">axes_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">),</span> <span class="s2">&quot;grid.linestyle&quot;</span><span class="p">:</span> <span class="s2">&quot;:&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/cf98df816713ca1db4cf74951b253b2eef7054f15ae1e3ba15f5df52d7b0525b.png"><img alt="_images/cf98df816713ca1db4cf74951b253b2eef7054f15ae1e3ba15f5df52d7b0525b.png" src="_images/cf98df816713ca1db4cf74951b253b2eef7054f15ae1e3ba15f5df52d7b0525b.png" style="width: 509.15px; height: 378.25px;" />
+</a>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="vis-plotnine.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="coming-from-stata.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Coming from Stata</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-a-plot-and-mapping-data">Specifying a plot and mapping data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-properties">Setting properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-groups">Defining groups</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-data-before-plotting">Transforming data before plotting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-transformation">Statistical transformation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resolving-overplotting">Resolving overplotting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-variables-through-transformation">Creating variables through transformation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orienting-marks-and-transforms">Orienting marks and transforms</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-and-displaying-the-plot">Building and displaying the plot</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-multiple-layers">Adding Multiple Layers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layer-specific-mappings">Layer-specific mappings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#faceting-and-pairing-subplots">Faceting and pairing subplots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integrating-with-matplotlib">Integrating with matplotlib</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Building and displaying the plot</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customising-the-appearance">Customising the appearance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameterising-scales">Parameterising scales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customising-legends-and-ticks">Customising legends and ticks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customising-limits-labels-and-titles">Customising limits, labels, and titles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theme-customisation">Theme customisation</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Arthur Turrell
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  This book is available under an MIT license.
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

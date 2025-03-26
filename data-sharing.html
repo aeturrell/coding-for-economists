@@ -1,0 +1,838 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Sharing Data &#8212; Coding for Economists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-9FZQCPFXZJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'data-sharing';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://aeturrell.github.io/coding-for-economists/data-sharing.html" />
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Advanced Coding" href="code-further-advanced.html" />
+    <link rel="prev" title="pandas alternatives, validation, and orchestration" href="data-advanced.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/smith_lovelace.png" class="logo__image only-light" alt="Coding for Economists - Home"/>
+    <script>document.write(`<img src="_static/smith_lovelace.png" class="logo__image only-dark" alt="Coding for Economists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-basics.html">Coding Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow-basics.html">Workflow Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-where.html">Writing Code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-analysis-quickstart.html">Data Analysis Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-intro.html">Working with Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-transformation.html">Data Transformation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-read-and-write.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-numbers.html">Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-categorical.html">Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-spreadsheets.html">Spreadsheets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-best-practice.html">Code in Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advanced.html">Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advcd-best-practice.html">Shortcuts to Better Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-intro.html">Intro to Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-letsplot.html">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-matplotlib.html">Powerful Data Visualisation with <strong>Matplotlib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-one.html">Common Plots I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-two.html">Common Plots II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="auto-research-outputs.html">Automating Research Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-markdown.html">Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-version-control.html">Version Control</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Econometrics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="econmt-probability-random.html">Probability and Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-statistics.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-regression.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-generalised-models.html">Generalised regression models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-diagnostics.html">Regression diagnostics and visualisations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-causal-inference.html">Causal Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayesian.html">Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayes-bambi.html">Bayesian Inference Made Easier</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-boolean.html">Boolean Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-joining-data.html">Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-missing-values.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-exploratory-analysis.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-extraction.html">Getting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-databases.html">Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-advanced.html"><strong>pandas</strong> alternatives, validation, and orchestration</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Sharing Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-further-advanced.html">Advanced Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-quarto.html">Combining Code and Text in Quarto Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-environments.html">Virtual Code Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-rap.html">Reproducible Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Time</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="time-intro.html">Introduction to Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-fcasts-env.html">Forecasting Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Text Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="text-intro.html">Introduction to Text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-regex.html">Regular Expressions, aka regex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-nlp.html">Natural Language Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ml-intro.html">Introduction to Machine Learning and AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-sup.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-data.html">Data for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-unsup.html">Unsupervised Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Geospatial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geo-intro.html">Intro to Geo-Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geo-vis.html">Geo-Spatial Visualisation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="maths-abstract.html">Abstract Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maths-numerical.html">Numerical Mathematics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Craft</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="craft-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-search.html">Putting the Search in Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-generating-ideas.html">Generating and Accepting Research Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-writing-papers.html">Writing Papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-research-blogs.html">Research Blog Posts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-referee.html">Writing Referee Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-technical-reports.html">Writing Technical Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-extended-abstracts.html">Extended Abstracts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coming from ...</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="coming-from-stata.html">Coming from Stata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-matlab.html">Coming from Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-r.html">Coming from R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-excel.html">Coming from Excel</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zreferences.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aeturrell/coding-for-economists/blob/main/data-sharing.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists/issues/new?title=Issue%20on%20page%20%2Fdata-sharing.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/data-sharing.ipynb" target="_blank"
+   class="btn btn-sm btn-download-notebook-button dropdown-item"
+   title="Download notebook file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="_sources/data-sharing.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Sharing Data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datasette-for-sharing-data">Datasette for sharing data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-locally">Run locally</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-on-the-web">Run on the web</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#here-s-one-i-made-earlier">Here’s one I made earlier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pros-and-cons-of-datasette">Pros and cons of datasette</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-repositories-for-sharing-data">Data repositories for sharing data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github-flat-data">GitHub Flat Data</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="sharing-data">
+<span id="data-sharing"></span><h1>Sharing Data<a class="headerlink" href="#sharing-data" title="Link to this heading">#</a></h1>
+<p>There are many times when you want to share data with a much wider audience. In this chapter, we’ll find out about some ways to share data in ways that are <em>fast</em>, <em>easy for users</em>, and follow <em>best practices</em>. Because it’s by far the most common case, we’ll focus on sharing <em>tabular data</em>.</p>
+<p>When might you want to share your data? If you’ve just finished writing a paper, you might want to share derived series; perhaps the data are the result of the paper if you’re working in a field such as economic history. If you’re working at a firm or in the public sector, perhaps there are datasets that you’ve decided to put out into the public domain and you want a cost effective way to share them. Perhaps you’ve got a slightly larger or more complex dataset that you’d like to put online, password protected, for a large number of co-authors.</p>
+<p>One part of best practice when sharing data is following the FAIR principles:</p>
+<ul class="simple">
+<li><p>Findable: The first step in allowing people to re-use data is for those people to be able to find them. Metadata and data should be easy to find for both humans and computers. This includes registering data (and meta-data) in a searchable source.</p></li>
+<li><p>Accessible: Once a user finds the required data, they need to know how those data can accessed, possibly including authentication and authorisation. So the data should be retrievable by their identifiers using a standardised protocol that is open, free, and universally implementable.</p></li>
+<li><p>Interoperable: The data usually need to be integrated with other data. In addition, the data need to interoperate with applications or workflows for analysis, storage, and processing.  Although there are free tools to open Excel and Stata files, data stored in those formats are that bit more difficult than truly open formats like CSV or parquet. Universally implementable means that Python’s pickle format or R’s .rds format shouldn’t be used to share data either. Interoperability means using open formats that can be accessed using free tools across different languages and operating systems.</p></li>
+<li><p>Reusable: The ultimate goal of FAIR is to optimise the reuse of data. To achieve this, metadata and data should be well-described so that they can be replicated and/or combined in different settings.</p></li>
+</ul>
+<p>Different ways of sharing data are inevitably better or worse across the four principles.</p>
+<p>Another part of best practice in sharing data is following the ‘five safes’:</p>
+<ol class="arabic simple">
+<li><p>Safe projects –– Is this use of the data appropriate, lawful, ethical, and sensible?</p></li>
+<li><p>Safe people –– Can the user be trusted to use the data in an appropriate manner?</p></li>
+<li><p>Safe data –– Is there a disclosure risk in the data itself?</p></li>
+<li><p>Safe settings –– Does the means of access limit unauthorised use?</p></li>
+<li><p>Safe outputs –– Are the statistical results non-disclosive?</p></li>
+</ol>
+<p>You can find out more about data sharing policies and best practice at <a class="reference external" href="https://fairsharing.org/">FAIRsharing</a>.</p>
+<section id="datasette-for-sharing-data">
+<h2>Datasette for sharing data<a class="headerlink" href="#datasette-for-sharing-data" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://datasette.io/">Datasette</a> is an extraordinary tool for exploring, sharing, and publishing data. It helps you take data of any shape or size, analyze and explore it, and publish it as an interactive website and accompanying API. Remember, API stands for application programming interface, which in this case means the data can be accessed directly through programming languages. Datasette is aimed at data journalists, museum curators, archivists, local governments, <em>economists</em>, and anyone else who has data that they wish to share with the world.</p>
+<p>An example datasette instance is <a class="reference external" href="https://global-power-plants.datasettes.com/">available here</a>; it shows a dataset of power stations.</p>
+<p>So, how does it work? Let’s assume you have some data in a CSV file. The first step in creating a datasette website is to turn that CSV file into a SQL-lite database (don’t worry if you don’t know what that is). The second step is to publish the data either <em>locally</em> (on your own computer) or on the internet (using a cloud service provider). Once the data are published, you and/or others can interact with them in several different ways.</p>
+<p>To use datasette, you’ll need a Python installation and to install some extra packages. (There’s a brief guide to installing packages in the Chapter on <a class="reference internal" href="code-preliminaries.html#code-preliminaries"><span class="std std-ref">Preliminaries</span></a>.). Then, to install the datasette package run</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">csvs</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">sqlite</span> <span class="n">datasette</span> 
+</pre></div>
+</div>
+<p>on the command line. To convert a CSV file called <code class="docutils literal notranslate"><span class="pre">data.csv</span></code> into a SQL-lite database (extension .db), use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>csvs-to-sqlite<span class="w"> </span>data.csv<span class="w"> </span>data.db
+</pre></div>
+</div>
+<p>on the command line.</p>
+<section id="run-locally">
+<h3>Run locally<a class="headerlink" href="#run-locally" title="Link to this heading">#</a></h3>
+<p>To run the data as an interactive website on your own computer, use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>datasette<span class="w"> </span>data.db
+</pre></div>
+</div>
+<p>on the command line. You should see a browser link appear; click it to start interactively exploring your data!</p>
+</section>
+<section id="run-on-the-web">
+<h3>Run on the web<a class="headerlink" href="#run-on-the-web" title="Link to this heading">#</a></h3>
+<p>There are many different cloud providers for datasettes but here we’ll focus on using Google Cloud Platform (GCP), specifically the Cloud Run service. To run a datasette instance on the web, you will need a GCP account with Cloud Run enabled. You will need to pay to run a datasette instance on Cloud Run, but there is a free tier covering, at the time of writing, the first 180,000 CPU-seconds per month and 2 million requests per month. Note that cloud run only counts time when an instance is serving users.</p>
+<p>To launch your dataset on the web as a <em>datasette</em>, install and configure the Google Cloud Command Line Interface tools by following the instructions <a class="reference external" href="https://cloud.google.com/sdk/">here</a>. Then run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>datasette<span class="w"> </span>publish<span class="w"> </span>cloudrun<span class="w"> </span>data.db<span class="w"> </span>--service<span class="o">=</span>mydata
+</pre></div>
+</div>
+<p>This will create a docker container and deploy it to the Cloud Run service. You may be prompted to give a preferred region. Once it’s ready, a website URL will appear: this is your data being served up on the web!</p>
+</section>
+<section id="here-s-one-i-made-earlier">
+<h3>Here’s one I made earlier<a class="headerlink" href="#here-s-one-i-made-earlier" title="Link to this heading">#</a></h3>
+<p>If you want to follow a full example of serving up data end-to-end, take a look at the <a class="reference external" href="https://github.com/aeturrell/datasette_particulate_matter">particulate matter datasette</a> github repo. These data were constructed by downloading files of estimates of 2.5 micron particulate matter concentration in the UK from the DEFRA website and combining them into a CSV.</p>
+<div class="admonition-exercises admonition">
+<p class="admonition-title">Exercises</p>
+<ol class="arabic simple">
+<li><p>Download the CSV file from the <a class="reference external" href="https://github.com/aeturrell/datasette_particulate_matter">particulate matter repo</a> and run it as a datasette locally on your own computer.</p></li>
+<li><p>(Advanced) Run the same set of data via a datasette instance on the web using Google Cloud Run. (This requires a Google Cloud Account; you may be billed for excessive use of this service so remember to shut it down via the Google Cloud Console once you’re done.)</p></li>
+</ol>
+</div>
+</section>
+<section id="pros-and-cons-of-datasette">
+<h3>Pros and cons of datasette<a class="headerlink" href="#pros-and-cons-of-datasette" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://datasette.io/"><strong>datasette</strong></a> is an extremely quick and cost-efficient way to serve up large datasets to anyone with an internet connection. The full utility comes from the ways that people can then use the data. Using the particulate matter example from the previous section, people can:</p>
+<ul class="simple">
+<li><p>Manually browse the data, making cuts by choosing from the filtering options or editing the equivalent SQL code.</p></li>
+<li><p>Manually download the data (and cuts thereof) as CSV or JSON files.</p></li>
+<li><p>Once data are filtered, copy the generated SQL code to reproduce the same filters programmatically in future. (This makes getting certain cuts <em>reproducible</em> for users.)</p></li>
+<li><p>Programmatically download cuts of the data using the generated CSV, SQL, or JSON endpoints. For example, to get the anthropogenic numbers for Southwark in 2018 from the particulate matter datasette instance:</p>
+<ul>
+<li><p>CSV, <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">pd.read_csv(&quot;https://particulatematter-fsx2r7puuq-nw.a.run.app/uk_particulate_matter.csv?sql=select+rowid%2C+local_authority_code%2C+pm_anthropogenic%2C+pm_total%2C+pm_non_anthropogenic%2C+local_authority_name%2C+year%2C+region%2C+country+from+uk_particulate_matter+where+%22local_authority_name%22+like+%3Ap0+and+%22year%22+%3D+%3Ap1+order+by+rowid+limit+101&amp;p0=%25southwark%25&amp;p1=2018&amp;_size=max&quot;)</span></code></p></li>
+<li><p>SQL,<code class="docutils literal notranslate"><span class="pre">select</span> <span class="pre">rowid,</span> <span class="pre">local_authority_code,</span> <span class="pre">pm_anthropogenic,</span> <span class="pre">pm_total,</span> <span class="pre">pm_non_anthropogenic,</span> <span class="pre">local_authority_name,</span> <span class="pre">year,</span> <span class="pre">region,</span> <span class="pre">country</span> <span class="pre">from</span> <span class="pre">uk_particulate_matter</span> <span class="pre">where</span> <span class="pre">&quot;local_authority_name&quot;</span> <span class="pre">like</span> <span class="pre">'%southwark%'</span> <span class="pre">and</span> <span class="pre">&quot;year&quot;</span> <span class="pre">=</span> <span class="pre">'2018'</span> <span class="pre">order</span> <span class="pre">by</span> <span class="pre">rowid</span> <span class="pre">limit</span> <span class="pre">101</span></code></p></li>
+<li><p>JSON, <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">pd.read_json(&quot;https://particulatematter-fsx2r7puuq-nw.a.run.app/uk_particulate_matter/uk_particulate_matter.json?_sort=rowid&amp;local_authority_name__contains=southwark&amp;year__exact=2018&amp;_shape=array&quot;)</span></code></p></li>
+</ul>
+</li>
+<li><p>By integrating with GitHub or other tools, datasette can be automated so that when the raw data change, the instance being served online is updated too.</p></li>
+<li><p>If you are building dashboards that are also deployed on the web, you can use a datasette website as the back-end to serve up the data to the dashboard (making use of the automatic API features of datasette).</p></li>
+</ul>
+<p>Publishing data with datasette is <em>fast</em>: we only needed a CSV file and a couple of commands. It’s also <em>easy for end users</em> who can access the data via a website and filter it or download it however they like, and access it both manually and programmatically. By having several options to access data, by allowing users to filter to just the data they need, and by allowing for the inclusion of <a class="reference external" href="https://docs.datasette.io/en/latest/metadata.html">metadata</a> and information <a class="reference external" href="https://docs.datasette.io/en/latest/metadata.html#specifying-units-for-a-column">on units</a>, datasette also makes it easier to follow <em>best practices</em>.</p>
+<p>Datasette also has add-ons that provide extra support for geospatial data, password protection, and more; see the <a class="reference external" href="https://datasette.io/plugins">plug-ins</a> page.</p>
+<p>The <em>downsides</em> of datasette are that you have to pay to serve up the data (at least if it becomes very popular), that it is built around <em>tabular data</em>, and that the data are not very findable (one of the four data principles): they may be available online through a website, but unless you do some work in sharing, promoting, and registering the link where they can be found, people are unlikely to find them.</p>
+</section>
+</section>
+<section id="data-repositories-for-sharing-data">
+<h2>Data repositories for sharing data<a class="headerlink" href="#data-repositories-for-sharing-data" title="Link to this heading">#</a></h2>
+<p>Putting your data in a managed data repository is another way to ensure others can find it and re-use it. Data repositories are websites where you can deposit a dataset, and its metadata, and others can come along and download it. The repositories are managed by third party organisations, and, typically, they are used to lodge a dataset that won’t be updated, eg if you have a dataset that was used for a paper that’s been published. Some of the benefits of data repositories are:</p>
+<ul class="simple">
+<li><p>You may get a permalink, eg a digital object identifier (DOI), and citation information to help people recognise and refer to your contribution</p></li>
+<li><p>Unless you are lodging <em>extremely</em> large datasets, you will likely not have to pay anything to host your data</p></li>
+<li><p>Data repositories are searchable, both within the site itself and in the sense of being indexed by Google-so people will potentially be able to find your data via a Google search.</p></li>
+</ul>
+<p>Some of the less good things, or at least things to bear in mind, about data repositories are:</p>
+<ul class="simple">
+<li><p>They are much less suitable for data that are being updated, and not at all suited to automatic updates (datasette is a better tool for this)</p></li>
+<li><p>They do not always provide good accessibility options; usually the only option is to download <em>all</em> of the data in a single format rather than the cut you want in the format you want.</p></li>
+<li><p>Whether or not the data are interoperable comes down to how the user chose to provide the data. Sometimes you will find repositories with closed data formats that require special tools. You can choose to put data in interoperable formats, but you aren’t compelled to.</p></li>
+</ul>
+<p>So the canonical use case for a data repository is static data that’s associated with a paper and which you don’t think many people will want to access a lot, or in different ways, but which needs to exist as a matter of record.</p>
+<p>If you’re interested in exploring some data repositories, there are lists <a class="reference external" href="https://authorservices.taylorandfrancis.com/data-sharing-policies/repositories/">here</a> and <a class="reference external" href="https://www.springernature.com/gp/authors/research-data-policy/repositories/12327124">here</a>. If you’d like to see how one works, <a class="reference external" href="https://zenodo.org/">check out Zenodo</a> which, at the time of writing, accepts up to 50GB per dataset and may accept larger files following discussion. Zenodo accepts both code and data, and gives each repo a DOI. Zenodo is run and hosted by CERN, the European Organization for Nuclear Research.</p>
+</section>
+<section id="github-flat-data">
+<h2>GitHub Flat Data<a class="headerlink" href="#github-flat-data" title="Link to this heading">#</a></h2>
+<p>GitHub, the remote code repository service, recently launched its <a class="reference external" href="https://octo.github.com/projects/flat-data">Flat Data tool</a>. In the launch document they explain that <em>they</em> were inspired by Simon Willison, the creator of the <strong>Datasette</strong> package featured above. Flat Data actually comprises three different tools: <a class="reference external" href="https://github.com/marketplace/actions/flat-data">‘flat action’</a>, which fetches and transforms data using GitHub Actions (don’t worry if you don’t know what that is), <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=GitHubOCTO.flat">‘flat editor’</a> which is a Visual Studio Code-based graphical interface for creating workflows with flat actions, and ‘flat viewer’ which allows anyone to browse, filter, and access data from flat files stored in a GitHub repo.</p>
+<p>The genius of Flat Data viewer is that any GitHub repository that has a file in the compatible format can be viewed using the tool by using the prefix “<a class="reference external" href="http://flatgithub.com">flatgithub.com</a>” instead of the usual path to the file. To take a specific example using the particulate matter that we’ve already seen in this chapter,</p>
+<p><a class="github reference external" href="https://github.com/aeturrell/datasette_particulate_matter/blob/main/uk_particulate_matter.csv">aeturrell/datasette_particulate_matter</a></p>
+<p>becomes</p>
+<p><a class="reference external" href="https://flatgithub.com/aeturrell/datasette_particulate_matter?filename=uk_particulate_matter.csv">https://flatgithub.com/aeturrell/datasette_particulate_matter?filename=uk_particulate_matter.csv</a></p>
+<p>Not only that but, just as with datasette, you can easily download the data in a format that suits you, and perform rudimentary data filtering.</p>
+<p>Some useful features of <strong>flat data viewer</strong> are that it integrates with your existing GitHub workflow and that it is free. However, the maximum size of dataset that you can lodge in a GitHub repo is limited to 100 Mb.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="data-advanced.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>pandas</strong> alternatives, validation, and orchestration</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="code-further-advanced.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Advanced Coding</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datasette-for-sharing-data">Datasette for sharing data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-locally">Run locally</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-on-the-web">Run on the web</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#here-s-one-i-made-earlier">Here’s one I made earlier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pros-and-cons-of-datasette">Pros and cons of datasette</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-repositories-for-sharing-data">Data repositories for sharing data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github-flat-data">GitHub Flat Data</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Arthur Turrell
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  This book is available under an MIT license.
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

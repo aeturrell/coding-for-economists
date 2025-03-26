@@ -1,0 +1,1142 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Combining Code and Text in Quarto Markdown &#8212; Coding for Economists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-9FZQCPFXZJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'wrkflow-quarto';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://aeturrell.github.io/coding-for-economists/wrkflow-quarto.html" />
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Virtual Code Environments" href="wrkflow-environments.html" />
+    <link rel="prev" title="Animation" href="vis-animation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/smith_lovelace.png" class="logo__image only-light" alt="Coding for Economists - Home"/>
+    <script>document.write(`<img src="_static/smith_lovelace.png" class="logo__image only-dark" alt="Coding for Economists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-basics.html">Coding Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow-basics.html">Workflow Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-where.html">Writing Code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-analysis-quickstart.html">Data Analysis Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-intro.html">Working with Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-transformation.html">Data Transformation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-read-and-write.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-numbers.html">Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-categorical.html">Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-spreadsheets.html">Spreadsheets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-best-practice.html">Code in Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advanced.html">Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advcd-best-practice.html">Shortcuts to Better Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-intro.html">Intro to Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-letsplot.html">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-matplotlib.html">Powerful Data Visualisation with <strong>Matplotlib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-one.html">Common Plots I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-two.html">Common Plots II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="auto-research-outputs.html">Automating Research Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-markdown.html">Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-version-control.html">Version Control</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Econometrics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="econmt-probability-random.html">Probability and Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-statistics.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-regression.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-generalised-models.html">Generalised regression models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-diagnostics.html">Regression diagnostics and visualisations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-causal-inference.html">Causal Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayesian.html">Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayes-bambi.html">Bayesian Inference Made Easier</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-boolean.html">Boolean Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-joining-data.html">Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-missing-values.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-exploratory-analysis.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-extraction.html">Getting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-databases.html">Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-advanced.html"><strong>pandas</strong> alternatives, validation, and orchestration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-sharing.html">Sharing Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-further-advanced.html">Advanced Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Combining Code and Text in Quarto Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-environments.html">Virtual Code Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-rap.html">Reproducible Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Time</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="time-intro.html">Introduction to Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-fcasts-env.html">Forecasting Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Text Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="text-intro.html">Introduction to Text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-regex.html">Regular Expressions, aka regex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-nlp.html">Natural Language Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ml-intro.html">Introduction to Machine Learning and AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-sup.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-data.html">Data for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-unsup.html">Unsupervised Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Geospatial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geo-intro.html">Intro to Geo-Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geo-vis.html">Geo-Spatial Visualisation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="maths-abstract.html">Abstract Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maths-numerical.html">Numerical Mathematics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Craft</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="craft-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-search.html">Putting the Search in Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-generating-ideas.html">Generating and Accepting Research Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-writing-papers.html">Writing Papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-research-blogs.html">Research Blog Posts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-referee.html">Writing Referee Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-technical-reports.html">Writing Technical Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-extended-abstracts.html">Extended Abstracts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coming from ...</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="coming-from-stata.html">Coming from Stata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-matlab.html">Coming from Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-r.html">Coming from R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-excel.html">Coming from Excel</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zreferences.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists/issues/new?title=Issue%20on%20page%20%2Fwrkflow-quarto.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/wrkflow-quarto.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Combining Code and Text in Quarto Markdown</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automated-reports-with-quarto">Automated Reports with <strong>Quarto</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-minimal-example-of-a-report-written-with-markdown-content">A minimal example of a report written with markdown content</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rendering-into-output-documents">Rendering into Output Documents</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-block-execution-options">Code Block Execution Options</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-minimal-example-of-a-report-written-with-jupyter-notebooks">A minimal example of a report written with Jupyter Notebooks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-optimal-workflow-for-writing-automated-reports">The Optimal Workflow for Writing Automated Reports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automated-slides-with-quarto">Automated Slides with <strong>Quarto</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-for-research-papers-and-slides">Tips for research papers and slides</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#including-in-line-numbers-and-even-text">Including in-line numbers and even text</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#including-latex-tables">Including latex tables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#including-figures-generated-elsewhere">Including figures generated elsewhere</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="combining-code-and-text-in-quarto-markdown">
+<span id="quarto"></span><h1>Combining Code and Text in Quarto Markdown<a class="headerlink" href="#combining-code-and-text-in-quarto-markdown" title="Link to this heading">#</a></h1>
+<p>In this chapter, you’ll get more in-depth with <a class="reference external" href="https://quarto.org/"><strong>Quarto</strong></a>, following a brief introduction in <a class="reference internal" href="code-where.html#code-where"><span class="std std-ref">Writing Code</span></a>. <strong>Quarto</strong> is a tool that allows you to combine code and text (in the form of markdown, covered in <a class="reference internal" href="wrkflow-markdown.html#wrkflow-markdown"><span class="std std-ref">Markdown</span></a>) and create rich outputs, like reports and presentations. These reports and presentations can also be automated because they are built from code.</p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Quarto is a unified authoring framework for data science, combining your code, its results, and your prose commentary. Quarto allows for outputs that are fully reproducible and it supports dozens of output formats, like PDFs, Microsoft Word files, slideshows, and more.</p>
+<p>Quarto markdown is designed to be used in three ways:</p>
+<ol class="arabic simple">
+<li><p>For communicating to decision makers, who want to focus on the conclusions, not the code behind the analysis.</p></li>
+<li><p>For collaborating with other data scientists (including future you!), who are interested in both your conclusions, and how you reached them (i.e. the code).</p></li>
+<li><p>As an environment in which to <em>do</em> data science, as a modern day lab notebook where you can capture not only what you did, but also what you were thinking.</p></li>
+</ol>
+<p>For example, a use case would be a technical report exploring recent trade statistics in which the code part pulls down the latest data and plots it. Or you could do the same analysis, but push it to a website. Best of all, you can decide whether to hide or show the code parts in the final outputs (or, with html outputs, allow users to choose whether to see the code or not). In more detail, use cases include:</p>
+<ul class="simple">
+<li><p>reports that use data and/or charts and that are similar each time they are run (eg only the data are updated)</p></li>
+<li><p>technical reports that show or use the functionality of an existing code base</p></li>
+<li><p>slide decks that summarise the most recent data and that are produced at a regular frequency</p></li>
+<li><p>sending exploratory or prototype analysis to co-authors or collaborators</p></li>
+<li><p>writing blogs for blogging services that accept <code class="docutils literal notranslate"><span class="pre">.md</span></code> files (make sure to export to markdown)</p></li>
+<li><p>creating automatically updated websites relatively easily——we won’t cover that in this chapter, but you can find some information on this <a class="reference external" href="https://quarto.org/docs/websites/">here</a>.</p></li>
+</ul>
+<p><strong>Quarto</strong> is a really convenient wrapper for a bunch of other tools that makes it convenient to produce automated reports. You should check the latest <a class="reference external" href="https://quarto.org/">documentation</a> for an up to date guide on use——here, we’re going to see the basics and introduce a couple of templates that will serve you well.</p>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h3>
+<p>You will need to go to the <a class="reference external" href="https://quarto.org/"><strong>Quarto</strong> website</a> and follow the <a class="reference external" href="https://quarto.org/docs/getting-started/installation.html">install instructions</a> first. You can check you’ve installed it properly using <code class="docutils literal notranslate"><span class="pre">quarto</span> <span class="pre">check</span> <span class="pre">install</span></code> on the command line.</p>
+<p>You may also find the Visual Studio Code <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=quarto.quarto">quarto extension</a> useful and this book recommends it. This creates a special button within Visual Studio code labelled “render” that shows you how the output will look side-by-side with the input.</p>
+</section>
+</section>
+<section id="automated-reports-with-quarto">
+<h2>Automated Reports with <strong>Quarto</strong><a class="headerlink" href="#automated-reports-with-quarto" title="Link to this heading">#</a></h2>
+<p>Quarto can be used to create <em>output</em> documents and slides in a wide variety of formats including HTML, PDF, Microsoft Office (docx and pptx), OpenOffice, and many more.</p>
+<p>You can write the <em>input</em> documents (include code snippets) in two possible ways:</p>
+<ol class="arabic simple">
+<li><p>A special kind of markdown file, with file extension <code class="docutils literal notranslate"><span class="pre">.qmd</span></code>. For more on markdown, see <a class="reference internal" href="wrkflow-markdown.html#wrkflow-markdown"><span class="std std-ref">Markdown</span></a>. Code blocks that have a special syntax get executed and their results are included in any outputs.</p></li>
+<li><p>Jupyter Notebooks, with file extension <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>. Code cells are executed and their results are included in any outputs.</p></li>
+</ol>
+<p>You optionally add code (e.g. Python, R, JavaScript, etc.) to the documents to dynamically create figures, tables, etc. and then render the documents to their final format using Quarto.</p>
+<section id="a-minimal-example-of-a-report-written-with-markdown-content">
+<h3>A minimal example of a report written with markdown content<a class="headerlink" href="#a-minimal-example-of-a-report-written-with-markdown-content" title="Link to this heading">#</a></h3>
+<p>We’re now going to try the most minimal example of the first approach, a <code class="docutils literal notranslate"><span class="pre">.qmd</span></code> file, that also includes code and outputs.</p>
+<p>There are advantages and disadvantages to writing your report in the <code class="docutils literal notranslate"><span class="pre">.qmd</span></code> format. The advantage is that it’s just a plain text file and therefore anyone can open it, look at it, and change it with a text editor (and it’s more convenient for version control in this way too). The big, big disadvantage is that you cannot see how the code is coming on as you write it (you have to render it to see the code outputs, as we’ll see in a moment). In the next sub-section, we’ll see a way of achieving a better workflow.</p>
+<p>Let’s get our minimal example setup. The below code and markdown form the content of a file called <code class="docutils literal notranslate"><span class="pre">report.qmd</span></code>:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>---
+title: &quot;Example Report&quot;
+author: &quot;Joan Robinson&quot;
+format: pdf
+toc: true
+number-sections: true
+<span class="gu">jupyter: python3</span>
+<span class="gu">---</span>
+
+<span class="gu">## Polar Axis</span>
+
+For a demonstration of a line plot on a polar axis, see <span class="ni">@fig</span>-polar.
+
+```{python}
+<span class="gh">#| label: fig-polar</span>
+<span class="gh">#| fig-cap: &quot;A line plot on a polar axis&quot;</span>
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 2 * np.pi * r
+fig, ax = plt.subplots(subplot_kw={&#39;projection&#39;: &#39;polar&#39;})
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```
+</pre></div>
+</div>
+<p>This example contains three important types of content:</p>
+<ol class="arabic simple">
+<li><p>A <strong>YAML header</strong> surrounded by <code class="docutils literal notranslate"><span class="pre">---</span></code>s.</p></li>
+<li><p><strong>Chunks</strong> of Python code surrounded by <code class="docutils literal notranslate"><span class="pre">```</span></code>.</p></li>
+<li><p>Markdown mixed with simple text formatting like <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">heading</span></code> and <code class="docutils literal notranslate"><span class="pre">_italics_</span></code>.</p></li>
+</ol>
+<p>In this ‘raw’ input quarto markdown <code class="docutils literal notranslate"><span class="pre">.qmd</span></code> file, <code class="docutils literal notranslate"><span class="pre">{python}</span></code> tells <strong>Quarto</strong> that a code chunk is in Python and should be executed, and <code class="docutils literal notranslate"><span class="pre">jupyter:</span> <span class="pre">python3</span></code> tells <strong>Quarto</strong> what installation of Jupyter Notebooks to use. If you’re unsure what your installation of Jupyter is called, you can see a list by running <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">kernelspec</span> <span class="pre">list</span></code> on the command line.</p>
+</section>
+<section id="rendering-into-output-documents">
+<h3>Rendering into Output Documents<a class="headerlink" href="#rendering-into-output-documents" title="Link to this heading">#</a></h3>
+<p>To turn the above report into an output PDF, save it as <code class="docutils literal notranslate"><span class="pre">report.qmd</span></code> and then, on the command line and in the same directory as the file, run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>quarto<span class="w"> </span>render<span class="w"> </span>report.qmd
+</pre></div>
+</div>
+<p>Remember that if you are using the Visual Studio Code <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=quarto.quarto">quarto extension</a> (recommended), you can hit the render button instead (but you’ll need to choose PDF as the output).</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Successfuly create a PDF by saving the markdown above into a file called <code class="docutils literal notranslate"><span class="pre">report.qmd</span></code>.</p>
+<p>If you get an error about not being able to find the Jupyter kernel, first check you have Jupyter Lab installed and then check what your Jupyter kernel is called using <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">kernelspec</span> <span class="pre">list</span></code> on the command line. You need to specify the name of your Jupyter kernel correct in the header document (in the example above, it’s called ‘python3’, which is the default).</p>
+</div>
+<p>Now, because we specified <code class="docutils literal notranslate"><span class="pre">pdf</span></code> in the ‘header’ of our file we automatically got a pdf. But a wide range of output formats are available. For example, HTML</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>quarto<span class="w"> </span>render<span class="w"> </span>report.qmd<span class="w"> </span>--to<span class="w"> </span>html
+</pre></div>
+</div>
+<p>and Microsoft Word</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>quarto<span class="w"> </span>render<span class="w"> </span>report.qmd<span class="w"> </span>--to<span class="w"> </span>docx
+</pre></div>
+</div>
+<p>One slight frustration with the conversion to Word Documents is that tables from code (dataframes) are not rendered as tables in the Word doc.</p>
+<p>The basic syntax is to write <code class="docutils literal notranslate"><span class="pre">--to</span> <span class="pre">outputformat</span></code> at the end of the render command.</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Successfuly create a HTML report by saving the markdown above into a file called <code class="docutils literal notranslate"><span class="pre">report.qmd</span></code> and then running the quarto render command with the to html option.</p>
+<p>What happens to the menu on the right-hand side as you add extra headings using the <code class="docutils literal notranslate"><span class="pre">##</span></code> markdown syntax?</p>
+</div>
+</section>
+<section id="code-block-execution-options">
+<h3>Code Block Execution Options<a class="headerlink" href="#code-block-execution-options" title="Link to this heading">#</a></h3>
+<p>There are different options for how the code block is executed. To include a code block that doesn’t get executed, just use regular markdown syntax (ie a block that begins <code class="docutils literal notranslate"><span class="pre">```python</span></code>). Otherwise, you have rich options about whether to show the input code, just the results, both, or neither (while still executing the code).</p>
+<p>For an example of a code output where the input is not shown, the code below will <em>only</em> show the output table by using the <code class="docutils literal notranslate"><span class="pre">echo:</span> <span class="pre">false</span></code> option.</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>```{python}
+<span class="gh">#| echo: false</span>
+import pandas as pd
+import seaborn as sns
+
+df = sns.load_dataset(&quot;penguins&quot;)
+pd.crosstab(df[&quot;species&quot;], [df[&quot;island&quot;], df[&quot;sex&quot;]], margins=True)
+```
+</pre></div>
+</div>
+<p>The table below gives all of the options for code blocks.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">eval</span></code></p></td>
+<td><p>Evaluate the code chunk (if false, just echos the code into the output).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">echo</span></code></p></td>
+<td><p>Include the source code in output</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">output</span></code></p></td>
+<td><p>Include the results of executing the code in the output (true, false, or asis to indicate that the output is raw markdown and should not have any of Quarto’s standard enclosing markdown).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">warning</span></code></p></td>
+<td><p>Include warnings in the output.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">error</span></code></p></td>
+<td><p>Include errors in the output (note that this implies that errors executing code will not halt processing of the document).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">include</span></code></p></td>
+<td><p>Catch all for preventing any output (code or results) from being included (e.g. include: false suppresses all output from the code block).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p>True</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td><p>False</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>It’s also <strong>possible to insert code results in-line with text</strong>. Here’s a minimal example of that.</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>---
+title: &quot;Example Report with Inline Numbers from Code&quot;
+author: &quot;Joan Robinson&quot;
+format: pdf
+toc: true
+number-sections: true
+<span class="gu">jupyter: python3</span>
+<span class="gu">---</span>
+
+<span class="gu">## Report</span>
+
+For a demonstration of a line plot on a polar axis, see <span class="ni">@fig</span>-polar.
+
+For an example of a code output where the input is not shown, the code below will <span class="ge">*only*</span> show the output table by using the <span class="sb">`echo: false`</span> option.
+
+```{python}
+<span class="gh">#| echo: false</span>
+from IPython.display import display, Markdown
+import pandas as pd
+import seaborn as sns
+
+df = sns.load_dataset(&quot;penguins&quot;)
+big_pen = df[&quot;body_mass_g&quot;].max()
+number = len(df)
+```
+
+<span class="gu">### The Heaviest Penguin</span>
+
+We find that the heaviest penguin, out of a total of <span class="sb">`python f&quot;{number}&quot;`</span> penguins, has a mass of <span class="sb">`python f&quot;{big_pen:.2f}&quot;`</span> kilograms.
+</pre></div>
+</div>
+<p>Note that, in this example, the <code class="docutils literal notranslate"><span class="pre">:2f</span></code> part of <code class="docutils literal notranslate"><span class="pre">{big_pen:.2f}</span></code> is an instruction to report the given number to 2 decimal places.</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Create a HTML report with an in-line number using the above example but change the formatting of the heaviest penguin to not show any decimal places.</p>
+</div>
+<p>There are, of course, lots of extra features that go beyond this example.</p>
+</section>
+<section id="a-minimal-example-of-a-report-written-with-jupyter-notebooks">
+<h3>A minimal example of a report written with Jupyter Notebooks<a class="headerlink" href="#a-minimal-example-of-a-report-written-with-jupyter-notebooks" title="Link to this heading">#</a></h3>
+<p>You can also write your reports with Jupyter Notebooks. As a reminder, these have cells that can be either text (in the form of markdown) or code (and they support a lot of languages), and have the file format <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>. This book recommends working with them in Visual Studio Code. Google Colab notebooks are a type of Jupyter notebook (and can be downloaded as <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> files).</p>
+<p>Writing your automated reports in Jupyter Notebooks has one major advantage over using <code class="docutils literal notranslate"><span class="pre">.qmd</span></code> markdown files: you can run the code as you go, so you know what you’re getting and it’s easier to weed out bugs. This book recommends this approach to writing automated reports.</p>
+<p>So what is the difference from what we’ve seen above? Very little, actually. Your content will still start with exactly the same header but this time it’s going to be in a <em>markdown cell</em> at the top of your notebook. To be explicit, the first cell in your notebook will have:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>---
+title: &quot;Example Report&quot;
+author: &quot;Joan Robinson&quot;
+format: pdf
+toc: true
+number-sections: true
+<span class="gu">jupyter: python3</span>
+<span class="gu">---</span>
+</pre></div>
+</div>
+<p>Subsequent cells will be code or markdown depending on whether you need rich outputs (figures and tables) or text. So, instead of a code chunk that begins with <code class="docutils literal notranslate"><span class="pre">```{python}</span></code> like in the <code class="docutils literal notranslate"><span class="pre">.qmd</span></code> approach, you will just create a new code cell.</p>
+<p>Remember that putting <code class="docutils literal notranslate"><span class="pre">format:</span> <span class="pre">pdf</span></code> into this header will mean that the <code class="docutils literal notranslate"><span class="pre">render</span></code> command automatically produces a pdf. You can change it to <code class="docutils literal notranslate"><span class="pre">format:</span> <span class="pre">html</span></code> to default to a html file instead—and both options can be over-written by passing <code class="docutils literal notranslate"><span class="pre">--to</span> <span class="pre">format</span></code>.</p>
+<p>As before, you can create text that is dynamically updated with code outputs too; just choose a code cell rather than a markdown cell.</p>
+<p>The main difference when it comes to Jupyter Notebooks is that you must decide whether you want to <em>execute</em> the notebook before you render it with <strong>Quarto</strong>. Executing a notebook just means run the code before exporting it to a new format. (As an aside, the best practice way to use Jupyter Notebooks is to save them without any code outputs, so execute and render would be the standard way of doing it.) The terminal command to run a notebook and render it is:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>quarto<span class="w"> </span>render<span class="w"> </span>jupyter-report.ipynb<span class="w"> </span>--execute
+</pre></div>
+</div>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Create a new Jupyter Notebook called <code class="docutils literal notranslate"><span class="pre">jupyter-report.ipynb</span></code> with the header above. Re-use the blocks of code and text from the <code class="docutils literal notranslate"><span class="pre">qmd</span></code> example in the previous section. Render it with the command above.</p>
+</div>
+<p>To change the output type, add another instruction to the command using <code class="docutils literal notranslate"><span class="pre">--to</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>quarto<span class="w"> </span>render<span class="w"> </span>jupyter-report.ipynb<span class="w"> </span>--execute<span class="w"> </span>--to<span class="w"> </span>html
+</pre></div>
+</div>
+</section>
+</section>
+<section id="the-optimal-workflow-for-writing-automated-reports">
+<h2>The Optimal Workflow for Writing Automated Reports<a class="headerlink" href="#the-optimal-workflow-for-writing-automated-reports" title="Link to this heading">#</a></h2>
+<p>This is an alternative to using the Visual Studio Code <strong>Quarto</strong> extension.</p>
+<p>We now turn to a big tip on the optimal workflow for making automated reports and slides. Often you are interested in seeing how the final report will look as you change the code in <em>real time</em>. This is possible with Jupyter Notebooks and <strong>Quarto</strong>. Run the following in the terminal</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>quarto<span class="w"> </span>preview<span class="w"> </span>jupyter-report.ipynb
+</pre></div>
+</div>
+<p>A browser window will open with a live preview of your pdf (if you set pdf as the default output option in the header). To create a live preview of a HTML document, it’s</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>quarto<span class="w"> </span>preview<span class="w"> </span>jupyter-report.ipynb<span class="w"> </span>--to<span class="w"> </span>html
+</pre></div>
+</div>
+<p>The image below shows an example of using preview side-by-side with a Jupyter Notebook in Visual Studio Code.</p>
+<p><img alt="Jupyter notebook and live HTML preview of generated report" src="https://quarto.org/docs/tools/images/vscode-preview.png" /></p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Take the Jupyter example from the previous exercise and change the format to HTML. Then add both a new text cell and a new figure (from a code cell) while in preview mode, making use of the <code class="docutils literal notranslate"><span class="pre">quarto</span> <span class="pre">preview</span></code> command above. If you need inspiration for the new figure, here’s a simple scatter plot:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="n">c</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="s2">&quot;cyan&quot;</span><span class="p">,</span> <span class="s2">&quot;yellow&quot;</span><span class="p">],</span>
+    <span class="n">edgecolors</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="automated-slides-with-quarto">
+<h2>Automated Slides with <strong>Quarto</strong><a class="headerlink" href="#automated-slides-with-quarto" title="Link to this heading">#</a></h2>
+<p>It isn’t just reports that you can create; you can make slide decks too. You have three main output formats to choose from for slides:</p>
+<ul class="simple">
+<li><p>html, via something called ‘revealjs’; use <code class="docutils literal notranslate"><span class="pre">format:</span> <span class="pre">revealjs</span></code></p></li>
+<li><p>pdf, via the LaTeX beamer package; use <code class="docutils literal notranslate"><span class="pre">format:</span> <span class="pre">beamer</span></code></p></li>
+<li><p>Powerpoint, using the pptx format; use <code class="docutils literal notranslate"><span class="pre">format:</span> <span class="pre">pptx</span></code></p></li>
+</ul>
+<p>Everything else is the same as we have seen before. Here’s a minimal example showing both code and text. It creates a HTML slide deck.</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>---
+title: &quot;My Talk&quot;
+author: &quot;Joan Robinson&quot;
+<span class="gu">format: revealjs</span>
+<span class="gu">---</span>
+
+<span class="gu">## Introduction</span>
+
+<span class="k">-</span><span class="w"> </span>This is some text
+<span class="k">-</span><span class="w"> </span>As is this
+
+<span class="gu">## Here Are Some Code Outputs</span>
+
+```{python}
+<span class="gh">#| echo: false</span>
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 2 * np.pi * r
+fig, ax = plt.subplots(subplot_kw={&#39;projection&#39;: &#39;polar&#39;})
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```
+</pre></div>
+</div>
+<p>Note that this will not show the code, only the figure, as we have set <code class="docutils literal notranslate"><span class="pre">#|</span> <span class="pre">echo:</span> <span class="pre">false</span></code> for the code chunk. You could also set <code class="docutils literal notranslate"><span class="pre">echo:</span> <span class="pre">false</span></code> for the whole deck in the header.</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Render this slide example in all three of the main formats</p>
+</div>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Add outputs from in-line code into your rendered deck, adapting the heaviest penguin example from earlier.</p>
+</div>
+</section>
+<section id="tips-for-research-papers-and-slides">
+<h2>Tips for research papers and slides<a class="headerlink" href="#tips-for-research-papers-and-slides" title="Link to this heading">#</a></h2>
+<p>If you wish to auto-insert latex tables into a PDF paper or slides generated by Quarto, you can absolutely do it. This is nice because it means that whenever you refresh your project’s outputs they are automatically scooped straigt into your paper. This could be, say, a regression table in latex from your usual regression package.</p>
+<p>We have found that the <a class="reference external" href="https://github.com/mikemahoney218/quarto-arxiv">arxiv-pdf extension</a> for papers produces good results. Once you’ve installed that, you might have a header that looks like this:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>---
+title: &quot;The title of my paper&quot;
+format:
+  arxiv-pdf:
+    keep-tex: true
+    linenumbers: false
+    doublespacing: false
+    runninghead: &quot;&quot;
+    fig-pos: H
+    include-in-header:
+<span class="w">      </span><span class="k">-</span><span class="w"> </span>text: |
+          \usepackage[utf8]{inputenc}
+          \usepackage{fontspec}
+          \usepackage{booktabs}
+          \usepackage{makecell}
+          \usepackage{threeparttable}
+          \usepackage{amsfonts}
+          \usepackage{amssymb}
+          \usepackage{amsmath}
+          \usepackage{amsthm}
+  arxiv-html: default
+author:
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>name: Your name
+    affiliations:
+<span class="w">      </span><span class="k">-</span><span class="w"> </span>name: Fake University
+        department: Fake University
+        address: 1 Forestry Drive
+        city: Durham
+        country: UK
+        postal-code: DH1 3LJ
+    orcid: 0000-0000-0000-0000
+    email: fake_email@fakeyfake.com
+    url: https://www.yourwebsitehere.co.uk
+abstract: |
+  Abstract here.
+keywords:
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>keyword1
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>keyword2
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>keyword3
+bibliography: bibliography.bib
+csl: chicago-author-date.csl
+link-citations: true
+execute:
+  echo: false
+<span class="gu">jupyter: python3</span>
+<span class="gu">---</span>
+</pre></div>
+</div>
+<p>Note that this keeps a .tex version of your paper. To avoid duplication of what’s under version control, you might want to add the .tex file to your <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file. You will need to have separate <code class="docutils literal notranslate"><span class="pre">.csl</span></code> and <code class="docutils literal notranslate"><span class="pre">.bib</span></code> files.</p>
+</section>
+<section id="including-in-line-numbers-and-even-text">
+<h2>Including in-line numbers and even text<a class="headerlink" href="#including-in-line-numbers-and-even-text" title="Link to this heading">#</a></h2>
+<p>Let’s say you’re writing a results paragraph describing a number in the text—you can auto-update this! <em>And</em> you can do it for text too—which would be useful if you were changing an overall configuration, say going from rolling window to expanding window in a forecast model.</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>```{python}
+... code that reads in the number and stores it as a variable <span class="sb">`result`</span> ...
+... code that reads in the text config and stores it as, eg, <span class="sb">`window_type=&quot;rolling&quot;`</span>
+```
+
+We find that this happens in <span class="sb">`python f&quot;{result}&quot;`</span> cases when we use a <span class="sb">`python window_type`</span> window forecasting model.
+</pre></div>
+</div>
+<section id="including-latex-tables">
+<h3>Including latex tables<a class="headerlink" href="#including-latex-tables" title="Link to this heading">#</a></h3>
+<p>In your code, you might have something like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tab_one_latex</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">proto_table</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">&quot;Mean (daily)&quot;</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">&quot;Std dev (daily)&quot;</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">&quot;Total&quot;</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">to_latex</span><span class="p">(</span><span class="n">hrules</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;outputs/table_one.tex&quot;</span><span class="p">),</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tab_one_latex</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to export a (pandas dataframe) table called <code class="docutils literal notranslate"><span class="pre">proto_table</span></code>.</p>
+<p>And then in your Quarto file you would have:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>```{python}
+<span class="gh">#| label: tbl-one</span>
+<span class="gh">#| tbl-cap: Summary statistics</span>
+<span class="gh">#| output: asis</span>
+<span class="gh">#| echo: false</span>
+<span class="gh">#| tbl-pos: H</span>
+
+with open(Path(&quot;outputs/table_one.tex&quot;), &quot;r&quot;) as f:
+    tab_one = f.read()
+
+print(tab_one)
+```
+</pre></div>
+</div>
+<p>You can refer to this table in the rest of the document using <code class="docutils literal notranslate"><span class="pre">Summary</span> <span class="pre">statisticsa</span> <span class="pre">are</span> <span class="pre">shown</span> <span class="pre">in</span> <span class="pre">&#64;tbl-one</span></code>.</p>
+</section>
+<section id="including-figures-generated-elsewhere">
+<h3>Including figures generated elsewhere<a class="headerlink" href="#including-figures-generated-elsewhere" title="Link to this heading">#</a></h3>
+<p>Include figures using, eg, the following:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>![<span class="nt">Varying the specification.</span>](<span class="na">../outputs/figure1.pdf</span>){#fig-one}
+</pre></div>
+</div>
+<p>and reference this as usual with <code class="docutils literal notranslate"><span class="pre">&#64;fig-one</span></code>.</p>
+<p>You can also automatically write out the packages you used in the paper (if you’re using <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> file):</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># Appendix {.unnumbered}</span>
+
+<span class="gu">## Software {.unnumbered}</span>
+
+This paper was prepared using Quarto and Python 3.10. The packages used are shown in <span class="ni">@tbl</span>-pkg.
+
+```{python}
+<span class="gh">#| label: tbl-pkg</span>
+<span class="gh">#| tbl-cap: Packages used in this paper.</span>
+<span class="gh">#| output: asis</span>
+<span class="gh">#| echo: false</span>
+<span class="gh">#| tbl-pos: h</span>
+
+
+with open(&quot;pyproject.toml&quot;, &quot;rb&quot;) as f:
+    packages_toml = tomli.load(f)
+
+pkg_df = pd.DataFrame(packages_toml[&quot;project&quot;][&quot;dependencies&quot;])
+pkg_df = pkg_df[0].str.split(&quot;&gt;=&quot;, expand=True)
+pkg_df = pkg_df.rename(columns={0: &quot;Python package name&quot;, 1: &quot;Version&quot;})
+pkg_df = pkg_df.set_index(&quot;Python package name&quot;)
+pkg_df
+```
+
+<span class="gh"># References {.unnumbered}</span>
+
+::: {#refs}
+:::
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="vis-animation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Animation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="wrkflow-environments.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Virtual Code Environments</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automated-reports-with-quarto">Automated Reports with <strong>Quarto</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-minimal-example-of-a-report-written-with-markdown-content">A minimal example of a report written with markdown content</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rendering-into-output-documents">Rendering into Output Documents</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-block-execution-options">Code Block Execution Options</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-minimal-example-of-a-report-written-with-jupyter-notebooks">A minimal example of a report written with Jupyter Notebooks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-optimal-workflow-for-writing-automated-reports">The Optimal Workflow for Writing Automated Reports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automated-slides-with-quarto">Automated Slides with <strong>Quarto</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-for-research-papers-and-slides">Tips for research papers and slides</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#including-in-line-numbers-and-even-text">Including in-line numbers and even text</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#including-latex-tables">Including latex tables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#including-figures-generated-elsewhere">Including figures generated elsewhere</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Arthur Turrell
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  This book is available under an MIT license.
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

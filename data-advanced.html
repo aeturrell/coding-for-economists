@@ -1,0 +1,1354 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pandas alternatives, validation, and orchestration &#8212; Coding for Economists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-9FZQCPFXZJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'data-advanced';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://aeturrell.github.io/coding-for-economists/data-advanced.html" />
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Sharing Data" href="data-sharing.html" />
+    <link rel="prev" title="Databases" href="data-databases.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/smith_lovelace.png" class="logo__image only-light" alt="Coding for Economists - Home"/>
+    <script>document.write(`<img src="_static/smith_lovelace.png" class="logo__image only-dark" alt="Coding for Economists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-basics.html">Coding Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow-basics.html">Workflow Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-where.html">Writing Code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-analysis-quickstart.html">Data Analysis Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-intro.html">Working with Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-transformation.html">Data Transformation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-read-and-write.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-numbers.html">Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-categorical.html">Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-spreadsheets.html">Spreadsheets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-best-practice.html">Code in Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advanced.html">Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advcd-best-practice.html">Shortcuts to Better Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-intro.html">Intro to Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-letsplot.html">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-matplotlib.html">Powerful Data Visualisation with <strong>Matplotlib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-one.html">Common Plots I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-two.html">Common Plots II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="auto-research-outputs.html">Automating Research Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-markdown.html">Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-version-control.html">Version Control</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Econometrics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="econmt-probability-random.html">Probability and Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-statistics.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-regression.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-generalised-models.html">Generalised regression models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-diagnostics.html">Regression diagnostics and visualisations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-causal-inference.html">Causal Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayesian.html">Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayes-bambi.html">Bayesian Inference Made Easier</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-boolean.html">Boolean Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-joining-data.html">Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-missing-values.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-exploratory-analysis.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-extraction.html">Getting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-databases.html">Databases</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>pandas</strong> alternatives, validation, and orchestration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-sharing.html">Sharing Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-further-advanced.html">Advanced Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-quarto.html">Combining Code and Text in Quarto Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-environments.html">Virtual Code Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-rap.html">Reproducible Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Time</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="time-intro.html">Introduction to Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-fcasts-env.html">Forecasting Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Text Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="text-intro.html">Introduction to Text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-regex.html">Regular Expressions, aka regex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-nlp.html">Natural Language Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ml-intro.html">Introduction to Machine Learning and AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-sup.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-data.html">Data for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-unsup.html">Unsupervised Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Geospatial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geo-intro.html">Intro to Geo-Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geo-vis.html">Geo-Spatial Visualisation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="maths-abstract.html">Abstract Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maths-numerical.html">Numerical Mathematics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Craft</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="craft-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-search.html">Putting the Search in Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-generating-ideas.html">Generating and Accepting Research Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-writing-papers.html">Writing Papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-research-blogs.html">Research Blog Posts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-referee.html">Writing Referee Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-technical-reports.html">Writing Technical Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-extended-abstracts.html">Extended Abstracts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coming from ...</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="coming-from-stata.html">Coming from Stata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-matlab.html">Coming from Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-r.html">Coming from R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-excel.html">Coming from Excel</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zreferences.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aeturrell/coding-for-economists/blob/main/data-advanced.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists/issues/new?title=Issue%20on%20page%20%2Fdata-advanced.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/data-advanced.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>pandas alternatives, validation, and orchestration</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternatives-to-pandas">Alternatives to <strong>pandas</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars">Polars</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Polars</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tidypolars">tidypolars</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datar">Datar</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-validation">Data Validation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pandera">Pandera</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-style-checks">Dataframe style checks</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-checks-as-a-class">Data checks as a class</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-checks-for-pipelines">Data checks for pipelines</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydantic">Pydantic</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cerberus">Cerberus</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fake-and-synthetic-data">Fake and Synthetic Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-orchestration">Data Orchestration</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="pandas-alternatives-validation-and-orchestration">
+<span id="advanced-data"></span><h1><strong>pandas</strong> alternatives, validation, and orchestration<a class="headerlink" href="#pandas-alternatives-validation-and-orchestration" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>In this chapter, you’ll learn about data validation, data orchestration, and some alternatives to the <strong>pandas</strong> package.</p>
+<section id="imports">
+<h3>Imports<a class="headerlink" href="#imports" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="alternatives-to-pandas">
+<h2>Alternatives to <strong>pandas</strong><a class="headerlink" href="#alternatives-to-pandas" title="Link to this heading">#</a></h2>
+<p><strong>pandas</strong> isn’t the only game in town, not by a long way—though it’s by far the best supported and the most fully featured. <strong>pandas</strong> is a good default package to use for data in the vast majority of cases. But it’s always good to have options—or, put another way, options have value! Other dataframe libraries may have a syntax that you prefer (<strong>datatable</strong>’s syntax is popular with some) or provide a speed-up in certain situations, for example when working with large datasets (<strong>polars</strong> promises to breeze through big data far faster than pandas can).</p>
+<p>If you’re specifically interested in how different dataframe options perform on increasingly large datasets, take a look at the benchmarks by the folks who make DuckDB <a class="reference external" href="https://duckdblabs.github.io/db-benchmark/">here</a>.</p>
+<p>If you only choose one <strong>pandas</strong> alternative, we recommend <strong>polars</strong>. It brings the benefits of speed and a consistent API.</p>
+<p>Here’s a quick run-through of some alternatives to <strong>pandas</strong>:</p>
+<section id="polars">
+<h3>Polars<a class="headerlink" href="#polars" title="Link to this heading">#</a></h3>
+<section id="id1">
+<h4>Polars<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<p><a class="reference external" href="https://www.pola.rs/"><strong>Polars</strong></a> is one of the fastest dataframe libraries in any language. It also uses Apache Arrow as backend. It currently consists of an ‘eager’ (for datasets smaller than approximately a few GB) interface that’s very similar to <strong>pandas</strong> and a ‘lazy’ interface (don’t worry if you don’t know what that means, it’s a big data thing) that is somewhat similar to spark (a big data tool). <strong>Polars</strong> is built on the Rust language. It’s particularly effective at merging datasets.</p>
+</section>
+<section id="tidypolars">
+<h4>tidypolars<a class="headerlink" href="#tidypolars" title="Link to this heading">#</a></h4>
+<p><a class="reference external" href="https://tidypolars.readthedocs.io/"><strong>tidypolars</strong></a> combines the syntax of the <strong>dplyr</strong>, from the R statistical language, with the best-in-class speed (for any language, as of the time of writing) of Python package <a class="reference external" href="https://www.pola.rs/"><strong>polars</strong></a>. Here’s an example of a typical command to give you a flavour of what the syntax looks like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tidypolars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tidypolars</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span><span class="p">,</span> <span class="n">desc</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">Tibble</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">])</span>
+
+<span class="p">(</span>
+    <span class="n">df</span>
+    <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">arrange</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">),</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">mutate</span><span class="p">(</span><span class="n">double_x</span> <span class="o">=</span> <span class="n">col</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="n">x_plus_y</span> <span class="o">=</span> <span class="n">col</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">col</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">))</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>┌─────┬─────┬─────┬──────────┬──────────┐
+│ x   ┆ y   ┆ z   ┆ double_x ┆ x_plus_y │
+│ --- ┆ --- ┆ --- ┆ ---      ┆ ---      │
+│ i64 ┆ i64 ┆ str ┆ i64      ┆ i64      │
+╞═════╪═════╪═════╪══════════╪══════════╡
+│ 2   ┆ 5   ┆ b   ┆ 4        ┆ 7        │
+├╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌┤
+│ 0   ┆ 3   ┆ a   ┆ 0        ┆ 3        │
+├╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌┼╌╌╌╌╌╌╌╌╌╌┤
+│ 1   ┆ 4   ┆ a   ┆ 2        ┆ 5        │
+└─────┴─────┴─────┴──────────┴──────────┘
+</pre></div>
+</div>
+</section>
+</section>
+<section id="datar">
+<h3>Datar<a class="headerlink" href="#datar" title="Link to this heading">#</a></h3>
+<p>Another library that gets close to <strong>dplylr</strong> syntax is <a class="reference external" href="https://github.com/pwwang/datar"><strong>datar</strong></a>. It integrates with <a class="reference external" href="https://plotnine.readthedocs.io/en/stable/"><strong>plotnine</strong></a> for visualisation.</p>
+</section>
+</section>
+<section id="data-validation">
+<h2>Data Validation<a class="headerlink" href="#data-validation" title="Link to this heading">#</a></h2>
+<p>When working with data, it’s useful to have a way to validate that what you’re getting is what you <em>think</em> you’re getting. And so various data validation methods have appeared that will fail loudly and proudly when your data are not as expected. Although most useful in a situation where data are being regularly updated, for example when producing a monthly index, these tools can also be useful if you want to be extra careful with your data in a research paper, if you are scaling up from a sample to a bigger dataset, or if you are updating an existing project.</p>
+<p>Of course, the most minimal way to do some validation is to ensure that your dataframe has its columns cast as the right data types from the start, and this is good practice in general. That’s about <em>data type</em>, but these tools go beyond that and deal with values <em>within</em> a data type. So rather than just saying it’s an integer, a data validation library might say that a column must be an integer between 0 and 100.</p>
+<p>The normal way that data validation libraries are used is that you specify some expectations you have of the dataset that will be flagged if and when they fail. Let’s see some of the tools that are available that do this. As ever, this chapter has benefitted enormously from the documentation of the featured packages.</p>
+<section id="pandera">
+<h3>Pandera<a class="headerlink" href="#pandera" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://pandera.readthedocs.io/en/stable/index.html"><strong>Pandera</strong></a> <span id="id2">[<a class="reference internal" href="zreferences.html#id5" title="Niels Bantilan. Pandera: Statistical Data Validation of Pandas Dataframes. In Meghann Agarwal, Chris Calloway, Dillon Niederhut, and David Shupe, editors, Proceedings of the 19th Python in Science Conference, 116 - 124. 2020. doi:10.25080/Majora-342d178e-010.">Niels Bantilan, 2020</a>]</span> has tight integration with <strong>pandas</strong> (as the name suggests). There are several different ways to specify data validation checks.</p>
+<section id="dataframe-style-checks">
+<h4>Dataframe style checks<a class="headerlink" href="#dataframe-style-checks" title="Link to this heading">#</a></h4>
+<p>It’s easiest to show how it works with an example. We’ll first create some data that we’d like to validate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandera</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
+
+<span class="c1"># data to validate</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;column1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
+        <span class="s2">&quot;column2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.9</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">20.4</span><span class="p">],</span>
+        <span class="s2">&quot;column3&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;value_1&quot;</span><span class="p">,</span> <span class="s2">&quot;value_2&quot;</span><span class="p">,</span> <span class="s2">&quot;value_3&quot;</span><span class="p">,</span> <span class="s2">&quot;value_2&quot;</span><span class="p">,</span> <span class="s2">&quot;value_1&quot;</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>column1</th>
+      <th>column2</th>
+      <th>column3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>-1.3</td>
+      <td>value_1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>-1.4</td>
+      <td>value_2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>-2.9</td>
+      <td>value_3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10</td>
+      <td>-10.1</td>
+      <td>value_2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9</td>
+      <td>-20.4</td>
+      <td>value_1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>pandera</strong> (I’m going to spell it as pantera sooner or later) works by defining <em>data schemas</em> for each column that say what values should appear in that column. Let’s create a schema for this dataframe:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define schema</span>
+<span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;column1&quot;</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">checks</span><span class="o">=</span><span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="o">.</span><span class="n">le</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span>
+        <span class="s2">&quot;column2&quot;</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">checks</span><span class="o">=</span><span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">)),</span>
+        <span class="s2">&quot;column3&quot;</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+            <span class="nb">str</span><span class="p">,</span>
+            <span class="n">checks</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="o">.</span><span class="n">str_startswith</span><span class="p">(</span><span class="s2">&quot;value_&quot;</span><span class="p">),</span>
+                <span class="c1"># define custom checks as functions that take a series as input and</span>
+                <span class="c1"># outputs a boolean or boolean Series</span>
+                <span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="p">],</span>
+        <span class="p">),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>What did we ask for here? That:</p>
+<ul class="simple">
+<li><p>column 1 should be an integer that is less than or equal to 10</p></li>
+<li><p>column 2 should be a continuous variable that’s less than 1.2</p></li>
+<li><p>column 3 should be a string that begins ‘value_’ and has a custom check on it that it can be split into chunks based on the single appearance of an underscore.</p></li>
+</ul>
+<p>Alright, let’s see what happens when we put well-behaved data through the schema.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validated_df</span> <span class="o">=</span> <span class="n">schema</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">validated_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   column1  column2  column3
+0        1     -1.3  value_1
+1        4     -1.4  value_2
+2        0     -2.9  value_3
+3       10    -10.1  value_2
+4        9    -20.4  value_1
+</pre></div>
+</div>
+</div>
+</div>
+<p>The data comes through the schema without incident because the data satisfies all the checks. Now, what about some data that <em>aren’t</em> well-behaved, but in a single column (here 1).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># data to validate</span>
+<span class="n">bad_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;column1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="s2">&quot;column2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4</span><span class="p">],</span>
+    <span class="s2">&quot;column3&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;value_1&quot;</span><span class="p">,</span> <span class="s2">&quot;value_2&quot;</span><span class="p">],</span>
+<span class="p">})</span>
+<span class="n">schema</span><span class="p">(</span><span class="n">bad_df</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+<span class="n">SchemaError</span>                               <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
+      <span class="mi">1</span> <span class="n">bad_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+      <span class="mi">2</span>     <span class="s2">&quot;column1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+      <span class="mi">3</span>     <span class="s2">&quot;column2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4</span><span class="p">],</span>
+      <span class="mi">4</span>     <span class="s2">&quot;column3&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;value_1&quot;</span><span class="p">,</span> <span class="s2">&quot;value_2&quot;</span><span class="p">],</span>
+      <span class="mi">5</span> <span class="p">})</span>
+<span class="o">----&gt;</span> <span class="mi">6</span> <span class="n">schema</span><span class="p">(</span><span class="n">bad_df</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="o">...</span>
+<span class="n">SchemaError</span><span class="p">:</span>  <span class="n">failed</span> <span class="n">element</span><span class="o">-</span><span class="n">wise</span> <span class="n">validator</span> <span class="mi">0</span><span class="p">:</span>
+
+<span class="n">failure</span> <span class="n">cases</span><span class="p">:</span>
+   <span class="n">index</span>  <span class="n">failure_case</span>
+<span class="mi">0</span>      <span class="mi">0</span>            <span class="mi">11</span>
+</pre></div>
+</div>
+<p>The error message is rather verbose but scroll to the end and we see the cause of it: a ‘schema error’. Not only that but we get a report about what failed (column 1), what check it was (0), and even what value triggered the error (11).</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">schema.validate(df,</span> <span class="pre">lazy=True)</span></code> to get all of the errors rather than just the first one to be triggered.</p>
+<p>You can also pass hypothesis tests into a schema as a check; there’s a nice <a class="reference external" href="https://pandera.readthedocs.io/en/stable/hypothesis.html">example of using a two-sample t-test</a> in the documentation.</p>
+</section>
+<section id="data-checks-as-a-class">
+<h4>Data checks as a class<a class="headerlink" href="#data-checks-as-a-class" title="Link to this heading">#</a></h4>
+<p>The ‘dataframe’ style of checks is not the only way to specify a schema. If you’re au fait with classes, you can also specify checks that way. Here’s the same example in that form:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pandera.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Series</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Schema</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">DataFrameModel</span><span class="p">):</span>
+    <span class="n">column1</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">le</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">column2</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">lt</span><span class="o">=-</span><span class="mf">1.2</span><span class="p">)</span>
+    <span class="n">column3</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">str_startswith</span><span class="o">=</span><span class="s2">&quot;value_&quot;</span><span class="p">)</span>
+
+    <span class="nd">@pa</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="s2">&quot;column3&quot;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">column_3_check</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">series</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Series</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check that column3 values have two elements after being split with &#39;_&#39;&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">series</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span>
+
+
+<span class="n">Schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>column1</th>
+      <th>column2</th>
+      <th>column3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>-1.3</td>
+      <td>value_1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>-1.4</td>
+      <td>value_2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>-2.9</td>
+      <td>value_3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10</td>
+      <td>-10.1</td>
+      <td>value_2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9</td>
+      <td>-20.4</td>
+      <td>value_1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Again, this passes but again it would not have with <code class="docutils literal notranslate"><span class="pre">bad_df</span></code> as defined earlier.</p>
+<p>It doesn’t <em>have</em> to be a single column that you’re checking at a time, <strong>pandera</strong> can also check data that is the subject of <code class="docutils literal notranslate"><span class="pre">groupby</span></code> operations. Here’s an example where data are grouped by a <code class="docutils literal notranslate"><span class="pre">group</span></code> column and then the means of the <code class="docutils literal notranslate"><span class="pre">height</span></code> column are compared:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">5.6</span><span class="p">,</span> <span class="mf">6.4</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">7.1</span><span class="p">],</span>
+        <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+            <span class="n">pa</span><span class="o">.</span><span class="n">Float</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="p">(</span><span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="n">g</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">g</span><span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">groupby</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">)</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">String</span><span class="p">),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>height</th>
+      <th>group</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.6</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>6.4</td>
+      <td>B</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.0</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>7.1</td>
+      <td>B</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="data-checks-for-pipelines">
+<h4>Data checks for pipelines<a class="headerlink" href="#data-checks-for-pipelines" title="Link to this heading">#</a></h4>
+<p>You can also specify the validations as function decorators that check the data as it <em>enters</em> (<code class="docutils literal notranslate"><span class="pre">check_input</span></code>) or <em>exits</em> (<code class="docutils literal notranslate"><span class="pre">check_output</span></code>) a function (or both, with <code class="docutils literal notranslate"><span class="pre">check_io</span></code>). This could be really useful as part of a larger pipeline of data processes. Here’s an example (of a dataframe that passes the input checks):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;column1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
+        <span class="s2">&quot;column2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.9</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">20.4</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">in_schema</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;column1&quot;</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+            <span class="n">pa</span><span class="o">.</span><span class="n">Int</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">element_wise</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;column2&quot;</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">Float</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">1.2</span><span class="p">)),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+
+<span class="nd">@pa</span><span class="o">.</span><span class="n">check_input</span><span class="p">(</span><span class="n">in_schema</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">preprocessor</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
+    <span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;column3&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;column1&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">dataframe</span><span class="p">[</span><span class="s2">&quot;column2&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">dataframe</span>
+
+
+<span class="n">preprocessed_df</span> <span class="o">=</span> <span class="n">preprocessor</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">preprocessed_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>column1</th>
+      <th>column2</th>
+      <th>column3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>-1.3</td>
+      <td>-0.3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>-1.4</td>
+      <td>2.6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>-2.9</td>
+      <td>-2.9</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10</td>
+      <td>-10.1</td>
+      <td>-0.1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9</td>
+      <td>-20.4</td>
+      <td>-11.4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="pydantic">
+<h3>Pydantic<a class="headerlink" href="#pydantic" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://pydantic-docs.helpmanual.io/"><strong>Pydantic</strong></a> has some of the same features as <strong>pandera</strong> but it piggybacks on the ability of Python 3.5+ to have ‘typed’ variables (if you’re not sure what that is, it’s a way to declare a variable has a particular data type from inception) and it is really focused around the validation of objects (created from classes) rather than dataframes.</p>
+<p>If you’ve used the <a class="reference external" href="https://sqlmodel.tiangolo.com/">SQLModel</a> package for writing SQL queries, you may be interested to know that every SQLModel call is also a Pydantic model.</p>
+<p>Here’s an example of a Pydantic schema that also implements a class:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Katherine Johnson&quot;</span>
+    <span class="n">signup_ts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">friends</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now pass some (acceptable) external data into this schema, creating an object of type <code class="docutils literal notranslate"><span class="pre">User</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">external_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;signup_ts&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-06-01 12:22&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;friends&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">],</span>
+<span class="p">}</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="o">**</span><span class="n">external_data</span><span class="p">)</span>
+<span class="n">user</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>User(id=123, name=&#39;Katherine Johnson&#39;, signup_ts=datetime.datetime(2019, 6, 1, 12, 22), friends=[1, 2, 3])
+</pre></div>
+</div>
+</div>
+</div>
+<p>That all worked well (as expected) but what if we now create an object that has ‘bad’ data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">User</span><span class="p">(</span><span class="n">signup_ts</span><span class="o">=</span><span class="s1">&#39;broken&#39;</span><span class="p">,</span> <span class="n">friends</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;not number&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+<span class="n">ValidationError</span>                           <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">User</span><span class="p">(</span><span class="n">signup_ts</span><span class="o">=</span><span class="s1">&#39;broken&#39;</span><span class="p">,</span> <span class="n">friends</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;not number&#39;</span><span class="p">])</span>
+
+
+<span class="n">ValidationError</span><span class="p">:</span> <span class="mi">3</span> <span class="n">validation</span> <span class="n">errors</span> <span class="k">for</span> <span class="n">User</span>
+<span class="nb">id</span>
+  <span class="n">field</span> <span class="n">required</span> <span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">value_error</span><span class="o">.</span><span class="n">missing</span><span class="p">)</span>
+<span class="n">signup_ts</span>
+  <span class="n">invalid</span> <span class="n">datetime</span> <span class="nb">format</span> <span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">value_error</span><span class="o">.</span><span class="n">datetime</span><span class="p">)</span>
+<span class="n">friends</span> <span class="o">-&gt;</span> <span class="mi">2</span>
+  <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">a</span> <span class="n">valid</span> <span class="n">integer</span> <span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">type_error</span><span class="o">.</span><span class="n">integer</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We get a loud failure, a <code class="docutils literal notranslate"><span class="pre">ValidationError</span></code>, and a short report about what went wrong.</p>
+</section>
+<section id="cerberus">
+<h3>Cerberus<a class="headerlink" href="#cerberus" title="Link to this heading">#</a></h3>
+<p>Our final stop on this tour of data validation is <a class="reference external" href="https://docs.python-cerberus.org/"><strong>Cerberus</strong></a>. It is designed to be a simple and lightweight data validation functionality. In this case, the schema is specified as a JSON file:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">},</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we pass data in to a <strong>Cerberus</strong> validator object along with the schema. This will return true for good data but for bad data…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cerberus</span><span class="w"> </span><span class="kn">import</span> <span class="n">Validator</span>
+
+<span class="n">v</span> <span class="o">=</span> <span class="n">Validator</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Sadie Alexander&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;occupation&quot;</span><span class="p">:</span> <span class="s2">&quot;Economist&quot;</span><span class="p">}</span>
+<span class="n">v</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is useful to know but we might want a bit more detail:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="o">.</span><span class="n">errors</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;occupation&#39;: [&#39;unknown field&#39;], &#39;score&#39;: [&#39;max value is 10&#39;]}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Much more complex schemas can be <a class="reference external" href="https://docs.python-cerberus.org/">constructed</a>.</p>
+</section>
+</section>
+<section id="fake-and-synthetic-data">
+<h2>Fake and Synthetic Data<a class="headerlink" href="#fake-and-synthetic-data" title="Link to this heading">#</a></h2>
+<p>Fake data can be very useful for testing pipelines and trying out analyses before you have the <em>real</em> data. The closer fake data is to real data, the more likely that you’re going to fully prepare yourself for the real data.</p>
+<p><em>Fake</em> data are data generated according to a schema that bear no statistical relationship to the real data. There are powerful tools for generating fake data. One of the most popular and fast libraries for doing so is <a class="reference external" href="https://mimesis.name/">Mimesis</a>.</p>
+<p><em>Synthetic</em> data take this one step further: they do capture some of the statistical properties of the underlying data and are generated from the underlying data. Again, they can be useful for trying out data before using the real thing—especially if the real data are highly confidential. A useful package for comparing real and synthetic data is <a class="reference external" href="https://datasciencecampus.github.io/synthgauge">SynthGuage</a>.</p>
+</section>
+<section id="data-orchestration">
+<h2>Data Orchestration<a class="headerlink" href="#data-orchestration" title="Link to this heading">#</a></h2>
+<p>Data orchestration is the automation of data-driven processes from end-to-end, including preparing data, making decisions based on that data, and taking actions based on those decisions. Think of a data pipeline in which you extract data (perhaps from files), transform it somehow, and load it into where you want to put it (downstream in your research process, or perhaps into an app). Sometimes these processes are called ETL, for extract, transform, and load. Some of their benefits include reproducibility, and being able to run tasks on a schedule—whether you are at your computer or not, and (if you’re using them in the cloud), whether your computer is even on or not! They are dreamboats for automation.</p>
+<p>A lot of them visualise the tasks they have to carry out as a DAG, or Directed Acyclic Graph. This defines how different tasks depend on each other in order, with one task following from the previous one (or perhaps following from multiple previous tasks). When they carry out a DAG of tasks on an event or at a scheduled time, they create a log of the execution of the steps too—so if something goes wrong, you can always look back at it. However, they are a layer of abstraction between you and the data, and this does make them a more advanced tool.</p>
+<p>Going into further details of data orchestration is outside of the scope of this book, so we won’t be seeing a practical example, but we think it’s important enough to mention it and to point you to more resources.</p>
+<p>There are some truly amazing tools out there to help you do this on a production scale. Broadly, there is a 1st generation of tools that are excellent but might have more trouble with tasks such as:</p>
+<ul class="simple">
+<li><p>local development, testing, and storage abstractions</p></li>
+<li><p>one-off and irregularly scheduled tasks</p></li>
+<li><p>the movement of data between tasks</p></li>
+<li><p>dynamic and parameterised workflows</p></li>
+</ul>
+<p>And there is a 2nd generation of tools that tries to solve some of these issues.</p>
+<p>Of the 1st generation, by far the best known and most suited for production is Apache’s (original AirBnB’s) <a class="reference external" href="http://airflow.incubator.apache.org/"><strong>Airflow</strong></a>. There’s a less mature 1st generation tool from Spotify called <a class="reference external" href="https://github.com/spotify/luigi"><strong>Luigi</strong></a> too, but Airflow is widely used in the tech industry, and doesn’t just schedule data processes in Python: it can run processes in pretty much whatever you like. Both of these tools try to solve the ‘plumbing’ associated with long-running batch processes on data: chaining tasks, automating them, dealing with failures, and scheduling. Both Luigi and Airflow have fancy interfaces to show you what’s going on with your tasks.</p>
+<p>Tools in the 2nd generation include the easy-to-use <a class="reference external" href="https://www.prefect.io/"><strong>Prefect</strong></a>, “modern workflow orchestration for data and ML engineers”, and <a class="reference external" href="https://dagster.io/"><strong>dagster</strong></a>, which bills itself as “a data orchestrator for machine learning, analytics, and ETL [extract, transform, and load]”. These have visualisation interfaces too, can run locally or on the cloud, and are more flexible about triggers for events.</p>
+<p>For a research project where you only need to execute your DAG once, and you’re probably much more concerned about the costliness of each step than anything else, these tools are likely to be overkill or not quite what you need. But if you’re automating an ETL process, they’re perfect (prefect). The best place to get started is by looking at their webpages and googling around for tutorials.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="data-databases.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Databases</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="data-sharing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Sharing Data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternatives-to-pandas">Alternatives to <strong>pandas</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars">Polars</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Polars</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tidypolars">tidypolars</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datar">Datar</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-validation">Data Validation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pandera">Pandera</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-style-checks">Dataframe style checks</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-checks-as-a-class">Data checks as a class</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-checks-for-pipelines">Data checks for pipelines</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydantic">Pydantic</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cerberus">Cerberus</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fake-and-synthetic-data">Fake and Synthetic Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-orchestration">Data Orchestration</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Arthur Turrell
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  This book is available under an MIT license.
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

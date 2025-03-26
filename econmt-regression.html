@@ -1,0 +1,3071 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Regression &#8212; Coding for Economists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-9FZQCPFXZJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'econmt-regression';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://aeturrell.github.io/coding-for-economists/econmt-regression.html" />
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Generalised regression models" href="econmt-generalised-models.html" />
+    <link rel="prev" title="Statistics" href="econmt-statistics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/smith_lovelace.png" class="logo__image only-light" alt="Coding for Economists - Home"/>
+    <script>document.write(`<img src="_static/smith_lovelace.png" class="logo__image only-dark" alt="Coding for Economists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-basics.html">Coding Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow-basics.html">Workflow Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-where.html">Writing Code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-analysis-quickstart.html">Data Analysis Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-intro.html">Working with Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-transformation.html">Data Transformation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-read-and-write.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-numbers.html">Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-categorical.html">Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-spreadsheets.html">Spreadsheets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-best-practice.html">Code in Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advanced.html">Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advcd-best-practice.html">Shortcuts to Better Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-intro.html">Intro to Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-letsplot.html">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-matplotlib.html">Powerful Data Visualisation with <strong>Matplotlib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-one.html">Common Plots I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-two.html">Common Plots II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="auto-research-outputs.html">Automating Research Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-markdown.html">Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-version-control.html">Version Control</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Econometrics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="econmt-probability-random.html">Probability and Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-statistics.html">Statistics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-generalised-models.html">Generalised regression models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-diagnostics.html">Regression diagnostics and visualisations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-causal-inference.html">Causal Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayesian.html">Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayes-bambi.html">Bayesian Inference Made Easier</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-boolean.html">Boolean Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-joining-data.html">Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-missing-values.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-exploratory-analysis.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-extraction.html">Getting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-databases.html">Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-advanced.html"><strong>pandas</strong> alternatives, validation, and orchestration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-sharing.html">Sharing Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-further-advanced.html">Advanced Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-quarto.html">Combining Code and Text in Quarto Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-environments.html">Virtual Code Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-rap.html">Reproducible Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Time</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="time-intro.html">Introduction to Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-fcasts-env.html">Forecasting Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Text Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="text-intro.html">Introduction to Text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-regex.html">Regular Expressions, aka regex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-nlp.html">Natural Language Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ml-intro.html">Introduction to Machine Learning and AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-sup.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-data.html">Data for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-unsup.html">Unsupervised Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Geospatial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geo-intro.html">Intro to Geo-Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geo-vis.html">Geo-Spatial Visualisation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="maths-abstract.html">Abstract Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maths-numerical.html">Numerical Mathematics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Craft</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="craft-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-search.html">Putting the Search in Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-generating-ideas.html">Generating and Accepting Research Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-writing-papers.html">Writing Papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-research-blogs.html">Research Blog Posts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-referee.html">Writing Referee Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-technical-reports.html">Writing Technical Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-extended-abstracts.html">Extended Abstracts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coming from ...</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="coming-from-stata.html">Coming from Stata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-matlab.html">Coming from Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-r.html">Coming from R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-excel.html">Coming from Excel</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zreferences.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aeturrell/coding-for-economists/blob/main/econmt-regression.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists/issues/new?title=Issue%20on%20page%20%2Feconmt-regression.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/econmt-regression.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Regression</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-review-of-econometrics">Quick Review of Econometrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notation">Notation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-markov-conditions">Gauss-Markov Conditions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-basics">Regression basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-errors">Standard errors</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#clustered-standard-errors">Clustered standard errors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-effects-and-categorical-variables">Fixed effects and categorical variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-dimensional-fixed-effects-aka-absorbing-regression">High dimensional fixed effects, aka absorbing regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformations-of-regressors">Transformations of regressors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logs-and-arcsinh">Logs and arcsinh</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-terms-and-powers">Interaction terms and powers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-formula-api-explained">The formula API explained</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-regression-models">Multiple regression models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-a-set-of-models-you-ve-already-created">Comparing a set of models you’ve already created</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stepwise-multiple-models">Stepwise multiple models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instrumental-variables">Instrumental variables</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="regression">
+<span id="id1"></span><h1>Regression<a class="headerlink" href="#regression" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>In this chapter, you’ll learn how to run linear regressions with code.</p>
+<p>If you’re running this code (either by copying and pasting it, or by downloading it using the icons at the top of the page), you may need to install the packages it uses first. There’s a brief guide to installing packages in the chapter on <a class="reference internal" href="code-preliminaries.html#code-preliminaries"><span class="std std-ref">Preliminaries</span></a>.</p>
+<p>Most of this chapter will rely on <a class="reference external" href="https://github.com/s3alfisc/pyfixest"><strong>pyfixest</strong></a> and we are indebted to <a class="reference external" href="https://github.com/s3alfisc">Alexander Fischer</a> for his efforts in bringing a convenient and flexible way to absorb high dimensional fixed effects to Python via <strong>pyfixest</strong>. Some of the material in this chapter follows <a class="reference external" href="https://grantmcdermott.com/">Grant McDermott</a>’s excellent notes and the <a class="reference external" href="https://lost-stats.github.io/">Library of Statistical Translation</a>.</p>
+</section>
+<section id="quick-review-of-econometrics">
+<h2>Quick Review of Econometrics<a class="headerlink" href="#quick-review-of-econometrics" title="Link to this heading">#</a></h2>
+<section id="notation">
+<h3>Notation<a class="headerlink" href="#notation" title="Link to this heading">#</a></h3>
+<p>Greek letters, like <span class="math notranslate nohighlight">\(\beta\)</span>, are the truth and represent parameters. Modified Greek letters are an estimate of the truth, for example <span class="math notranslate nohighlight">\(\hat{\beta}\)</span>. Sometimes Greek letters will stand in for vectors of parameters. Most of the time, upper case Latin characters such as <span class="math notranslate nohighlight">\(X\)</span> will represent random variables (which could have more than one dimension). Lower case letters from the Latin alphabet denote realised data, for instance <span class="math notranslate nohighlight">\(x\)</span> (which again could be multi-dimensional).  Modified Latin alphabet letters denote computations performed on data, for instance <span class="math notranslate nohighlight">\(\bar{x} = \frac{1}{n} \displaystyle\sum_{i} x_i\)</span> where <span class="math notranslate nohighlight">\(n\)</span> is number of samples.</p>
+<p>Ordinary least squares (OLS) regression can be used to <em>estimate</em> the parameters of certain types of model, most typically models of the form</p>
+<div class="math notranslate nohighlight">
+\[
+y = \beta_0 + \beta_1 \cdot x_1 + \beta_2 \cdot x_2 .
+\]</div>
+<p>This generic model says that the value of an outcome variable <span class="math notranslate nohighlight">\(y\)</span> is a linear function of one or more input predictor variables <span class="math notranslate nohighlight">\(x_i\)</span>, where the <span class="math notranslate nohighlight">\(x_i\)</span> could be transforms of original data. But the above equation is a platonic ideal, what we call a data generating process (DGP). OLS allows us to recover <em>estimates</em> of the parameters of the model , i.e. to find <span class="math notranslate nohighlight">\(\hat{\beta_i}\)</span> and to enable us to write an estimated model:</p>
+<div class="math notranslate nohighlight">
+\[
+y = \hat{\beta_0} + \hat{\beta_1} \cdot x_1 + \hat{\beta_2} \cdot x_2 + \epsilon .
+\]</div>
+<p>This equation can also be expressed in matrix form as</p>
+<div class="math notranslate nohighlight">
+\[
+y = x'\cdot \hat{\beta} + \epsilon
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(x' = (1, x_1, \dots, x_{n})'\)</span> and <span class="math notranslate nohighlight">\(\hat{\beta} = (\hat{\beta_0}, \hat{\beta_1}, \dots, \hat{\beta_{n}})\)</span>.</p>
+<p>Given data <span class="math notranslate nohighlight">\(y_i\)</span> stacked to make a vector <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(x_{i}\)</span> stacked to make a matrix <span class="math notranslate nohighlight">\(X\)</span>, this can be solved for the coefficients <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> according to</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\beta} = \left(X'X\right)^{-1} X'y .
+\]</div>
+</section>
+<section id="gauss-markov-conditions">
+<h3>Gauss-Markov Conditions<a class="headerlink" href="#gauss-markov-conditions" title="Link to this heading">#</a></h3>
+<p>To be sure that the estimates of these parameters are the <em>best linear unbiased estimate</em>, a few conditions need to hold: the Gauss-Markov conditions:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(y\)</span> is a linear function of the <span class="math notranslate nohighlight">\(\beta_i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> and the <span class="math notranslate nohighlight">\(x_i\)</span> are randomly sampled from the population.</p></li>
+<li><p>There is no perfect multi-collinearity of variables.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{E}(\epsilon | x_1, \dots, x_n) = 0\)</span> (unconfoundedness)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{Var}(\epsilon | x_1, \dots, x_n) = \sigma^2\)</span> (homoskedasticity)</p></li>
+</ol>
+<p>(1)-(4) also guarantee that OLS estimates are unbiased and <span class="math notranslate nohighlight">\(\mathbb{E}(\hat{\beta}_i) = \beta_i\)</span>.</p>
+<p>The classic linear model requires a 6th assumption; that <span class="math notranslate nohighlight">\(\epsilon \thicksim \mathcal{N}(0, \sigma^2)\)</span>.</p>
+<p>The interpretation of regression coefficients depends on what their units are to begin with, but you can always work it out by differentiating both sides of the model equation with respect to the <span class="math notranslate nohighlight">\(x_i\)</span>. For example, for the first model equation above</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial y}{\partial x_i} = \beta_i
+\]</div>
+<p>so we get the interpretation that <span class="math notranslate nohighlight">\(\beta_i\)</span> is the rate of change of y with respect to <span class="math notranslate nohighlight">\(x_i\)</span>. If <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are in levels, this means that a unit increase in <span class="math notranslate nohighlight">\(x_i\)</span> is associated with a <span class="math notranslate nohighlight">\(\beta_i\)</span> units increase in <span class="math notranslate nohighlight">\(y\)</span>. If the right-hand side of the model is <span class="math notranslate nohighlight">\(\ln x_i\)</span> then we get</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial y}{\partial x_i} = \beta_i \frac{1}{x_i} 
+\]</div>
+<p>with some abuse of notation, we can rewrite this as <span class="math notranslate nohighlight">\(\partial y = \beta_i \partial x_i/x_i\)</span>, which says that a percent change in <span class="math notranslate nohighlight">\(x_i\)</span> is associated with a <span class="math notranslate nohighlight">\(\beta_i\)</span> unit change in <span class="math notranslate nohighlight">\(y\)</span>. With a logged <span class="math notranslate nohighlight">\(y\)</span> variable, it’s a percent change in <span class="math notranslate nohighlight">\(x_i\)</span> that is associated with a percent change in <span class="math notranslate nohighlight">\(y\)</span>, or <span class="math notranslate nohighlight">\(\partial y/y = \beta_i \partial x_i/x_i\)</span> (note that both sides of this equation are unitless in this case). Finally, another example that is important in practice is that of log differences, eg <span class="math notranslate nohighlight">\(y = \beta_i (\ln x_i - \ln x_i')\)</span>. Again, we will abuse notation and say that this case may be represented as <span class="math notranslate nohighlight">\(\partial y = \beta_i (\partial x_i/x_i - \partial x_i'/x_i')\)</span>, i.e. the difference in two percentages, a <em>percentage point</em> change, in <span class="math notranslate nohighlight">\(x_i\)</span> is associated with a <span class="math notranslate nohighlight">\(\beta_i\)</span> unit change in <span class="math notranslate nohighlight">\(y\)</span>.</p>
+</section>
+</section>
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Link to this heading">#</a></h2>
+<p>Let’s import some of the packages we’ll be using:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyfixest</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lets_plot</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">LetsPlot</span><span class="o">.</span><span class="n">setup_html</span><span class="p">()</span>
+
+<span class="c1"># Set seed for random numbers</span>
+<span class="n">seed_for_prng</span> <span class="o">=</span> <span class="mi">78557</span>
+<span class="n">prng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span>
+    <span class="n">seed_for_prng</span>
+<span class="p">)</span>  <span class="c1"># prng=probabilistic random number generator</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <div id="dgoMnp"></div>
+            <script type="text/javascript" data-lets-plot-script="library">
+                if(!window.letsPlotCallQueue) {
+                    window.letsPlotCallQueue = [];
+                }; 
+                window.letsPlotCall = function(f) {
+                    window.letsPlotCallQueue.push(f);
+                };
+                (function() {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.6.1/js-package/distr/lets-plot.min.js";
+                    script.onload = function() {
+                        window.letsPlotCall = function(f) {f();};
+                        window.letsPlotCallQueue.forEach(function(f) {f();});
+                        window.letsPlotCallQueue = [];
+                        
+                    };
+                    script.onerror = function(event) {
+                        window.letsPlotCall = function(f) {};    // noop
+                        window.letsPlotCallQueue = [];
+                        var div = document.createElement("div");
+                        div.style.color = 'darkred';
+                        div.textContent = 'Error loading Lets-Plot JS';
+                        document.getElementById("dgoMnp").appendChild(div);
+                    };
+                    var e = document.getElementById("dgoMnp");
+                    e.appendChild(script);
+                })()
+            </script>
+            </div><div class="output text_html">
+            <div id="TGrnkL"></div>
+            <script type="text/javascript" data-lets-plot-script="library">
+                if(!window.letsPlotCallQueue) {
+                    window.letsPlotCallQueue = [];
+                }; 
+                window.letsPlotCall = function(f) {
+                    window.letsPlotCallQueue.push(f);
+                };
+                (function() {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.6.1/js-package/distr/lets-plot.min.js";
+                    script.onload = function() {
+                        window.letsPlotCall = function(f) {f();};
+                        window.letsPlotCallQueue.forEach(function(f) {f();});
+                        window.letsPlotCallQueue = [];
+                        
+                    };
+                    script.onerror = function(event) {
+                        window.letsPlotCall = function(f) {};    // noop
+                        window.letsPlotCallQueue = [];
+                        var div = document.createElement("div");
+                        div.style.color = 'darkred';
+                        div.textContent = 'Error loading Lets-Plot JS';
+                        document.getElementById("TGrnkL").appendChild(div);
+                    };
+                    var e = document.getElementById("TGrnkL");
+                    e.appendChild(script);
+                })()
+            </script>
+            </div><div class="output text_html">
+            <div id="oP378v"></div>
+            <script type="text/javascript" data-lets-plot-script="library">
+                if(!window.letsPlotCallQueue) {
+                    window.letsPlotCallQueue = [];
+                }; 
+                window.letsPlotCall = function(f) {
+                    window.letsPlotCallQueue.push(f);
+                };
+                (function() {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.6.1/js-package/distr/lets-plot.min.js";
+                    script.onload = function() {
+                        window.letsPlotCall = function(f) {f();};
+                        window.letsPlotCallQueue.forEach(function(f) {f();});
+                        window.letsPlotCallQueue = [];
+                        
+                    };
+                    script.onerror = function(event) {
+                        window.letsPlotCall = function(f) {};    // noop
+                        window.letsPlotCallQueue = [];
+                        var div = document.createElement("div");
+                        div.style.color = 'darkred';
+                        div.textContent = 'Error loading Lets-Plot JS';
+                        document.getElementById("oP378v").appendChild(div);
+                    };
+                    var e = document.getElementById("oP378v");
+                    e.appendChild(script);
+                })()
+            </script>
+            </div></div>
+</div>
+</section>
+<section id="regression-basics">
+<h2>Regression basics<a class="headerlink" href="#regression-basics" title="Link to this heading">#</a></h2>
+<p>There are two ways to run regressions: passing the data directly as objects, and using formulae. For most situations, the formula API is more convenient and so most of what we’ll cover uses this.</p>
+<p>For our workhorse regression package, we’ll be using <strong>pyfixest</strong>, which has <a class="reference external" href="https://github.com/s3alfisc/pyfixest/issues/202#issuecomment-1819958417">impressive speed</a>.</p>
+<p>We’ll use the starwars dataset to run a regression of mass on height for star wars characters. This example borrows very heavily from notes by <a class="reference external" href="https://grantmcdermott.com/">Grant McDermott</a>. First, let’s bring the dataset in:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;https://github.com/aeturrell/coding-for-economists/raw/main/data/starwars.csv&quot;</span><span class="p">,</span>
+    <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="c1"># Look at first few rows</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>height</th>
+      <th>mass</th>
+      <th>hair_color</th>
+      <th>eye_color</th>
+      <th>gender</th>
+      <th>homeworld</th>
+      <th>species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Luke Skywalker</td>
+      <td>172.0</td>
+      <td>77.0</td>
+      <td>blond</td>
+      <td>blue</td>
+      <td>male</td>
+      <td>Tatooine</td>
+      <td>Human</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>C-3PO</td>
+      <td>167.0</td>
+      <td>75.0</td>
+      <td>NaN</td>
+      <td>yellow</td>
+      <td>NaN</td>
+      <td>Tatooine</td>
+      <td>Droid</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>R2-D2</td>
+      <td>96.0</td>
+      <td>32.0</td>
+      <td>NaN</td>
+      <td>red</td>
+      <td>NaN</td>
+      <td>Naboo</td>
+      <td>Droid</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Darth Vader</td>
+      <td>202.0</td>
+      <td>136.0</td>
+      <td>none</td>
+      <td>yellow</td>
+      <td>male</td>
+      <td>Tatooine</td>
+      <td>Human</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Leia Organa</td>
+      <td>150.0</td>
+      <td>49.0</td>
+      <td>brown</td>
+      <td>brown</td>
+      <td>female</td>
+      <td>Alderaan</td>
+      <td>Human</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Okay, now let’s do a regression using OLS and a formula that says our y-variable is mass and our regressor is height:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_sw</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span><span class="s2">&quot;mass ~ height&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Well, where are the results!? They’re stored in the object we created. To peek at them we need to call the summary function (and, for easy reading, I’ll print it out too using <code class="docutils literal notranslate"><span class="pre">print</span></code>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_sw</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>###
+
+Estimation:  OLS
+Dep. var.: mass, Fixed effects: 0
+Inference:  iid
+Observations:  59
+
+| Coefficient   |   Estimate |   Std. Error |   t value |   Pr(&gt;|t|) |     2.5% |   97.5% |
+|:--------------|-----------:|-------------:|----------:|-----------:|---------:|--------:|
+| Intercept     |    -13.810 |      111.155 |    -0.124 |      0.902 | -236.393 | 208.773 |
+| height        |      0.639 |        0.626 |     1.020 |      0.312 |   -0.615 |   1.892 |
+---
+RMSE: 166.502 R2: 0.018 
+</pre></div>
+</div>
+</div>
+</div>
+<p>What we’re seeing here are really several bits of information glued together. To just grab the coefficient results in a tidy format, use</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_sw</span><span class="o">.</span><span class="n">tidy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Estimate</th>
+      <th>Std. Error</th>
+      <th>t value</th>
+      <th>Pr(&gt;|t|)</th>
+      <th>2.5%</th>
+      <th>97.5%</th>
+    </tr>
+    <tr>
+      <th>Coefficient</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Intercept</th>
+      <td>-13.810314</td>
+      <td>111.154526</td>
+      <td>-0.124244</td>
+      <td>0.901559</td>
+      <td>-236.393413</td>
+      <td>208.772785</td>
+    </tr>
+    <tr>
+      <th>height</th>
+      <td>0.638571</td>
+      <td>0.626058</td>
+      <td>1.019986</td>
+      <td>0.312045</td>
+      <td>-0.615089</td>
+      <td>1.892231</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>You’ll have noticed that we got an intercept, even though we didn’t specify one in the formula. <strong>pyfixest</strong> adds in an intercept by default because, most of the time, you will want one. To turn it off, add a <code class="docutils literal notranslate"><span class="pre">-1</span></code> at the end of the formula command, eg in this case you would call <code class="docutils literal notranslate"><span class="pre">feols(&quot;mass</span> <span class="pre">~</span> <span class="pre">height</span> <span class="pre">-1&quot;,</span> <span class="pre">data=df)</span></code>.</p>
+<p>The fit we got in the case with the intercept was pretty terrible; a low <span class="math notranslate nohighlight">\(R^2\)</span> and both of our confidence intervals are large and contain zero. What’s going on? If there’s one adage in regression that’s always worth paying attention to, it’s <em>always plot your data</em>. Let’s see what’s going on here (using <strong>matplotlib</strong> for plotting):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;height&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;mass&quot;</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+    <span class="s2">&quot;Jabba the Hutt&quot;</span><span class="p">,</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;mass&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()][[</span><span class="s2">&quot;height&quot;</span><span class="p">,</span> <span class="s2">&quot;mass&quot;</span><span class="p">]],</span>
+    <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">50</span><span class="p">),</span>
+    <span class="n">textcoords</span><span class="o">=</span><span class="s2">&quot;offset points&quot;</span><span class="p">,</span>
+    <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;fancy&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span>
+        <span class="n">connectionstyle</span><span class="o">=</span><span class="s2">&quot;arc3,rad=0.3&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Always plot the data&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8124476a1ef26c34675c8cf2ea11c257d8747d7f2c4b926602157c7b1a9c12f8.svg" src="_images/8124476a1ef26c34675c8cf2ea11c257d8747d7f2c4b926602157c7b1a9c12f8.svg" />
+</div>
+</div>
+<p>Oh dear, Jabba’s been on the paddy frogs again, and he’s a bit of different case. When we’re estimating statistical relationships, we have all kinds of choices and should be wary about arbitrary decisions of what to include or exclude in case we fool ourselves about the generality of the relationship we are capturing. Let’s say we knew that we weren’t interested in Hutts though, but only in other species: in that case, it’s fair enough to filter out Jabba and run the regression without this obvious outlier. We’ll exclude any entry that contains the string ‘Jabba’ in the <code class="docutils literal notranslate"><span class="pre">name</span></code> column:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_outlier_free</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span>
+    <span class="s2">&quot;mass ~ height&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;Jabba&quot;</span><span class="p">)]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results_outlier_free</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>###
+
+Estimation:  OLS
+Dep. var.: mass, Fixed effects: 0
+Inference:  iid
+Observations:  58
+
+| Coefficient   |   Estimate |   Std. Error |   t value |   Pr(&gt;|t|) |    2.5% |   97.5% |
+|:--------------|-----------:|-------------:|----------:|-----------:|--------:|--------:|
+| Intercept     |    -32.541 |       12.561 |    -2.591 |      0.012 | -57.703 |  -7.379 |
+| height        |      0.621 |        0.071 |     8.785 |      0.000 |   0.480 |   0.763 |
+---
+RMSE: 18.804 R2: 0.58 
+None
+</pre></div>
+</div>
+</div>
+</div>
+<p>This looks a lot more healthy. Not only is the model explaining a <em>lot</em> more of the data, but the coefficients are now significant.</p>
+<section id="standard-errors">
+<h3>Standard errors<a class="headerlink" href="#standard-errors" title="Link to this heading">#</a></h3>
+<p>You’ll have seen that there’s a column for the standard error of the estimates in the regression table and a message saying that the covariance type of these is ‘nonrobust’. Let’s say that, instead, we want to use Eicker-Huber-White robust standard errors, aka “HC2” standard errors. We can specify to use these up front standard errors up front in the fit method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span><span class="s2">&quot;mass ~ height&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">vcov</span><span class="o">=</span><span class="s2">&quot;HC2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>###
+
+Estimation:  OLS
+Dep. var.: mass, Fixed effects: 0
+Inference:  HC2
+Observations:  59
+
+| Coefficient   |   Estimate |   Std. Error |   t value |   Pr(&gt;|t|) |    2.5% |   97.5% |
+|:--------------|-----------:|-------------:|----------:|-----------:|--------:|--------:|
+| Intercept     |    -13.810 |       23.864 |    -0.579 |      0.565 | -61.596 |  33.976 |
+| height        |      0.639 |        0.089 |     7.139 |      0.000 |   0.459 |   0.818 |
+---
+RMSE: 166.502 R2: 0.018 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or, alternatively, we can go back to our existing results and get new standard errors “on the fly”:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_sw</span><span class="o">.</span><span class="n">vcov</span><span class="p">(</span><span class="s2">&quot;HC2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>###
+
+Estimation:  OLS
+Dep. var.: mass, Fixed effects: 0
+Inference:  HC2
+Observations:  59
+
+| Coefficient   |   Estimate |   Std. Error |   t value |   Pr(&gt;|t|) |    2.5% |   97.5% |
+|:--------------|-----------:|-------------:|----------:|-----------:|--------:|--------:|
+| Intercept     |    -13.810 |       23.864 |    -0.579 |      0.565 | -61.596 |  33.976 |
+| height        |      0.639 |        0.089 |     7.139 |      0.000 |   0.459 |   0.818 |
+---
+RMSE: 166.502 R2: 0.018 
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are several different types of standard errors available in <strong>pyfixest</strong>:</p>
+<ul class="simple">
+<li><p>“iid”, “HC1”, “HC2”, “HC3”</p></li>
+<li><p>“hetero”, for heteroskedasticity and autocorrelation consistent standard errors, for which you may want to also use some keyword arguments</p></li>
+<li><p>clustered standard errors: see below. CRV1 and CRV3 available.</p></li>
+</ul>
+<p>You can find information on all of these <a class="reference external" href="https://s3alfisc.github.io/pyfixest/tutorial/#standard-errors-and-inference">here</a>.</p>
+<p>For now, let’s look more closely at those last ones: clustered standard errors.</p>
+<section id="clustered-standard-errors">
+<h4>Clustered standard errors<a class="headerlink" href="#clustered-standard-errors" title="Link to this heading">#</a></h4>
+<p>Often, we know something about the structure of likely errors, namely that they occur in groups. In the below example we use one-way clusters to capture this effect in the errors.</p>
+<p>Note that in the below example, we grab a subset of the data for which a set of variables we’re interested in are defined, otherwise the below example would execute with an error because of missing cluster-group values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xf</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;homeworld&quot;</span><span class="p">,</span> <span class="s2">&quot;mass&quot;</span><span class="p">,</span> <span class="s2">&quot;height&quot;</span><span class="p">,</span> <span class="s2">&quot;species&quot;</span><span class="p">])</span>
+<span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span><span class="s2">&quot;mass ~ height&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">xf</span><span class="p">,</span> <span class="n">vcov</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;CRV1&quot;</span><span class="p">:</span> <span class="s2">&quot;homeworld&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>###
+
+Estimation:  OLS
+Dep. var.: mass, Fixed effects: 0
+Inference:  CRV1
+Observations:  55
+
+| Coefficient   |   Estimate |   Std. Error |   t value |   Pr(&gt;|t|) |    2.5% |   97.5% |
+|:--------------|-----------:|-------------:|----------:|-----------:|--------:|--------:|
+| Intercept     |     -8.795 |       29.150 |    -0.302 |      0.765 | -67.859 |  50.268 |
+| height        |      0.616 |        0.098 |     6.280 |      0.000 |   0.417 |   0.815 |
+---
+RMSE: 172.239 R2: 0.014 
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can add two-way clustering of standard errors using the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span><span class="s2">&quot;mass ~ height&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">xf</span><span class="p">,</span> <span class="n">vcov</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;CRV1&quot;</span><span class="p">:</span> <span class="s2">&quot;homeworld + species&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>###
+
+Estimation:  OLS
+Dep. var.: mass, Fixed effects: 0
+Inference:  CRV1
+Observations:  55
+
+| Coefficient   |   Estimate |   Std. Error |   t value |   Pr(&gt;|t|) |    2.5% |   97.5% |
+|:--------------|-----------:|-------------:|----------:|-----------:|--------:|--------:|
+| Intercept     |     -8.795 |       30.589 |    -0.288 |      0.776 | -71.357 |  53.766 |
+| height        |      0.616 |        0.104 |     5.938 |      0.000 |   0.404 |   0.828 |
+---
+RMSE: 172.239 R2: 0.014 
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you would generally expect, the addition of clustering has increased the standard errors.</p>
+</section>
+</section>
+</section>
+<section id="fixed-effects-and-categorical-variables">
+<h2>Fixed effects and categorical variables<a class="headerlink" href="#fixed-effects-and-categorical-variables" title="Link to this heading">#</a></h2>
+<p>Fixed effects are a way of allowing the intercept of a regression model to vary freely across individuals or groups. It is, for example, used to control for any individual-specific attributes that do not vary across time in panel data.</p>
+<p>Let’s use the ‘mtcars’ dataset to demonstrate this. We’ll read it in and set the datatypes of some of the columns at the same time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mpg</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;https://raw.githubusercontent.com/LOST-STATS/lost-stats.github.io/source/Data/mtcars.csv&quot;</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;mpg&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;hp&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;disp&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;cyl&quot;</span><span class="p">:</span> <span class="s2">&quot;category&quot;</span><span class="p">},</span>
+<span class="p">)</span>
+<span class="n">mpg</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>model</th>
+      <th>mpg</th>
+      <th>cyl</th>
+      <th>disp</th>
+      <th>hp</th>
+      <th>drat</th>
+      <th>wt</th>
+      <th>qsec</th>
+      <th>vs</th>
+      <th>am</th>
+      <th>gear</th>
+      <th>carb</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Mazda RX4</td>
+      <td>21.0</td>
+      <td>6</td>
+      <td>160.0</td>
+      <td>110.0</td>
+      <td>3.90</td>
+      <td>2.620</td>
+      <td>16.46</td>
+      <td>0</td>
+      <td>1</td>
+      <td>4</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Mazda RX4 Wag</td>
+      <td>21.0</td>
+      <td>6</td>
+      <td>160.0</td>
+      <td>110.0</td>
+      <td>3.90</td>
+      <td>2.875</td>
+      <td>17.02</td>
+      <td>0</td>
+      <td>1</td>
+      <td>4</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Datsun 710</td>
+      <td>22.8</td>
+      <td>4</td>
+      <td>108.0</td>
+      <td>93.0</td>
+      <td>3.85</td>
+      <td>2.320</td>
+      <td>18.61</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Hornet 4 Drive</td>
+      <td>21.4</td>
+      <td>6</td>
+      <td>258.0</td>
+      <td>110.0</td>
+      <td>3.08</td>
+      <td>3.215</td>
+      <td>19.44</td>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Hornet Sportabout</td>
+      <td>18.7</td>
+      <td>8</td>
+      <td>360.0</td>
+      <td>175.0</td>
+      <td>3.15</td>
+      <td>3.440</td>
+      <td>17.02</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now we have our data in we want to regress mpg (miles per gallon) on hp (horsepower) with fixed effects for cyl (cylinders). Now we <em>could</em> just pop in a formula like this <code class="docutils literal notranslate"><span class="pre">'mpg</span> <span class="pre">~</span> <span class="pre">hp</span> <span class="pre">+</span> <span class="pre">cyl'</span></code> because we took the trouble to declare that <code class="docutils literal notranslate"><span class="pre">cyl</span></code> was of datatype category when reading it in from the csv file. This means that statsmodels will treat it as a category and use it as a fixed effect by default.</p>
+<p>But when I read that formula I get nervous that <code class="docutils literal notranslate"><span class="pre">cyl</span></code> might not have been processed correctly (ie it could have been read in as a float, which is what it looks like) and it might just be treated as a float (aka a continuous variable) in the regression. Which is not what we want at all. So, to be safe, and make our intentions explicit (even when the data is of type ‘category’), it’s best to use the syntax <code class="docutils literal notranslate"><span class="pre">C(cyl)</span></code> to ask for a fixed effect.</p>
+<p>Here’s a regression which does that:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span><span class="s2">&quot;mpg ~ hp + C(cyl)&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">mpg</span><span class="p">)</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>###
+
+Estimation:  OLS
+Dep. var.: mpg, Fixed effects: 0
+Inference:  iid
+Observations:  32
+
+| Coefficient   |   Estimate |   Std. Error |   t value |   Pr(&gt;|t|) |    2.5% |   97.5% |
+|:--------------|-----------:|-------------:|----------:|-----------:|--------:|--------:|
+| Intercept     |     28.650 |        1.588 |    18.044 |      0.000 |  25.398 |  31.903 |
+| hp            |     -0.024 |        0.015 |    -1.560 |      0.130 |  -0.056 |   0.008 |
+| C(cyl)[T.6]   |     -5.968 |        1.639 |    -3.640 |      0.001 |  -9.326 |  -2.610 |
+| C(cyl)[T.8]   |     -8.521 |        2.326 |    -3.663 |      0.001 | -13.286 |  -3.756 |
+---
+RMSE: 2.943 R2: 0.754 
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see here that two of the three possible values of <code class="docutils literal notranslate"><span class="pre">cyl</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mpg</span><span class="p">[</span><span class="s2">&quot;cyl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;6&#39;, &#39;4&#39;, &#39;8&#39;]
+Categories (3, object): [&#39;4&#39;, &#39;6&#39;, &#39;8&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>have been added as fixed effects regressors. The way that <code class="docutils literal notranslate"><span class="pre">+C(cyl)</span></code> has been added makes it so that the coefficients given are relative to the coefficient for the intercept. We can turn the intercept off to get a coefficient per unique <code class="docutils literal notranslate"><span class="pre">cyl</span></code> value:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span><span class="s2">&quot;mpg ~ hp + C(cyl) -1&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">mpg</span><span class="p">)</span><span class="o">.</span><span class="n">tidy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Estimate</th>
+      <th>Std. Error</th>
+      <th>t value</th>
+      <th>Pr(&gt;|t|)</th>
+      <th>2.5%</th>
+      <th>97.5%</th>
+    </tr>
+    <tr>
+      <th>Coefficient</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Intercept</th>
+      <td>28.650118</td>
+      <td>1.587787</td>
+      <td>18.044056</td>
+      <td>0.000000</td>
+      <td>25.397684</td>
+      <td>31.902552</td>
+    </tr>
+    <tr>
+      <th>hp</th>
+      <td>-0.024039</td>
+      <td>0.015408</td>
+      <td>-1.560163</td>
+      <td>0.129954</td>
+      <td>-0.055600</td>
+      <td>0.007523</td>
+    </tr>
+    <tr>
+      <th>C(cyl)[T.6]</th>
+      <td>-5.967655</td>
+      <td>1.639278</td>
+      <td>-3.640418</td>
+      <td>0.001092</td>
+      <td>-9.325563</td>
+      <td>-2.609747</td>
+    </tr>
+    <tr>
+      <th>C(cyl)[T.8]</th>
+      <td>-8.520851</td>
+      <td>2.326075</td>
+      <td>-3.663188</td>
+      <td>0.001029</td>
+      <td>-13.285599</td>
+      <td>-3.756102</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>When there is an intercept, the coefficients of fixed effect variables can be interpreted as being the average of <span class="math notranslate nohighlight">\(y\)</span> for that class <em>compared</em> to the excluded classes holding all other categories and variables fixed.</p>
+<section id="high-dimensional-fixed-effects-aka-absorbing-regression">
+<h3>High dimensional fixed effects, aka absorbing regression<a class="headerlink" href="#high-dimensional-fixed-effects-aka-absorbing-regression" title="Link to this heading">#</a></h3>
+<p>Sometimes, you just have a LOT of fixed effects (and perhaps you don’t particularly care about them individually). A common example is having a large number of firms as part of a panel. Fortunately, there are ways to make regression with high dimensional fixed effects be both fast and concise. (In Stata, this is provided by the <code class="docutils literal notranslate"><span class="pre">reghdfe</span></code> package.)</p>
+<p>Let’s say we have a regression of the form</p>
+<div class="math notranslate nohighlight">
+\[
+y_i = x_i\cdot \beta + z_i\cdot \gamma +\epsilon_i
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(y_i\)</span> are observations indexed by <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(x_i\)</span> are vectors of exogenous variables we care about the coefficients (<span class="math notranslate nohighlight">\(\beta\)</span>), <span class="math notranslate nohighlight">\(z_i\)</span> are vectors of fixed effects we don’t care too much about the coefficients (<span class="math notranslate nohighlight">\(\gamma\)</span>) for, and the <span class="math notranslate nohighlight">\(\epsilon_i\)</span> are errors. Then we can use an <em>absorbing regression</em> to solve for the <span class="math notranslate nohighlight">\(\beta\)</span> while ignoring the <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
+<p>Here’s an example using simulated data on workers taken from the docs for a different regression package (<a class="reference external" href="https://bashtage.github.io/linearmodels//"><strong>linearmodels</strong></a>). Let’s simulate some data first, with two fixed effects (state and firm) alongside the two exogenous variables we’re interested in.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">numpy.random</span><span class="w"> </span><span class="kn">import</span> <span class="n">default_rng</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">default_rng</span><span class="p">()</span>  <span class="c1"># Random number generator</span>
+
+<span class="c1"># Create synthetic input data</span>
+<span class="n">nobs</span> <span class="o">=</span> <span class="mi">1_000_000</span>  <span class="c1"># No. observations</span>
+<span class="n">state_id</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">nobs</span><span class="p">)</span>  <span class="c1"># State identifier</span>
+<span class="n">firm_id</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="n">nobs</span> <span class="o">//</span> <span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">nobs</span><span class="p">)</span>  <span class="c1"># Firm identifier (mean of 5 workers/firm)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">((</span><span class="n">nobs</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># Exogenous variables</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;state_id&quot;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">state_id</span><span class="p">),</span>
+        <span class="s2">&quot;firm_id&quot;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">firm_id</span><span class="p">),</span>
+        <span class="s2">&quot;exog_0&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="s2">&quot;exog_1&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># Create synthetic relationship</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>  <span class="c1"># coefficients of interest</span>
+<span class="n">state_effects</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">state_id</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">state_effects</span> <span class="o">=</span> <span class="n">state_effects</span><span class="p">[</span><span class="n">state_id</span><span class="p">]</span>  <span class="c1"># Generate state fixed effects</span>
+<span class="n">firm_effects</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">firm_id</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">firm_effects</span> <span class="o">=</span> <span class="n">firm_effects</span><span class="p">[</span><span class="n">firm_id</span><span class="p">]</span>  <span class="c1"># Generate firm fixed effects</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">nobs</span><span class="p">)</span>  <span class="c1"># Generate errors</span>
+<span class="c1"># Generate endogeneous outcome variable</span>
+<span class="n">sim</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">sim</span><span class="p">[</span><span class="s2">&quot;exog_0&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">beta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="o">+</span> <span class="n">sim</span><span class="p">[</span><span class="s2">&quot;exog_1&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">beta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="o">+</span> <span class="n">firm_effects</span>
+    <span class="o">+</span> <span class="n">state_effects</span>
+    <span class="o">+</span> <span class="n">eps</span>
+<span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state_id</th>
+      <th>firm_id</th>
+      <th>exog_0</th>
+      <th>exog_1</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>44</td>
+      <td>53258</td>
+      <td>-0.857676</td>
+      <td>-0.214517</td>
+      <td>-0.735448</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>19</td>
+      <td>46892</td>
+      <td>1.566748</td>
+      <td>0.475191</td>
+      <td>3.549303</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>31</td>
+      <td>120287</td>
+      <td>-1.137149</td>
+      <td>-0.756408</td>
+      <td>-3.271708</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>37</td>
+      <td>3900</td>
+      <td>-0.525675</td>
+      <td>1.160383</td>
+      <td>2.367584</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>14</td>
+      <td>199504</td>
+      <td>-0.453512</td>
+      <td>-0.507235</td>
+      <td>0.420276</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now we pass this to <strong>pyfixest</strong> and with the <code class="docutils literal notranslate"><span class="pre">state_id</span></code> and <code class="docutils literal notranslate"><span class="pre">firm_id</span></code> variables entered after a vertical bar:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_hdfe</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span><span class="s2">&quot;y ~ exog_0 + exog_1 | state_id + firm_id&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">sim</span><span class="p">)</span>
+<span class="n">results_hdfe</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>###
+
+Estimation:  OLS
+Dep. var.: y, Fixed effects: state_id+firm_id
+Inference:  CRV1
+Observations:  1000000
+
+| Coefficient   |   Estimate |   Std. Error |   t value |   Pr(&gt;|t|) |   2.5% |   97.5% |
+|:--------------|-----------:|-------------:|----------:|-----------:|-------:|--------:|
+| exog_0        |      0.998 |        0.001 |   910.841 |      0.000 |  0.996 |   1.001 |
+| exog_1        |      3.000 |        0.001 |  3553.902 |      0.000 |  2.998 |   3.002 |
+---
+RMSE: 0.895 R2: 0.938 R2 Within: 0.909 
+</pre></div>
+</div>
+</div>
+</div>
+<p>So, from our 1,000,000 observations, we have roughly 200,000 fixed effects that have been scooped up and packed away, leaving us with just the coefficients, <span class="math notranslate nohighlight">\(\beta\)</span>, on the exogenous variables of interest.</p>
+</section>
+</section>
+<section id="transformations-of-regressors">
+<h2>Transformations of regressors<a class="headerlink" href="#transformations-of-regressors" title="Link to this heading">#</a></h2>
+<p>This chapter is showcasing <em>linear</em> regression. What that means is that the model is linear in the regressors: but it doesn’t mean that those regressors can’t be some kind of (potentially non-linear) transform of the original features <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
+<section id="logs-and-arcsinh">
+<h3>Logs and arcsinh<a class="headerlink" href="#logs-and-arcsinh" title="Link to this heading">#</a></h3>
+<p>You have two options for adding in logs: do them before, or do them in the formula. Doing them before just makes use of standard dataframe operations to declare a new column:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mpg</span><span class="p">[</span><span class="s2">&quot;lnhp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">mpg</span><span class="p">[</span><span class="s2">&quot;hp&quot;</span><span class="p">])</span>
+<span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span><span class="s2">&quot;mpg ~ lnhp&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">mpg</span><span class="p">)</span><span class="o">.</span><span class="n">tidy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Estimate</th>
+      <th>Std. Error</th>
+      <th>t value</th>
+      <th>Pr(&gt;|t|)</th>
+      <th>2.5%</th>
+      <th>97.5%</th>
+    </tr>
+    <tr>
+      <th>Coefficient</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Intercept</th>
+      <td>72.640475</td>
+      <td>6.004325</td>
+      <td>12.098024</td>
+      <td>4.551914e-13</td>
+      <td>60.378007</td>
+      <td>84.902943</td>
+    </tr>
+    <tr>
+      <th>lnhp</th>
+      <td>-10.764176</td>
+      <td>1.224304</td>
+      <td>-8.792079</td>
+      <td>8.387409e-10</td>
+      <td>-13.264538</td>
+      <td>-8.263814</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Alternatively, you can specify the log directly in the formula:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_ln</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span><span class="s2">&quot;mpg ~ np.log(hp)&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">mpg</span><span class="p">)</span>
+<span class="n">results_ln</span><span class="o">.</span><span class="n">tidy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Estimate</th>
+      <th>Std. Error</th>
+      <th>t value</th>
+      <th>Pr(&gt;|t|)</th>
+      <th>2.5%</th>
+      <th>97.5%</th>
+    </tr>
+    <tr>
+      <th>Coefficient</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Intercept</th>
+      <td>72.640475</td>
+      <td>6.004325</td>
+      <td>12.098024</td>
+      <td>4.551914e-13</td>
+      <td>60.378007</td>
+      <td>84.902943</td>
+    </tr>
+    <tr>
+      <th>np.log(hp)</th>
+      <td>-10.764176</td>
+      <td>1.224304</td>
+      <td>-8.792079</td>
+      <td>8.387409e-10</td>
+      <td>-13.264538</td>
+      <td>-8.263814</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Clearly, the first method will work for <code class="docutils literal notranslate"><span class="pre">arcsinh(x)</span></code> and <code class="docutils literal notranslate"><span class="pre">log(x+1)</span></code>, but you can also pass both of these into the formula directly too. (For more on the pros and cons of arcsinh, see <span id="id2">Bellemare and Wichman [<a class="reference internal" href="zreferences.html#id6" title="Marc F Bellemare and Casey J Wichman. Elasticities and the inverse hyperbolic sine transformation. Oxford Bulletin of Economics and Statistics, 82(1):50–61, 2020.">2020</a>]</span>.) Here it is with arcsinh:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span><span class="s2">&quot;mpg ~ np.arcsinh(hp)&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">mpg</span><span class="p">)</span><span class="o">.</span><span class="n">tidy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Estimate</th>
+      <th>Std. Error</th>
+      <th>t value</th>
+      <th>Pr(&gt;|t|)</th>
+      <th>2.5%</th>
+      <th>97.5%</th>
+    </tr>
+    <tr>
+      <th>Coefficient</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Intercept</th>
+      <td>80.104142</td>
+      <td>6.849916</td>
+      <td>11.694179</td>
+      <td>1.060707e-12</td>
+      <td>66.114748</td>
+      <td>94.093536</td>
+    </tr>
+    <tr>
+      <th>np.arcsinh(hp)</th>
+      <td>-10.764584</td>
+      <td>1.224363</td>
+      <td>-8.791985</td>
+      <td>8.389380e-10</td>
+      <td>-13.265067</td>
+      <td>-8.264100</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="interaction-terms-and-powers">
+<h3>Interaction terms and powers<a class="headerlink" href="#interaction-terms-and-powers" title="Link to this heading">#</a></h3>
+<p>This chapter is showcasing <em>linear</em> regression. What that means is that the model is linear in the regressors: but it doesn’t mean that those regressors can’t be some kind of non-linear transform of the original features <span class="math notranslate nohighlight">\(x_i\)</span>. Two of the most common transformations that you might want to use are <em>interaction terms</em> and <em>polynomial terms</em>. An example of an interaction term would be</p>
+<div class="math notranslate nohighlight">
+\[
+y = \beta_0 + \beta_1 x_1 \cdot x_2
+\]</div>
+<p>while an example of a polynomial term would be</p>
+<div class="math notranslate nohighlight">
+\[
+y = \beta_0 + \beta_1 x_1^2
+\]</div>
+<p>i.e. the last term enters only after it is multiplied by itself.</p>
+<p>One note of warning: the interpretation of the effect of a variable is no longer as simple as was set out at the start of this chapter. To work out <em>what</em> the new interpretation is, the procedure is the same though: just take the derivative. In the case of the interaction model above, the effect of a unit change in <span class="math notranslate nohighlight">\(x_1\)</span> on <span class="math notranslate nohighlight">\(y\)</span> is now going to be a function of <span class="math notranslate nohighlight">\(x_2\)</span>. In the case of the polynomial model above, the effect of a unit change in <span class="math notranslate nohighlight">\(x_1\)</span> on <span class="math notranslate nohighlight">\(y\)</span> will be <span class="math notranslate nohighlight">\(2\beta_1 \cdot x_1\)</span>. For more on interaction terms, see <span id="id3">Balli and Sørensen [<a class="reference internal" href="zreferences.html#id7" title="Hatice Ozer Balli and Bent E Sørensen. Interaction effects in econometrics. Empirical Economics, 45(1):583–603, 2013.">2013</a>]</span>.</p>
+<p>Alright, with all of that preamble out of the way, let’s see how we actual do some of this! Let’s try including a linear and squared term in the regression of <code class="docutils literal notranslate"><span class="pre">mpg</span></code> on <code class="docutils literal notranslate"><span class="pre">hp</span></code> making use of the numpy power function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res_poly</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span><span class="s2">&quot;mpg ~ hp + np.power(hp, 2)&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">mpg</span><span class="p">)</span>
+<span class="n">res_poly</span><span class="o">.</span><span class="n">tidy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Estimate</th>
+      <th>Std. Error</th>
+      <th>t value</th>
+      <th>Pr(&gt;|t|)</th>
+      <th>2.5%</th>
+      <th>97.5%</th>
+    </tr>
+    <tr>
+      <th>Coefficient</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Intercept</th>
+      <td>40.409117</td>
+      <td>2.740759</td>
+      <td>14.743766</td>
+      <td>5.107026e-15</td>
+      <td>34.803635</td>
+      <td>46.014600</td>
+    </tr>
+    <tr>
+      <th>hp</th>
+      <td>-0.213308</td>
+      <td>0.034884</td>
+      <td>-6.114812</td>
+      <td>1.162972e-06</td>
+      <td>-0.284654</td>
+      <td>-0.141963</td>
+    </tr>
+    <tr>
+      <th>np.power(hp, 2)</th>
+      <td>0.000421</td>
+      <td>0.000098</td>
+      <td>4.274647</td>
+      <td>1.889240e-04</td>
+      <td>0.000219</td>
+      <td>0.000622</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now let’s include the original term in hp, a term in disp, and the interaction between them, which is represented by hp:disp in the table. We can do this by multiplying out the terms:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res_inter</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span><span class="s2">&quot;mpg ~ hp * disp&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">mpg</span><span class="p">)</span>
+<span class="n">res_inter</span><span class="o">.</span><span class="n">tidy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Estimate</th>
+      <th>Std. Error</th>
+      <th>t value</th>
+      <th>Pr(&gt;|t|)</th>
+      <th>2.5%</th>
+      <th>97.5%</th>
+    </tr>
+    <tr>
+      <th>Coefficient</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Intercept</th>
+      <td>39.674263</td>
+      <td>2.914172</td>
+      <td>13.614248</td>
+      <td>7.172041e-14</td>
+      <td>33.704852</td>
+      <td>45.643674</td>
+    </tr>
+    <tr>
+      <th>hp</th>
+      <td>-0.097894</td>
+      <td>0.024745</td>
+      <td>-3.956175</td>
+      <td>4.725449e-04</td>
+      <td>-0.148581</td>
+      <td>-0.047207</td>
+    </tr>
+    <tr>
+      <th>disp</th>
+      <td>-0.073373</td>
+      <td>0.014387</td>
+      <td>-5.100113</td>
+      <td>2.109284e-05</td>
+      <td>-0.102843</td>
+      <td>-0.043904</td>
+    </tr>
+    <tr>
+      <th>hp:disp</th>
+      <td>0.000290</td>
+      <td>0.000087</td>
+      <td>3.336151</td>
+      <td>2.407037e-03</td>
+      <td>0.000112</td>
+      <td>0.000468</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>In the unusual case that you want <em>only</em> the interaction term, you write it as it appears in the table above:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res_only_inter</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span><span class="s2">&quot;mpg ~ hp : disp&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">mpg</span><span class="p">)</span>
+<span class="n">res_only_inter</span><span class="o">.</span><span class="n">tidy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Estimate</th>
+      <th>Std. Error</th>
+      <th>t value</th>
+      <th>Pr(&gt;|t|)</th>
+      <th>2.5%</th>
+      <th>97.5%</th>
+    </tr>
+    <tr>
+      <th>Coefficient</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Intercept</th>
+      <td>25.809854</td>
+      <td>1.005184</td>
+      <td>25.676738</td>
+      <td>0.000000e+00</td>
+      <td>23.756994</td>
+      <td>27.862715</td>
+    </tr>
+    <tr>
+      <th>hp:disp</th>
+      <td>-0.000142</td>
+      <td>0.000019</td>
+      <td>-7.408952</td>
+      <td>2.958491e-08</td>
+      <td>-0.000181</td>
+      <td>-0.000103</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="the-formula-api-explained">
+<h2>The formula API explained<a class="headerlink" href="#the-formula-api-explained" title="Link to this heading">#</a></h2>
+<p>As you will have seen <code class="docutils literal notranslate"><span class="pre">~</span></code> separates the left- and right-hand sides of the regression. <code class="docutils literal notranslate"><span class="pre">+</span></code> computes a set union, which will also be familiar from the examples above (ie it includes two terms as long as they are distinct). <code class="docutils literal notranslate"><span class="pre">-</span></code> computes a set difference; it adds the set of terms to the left of it while removing any that appear on the right of it. As we’ve seen, <code class="docutils literal notranslate"><span class="pre">a*b</span></code> is a short-hand for <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">+</span> <span class="pre">a:b</span></code>, with the last term representing the interaction. <code class="docutils literal notranslate"><span class="pre">/</span></code> is short hand for <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">a:b</span></code>, which is useful if, for example <code class="docutils literal notranslate"><span class="pre">b</span></code> is nested within <code class="docutils literal notranslate"><span class="pre">a</span></code>, so it doesn’t make sense to control for <code class="docutils literal notranslate"><span class="pre">b</span></code> on its own. Actually, the <code class="docutils literal notranslate"><span class="pre">:</span></code> character can interact multiple terms so that <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">+</span> <span class="pre">b):(d</span> <span class="pre">+</span> <span class="pre">c)</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">a:c</span> <span class="pre">+</span> <span class="pre">a:d</span> <span class="pre">+</span> <span class="pre">b:c</span> <span class="pre">+</span> <span class="pre">b:d</span></code>. <code class="docutils literal notranslate"><span class="pre">C(a)</span></code> tells statsmodels to treat <code class="docutils literal notranslate"><span class="pre">a</span></code> as a categorical variable that will be included as a fixed effect. Finally, as we saw above with powers, you can also pass in vectorised functions, such as <code class="docutils literal notranslate"><span class="pre">np.log()</span></code> and <code class="docutils literal notranslate"><span class="pre">np.power()</span></code>, directly into the formulae.</p>
+<p>One gotcha with the formula API is ensuring that you have sensible variable names in your dataframe, i.e. ones that do <em>not</em> include whitespace or, to take a really pathological example, have the name ‘a + b’ for one of the columns that you want to regress on. You can dodge this kind of problem by passing in the variable name as, for example, <code class="docutils literal notranslate"><span class="pre">Q(&quot;a</span> <span class="pre">+</span> <span class="pre">b&quot;)</span></code> to be clear that the <em>column name</em> is anything within the <code class="docutils literal notranslate"><span class="pre">Q(&quot;...&quot;)</span></code>.</p>
+</section>
+<section id="multiple-regression-models">
+<h2>Multiple regression models<a class="headerlink" href="#multiple-regression-models" title="Link to this heading">#</a></h2>
+<p>As is so often the case, you’re likely to want to run more than one model at once with different specifications. There are two  ways you may wish to do this.</p>
+<section id="comparing-a-set-of-models-you-ve-already-created">
+<h3>Comparing a set of models you’ve already created<a class="headerlink" href="#comparing-a-set-of-models-you-ve-already-created" title="Link to this heading">#</a></h3>
+<p>In the code above, we created three different models: <code class="docutils literal notranslate"><span class="pre">results_ln</span></code>, <code class="docutils literal notranslate"><span class="pre">res_poly</span></code>, and <code class="docutils literal notranslate"><span class="pre">res_inter</span></code>. Let’s say we now want to compare them in a table: we can! By using <strong>pyfixest</strong>’s <code class="docutils literal notranslate"><span class="pre">etable()</span></code> function. (If you need to do this in <strong>statsmodels</strong>, use <code class="docutils literal notranslate"><span class="pre">summary_col()</span></code> as explained <a class="reference external" href="https://aeturrell.com/blog/posts/running-many-regressions-alongside-pandas/">here</a> or <a class="reference external" href="https://github.com/mwburke/stargazer"><strong>stargazer</strong></a>.)</p>
+<p>Let’s see <code class="docutils literal notranslate"><span class="pre">etable</span></code> in action:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pf</span><span class="o">.</span><span class="n">etable</span><span class="p">([</span><span class="n">results_ln</span><span class="p">,</span> <span class="n">res_poly</span><span class="p">,</span> <span class="n">res_inter</span><span class="p">],</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;df&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>est1</th>
+      <th>est2</th>
+      <th>est3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>depvar</th>
+      <td>mpg</td>
+      <td>mpg</td>
+      <td>mpg</td>
+    </tr>
+    <tr>
+      <th>np.log(hp)</th>
+      <td>-10.764*** \n (1.224)</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>hp</th>
+      <td></td>
+      <td>-0.213*** \n (0.035)</td>
+      <td>-0.098*** \n (0.025)</td>
+    </tr>
+    <tr>
+      <th>np.power(hp, 2)</th>
+      <td></td>
+      <td>0.000*** \n (0.000)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>disp</th>
+      <td></td>
+      <td></td>
+      <td>-0.073*** \n (0.014)</td>
+    </tr>
+    <tr>
+      <th>hp:disp</th>
+      <td></td>
+      <td></td>
+      <td>0.000** \n (0.000)</td>
+    </tr>
+    <tr>
+      <th>Intercept</th>
+      <td>72.640*** \n (6.004)</td>
+      <td>40.409*** \n (2.741)</td>
+      <td>39.674*** \n (2.914)</td>
+    </tr>
+    <tr>
+      <th>Observations</th>
+      <td>32</td>
+      <td>32</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>S.E. type</th>
+      <td>iid</td>
+      <td>iid</td>
+      <td>iid</td>
+    </tr>
+    <tr>
+      <th>R2</th>
+      <td>0.720</td>
+      <td>0.756</td>
+      <td>0.820</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>There are a few different <code class="docutils literal notranslate"><span class="pre">type=</span></code> options, including dataframe, markdown, and latex:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pf</span><span class="o">.</span><span class="n">etable</span><span class="p">([</span><span class="n">results_ln</span><span class="p">,</span> <span class="n">res_poly</span><span class="p">,</span> <span class="n">res_inter</span><span class="p">],</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;md&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>index                   est1        est2        est3
+---------------  -----------  ----------  ----------
+depvar                   mpg         mpg         mpg
+----------------------------------------------------
+np.log(hp)       -10.764***
+                     (1.224)
+hp                            -0.213***   -0.098***
+                                 (0.035)     (0.025)
+np.power(hp, 2)                0.000***
+                                 (0.000)
+disp                                      -0.073***
+                                             (0.014)
+hp:disp                                     0.000**
+                                             (0.000)
+Intercept         72.640***   40.409***   39.674***
+                     (6.004)     (2.741)     (2.914)
+----------------------------------------------------
+Observations              32          32          32
+S.E. type                iid         iid         iid
+R2                     0.720       0.756       0.820
+----------------------------------------------------
+</pre></div>
+</div>
+</div>
+</div>
+<p>And of course the latex one (<code class="docutils literal notranslate"><span class="pre">type=&quot;tex&quot;</span></code>) can be written to a file using <code class="docutils literal notranslate"><span class="pre">open('regression.tex',</span> <span class="pre">'w').write(...)</span></code> where the ellipsis is the relevant <code class="docutils literal notranslate"><span class="pre">etable()</span></code> command.</p>
+</section>
+<section id="stepwise-multiple-models">
+<h3>Stepwise multiple models<a class="headerlink" href="#stepwise-multiple-models" title="Link to this heading">#</a></h3>
+<p>Sometimes you want to use a formula and add variables in step-wise. There are 4 stepwise functions: <code class="docutils literal notranslate"><span class="pre">sw</span></code>, <code class="docutils literal notranslate"><span class="pre">sw0</span></code>, <code class="docutils literal notranslate"><span class="pre">csw</span></code>, <code class="docutils literal notranslate"><span class="pre">csw0</span></code>.</p>
+<p>Assume you have the following formula: <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">sw(x2,</span> <span class="pre">x3)</span></code>. The stepwise function sw will estimate the following two models: <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x3</span></code>. That is, each element in <code class="docutils literal notranslate"><span class="pre">sw()</span></code> is sequentially, and separately, added to the formula. If you use <code class="docutils literal notranslate"><span class="pre">sw0</span></code> in lieu of <code class="docutils literal notranslate"><span class="pre">sw</span></code>, then the model <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x1</span></code> would also be estimated: the <code class="docutils literal notranslate"><span class="pre">0</span></code> in the name implies that the model without any stepwise element will also be estimated. This explains how to use <code class="docutils literal notranslate"><span class="pre">sw</span></code> and <code class="docutils literal notranslate"><span class="pre">sw0</span></code>.</p>
+<p>The prefix c in the remaining two options, <code class="docutils literal notranslate"><span class="pre">csw</span></code> and <code class="docutils literal notranslate"><span class="pre">csw0</span></code>, means “cumulative”: each stepwise element is added to the next. That is, <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">csw(x2,</span> <span class="pre">x3)</span></code> would cause <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2</span> <span class="pre">+</span> <span class="pre">x3</span></code> to be estimated. The <code class="docutils literal notranslate"><span class="pre">0</span></code> has the same meaning, ie it estimates the most basic version. As an example, <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">csw0(x2,</span> <span class="pre">x3)</span></code> leads to the following three models being estimated: <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x1</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2</span> <span class="pre">+</span> <span class="pre">x3</span></code>.</p>
+<p>Let’s see some examples (courtesy of the brilliant <strong>fixest</strong> documentation for the statistical language R). We’ll be using the iris dataset, which comes with the <strong>plotly</strong> package.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
+
+<span class="n">iris</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">iris</span><span class="p">()</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="s2">&quot;x2&quot;</span><span class="p">,</span> <span class="s2">&quot;x3&quot;</span><span class="p">,</span> <span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">]</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>y</th>
+      <th>x1</th>
+      <th>x2</th>
+      <th>x3</th>
+      <th>species</th>
+      <th>id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Let’s try a regular (not cumulative) stepwise regression:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span><span class="s2">&quot;y ~ sw(x1, x2, x3)&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">iris</span><span class="p">)</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>###
+
+Estimation:  OLS
+Dep. var.: y, Fixed effects: 0
+Inference:  iid
+Observations:  150
+
+| Coefficient   |   Estimate |   Std. Error |   t value |   Pr(&gt;|t|) |   2.5% |   97.5% |
+|:--------------|-----------:|-------------:|----------:|-----------:|-------:|--------:|
+| Intercept     |      6.481 |        0.481 |    13.466 |      0.000 |  5.530 |   7.432 |
+| x1            |     -0.209 |        0.156 |    -1.339 |      0.183 | -0.517 |   0.099 |
+---
+RMSE: 0.82 R2: 0.012 
+###
+
+Estimation:  OLS
+Dep. var.: y, Fixed effects: 0
+Inference:  iid
+Observations:  150
+
+| Coefficient   |   Estimate |   Std. Error |   t value |   Pr(&gt;|t|) |   2.5% |   97.5% |
+|:--------------|-----------:|-------------:|----------:|-----------:|-------:|--------:|
+| Intercept     |      4.306 |        0.078 |    54.895 |      0.000 |  4.151 |   4.461 |
+| x2            |      0.409 |        0.019 |    21.646 |      0.000 |  0.372 |   0.446 |
+---
+RMSE: 0.404 R2: 0.76 
+###
+
+Estimation:  OLS
+Dep. var.: y, Fixed effects: 0
+Inference:  iid
+Observations:  150
+
+| Coefficient   |   Estimate |   Std. Error |   t value |   Pr(&gt;|t|) |   2.5% |   97.5% |
+|:--------------|-----------:|-------------:|----------:|-----------:|-------:|--------:|
+| Intercept     |      4.779 |        0.073 |    65.616 |      0.000 |  4.636 |   4.923 |
+| x3            |      0.888 |        0.051 |    17.297 |      0.000 |  0.786 |   0.989 |
+---
+RMSE: 0.475 R2: 0.669 
+</pre></div>
+</div>
+</div>
+</div>
+<p>And a cumulative stepwise regression:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span><span class="s2">&quot;y ~ csw(x1, x2, x3)&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">iris</span><span class="p">)</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>###
+
+Estimation:  OLS
+Dep. var.: y, Fixed effects: 0
+Inference:  iid
+Observations:  150
+
+| Coefficient   |   Estimate |   Std. Error |   t value |   Pr(&gt;|t|) |   2.5% |   97.5% |
+|:--------------|-----------:|-------------:|----------:|-----------:|-------:|--------:|
+| Intercept     |      6.481 |        0.481 |    13.466 |      0.000 |  5.530 |   7.432 |
+| x1            |     -0.209 |        0.156 |    -1.339 |      0.183 | -0.517 |   0.099 |
+---
+RMSE: 0.82 R2: 0.012 
+###
+
+Estimation:  OLS
+Dep. var.: y, Fixed effects: 0
+Inference:  iid
+Observations:  150
+
+| Coefficient   |   Estimate |   Std. Error |   t value |   Pr(&gt;|t|) |   2.5% |   97.5% |
+|:--------------|-----------:|-------------:|----------:|-----------:|-------:|--------:|
+| Intercept     |      2.251 |        0.247 |     9.104 |      0.000 |  1.763 |   2.740 |
+| x1            |      0.597 |        0.069 |     8.602 |      0.000 |  0.460 |   0.734 |
+| x2            |      0.471 |        0.017 |    27.616 |      0.000 |  0.437 |   0.504 |
+---
+RMSE: 0.33 R2: 0.84 
+###
+
+Estimation:  OLS
+Dep. var.: y, Fixed effects: 0
+Inference:  iid
+Observations:  150
+
+| Coefficient   |   Estimate |   Std. Error |   t value |   Pr(&gt;|t|) |   2.5% |   97.5% |
+|:--------------|-----------:|-------------:|----------:|-----------:|-------:|--------:|
+| Intercept     |      1.845 |        0.250 |     7.368 |      0.000 |  1.350 |   2.340 |
+| x1            |      0.655 |        0.067 |     9.823 |      0.000 |  0.523 |   0.787 |
+| x2            |      0.711 |        0.057 |    12.560 |      0.000 |  0.599 |   0.823 |
+| x3            |     -0.563 |        0.127 |    -4.426 |      0.000 | -0.814 |  -0.311 |
+---
+RMSE: 0.31 R2: 0.859 
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is a very verbose way to get regression coefficients out! We can get a summary of the info by using <code class="docutils literal notranslate"><span class="pre">etable</span></code> again, but this time as a <em>method</em> rather than a stand-alone function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg_iris_csw</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span><span class="s2">&quot;y ~ csw(x1, x2, x3)&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">iris</span><span class="p">)</span>
+<span class="n">reg_iris_csw</span><span class="o">.</span><span class="n">etable</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="ezjwrshyxj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>
+#ezjwrshyxj table {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+#ezjwrshyxj thead, tbody, tfoot, tr, td, th { border-style: none; }
+ tr { background-color: transparent; }
+#ezjwrshyxj p { margin: 0; padding: 0; }
+ #ezjwrshyxj .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: hidden; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #ezjwrshyxj .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #ezjwrshyxj .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #ezjwrshyxj .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #ezjwrshyxj .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #ezjwrshyxj .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #ezjwrshyxj .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: black; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: black; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #ezjwrshyxj .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 0px; border-left-color: white; border-right-style: none; border-right-width: 0px; border-right-color: white; vertical-align: bottom; padding-top: 4px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #ezjwrshyxj .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #ezjwrshyxj .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #ezjwrshyxj .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #ezjwrshyxj .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: black; vertical-align: bottom; padding-top: 4px; padding-bottom: 4px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #ezjwrshyxj .gt_spanner_row { border-bottom-style: hidden; }
+ #ezjwrshyxj .gt_group_heading { padding-top: 0px; padding-bottom: 0px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 0px; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 0.5px; border-top-color: black; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: black; border-left-style: none; border-left-width: 1px; border-left-color: white; border-right-style: none; border-right-width: 1px; border-right-color: white; vertical-align: middle; text-align: left; }
+ #ezjwrshyxj .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 0px; font-weight: initial; border-top-style: solid; border-top-width: 0.5px; border-top-color: black; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: black; vertical-align: middle; }
+ #ezjwrshyxj .gt_from_md> :first-child { margin-top: 0; }
+ #ezjwrshyxj .gt_from_md> :last-child { margin-bottom: 0; }
+ #ezjwrshyxj .gt_row { padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: none; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 0px; border-left-color: white; border-right-style: none; border-right-width: 0px; border-right-color: white; vertical-align: middle; overflow-x: hidden; }
+ #ezjwrshyxj .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: hidden; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #ezjwrshyxj .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #ezjwrshyxj .gt_row_group_first td { border-top-width: 0.5px; }
+ #ezjwrshyxj .gt_row_group_first th { border-top-width: 0.5px; }
+ #ezjwrshyxj .gt_striped { background-color: rgba(128,128,128,0.05); }
+ #ezjwrshyxj .gt_table_body { border-top-style: solid; border-top-width: 0.5px; border-top-color: black; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: black; }
+ #ezjwrshyxj .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #ezjwrshyxj .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #ezjwrshyxj .gt_left { text-align: left; }
+ #ezjwrshyxj .gt_center { text-align: center; }
+ #ezjwrshyxj .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #ezjwrshyxj .gt_font_normal { font-weight: normal; }
+ #ezjwrshyxj .gt_font_bold { font-weight: bold; }
+ #ezjwrshyxj .gt_font_italic { font-style: italic; }
+ #ezjwrshyxj .gt_super { font-size: 65%; }
+ #ezjwrshyxj .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #ezjwrshyxj .gt_asterisk { font-size: 100%; vertical-align: 0; }
+ 
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+
+<tr class="gt_col_headings gt_spanner_row">
+  <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id=""></th>
+  <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="y">
+    <span class="gt_column_spanner">y</span>
+  </th>
+</tr>
+<tr class="gt_col_headings">
+  <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="0">(1)</th>
+  <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="1">(2)</th>
+  <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="2">(3)</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+  <tr class="gt_group_heading_row">
+    <th class="gt_group_heading" colspan="4">coef</th>
+  </tr>
+  <tr>
+    <th class="gt_row gt_left gt_stub">x1</th>
+    <td class="gt_row gt_center">-0.209 <br> (0.156)</td>
+    <td class="gt_row gt_center">0.597*** <br> (0.069)</td>
+    <td class="gt_row gt_center">0.655*** <br> (0.067)</td>
+  </tr>
+  <tr>
+    <th class="gt_row gt_left gt_stub">x2</th>
+    <td class="gt_row gt_center"></td>
+    <td class="gt_row gt_center">0.471*** <br> (0.017)</td>
+    <td class="gt_row gt_center">0.711*** <br> (0.057)</td>
+  </tr>
+  <tr>
+    <th class="gt_row gt_left gt_stub">x3</th>
+    <td class="gt_row gt_center"></td>
+    <td class="gt_row gt_center"></td>
+    <td class="gt_row gt_center">-0.563*** <br> (0.127)</td>
+  </tr>
+  <tr>
+    <th class="gt_row gt_left gt_stub">Intercept</th>
+    <td class="gt_row gt_center">6.481*** <br> (0.481)</td>
+    <td class="gt_row gt_center">2.251*** <br> (0.247)</td>
+    <td class="gt_row gt_center">1.845*** <br> (0.250)</td>
+  </tr>
+  <tr class="gt_group_heading_row">
+    <th class="gt_group_heading" colspan="4">stats</th>
+  </tr>
+  <tr>
+    <th class="gt_row gt_left gt_stub">Observations</th>
+    <td class="gt_row gt_center">150</td>
+    <td class="gt_row gt_center">150</td>
+    <td class="gt_row gt_center">150</td>
+  </tr>
+  <tr>
+    <th class="gt_row gt_left gt_stub">S.E. type</th>
+    <td class="gt_row gt_center">iid</td>
+    <td class="gt_row gt_center">iid</td>
+    <td class="gt_row gt_center">iid</td>
+  </tr>
+  <tr>
+    <th class="gt_row gt_left gt_stub">R<sup>2</sup></th>
+    <td class="gt_row gt_center">0.012</td>
+    <td class="gt_row gt_center">0.840</td>
+    <td class="gt_row gt_center">0.859</td>
+  </tr>
+</tbody>
+  <tfoot class="gt_sourcenotes">
+  
+  <tr>
+    <td class="gt_sourcenote" colspan="4">Significance levels: * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001. Format of coefficient cell:
+Coefficient 
+ (Std. Error)</td>
+  </tr>
+
+</tfoot>
+
+</table>
+
+</div>
+        </div></div>
+</div>
+<p>Even handier, <strong>pyfixest</strong> lets you visualise these results (via <strong>Lets-Plot</strong>):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg_iris_csw</span><span class="o">.</span><span class="n">coefplot</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">   <div id="6RKUm4"></div>
+   <script type="text/javascript" data-lets-plot-script="plot">
+   
+   (function() {
+   // ----------
+   
+   const forceImmediateRender = false;
+   const responsive = false;
+   
+   let sizing = {
+       width_mode: "MIN",
+       height_mode: "SCALED",
+       width: null, 
+       height: null 
+   };
+   
+   const preferredWidth = document.body.dataset.letsPlotPreferredWidth;
+   if (preferredWidth !== undefined) {
+       sizing = {
+           width_mode: 'FIXED',
+           height_mode: 'SCALED',
+           width: parseFloat(preferredWidth)
+       };
+   }
+   
+   const containerDiv = document.getElementById("6RKUm4");
+   let fig = null;
+   
+   function renderPlot() {
+       if (fig === null) {
+           const plotSpec = {
+"data":{
+"Coefficient":["Intercept","Intercept","Intercept","x1","x1","x1","Intercept","Intercept","Intercept","x1","x1","x1","x2","x2","Intercept","Intercept","Intercept","x1","x1","x1","x2","x2","x3"],
+"Estimate":[6.481223211459711,2.2512945950851306,1.8450608032162599,-0.20887029408198413,0.596752519311361,0.6548642427854501,6.481223211459711,2.2512945950851306,1.8450608032162599,-0.20887029408198413,0.596752519311361,0.6548642427854501,0.47079368861421705,0.7110629145526448,6.481223211459711,2.2512945950851306,1.8450608032162599,-0.20887029408198413,0.596752519311361,0.6548642427854501,0.47079368861421705,0.7110629145526448,-0.5625678605519202],
+"2.5%":[5.53012510189775,1.7625981579608478,1.3501394661194241,-0.5172255483370493,0.4596547365435999,0.5231022847389472,5.53012510189775,1.7625981579608478,1.3501394661194241,-0.5172255483370493,0.4596547365435999,0.5231022847389472,0.43710284144635514,0.5991725075540556,5.53012510189775,1.7625981579608478,1.3501394661194241,-0.5172255483370493,0.4596547365435999,0.5231022847389472,0.43710284144635514,0.5991725075540556,-0.8137832967943557],
+"97.5%":[7.432321321021672,2.7399910322094136,2.3399821403130954,0.09948496017308103,0.733850302079122,0.786626200831953,7.432321321021672,2.7399910322094136,2.3399821403130954,0.09948496017308103,0.733850302079122,0.786626200831953,0.504484535782079,0.822953321551234,7.432321321021672,2.7399910322094136,2.3399821403130954,0.09948496017308103,0.733850302079122,0.786626200831953,0.504484535782079,0.822953321551234,-0.31135242430948473],
+"Model":["y~x1: 95.0%","y~x1+x2: 95.0%","y~x1+x2+x3: 95.0%","y~x1: 95.0%","y~x1+x2: 95.0%","y~x1+x2+x3: 95.0%","y~x1: 95.0%","y~x1+x2: 95.0%","y~x1+x2+x3: 95.0%","y~x1: 95.0%","y~x1+x2: 95.0%","y~x1+x2+x3: 95.0%","y~x1+x2: 95.0%","y~x1+x2+x3: 95.0%","y~x1: 95.0%","y~x1+x2: 95.0%","y~x1+x2+x3: 95.0%","y~x1: 95.0%","y~x1+x2: 95.0%","y~x1+x2+x3: 95.0%","y~x1+x2: 95.0%","y~x1+x2+x3: 95.0%","y~x1+x2+x3: 95.0%"]
+},
+"mapping":{
+"x":"Coefficient",
+"y":"Estimate",
+"color":"Model"
+},
+"data_meta":{
+"series_annotations":[{
+"type":"int",
+"column":"level_0"
+},{
+"type":"str",
+"column":"Coefficient"
+},{
+"type":"int",
+"column":"index"
+},{
+"type":"float",
+"column":"Estimate"
+},{
+"type":"float",
+"column":"Std. Error"
+},{
+"type":"float",
+"column":"t value"
+},{
+"type":"float",
+"column":"Pr(>|t|)"
+},{
+"type":"float",
+"column":"2.5%"
+},{
+"type":"float",
+"column":"97.5%"
+},{
+"type":"str",
+"column":"Model"
+}]
+},
+"guides":{
+"y":{
+"title":"Estimate and 95.0% Confidence Interval"
+}
+},
+"coord":{
+"name":"flip",
+"flip":true
+},
+"ggsize":{
+"width":500.0,
+"height":300.0
+},
+"theme":{
+"axis_text_x":{
+"angle":0.0,
+"blank":false
+}
+},
+"kind":"plot",
+"scales":[],
+"layers":[{
+"geom":"point",
+"mapping":{
+},
+"position":{
+"name":"dodge",
+"width":0.5
+},
+"data_meta":{
+},
+"data":{
+}
+},{
+"geom":"errorbar",
+"mapping":{
+"ymin":"2.5%",
+"ymax":"97.5%"
+},
+"position":{
+"name":"dodge",
+"width":0.5
+},
+"data_meta":{
+},
+"width":0.05,
+"data":{
+}
+},{
+"geom":"hline",
+"mapping":{
+},
+"data_meta":{
+},
+"yintercept":0.0,
+"linetype":"dashed",
+"color":"black",
+"data":{
+}
+}],
+"metainfo_list":[],
+"spec_id":"1"
+};
+           window.letsPlotCall(function() { fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, containerDiv, sizing); });
+       } else {
+           fig.updateView({});
+       }
+   }
+   
+   const renderImmediately = 
+       forceImmediateRender || (
+           sizing.width_mode === 'FIXED' && 
+           (sizing.height_mode === 'FIXED' || sizing.height_mode === 'SCALED')
+       );
+   
+   if (renderImmediately) {
+       renderPlot();
+   }
+   
+   if (!renderImmediately || responsive) {
+       // Set up observer for initial sizing or continuous monitoring
+       var observer = new ResizeObserver(function(entries) {
+           for (let entry of entries) {
+               if (entry.contentBoxSize && 
+                   entry.contentBoxSize[0].inlineSize > 0) {
+                   if (!responsive && observer) {
+                       observer.disconnect();
+                       observer = null;
+                   }
+                   renderPlot();
+                   if (!responsive) {
+                       break;
+                   }
+               }
+           }
+       });
+       
+       observer.observe(containerDiv);
+   }
+   
+   // ----------
+   })();
+   
+   </script></div></div>
+</div>
+</section>
+</section>
+<section id="instrumental-variables">
+<h2>Instrumental variables<a class="headerlink" href="#instrumental-variables" title="Link to this heading">#</a></h2>
+<p>We will again be using <strong>pyfixest</strong> for instrumental variables (IV) regression. This sub-section is indebted to another package, <a class="reference external" href="https://bashtage.github.io/linearmodels//doc/index.html"><strong>linearmodels</strong></a>, for the following example.</p>
+<p>Recall that a good instrumental variable <span class="math notranslate nohighlight">\(z\)</span> has zero covariance with the error from the regression (which is untestable) and non-zero covariance with the variable of interest (which is).</p>
+<p>Recall that in IV regression, we have a model of the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}y_i    &amp; = x_{1i}\hat{\beta}_1 + x_{2i}\hat{\beta}_2 + \epsilon_i \\
+x_{2i} &amp; = z_{1i}\hat{\delta} + z_{2i}\hat{\gamma} + \nu_i\end{split}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(x_{1i}\)</span> is a set of <span class="math notranslate nohighlight">\(k_1\)</span> exogenous regressors and <span class="math notranslate nohighlight">\(x_{2i}\)</span> is a set of <span class="math notranslate nohighlight">\(k_2\)</span> endogenous regressors such that <span class="math notranslate nohighlight">\(\text{Cov}(x_{2i}, \epsilon_i)\neq 0\)</span>. This is a problem for the usual OLS assumptions (the right-hand side should be exogenous).</p>
+<p>To get around this, in 2-stage least squares IV, we first regress <span class="math notranslate nohighlight">\(x_{2i}\)</span> on instruments that explain <span class="math notranslate nohighlight">\(x_{2i}\)</span> <em>but not</em> <span class="math notranslate nohighlight">\(y_i\)</span>, and then regress <span class="math notranslate nohighlight">\(y_i\)</span> only on the predicted/estimated left-hand side from the first regression, ie on <span class="math notranslate nohighlight">\(\hat{x}_{2i}\)</span>.</p>
+<p>It’s always easiest to see an example, so let’s estimate what might cause (realised) cigarette demand for the 48 continental US states in 1995.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dfiv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;https://vincentarelbundock.github.io/Rdatasets/csv/AER/CigarettesSW.csv&quot;</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;category&quot;</span><span class="p">},</span>
+<span class="p">)</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+    <span class="n">rprice</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;cpi&quot;</span><span class="p">],</span>
+    <span class="n">rincome</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;income&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;cpi&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="n">dfiv</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rownames</th>
+      <th>state</th>
+      <th>year</th>
+      <th>cpi</th>
+      <th>population</th>
+      <th>packs</th>
+      <th>income</th>
+      <th>tax</th>
+      <th>price</th>
+      <th>taxs</th>
+      <th>rprice</th>
+      <th>rincome</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>AL</td>
+      <td>1985</td>
+      <td>1.076</td>
+      <td>3973000</td>
+      <td>116.486282</td>
+      <td>46014968</td>
+      <td>32.500004</td>
+      <td>102.181671</td>
+      <td>33.348335</td>
+      <td>94.964381</td>
+      <td>10.763866</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>AR</td>
+      <td>1985</td>
+      <td>1.076</td>
+      <td>2327000</td>
+      <td>128.534592</td>
+      <td>26210736</td>
+      <td>37.000000</td>
+      <td>101.474998</td>
+      <td>37.000000</td>
+      <td>94.307622</td>
+      <td>10.468165</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>AZ</td>
+      <td>1985</td>
+      <td>1.076</td>
+      <td>3184000</td>
+      <td>104.522614</td>
+      <td>43956936</td>
+      <td>31.000000</td>
+      <td>108.578751</td>
+      <td>36.170418</td>
+      <td>100.909622</td>
+      <td>12.830456</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>CA</td>
+      <td>1985</td>
+      <td>1.076</td>
+      <td>26444000</td>
+      <td>100.363037</td>
+      <td>447102816</td>
+      <td>26.000000</td>
+      <td>107.837341</td>
+      <td>32.104000</td>
+      <td>100.220580</td>
+      <td>15.713321</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>CO</td>
+      <td>1985</td>
+      <td>1.076</td>
+      <td>3209000</td>
+      <td>112.963539</td>
+      <td>49466672</td>
+      <td>31.000000</td>
+      <td>94.266663</td>
+      <td>31.000000</td>
+      <td>87.608425</td>
+      <td>14.326190</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now we’ll specify the model. It’s going to be in the form <code class="docutils literal notranslate"><span class="pre">dep</span> <span class="pre">~</span> <span class="pre">exog</span> <span class="pre">+</span> <span class="pre">[endog</span> <span class="pre">~</span> <span class="pre">instruments]</span></code>, where endog will be regressed on instruments and dep will be regressed on both exog and the predicted values of endog.</p>
+<p>In this case, the model will be</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Price}_i = \hat{\pi}_0 + \hat{\pi}_1 \text{SalesTax}_i + v_i 
+\]</div>
+<p>in the first stage regression and</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Packs}_i = \hat{\beta}_0 + \hat{\beta}_2\widehat{\text{Price}_i} + \hat{\beta}_1 \text{RealIncome}_i + u_i
+\]</div>
+<p>in the second stage.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_iv</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span>
+    <span class="s2">&quot;np.log(packs) ~ np.log(rincome) + 1 | year + state | np.log(rprice) ~ taxs &quot;</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">dfiv</span><span class="p">,</span>
+    <span class="n">vcov</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;CRV1&quot;</span><span class="p">:</span> <span class="s2">&quot;year&quot;</span><span class="p">},</span>
+<span class="p">)</span>
+<span class="n">results_iv</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>###
+
+Estimation:  IV
+Dep. var.: np.log(packs), Fixed effects: year+state
+Inference:  CRV1
+Observations:  96
+
+| Coefficient     |   Estimate |   Std. Error |               t value |   Pr(&gt;|t|) |   2.5% |   97.5% |
+|:----------------|-----------:|-------------:|----------------------:|-----------:|-------:|--------:|
+| np.log(rprice)  |     -1.279 |        0.000 | -4898551742658678.000 |      0.000 | -1.279 |  -1.279 |
+| np.log(rincome) |      0.443 |        0.000 |  3372420275527436.500 |      0.000 |  0.443 |   0.443 |
+---
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can compare the IV results against (naive) OLS. First, run the OLS equivalent:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_cigs_ols</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">feols</span><span class="p">(</span>
+    <span class="s2">&quot;np.log(packs) ~ np.log(rprice) + np.log(rincome) | year + state&quot;</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">dfiv</span><span class="p">,</span>
+    <span class="n">vcov</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;CRV1&quot;</span><span class="p">:</span> <span class="s2">&quot;year&quot;</span><span class="p">},</span>
+<span class="p">)</span>
+<span class="n">results_cigs_ols</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>###
+
+Estimation:  OLS
+Dep. var.: np.log(packs), Fixed effects: year+state
+Inference:  CRV1
+Observations:  96
+
+| Coefficient     |   Estimate |   Std. Error |               t value |   Pr(&gt;|t|) |   2.5% |   97.5% |
+|:----------------|-----------:|-------------:|----------------------:|-----------:|-------:|--------:|
+| np.log(rprice)  |     -1.056 |        0.000 | -6310374603234333.000 |      0.000 | -1.056 |  -1.056 |
+| np.log(rincome) |      0.497 |        0.000 |  2808549167977084.000 |      0.000 |  0.497 |   0.497 |
+---
+RMSE: 0.044 R2: 0.967 R2 Within: 0.556 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s do a proper comparison of these models using <code class="docutils literal notranslate"><span class="pre">etable()</span></code>. Note the order: the IV results are the second column of data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pf</span><span class="o">.</span><span class="n">etable</span><span class="p">([</span><span class="n">results_cigs_ols</span><span class="p">,</span> <span class="n">results_iv</span><span class="p">],</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;md&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>index                     est1           est2
+---------------  -------------  -------------
+depvar           np.log(packs)  np.log(packs)
+---------------------------------------------
+np.log(rprice)      -1.056***      -1.279***
+                       (0.000)        (0.000)
+np.log(rincome)      0.497***       0.443***
+                       (0.000)        (0.000)
+---------------------------------------------
+state                        x              x
+year                         x              x
+---------------------------------------------
+Observations                96             96
+S.E. type             by: year       by: year
+R2                       0.967              -
+---------------------------------------------
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once we take into account the fact that the real price is endogenous to (realised) demand, we find that its coefficient is more negative; i.e. an increase in the real price of cigarettes creates a bigger fall in number of packs bought.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="econmt-statistics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Statistics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="econmt-generalised-models.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Generalised regression models</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-review-of-econometrics">Quick Review of Econometrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notation">Notation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-markov-conditions">Gauss-Markov Conditions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-basics">Regression basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-errors">Standard errors</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#clustered-standard-errors">Clustered standard errors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-effects-and-categorical-variables">Fixed effects and categorical variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-dimensional-fixed-effects-aka-absorbing-regression">High dimensional fixed effects, aka absorbing regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformations-of-regressors">Transformations of regressors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logs-and-arcsinh">Logs and arcsinh</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-terms-and-powers">Interaction terms and powers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-formula-api-explained">The formula API explained</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-regression-models">Multiple regression models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-a-set-of-models-you-ve-already-created">Comparing a set of models you’ve already created</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stepwise-multiple-models">Stepwise multiple models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instrumental-variables">Instrumental variables</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Arthur Turrell
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  This book is available under an MIT license.
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

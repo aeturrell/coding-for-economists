@@ -1,0 +1,1035 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Regular Expressions, aka regex &#8212; Coding for Economists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-9FZQCPFXZJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'text-regex';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://aeturrell.github.io/coding-for-economists/text-regex.html" />
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Natural Language Processing" href="text-nlp.html" />
+    <link rel="prev" title="Introduction to Text" href="text-intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/smith_lovelace.png" class="logo__image only-light" alt="Coding for Economists - Home"/>
+    <script>document.write(`<img src="_static/smith_lovelace.png" class="logo__image only-dark" alt="Coding for Economists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-basics.html">Coding Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow-basics.html">Workflow Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-where.html">Writing Code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-analysis-quickstart.html">Data Analysis Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-intro.html">Working with Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-transformation.html">Data Transformation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-read-and-write.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-numbers.html">Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-categorical.html">Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-spreadsheets.html">Spreadsheets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-best-practice.html">Code in Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advanced.html">Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advcd-best-practice.html">Shortcuts to Better Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-intro.html">Intro to Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-letsplot.html">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-matplotlib.html">Powerful Data Visualisation with <strong>Matplotlib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-one.html">Common Plots I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-two.html">Common Plots II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="auto-research-outputs.html">Automating Research Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-markdown.html">Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-version-control.html">Version Control</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Econometrics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="econmt-probability-random.html">Probability and Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-statistics.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-regression.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-generalised-models.html">Generalised regression models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-diagnostics.html">Regression diagnostics and visualisations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-causal-inference.html">Causal Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayesian.html">Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayes-bambi.html">Bayesian Inference Made Easier</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-boolean.html">Boolean Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-joining-data.html">Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-missing-values.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-exploratory-analysis.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-extraction.html">Getting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-databases.html">Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-advanced.html"><strong>pandas</strong> alternatives, validation, and orchestration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-sharing.html">Sharing Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-further-advanced.html">Advanced Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-quarto.html">Combining Code and Text in Quarto Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-environments.html">Virtual Code Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-rap.html">Reproducible Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Time</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="time-intro.html">Introduction to Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-fcasts-env.html">Forecasting Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Text Analysis</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="text-intro.html">Introduction to Text</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Regular Expressions, aka regex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-nlp.html">Natural Language Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ml-intro.html">Introduction to Machine Learning and AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-sup.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-data.html">Data for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-unsup.html">Unsupervised Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Geospatial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geo-intro.html">Intro to Geo-Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geo-vis.html">Geo-Spatial Visualisation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="maths-abstract.html">Abstract Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maths-numerical.html">Numerical Mathematics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Craft</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="craft-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-search.html">Putting the Search in Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-generating-ideas.html">Generating and Accepting Research Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-writing-papers.html">Writing Papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-research-blogs.html">Research Blog Posts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-referee.html">Writing Referee Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-technical-reports.html">Writing Technical Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-extended-abstracts.html">Extended Abstracts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coming from ...</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="coming-from-stata.html">Coming from Stata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-matlab.html">Coming from Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-r.html">Coming from R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-excel.html">Coming from Excel</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zreferences.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aeturrell/coding-for-economists/blob/main/text-regex.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists/issues/new?title=Issue%20on%20page%20%2Ftext-regex.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/text-regex.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Regular Expressions, aka regex</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-characters">Special Characters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifiers">Quantifiers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metacharacters">Metacharacters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ranges">Ranges</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#greedy-versus-lazy-regexes">Greedy versus lazy regexes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matches-versus-capture-groups">Matches versus capture groups</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="regular-expressions-aka-regex">
+<span id="text-regex"></span><h1>Regular Expressions, aka regex<a class="headerlink" href="#regular-expressions-aka-regex" title="Link to this heading">#</a></h1>
+<p>This chapter covers how to regular expressions to perform processing of text.</p>
+<p>Regex, aka regular expressions, provide a way to both search and change text. Their advantages are that they are concise, they run very quickly, they can be ported across languages (they are definitely not just a Python thing!), and they are very powerful. The disadvantage is that they are confusing and take some getting used to!</p>
+<p><img alt="" src="https://imgs.xkcd.com/comics/regular_expressions.png" /></p>
+<p>You can live code regex in a couple of places, the first is within Visual Studio Code itself. Do this by clicking the magnifying glass in the left-hand side panel of options. When the search strip appears, you can put a search term in. To the right of the text entry box, there are three buttons, one of which is a period (full stop) followed by an asterisk. This option allows the Visual Studio text search function to accept regular expressions. This will apply regex to all of the text in your current Visual Studio workspace.</p>
+<p>Another approach is to head over to <a class="reference external" href="https://regex101.com/">https://regex101.com/</a> or <a class="reference external" href="https://regexr.com/">https://regexr.com/</a> and begin typing your regular expression there (regexr’s cheat sheets and reference patterns are well worth checking out too). You will need to add some text in the box for the regex to be applied to.</p>
+<p>Try either of the above with the regex <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">\w+\s</span></code>. This matches any occurrence of the word ‘string’ that is followed by another word and then a whitespace. As an example, ‘string cleaning ‘ would be picked up as a match when using this regex.</p>
+<p>Within Python, the <code class="docutils literal notranslate"><span class="pre">re</span></code> library provides support for regular expressions. Let’s try it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;It is true that string cleaning is a topic in this chapter. string editing is another.&quot;</span>
+<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;string \w+\s&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;string cleaning &#39;, &#39;string editing &#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">re.findall()</span></code> returns all matches. There are several useful search-like functions in <code class="docutils literal notranslate"><span class="pre">re</span></code> to be aware of that have a similar syntax of <code class="docutils literal notranslate"><span class="pre">re.function(regex,</span> <span class="pre">text)</span></code>. The table shows what they all do</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>What it does</p></th>
+<th class="head"><p>Example of use</p></th>
+<th class="head"><p>Output for given value of <code class="docutils literal notranslate"><span class="pre">text</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">re.match()</span></code></p></td>
+<td><p>Declares whether there is a match at the beginning of a string.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">re.match(&quot;string</span> <span class="pre">\w+\s&quot;</span> <span class="pre">,</span> <span class="pre">text)</span> <span class="pre">is</span> <span class="pre">True</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">re.search()</span></code></p></td>
+<td><p>Declares whether there is a match anywhere in the string.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">re.search(&quot;string</span> <span class="pre">\w+\s&quot;</span> <span class="pre">,</span> <span class="pre">text)</span> <span class="pre">is</span> <span class="pre">True</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">re.findall()</span></code></p></td>
+<td><p>Returns all matches.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">re.findall(&quot;string</span> <span class="pre">\w+\s&quot;</span> <span class="pre">,</span> <span class="pre">text)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['string</span> <span class="pre">cleaning</span> <span class="pre">',</span> <span class="pre">'string</span> <span class="pre">editing</span> <span class="pre">']</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">re.split()</span></code></p></td>
+<td><p>Splits text wherever a match occurs.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">re.split(&quot;string</span> <span class="pre">\w+\s&quot;</span> <span class="pre">,</span> <span class="pre">text)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['It</span> <span class="pre">is</span> <span class="pre">true</span> <span class="pre">that</span> <span class="pre">',</span> <span class="pre">'is</span> <span class="pre">a</span> <span class="pre">topic</span> <span class="pre">in</span> <span class="pre">this</span> <span class="pre">chapter.</span> <span class="pre">',</span> <span class="pre">'is</span> <span class="pre">another.']</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Another really handy regex function is <code class="docutils literal notranslate"><span class="pre">re.sub()</span></code>, which substitutes one bit of text for another if it finds a match. Here’s an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_text</span> <span class="o">=</span> <span class="s2">&quot;new text here! &quot;</span>
+<span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;string \w+\s&quot;</span><span class="p">,</span> <span class="n">new_text</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;It is true that new text here! is a topic in this chapter. new text here! is another.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="special-characters">
+<h2>Special Characters<a class="headerlink" href="#special-characters" title="Link to this heading">#</a></h2>
+<p>So far, we’ve only seen a very simple application of regex involving a vanilla word, <code class="docutils literal notranslate"><span class="pre">string</span></code>, the code for another word <code class="docutils literal notranslate"><span class="pre">\w+</span></code> and the code for a whitespace <code class="docutils literal notranslate"><span class="pre">\s</span></code>. Let’s take a more comprehensive look at the regex special characters:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Character</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example Text</p></th>
+<th class="head"><p>Example Regex</p></th>
+<th class="head"><p>Example Match Text</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>\d</p></td>
+<td><p>One Unicode digit in any script</p></td>
+<td><p>“file_93 is open”</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">file_\d\d</span></code></p></td>
+<td><p>“file_93”</p></td>
+</tr>
+<tr class="row-odd"><td><p>\w</p></td>
+<td><p>“word character”: Unicode letter, digit, or underscore</p></td>
+<td><p>“blah hello-word blah”</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\w-\w</span></code></p></td>
+<td><p>“hello-world”</p></td>
+</tr>
+<tr class="row-even"><td><p>\s</p></td>
+<td><p>“whitespace character”: any Unicode separator</p></td>
+<td><p>“these are some words with spaces”</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">words\swith\sspaces</span></code></p></td>
+<td><p>“words with spaces”</p></td>
+</tr>
+<tr class="row-odd"><td><p>\D</p></td>
+<td><p>Non-digit character (opposite of \d)</p></td>
+<td><p>“ABC 10323982328”</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\D\D\D</span></code></p></td>
+<td><p>“ABC”</p></td>
+</tr>
+<tr class="row-even"><td><p>\W</p></td>
+<td><p>Non-word character (opposite of \w)</p></td>
+<td><p>“Once upon a time *”</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\W</span></code></p></td>
+<td><p>“*”</p></td>
+</tr>
+<tr class="row-odd"><td><p>\S</p></td>
+<td><p>Non-whitespace character (opposite of \s)</p></td>
+<td><p>“y        “</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\S</span></code></p></td>
+<td><p>“y”</p></td>
+</tr>
+<tr class="row-even"><td><p>\Z</p></td>
+<td><p>End of string</p></td>
+<td><p>“End of a string”</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\w+\Z</span></code></p></td>
+<td><p>“string””</p></td>
+</tr>
+<tr class="row-odd"><td><p>.</p></td>
+<td><p>Match any character except the newline</p></td>
+<td><p>“ab=def”</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ab.def</span></code></p></td>
+<td><p>“ab=def”</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Note that whitespace characters include newlines, <code class="docutils literal notranslate"><span class="pre">\n</span></code>, and tabs, <code class="docutils literal notranslate"><span class="pre">\t</span></code>.</p>
+</section>
+<section id="quantifiers">
+<h2>Quantifiers<a class="headerlink" href="#quantifiers" title="Link to this heading">#</a></h2>
+<p>As well as these special characters, there are quantifiers which ask for more than one occurence of a character. For example, in the above, <code class="docutils literal notranslate"><span class="pre">\w\w</span></code> asked for two word characters, while <code class="docutils literal notranslate"><span class="pre">\d\d</span></code> asks for two digits. The next table shows all of the quantifiers.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Quantifier</p></th>
+<th class="head"><p>Role</p></th>
+<th class="head"><p>Example Text</p></th>
+<th class="head"><p>Example Regex</p></th>
+<th class="head"><p>Example Match</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>{m}</p></td>
+<td><p>Exactly m repetitions</p></td>
+<td><p>“936 and 42 are the codes”</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\d{3}</span></code></p></td>
+<td><p>“936”</p></td>
+</tr>
+<tr class="row-odd"><td><p>{m,n}</p></td>
+<td><p>From m (default 0) to n (default infinity)</p></td>
+<td><p>“Words up to four letters”</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\b\w{1,4}\b</span></code></p></td>
+<td><p>“up”, “to”, “four”</p></td>
+</tr>
+<tr class="row-even"><td><p>*</p></td>
+<td><p>0 or more. Same as {,}</p></td>
+<td><p>“42 is the code”</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\d*\s</span></code></p></td>
+<td><p>“42”</p></td>
+</tr>
+<tr class="row-odd"><td><p>+</p></td>
+<td><p>1 or more. Same as {1,}</p></td>
+<td><p>“4 323 hello”</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\d+</span></code></p></td>
+<td><p>“4”, “323”</p></td>
+</tr>
+<tr class="row-even"><td><p>?</p></td>
+<td><p>Optional, so 0 or 1. Same as {,1}.</p></td>
+<td><p>“4 323 hello”</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\d?\s</span></code></p></td>
+<td><p>“4”</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Find a single regex that will pick out only the percentage numbers from both “Inflation in year 3 was 2 percent” and “Interest rates were as high as 12 percent”.</p>
+</div>
+</section>
+<section id="metacharacters">
+<h2>Metacharacters<a class="headerlink" href="#metacharacters" title="Link to this heading">#</a></h2>
+<p>Now, as well as special characters and quantifiers, we can have meta-character matches. These are not characters <em>per se</em>, but starts, ends, and other bits of words. For example, <code class="docutils literal notranslate"><span class="pre">\b</span></code> matches strings at a word (<code class="docutils literal notranslate"><span class="pre">\w+</span></code>) boundary, so if we took the text “Three letter words only are captured” and ran <code class="docutils literal notranslate"><span class="pre">\b\w\w\w\b</span></code> we would return “are”. <code class="docutils literal notranslate"><span class="pre">\B</span></code> matches strings not at word (<code class="docutils literal notranslate"><span class="pre">\w+</span></code>) boundaries so the text “Bricks” with <code class="docutils literal notranslate"><span class="pre">\B\w\w\B</span></code> applied would yield “ri”. The next table contains some useful metacharacters.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Metacharacter Sequence</p></th>
+<th class="head"><p>Meaning</p></th>
+<th class="head"><p>Example Regex</p></th>
+<th class="head"><p>Example Match</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>^</p></td>
+<td><p>Start of string or line</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^abc</span></code></p></td>
+<td><p>“abc” (appearing at start of string or line)</p></td>
+</tr>
+<tr class="row-odd"><td><p>$</p></td>
+<td><p>End of string, or end of line</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">xyz$</span></code></p></td>
+<td><p>“xyz” (appearing at end of string or line)</p></td>
+</tr>
+<tr class="row-even"><td><p>\b</p></td>
+<td><p>Match string at word (\w+) boundary</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ing\b</span></code></p></td>
+<td><p>“match<strong>ing</strong>” (matches ing if it is at the end of a word)</p></td>
+</tr>
+<tr class="row-odd"><td><p>\B</p></td>
+<td><p>Match string not at word (\w+) boundary</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\Bing\B</span></code></p></td>
+<td><p>“st<strong>ing</strong>er” (matches ing if it is not at the beginning or end of the word)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Because so many characters have special meaning in regex, if you want to look for, say, a dollar sign or a dot, you need to escape the character first with a backward slash. So <code class="docutils literal notranslate"><span class="pre">\${1}\d+</span></code> would look for a single dollar sign followed by some digits and would pick up the ‘$50’ in ‘she made $50 dollars’.</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Find the regex that will pick out only the first instance of the word ‘money’ and any word subsequent to ‘money’ from the following: “money supply has grown considerably. money demand has not kept up.”.</p>
+</div>
+</section>
+<section id="ranges">
+<h2>Ranges<a class="headerlink" href="#ranges" title="Link to this heading">#</a></h2>
+<p>You probably think you’re done with regex, but not so fast! There are more metacharacters to come. This time, they will represent <em>ranges</em> of characters.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Metacharacter Sequence</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example Expression</p></th>
+<th class="head"><p>Example Match</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[characters]</p></td>
+<td><p>The characters inside the brackets are part of a matching-character set</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[abcd]</span></code></p></td>
+<td><p>a, b, c, d, abcd</p></td>
+</tr>
+<tr class="row-odd"><td><p>[^…]</p></td>
+<td><p>Characters inside brackets are a non-matching set; a character not inside is a matching character.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[^abcd]</span></code></p></td>
+<td><p>Any occurrence of any character EXCEPT a, b, c, d.</p></td>
+</tr>
+<tr class="row-even"><td><p>[character-character]</p></td>
+<td><p>Any character in the range between two characters (inclusive) is part of the set</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[a-z]</span></code></p></td>
+<td><p>Any lowercase letter</p></td>
+</tr>
+<tr class="row-odd"><td><p>[^character]</p></td>
+<td><p>Any character that is not the listed character</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[^A]</span></code></p></td>
+<td><p>Any character EXCEPT capital A</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Ranges have two more neat tricks. The first is that they can be concatenated. For example, <code class="docutils literal notranslate"><span class="pre">[a-c-1-5]</span></code> would match any of a, b, c, 1, 2, 3, 4, 5. They can also be modified with a quantifier, so <code class="docutils literal notranslate"><span class="pre">[a-c0-2]{2}</span></code> would match “a0” and “ab”.</p>
+</section>
+<section id="greedy-versus-lazy-regexes">
+<h2>Greedy versus lazy regexes<a class="headerlink" href="#greedy-versus-lazy-regexes" title="Link to this heading">#</a></h2>
+<p>Buckle up, because this one is a bit tricky to grasp. Adding a <code class="docutils literal notranslate"><span class="pre">?</span></code> after a regex will make it go from being ‘greedy’ to being ‘lazy’. Greedy means that you will match the longest possible string that hits the condition. Lazy will mean that you get the shortest possible string matching the condition. It’s easiest to demonstrate with an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_string</span> <span class="o">=</span> <span class="s2">&quot;stackoverflow&quot;</span>
+<span class="n">greedy_regex</span> <span class="o">=</span> <span class="s2">&quot;s.*o&quot;</span>
+<span class="n">lazy_regex</span> <span class="o">=</span> <span class="s2">&quot;s.*?o&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The greedy match is </span><span class="si">{</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">greedy_regex</span><span class="p">,</span><span class="w"> </span><span class="n">test_string</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The lazy match is </span><span class="si">{</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">lazy_regex</span><span class="p">,</span><span class="w"> </span><span class="n">test_string</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The greedy match is stackoverflo
+The lazy match is stacko
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the former (greedy) case, we get from an ‘s’ all the way to the last ‘o’ within the same word. In the latter (lazy) case we just get everything between the start and first occurrence of an ‘o’.</p>
+</section>
+<section id="matches-versus-capture-groups">
+<h2>Matches versus capture groups<a class="headerlink" href="#matches-versus-capture-groups" title="Link to this heading">#</a></h2>
+<p>There is often a difference between what you might want to match and what you actually want to <em>grab</em> with your regex. Let’s say, for example, we’re parsing some text and we want any numbers that follow the format ‘$xx.xx’, where the ‘x’ are numbers but we don’t want the dollar sign. To do this, we can create a <em>capture group</em> using brackets. Here’s an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Product 1 was $45.34, while product 2 came in at $50.00 however it was assessed that the $4.66 difference did not make up for the higher quality of product 2.&quot;</span>
+<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;\$(\d</span><span class="si">{2}</span><span class="s2">.\d</span><span class="si">{2}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;45.34&#39;, &#39;50.00&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s pick apart the regex here. First, we asked for a literal dollar sign using <code class="docutils literal notranslate"><span class="pre">\$</span></code>. Next, we opened up a capture group with <code class="docutils literal notranslate"><span class="pre">(</span></code>. Then we said only give us the numbers that are 2 digits, a period, and another 2 digits (thus excluding $4.66). Finally, we closed the capture group with <code class="docutils literal notranslate"><span class="pre">)</span></code>.</p>
+<p>So while we specify a <em>match</em> using regex, while only want running the regex to return the <em>capture group</em>.</p>
+<p>Let’s see a more complicated example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sal_r_per</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\b([0-9]{1,6}(?:\.)?(?:[0-9]{1,2})?(?:\s?-\s?|\s?to\s?)[0-9]{1,6}(?:\.)?(?:[0-9]{1,2})?)(?:\s?per)\b&quot;</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;This job pays gbp 30500.00 to 35000 per year. Apply at number 100 per the below address.&quot;</span>
+<span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">sal_r_per</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;30500.00 to 35000&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this case, the regex first looks for up to 6 digits, then optionally a period, then optionally another couple of digits, then either a dash or ‘to’ using the ‘|’ operator (which means or), followed by a similar number, followed by ‘per’.</p>
+<p>But the capture group is only the subset of the match that is the number range-we discard most of the rest. Note also that other numbers, even if they are followed by ‘per’, are not picked up. <code class="docutils literal notranslate"><span class="pre">(?:)</span></code> begins a <em>non-capture group</em>, which matches only but does not capture, so that although <code class="docutils literal notranslate"><span class="pre">(?:\s?per)</span></code> looks for “ per” after a salary (with the space optional due to the second <code class="docutils literal notranslate"><span class="pre">?</span></code>), it does not get returned.</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Find a regex that captures the wage range from “Salary Pay in range <span class="math notranslate nohighlight">\(9.00 - \)</span>12.02 but you must start at 8.00 - 8.30 every morning.”.</p>
+</div>
+<p>This has been a whirlwind tour of regexes. Although regex looks a lot like gobbledygook, it is a really useful tool to be able to deploy for more complex string cleaning and extraction tasks.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="text-intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Text</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="text-nlp.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Natural Language Processing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-characters">Special Characters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifiers">Quantifiers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metacharacters">Metacharacters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ranges">Ranges</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#greedy-versus-lazy-regexes">Greedy versus lazy regexes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matches-versus-capture-groups">Matches versus capture groups</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Arthur Turrell
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  This book is available under an MIT license.
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

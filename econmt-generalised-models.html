@@ -1,0 +1,1937 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Generalised regression models &#8212; Coding for Economists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-9FZQCPFXZJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'econmt-generalised-models';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://aeturrell.github.io/coding-for-economists/econmt-generalised-models.html" />
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Regression diagnostics and visualisations" href="econmt-diagnostics.html" />
+    <link rel="prev" title="Regression" href="econmt-regression.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/smith_lovelace.png" class="logo__image only-light" alt="Coding for Economists - Home"/>
+    <script>document.write(`<img src="_static/smith_lovelace.png" class="logo__image only-dark" alt="Coding for Economists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-basics.html">Coding Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow-basics.html">Workflow Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-where.html">Writing Code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-analysis-quickstart.html">Data Analysis Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-intro.html">Working with Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-transformation.html">Data Transformation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-read-and-write.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-numbers.html">Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-categorical.html">Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-spreadsheets.html">Spreadsheets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-best-practice.html">Code in Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advanced.html">Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advcd-best-practice.html">Shortcuts to Better Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-intro.html">Intro to Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-letsplot.html">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-matplotlib.html">Powerful Data Visualisation with <strong>Matplotlib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-one.html">Common Plots I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-two.html">Common Plots II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="auto-research-outputs.html">Automating Research Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-markdown.html">Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-version-control.html">Version Control</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Econometrics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="econmt-probability-random.html">Probability and Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-statistics.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-regression.html">Regression</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Generalised regression models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-diagnostics.html">Regression diagnostics and visualisations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-causal-inference.html">Causal Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayesian.html">Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayes-bambi.html">Bayesian Inference Made Easier</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-boolean.html">Boolean Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-joining-data.html">Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-missing-values.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-exploratory-analysis.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-extraction.html">Getting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-databases.html">Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-advanced.html"><strong>pandas</strong> alternatives, validation, and orchestration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-sharing.html">Sharing Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-further-advanced.html">Advanced Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-quarto.html">Combining Code and Text in Quarto Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-environments.html">Virtual Code Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-rap.html">Reproducible Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Time</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="time-intro.html">Introduction to Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-fcasts-env.html">Forecasting Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Text Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="text-intro.html">Introduction to Text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-regex.html">Regular Expressions, aka regex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-nlp.html">Natural Language Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ml-intro.html">Introduction to Machine Learning and AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-sup.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-data.html">Data for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-unsup.html">Unsupervised Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Geospatial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geo-intro.html">Intro to Geo-Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geo-vis.html">Geo-Spatial Visualisation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="maths-abstract.html">Abstract Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maths-numerical.html">Numerical Mathematics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Craft</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="craft-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-search.html">Putting the Search in Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-generating-ideas.html">Generating and Accepting Research Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-writing-papers.html">Writing Papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-research-blogs.html">Research Blog Posts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-referee.html">Writing Referee Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-technical-reports.html">Writing Technical Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-extended-abstracts.html">Extended Abstracts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coming from ...</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="coming-from-stata.html">Coming from Stata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-matlab.html">Coming from Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-r.html">Coming from R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-excel.html">Coming from Excel</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zreferences.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aeturrell/coding-for-economists/blob/main/econmt-generalised-models.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists/issues/new?title=Issue%20on%20page%20%2Feconmt-generalised-models.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/econmt-generalised-models.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Generalised regression models</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logit-probit-and-generalised-linear-models">Logit, probit, and generalised linear models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logit">Logit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probit">Probit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generalised-linear-models">Generalised linear models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-mixed-effects-regressions-lmer">Linear Mixed Effects Regressions (LMER)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-vs-random-effects">Fixed vs Random Effects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-random-effects">Example with Random Effects</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#violations-of-the-classical-linear-model-clm">Violations of the classical linear model (CLM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heteroskedasticity">Heteroskedasticity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantile-regression">Quantile regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-and-recursive-regressions">Rolling and recursive regressions</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="generalised-regression-models">
+<span id="generalised-models"></span><h1>Generalised regression models<a class="headerlink" href="#generalised-regression-models" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>In this chapter, you’ll learn how to run more generalised regressions with code. This will include logit, probit, generalised linear models, random effects, quantile regressions, and rolling + recursive regressions.</p>
+<p>Most of this chapter will rely on the amazing <a class="reference external" href="https://www.statsmodels.org/stable/index.html"><strong>statsmodels</strong></a> package, including for some of the examples. Some of the material in this chapter follows <a class="reference external" href="https://grantmcdermott.com/">Grant McDermott</a>’s excellent notes and the <a class="reference external" href="https://lost-stats.github.io/">Library of Statistical Translation</a>.</p>
+</section>
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Link to this heading">#</a></h2>
+<p>Let’s import some of the packages we’ll be using:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.formula.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">smf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lets_plot</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">LetsPlot</span><span class="o">.</span><span class="n">setup_html</span><span class="p">()</span>
+
+<span class="c1"># Set seed for random numbers</span>
+<span class="n">seed_for_prng</span> <span class="o">=</span> <span class="mi">78557</span>
+<span class="n">prng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span>
+    <span class="n">seed_for_prng</span>
+<span class="p">)</span>  <span class="c1"># prng=probabilistic random number generator</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+            <div id="QwlIeV"></div>
+            <script type="text/javascript" data-lets-plot-script="library">
+                if(!window.letsPlotCallQueue) {
+                    window.letsPlotCallQueue = [];
+                }; 
+                window.letsPlotCall = function(f) {
+                    window.letsPlotCallQueue.push(f);
+                };
+                (function() {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://cdn.jsdelivr.net/gh/JetBrains/lets-plot@v4.6.1/js-package/distr/lets-plot.min.js";
+                    script.onload = function() {
+                        window.letsPlotCall = function(f) {f();};
+                        window.letsPlotCallQueue.forEach(function(f) {f();});
+                        window.letsPlotCallQueue = [];
+                        
+                    };
+                    script.onerror = function(event) {
+                        window.letsPlotCall = function(f) {};    // noop
+                        window.letsPlotCallQueue = [];
+                        var div = document.createElement("div");
+                        div.style.color = 'darkred';
+                        div.textContent = 'Error loading Lets-Plot JS';
+                        document.getElementById("QwlIeV").appendChild(div);
+                    };
+                    var e = document.getElementById("QwlIeV");
+                    e.appendChild(script);
+                })()
+            </script>
+            </div></div>
+</div>
+</section>
+<section id="logit-probit-and-generalised-linear-models">
+<h2>Logit, probit, and generalised linear models<a class="headerlink" href="#logit-probit-and-generalised-linear-models" title="Link to this heading">#</a></h2>
+<p>For this section, we’ll be using the <a class="reference external" href="https://www.statsmodels.org/"><strong>statsmodels</strong></a> package. <strong>statsmodels</strong> has been around a long time (and is more mature than <strong>pyfixest</strong>), but it doesn’t absorb fixed effects, and it doesn’t have an out-of-the-box instrumental variables regression function. The two packages are similar in that you can use formulae in both.</p>
+<section id="logit">
+<h3>Logit<a class="headerlink" href="#logit" title="Link to this heading">#</a></h3>
+<p>A logistical regression, aka a logit, is a statistical method for a best-fit line between a regressors <span class="math notranslate nohighlight">\(X\)</span> and an outcome varibale <span class="math notranslate nohighlight">\(y\)</span> that takes on values in <span class="math notranslate nohighlight">\((0, 1)\)</span>.</p>
+<p>The function that we’re assuming links the regressors and the outcome has a few different names but the most common is the sigmoid function or the logistic function. The data generating process is assumed to be</p>
+<div class="math notranslate nohighlight">
+\[
+{\displaystyle \mathbb{P}(Y=1\mid X) = \frac{1}{1 + e^{-X'\beta}}}
+\]</div>
+<p>we can also write this as <span class="math notranslate nohighlight">\(\ln\left(\frac{p}{p-1}\right) = \beta_0 + \sum_i \beta_i x_i\)</span> to get a ‘log-odds’ relationship. The coefficients from a logit model do not have the same interpration as in an OLS estimation, and you can see this from the fact that <span class="math notranslate nohighlight">\(\partial y/\partial x_i \neq \beta_i\)</span> for logit. Of course, you can work out what the partial derivative is for yourself but most packages offer a convenient way to quickly recover the marginal effects.</p>
+<p>Logit models are available in <strong>scikit-learn</strong> and <strong>statsmodels</strong> but bear in mind that the <strong>scikit-learn</strong> logit model is, ermm, extremely courageous in that regularisation is applied by default. If you don’t know what that means, don’t worry, but it’s probably best to stick with <strong>statsmodels</strong> as we will do in this example.</p>
+<p>We will predict a target <code class="docutils literal notranslate"><span class="pre">GRADE</span></code>, representing whether a grade improved or not, based on some regressors including participation in a programme.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the data from Spector and Mazzeo (1980)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">spector</span><span class="o">.</span><span class="n">load_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">data</span>
+<span class="c1"># Look at info on data</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">spector</span><span class="o">.</span><span class="n">NOTE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>::
+
+    Number of Observations - 32
+
+    Number of Variables - 4
+
+    Variable name definitions::
+
+        Grade - binary variable indicating whether or not a student&#39;s grade
+                improved.  1 indicates an improvement.
+        TUCE  - Test score on economics test
+        PSI   - participation in program
+        GPA   - Student&#39;s grade point average
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res_logit</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">logit</span><span class="p">(</span><span class="s2">&quot;GRADE ~ GPA + TUCE + PSI&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res_logit</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.402801
+         Iterations 7
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:                  GRADE   No. Observations:                   32
+Model:                          Logit   Df Residuals:                       28
+Method:                           MLE   Df Model:                            3
+Date:                Wed, 26 Mar 2025   Pseudo R-squ.:                  0.3740
+Time:                        16:02:19   Log-Likelihood:                -12.890
+converged:                       True   LL-Null:                       -20.592
+Covariance Type:            nonrobust   LLR p-value:                  0.001502
+==============================================================================
+                 coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept    -13.0213      4.931     -2.641      0.008     -22.687      -3.356
+GPA            2.8261      1.263      2.238      0.025       0.351       5.301
+TUCE           0.0952      0.142      0.672      0.501      -0.182       0.373
+PSI            2.3787      1.065      2.234      0.025       0.292       4.465
+==============================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<p>So, did participation (<code class="docutils literal notranslate"><span class="pre">PSI</span></code>) help increase a grade? Yes. But we need to check the marginal effect to say exactly how much. We’ll use <code class="docutils literal notranslate"><span class="pre">get_margeff()</span></code> to do this, we’d like the derivative of y with respect to x effect, and we’ll take it at the mean of each regressor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">marg_effect</span> <span class="o">=</span> <span class="n">res_logit</span><span class="o">.</span><span class="n">get_margeff</span><span class="p">(</span><span class="n">at</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;dydx&quot;</span><span class="p">)</span>
+<span class="n">marg_effect</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Marginal Effects</caption>
+<tr>
+  <th>Dep. Variable:</th> <td>GRADE</td>
+</tr>
+<tr>
+  <th>Method:</th>        <td>dydx</td> 
+</tr>
+<tr>
+  <th>At:</th>            <td>mean</td> 
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+    <th></th>      <th>dy/dx</th>    <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>GPA</th>  <td>    0.5339</td> <td>    0.237</td> <td>    2.252</td> <td> 0.024</td> <td>    0.069</td> <td>    0.998</td>
+</tr>
+<tr>
+  <th>TUCE</th> <td>    0.0180</td> <td>    0.026</td> <td>    0.685</td> <td> 0.493</td> <td>   -0.033</td> <td>    0.069</td>
+</tr>
+<tr>
+  <th>PSI</th>  <td>    0.4493</td> <td>    0.197</td> <td>    2.284</td> <td> 0.022</td> <td>    0.064</td> <td>    0.835</td>
+</tr>
+</table></div></div>
+</div>
+<p>So participation gives almost half a grade increase.</p>
+</section>
+<section id="probit">
+<h3>Probit<a class="headerlink" href="#probit" title="Link to this heading">#</a></h3>
+<p>Probit is very similar to logit: it’s a statistical method for a best-fit line between regressors <span class="math notranslate nohighlight">\(X\)</span> and an outcome varibale <span class="math notranslate nohighlight">\(y\)</span> that takes on values in <span class="math notranslate nohighlight">\((0, 1)\)</span>. And, just like with logit, the function that we’re assuming links the regressors and the outcome has a few different names!</p>
+<p>The data generating process is assumed to be</p>
+<div class="math notranslate nohighlight">
+\[
+{\displaystyle \mathbb{P}(Y=1\mid X)=\Phi (X^{T}\beta )}
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+{\displaystyle \Phi (x)={\frac {1}{\sqrt {2\pi }}}\int _{-\infty }^{x}e^{-{\frac {y^{2}}{2}}}dy.}
+\]</div>
+<p>is the cumulative standard normal (aka Gaussian) distribution. The coefficients from a probit model do not have the same interpration as in an OLS estimation, and you can see this from the fact that <span class="math notranslate nohighlight">\(\partial y/\partial x_i \neq \beta_i\)</span> for probit. And, just as with logit, although you can derive the marginal effects, most packages offer a convenient way to quickly recover them. Of particular note is the <a class="reference external" href="https://github.com/vincentarelbundock/pymarginaleffects"><strong>pymarginaleffects</strong></a> package by Vincent Arel-Bundock.</p>
+<p>We can re-use our previous example of predicting a target <code class="docutils literal notranslate"><span class="pre">GRADE</span></code>, representing whether a grade improved or not, based on some regressors including participation (PSI) in a programme.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res_probit</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">probit</span><span class="p">(</span><span class="s2">&quot;GRADE ~ GPA + TUCE + PSI&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res_probit</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.400588
+         Iterations 6
+                          Probit Regression Results                           
+==============================================================================
+Dep. Variable:                  GRADE   No. Observations:                   32
+Model:                         Probit   Df Residuals:                       28
+Method:                           MLE   Df Model:                            3
+Date:                Wed, 26 Mar 2025   Pseudo R-squ.:                  0.3775
+Time:                        16:02:20   Log-Likelihood:                -12.819
+converged:                       True   LL-Null:                       -20.592
+Covariance Type:            nonrobust   LLR p-value:                  0.001405
+==============================================================================
+                 coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept     -7.4523      2.542     -2.931      0.003     -12.435      -2.469
+GPA            1.6258      0.694      2.343      0.019       0.266       2.986
+TUCE           0.0517      0.084      0.617      0.537      -0.113       0.216
+PSI            1.4263      0.595      2.397      0.017       0.260       2.593
+==============================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_marg_effect</span> <span class="o">=</span> <span class="n">res_probit</span><span class="o">.</span><span class="n">get_margeff</span><span class="p">(</span><span class="n">at</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;dydx&quot;</span><span class="p">)</span>
+<span class="n">p_marg_effect</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>Probit Marginal Effects</caption>
+<tr>
+  <th>Dep. Variable:</th> <td>GRADE</td>
+</tr>
+<tr>
+  <th>Method:</th>        <td>dydx</td> 
+</tr>
+<tr>
+  <th>At:</th>            <td>mean</td> 
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+    <th></th>      <th>dy/dx</th>    <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>GPA</th>  <td>    0.5333</td> <td>    0.232</td> <td>    2.294</td> <td> 0.022</td> <td>    0.078</td> <td>    0.989</td>
+</tr>
+<tr>
+  <th>TUCE</th> <td>    0.0170</td> <td>    0.027</td> <td>    0.626</td> <td> 0.531</td> <td>   -0.036</td> <td>    0.070</td>
+</tr>
+<tr>
+  <th>PSI</th>  <td>    0.4679</td> <td>    0.188</td> <td>    2.494</td> <td> 0.013</td> <td>    0.100</td> <td>    0.836</td>
+</tr>
+</table></div></div>
+</div>
+<p>It’s no coincidence that we find very similar results here because the two functions we’re using don’t actually look all that different:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">support</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">support</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">logistic</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">support</span><span class="p">),</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Logistic&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">support</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">support</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Probit&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c415bb8f2902e72e5d3f5654ff36616909185e84c582102ce86ea671a1a941c1.svg" src="_images/c415bb8f2902e72e5d3f5654ff36616909185e84c582102ce86ea671a1a941c1.svg" />
+</div>
+</div>
+<p>What difference there is, is that logistic regression puts more weight into the tails of the distribution. Arguably, logit is easier to interpret too. With logistic regression, a one unit change in <span class="math notranslate nohighlight">\(x_i\)</span> is associated with a <span class="math notranslate nohighlight">\(\beta_i\)</span> change in the log odds of a 1 outcome or, alternatively, an <span class="math notranslate nohighlight">\(e^{\beta_i}\)</span>-fold change in the odds, all else being equal. With a probit, this is a change of <span class="math notranslate nohighlight">\(\beta_i z\)</span> for <span class="math notranslate nohighlight">\(z\)</span> a normalised variable that you’d have to convert into a predicted probability using the normal CDF.</p>
+</section>
+<section id="generalised-linear-models">
+<h3>Generalised linear models<a class="headerlink" href="#generalised-linear-models" title="Link to this heading">#</a></h3>
+<p>Logit and probit (and OLS for that matter) as special cases of a class of models such that <span class="math notranslate nohighlight">\(g\)</span> is a ‘link’ function connects a function of regressors to the output, and <span class="math notranslate nohighlight">\(\mu\)</span> is the mean of a conditional response distribution at a given point in the space of regressors. When <span class="math notranslate nohighlight">\(g(\mu) = X'\beta\)</span>, we just get regular OLS. When it’s logit, we have</p>
+<div class="math notranslate nohighlight">
+\[
+{\displaystyle \mu= \mathbb{E}(Y\mid X=x) =g^{-1}(X'\beta)= \frac{1}{1 + e^{-X'\beta}}.}
+\]</div>
+<p>But as well as the ones we’ve seen, there are many possible link functions one can use via the catch-all <code class="docutils literal notranslate"><span class="pre">glm</span></code> function. These come in different ‘families’ of distributions, with the default for the binomial family being logit. So, running <code class="docutils literal notranslate"><span class="pre">smf.glm('GRADE</span> <span class="pre">~</span> <span class="pre">GPA</span> <span class="pre">+</span> <span class="pre">TUCE</span> <span class="pre">+</span> <span class="pre">PSI',</span> <span class="pre">data=df,</span> <span class="pre">family=sm.families.Binomial()).fit()</span></code> will produce exactly the same as we got both using the <code class="docutils literal notranslate"><span class="pre">logit</span></code> function. For more on the families of distributions and possible link functions, see the <a class="reference external" href="https://www.statsmodels.org/stable/glm.html#">relevant part</a> of the <strong>statsmodels</strong> documentation.</p>
+<p>If you need a library dedicated to GLMs that has all the bells and whistles you can dream of, you might want to check out <a class="reference external" href="https://glum.readthedocs.io/en/latest/">glum</a>. At the time of writing, it is <a class="reference external" href="https://glum.readthedocs.io/en/latest/benchmarks.html">faster</a> than either GLMnet or H2O (two other popular GLM libraries).</p>
+</section>
+</section>
+<section id="linear-mixed-effects-regressions-lmer">
+<h2>Linear Mixed Effects Regressions (LMER)<a class="headerlink" href="#linear-mixed-effects-regressions-lmer" title="Link to this heading">#</a></h2>
+<p>Linear mixed models are an extension of simple linear models to allow both fixed and random effects. It’s worth us having a quick recap of random effects before we dig into it.</p>
+<section id="fixed-vs-random-effects">
+<h3>Fixed vs Random Effects<a class="headerlink" href="#fixed-vs-random-effects" title="Link to this heading">#</a></h3>
+<p>As this is going to come up in this chapter, it’s worth having a quick review of the difference between fixed and random effects in regression-based models. There’s a bit of disagreement about what people really mean when they say “fixed effects” or “random effects”, so let’s define them clearly here.</p>
+<blockquote>
+<div><p>Random effects are estimated with partial pooling, while fixed effects are not.</p>
+</div></blockquote>
+<p>What does this mean? Well, technically, if an effect is assumed to be a realised value of a random variable, it is called a random effect. We could say that, in frequentist land (where parameters have true values), a single fixed effect model might look like:</p>
+<div class="math notranslate nohighlight">
+\[
+y = \gamma\cdot d
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(d \in \{0, 1\}\)</span>, which could be whether an individual belongs to, say, group 0 or group 1 and <span class="math notranslate nohighlight">\(\gamma\)</span> is a coefficient that is to be estimated. <span class="math notranslate nohighlight">\(\gamma\)</span> has a single “true” value, and we can admire the value of <span class="math notranslate nohighlight">\(\hat{\gamma}\)</span> in a regression table once we have done our estimation.</p>
+<p>In contrast, even in a frequentist model, random effects are allowed to vary: they are drawn from a distribution (or, more accurately, their deviations from the true value are drawn from a distribution). This might be written as</p>
+<div class="math notranslate nohighlight">
+\[
+y_{i}= w_{i}
+\]</div>
+<p>and it could be that, instead of a group-specific intercept as in the fixed effects model above, the intercept can take a <em>range of values</em> depending on the individual. Although it’s not always true, another way of thinking about this is that fixed effects are constant across individuals while random effects can vary.</p>
+<p>So what’s this business about partial pooling? Imagine we have a situation where one group is under-sampled relative to the other groups. With few data points, we may not be able to precisely estimate fixed effects. However, partial pooling means that, if you do have few data points within a group, the group effect estimate can be partially based on the more abundant data from other groups. Random effects can provide a good compromise between estimating an effect by completely pooling all groups, which masks group-level variation, and estimating an effect for all groups completely separately, which could give imprecise estimates for low-sample groups. For example, when estimating means using a random effects approach, subgroup means are allowed to deviate a bit from the mean of the larger group, but not by an arbitrary amount—those deviations follow a distribution, typically a Gaussian (aka Normal) distribution. That’s where the “random” in random effects comes from: the deviations of subgroups from a “parent group” follow the distribution of a random variable.</p>
+<p>The rule of thumb when thinking about how many different categories should exist for a variable to get the random, rather than fixed, effects treatment is that there should be more than 5 or 6 levels at a minimum in order to apply random effects—fewer than this and it’s hard to estimate the variance around the central estimate. Because you could potentially precisely estimated a fixed effect if you had lots of samples in those 5 or 6 levels, you’re more likely to reach for random effects when you have fewer samples per class.</p>
+<p>Random effects are the extension of this partial pooling technique to a wide range of situations: including multiple predictors, mixed continuous and categorical variables, and more.</p>
+<p>As a concrete example, taken from a <a class="reference external" href="https://stats.stackexchange.com/questions/4700/what-is-the-difference-between-fixed-effect-random-effect-and-mixed-effect-mode">forum post</a> by Paul of MassMutual, suppose you want to estimate average US household income by ZIP code. You have a large dataset containing observations of household incomes and ZIP codes. Some ZIP codes are well represented in the dataset, but others have only a couple of households.</p>
+<p>For your initial model you would most likely take the mean income in each ZIP. This will work well when you have lots of data for all ZIPs, but the estimates for your poorly sampled ZIPs will suffer from high variance. You can mitigate this by using a shrinkage estimator (aka partial pooling), which will push extreme values towards the mean income across all ZIP codes.</p>
+<p>But how much shrinkage/pooling should you do for a particular ZIP? Intuitively, it should depend on the following:</p>
+<ol class="arabic simple">
+<li><p>How many observations you have in that ZIP</p></li>
+<li><p>How many observations you have overall</p></li>
+<li><p>The individual-level mean and variance of household income across all ZIP codes</p></li>
+<li><p>The group-level variance in mean household income across all ZIP codes</p></li>
+</ol>
+<p>Now, if you model ZIP code as a random effect, the mean income estimate in all ZIP codes will be subjected to a statistically well-founded shrinkage, taking into account all of these factors.</p>
+<p>Random effects models automatically handle 4, the variability estimation, for all random effects in the model. This is useful, as it would be hard to do manually. Having accounted for (1)–(4), a random effects model is able to determine the appropriate shrinkage for low-sample groups. It can also handle much more complicated models with many different predictors.</p>
+<p><strong>Mixed effects models</strong> are models that combine random and fixed effects.</p>
+</section>
+<section id="example-with-random-effects">
+<h3>Example with Random Effects<a class="headerlink" href="#example-with-random-effects" title="Link to this heading">#</a></h3>
+<p>We’ll be using the <strong>statsmodels</strong> package to demonstrate this, along with the dietox dataset, which has data on the growth curves of pigs. The data are taken from a study of the “Influence of Dietary Rapeseed Oli, Vitamin E, and Copper on Performance and Antioxidant and Oxidative Status of Pigs” <span id="id1">[<a class="reference internal" href="zreferences.html#id41" title="Charlotte Lauridsen, Søren Højsgaard, and Martin Tang Sørensen. Influence of dietary rapeseed oil, vitamin e, and copper on the performance and the antioxidative and oxidative status of pigs. Journal of animal science, 77(4):906–916, 1999.">Lauridsen, Højsgaard, and Sørensen, 1999</a>]</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;dietox&quot;</span><span class="p">,</span> <span class="s2">&quot;geepack&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Pig</th>
+      <th>Evit</th>
+      <th>Cu</th>
+      <th>Litter</th>
+      <th>Start</th>
+      <th>Weight</th>
+      <th>Feed</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4601</td>
+      <td>Evit000</td>
+      <td>Cu000</td>
+      <td>1</td>
+      <td>26.5</td>
+      <td>26.50000</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4601</td>
+      <td>Evit000</td>
+      <td>Cu000</td>
+      <td>1</td>
+      <td>26.5</td>
+      <td>27.59999</td>
+      <td>5.200005</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4601</td>
+      <td>Evit000</td>
+      <td>Cu000</td>
+      <td>1</td>
+      <td>26.5</td>
+      <td>36.50000</td>
+      <td>17.600000</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4601</td>
+      <td>Evit000</td>
+      <td>Cu000</td>
+      <td>1</td>
+      <td>26.5</td>
+      <td>40.29999</td>
+      <td>28.500000</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4601</td>
+      <td>Evit000</td>
+      <td>Cu000</td>
+      <td>1</td>
+      <td>26.5</td>
+      <td>49.09998</td>
+      <td>45.200001</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now we’re going to regress the weight of the pigs on the time and a couple of random effects.</p>
+<p>We fit two random effects for each pig: a random intercept, and a random slope (with respect to time). This means that each pig may have a different baseline weight, as well as grow at a different rate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">md</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">mixedlm</span><span class="p">(</span><span class="s2">&quot;Weight ~ Time&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Pig&quot;</span><span class="p">],</span> <span class="n">re_formula</span><span class="o">=</span><span class="s2">&quot;~Time&quot;</span><span class="p">)</span>
+<span class="n">mdf</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lbfgs&quot;</span><span class="p">])</span>
+<span class="n">mdf</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<tr>
+       <td>Model:</td>       <td>MixedLM</td> <td>Dependent Variable:</td>   <td>Weight</td>  
+</tr>
+<tr>
+  <td>No. Observations:</td>   <td>861</td>         <td>Method:</td>          <td>REML</td>   
+</tr>
+<tr>
+     <td>No. Groups:</td>      <td>72</td>          <td>Scale:</td>          <td>6.0372</td>  
+</tr>
+<tr>
+  <td>Min. group size:</td>    <td>11</td>      <td>Log-Likelihood:</td>   <td>-2217.0475</td>
+</tr>
+<tr>
+  <td>Max. group size:</td>    <td>12</td>        <td>Converged:</td>          <td>Yes</td>   
+</tr>
+<tr>
+  <td>Mean group size:</td>   <td>12.0</td>            <td></td>                <td></td>     
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+          <td></td>          <th>Coef.</th> <th>Std.Err.</th>    <th>z</th>   <th>P>|z|</th> <th>[0.025</th> <th>0.975]</th>
+</tr>
+<tr>
+  <th>Intercept</th>        <td>15.739</td>   <td>0.550</td>  <td>28.603</td> <td>0.000</td> <td>14.660</td> <td>16.817</td>
+</tr>
+<tr>
+  <th>Time</th>              <td>6.939</td>   <td>0.080</td>  <td>86.925</td> <td>0.000</td>  <td>6.783</td>  <td>7.095</td>
+</tr>
+<tr>
+  <th>Group Var</th>        <td>19.503</td>   <td>1.561</td>     <td></td>      <td></td>       <td></td>       <td></td>   
+</tr>
+<tr>
+  <th>Group x Time Cov</th>  <td>0.294</td>   <td>0.153</td>     <td></td>      <td></td>       <td></td>       <td></td>   
+</tr>
+<tr>
+  <th>Time Var</th>          <td>0.416</td>   <td>0.033</td>     <td></td>      <td></td>       <td></td>       <td></td>   
+</tr>
+</table><br/>
+</div></div>
+</div>
+<p>This is saying that we have 72 pigs with 861 observations between them. The “Group Var” here is the random effect intercept for pigs, and it has a variance of 19.5. Meanwhile the slope random effect has a variance of 0.416. In addition to these, there are the two fixed effects. It’s easier to see where all of these estimates come out by plotting them. We’ll be honest, plotting the estimates hasn’t been made easy—so getting the data out and configuring it isn’t as easy as it could be.</p>
+<p>First we pop the random effects results, and the errors, into dataframes in the tidy format</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">value_col_titles</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Group&quot;</span><span class="p">,</span> <span class="s2">&quot;Time&quot;</span><span class="p">]</span>
+<span class="n">group_time_ests</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">mdf</span><span class="o">.</span><span class="n">random_effects</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">group_time_ests</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">group_time_ests</span><span class="p">,</span> <span class="n">value_vars</span><span class="o">=</span><span class="n">value_col_titles</span><span class="p">)</span>
+<span class="c1"># add on the parameters</span>
+<span class="k">for</span> <span class="n">value_col</span><span class="p">,</span> <span class="n">add_on</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+    <span class="n">value_col_titles</span><span class="p">,</span> <span class="p">[</span><span class="n">mdf</span><span class="o">.</span><span class="n">fe_params</span><span class="p">[</span><span class="s2">&quot;Intercept&quot;</span><span class="p">],</span> <span class="n">mdf</span><span class="o">.</span><span class="n">fe_params</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">]]</span>
+<span class="p">):</span>
+    <span class="n">group_time_ests</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">group_time_ests</span><span class="p">[</span><span class="s2">&quot;variable&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">value_col</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">group_time_ests</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">group_time_ests</span><span class="p">[</span><span class="s2">&quot;variable&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">value_col</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">add_on</span>
+    <span class="p">)</span>
+
+<span class="n">group_time_ests</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>variable</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Group</td>
+      <td>15.109694</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Group</td>
+      <td>16.133875</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Group</td>
+      <td>17.846672</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Group</td>
+      <td>19.771567</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Group</td>
+      <td>17.265125</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pig_errors</span> <span class="o">=</span> <span class="n">mdf</span><span class="o">.</span><span class="n">conf_int</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">&quot;Intercept&quot;</span><span class="p">,</span> <span class="s2">&quot;Time&quot;</span><span class="p">]]</span>
+<span class="n">pig_errors</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;min&quot;</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">]</span>
+<span class="n">pig_errors</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pig_errors</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">pig_errors</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">pig_errors</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="s2">&quot;variable&quot;</span><span class="p">})</span>
+    <span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s2">&quot;Intercept&quot;</span><span class="p">:</span> <span class="s2">&quot;Group&quot;</span><span class="p">})</span>
+<span class="p">)</span>
+<span class="n">pig_errors</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>variable</th>
+      <th>min</th>
+      <th>max</th>
+      <th>mean</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Group</td>
+      <td>14.660193</td>
+      <td>16.817108</td>
+      <td>15.738650</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Time</td>
+      <td>6.782554</td>
+      <td>7.095474</td>
+      <td>6.939014</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now let’s plot the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+    <span class="n">ggplot</span><span class="p">()</span>
+    <span class="o">+</span> <span class="n">geom_errorbar</span><span class="p">(</span>
+        <span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;variable&quot;</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=</span><span class="s2">&quot;min&quot;</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">),</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">pig_errors</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">height</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="o">+</span> <span class="n">geom_point</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;variable&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">),</span> <span class="n">data</span><span class="o">=</span><span class="n">pig_errors</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">geom_jitter</span><span class="p">(</span>
+        <span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;variable&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">),</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">group_time_ests</span><span class="p">,</span>
+        <span class="n">height</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="o">+</span> <span class="n">ggtitle</span><span class="p">(</span><span class="s2">&quot;Random effects: pig model&quot;</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">xlim</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">labs</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Estimate&quot;</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Variable&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARN: using &#39;height&#39; parameter for errorbar was deprecated.
+      Please, use &#39;width&#39; parameter instead.
+</pre></div>
+</div>
+<div class="output text_html">   <div id="CuixHH"></div>
+   <script type="text/javascript" data-lets-plot-script="plot">
+   
+   (function() {
+   // ----------
+   
+   const forceImmediateRender = false;
+   const responsive = false;
+   
+   let sizing = {
+       width_mode: "MIN",
+       height_mode: "SCALED",
+       width: null, 
+       height: null 
+   };
+   
+   const preferredWidth = document.body.dataset.letsPlotPreferredWidth;
+   if (preferredWidth !== undefined) {
+       sizing = {
+           width_mode: 'FIXED',
+           height_mode: 'SCALED',
+           width: parseFloat(preferredWidth)
+       };
+   }
+   
+   const containerDiv = document.getElementById("CuixHH");
+   let fig = null;
+   
+   function renderPlot() {
+       if (fig === null) {
+           const plotSpec = {
+"mapping":{
+},
+"data_meta":{
+},
+"ggtitle":{
+"text":"Random effects: pig model"
+},
+"guides":{
+"x":{
+"title":"Estimate"
+},
+"y":{
+"title":"Variable"
+}
+},
+"kind":"plot",
+"scales":[{
+"aesthetic":"x",
+"limits":[5.0,30.0]
+}],
+"layers":[{
+"geom":"errorbar",
+"data":{
+"variable":["Group","Time"],
+"min":[14.660193056973178,6.782554042245177],
+"max":[16.817107744024007,7.095474122754183]
+},
+"mapping":{
+"y":"variable",
+"xmin":"min",
+"xmax":"max"
+},
+"data_meta":{
+"series_annotations":[{
+"type":"str",
+"column":"variable"
+},{
+"type":"float",
+"column":"min"
+},{
+"type":"float",
+"column":"max"
+},{
+"type":"float",
+"column":"mean"
+}]
+},
+"color":"black",
+"size":2.0,
+"alpha":1.0,
+"width":0.1
+},{
+"geom":"point",
+"data":{
+"variable":["Group","Time"],
+"mean":[15.738650400498592,6.93901408249968]
+},
+"mapping":{
+"x":"mean",
+"y":"variable"
+},
+"data_meta":{
+"series_annotations":[{
+"type":"str",
+"column":"variable"
+},{
+"type":"float",
+"column":"min"
+},{
+"type":"float",
+"column":"max"
+},{
+"type":"float",
+"column":"mean"
+}]
+},
+"color":"black",
+"size":5.0
+},{
+"geom":"jitter",
+"data":{
+"variable":["Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Group","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time","Time"],
+"value":[15.109693686108605,16.133875296492512,17.84667178847565,19.771567314048433,17.265125108136157,17.965823984174243,20.31909993798248,5.331304461878009,20.761560806983006,14.495738586128223,7.664585578583525,19.25227268375141,15.921382127168568,13.759048087613808,13.165491740640235,20.07538623478968,20.052152727010775,20.093404585837405,18.199432215789766,15.690642722022638,9.646703253810664,10.72329438099192,5.911627180565445,19.939169356491476,22.19259666467407,12.44163095516041,18.419390326932994,14.741887701876154,19.146103542736736,15.288396800683612,18.287875308516806,12.52611233101057,10.119093838778637,14.088168886458918,11.423557198430245,14.14981490053586,11.90924123015774,16.367366611620266,23.919549320899208,17.122168073890297,16.800778750422317,17.36059936273286,16.771927106221263,17.10690210415309,12.504064565922352,10.398697011480095,12.823478752444167,26.64465892313158,8.734370064667552,18.62436398308372,13.79750431267728,15.070003615631903,13.486796503716912,13.419698462342284,18.463970806659734,20.347704287666918,12.84406283475442,15.240438332908438,12.457892839086927,16.15394306344838,11.111825634470193,17.89167816836765,27.810886979233665,21.21706156883001,14.237087662290522,14.658380028767574,13.947614044891285,14.648598498886095,15.533311483000688,15.462587707836057,16.954403930185908,13.41952990812312,6.84820870943891,7.364919370958952,7.235198505975382,7.3740406738891275,8.143677589478575,6.727774675377169,6.913228738405374,6.778782656762877,6.276193608451923,6.649691600914119,5.090291561181642,6.778689924738096,6.853424636028742,7.14302159270501,7.720404507080323,6.0659686028975734,7.2730535694449125,6.555535931087061,6.919646097737104,6.203392734454888,6.199770560568749,7.001323642380481,6.284492988580217,7.234369438886161,6.831352787126841,6.437313952427192,6.348748936304306,6.9812166416383805,7.525770084383989,7.385623529076719,6.856788926017627,6.496074063246731,7.399109260079589,7.735050718785693,6.513759841167045,6.452458670260685,6.52944479172505,7.033532207847496,7.7125184247085485,7.468176871538575,7.386628654390607,7.019009654361817,7.2240552730793794,7.352309196833695,7.10512516447372,7.31884690913768,7.270556114041765,7.007266036654343,7.9011705569808495,7.7729315525282665,7.2513597614761105,7.111628953645748,7.462543502523634,6.741606811915895,7.628612603274763,7.398548347338719,7.483293405328047,6.344090436984738,6.557014517519228,6.783182515574241,5.263276027925869,7.05450658903964,7.190353967273619,6.062659395681612,5.646656091784373,5.131256930748582,7.402451202046265,7.160341211464035,7.762129402810243,7.070053306947234,6.957315558497012,7.446192663934075]
+},
+"mapping":{
+"x":"value",
+"y":"variable"
+},
+"data_meta":{
+"series_annotations":[{
+"type":"str",
+"column":"variable"
+},{
+"type":"float",
+"column":"value"
+}]
+},
+"height":0.2,
+"size":2.0,
+"alpha":0.6,
+"color":"blue"
+}],
+"metainfo_list":[],
+"spec_id":"1"
+};
+           window.letsPlotCall(function() { fig = LetsPlot.buildPlotFromProcessedSpecs(plotSpec, containerDiv, sizing); });
+       } else {
+           fig.updateView({});
+       }
+   }
+   
+   const renderImmediately = 
+       forceImmediateRender || (
+           sizing.width_mode === 'FIXED' && 
+           (sizing.height_mode === 'FIXED' || sizing.height_mode === 'SCALED')
+       );
+   
+   if (renderImmediately) {
+       renderPlot();
+   }
+   
+   if (!renderImmediately || responsive) {
+       // Set up observer for initial sizing or continuous monitoring
+       var observer = new ResizeObserver(function(entries) {
+           for (let entry of entries) {
+               if (entry.contentBoxSize && 
+                   entry.contentBoxSize[0].inlineSize > 0) {
+                   if (!responsive && observer) {
+                       observer.disconnect();
+                       observer = null;
+                   }
+                   renderPlot();
+                   if (!responsive) {
+                       break;
+                   }
+               }
+           }
+       });
+       
+       observer.observe(containerDiv);
+   }
+   
+   // ----------
+   })();
+   
+   </script></div></div>
+</div>
+</section>
+</section>
+<section id="violations-of-the-classical-linear-model-clm">
+<h2>Violations of the classical linear model (CLM)<a class="headerlink" href="#violations-of-the-classical-linear-model-clm" title="Link to this heading">#</a></h2>
+<section id="heteroskedasticity">
+<h3>Heteroskedasticity<a class="headerlink" href="#heteroskedasticity" title="Link to this heading">#</a></h3>
+<p>If an estimated model is homoskedastic then its random variables have equal (finite) variance. This is also known as homogeneity of variance. Another way of putting it is that, for all <em>observations</em> <span class="math notranslate nohighlight">\(i\)</span> in an estimated model <span class="math notranslate nohighlight">\(y_i = X_i\hat{\beta} + \epsilon_i\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(\epsilon_i \epsilon_i) = \sigma^2
+\]</div>
+<p>When this relationship does not hold, an estimated model is said to be heteroskedastic.</p>
+<p>To test for heteroskedasticity, you can use <strong>statsmodels</strong>’ versions of the <a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.stats.diagnostic.het_breuschpagan.html#statsmodels.stats.diagnostic.het_breuschpagan">Breusch-Pagan</a> or <a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.stats.diagnostic.het_white.html#statsmodels.stats.diagnostic.het_white">White</a> tests with the null hypothesis that the estimated model is homoskedastic. If the null hypothesis is rejected, then standard errors, t-statistics, and F-statistics are invalidated. In this case, you will need HAC (heteroskedasticity and auto-correlation consistent) standard errors, t- and F-statistics.</p>
+<p>To obtain HAC standard errors from existing regression results in a variable <code class="docutils literal notranslate"><span class="pre">results</span></code>, you can use (for 1 lag):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">(</span><span class="s1">&#39;HAC&#39;</span><span class="p">,</span> <span class="n">maxlags</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="quantile-regression">
+<h2>Quantile regression<a class="headerlink" href="#quantile-regression" title="Link to this heading">#</a></h2>
+<p>Quantile regression estimates the conditional quantiles of a response variable. In some cases, it can be more robust to outliers and, in the case of the <span class="math notranslate nohighlight">\(q=0.5\)</span> quantile it is equivalent LAD (Least Absolute Deviation) regression. Let’s look at an example of quantile regression in action, lifted direct from the <strong>statsmodels</strong> <a class="reference external" href="https://www.statsmodels.org/dev/examples/notebooks/generated/quantile_regression.html">documentation</a> and based on a Journal of Economic Perspectives paper by Koenker and Hallock <span id="id2">[<a class="reference internal" href="zreferences.html#id48" title="Roger Koenker and Kevin F Hallock. Quantile regression. Journal of economic perspectives, 15(4):143–156, 2001.">Koenker and Hallock, 2001</a>]</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">engel</span><span class="o">.</span><span class="n">load_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">data</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>income</th>
+      <th>foodexp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>420.157651</td>
+      <td>255.839425</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>541.411707</td>
+      <td>310.958667</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>901.157457</td>
+      <td>485.680014</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>639.080229</td>
+      <td>402.997356</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>750.875606</td>
+      <td>495.560775</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>What we have here are two sets of related data. Let’s perform several quantile regressions from 0.1 to 0.9 in steps of 0.1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mod</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">quantreg</span><span class="p">(</span><span class="s2">&quot;foodexp ~ income&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+<span class="n">quantiles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">q_results</span> <span class="o">=</span> <span class="p">[</span><span class="n">mod</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">quantiles</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <span class="math notranslate nohighlight">\(q=0.5\)</span> entry will be at the <code class="docutils literal notranslate"><span class="pre">4</span></code> index; let’s take a look at it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">q_results</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                         QuantReg Regression Results                          
+==============================================================================
+Dep. Variable:                foodexp   Pseudo R-squared:               0.6206
+Model:                       QuantReg   Bandwidth:                       64.51
+Method:                 Least Squares   Sparsity:                        209.3
+Date:                Wed, 26 Mar 2025   No. Observations:                  235
+Time:                        16:02:21   Df Residuals:                      233
+                                        Df Model:                            1
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept     81.4823     14.634      5.568      0.000      52.649     110.315
+income         0.5602      0.013     42.516      0.000       0.534       0.586
+==============================================================================
+
+The condition number is large, 2.38e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s take a look at the results for all of the regressions <em>and</em> let’s add in OLS for comparison:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols_res</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;foodexp ~ income&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="n">get_y</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">x</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">income</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">income</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">50</span><span class="p">)</span>
+<span class="c1"># Just to make the plot clearer</span>
+<span class="n">x_max</span> <span class="o">=</span> <span class="mi">3000</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">x_max</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;income&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;foodexp&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">q_results</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">get_y</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Intercept&quot;</span><span class="p">],</span> <span class="n">res</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;income&quot;</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;$q=</span><span class="si">{</span><span class="n">quantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">1.1f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">get_y</span><span class="p">(</span><span class="n">ols_res</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;Intercept&quot;</span><span class="p">],</span> <span class="n">ols_res</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;income&quot;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;OLS&quot;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_max</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/654deddda6ae9f9a5606fbcf26f398b8f6e17c9f8ff88236aa6a1031584aa51e.svg" src="_images/654deddda6ae9f9a5606fbcf26f398b8f6e17c9f8ff88236aa6a1031584aa51e.svg" />
+</div>
+</div>
+<p>This chart shows very clearly how quantile regression differs from OLS. The line fitted by OLS is trying to be all things to all points whereas the line fitted by quantile regression is focused only on its quantile. You can also see how points far from the median (not all shown) may be having a large influence on the OLS line.</p>
+</section>
+<section id="rolling-and-recursive-regressions">
+<h2>Rolling and recursive regressions<a class="headerlink" href="#rolling-and-recursive-regressions" title="Link to this heading">#</a></h2>
+<p>Rolling ordinary least squares applies OLS (ordinary least squares) across a fixed window of observations and then rolls (moves or slides) that window across the data set. They key parameter is <code class="docutils literal notranslate"><span class="pre">window</span></code>, which determines the number of observations used in each OLS regression. Recursive regression is equivalent to rolling regression but with a window that expands over time.</p>
+<p>Let’s first create some synthetic data to perform estimation on:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_regression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.regression.rolling</span><span class="w"> </span><span class="kn">import</span> <span class="n">RollingOLS</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;feature0&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;feature1&quot;</span><span class="p">})</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature0</th>
+      <th>feature1</th>
+      <th>target</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-0.955945</td>
+      <td>-0.345982</td>
+      <td>-36.740556</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-1.225436</td>
+      <td>0.844363</td>
+      <td>7.190031</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.692050</td>
+      <td>1.536377</td>
+      <td>44.389018</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.010500</td>
+      <td>1.785870</td>
+      <td>57.019515</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-0.895467</td>
+      <td>0.386902</td>
+      <td>-16.088554</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now let’s fit the model using a formula and a <code class="docutils literal notranslate"><span class="pre">window</span></code> of 25 steps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">roll_reg</span> <span class="o">=</span> <span class="n">RollingOLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span>
+    <span class="s2">&quot;target ~ feature0 + feature1 -1&quot;</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span>
+<span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">roll_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that -1 in the formala suppresses the intercept. We can see the parameters using <code class="docutils literal notranslate"><span class="pre">model.params</span></code>. Here are the params for time steps between 20 and 30:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">20</span><span class="p">:</span><span class="mi">30</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature0</th>
+      <th>feature1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>20</th>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>20.532655</td>
+      <td>34.919468</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>20.470171</td>
+      <td>35.365235</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>20.002261</td>
+      <td>35.666997</td>
+    </tr>
+  </tbody>
+</table>
+<p>10 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p>Note that there aren’t parameters for entries between 0 and 23 because our window is 25 steps wide. We can easily look at how any of the coefficients are changing over time. Here’s an example for ‘feature0’.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">plot_recursive_coefficient</span><span class="p">(</span><span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;feature0&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time step&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Coefficient value&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/23f8aa521d9fc6edae7290e34a44b4fd13990d43f5e2a7beeaa1c10851eba222.svg" src="_images/23f8aa521d9fc6edae7290e34a44b4fd13990d43f5e2a7beeaa1c10851eba222.svg" />
+</div>
+</div>
+<p>A rolling regression with an <em>expanding</em> rather than <em>moving</em> window is effectively a recursive least squares model. We can do this instead using the <code class="docutils literal notranslate"><span class="pre">RecursiveLS</span></code> function from <strong>statsmodels</strong>. Let’s fit this to the whole dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg_rls</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">RecursiveLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;target ~ feature0 + feature1 -1&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+<span class="n">model_rls</span> <span class="o">=</span> <span class="n">reg_rls</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model_rls</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                           Statespace Model Results                           
+==============================================================================
+Dep. Variable:                 target   No. Observations:                  200
+Model:                    RecursiveLS   Log Likelihood                -570.923
+Date:                Wed, 26 Mar 2025   R-squared:                       0.988
+Time:                        16:02:22   AIC                           1145.847
+Sample:                             0   BIC                           1152.444
+                                - 200   HQIC                          1148.516
+Covariance Type:            nonrobust   Scale                           17.413
+==============================================================================
+                 coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+feature0      20.6872      0.296     69.927      0.000      20.107      21.267
+feature1      34.0655      0.302    112.870      0.000      33.474      34.657
+===================================================================================
+Ljung-Box (L1) (Q):                   2.02   Jarque-Bera (JB):                 3.93
+Prob(Q):                              0.16   Prob(JB):                         0.14
+Heteroskedasticity (H):               1.17   Skew:                            -0.31
+Prob(H) (two-sided):                  0.51   Kurtosis:                         3.31
+===================================================================================
+
+Warnings:
+[1] Parameters and covariance matrix estimates are RLS estimates conditional on the entire sample.
+</pre></div>
+</div>
+</div>
+</div>
+<p>But now we can look back at how the values of the coefficients changed over time too:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">model_rls</span><span class="o">.</span><span class="n">plot_recursive_coefficient</span><span class="p">(</span>
+    <span class="nb">range</span><span class="p">(</span><span class="n">reg_rls</span><span class="o">.</span><span class="n">k_exog</span><span class="p">),</span> <span class="n">legend_loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span>
+<span class="p">)</span>
+<span class="n">ax_list</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">axes</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">ax_list</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">ax_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time step&quot;</span><span class="p">)</span>
+<span class="n">ax_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Coefficient value&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/66d59e29c75d36ba9c3f21d06ad49eecb7f538e5a3b6200a20a24be015908f72.svg" src="_images/66d59e29c75d36ba9c3f21d06ad49eecb7f538e5a3b6200a20a24be015908f72.svg" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="econmt-regression.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Regression</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="econmt-diagnostics.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Regression diagnostics and visualisations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logit-probit-and-generalised-linear-models">Logit, probit, and generalised linear models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logit">Logit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probit">Probit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generalised-linear-models">Generalised linear models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-mixed-effects-regressions-lmer">Linear Mixed Effects Regressions (LMER)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed-vs-random-effects">Fixed vs Random Effects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-random-effects">Example with Random Effects</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#violations-of-the-classical-linear-model-clm">Violations of the classical linear model (CLM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heteroskedasticity">Heteroskedasticity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantile-regression">Quantile regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-and-recursive-regressions">Rolling and recursive regressions</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Arthur Turrell
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  This book is available under an MIT license.
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

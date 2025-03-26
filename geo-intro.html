@@ -1,0 +1,2466 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Intro to Geo-Spatial Analysis &#8212; Coding for Economists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-9FZQCPFXZJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-9FZQCPFXZJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'geo-intro';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="canonical" href="https://aeturrell.github.io/coding-for-economists/geo-intro.html" />
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Geo-Spatial Visualisation" href="geo-vis.html" />
+    <link rel="prev" title="Unsupervised Machine Learning" href="ml-unsup.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/smith_lovelace.png" class="logo__image only-light" alt="Coding for Economists - Home"/>
+    <script>document.write(`<img src="_static/smith_lovelace.png" class="logo__image only-dark" alt="Coding for Economists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-basics.html">Coding Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow-basics.html">Workflow Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-where.html">Writing Code</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-analysis-quickstart.html">Data Analysis Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-intro.html">Working with Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-transformation.html">Data Transformation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-read-and-write.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-numbers.html">Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-categorical.html">Categorical Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-spreadsheets.html">Spreadsheets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-best-practice.html">Code in Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advanced.html">Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-advcd-best-practice.html">Shortcuts to Better Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-intro.html">Intro to Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-letsplot.html">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-matplotlib.html">Powerful Data Visualisation with <strong>Matplotlib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-one.html">Common Plots I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-common-plots-two.html">Common Plots II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Essential Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="auto-research-outputs.html">Automating Research Outputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-markdown.html">Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-command-line.html">The Command Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-version-control.html">Version Control</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Econometrics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="econmt-probability-random.html">Probability and Random Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-statistics.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-regression.html">Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-generalised-models.html">Generalised regression models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-diagnostics.html">Regression diagnostics and visualisations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-causal-inference.html">Causal Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayesian.html">Bayesian Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="econmt-bayes-bambi.html">Bayesian Inference Made Easier</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-boolean.html">Boolean Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-joining-data.html">Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-missing-values.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-exploratory-analysis.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-extraction.html">Getting Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-databases.html">Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-advanced.html"><strong>pandas</strong> alternatives, validation, and orchestration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-sharing.html">Sharing Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="code-further-advanced.html">Advanced Coding</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-narrative.html">Narrative Data Visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-tables.html">Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-dashboards.html">Dashboards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-animation.html">Animation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-quarto.html">Combining Code and Text in Quarto Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-environments.html">Virtual Code Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrkflow-rap.html">Reproducible Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Time</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="time-intro.html">Introduction to Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-fcasts-env.html">Forecasting Exercises</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Text Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="text-intro.html">Introduction to Text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-regex.html">Regular Expressions, aka regex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text-nlp.html">Natural Language Processing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ml-intro.html">Introduction to Machine Learning and AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-sup.html">Supervised Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-data.html">Data for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ml-unsup.html">Unsupervised Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Geospatial</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Intro to Geo-Spatial Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geo-vis.html">Geo-Spatial Visualisation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="maths-abstract.html">Abstract Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maths-numerical.html">Numerical Mathematics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Craft</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="craft-intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-search.html">Putting the Search in Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-generating-ideas.html">Generating and Accepting Research Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-writing-papers.html">Writing Papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-research-blogs.html">Research Blog Posts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-referee.html">Writing Referee Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-technical-reports.html">Writing Technical Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="craft-extended-abstracts.html">Extended Abstracts</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Data Visualisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vis-plotnine.html">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vis-seaborn.html">Data Visualisation with <strong>Seaborn</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Coming from ...</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="coming-from-stata.html">Coming from Stata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-matlab.html">Coming from Matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-r.html">Coming from R</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coming-from-excel.html">Coming from Excel</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">End Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zreferences.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/aeturrell/coding-for-economists/blob/main/geo-intro.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/aeturrell/coding-for-economists/issues/new?title=Issue%20on%20page%20%2Fgeo-intro.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/geo-intro.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Intro to Geo-Spatial Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-reference-systems">Coordinate Reference Systems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imports-and-packages">Imports and packages</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geopandas-dataframes">Geopandas dataframes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-and-output">Input and Output</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basics">Basics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-coordinate-reference-systems">Working with Coordinate Reference Systems</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulating-space">Manipulating Space</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Basics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-operations">Spatial Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#point-in-polygon">Point-in-polygon</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#buffers">Buffers</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-set-operations">Spatial set operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-distances">Computing distances</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neighbours">Neighbours</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation-and-dissolve">Aggregation and Dissolve</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dissolve">Dissolve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation">Aggregation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-data">Merging data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#attribute-joins">Attribute Joins</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-joins">Spatial Joins</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geocoding">Geocoding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geopy-stand-alone">Geopy stand-alone</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geopy-built-in-to-geopandas">Geopy built-in to geopandas</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openstreetmap-and-osmnx">OpenStreetMap and Osmnx</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review">Review</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="intro-to-geo-spatial-analysis">
+<span id="geo-intro"></span><h1>Intro to Geo-Spatial Analysis<a class="headerlink" href="#intro-to-geo-spatial-analysis" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>In this chapter, you’ll learn the basics of geospatial analysis with code. This chapter is indebted to the excellent geographical shapefiles available to download from <a class="reference external" href="https://www.naturalearthdata.com/downloads/">Natural Earth</a>.</p>
+<p>You should be aware when following this chapter that installing geographic analysis packages isn’t always the easiest and things can and do go wrong! (Some geospatial analysis courses recommend running everything in a Docker container.) If you’re not familiar with Docker and you’re installing everything locally, a strong recommendation is to use conda. There’s a brief guide on installing packages in the Chapter on <a class="reference internal" href="code-preliminaries.html#code-preliminaries"><span class="std std-ref">Preliminaries</span></a>.</p>
+<p>There are two types of spatial data geographic information systems (GIS): vector and raster. Vector spatial data are made up of vertices and paths. These are represented computationally by points (zero-dimensional objects, if you like), lines (1D objects), and polygons (2D objects, aka an area). Vector data are analogous to vector image formats, like .eps and .pdf, they are smooth and well-defined regardless of the level of zoom you look at them (on a map). Raster data are composed of pixels, also known as grid cells. Each cell has a different value and the raster map is overlaid on a map. Raster data are better for continuous variables such as temperature or rainfall, while vector data are better suited to political boundaries and features like roads. In this book, we’ll only cover vector geospatial data analysis (if you need to work with rasters, check out <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/">rasterio</a>).</p>
+<p>Common file formats for vector data include Shapefile (.shp…), GeoJSON/JSON, KML and GeoPackage.</p>
+<section id="coordinate-reference-systems">
+<h3>Coordinate Reference Systems<a class="headerlink" href="#coordinate-reference-systems" title="Link to this heading">#</a></h3>
+<p>A Coordinate Reference System (CRS) associates numerical coordinates with a position on the surface of the Earth. Latitude and longitude are an example (and have units of degrees) but there are many CRSs. They are important because they define how your data will look on a map. Think about it like this: in the case of the usual charts you plot, you usually take it as given that you are working in a space that is 2D with an X- and Y-basis vector. But the most basic object in mapping is a <em>sphere</em>, which is fundamentally different to a 2D plane. This means you have to choose whether to show part of a globe or all of a 2D representation of a globe (a <em>projection</em>), which inevitably introduces distortions.</p>
+<p>The type main classes of CRS are geographic or projection. A geographic CRS uses a 3D model of the Earth and ‘drapes’ the data over it.</p>
+<p>A projected CRS has the geographic CRS plus a map projection that has co-ordinates on a 2D plane. It is well known that there is no distortion-free projection from a globe to a plane; you cannot preserve areas, shapes, distances, and angles simultaneously. Different map projections introduce different distortions, as lovingly shown in this <a class="reference external" href="https://xkcd.com/977/">xkcd</a> cartoon.</p>
+<p>One example of a map projection is the Mercator projection, which is a <em>conformal mapping</em>, i.e. a mapping that locally preserves angles, but not necessarily lengths. In fact, Mercator distorts areas, especially the further away an area is from the equator. Some projections are better for some purposes than others.</p>
+<p><img alt="XKCD Bad Map Projection: South America" src="https://imgs.xkcd.com/comics/bad_map_projection_south_america.png" /></p>
+<p>XKCD: Bad Map Projection: South America</p>
+<p>Some analysis tools expect geospatial data to be in a projected CRS-this is true of the main package we’ll use, <strong>geopandas</strong>. This is usually not a problem for economic data; it’s rare that the curvature of the Earth becomes a factor (though distances might in some rare situations). Most spatial libraries expect that all of the data that are being combined be in the same CRS.</p>
+<p>CRSs are usually referenced by an <a class="reference external" href="https://epsg.io/">EPSG code</a>. Two widely used CRSs are WGS84 (aka EPSG: 4326) which provides a good representation of most places on Earth and NAD83 (aka EPSG: 4269), which provides a good representation of the USA.</p>
+<p>Why are we banging on about this? Because maps and geometry objects come in different CRS and it’s worth being aware of that so that you can ensure they are in the same format, and that you have the right CRS for your purposes.</p>
+</section>
+<section id="imports-and-packages">
+<h3>Imports and packages<a class="headerlink" href="#imports-and-packages" title="Link to this heading">#</a></h3>
+<p>We’ll be using <a class="reference external" href="https://geopandas.org/index.html"><strong>geopandas</strong></a>, the go-to package for vector spatial analysis in Python. The easiest way to install this package is using <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">geopandas</span></code>; if you want to install it via pip then look at the <a class="reference external" href="https://geopandas.org/install.html">install instructions</a>.</p>
+<p>Let’s import some of the packages we’ll be using:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set max rows displayed for readability</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.max_rows&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="c1"># Plot settings</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span>
+    <span class="s2">&quot;https://github.com/aeturrell/coding-for-economists/raw/main/plot_style.txt&quot;</span>
+<span class="p">)</span>
+<span class="c1"># For this chapter, some bespoke settings:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;axes.autolimit_mode&quot;</span><span class="p">:</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;patch.linewidth&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+        <span class="s2">&quot;figure.figsize&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+        <span class="s2">&quot;figure.dpi&quot;</span><span class="p">:</span> <span class="mi">125</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="geopandas-dataframes">
+<h2>Geopandas dataframes<a class="headerlink" href="#geopandas-dataframes" title="Link to this heading">#</a></h2>
+<p>Quite literally, <strong>GeoPandas</strong> is a combination of geo and pandas so the good news is that everything you know about using <strong>pandas</strong> dataframes can be re-used here for geospatial data. The geo part adds functionality for geo-spatial data.</p>
+<section id="input-and-output">
+<h3>Input and Output<a class="headerlink" href="#input-and-output" title="Link to this heading">#</a></h3>
+<p>So, first, we need some geo-spatial data to analyse. There are several different file formats for geo-spatial data, such as Shapefile (.shp), GeoJSON/JSON, KML, and GeoPackage.</p>
+<p>We’ll use a Shapefile of the countries of the world from <a class="reference external" href="https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/">Natural Earth</a>. It comes as a zip file; unzip it and one of the files ends in .shp, which is the one we load with <strong>geopandas</strong>.</p>
+<p>Let’s load the data and look at the first few rows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To run this example, you will need to download the files at this url:</span>
+<span class="c1"># https://github.com/aeturrell/coding-for-economists/tree/main/data/geo/world</span>
+<span class="c1"># and save them in the path &#39;data/geo/world&#39; (path relative to where you&#39;re running the code)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/geo/world/ne_50m_admin_0_countries.shp&quot;</span><span class="p">))</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>featurecla</th>
+      <th>scalerank</th>
+      <th>LABELRANK</th>
+      <th>SOVEREIGNT</th>
+      <th>SOV_A3</th>
+      <th>ADM0_DIF</th>
+      <th>LEVEL</th>
+      <th>TYPE</th>
+      <th>ADMIN</th>
+      <th>ADM0_A3</th>
+      <th>...</th>
+      <th>NAME_KO</th>
+      <th>NAME_NL</th>
+      <th>NAME_PL</th>
+      <th>NAME_PT</th>
+      <th>NAME_RU</th>
+      <th>NAME_SV</th>
+      <th>NAME_TR</th>
+      <th>NAME_VI</th>
+      <th>NAME_ZH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Admin-0 country</td>
+      <td>1</td>
+      <td>3</td>
+      <td>Zimbabwe</td>
+      <td>ZWE</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Sovereign country</td>
+      <td>Zimbabwe</td>
+      <td>ZWE</td>
+      <td>...</td>
+      <td>짐바브웨</td>
+      <td>Zimbabwe</td>
+      <td>Zimbabwe</td>
+      <td>Zimbábue</td>
+      <td>Зимбабве</td>
+      <td>Zimbabwe</td>
+      <td>Zimbabve</td>
+      <td>Zimbabwe</td>
+      <td>辛巴威</td>
+      <td>POLYGON ((31.28789 -22.40205, 31.19727 -22.344...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Admin-0 country</td>
+      <td>1</td>
+      <td>3</td>
+      <td>Zambia</td>
+      <td>ZMB</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Sovereign country</td>
+      <td>Zambia</td>
+      <td>ZMB</td>
+      <td>...</td>
+      <td>잠비아</td>
+      <td>Zambia</td>
+      <td>Zambia</td>
+      <td>Zâmbia</td>
+      <td>Замбия</td>
+      <td>Zambia</td>
+      <td>Zambiya</td>
+      <td>Zambia</td>
+      <td>赞比亚</td>
+      <td>POLYGON ((30.39609 -15.64307, 30.25068 -15.643...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Admin-0 country</td>
+      <td>1</td>
+      <td>3</td>
+      <td>Yemen</td>
+      <td>YEM</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Sovereign country</td>
+      <td>Yemen</td>
+      <td>YEM</td>
+      <td>...</td>
+      <td>예멘</td>
+      <td>Jemen</td>
+      <td>Jemen</td>
+      <td>Iémen</td>
+      <td>Йемен</td>
+      <td>Jemen</td>
+      <td>Yemen</td>
+      <td>Yemen</td>
+      <td>也门</td>
+      <td>MULTIPOLYGON (((53.08564 16.64839, 52.58145 16...</td>
+    </tr>
+  </tbody>
+</table>
+<p>3 rows × 95 columns</p>
+</div></div></div>
+</div>
+<p>There’s a lot of info here, but a lot of it is different labelling. The dataset has one country per row.</p>
+<p>To save the data frame, use <code class="docutils literal notranslate"><span class="pre">df.to_file(&quot;output_name.shp&quot;)</span></code> for shapefiles. For other output formats use, for example, <code class="docutils literal notranslate"><span class="pre">df.to_file(&quot;output_name.geojson&quot;,</span> <span class="pre">driver=&quot;GeoJSON&quot;)</span></code>.</p>
+</section>
+<section id="basics">
+<h3>Basics<a class="headerlink" href="#basics" title="Link to this heading">#</a></h3>
+<p>Let’s see what we get when we call the humble plot function on the data we already read in!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d285434313192496ae768ff9e226ebee123d4bfe5aa639a01d77fbdedccb9147.svg" src="_images/d285434313192496ae768ff9e226ebee123d4bfe5aa639a01d77fbdedccb9147.svg" />
+</div>
+</div>
+<p>I think it’s glorious just how easy this is to use.</p>
+<p>Because <strong>geopandas</strong> builds on <strong>pandas</strong>, we can do all of the usual pandas-like operations such as filtering based on values. Here’s how to filter to an individual country (one with a recognisable shape!):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;ADMIN&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Italy&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8e3cdb10eb02055fcbe2c3dc0796dd8630dc45beead7a6dfff4354fd5dea1412.svg" src="_images/8e3cdb10eb02055fcbe2c3dc0796dd8630dc45beead7a6dfff4354fd5dea1412.svg" />
+</div>
+</div>
+<p>Note that it is the last column in the dataframe, the <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column, that makes this sorcery possible.</p>
+</section>
+<section id="working-with-coordinate-reference-systems">
+<h3>Working with Coordinate Reference Systems<a class="headerlink" href="#working-with-coordinate-reference-systems" title="Link to this heading">#</a></h3>
+<p>We can check what the CRS of this entire <strong>geopandas</strong> dataframe is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Geographic 2D CRS: EPSG:4326&gt;
+Name: WGS 84
+Axis Info [ellipsoidal]:
+- Lat[north]: Geodetic latitude (degree)
+- Lon[east]: Geodetic longitude (degree)
+Area of Use:
+- name: World.
+- bounds: (-180.0, -90.0, 180.0, 90.0)
+Datum: World Geodetic System 1984 ensemble
+- Ellipsoid: WGS 84
+- Prime Meridian: Greenwich
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can switch between CRS using the <code class="docutils literal notranslate"><span class="pre">to_crs</span></code> function. Let’s see the world map we plotted earlier using the WGS84 projection and also using some other projection, including the dreaded Meractor projection. Mercator looks completely ridiculous if we don’t drop Antarctica first, so let’s get shot of it for all the projections. (You can find a list of projections <a class="reference external" href="https://proj.org/operations/projections/index.html">here</a>.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exclude_admins</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Antarctica&quot;</span><span class="p">,</span> <span class="s2">&quot;French Southern and Antarctic Lands&quot;</span><span class="p">]</span>
+<span class="n">proj_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;WGS 84&quot;</span><span class="p">,</span> <span class="s2">&quot;Mercator&quot;</span><span class="p">,</span> <span class="s2">&quot;Winkel Tripel&quot;</span><span class="p">,</span> <span class="s2">&quot;Quartic Authalic&quot;</span><span class="p">]</span>
+<span class="n">crs_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">,</span> <span class="s2">&quot;EPSG:3395&quot;</span><span class="p">,</span> <span class="s2">&quot;+proj=wintri&quot;</span><span class="p">,</span> <span class="s2">&quot;+proj=qua_aut&quot;</span><span class="p">]</span>
+
+<span class="n">world_no_antrtc</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;ADMIN&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">exclude_admins</span><span class="p">)]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span>
+    <span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">):</span>
+    <span class="n">world_no_antrtc</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">crs_names</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#b2f3b2&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">proj_names</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/97c81f83ed0b9a57d2566bccaec654143fffe6a37fbaebd7006ab9128d2b8437.svg" src="_images/97c81f83ed0b9a57d2566bccaec654143fffe6a37fbaebd7006ab9128d2b8437.svg" />
+</div>
+</div>
+</section>
+</section>
+<section id="manipulating-space">
+<h2>Manipulating Space<a class="headerlink" href="#manipulating-space" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Basics<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Let’s look more closely at the objects that encode the shapes of the countries on our world map:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;ADMIN&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Italy&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>137    MULTIPOLYGON (((7.02109 45.92578, 7.05576 45.9...
+Name: geometry, dtype: geometry
+</pre></div>
+</div>
+</div>
+</div>
+<p>The object is a multipolygon. Remember that we have points (0D), lines (1D), and polygons (aka areas, 2D) that we can embed in a projection. A line is at least 2 vertices that are connected; a polygon is the area contained within 3 or more vertices. Multipolygons are the union of two or more non-contiguous polygons: in this case, the Italian mainland, Sicily, and Sardinia.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function works just as happily if our basic objects are points rather than polygons though. In the below example, we’ll grab the centroid (the spatial midpoint) of each country as a point and plot them:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We are going to round-trip the data through a flat projection that preserves</span>
+<span class="c1"># area here, Equal Area Cylindrical (&#39;+proj=cea&#39;), and then convert back to a</span>
+<span class="c1"># geographical CRS. This is to ensure the centroid results are correct across</span>
+<span class="c1"># the globe. The key part is the `.centroid`</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;centroid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="s2">&quot;+proj=cea&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">boundary</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;centroid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/46a10fe30064fc2734915ff4794f1100afee221691161cac44b7e76b9c8cae2a.svg" src="_images/46a10fe30064fc2734915ff4794f1100afee221691161cac44b7e76b9c8cae2a.svg" />
+</div>
+</div>
+<p>Let’s explore those basic building blocks a bit more. A point at position (1, 2) is defined as follows (<strong>shapely</strong> is used by <strong>geopandas</strong>):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Point</span>
+
+<span class="n">point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">point</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8107fff351d6544abe2eb9587f74bf13782798aad686c77c5b7257fc1085d16b.svg" src="_images/8107fff351d6544abe2eb9587f74bf13782798aad686c77c5b7257fc1085d16b.svg" />
+</div>
+</div>
+<p>A point doesn’t have much other than a single position in 2D space. But lines have length, and polygons have area.</p>
+<p>There are different kinds of lines but the simplest is the <code class="docutils literal notranslate"><span class="pre">LineString()</span></code> which can be constructed from a sequence of points.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">LineString</span>
+
+<span class="n">line</span> <span class="o">=</span> <span class="n">LineString</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Length of line is </span><span class="si">{</span><span class="n">line</span><span class="o">.</span><span class="n">length</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">line</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Length of line is 11.78
+</pre></div>
+</div>
+<img alt="_images/ba07d7344efb40788c52b990c093f33a28be57fdbc620836bd3cd6b3e7a130e2.svg" src="_images/ba07d7344efb40788c52b990c093f33a28be57fdbc620836bd3cd6b3e7a130e2.svg" />
+</div>
+</div>
+<p>We already saw Polygons in the shape of Italy. But here’s a much simpler one:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Polygon</span>
+
+<span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The area of the poly is </span><span class="si">{</span><span class="n">poly</span><span class="o">.</span><span class="n">area</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">poly</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The area of the poly is 0.5
+</pre></div>
+</div>
+<img alt="_images/b3076aad4c3232b1a3a4347173439db6cca62f7ab8edaeb2eb54550b60911722.svg" src="_images/b3076aad4c3232b1a3a4347173439db6cca62f7ab8edaeb2eb54550b60911722.svg" />
+</div>
+</div>
+</section>
+<section id="spatial-operations">
+<h3>Spatial Operations<a class="headerlink" href="#spatial-operations" title="Link to this heading">#</a></h3>
+<p>We’ve seen the basic building blocks of geometries: points, lines, and polygons. We’ve also seen how to retrieve some basic properties of these such as length, area, and centroid. In this section, we’ll see some slightly more advanced spatial operations that you can perform with <strong>geopandas</strong>.</p>
+<section id="point-in-polygon">
+<h4>Point-in-polygon<a class="headerlink" href="#point-in-polygon" title="Link to this heading">#</a></h4>
+<p>This does pretty much what you’d expect! It’s useful in practice because we might want to know if a particular place falls within one area or another. As a test, let’s see if the centroid for Germany actually falls within the Germany polygon.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_row</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;ADMIN&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Germany&quot;</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">df_row</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">df_row</span><span class="p">[</span><span class="s2">&quot;centroid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>But be careful with this! Countries can have complex multi-polygon geometries for which a centroid is not guaranteed to be within any of the polygons. France is a great example as French Guiana is so far away that it pulls the centroid just out of the mainland:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">df_row</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;ADMIN&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;France&quot;</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">df_row</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">df_row</span><span class="p">[</span><span class="s2">&quot;centroid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8ba3b5b8afdf769c9711d62dc04415fbe3543ba13db28a7702a727e68a0b651c.svg" src="_images/8ba3b5b8afdf769c9711d62dc04415fbe3543ba13db28a7702a727e68a0b651c.svg" />
+</div>
+</div>
+</section>
+<section id="buffers">
+<h4>Buffers<a class="headerlink" href="#buffers" title="Link to this heading">#</a></h4>
+<p>Buffers are just an area drawn around a particular geometry, given a specific radius. They have a great practical use in computing catchment areas and so on. To create a buffer around the geometry you’re currently using, use the <code class="docutils literal notranslate"><span class="pre">df.buffer(number)</span></code> command to return a column with the buffered version of your geometry in. Be aware that the units of the CRS you’re using will determine the units of the buffer.</p>
+</section>
+</section>
+<section id="spatial-set-operations">
+<h3>Spatial set operations<a class="headerlink" href="#spatial-set-operations" title="Link to this heading">#</a></h3>
+<p>More complex spatial manipulation can be achieved through spatial set operations. The figure below shows some examples for polygons (but the same principles apply for lines and polygons too):</p>
+<p><img src="https://geopandas.org/_images/overlay_operations.png" alt="Spatial operations"></a></p>
+<p>Different set operations with two polygons. Source: QGIS documentation.</p>
+<p>In addition to these, there are ‘crosses’ (for two lines) and ‘touches’. You can find information about all of the set operations that are available <a class="reference external" href="https://geopandas.org/set_operations.html">here</a>.</p>
+<p>To demonstrate one of these, let’s see if we can pick out a few regions that are <em>intersected</em> by a river. We’ll try out the river Trent, which passes through England, and we’ll see which <em>Local Authority Districts</em> (LADs) it passes through. First, we load the UK data, which is from the <a class="reference external" href="https://geoportal.statistics.gov.uk/datasets/local-authority-districts-may-2020-boundaries-uk-buc">ONS Open Geography Portal</a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To run this example, you will need to download the files at this url:</span>
+<span class="c1"># https://github.com/aeturrell/coding-for-economists/tree/main/data/geo/uk_lad</span>
+<span class="c1"># and save them in the path &#39;data/geo/uk_lad&#39; (path relative to where you&#39;re running the code)</span>
+<span class="n">dfuk</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span>
+    <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/geo/uk_lad/Local_Authority_Districts__May_2020__UK_BUC.shp&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">dfuk</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;dimgrey&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5bcf2e490b8c06bdbae3d6ee81f53add0e242b3e822b03d1145ee199cdbeaea8.svg" src="_images/5bcf2e490b8c06bdbae3d6ee81f53add0e242b3e822b03d1145ee199cdbeaea8.svg" />
+</div>
+</div>
+<p>Next we bring in data on major rivers and pass it through the same projection as our map of England is using:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To run this example, you will need to download the files at this url:</span>
+<span class="c1"># https://github.com/aeturrell/coding-for-economists/tree/main/data/geo/rivers</span>
+<span class="c1"># and save them in the path &#39;data/geo/rivers&#39; (path relative to where you&#39;re running the code)</span>
+<span class="n">river</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/geo/rivers/rivers.shp&quot;</span><span class="p">))</span>
+<span class="n">river</span> <span class="o">=</span> <span class="n">river</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">dfuk</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="n">river</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;mediumblue&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6dcac1d9bea610772ab5769661bec0c08177087c7159517e3ddfcbc0db269423.svg" src="_images/6dcac1d9bea610772ab5769661bec0c08177087c7159517e3ddfcbc0db269423.svg" />
+</div>
+</div>
+<p>We can now combine these for a view on how these rivers goes through the UK. We will use <code class="docutils literal notranslate"><span class="pre">buffer()</span></code> to modify how easy it is to visualise the river by asking for everything within 1.5 km from the river.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_frame_on</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+<span class="n">dfuk</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">river</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mf">1.5e3</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightblue&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6b065158f967c51ff5e2e6bc05cf6a4567d8cc3e784a7d7fc1169b40c45cb502.svg" src="_images/6b065158f967c51ff5e2e6bc05cf6a4567d8cc3e784a7d7fc1169b40c45cb502.svg" />
+</div>
+</div>
+<p>Let’s turn our focus to one river: the Trent. We will ask which of the regions are intersected by that river and plot only those parts. We’ll also add some annotations for the names of the regions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Restrict river to just one</span>
+<span class="n">river_name</span> <span class="o">=</span> <span class="s2">&quot;Trent&quot;</span>
+<span class="n">river</span> <span class="o">=</span> <span class="n">river</span><span class="p">[</span><span class="n">river</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">river_name</span><span class="p">]</span>
+
+<span class="c1"># Find a subset of the regions that is intersected by the river by creating new True/False column</span>
+<span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;river&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">river</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># The rest of the code is just related to plotting:</span>
+
+<span class="c1"># Create a cut of dfuk for convenience</span>
+<span class="n">df_th</span> <span class="o">=</span> <span class="n">dfuk</span><span class="p">[</span><span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;river&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Get a representative point for each region to annotate</span>
+<span class="n">df_th</span><span class="p">[</span><span class="s2">&quot;coords&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df_th</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">representative_point</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">coords</span><span class="p">[:][</span><span class="mi">0</span><span class="p">])</span>
+<span class="p">)</span>
+
+<span class="c1"># Plotting bits</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_frame_on</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+<span class="n">df_th</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;0.6&quot;</span><span class="p">)</span>
+<span class="n">river</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightblue&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="c1"># Add text annotation to the largest polygons</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df_th</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">area</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">df_th</span><span class="o">.</span><span class="n">area</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mf">0.4</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;LAD20NM&quot;</span><span class="p">],</span>
+            <span class="n">xy</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;coords&quot;</span><span class="p">],</span>
+            <span class="n">horizontalalignment</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+            <span class="n">weight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">,</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;Local Authority Districts that are intersected by the </span><span class="si">{</span><span class="n">river_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4307af46d26acd3943ffd4a12271d5c8d44565f1707c2623190123fd8a5dd4c5.svg" src="_images/4307af46d26acd3943ffd4a12271d5c8d44565f1707c2623190123fd8a5dd4c5.svg" />
+</div>
+</div>
+<p>Note that the way we set this up to use <code class="docutils literal notranslate"><span class="pre">river_name</span></code> as an input variable means we could oh so easily wrap everything up in a function that did this for other rivers. Oh go on then, let’s see how that works <em>because</em> it shows how scalable operations are once you do them in <em>code</em>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">river_intersect_plot</span><span class="p">(</span><span class="n">river_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given the name of a river, shows a plot of the LADs that it intersects.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">river</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;geo&quot;</span><span class="p">,</span> <span class="s2">&quot;rivers&quot;</span><span class="p">,</span> <span class="s2">&quot;rivers.shp&quot;</span><span class="p">))</span>
+    <span class="n">river</span> <span class="o">=</span> <span class="n">river</span><span class="p">[</span><span class="n">river</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">river_name</span><span class="p">]</span>
+    <span class="n">river</span> <span class="o">=</span> <span class="n">river</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">dfuk</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+    <span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;river&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">river</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mf">2e3</span><span class="p">)</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">df_th</span> <span class="o">=</span> <span class="n">dfuk</span><span class="p">[</span><span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;river&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df_th</span><span class="p">[</span><span class="s2">&quot;coords&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">df_th</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">representative_point</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">coords</span><span class="p">[:][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_frame_on</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+    <span class="n">df_th</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;0.6&quot;</span><span class="p">)</span>
+    <span class="n">river</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightblue&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df_th</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">area</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">df_th</span><span class="o">.</span><span class="n">area</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mf">0.6</span><span class="p">):</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+                <span class="n">text</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;LAD20NM&quot;</span><span class="p">],</span>
+                <span class="n">xy</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;coords&quot;</span><span class="p">],</span>
+                <span class="n">horizontalalignment</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+                <span class="n">weight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">,</span>
+                <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Local Authority Districts that are intersected by the </span><span class="si">{</span><span class="n">river_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With our function defined, we can do the whole thing for a completely different river:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">river_intersect_plot</span><span class="p">(</span><span class="s2">&quot;Thames&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/aae8e4d1837c45bbcb0a7b740250ea774943a19481f89cfb89a1d8b6ef25dc07.svg" src="_images/aae8e4d1837c45bbcb0a7b740250ea774943a19481f89cfb89a1d8b6ef25dc07.svg" />
+</div>
+</div>
+</section>
+<section id="computing-distances">
+<h3>Computing distances<a class="headerlink" href="#computing-distances" title="Link to this heading">#</a></h3>
+<p>Computing the distances between two points <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> (in the same CRS) is achieved using the <code class="docutils literal notranslate"><span class="pre">a.distance(b)</span></code> command.</p>
+<p>As an example, let’s now find out how far it is between two regions of interest in our cut of regions around the Trent. We’ll pick the East Riding of Yorkshire and Stafford, and then plot them on the map in different colours. Because <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> is so flexible, and there could be multiple geometries with the names ‘East Riding of Yorkshire’ and ‘Stafford’ we have to not only select the names we want but, in case there are multiple rows, specify which row. If you just want the first you can use <code class="docutils literal notranslate"><span class="pre">iloc[0]</span></code>, which is what happens in the example below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the rows we&#39;re interested in out of the dataframe:</span>
+<span class="n">name_a</span> <span class="o">=</span> <span class="s2">&quot;East Riding of Yorkshire&quot;</span>
+<span class="n">name_b</span> <span class="o">=</span> <span class="s2">&quot;Stafford&quot;</span>
+<span class="c1"># This selects the *all rows* that match these conditions, which is why we have to use .iloc[0] thereafter</span>
+<span class="c1"># to make sure we&#39;re only passing a single row.</span>
+<span class="n">place_a</span> <span class="o">=</span> <span class="n">df_th</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_th</span><span class="p">[</span><span class="s2">&quot;LAD20NM&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;East Riding of Yorkshire&quot;</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">place_b</span> <span class="o">=</span> <span class="n">df_th</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_th</span><span class="p">[</span><span class="s2">&quot;LAD20NM&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Stafford&quot;</span><span class="p">,</span> <span class="p">:]</span>
+<span class="c1"># Compute the distance using representative points</span>
+<span class="n">dist_a_b</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">place_a</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">representative_point</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">place_b</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">representative_point</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="p">)</span>
+
+<span class="c1"># Plot the map</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_frame_on</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+<span class="n">df_th</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;0.6&quot;</span><span class="p">)</span>
+<span class="n">river</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightblue&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">place_a</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">place_b</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">place</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">place_a</span><span class="p">,</span> <span class="n">place_b</span><span class="p">]):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">text</span><span class="o">=</span><span class="n">place</span><span class="p">[</span><span class="s2">&quot;LAD20NM&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">xy</span><span class="o">=</span><span class="n">place</span><span class="p">[</span><span class="s2">&quot;coords&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">horizontalalignment</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+        <span class="n">weight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="c1"># Uncomment below to add a connecting line</span>
+<span class="c1">## Create a line between two rep points in a and b</span>
+<span class="c1"># connector = LineString([place_a[&#39;geometry&#39;].representative_point().iloc[0],</span>
+<span class="c1">#                        place_b[&#39;geometry&#39;].representative_point().iloc[0]])</span>
+<span class="c1">## Convert it to a geopandas dataframe for easy plotting</span>
+<span class="c1"># gpd.GeoDataFrame([connector],columns=[&#39;line&#39;], geometry=&#39;line&#39;).plot(ax=ax, linestyle=&#39;-.&#39;, color=&#39;black&#39;)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;Distance between </span><span class="si">{</span><span class="n">name_a</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">name_b</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">dist_a_b</span><span class="o">/</span><span class="mf">1e3</span><span class="si">:</span><span class="s2">1.0f</span><span class="si">}</span><span class="s2"> km.&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;left&quot;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ccc72100c1cba77b1b10f75698c88dcf370fec85a0bd5725ea5f90ed28da0530.svg" src="_images/ccc72100c1cba77b1b10f75698c88dcf370fec85a0bd5725ea5f90ed28da0530.svg" />
+</div>
+</div>
+</section>
+<section id="neighbours">
+<h3>Neighbours<a class="headerlink" href="#neighbours" title="Link to this heading">#</a></h3>
+<p>It’s really useful to have a way to determine all of the adjacent geometries to a given geometry. The <code class="docutils literal notranslate"><span class="pre">touches</span></code> geospatial operation is the best for this <em>but</em> do be careful because the level of the detail in polygons varies for different maps and you may find that they sometimes overlap rather than simply touch. So, in the example of finding all of the neighbours for all of the local authority districts in the UK below, not only do we include those LADs that touch, we also include those that overlap.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Empty list of lists</span>
+<span class="n">neighbours_all</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dfuk</span><span class="p">))]</span>
+<span class="c1"># Iterate over rows</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">dfuk</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="c1"># Find any touches of this row</span>
+    <span class="n">neighbours</span> <span class="o">=</span> <span class="n">dfuk</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">touches</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]),</span> <span class="s2">&quot;LAD20NM&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="c1"># Find any overlaps of this row</span>
+    <span class="n">overlap</span> <span class="o">=</span> <span class="n">dfuk</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">overlaps</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]),</span> <span class="s2">&quot;LAD20NM&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="c1"># Take the union of touches and overlaps</span>
+    <span class="n">neighbours</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">union1d</span><span class="p">(</span><span class="n">neighbours</span><span class="p">,</span> <span class="n">overlap</span><span class="p">)</span>
+    <span class="c1"># Store the result</span>
+    <span class="n">neighbours_all</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">neighbours</span>
+
+<span class="c1"># Put result back into geopandas dataframe (RHS is a list of lists of strings)</span>
+<span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;neighbours&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">neighbours_all</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we should have an extra column that tells us which regions are adjacent to which by name:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dfuk</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>OBJECTID</th>
+      <th>LAD20CD</th>
+      <th>LAD20NM</th>
+      <th>LAD20NMW</th>
+      <th>BNG_E</th>
+      <th>BNG_N</th>
+      <th>LONG</th>
+      <th>LAT</th>
+      <th>Shape__Are</th>
+      <th>Shape__Len</th>
+      <th>geometry</th>
+      <th>river</th>
+      <th>neighbours</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>E06000001</td>
+      <td>Hartlepool</td>
+      <td>None</td>
+      <td>447160</td>
+      <td>531474</td>
+      <td>-1.27018</td>
+      <td>54.6761</td>
+      <td>9.660727e+07</td>
+      <td>50737.909874</td>
+      <td>POLYGON ((448973.593 536745.277, 448986.025 53...</td>
+      <td>False</td>
+      <td>[County Durham, Stockton-on-Tees]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>E06000002</td>
+      <td>Middlesbrough</td>
+      <td>None</td>
+      <td>451141</td>
+      <td>516887</td>
+      <td>-1.21099</td>
+      <td>54.5447</td>
+      <td>5.523093e+07</td>
+      <td>35500.289988</td>
+      <td>POLYGON ((451894.299 521145.303, 453997.697 51...</td>
+      <td>False</td>
+      <td>[Hambleton, Redcar and Cleveland, Stockton-on-...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>E06000003</td>
+      <td>Redcar and Cleveland</td>
+      <td>None</td>
+      <td>464361</td>
+      <td>519597</td>
+      <td>-1.00608</td>
+      <td>54.5675</td>
+      <td>2.483255e+08</td>
+      <td>85085.268776</td>
+      <td>POLYGON ((478232.599 518788.828, 477689.303 51...</td>
+      <td>False</td>
+      <td>[Hambleton, Middlesbrough, Scarborough, Stockt...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>E06000004</td>
+      <td>Stockton-on-Tees</td>
+      <td>None</td>
+      <td>444940</td>
+      <td>518183</td>
+      <td>-1.30664</td>
+      <td>54.5569</td>
+      <td>2.052160e+08</td>
+      <td>88846.876387</td>
+      <td>POLYGON ((452243.536 526335.188, 451711.3 5256...</td>
+      <td>False</td>
+      <td>[County Durham, Darlington, Hambleton, Hartlep...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>E06000005</td>
+      <td>Darlington</td>
+      <td>None</td>
+      <td>428029</td>
+      <td>515648</td>
+      <td>-1.56835</td>
+      <td>54.5353</td>
+      <td>1.988128e+08</td>
+      <td>91926.839545</td>
+      <td>POLYGON ((436388.002 522354.197, 437351.702 52...</td>
+      <td>False</td>
+      <td>[County Durham, Hambleton, Richmondshire, Stoc...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Let’s plot an example to be sure we’ve done it all right!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name_of_region</span> <span class="o">=</span> <span class="s2">&quot;High Peak&quot;</span>
+<span class="c1"># Set colors now for ease in plotting</span>
+<span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;#b2df8a&quot;</span>
+<span class="n">dfuk</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;LAD20NM&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">name_of_region</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;#33a02c&quot;</span>
+<span class="c1"># Get representative points to use for text annotation. Note that we want xy coords, hence the fussy use of .apply</span>
+<span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;coords&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">representative_point</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">coords</span><span class="p">[:][</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># Get a list of the neighbours--again, this comes out as a dataframe row so we need to call iloc[0] to get first entry</span>
+<span class="n">names_neighbours</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+    <span class="n">dfuk</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;LAD20NM&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">name_of_region</span><span class="p">,</span> <span class="s2">&quot;neighbours&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="c1"># Cut to only those areas of interest</span>
+<span class="n">df_cut</span> <span class="o">=</span> <span class="n">dfuk</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;LAD20NM&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">names_neighbours</span> <span class="o">+</span> <span class="p">[</span><span class="n">name_of_region</span><span class="p">])]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">df_cut</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">df_cut</span><span class="p">[</span><span class="s2">&quot;color&quot;</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_frame_on</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+<span class="c1"># Add annotation</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df_cut</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="n">text</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;LAD20NM&quot;</span><span class="p">],</span>
+        <span class="n">xy</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;coords&quot;</span><span class="p">],</span>
+        <span class="n">horizontalalignment</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+        <span class="n">weight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0e50a755508796827bfd7483cb0f2668876796bc1ab5f46c91dbdd06e42ad4a1.svg" src="_images/0e50a755508796827bfd7483cb0f2668876796bc1ab5f46c91dbdd06e42ad4a1.svg" />
+</div>
+</div>
+<p>Hooray! It looks like it worked. And notice how the only variable we need to change to get a different map is <code class="docutils literal notranslate"><span class="pre">name_of_region</span></code>, so this could easily be wrapped up in a function to re-use again.</p>
+<p>For an exercise, why don’t you see if you can figure out what’s so special about Powys and the Isle of Wight.</p>
+</section>
+</section>
+<section id="aggregation-and-dissolve">
+<h2>Aggregation and Dissolve<a class="headerlink" href="#aggregation-and-dissolve" title="Link to this heading">#</a></h2>
+<section id="dissolve">
+<h3>Dissolve<a class="headerlink" href="#dissolve" title="Link to this heading">#</a></h3>
+<p>A useful common map operation is to aggregate by spatial region: i.e. to eliminate some of the granularity of a map by combining smaller regions into larger regions. This is called a ‘dissolve’ because it dissolves the boundaries between regions to form larger ones.</p>
+<p>To demonstrate it, let’s take the many UK local authority districts and <code class="docutils literal notranslate"><span class="pre">dissolve()</span></code> them into the UK countries. We can do this using the <code class="docutils literal notranslate"><span class="pre">LAD20CD</span></code> column because the code used for it always begins with a letter that represents the country: E for England, W for Wales, N for Northern Ireland, and S for Scotland. So to do the dissolve, we first create a new column just like we would do for a <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> in a regular <strong>pandas</strong> dataframe. But instead of using <code class="docutils literal notranslate"><span class="pre">groupby()</span></code>, we <code class="docutils literal notranslate"><span class="pre">dissolve()</span></code> by the new column. This will give us a new map that is made up of only 4 polygons.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;country&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfuk</span><span class="p">[</span><span class="s2">&quot;LAD20CD&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">dfuk</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>LAD20CD</th>
+      <th>LAD20NM</th>
+      <th>country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>E06000001</td>
+      <td>Hartlepool</td>
+      <td>E</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>E06000002</td>
+      <td>Middlesbrough</td>
+      <td>E</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>E06000003</td>
+      <td>Redcar and Cleveland</td>
+      <td>E</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>E06000004</td>
+      <td>Stockton-on-Tees</td>
+      <td>E</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>E06000005</td>
+      <td>Darlington</td>
+      <td>E</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">country_uk</span> <span class="o">=</span> <span class="n">dfuk</span><span class="o">.</span><span class="n">dissolve</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;country&quot;</span><span class="p">)</span>
+<span class="n">country_uk</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9898a9be0147d62b5bc7f91a25f59003ccea14a4570462fe362ce72d400e2c6a.svg" src="_images/9898a9be0147d62b5bc7f91a25f59003ccea14a4570462fe362ce72d400e2c6a.svg" />
+</div>
+</div>
+<p>The default way that columns other than the geometry are combined is by taking the first row of each kind, but dissolve accepts and <code class="docutils literal notranslate"><span class="pre">agg_func=</span></code> argument that you can also pass last, min, max, sum, mean, and median.</p>
+</section>
+<section id="aggregation">
+<h3>Aggregation<a class="headerlink" href="#aggregation" title="Link to this heading">#</a></h3>
+<p>Because <strong>geopandas</strong> builds on <strong>pandas</strong>, all the usual operations (i.e. <code class="docutils literal notranslate"><span class="pre">groupby()</span></code>) that you might do on a <strong>pandas</strong> dataframe also work for non-geometry columns.</p>
+</section>
+</section>
+<section id="merging-data">
+<h2>Merging data<a class="headerlink" href="#merging-data" title="Link to this heading">#</a></h2>
+<section id="attribute-joins">
+<h3>Attribute Joins<a class="headerlink" href="#attribute-joins" title="Link to this heading">#</a></h3>
+<p>In an attribute join, a GeoSeries or GeoDataFrame is combined with a regular pandas Series or DataFrame based on a common variable. This is analogous to normal merging or joining in pandas.</p>
+</section>
+<section id="spatial-joins">
+<h3>Spatial Joins<a class="headerlink" href="#spatial-joins" title="Link to this heading">#</a></h3>
+<p>Spatial joins are more complex because we take two different sets of geometries and say how to combine them. The key to this is i) ensuring that the datasets have the same CRS and ii) using <code class="docutils literal notranslate"><span class="pre">sjoin()</span></code> to perform the spatial join. We’ll show how to do a spatial join that is an inner intersection using <code class="docutils literal notranslate"><span class="pre">op=intersects</span></code>.</p>
+<p>We’ll take some data on, and a map of, the world, which has per country geometries in plus columns for, eg, gdp per capita, and we’ll merge it with a dataframe with the names and positions of cities in. Our intersects spatial join will combine each city (a lat/lon point) with the shapes of countries and determine which city goes in which country (even if it’s on the boundary).</p>
+<p>This is just one example of a spatial join: the other possible arguments to <code class="docutils literal notranslate"><span class="pre">op</span></code> are <code class="docutils literal notranslate"><span class="pre">within</span></code> and <code class="docutils literal notranslate"><span class="pre">contains</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To run this example, you will need to download the files at this url:</span>
+<span class="c1"># https://github.com/aeturrell/coding-for-economists/tree/main/data/geo/detailed_world</span>
+<span class="c1"># and save them in the path &#39;data/geo/detailed_world&#39; (path relative to where you&#39;re running the code)</span>
+<span class="c1"># Grab a world map that has extra data in</span>
+<span class="n">world</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/geo/detailed_world/ne_110m_admin_0_countries.shp&quot;</span><span class="p">))</span>
+<span class="c1"># drop columns we&#39;re less interested in</span>
+<span class="n">cols_to_keep</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;featurecla&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;scalerank&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LABELRANK&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SOVEREIGNT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SOV_A3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ADM0_DIF&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LEVEL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TYPE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ADMIN&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;POP_EST&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;geometry&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">cols_to_keep</span><span class="p">]</span>
+<span class="n">world</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>featurecla</th>
+      <th>scalerank</th>
+      <th>LABELRANK</th>
+      <th>SOVEREIGNT</th>
+      <th>SOV_A3</th>
+      <th>ADM0_DIF</th>
+      <th>LEVEL</th>
+      <th>TYPE</th>
+      <th>ADMIN</th>
+      <th>POP_EST</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Admin-0 country</td>
+      <td>1</td>
+      <td>6</td>
+      <td>Fiji</td>
+      <td>FJI</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Sovereign country</td>
+      <td>Fiji</td>
+      <td>889953.0</td>
+      <td>MULTIPOLYGON (((180 -16.06713, 180 -16.55522, ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Admin-0 country</td>
+      <td>1</td>
+      <td>3</td>
+      <td>United Republic of Tanzania</td>
+      <td>TZA</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Sovereign country</td>
+      <td>United Republic of Tanzania</td>
+      <td>58005463.0</td>
+      <td>POLYGON ((33.90371 -0.95, 34.07262 -1.05982, 3...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Admin-0 country</td>
+      <td>1</td>
+      <td>7</td>
+      <td>Western Sahara</td>
+      <td>SAH</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Indeterminate</td>
+      <td>Western Sahara</td>
+      <td>603253.0</td>
+      <td>POLYGON ((-8.66559 27.65643, -8.66512 27.58948...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Admin-0 country</td>
+      <td>1</td>
+      <td>2</td>
+      <td>Canada</td>
+      <td>CAN</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Sovereign country</td>
+      <td>Canada</td>
+      <td>37589262.0</td>
+      <td>MULTIPOLYGON (((-122.84 49, -122.97421 49.0025...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Admin-0 country</td>
+      <td>1</td>
+      <td>2</td>
+      <td>United States of America</td>
+      <td>US1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>Country</td>
+      <td>United States of America</td>
+      <td>328239523.0</td>
+      <td>MULTIPOLYGON (((-122.84 49, -120 49, -117.0312...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To run this example, you will need to download the files at this url:</span>
+<span class="c1"># https://github.com/aeturrell/coding-for-economists/tree/main/data/geo/cities</span>
+<span class="c1"># and save them in the path &#39;data/geo/cities&#39; (path relative to where you&#39;re running the code)</span>
+<span class="n">cities</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/geo/cities/ne_110m_populated_places.shp&quot;</span><span class="p">))</span>
+<span class="n">cities</span> <span class="o">=</span> <span class="n">cities</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">world</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="n">cols_to_keep_cities</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;FEATURECLA&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NAME&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NAMEPAR&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NAMEALT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NAMEASCII&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;geometry&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LATITUDE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LONGITUDE&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">cities</span> <span class="o">=</span> <span class="n">cities</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">cols_to_keep_cities</span><span class="p">]</span>
+<span class="n">cities</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>FEATURECLA</th>
+      <th>NAME</th>
+      <th>NAMEPAR</th>
+      <th>NAMEALT</th>
+      <th>NAMEASCII</th>
+      <th>geometry</th>
+      <th>LATITUDE</th>
+      <th>LONGITUDE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Admin-0 capital</td>
+      <td>Vatican City</td>
+      <td>None</td>
+      <td>None</td>
+      <td>Vatican City</td>
+      <td>POINT (12.45339 41.90328)</td>
+      <td>41.903282</td>
+      <td>12.453387</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Admin-0 capital</td>
+      <td>San Marino</td>
+      <td>None</td>
+      <td>None</td>
+      <td>San Marino</td>
+      <td>POINT (12.44177 43.9361)</td>
+      <td>43.936096</td>
+      <td>12.441770</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Admin-0 capital</td>
+      <td>Vaduz</td>
+      <td>None</td>
+      <td>None</td>
+      <td>Vaduz</td>
+      <td>POINT (9.51667 47.13372)</td>
+      <td>47.133724</td>
+      <td>9.516670</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Admin-0 capital alt</td>
+      <td>Lobamba</td>
+      <td>None</td>
+      <td>None</td>
+      <td>Lobamba</td>
+      <td>POINT (31.2 -26.46667)</td>
+      <td>-26.466668</td>
+      <td>31.199997</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Admin-0 capital</td>
+      <td>Luxembourg</td>
+      <td>None</td>
+      <td>None</td>
+      <td>Luxembourg</td>
+      <td>POINT (6.13 49.61166)</td>
+      <td>49.611660</td>
+      <td>6.130003</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cities_with_country</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">cities</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">predicate</span><span class="o">=</span><span class="s2">&quot;intersects&quot;</span><span class="p">)</span>
+<span class="n">cities_with_country</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>FEATURECLA</th>
+      <th>NAME</th>
+      <th>NAMEPAR</th>
+      <th>NAMEALT</th>
+      <th>NAMEASCII</th>
+      <th>geometry</th>
+      <th>LATITUDE</th>
+      <th>LONGITUDE</th>
+      <th>index_right</th>
+      <th>featurecla</th>
+      <th>scalerank</th>
+      <th>LABELRANK</th>
+      <th>SOVEREIGNT</th>
+      <th>SOV_A3</th>
+      <th>ADM0_DIF</th>
+      <th>LEVEL</th>
+      <th>TYPE</th>
+      <th>ADMIN</th>
+      <th>POP_EST</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Admin-0 capital</td>
+      <td>Vatican City</td>
+      <td>None</td>
+      <td>None</td>
+      <td>Vatican City</td>
+      <td>POINT (12.45339 41.90328)</td>
+      <td>41.903282</td>
+      <td>12.453387</td>
+      <td>141</td>
+      <td>Admin-0 country</td>
+      <td>1</td>
+      <td>2</td>
+      <td>Italy</td>
+      <td>ITA</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Sovereign country</td>
+      <td>Italy</td>
+      <td>60297396.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Admin-0 capital</td>
+      <td>San Marino</td>
+      <td>None</td>
+      <td>None</td>
+      <td>San Marino</td>
+      <td>POINT (12.44177 43.9361)</td>
+      <td>43.936096</td>
+      <td>12.441770</td>
+      <td>141</td>
+      <td>Admin-0 country</td>
+      <td>1</td>
+      <td>2</td>
+      <td>Italy</td>
+      <td>ITA</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Sovereign country</td>
+      <td>Italy</td>
+      <td>60297396.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Admin-0 capital</td>
+      <td>Vaduz</td>
+      <td>None</td>
+      <td>None</td>
+      <td>Vaduz</td>
+      <td>POINT (9.51667 47.13372)</td>
+      <td>47.133724</td>
+      <td>9.516670</td>
+      <td>114</td>
+      <td>Admin-0 country</td>
+      <td>1</td>
+      <td>4</td>
+      <td>Austria</td>
+      <td>AUT</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Sovereign country</td>
+      <td>Austria</td>
+      <td>8877067.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Admin-0 capital alt</td>
+      <td>Lobamba</td>
+      <td>None</td>
+      <td>None</td>
+      <td>Lobamba</td>
+      <td>POINT (31.2 -26.46667)</td>
+      <td>-26.466668</td>
+      <td>31.199997</td>
+      <td>73</td>
+      <td>Admin-0 country</td>
+      <td>1</td>
+      <td>4</td>
+      <td>eSwatini</td>
+      <td>SWZ</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Sovereign country</td>
+      <td>eSwatini</td>
+      <td>1148130.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Admin-0 capital</td>
+      <td>Luxembourg</td>
+      <td>None</td>
+      <td>None</td>
+      <td>Luxembourg</td>
+      <td>POINT (6.13 49.61166)</td>
+      <td>49.611660</td>
+      <td>6.130003</td>
+      <td>128</td>
+      <td>Admin-0 country</td>
+      <td>1</td>
+      <td>6</td>
+      <td>Luxembourg</td>
+      <td>LUX</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Sovereign country</td>
+      <td>Luxembourg</td>
+      <td>619896.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now we have our cities, and their points, merged into a dataset that also gives the continent and other data that was originally only in our <code class="docutils literal notranslate"><span class="pre">world</span></code> dataframe.</p>
+</section>
+</section>
+<section id="geocoding">
+<h2>Geocoding<a class="headerlink" href="#geocoding" title="Link to this heading">#</a></h2>
+<p>Geocoding is the process of taking an address or the name of a place and retrieving its position in a geographic co-ordinate system. There are many entities you might want to do this for, such as cities, landmarks, geographic features like rivers, and postal code. Reverse geocoding takes a latitude and longitude and works backwards to work out the name of the object that’s there.</p>
+<p>Geocoding as a service is offered by several providers, including Geocodio, Google’s geocode API service, Bing, OpenStreetMap, and more. Some of these charge, especially for volume.</p>
+<p>There are two parts of geocoding: one is the interface that you use to issue the command (the front-end, the bit you see), and another is that does the actual geocoding (the back-end, an API you don’t see). The back-end bit is what you sometimes have to pay for as a service if you’re geocoding at scale.</p>
+<p>We’ll look at a geocoding package that comes in two different forms: <a class="reference external" href="https://geopy.readthedocs.io/en/stable/"><strong>Geopy</strong></a>, which is a Python package that provides a front end for a large number of geocoding APIs, including OpenStreetMap, Bing, Google, ArcGIS, and more. You may also want to explore the <a class="reference external" href="https://geocoder.readthedocs.io/"><strong>geocoder</strong></a> Python package as an alternative.</p>
+<section id="geopy-stand-alone">
+<h3>Geopy stand-alone<a class="headerlink" href="#geopy-stand-alone" title="Link to this heading">#</a></h3>
+<p>Below is an example of using <strong>Geopy</strong> as a stand-alone package. We’ll use the OpenStreetMap API to do the geocoding, which is called <code class="docutils literal notranslate"><span class="pre">Nominatim</span></code>. It’s important to note that this API has some fair usage conditions including a maximum of 1 request per second, that you provide an informative ‘user agent’ parameter, and that you clearly display attribution (thank you OpenStreetMap!). For bulk geocoding, you may need to pay a fee to a provider.</p>
+<p>Let’s see an example retrieving the full address of a landmark:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># If you don&#39;t have it, install geopy using &#39;pip install geopy&#39;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">geopy.geocoders</span><span class="w"> </span><span class="kn">import</span> <span class="n">Nominatim</span>
+
+<span class="c1"># Create a geolocator using Open Street Map (aka Nominatim)</span>
+<span class="c1"># Use your own user agent identifier here</span>
+<span class="n">geolocator</span> <span class="o">=</span> <span class="n">Nominatim</span><span class="p">(</span><span class="n">user_agent</span><span class="o">=</span><span class="s2">&quot;codeforecon&quot;</span><span class="p">)</span>
+
+<span class="c1"># Pass an address to retrieve full location information:</span>
+<span class="n">location</span> <span class="o">=</span> <span class="n">geolocator</span><span class="o">.</span><span class="n">geocode</span><span class="p">(</span><span class="s2">&quot;Bank of England&quot;</span><span class="p">)</span>
+
+<span class="n">location</span><span class="o">.</span><span class="n">address</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Bank of England, 8AH, Threadneedle Street, Bank, City of London, Greater London, England, EC2R 8AH, United Kingdom&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The location parameter also contains a latitude and longitude, which is useful for further geospatial operations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">location</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="n">location</span><span class="o">.</span><span class="n">longitude</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(51.51413225, -0.08892476721255456)
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here’s an example of using the same API to do a reverse geocode from a given lat/lon:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We can also reverse geocode from a lat and lon:</span>
+<span class="n">scnd_location</span> <span class="o">=</span> <span class="n">geolocator</span><span class="o">.</span><span class="n">reverse</span><span class="p">(</span><span class="s2">&quot;51.529969, -0.127688&quot;</span><span class="p">)</span>
+
+<span class="n">scnd_location</span><span class="o">.</span><span class="n">address</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;British Library, 96, Euston Road, Somers Town, London Borough of Camden, London, Greater London, England, NW1 2DB, United Kingdom&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="geopy-built-in-to-geopandas">
+<h3>Geopy built-in to geopandas<a class="headerlink" href="#geopy-built-in-to-geopandas" title="Link to this heading">#</a></h3>
+<p>If you don’t want to break out into a separate package, you need not! <strong>geopandas</strong> has its own interface with <strong>geopy</strong>. We’ll use it to get the boroughs of ..</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boros_df</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;boro_name&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Staten Island&quot;</span><span class="p">,</span> <span class="s2">&quot;Queens&quot;</span><span class="p">,</span> <span class="s2">&quot;Brooklyn&quot;</span><span class="p">,</span> <span class="s2">&quot;Manhattan&quot;</span><span class="p">,</span> <span class="s2">&quot;Bronx&quot;</span><span class="p">]},</span>
+    <span class="n">index</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">boros_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>boro_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Staten Island</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Queens</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Brooklyn</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Manhattan</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Bronx</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Next we carry out the geocoding step using <code class="docutils literal notranslate"><span class="pre">gpd.tools.geocode()</span></code> and pass an entire column of values that we would like to get <code class="docutils literal notranslate"><span class="pre">POINT</span></code> geometries and address for:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boros_df</span><span class="p">[[</span><span class="s2">&quot;geometry&quot;</span><span class="p">,</span> <span class="s2">&quot;address&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">geocode</span><span class="p">(</span>
+    <span class="n">boros_df</span><span class="o">.</span><span class="n">boro_name</span><span class="p">,</span>
+    <span class="n">provider</span><span class="o">=</span><span class="s2">&quot;photon&quot;</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">set_geometry</span><span class="p">(</span><span class="s2">&quot;geometry&quot;</span><span class="p">)</span>
+<span class="n">boros_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/micromamba/envs/codeforecon/lib/python3.10/site-packages/pandas/core/frame.py:4343: FutureWarning: You are adding a column named &#39;geometry&#39; to a GeoDataFrame constructed without an active geometry column. Currently, this automatically sets the active geometry column to &#39;geometry&#39; but in the future that will no longer happen. Instead, either provide geometry to the GeoDataFrame constructor (GeoDataFrame(... geometry=GeoSeries()) or use `set_geometry(&#39;geometry&#39;)` to explicitly set the active geometry column.
+  self[k1] = value[k2]
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>boro_name</th>
+      <th>geometry</th>
+      <th>address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Staten Island</td>
+      <td>POINT (-74.1496 40.58346)</td>
+      <td>Staten Island, New York, New York, United States</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Queens</td>
+      <td>POINT (-73.82831 40.71351)</td>
+      <td>Queens, New York, New York, United States</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Brooklyn</td>
+      <td>POINT (-73.94972 40.6526)</td>
+      <td>Brooklyn, New York, New York, United States</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Manhattan</td>
+      <td>POINT (-73.95989 40.78962)</td>
+      <td>Manhattan, New York, New York, United States</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Bronx</td>
+      <td>POINT (-73.87859 40.84665)</td>
+      <td>The Bronx, New York, New York, United States</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="openstreetmap-and-osmnx">
+<h2>OpenStreetMap and Osmnx<a class="headerlink" href="#openstreetmap-and-osmnx" title="Link to this heading">#</a></h2>
+<p>OpenStreetMap (OSM) is a crowd-sourced project that aims to create a free map of the world containing information about streets, buildings, landmarks, landuse, and more. Its users regularly update the information it holds. Think Wikipedia but for a world map. It excels at highly detailed and freely available renderings of streets.</p>
+<p><a class="reference external" href="https://geoffboeing.com/publications/osmnx-complex-street-networks/"><strong>Osmnx</strong></a> is a package that can retrieve, construct, analyze, and visualize street networks from OpenStreetMap <span id="id2">[<a class="reference internal" href="zreferences.html#id13" title="Geoff Boeing. Osmnx: new methods for acquiring, constructing, analyzing, and visualizing complex street networks. Computers, Environment and Urban Systems, 65:126–139, 2017.">Boeing, 2017</a>]</span>. It also does some geocoding on the fly. Let’s see it in action and feed in the address we obtained in the geocoding example from earlier; using the <code class="docutils literal notranslate"><span class="pre">graph_from_point()</span></code> method will give us the network of streets around a location.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">osmnx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ox</span>
+
+<span class="c1"># Fetch OSM street network from the location</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">graph_from_point</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">location</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="n">location</span><span class="o">.</span><span class="n">longitude</span><span class="p">),</span> <span class="n">dist</span><span class="o">=</span><span class="mf">1.3e3</span><span class="p">,</span> <span class="n">network_type</span><span class="o">=</span><span class="s2">&quot;all&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The returned object is of <code class="docutils literal notranslate"><span class="pre">type</span></code> multidigraph, or more precisely <code class="docutils literal notranslate"><span class="pre">networkx.classes.multidigraph.MultiDiGraph</span></code>. This is an object defined in the <strong>networkx</strong> package, and you can find out more about its properties <a class="reference external" href="https://networkx.org/documentation/stable/reference/classes/multidigraph.html">here</a> but what’s important is that, at least here, the network’s nodes are where streets meet and its edges are streets.</p>
+<p>Rather than plot this as nodes and edges, we can make a much nicer plot of the grid of streets using the below snippet:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span>
+    <span class="n">graph</span><span class="p">,</span> <span class="n">bgcolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0b18aa4c3fac9d5f7917c7a72e0cab709d0497ff3e647e00dc9a5e625d5b11e9.svg" src="_images/0b18aa4c3fac9d5f7917c7a72e0cab709d0497ff3e647e00dc9a5e625d5b11e9.svg" />
+</div>
+</div>
+<p>The channel with few streets is the river Thames.</p>
+<p>We can also use <strong>osmnx</strong> to work out the shortest path between nodes. Let’s see a practical example: going from Bank, north of the river Thames, to Borough Market (great for lunch), south of the river. First, we need the lat and long of Borough Market.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lunch_loc</span> <span class="o">=</span> <span class="n">geolocator</span><span class="o">.</span><span class="n">geocode</span><span class="p">(</span><span class="s2">&quot;Borough Market&quot;</span><span class="p">)</span>
+<span class="n">lunch_loc</span><span class="o">.</span><span class="n">address</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Borough Market, Bedale Street, Bermondsey Village, The Borough, London Borough of Southwark, London, Greater London, England, SE1 9AL, United Kingdom&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we find the nearest node to the given locations, and ask <strong>osmnx</strong> to work out a route.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orig</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">nearest_nodes</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">Y</span><span class="o">=</span><span class="n">location</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">location</span><span class="o">.</span><span class="n">longitude</span><span class="p">)</span>
+<span class="n">dest</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">nearest_nodes</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">Y</span><span class="o">=</span><span class="n">lunch_loc</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">lunch_loc</span><span class="o">.</span><span class="n">longitude</span><span class="p">)</span>
+<span class="n">route</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">orig</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph_route</span><span class="p">(</span>
+    <span class="n">graph</span><span class="p">,</span>
+    <span class="n">route</span><span class="p">,</span>
+    <span class="n">route_linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">node_size</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">bgcolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span>
+    <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">close</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">route_color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6f1a2841fe23e5bed728f4147166e079e078321fe50ec8b78286b4d7fec56b39.svg" src="_images/6f1a2841fe23e5bed728f4147166e079e078321fe50ec8b78286b4d7fec56b39.svg" />
+</div>
+</div>
+<p>Okay, you’re in Borough Market but you need to decide where exactly to get your lunch from. OpenStreetMap includes information on many kinds of nearby amenities, including <code class="docutils literal notranslate"><span class="pre">bar</span></code>, <code class="docutils literal notranslate"><span class="pre">cafe</span></code>, and <code class="docutils literal notranslate"><span class="pre">pub</span></code>. We can retrieve this information and put it straight into a <strong>geopandas</strong> dataframe using the <code class="docutils literal notranslate"><span class="pre">geometries_from_place()</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">restaurants</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">features_from_place</span><span class="p">(</span>
+    <span class="s2">&quot;Borough Market&quot;</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;amenity&quot;</span><span class="p">:</span> <span class="s2">&quot;restaurant&quot;</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_osm_geoms</span><span class="p">(</span><span class="n">osm_df</span><span class="p">,</span> <span class="n">skip_names</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">osm_df</span><span class="p">[</span><span class="s2">&quot;coords&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">osm_df</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">representative_point</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">coords</span><span class="p">[:][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">(</span>
+        <span class="n">graph</span><span class="p">,</span> <span class="n">bgcolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="n">osm_df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">osm_df</span><span class="p">[::</span><span class="n">skip_names</span><span class="p">]</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+            <span class="n">xy</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;coords&quot;</span><span class="p">],</span>
+            <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">),</span>
+            <span class="n">textcoords</span><span class="o">=</span><span class="s2">&quot;offset points&quot;</span><span class="p">,</span>
+            <span class="n">horizontalalignment</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+            <span class="n">weight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">,</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span>
+                <span class="n">connectionstyle</span><span class="o">=</span><span class="s2">&quot;arc3,rad=0.3&quot;</span><span class="p">,</span>
+                <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="n">plot_osm_geoms</span><span class="p">(</span><span class="n">restaurants</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0154a76a5097726337490ac5037649b38996af23870d0d87fbccee835d0ffbc4.svg" src="_images/0154a76a5097726337490ac5037649b38996af23870d0d87fbccee835d0ffbc4.svg" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">amenity</span></code> is just one type of geometry that can be retrieved too: others are <code class="docutils literal notranslate"><span class="pre">building</span></code>, <code class="docutils literal notranslate"><span class="pre">landuse</span></code>, and <code class="docutils literal notranslate"><span class="pre">leisure</span></code>. You can find a list of them <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Map_features">here</a>. For example, here are the (many) churches in the City of London:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">churches</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">features_from_place</span><span class="p">(</span><span class="s2">&quot;City of London&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;building&quot;</span><span class="p">:</span> <span class="s2">&quot;church&quot;</span><span class="p">})</span>
+<span class="n">churches</span> <span class="o">=</span> <span class="n">churches</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_osm_geoms</span><span class="p">(</span><span class="n">churches</span><span class="p">,</span> <span class="n">skip_names</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5bc4170dfa8c85890dd981746501cba3e43dfb5a8e6128ed89542f67d1d35c8f.svg" src="_images/5bc4170dfa8c85890dd981746501cba3e43dfb5a8e6128ed89542f67d1d35c8f.svg" />
+</div>
+</div>
+</section>
+<section id="review">
+<h2>Review<a class="headerlink" href="#review" title="Link to this heading">#</a></h2>
+<p>If you know:</p>
+<ul class="simple">
+<li><p>✅ what a coordinate reference system (crs) is;</p></li>
+<li><p>✅ how to open and use geospatial data using <strong>geopandas</strong>;</p></li>
+<li><p>✅ how to create quick plots of maps;</p></li>
+<li><p>✅ what points, lines, and polygons are in a geospatial context;</p></li>
+<li><p>✅ how to perform set operations on points, lines, and polygons;</p></li>
+<li><p>✅ how to compute distances, nearest neighbours, and other geospatial properties;</p></li>
+<li><p>✅ how to aggregate, merge, and dissolve geospatial data; and</p></li>
+<li><p>✅ how to use geocoding to retrieve geospatial data</p></li>
+</ul>
+<p>then you have a good grasp of the basics of geospatial analysis!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ml-unsup.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Unsupervised Machine Learning</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="geo-vis.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Geo-Spatial Visualisation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-reference-systems">Coordinate Reference Systems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imports-and-packages">Imports and packages</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geopandas-dataframes">Geopandas dataframes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-and-output">Input and Output</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basics">Basics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-coordinate-reference-systems">Working with Coordinate Reference Systems</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulating-space">Manipulating Space</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Basics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-operations">Spatial Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#point-in-polygon">Point-in-polygon</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#buffers">Buffers</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-set-operations">Spatial set operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-distances">Computing distances</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neighbours">Neighbours</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation-and-dissolve">Aggregation and Dissolve</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dissolve">Dissolve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation">Aggregation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-data">Merging data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#attribute-joins">Attribute Joins</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-joins">Spatial Joins</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geocoding">Geocoding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geopy-stand-alone">Geopy stand-alone</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geopy-built-in-to-geopandas">Geopy built-in to geopandas</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openstreetmap-and-osmnx">OpenStreetMap and Osmnx</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review">Review</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Arthur Turrell
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  This book is available under an MIT license.
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
