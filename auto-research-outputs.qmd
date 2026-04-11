@@ -1,32 +1,17 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: '0.8'
-    jupytext_version: 1.5.0
-kernelspec:
-  display_name: 'Python 3.10.12 64-bit (''codeforecon'': conda)'
-  language: python
-  name: python3
----
-(auto-research-outputs)=
-# Automating Research Outputs
+# Automating Research Outputs {#sec-auto-research-outputs}
 
 
 In this chapter, you'll learn how to automate the inclusion of figures and tables in LaTeX-derived research outputs including PDFs and slides——plus how to convert those outputs to Microsoft Word documents and more. Much of what you'll see in this chapter applies to a wide range of coding languages.
 
-This chapter has some similarities with another chapter, on {ref}`quarto`. Increasingly, we're inclined to use Quarto to write papers where we want research outputs to be automated because it supports a few things that are hard or infeasible in LaTeX. These include within-document code execution and in-line insertion of variables. And the Quarto-based approach still generates a LaTeX file if you want! If you're not sure where to start, we now recommend you begin with Quarto rather than pure LaTeX. Check the other chapter for more—particularly the last section.
+This chapter has some similarities with another chapter, on @sec-quarto. Increasingly, we're inclined to use Quarto to write papers where we want research outputs to be automated because it supports a few things that are hard or infeasible in LaTeX. These include within-document code execution and in-line insertion of variables. And the Quarto-based approach still generates a LaTeX file if you want! If you're not sure where to start, we now recommend you begin with Quarto rather than pure LaTeX. Check the other chapter for more—particularly the last section.
 
-In this chapter, we focus on "traditional" academic paper writing using the LaTeX typesetting language. It has a bit of a learning curve. If you're just looking to create some automated reports using code and text rather than write pre-prints, working papers, journal articles, or academic-talk style slide decks—the chapter on {ref}`quarto` is going to be a better and easier fit for you.
+In this chapter, we focus on "traditional" academic paper writing using the LaTeX typesetting language. It has a bit of a learning curve. If you're just looking to create some automated reports using code and text rather than write pre-prints, working papers, journal articles, or academic-talk style slide decks—the chapter on @sec-quarto is going to be a better and easier fit for you.
 
 Automating the inclusion of figures and tables in your research outputs has many benefits:
 
 - once configured, it's clearly *easier* than manual updates
 - your paper can update at the touch of a button
-- it helps with creating a *reproducible analytical pipeline* (for more on these, see the {ref}`wrkflow-rap` chapter).
+- it helps with creating a *reproducible analytical pipeline* (for more on these, see the @sec-wrkflow-rap chapter).
 - it enforces structure on your project
 - automation is complementary to other good practices such as version control
 
@@ -83,7 +68,7 @@ The important line here is `plt.savefig("outputs/figures/chart.pdf")` because it
 
 Now let's imagine you've created a table of descriptive statistics such as the one below:
 
-```{code-cell} ipython3
+```{python}
 import seaborn as sns
 import pandas as pd
 
@@ -95,13 +80,13 @@ table
 
 This can be turned into a $\LaTeX$ table using the following command
 
-```{code-cell} ipython3
+```{python}
 table.style.to_latex(caption='A Table', label='tab:descriptive')
 ```
 
 Or perhaps you have a regression table, for example
 
-```{code-cell} ipython3
+```{python}
 import pandas as pd
 from sklearn import datasets
 import statsmodels.formula.api as smf
@@ -119,7 +104,7 @@ reg_results = Stargazer([est, est2])
 reg_results
 ```
 
-```{code-cell} ipython3
+```{python}
 import numpy as np
 import pandas as pd
 #import pylatex as pl  # for the latex table; note: not a dependency of pyfixest - needs manual installation
@@ -140,7 +125,7 @@ pf.etable([fit1, fit2, fit3, fit4,])
 
 which can be cast into $\LaTeX$ using `type="tex"`.
 
-```{code-cell} ipython3
+```{python}
 tab = pf.etable(
     [fit1, fit2, fit3, fit4],
     digits=2,
@@ -229,9 +214,9 @@ More text
 \end{document}
 ```
 
-```{admonition} Exercise
+::: {.callout-tip title="Exercise"}
 Create a .tex file from the tex code above and convert it to a word document using **pandoc**.
-```
+:::
 
 What's surprising is how effective the conversion to word is: even if you have figures, equations, and other non-text features.
 
@@ -300,6 +285,6 @@ Slide with an equation
 \end{document}
 ```
 
-```{admonition} Exercise
+::: {.callout-tip title="Exercise"}
 Create a .tex beamer file from the tex code above and convert it to a powerpoint presentation using **pandoc**.
-```
+:::

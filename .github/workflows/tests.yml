@@ -22,15 +22,20 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: install mamba
-        uses: mamba-org/setup-micromamba@v2
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Set up Python
+        run: uv python install
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Install Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
         with:
-          environment-file: environment.yml
-          init-shell: >-
-            bash
-          cache-environment: true
-          post-cleanup: 'all'
-      
+          version: "1.5.57"
+
       - name: set timezone
         run: |
           TZ="Europe/London" &&
@@ -51,21 +56,8 @@ jobs:
 
       - name: install text models
         run: |
-          micromamba run -n codeforecon python3 -m spacy download en_core_web_sm &&
-          micromamba run -n codeforecon python3 -m nltk.downloader all
-
-      - name: special fix for todoify
-        run: |
-          sed -i '90 s/^/#/' /home/runner/micromamba/envs/codeforecon/lib/python3.10/site-packages/mdit_py_plugins/tasklists/__init__.py
-
-      # Issue with pymc needing np<2.0 and skimpy needing >2.0, so pip install of latter causes upgrade to np
-      - name: special fix for numpy
-        run: |
-          micromamba run -n codeforecon pip install --force-reinstall -v "numpy==1.26"
-
-      - name: Monkey patch for binsreg  # sets np.math = math
-        run: |
-          sed -i '/^import\|^from.*import/ { :a; n; /^import\|^from.*import/! { x; s/.*//; x; ba; }; }; a\import math\nimport numpy as np\nnp.math = math' ~/micromamba/envs/codeforecon/lib/python3.10/site-packages/binsreg/funs.py
+          uv run python3 -m spacy download en_core_web_sm &&
+          uv run python3 -m nltk.downloader all
 
       - name: git config  # Needed as git config --get user.name is used in one example
         run: |
@@ -74,7 +66,7 @@ jobs:
 
       - name: build the book
         run: |
-          micromamba run -n codeforecon jupyter-book build . --verbose
+          uv run quarto render
 
       - name: success
         run: |

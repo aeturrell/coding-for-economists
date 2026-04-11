@@ -1,19 +1,4 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: '0.8'
-    jupytext_version: 1.5.0
-kernelspec:
-  display_name: 'Python 3.10.12 64-bit (''codeforecon'': conda)'
-  language: python
-  name: python3
----
-(data-read-and-write)=
-# Reading and Writing Files
+# Reading and Writing Files {#sec-data-read-and-write}
 
 In this chapter, you'll learn about reading and writing data.
 
@@ -25,7 +10,7 @@ There are a huge range of input and output formats available in **pandas**: Stat
 
 Let's set some preliminary settings:
 
-```{code-cell} ipython3
+```{python}
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -99,7 +84,7 @@ It's best *not* to use formats associated with proprietary software, especially 
 
 It's frequently the case that you'll want to write an individual table, chunk of text, or other content that can be opened with a text editor to file. **pandas** has some convenience functions for this (there was a short example in the data analysis quickstart). Let's say we had a table:
 
-```{code-cell} ipython3
+```{python}
 df = pd.read_csv('https://vincentarelbundock.github.io/Rdatasets/csv/dplyr/storms.csv')
 table = (df.groupby(['month'])
            .agg({'wind': 'mean',
@@ -117,9 +102,9 @@ to create data suitable for putting in a markdown file, `table.to_string()` to g
 
 Each of these export options accepts a filepath to write to, eg one can write `table.style.to_latex(os.path.join('path', 'to', 'file.md'))`.
 
-```{note}
+::: {.callout-note}
 `.to_markdown()` has a dependency on another package, [**tabulate**](https://github.com/astanin/python-tabulate), which is for pretty-printing tables in Python and on the command line. You can install it using `pip install tabulate`.
-```
+:::
 
 If you have a string, bit of tex, or chunk of markdown that isn't coming directly from **pandas**, you can use base Python to write it to a file. Let's say we wanted to take some text,
 

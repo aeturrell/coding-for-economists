@@ -19,15 +19,20 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: install mamba
-        uses: mamba-org/setup-micromamba@v2
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Set up Python
+        run: uv python install
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Install Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
         with:
-          environment-file: environment.yml
-          init-shell: >-
-            bash
-          cache-environment: true
-          post-cleanup: 'all'
-      
+          version: "1.5.57"
+
       - name: set timezone
         run: |
           TZ="Europe/London" &&
@@ -48,21 +53,8 @@ jobs:
 
       - name: install text models
         run: |
-          micromamba run -n codeforecon python3 -m spacy download en_core_web_sm &&
-          micromamba run -n codeforecon python3 -m nltk.downloader all
-
-      - name: special fix for todoify
-        run: |
-          sed -i '90 s/^/#/' /home/runner/micromamba/envs/codeforecon/lib/python3.10/site-packages/mdit_py_plugins/tasklists/__init__.py
-
-      # Issue with pymc needing np<2.0 and skimpy needing >2.0, so pip install of latter causes upgrade to np
-      - name: special fix for numpy
-        run: |
-          micromamba run -n codeforecon pip install --force-reinstall -v "numpy==1.26"
-
-      - name: Monkey patch for binsreg  # sets np.math = math
-        run: |
-          sed -i '/^import\|^from.*import/ { :a; n; /^import\|^from.*import/! { x; s/.*//; x; ba; }; }; a\import math\nimport numpy as np\nnp.math = math' ~/micromamba/envs/codeforecon/lib/python3.10/site-packages/binsreg/funs.py
+          uv run python3 -m spacy download en_core_web_sm &&
+          uv run python3 -m nltk.downloader all
 
       - name: git config  # Needed as git config --get user.name is used in one example
         run: |
@@ -71,31 +63,31 @@ jobs:
 
       - name: build the book
         run: |
-          micromamba run -n codeforecon jupyter-book build . --verbose
+          uv run quarto render
 
       - name: Check if there is a parent commit
         id: check-parent-commit
         run: |
           echo "::set-output name=sha::$(git rev-parse --verify --quiet HEAD^)"
-  
+
       - name: Detect and tag new version
         id: check-version
         if: steps.check-parent-commit.outputs.sha
         uses: salsify/action-detect-and-tag-new-version@v2.0.3
         with:
           version-command: |
-            micromamba run -n codeforecon toml get --toml-path=pyproject.toml project.version
-  
+            uv run toml get --toml-path=pyproject.toml project.version
+
       - name: Bump version for developmental release
         if: "! steps.check-version.outputs.tag"
         run: |
-          micromamba run -n codeforecon python version_bumper.py &&
-          version=$(micromamba run -n codeforecon toml get --toml-path=pyproject.toml project.version) &&
-          micromamba run -n codeforecon toml set --toml-path=pyproject.toml project.version $version.dev.$(date +%s)
-  
+          uv run python version_bumper.py &&
+          version=$(uv run toml get --toml-path=pyproject.toml project.version) &&
+          uv run toml set --toml-path=pyproject.toml project.version $version.dev.$(date +%s)
+
       - name: Publish
         if: steps.check-version.outputs.tag
-        run: micromamba run -n codeforecon ghp-import -n -p -f _build/html
+        run: uv run ghp-import -n -p -f _book
 
       - name: Publish the release notes
         uses: release-drafter/release-drafter@v6.0.0

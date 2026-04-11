@@ -1,21 +1,6 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: '0.8'
-    jupytext_version: 1.5.0
-kernelspec:
-  display_name: 'Python 3.10.12 64-bit (''codeforecon'': conda)'
-  language: python
-  name: python3
----
-(wrkflow-environments)=
-# Virtual Code Environments
+# Virtual Code Environments {#sec-wrkflow-environments}
 
-In this chapter, you're going to learn about virtual coding environments. These allow you to isolate all of the packages that you're using to do analysis for one project from the set of packages you might need for a different project. They're an important part of creating a reproducible analytical pipeline (more on that in {ref}`wrkflow-rap` but a key benefit is that others can reproduce the environment you used) and it's best practice to have an isolated environment per project.
+In this chapter, you're going to learn about virtual coding environments. These allow you to isolate all of the packages that you're using to do analysis for one project from the set of packages you might need for a different project. They're an important part of creating a reproducible analytical pipeline (more on that in @sec-wrkflow-rap but a key benefit is that others can reproduce the environment you used) and it's best practice to have an isolated environment per project.
 
 If you're going through this book using uv, you are already using virtual environments even though you may not have realised it! uv creates a different Python installation (with its attendant packages) for each project folder you use.
 
@@ -37,7 +22,7 @@ If you're just getting going with coding, this book recommends that you use uv.
 - (advanced) build Python packages
 - (advanced) upload Python packages to PyPI where they can be installed (ie make your project pip installable by anyone in the world)
 
-The environment that uv creates is tied to your project folder. After navigating to your project folder on the command line (more on the command line in {ref}`wrkflow-command-line`), use
+The environment that uv creates is tied to your project folder. After navigating to your project folder on the command line (more on the command line in @sec-wrkflow-command-line), use
 
 ```bash
 uv init
@@ -82,7 +67,7 @@ Much of these two subsections is covered by the Miniconda documentation on [mana
 
 ### Creating Environments
 
-If you're using Miniconda for Python, you manage and change environments on the command line (more on the command line in {ref}`wrkflow-command-line`) too. Before following these instructions, check that you have Miniconda installed and activated. You should see something like `(base) username@computername:~$` on the command line (base is the default conda environment).
+If you're using Miniconda for Python, you manage and change environments on the command line (more on the command line in @sec-wrkflow-command-line) too. Before following these instructions, check that you have Miniconda installed and activated. You should see something like `(base) username@computername:~$` on the command line (base is the default conda environment).
 
 To create a new environment called "myenv" with a specific version of Python (but no extra packages installed), it's
 
@@ -142,13 +127,13 @@ This goes into a file called `environment.yml`, which can be installed by runnin
 conda env create -f environment.yml
 ```
 
-This book is put together using an isolated *conda* environment specified in a file. It's an unusually big one because there are a lot of packages, some of them with complex dependencies, featured in the book! Here they are:
+This book is put together using dependencies specified in `pyproject.toml` and managed by uv. It's an unusually big set because there are a lot of packages, some of them with complex dependencies, featured in the book! Here they are:
 
-```{code-cell} ipython3
-:tags: ["hide-input"]
+```{python}
+#| code-fold: true
 from rich import print
 
-with open("environment.yml", 'r') as stream:
+with open("pyproject.toml", 'r') as stream:
     data_loaded = stream.read()
 
 print(data_loaded)
