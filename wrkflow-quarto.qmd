@@ -405,8 +405,7 @@ Note that this keeps a .tex version of your paper. To avoid duplication of what'
 
 Let's say you're writing a results paragraph describing a number in the text—you can auto-update this! *And* you can do it for text too—which would be useful if you were changing an overall configuration, say going from rolling window to expanding window in a forecast model.
 
-````markdown
-```{python}
+```{{python}}
 ... code that reads in the number and stores it as a variable `result` ...
 ... code that reads in the text config and stores it as, eg, `window_type="rolling"`
 ```
@@ -419,7 +418,7 @@ We find that this happens in `python f"{result}"` cases when we use a `python wi
 
 In your code, you might have something like:
 
-```python
+```{{python}}
 tab_one_latex = (
     proto_table.style.format(subset="Mean (daily)", precision=3)
     .format(subset="Std dev (daily)", precision=2)
@@ -435,8 +434,7 @@ to export a (pandas dataframe) table called `proto_table`.
 
 And then in your Quarto file you would have:
 
-````markdown
-```{python}
+```{{python}}
 #| label: tbl-one
 #| tbl-cap: Summary statistics
 #| output: asis
@@ -448,7 +446,6 @@ with open(Path("outputs/table_one.tex"), "r") as f:
 
 print(tab_one)
 ```
-````
 
 You can refer to this table in the rest of the document using `Summary statisticsa are shown in @tbl-one`.
 
@@ -471,7 +468,7 @@ You can also automatically write out the packages you used in the paper (if you'
 
 This paper was prepared using Quarto and Python 3.10. The packages used are shown in @tbl-pkg.
 
-```{python}
+```{{python}}
 #| label: tbl-pkg
 #| tbl-cap: Packages used in this paper.
 #| output: asis

@@ -252,7 +252,9 @@ def main():
         else:
             print(f"Skipping unsupported file type: {path}", file=sys.stderr)
 
-    print(f"\nTotal files {'changed' if args.apply else 'that would change'}: {total_changed}")
+    print(
+        f"\nTotal files {'changed' if args.apply else 'that would change'}: {total_changed}"
+    )
 
 
 if __name__ == "__main__":
