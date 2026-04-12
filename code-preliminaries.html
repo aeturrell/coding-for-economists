@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Preliminaries – Coding for Economists</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./code-basics.html" rel="next">
+<link href="./index.html" rel="prev">
+<link href="./favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9FZQCPFXZJ"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-9FZQCPFXZJ', { 'anonymize_ip': true});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+
+
+<meta name="twitter:title" content="Preliminaries – Coding for Economists">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./code-preliminaries.html">Getting Started</a></li><li class="breadcrumb-item"><a href="./code-preliminaries.html"><span class="chapter-title">Preliminaries</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Coding for Economists</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/aeturrell/coding-for-economists" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Getting Started</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-preliminaries.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Preliminaries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coding Basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./workflow-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Workflow Basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-where.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Writing Code</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Essential Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-analysis-quickstart.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Analysis Quickstart</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Working with Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-transformation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Transformation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-read-and-write.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reading and Writing Files</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-numbers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Numbers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-categorical.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Categorical Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-spreadsheets.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Spreadsheets</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Essential Coding</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-best-practice.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Code in Style</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coding</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-advcd-best-practice.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Shortcuts to Better Coding</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Essential Data Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Intro to Data Visualisation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-letsplot.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-matplotlib.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Powerful Data Visualisation with <strong>Matplotlib</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-common-plots-one.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Common Plots I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-common-plots-two.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Common Plots II</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Essential Workflow</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./auto-research-outputs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Automating Research Outputs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-markdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Markdown</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-command-line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">The Command Line</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-version-control.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Version Control</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Econometrics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-probability-random.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Probability and Random Processes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-generalised-models.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Generalised regression models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-diagnostics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regression diagnostics and visualisations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-causal-inference.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Causal Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-bayesian.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bayesian Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-bayes-bambi.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bayesian Inference Made Easier</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-boolean.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Boolean Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-joining-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Joins</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-missing-values.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Missing Values</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-exploratory-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploratory Data Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-extraction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Getting Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-databases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Databases</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><strong>pandas</strong> alternatives, validation, and orchestration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-sharing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Sharing Data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Coding</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-further-advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Advanced Coding</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-narrative.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Narrative Data Visualisation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Tables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-dashboards.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Dashboards</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-animation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Animation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">Workflow</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-quarto.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Combining Code and Text in Quarto Markdown</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-environments.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Virtual Code Environments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-rap.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reproducible Analysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
+ <span class="menu-text">Time</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./time-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction to Time</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./time-series.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Time Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./time-fcasts-env.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Forecasting Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true">
+ <span class="menu-text">Text Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./text-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction to Text</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./text-regex.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regular Expressions, aka regex</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./text-nlp.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true">
+ <span class="menu-text">Machine Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction to Machine Learning and AI</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-sup.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Supervised Machine Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data for Machine Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-unsup.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Unsupervised Machine Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true">
+ <span class="menu-text">Geospatial</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geo-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Intro to Geo-Spatial Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geo-vis.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Geo-Spatial Visualisation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true">
+ <span class="menu-text">Mathematics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./maths-abstract.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Abstract Mathematics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./maths-numerical.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Numerical Mathematics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true">
+ <span class="menu-text">Craft</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-search.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Putting the Search in Research</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-generating-ideas.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Generating and Accepting Research Ideas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-writing-papers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Writing Papers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-research-blogs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Research Blog Posts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-referee.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Writing Referee Reports</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-technical-reports.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Writing Technical Reports</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-extended-abstracts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Extended Abstracts</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true">
+ <span class="menu-text">Further Data Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-plotnine.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-seaborn.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Visualisation with <strong>Seaborn</strong></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true">
+ <span class="menu-text">Coming from …</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./coming-from-stata.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coming from Stata</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./coming-from-matlab.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coming from Matlab</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./coming-from-r.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coming from R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./coming-from-excel.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coming from Excel</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="true">
+ <span class="menu-text">End Matter</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./contributing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Contributing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./zreferences.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bibliography</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#choice-of-programming-language-for-the-book" id="toc-choice-of-programming-language-for-the-book" class="nav-link active" data-scroll-target="#choice-of-programming-language-for-the-book">Choice of programming language for the book</a></li>
+  <li><a href="#concepts" id="toc-concepts" class="nav-link" data-scroll-target="#concepts">Concepts</a>
+  <ul class="collapse">
+  <li><a href="#operating-system" id="toc-operating-system" class="nav-link" data-scroll-target="#operating-system">Operating System</a></li>
+  <li><a href="#python-interpreter" id="toc-python-interpreter" class="nav-link" data-scroll-target="#python-interpreter">Python interpreter</a></li>
+  <li><a href="#an-integrated-development-environment-or-ide" id="toc-an-integrated-development-environment-or-ide" class="nav-link" data-scroll-target="#an-integrated-development-environment-or-ide">An Integrated Development Environment, or IDE</a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
+  <li><a href="#typical-workflow" id="toc-typical-workflow" class="nav-link" data-scroll-target="#typical-workflow">Typical workflow</a></li>
+  </ul></li>
+  <li><a href="#how-to-get-started-on-your-own-computer" id="toc-how-to-get-started-on-your-own-computer" class="nav-link" data-scroll-target="#how-to-get-started-on-your-own-computer">How to get started on your own computer</a>
+  <ul class="collapse">
+  <li><a href="#installing-python" id="toc-installing-python" class="nav-link" data-scroll-target="#installing-python">Installing Python</a></li>
+  <li><a href="#installing-your-integrated-development-environment-visual-studio-code" id="toc-installing-your-integrated-development-environment-visual-studio-code" class="nav-link" data-scroll-target="#installing-your-integrated-development-environment-visual-studio-code">Installing your integrated development environment, Visual Studio Code</a></li>
+  </ul></li>
+  <li><a href="#coding-in-the-cloud" id="toc-coding-in-the-cloud" class="nav-link" data-scroll-target="#coding-in-the-cloud">Coding in the cloud</a></li>
+  <li><a href="#alternative-ways-to-run-the-code-from-the-book" id="toc-alternative-ways-to-run-the-code-from-the-book" class="nav-link" data-scroll-target="#alternative-ways-to-run-the-code-from-the-book">Alternative ways to run the code from the book</a></li>
+  <li><a href="#running-your-first-python-code" id="toc-running-your-first-python-code" class="nav-link" data-scroll-target="#running-your-first-python-code">Running your first Python code</a>
+  <ul class="collapse">
+  <li><a href="#getting-to-grips-with-visual-studio-code" id="toc-getting-to-grips-with-visual-studio-code" class="nav-link" data-scroll-target="#getting-to-grips-with-visual-studio-code">Getting to grips with Visual Studio Code</a></li>
+  <li><a href="#running-python-code" id="toc-running-python-code" class="nav-link" data-scroll-target="#running-python-code">Running Python code</a></li>
+  </ul></li>
+  <li><a href="#packages-and-how-to-install-them" id="toc-packages-and-how-to-install-them" class="nav-link" data-scroll-target="#packages-and-how-to-install-them">Packages and how to install them</a>
+  <ul class="collapse">
+  <li><a href="#the-terminal-in-brief" id="toc-the-terminal-in-brief" class="nav-link" data-scroll-target="#the-terminal-in-brief">The Terminal in Brief</a></li>
+  <li><a href="#installing-packages" id="toc-installing-packages" class="nav-link" data-scroll-target="#installing-packages">Installing Packages</a></li>
+  </ul></li>
+  <li><a href="#review" id="toc-review" class="nav-link" data-scroll-target="#review">Review</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/aeturrell/coding-for-economists/edit/main/code-preliminaries.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/aeturrell/coding-for-economists/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./code-preliminaries.html">Getting Started</a></li><li class="breadcrumb-item"><a href="./code-preliminaries.html"><span class="chapter-title">Preliminaries</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-code-preliminaries" class="quarto-section-identifier"><span class="chapter-title">Preliminaries</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Congratulations on starting your coding for economics journey! In this chapter, we’re going to help you install or access the tools you need. This chapter is unlikely to be as fun as subsequent ones, but we recommend that you read and follow it because it’s key to being able to run code. First, we’re going to give you some background on key concepts for coding. Then, we’ll give you an option to either follow instructions to start coding on your own computer or use a popular online cloud service for coding. Either way, by the end of this chapter, you will be running code!</p>
+<section id="choice-of-programming-language-for-the-book" class="level2">
+<h2 class="anchored" data-anchor-id="choice-of-programming-language-for-the-book">Choice of programming language for the book</h2>
+<p>This book uses Python, which is usually ranked as the first or second most popular programming language in the world and, just as importantly, it’s also one of the easiest to learn. It’s a general purpose language, which means it can perform a wide range of tasks. This combination of features is why people say Python has a “low floor and high ceiling”. It’s also very versatile; the joke goes that Python is the 2nd best language at everything, and there’s some truth to that (although Python is 1st best at some tasks, like machine learning). But a language that covers such a lot of ground is also very useful; and Python is widely used across industry (eg at Google and Apple), academia, and the public sector, and is often taught in school computer science classes too. It is used for everything from computer games to websites, from data science to <a href="https://github.com/nasa/fprime">flying a helicopter on Mars</a>. And, of course, it’s behind innovations like large language models too!</p>
+<p>As an economist, you will know that this means Python benefits from strong positive network externalities. As such, learning Python has a lot of value and, once you have, learning more specialised languages like C++ or R is much easier; many of the basic programming concepts you’ll see in this book are useful in almost any programming language. One other benefit of Python if you plan to do any work on the cloud is that it is extremely well supported.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://imgs.xkcd.com/comics/python.png" class="img-fluid figure-img"></p>
+<figcaption>xkcd-python</figcaption>
+</figure>
+</div>
+<p><em>Python</em>, from <a href="https://xkcd.com">xkcd</a>.</p>
+<p>Different languages have different strengths and weaknesses; Python’s strengths are being easy to write; having depth and flexibility; being ubiquitous; and having an amazing line-up of packages for doing just about anything in analysis, plus tons of other fields too. You may hear that Python is slow; and indeed it is compared to compiled languages like C++, Fortran, or Rust, but the trade-off we make here is that Python is <em>far</em> easier to write, and is “dynamic”, meaning we can see results right away. For analysis, this trade-off is a no-brainer, and you will rarely run into speed issues (and, when you do, it will likely be solvable with structuring the code differently). I think Python’s two greatest weaknesses currently are actually that there are too many different ways to manage packages, and that there are too many different ways to install it.</p>
+<p>Overall, Python is a brilliant language to code in, especially for analysis, data science, and economics, and it’s no wonder that it’s one of the world’s most popular languages!</p>
+</section>
+<section id="concepts" class="level2">
+<h2 class="anchored" data-anchor-id="concepts">Concepts</h2>
+<p>In this section, we’re going to help you understand the key elements of a computational environment for coding. The combination of the version of the language you’re using (eg Python 3.10), the packages (add-ons to the language) and their versions (eg pandas 2.1.0), and the operating system the code is being run on (eg MacOS Catalina) is called the computational environment. So, to create a computational environment to run code, you’ll need:</p>
+<ul>
+<li>a computer with an <em>operating system</em>. This could be your computer or one on the cloud.</li>
+<li>an installation of <em>Python</em>, so that the computer can interpret and execute Python code</li>
+<li>an <em>integrated development environment</em>, or IDE, a place to write and run code</li>
+<li><em>packages</em>, which extend the functionality of Python in all kinds of useful ways</li>
+</ul>
+<p>Let’s talk through each of these in a bit more detail.</p>
+<section id="operating-system" class="level3">
+<h3 class="anchored" data-anchor-id="operating-system">Operating System</h3>
+<p>Almost all the code you’ll see can be run on all three of the major operating systems: Windows, MacOS, and Linux, so it doesn’t matter much what operating system you’re using. Almost all cloud services use Linux.</p>
+<p>If you haven’t yet decided which operating system to use, this book recommends either Linux or MacOS because, in a very small number of cases, you’ll find it easier to run the most advanced code on them rather than on Windows. Don’t panic if you have Windows already though—most things will work just fine and it tends to be power users who run into this problem. (If you’re not familiar with Linux, it’s a free operating system that is also widely used for cloud services and, while it used to have a reputation as being fearsomely difficult for beginners, some modern Linux distributions, such as Ubuntu, are pretty user-friendly.)</p>
+<p>If you have Windows and you want to use Linux or Mac but don’t want to shell out for a new computer, there are a couple of options. One is to use the <a href="https://pbpython.com/wsl-python.html"><em>Windows Subsystem for Linux</em></a>. It’s essentially a Linux operating system that installs alongside and integrates with your existing Windows operating system. This allows you to run code as if you were using Linux. You can get WSL <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">for free from Microsoft</a>. Another option (easier but can be more expensive) is to use an online cloud service, an option we’ll return to shortly.</p>
+</section>
+<section id="python-interpreter" class="level3">
+<h3 class="anchored" data-anchor-id="python-interpreter">Python interpreter</h3>
+<p>Python is both a programming language that humans can read, and a language that computers can read, interpret, and then carry out instructions based on. For a computer to be able to read and execute Python code, it needs to have a Python interpreter installed. There are lots of ways to install a Python “interpreter” on your own computer, this book recommends the uv distribution of Python for its flexibility, simplicity, and features. Cloud services often come with a Python interpreter installed, and we’ll see shortly how to install one on your own computer.</p>
+<p>In the box below, you can see which version of Python was used to compile this book:</p>
+<div id="5ffe2dab" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-stdout">
+<pre><code>Compiled with Python version: 3.10.16 (main, Mar 17 2025, 21:01:46) [Clang 20.1.0 ]</code></pre>
+</div>
+</div>
+</section>
+<section id="an-integrated-development-environment-or-ide" class="level3">
+<h3 class="anchored" data-anchor-id="an-integrated-development-environment-or-ide">An Integrated Development Environment, or IDE</h3>
+<p>An integrated development environment (IDE) is a software application that provides a few tools to make coding easier. The most important of these is a way to write the code itself! IDEs are not the only way to programme, but they are perhaps the most useful. If you have used <strong>Stata</strong> or <strong>Matlab</strong>, you may not have realised it, but these analytical tools bundle the interpreter and the IDE together. But they are separate things: the interpreter is a way of processing your instructions, the IDE is where you write those instructions.</p>
+<p>There are a lot of integrated development environments (IDEs) out there. This book strongly recommends Microsoft’s Visual Studio Code, which works on all major operating systems and is one of the most popular. Here are some of the most useful features that Visual Studio Code provides:</p>
+<ul>
+<li>a way to run your code interactively (line-by-line) or all at once</li>
+<li>a way to debug (look for errors) in your code</li>
+<li>a quick way to access helpful information about commonly used software packages</li>
+<li>easy ways to initiate automatic code formatting, so that your code follows best practice guidelines</li>
+<li>auto-completion of your code when you hit <kbd>TAB</kbd></li>
+<li>automatic code checking for basic errors</li>
+<li>colouring your brackets in pairs so you can keep track of the logical order of execution of your code!</li>
+</ul>
+</section>
+<section id="packages" class="level3">
+<h3 class="anchored" data-anchor-id="packages">Packages</h3>
+<p>A Python package is a collection of functions, data, and documentation that extends the capabilities of an installed version of Python. Using packages is key to most data science because most of the functionality we’ll need comes from extra packages. You’ll see statements like <code>import numpy as np</code> at the start of many Python code scripts—these are instructions to use an installed package (here one called <strong>numpy</strong>) and to give it a shortened name (<code>np</code>, for convenience) in the rest of the script. The functions in the <strong>numpy</strong> package are then accessed through syntax like <code>np.</code>; for example, you can take logs with <code>np.log(x)</code> where <code>x</code> is a variable containing a number. You need only install packages once, but you must import them into each script you need to use them in. We’ll see more on how to both install and use packages in subsequent chapters.</p>
+</section>
+<section id="typical-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="typical-workflow">Typical workflow</h3>
+<p>The typical workflow for analysis with code might be something like this:</p>
+<ul>
+<li>Open up your integrated development environment (IDE)</li>
+<li>Write some code in a script (a text file with code in) in your IDE</li>
+<li>If necessary for the analysis that you’re doing, install any extra packages</li>
+<li>Use the IDE to send bits of code from the script, or the entire script, to be executed by Python and add-on packages, and to display results</li>
+<li>(once the project is complete) ensure the script can be run from top to bottom to re-produce your analysis</li>
+</ul>
+<p>We’ll see two ways to achieve this workflow:</p>
+<ol type="1">
+<li>Installing an IDE, a Python interpreter, and any extra Python packages on your own computer</li>
+<li>Using a computer in the cloud that you access through your internet browser. Cloud computers often have an IDE and Python built-in, and you can easily install extra packages in them too. However, you should be aware that the cloud service we recommend has a 60 hours / month free tier. Beyond this you’ll need to pay for extra hours.</li>
+</ol>
+<p>You should pick whichever you’re more comfortable with! Eventually, you’ll probably try both.</p>
+</section>
+</section>
+<section id="how-to-get-started-on-your-own-computer" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-get-started-on-your-own-computer">How to get started on your own computer</h2>
+<p>These instructions are for if you’ve decided to code on your own computer.</p>
+<section id="installing-python" class="level3">
+<h3 class="anchored" data-anchor-id="installing-python">Installing Python</h3>
+<p>To download and install Python, we’ll use the uv “distribution” of Python, which is available on all major operating systems. To install it, follow the instructions at <a href="https://docs.astral.sh/uv/getting-started/installation/#installation-methods">this website</a>. Unlike installing normal programmes, we’re going to use the <em>command line</em> to install Python. Linux, Mac, and Windows all have built-in command lines: search for <em>Terminal</em> on Mac or Linux, and <em>Powershell</em> on Windows. These apps will bring up boxes that you can type commands in. As of the time of writing, the commands are:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-LsSf</span> https://astral.sh/uv/install.sh <span class="kw">|</span> <span class="fu">sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>for Linux and Mac, and</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>powershell <span class="op">-</span>ExecutionPolicy ByPass <span class="op">-</span>c <span class="st">"irm https://astral.sh/uv/install.ps1 | iex"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>for Windows. Hit return to execute the commands.</p>
+<p>Once you have installed uv, you can check it’s installed properly by running <code>uv --version</code>. You should see a message pop up that says “uv” and then the latest version number.</p>
+<p>We didn’t actually download Python yet–we downloaded <strong>uv</strong>, which is going to manage our Python environment. So next we need to run</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> python install</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="installing-your-integrated-development-environment-visual-studio-code" class="level3">
+<h3 class="anchored" data-anchor-id="installing-your-integrated-development-environment-visual-studio-code">Installing your integrated development environment, Visual Studio Code</h3>
+<p><a href="https://code.visualstudio.com/">Visual Studio Code</a> is a free and open source IDE from Microsoft that is available on all major operating systems. Just like Python itself, Visual Studio can be extended with packages, and it is those packages, called extensions in this case, that make it so useful. As well as Python, Visual Studio Code supports a ton of other languages.</p>
+<p>Download and install Visual Studio Code. If you need some help, there is a video below that will walk you through downloading and installing Visual Studio Code, and then using it to run Python code in both scripts and in notebooks. We’ll go through these instructions in detail in the rest of this chapter.</p>
+<p>Note that if you are testing out notebooks and the interactive window, you will need to create a new folder and work in it in Visual Studio Code. Once you’ve opened a folder explicitly in VS Code, open the command line within Visual Studio Code then run <code>uv init</code> to create a Python installation, and <code>uv add jupyter</code> to provide this nascent Python environment with the means to create interactive windows.</p>
+<iframe width="700" height="394" src="https://www.youtube.com/embed/1kKTYsQdaPw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+<p><em><a href="https://www.youtube.com/watch?v=1kKTYsQdaPw">How to install Visual Studio Code and use it to run Python code</a></em></p>
+</section>
+</section>
+<section id="coding-in-the-cloud" class="level2">
+<h2 class="anchored" data-anchor-id="coding-in-the-cloud">Coding in the cloud</h2>
+<p>These instructions are for if you wish to code in the cloud rather than on your own computer. There are many ways to do data science in the cloud, but we’re going to share with you the absolute simplest. For this, you will need to sign up for a <a href="https://github.com/">Github Account</a>. GitHub is an organisation that’s owned by Microsoft and which provides a range of services including a way to back-up code on the cloud, and cloud computing. One of the services offered is <em>Github Codespaces</em>. A GitHub Codespace is an online cloud computer that you connect to from your browser window. It has a generous 60 hours free of computing per month.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you go over the free tier hours on GitHub Codespaces, your credit card will be charged for any further hours of GitHub Codespaces you use.</p>
+</div>
+</div>
+<p>Once you’ve signed up for a GitHub account, head to <a href="https://github.com/codespaces">Github Codespaces</a> and click on “Get Started for Free”. You should see a menu of “quick start templates”. Under where it says “Jupyter Notebook”, hit “Use this template”.</p>
+<p>You will find that a new page loads with several panels in. This is an online version of Visual Studio Code that works much like if you had installed it on your own computer. It will already have a version of Python installed—you can check which one by running <code>python --version</code> in the terminal. The terminal is usually found in the lowest panel of Visual Studio Code, and, in Codespaces, will typically display a welcome message.</p>
+</section>
+<section id="alternative-ways-to-run-the-code-from-the-book" class="level2">
+<h2 class="anchored" data-anchor-id="alternative-ways-to-run-the-code-from-the-book">Alternative ways to run the code from the book</h2>
+<p>As well as following this book using your own computer or on the cloud via GitHub Codespaces, you can run the code online through a few other options. The first is the easiest to get started with.</p>
+<ol type="1">
+<li><a href="https://research.google.com/colaboratory/">Google Colab notebooks</a>. Free for most use. You can launch most pages in this book interactively by using the ‘Colab’ button under the rocket symbol at the top of most pages in this book. It will be in the form of a notebook (which mixes code and text) rather than a script (.py file) but the code you write is the same. Note that Colab doesn’t use Visual Studio Code.</li>
+<li><a href="https://www.gitpod.io/">Gitpod Workspace</a>. An alternative to Codespaces. This is a remote, cloud-based version of Visual Studio Code with Python installed and will run Python scripts. Note that the free tier covers 50 hours per month.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Try going to the <a href="code-basics.html" class="quarto-xref"><span>Coding Basics</span></a> chapter now, click on the rocketship symbol (🚀) and then select “Colab”. When the Colab notebook opens, select the first code cell and hit shift + enter to run it.</p>
+</div>
+</div>
+</section>
+<section id="running-your-first-python-code" class="level2">
+<h2 class="anchored" data-anchor-id="running-your-first-python-code">Running your first Python code</h2>
+<section id="getting-to-grips-with-visual-studio-code" class="level3">
+<h3 class="anchored" data-anchor-id="getting-to-grips-with-visual-studio-code">Getting to grips with Visual Studio Code</h3>
+<p>Once you have Visual Studio Code installed and opened (either on your own computer or in the cloud), navigate to the ‘extensions’ tab on the left hand side vertical bar of icons (it’s the one that looks like 4 squares). You’ll need to install the <em>Python</em> extension, which you can search for by using the text box within VS Code’s extensions panel. If you’re using the cloud version, you may find that it’s already installed.</p>
+<p>There are some other extensions it’s useful to have and install (if they aren’t already):</p>
+<ul>
+<li>Jupyter</li>
+<li>Pylance</li>
+<li>indent-rainbow</li>
+</ul>
+<p>Although you won’t have any Python code to play with yet, or an interactive window to execute that Python code, it’s worth us spending a brief moment familiarising ourselves with the different bits of a <em>typical</em> view in Visual Studio Code.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://github.com/aeturrell/coding-for-economists/blob/main/img/vscode_layout.png?raw=true" class="img-fluid figure-img"></p>
+<figcaption>A typical user view in Visual Studio Code</figcaption>
+</figure>
+</div>
+<p>The figure above shows the typical layout of Visual Studio Code once you have a Python session running, and a Python script open. The long vertical panel on the far left-hand side changes what is seen in panels 1 and 2; it currently has the file explorer selected. Let’s run through the numbered parts of the figure.</p>
+<ol type="1">
+<li>When the explorer option is selected from the icons to the left of 1 and 2, the contents of the folder that’s currently open are shown in 1.</li>
+<li>This is an outline of the key parts of the file that is open in 3.</li>
+<li>This is just a fancy text editor. In the figure above, it’s showing a Python script (a file that contains code and has a name that ends in <code>.py</code>). Shortly, we’ll see how selecting code and pressing <kbd>Shift</kbd> + <kbd>Enter</kbd> (‘Enter’ is labelled as ‘Return’ on some keyboards) will execute code whose results appear in panel 5.</li>
+<li>This is the command line or <em>terminal</em>, a place where you can type in commands that your computer will then execute. If you want to try a command, type <code>date</code> (Mac/Linux) or <code>date /t</code> (Windows). This is where we install extra <em>packages</em>.</li>
+<li>This is the interactive Python window, which is where code and code outputs appear after you select and execute them from a script (see 3). It shows the code that you executed and any outputs from that execution—in the screenshot shown, the code has created a plot. The name and version of Python you’re using appear at the top of the interactive window.</li>
+</ol>
+<p>Note that there is lots of useful information arrayed right at the bottom of the window in the blue bar, including the version of Python currently being used by VS Code.</p>
+</section>
+<section id="running-python-code" class="level3">
+<h3 class="anchored" data-anchor-id="running-python-code">Running Python code</h3>
+<p>Now you will create and run your first code. If you get stuck, there’s a more in-depth tutorial over at the <a href="https://code.visualstudio.com/docs/python/python-tutorial">VS Code documentation</a>.</p>
+<p>In Visual Studio Code, click on the “Explorer” symbol (some files on the left-hand side of the screen) to bring up a file explorer. Check you’re in a good location on your computer to try things out and, if not, change the folder you’re in using File -&gt; Open Folder until you’re happy.</p>
+<p>Now open up a terminal <em>within</em> Visual Studio Code. Make sure it’s the same type of terminal that you installed uv in, eg use Powershell on Windows (you can select to use different types of terminals.) The shortcut to open the terminal panel is Ctrl + ` on Linux and Windows, and Cmd + ` on Mac. The terminal panel appears along the bottom of VS Code. Run <code>uv init</code> in the terminal to initiate an installation of Python. <strong>This Python installation only lives in your current folder</strong>. Then, to install the package we need for this section run <code>uv add jupyter</code>. (We will cover the terminal and installing packages in much more detail shortly.)</p>
+<p>Now, still with the explorer panel open on the left hand side, click on the symbol that looks like a blank piece of paper with a “+” sign on it. This will create a new file, and your cursor should move to name it. Name it <code>hello_world.py</code>. The file extension, <code>.py</code>, is very important as it implicitly tells Visual Studio Code that this is a Python script.</p>
+<p>In the Visual Studio Code editor, add a single line to the file:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Hello World!'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Save the file.</p>
+<p>If you named this file with the extension <code>.py</code> then VS Code will recognise that it is Python code and you should see the name and version of Python pop up in the bar at the bottom of your VS Code window. (You can have multiple versions of Python installed—if you ever want to change which Python version your code uses, click on the version shown in the bar and select the version you want.)</p>
+<p>Alright, shall we actually <strong>run some code</strong>? Select/highlight the <code>print("Hello world!")</code> text you typed in the file and right-click. You’ll get a lot of options here, but the one you want is <strong>“Run Selection/Line in Interactive Window”</strong>.</p>
+<p>This should cause a new ‘interactive’ panel to appear within Visual Studio Code, and, hey presto you should see:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello world!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>Hello world!</code></pre>
+<p>The <em>interactive window</em> is a convenient and flexible way to run code that you have open in a script or that you type directly into the interactive window code box. The interactive window will ‘remember’ any variables that have been assigned (for examples, code statements like <code>x = 5</code>), whether they came from running some lines in your script or from you typing them in directly. Working with the interactive window will feel familiar to anyone who has used Stata, Matlab, or R. It doesn’t require you to write the whole script, start to finish, ahead of time. Instead, you can jam, changing code as you go, (re-)running it line by line.</p>
+<p>It would be cumbersome to have to right-click every time we wanted to run some code, so we’re going to make a <em>keyboard shortcut</em> to send whatever code is highlighted to the interactive window to be executed. To do this:</p>
+<ul>
+<li>Open up the Visual Studio Code configuration menu (the cog on the lower left-hand side)</li>
+<li>Go to Settings</li>
+<li>Type “jupyter send” in the box to make an entry “Interactive Window &gt; Text Editor: Execute Selection” appear</li>
+<li>Ensure the box next to this entry is ticked</li>
+</ul>
+<p>Now return to your script, put your cursor on the line with <code>print("Hello world!")</code> on, and hit <kbd>Shift</kbd>+<kbd>Enter</kbd>. You should see “Hello world!” appear again, only this time, it was much easier.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Running code in the terminal instead">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Running code in the terminal instead
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The interactive window isn’t the only way to run code; you can do it in the terminal too. This is less popular for data science, but it does occasionally have its uses. If you want to do this, right-click on the selected code and choose “Run Python -&gt; Run Selection/Line in Terminal”.</p>
+</div>
+</div>
+</div>
+<p>Let’s make more use of the <em>interactive window</em>. At the bottom of it, there is a box that says ‘Type code here and press shift-enter to run’. Go ahead and type <code>print('Hello World!')</code> directly in there to achieve the same effect as running the line from your script. Also, any variables you run in the interactive window (from your script or directly by entering them in the box) will persist.</p>
+<p>To see how variables persist, type <code>hello_string = 'Hello World!'</code> into the interactive window’s code entry box and hit shift-enter. If you now type <code>hello_string</code> and hit shift+enter, you will see the contents of the variable you just created. You can also click the grid symbol at the top of the interactive window (between the stop symbol and the save file symbol); this is the variable explorer and will pop open a panel showing all of the variables you’ve created in this interactive session. You should see one called <code>hello_string</code> of type <code>str</code> with a value <code>Hello World!</code>.</p>
+<p>This shows the two ways of working with the interactive window–running (segments) from a script, or writing code directly in the entry box. It doesn’t matter which way you entered variables, they will all be remembered within that session in your interactive window.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Start interactive windows and terminals within your project directory">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Start interactive windows and terminals within your project directory
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In Visual Studio Code, you can ensure that the interactive window starts in the root directory of your project by setting “Jupyter: Notebook File Root” to <code>${workspaceFolder}</code> in the Settings menu. For the integrated command line, change “Terminal › Integrated: Cwd” to <code>${workspaceFolder}</code> too.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Create a new script that, when run, prints “Welcome to Coding for Economists” and run it in an interactive window.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="packages-and-how-to-install-them" class="level2">
+<h2 class="anchored" data-anchor-id="packages-and-how-to-install-them">Packages and how to install them</h2>
+<p>Packages (also called libraries) are key to extending the functionality of Python and it won’t be long before you’ll need to install some extra ones! There are packages for geoscience, for building websites, for analysing genetic data, and, yes, of course, for economics. Packages are typically not written by the core maintainers of the Python language but by enthusiasts, firms, researchers, academics, all sorts! Because anyone can write packages, they vary widely in their quality and usefulness. There are some that are key for an economics workflow, though, and you’ll be seeing them again and again.</p>
+<blockquote class="twitter-tweet blockquote">
+<p lang="en" dir="ltr">
+Name a more iconic trio, I'll wait. <a href="https://t.co/pGaLuUxQ3r">pic.twitter.com/pGaLuUxQ3r</a>
+</p>
+— Vicki Boykis (@vboykis) <a href="https://twitter.com/vboykis/status/1032631145035427840?ref_src=twsrc%5Etfw">August 23, 2018</a>
+</blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>The three Python packages <strong>numpy</strong>, <strong>pandas</strong>, and <strong>maplotlib</strong>, which respectively cover provide numerical, data, and plotting functionality, are ubiquitous. So many scripts begin by importing them, as in the tweet above!</p>
+<p>Python packages don’t come built-in (by definition) so you need to install them (just once, like installing any other application), and then import them into your scripts (whenever you use them in a script). When you issue an install command for a specific package, it is automatically downloaded from the internet and installed in the appropriate place on your computer.</p>
+<p>We use the <em>terminal</em> or <em>command line</em> within Visual Studio Code to install additional Python packages. In the figure earlier in the Chapter, this is labelled as panel number 4.</p>
+<p>To install extra Python packages, you issue install commands to a text-based window called the “terminal”.</p>
+<section id="the-terminal-in-brief" class="level3">
+<h3 class="anchored" data-anchor-id="the-terminal-in-brief">The Terminal in Brief</h3>
+<p>The <em>terminal</em> is also known as the <em>command line</em> and sometimes the <em>command prompt</em>. It was labelled 4 in the screenshot of Visual Studio Code from earlier in the chapter. The terminal is a text-based way to issue all kinds of commands to your computer (not just Python commands) and knowing a little bit about it is really useful for coding (and more) because managing packages, environments (which we haven’t yet discussed), and version control (ditto) can all be done via the terminal.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To open up the command line within Visual Studio Code, use the <kbd>⌃</kbd> + <kbd>`</kbd> keyboard shortcut (Mac) or <kbd>ctrl</kbd> + <kbd>`</kbd> (Windows/Linux), or click “View &gt; Terminal”.</p>
+<p>If you want to open up the command line independently of Visual Studio Code, search for “Terminal” on Mac and Linux, and “Powershell” on Windows.</p>
+</div>
+</div>
+<p>Firstly, everything you can do by clicking on icons to launch programmes on your computer, you can also do via the terminal (also known as the command line). The functionality of a lot of programmes can be accessed using the command line, and some programmes <em>only</em> have a command line interface (CLI). This includes some that are used for data science.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The command line interacts with your operating system and can be used to create, activate, or change python installations.</p>
+</div>
+</div>
+<p>Use Visual Studio Code to open a terminal window by clicking Terminal -&gt; New Terminal on the list of commands at the very top of the window. If you have installed uv on your computer, your terminal should look something like this as your ‘command prompt’:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">your-username@your-computer</span> current-directory %</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>on Mac, and the same but with ‘%’ replaced by ‘$’ on linux, and (using Powershell)</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">PS</span> C<span class="op">:</span>\Windows\System32<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>on Windows.</p>
+<p>You can check that uv has successfully installed Python in your current project’s folder by running</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can find out more about the terminal in the chapter on <a href="wrkflow-command-line.html" class="quarto-xref"><span>The Command Line</span></a>.</p>
+</section>
+<section id="installing-packages" class="level3">
+<h3 class="anchored" data-anchor-id="installing-packages">Installing Packages</h3>
+<p>To install any packages within the Python environment in the folder you’re using in Visual Studio Code, enter the following in Visual Studio Code’s terminal (the same place where you just ran <code>uv run python --version</code>).</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add packagename</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and hit return. In the above, <code>packagename</code> might be <code>pandas</code>, for example. If you have problems installing, make sure that you are connected to the internet, and that <a href="https://pypi.org/">PyPI</a> (the Python package index) isn’t blocked by your firewall or proxy.</p>
+<p>You can see what packages you have previously installed by entering <code>uv pip list</code> into the command line.</p>
+</section>
+</section>
+<section id="review" class="level2">
+<h2 class="anchored" data-anchor-id="review">Review</h2>
+<p>You’re ready to move on to the next chapter! 🚀</p>
+<p>Well done if you made this far: starting is the hardest bit. (If you want to tweak your Visual Studio Code setup even more, there’s some tips at the end of <a href="code-further-advanced.html" class="quarto-xref"><span>Advanced Coding</span></a>.)</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/aeturrell\.github\.io\/coding-for-economists");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Introduction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Introduction</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./code-basics.html" class="pagination-link" aria-label="Coding Basics">
+        <span class="nav-page-text"><span class="chapter-title">Coding Basics</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>This book is available under an MIT license.</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/aeturrell/coding-for-economists/edit/main/code-preliminaries.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/aeturrell/coding-for-economists/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

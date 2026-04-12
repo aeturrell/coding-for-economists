@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Writing Papers – Coding for Economists</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./craft-research-blogs.html" rel="next">
+<link href="./craft-generating-ideas.html" rel="prev">
+<link href="./favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9FZQCPFXZJ"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-9FZQCPFXZJ', { 'anonymize_ip': true});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta name="twitter:title" content="Writing Papers – Coding for Economists">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./craft-intro.html">Craft</a></li><li class="breadcrumb-item"><a href="./craft-writing-papers.html"><span class="chapter-title">Writing Papers</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Coding for Economists</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/aeturrell/coding-for-economists" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Getting Started</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-preliminaries.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preliminaries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coding Basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./workflow-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Workflow Basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-where.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Writing Code</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Essential Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-analysis-quickstart.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Analysis Quickstart</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Working with Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-transformation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Transformation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-read-and-write.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reading and Writing Files</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-numbers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Numbers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-categorical.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Categorical Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-spreadsheets.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Spreadsheets</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Essential Coding</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-best-practice.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Code in Style</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coding</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-advcd-best-practice.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Shortcuts to Better Coding</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Essential Data Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Intro to Data Visualisation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-letsplot.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-matplotlib.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Powerful Data Visualisation with <strong>Matplotlib</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-common-plots-one.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Common Plots I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-common-plots-two.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Common Plots II</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Essential Workflow</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./auto-research-outputs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Automating Research Outputs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-markdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Markdown</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-command-line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">The Command Line</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-version-control.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Version Control</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Econometrics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-probability-random.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Probability and Random Processes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-generalised-models.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Generalised regression models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-diagnostics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regression diagnostics and visualisations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-causal-inference.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Causal Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-bayesian.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bayesian Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-bayes-bambi.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bayesian Inference Made Easier</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-boolean.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Boolean Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-joining-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Joins</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-missing-values.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Missing Values</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-exploratory-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploratory Data Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-extraction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Getting Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-databases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Databases</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><strong>pandas</strong> alternatives, validation, and orchestration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-sharing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Sharing Data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Coding</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-further-advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Advanced Coding</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-narrative.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Narrative Data Visualisation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Tables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-dashboards.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Dashboards</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-animation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Animation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">Workflow</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-quarto.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Combining Code and Text in Quarto Markdown</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-environments.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Virtual Code Environments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-rap.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reproducible Analysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
+ <span class="menu-text">Time</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./time-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction to Time</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./time-series.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Time Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./time-fcasts-env.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Forecasting Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true">
+ <span class="menu-text">Text Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./text-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction to Text</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./text-regex.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regular Expressions, aka regex</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./text-nlp.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true">
+ <span class="menu-text">Machine Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction to Machine Learning and AI</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-sup.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Supervised Machine Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data for Machine Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-unsup.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Unsupervised Machine Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true">
+ <span class="menu-text">Geospatial</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geo-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Intro to Geo-Spatial Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geo-vis.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Geo-Spatial Visualisation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true">
+ <span class="menu-text">Mathematics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./maths-abstract.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Abstract Mathematics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./maths-numerical.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Numerical Mathematics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true">
+ <span class="menu-text">Craft</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-search.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Putting the Search in Research</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-generating-ideas.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Generating and Accepting Research Ideas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-writing-papers.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Writing Papers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-research-blogs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Research Blog Posts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-referee.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Writing Referee Reports</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-technical-reports.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Writing Technical Reports</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-extended-abstracts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Extended Abstracts</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true">
+ <span class="menu-text">Further Data Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-plotnine.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-seaborn.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Visualisation with <strong>Seaborn</strong></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true">
+ <span class="menu-text">Coming from …</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./coming-from-stata.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coming from Stata</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./coming-from-matlab.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coming from Matlab</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./coming-from-r.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coming from R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./coming-from-excel.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coming from Excel</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="true">
+ <span class="menu-text">End Matter</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./contributing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Contributing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./zreferences.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bibliography</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#before-you-write-the-overall-contribution" id="toc-before-you-write-the-overall-contribution" class="nav-link active" data-scroll-target="#before-you-write-the-overall-contribution">Before you write: The Overall Contribution</a></li>
+  <li><a href="#figures" id="toc-figures" class="nav-link" data-scroll-target="#figures">Figures</a></li>
+  <li><a href="#title" id="toc-title" class="nav-link" data-scroll-target="#title">Title</a></li>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#paper-introduction" id="toc-paper-introduction" class="nav-link" data-scroll-target="#paper-introduction">Paper Introduction</a>
+  <ul class="collapse">
+  <li><a href="#the-hook-or-motivation" id="toc-the-hook-or-motivation" class="nav-link" data-scroll-target="#the-hook-or-motivation">The Hook, or Motivation</a></li>
+  <li><a href="#the-question" id="toc-the-question" class="nav-link" data-scroll-target="#the-question">The Question</a></li>
+  <li><a href="#findings-or-main-contribution" id="toc-findings-or-main-contribution" class="nav-link" data-scroll-target="#findings-or-main-contribution">Findings, or Main Contribution</a></li>
+  <li><a href="#the-antecedents" id="toc-the-antecedents" class="nav-link" data-scroll-target="#the-antecedents">The Antecedents</a></li>
+  <li><a href="#the-value-add" id="toc-the-value-add" class="nav-link" data-scroll-target="#the-value-add">The Value-Add</a></li>
+  <li><a href="#robustness-checks" id="toc-robustness-checks" class="nav-link" data-scroll-target="#robustness-checks">Robustness Checks</a></li>
+  <li><a href="#the-road-map" id="toc-the-road-map" class="nav-link" data-scroll-target="#the-road-map">The Road Map</a></li>
+  </ul></li>
+  <li><a href="#the-middle-of-the-paper" id="toc-the-middle-of-the-paper" class="nav-link" data-scroll-target="#the-middle-of-the-paper">The Middle of the Paper</a>
+  <ul class="collapse">
+  <li><a href="#data-including-descriptive-statistics" id="toc-data-including-descriptive-statistics" class="nav-link" data-scroll-target="#data-including-descriptive-statistics">Data (including descriptive statistics)</a></li>
+  <li><a href="#theory-or-methods" id="toc-theory-or-methods" class="nav-link" data-scroll-target="#theory-or-methods">Theory or Methods</a></li>
+  <li><a href="#empirical-framework" id="toc-empirical-framework" class="nav-link" data-scroll-target="#empirical-framework">Empirical framework</a></li>
+  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">Results and Discussion</a></li>
+  <li><a href="#regression-tables" id="toc-regression-tables" class="nav-link" data-scroll-target="#regression-tables">Regression Tables</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#after-the-draft-is-written" id="toc-after-the-draft-is-written" class="nav-link" data-scroll-target="#after-the-draft-is-written">After the draft is written</a></li>
+  <li><a href="#further-resources" id="toc-further-resources" class="nav-link" data-scroll-target="#further-resources">Further Resources</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/aeturrell/coding-for-economists/edit/main/craft-writing-papers.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/aeturrell/coding-for-economists/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./craft-intro.html">Craft</a></li><li class="breadcrumb-item"><a href="./craft-writing-papers.html"><span class="chapter-title">Writing Papers</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-craft-writing-papers" class="quarto-section-identifier"><span class="chapter-title">Writing Papers</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This chapter provides guidance on how to structure and write a research paper, particularly what sections to have and what information to convey in them.</p>
+<p>The advice is designed to be general good practice but it is unlikely to cover all cases and there may well be good reasons to ignore parts of it depending on the nature of any given project. Despite being phrased as “do this” or “don’t do that”, the points made are designed to be sensible starting points–not rules that must be followed.</p>
+<p>The guidance assumes you are producing a long-form paper in economics journal style rather than a short-form paper in computer science style. However, much of the guidance applies independent of journal article length.</p>
+<p>This chapter has shamelessly drawn on numerous sources, including Keith Head’s <a href="http://blogs.ubc.ca/khead/research/research-advice/formula">The Introduction Formula</a>, Marc Bellemere’s <a href="http://marcfbellemare.com/wordpress/12797">Middle Bits Formula</a> for applied papers and <a href="http://marcfbellemare.com/wordpress/12060">Conclusion Formula</a>, <a href="https://twitter.com/rskudesia/status/1120324415424585728?s=20">Advice on how to structure a paper</a> from a mysterious, but very helpful, reviewer 3 as received by Ravi Kudesia, a <a href="https://eebatou.wordpress.com/2008/01/19/your-10-point-checklist-before-sending-off-that-manuscript/">Checklist for before submission</a> from Mike Kaspari, a <a href="http://macromomblog.com/2019/09/29/we-need-to-talk-more/">blog post</a> by Claudia Sahm, and <a href="https://www.cgdev.org/blog/how-write-introduction-your-development-economics-paper">How to Write the Introduction of Your Development Economics Paper</a> by David Evans.</p>
+<p>The subsequent sections address the major parts of a paper and give advice on each.</p>
+<section id="before-you-write-the-overall-contribution" class="level2">
+<h2 class="anchored" data-anchor-id="before-you-write-the-overall-contribution">Before you write: The Overall Contribution</h2>
+<p>One of the most important pieces of information you are trying to convey to your reader is the <em>marginal contribution</em> you are making relative to pre-existing knowledge and tools. To help bring this out, before you even start writing you should ask yourself the following questions:</p>
+<ol type="1">
+<li><p>How does the manuscript change, challenge, or fundamentally alter knowledge with respect to the concepts, relationships, models, theories, or use of methods related to the literature on X? (X is the literature to which you want to contribute.)</p></li>
+<li><p>How does the manuscript cause us to think about X or undertake X in a way that would not normally be anticipated from extrapolations of existing work, thereby advancing future work in an important and useful way?</p></li>
+</ol>
+<p>In response to these questions, it can be useful to create a <span class="math inline">3\times5</span> matrix. On one side list (1) change, (2) challenge, and (3) fundamentally alter. On the other side, list (1) concepts, (2) relationships, (3) models, (4) theories, and (5) use of methods.</p>
+<p>Another way to think about the structure and contribution of a paper is to ensure that these 10 points are well-covered:</p>
+<ul>
+<li>What is the focus?</li>
+<li>Why it is relevant?</li>
+<li>What is known/not known (and why it needs attention)?</li>
+<li>What is the burning question?</li>
+<li>How is the question addressed (theoretically/empirically)?</li>
+<li>What was done?</li>
+<li>What was found?</li>
+<li>What does it mean?</li>
+<li>What has been added to the discussion?</li>
+<li>Why should people care/what is the news people can use? (eg new package, contribution to policy debate, fresh empirical evidence)</li>
+</ul>
+<p>You need to be able to complete the sentence “our marginal contribution is…”. If you don’t know what it is, your readers won’t either!</p>
+</section>
+<section id="figures" class="level2">
+<h2 class="anchored" data-anchor-id="figures">Figures</h2>
+<p>Insofar as is possible, try to make figures self-contained. For example, don’t ask people to match panels (a), (b), (c), and so on, with the descriptions in the figure caption; use informative labels. Ensure that your figure captions stand alone in explaining the chart—even better if the figure is clear by itself.</p>
+<p>You should have one <strong>killer chart</strong> per paper, a single plot that tells the story of your most important finding clearly. This is the chart that might get picked up by <em>The Economist</em> or the <em>Financial Times</em>. Papers in science journals, which often have quite strict length limits, are very good this (they’re also good at highly dense technical charts, though those are different).</p>
+<p>For example, here is a figure summarising a fairly complex precipitation nowcasting paper, “Skillful Precipitation Nowcasting Using Deep Generative Models of Radar”, written by Deepmind <span class="citation" data-cites="ravuris2021skillful">Ravuri et al. (<a href="wrkflow-quarto.html#ref-ravuris2021skillful" role="doc-biblioref">2021</a>)</span>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41586-021-03854-z/MediaObjects/41586_2021_3854_Fig1_HTML.png?as=webp" class="img-fluid figure-img"></p>
+<figcaption>Summary figure from Deepmind paper on nowcasting</figcaption>
+</figure>
+</div>
+<p>In one fell swoop, they tell us about the structure of the model, what it’s useful for (UK rain nowcasting, for which there is a strong need), and how their model, DGMR, compares against both observations and the leading alternative code, PySTEPS. (You can even find the Python code over at their <a href="https://github.com/deepmind/deepmind-research/tree/master/nowcasting">Github page</a>.)</p>
+<p>Another good example is from “Inferring the effectiveness of government interventions against COVID-19”, <span class="citation" data-cites="brauner2021inferring">(<a href="wrkflow-quarto.html#ref-brauner2021inferring" role="doc-biblioref">Brauner et al. 2021</a>)</span>. This summarises the fairly complex results of a Bayesian model of non-pharmaceutical interventions into a single summary figure that policymakers can read off the results from in a second. This papers uses the Bayesian package PyMC, which you find out more about in the <a href="econmt-bayesian.html" class="quarto-xref"><span>Bayesian Inference</span></a> chapter.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.science.org/cms/10.1126/science.abd9338/asset/3ae0348b-6d8b-439c-8815-556bda63b789/assets/graphic/371_abd9338_f2.jpeg" class="img-fluid figure-img"></p>
+<figcaption>Figure summarising effectiveness of different interventions for Covid-19.</figcaption>
+</figure>
+</div>
+<p>Perhaps you feel that these aren’t serious or technical looking enough? Even serious, technical people have limited bandwidth: help them out with an easy to understand visual summary of your findings.</p>
+<p>If you’re making plots, think deeply about their purpose and how clear they are. You can find more information on plotting over in the <a href="vis-intro.html" class="quarto-xref"><span>Intro to Data Visualisation</span></a> pages.</p>
+<p>To make life easier for your readers, put figures next to where they are first referenced in the text. If you have co-authors who prefer to have figures at the end, there’s a single option toggle you can use with the LaTeX package <a href="https://texdoc.org/serve/endfloat.pdf/0"><strong>endfloat</strong></a>: turn it on before you compile it to send to them 😉.</p>
+</section>
+<section id="title" class="level2">
+<h2 class="anchored" data-anchor-id="title">Title</h2>
+<p>Choosing a title is a tricky business. In recent years, there’s been a backlash against uninformative (“Two analyses of the labour market”) or question-based (“Does X cause Y?”) paper titles and a movement that promotes ‘say what you did’ paper titles. For example, in the latter case, you might go for something along the lines of “Evidence that X causes Y in circumstance Z using method W”. There’s also a bit of a backlash against pun titles—though they do have a place when the paper itself is light-hearted. Another pitfall is to make your paper title solely about a vague but complicated-sounding method, eg “A Semiparametric Investigation of X” is not going to win you many readers.</p>
+<p>While saying what you did can make the title quite long, and perhaps a bit less exciting and mysterious, it’s probably a good idea. Given the way that people find papers, through Google searches, you may wish to ensure that certain keywords also make it into the title.</p>
+</section>
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p>The abstract is a concise summary of the entire paper. Its function is to describe the rest of the paper, not to evaluate or defend it. The abstract should begin with a brief but precise statement of the problem or issue, followed by a fleeting description of the research method, design, and outputs, the major findings and marginal contribution, and the conclusions reached. The abstract should contain key words referring to method and content to help it get picked up by searches.</p>
+<p>Ideally, your abstract should answer these key questions:</p>
+<ol type="1">
+<li><p>what’s the research question?</p></li>
+<li><p>what’s the main result?</p></li>
+<li><p>what’s the research method?</p></li>
+<li><p>are the findings trivial or substantive?</p></li>
+</ol>
+<p>Another way of thinking about organising your abstract is motivation, purpose, methods, findings, and policy implications.</p>
+<p>Once you have written them, market test your title and abstract. The title and abstract are the front door. They are the most important parts of the paper. Craft them carefully and get frank feedback on them from people who know the field.</p>
+<p>Many people find it useful to write the abstract of a paper last. By the time you have thought about the overall contribution and written the rest of the paper (particularly the introduction and conclusion), the abstract will be far easier. Abstracts are usually limited to 150—250 words, but can be as few as 100 words for some journals.</p>
+<p>For an example of an abstract that really nails it, take a look at “The tradeoff between knowledge of mandated benefits and moral hazard” by Dr Jessica Brown <span class="citation" data-cites="brown2022tradeoff">(<a href="wrkflow-quarto.html#ref-brown2022tradeoff" role="doc-biblioref">Brown 2022</a>)</span>:</p>
+<blockquote class="blockquote">
+<p>When workers are not aware of a mandated benefit, they cannot take it into account in their employment decision, leading to deadweight loss. On the other hand, lack of awareness of a benefit reduces moral hazard, decreasing deadweight loss. I incorporate these trade‐offs into a model of mandated benefits and apply the model to Temporary Disability Insurance, an employment benefit mandated in five states. First, using data collected through an original survey, I provide evidence that there is low awareness of this benefit. Second, I use the updated mandated benefits model to show that over a broad range of reasonable assumptions, the additional employee valuation of the benefit outweighs the additional program cost from moral hazard, and thus a public information campaign would increase employment.</p>
+</blockquote>
+</section>
+<section id="paper-introduction" class="level2">
+<h2 class="anchored" data-anchor-id="paper-introduction">Paper Introduction</h2>
+<p>Remember: most people who read your paper will only read the abstract, introduction, and conclusion. If your entire contribution isn’t understandable from reading these three together, you are missing a trick: and the introduction will be doing most of that work. You should spend a lot of time on your introduction. However, many people find that—like the abstract and conclusion—it’s a section that’s easier to write later rather than sooner. On the other hand, writing a good introduction can force you to really engage with what your contribution is and may save you time in the long run.</p>
+<p>The subsections below detail the various parts that an introduction should incorporate, although they should not be labelled as such in the paper—they are all part of your <em>Introduction</em> section.</p>
+<p>Note that there isn’t a separate “Literature Review” section below. You don’t need to bother with a dedicated literature review—it should be weaved into your introduction in the “Antecedent” and “Value-Add” sections, and only exist insofar as it explains how your work relates to the closest five to seven studies on the topic. This <em>doesn’t</em> mean that you shouldn’t have <em>done</em> a literature review—you almost certainly should have at some point. But this guidance is about writing a paper, not a literature review, and it’s better to keep them separate. (There are obvious exceptions to this rule, such as reviews.)</p>
+<section id="the-hook-or-motivation" class="level3">
+<h3 class="anchored" data-anchor-id="the-hook-or-motivation">The Hook, or Motivation</h3>
+<p>In the first paragraph of the introduction, attract the reader’s interest by telling them that this paper relates to something interesting. What makes a topic Y interesting? Some combination of the following attributes makes Y something worth looking at.</p>
+<ul>
+<li><p>Y matters: When Y rises or falls, people are hurt or helped.</p></li>
+<li><p>Y is puzzling: it defies easy explanation.</p></li>
+<li><p>Y is controversial: some argue one thing while others say another.</p></li>
+<li><p>Y is big (like the service sector) or common (like traffic jams).</p></li>
+<li><p>Y helps you do something you could not do before (ie it expands a reader’s production frontier).</p></li>
+</ul>
+<p>You should avoid doing the following with your hook:</p>
+<ul>
+<li><p>The bait and switch: promising an interesting topic but delivering something else, in particular, something boring.</p></li>
+<li><p>“all my friends are doing it”: presenting no other motivation for a topic than that other people have written papers on it.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://pbs.twimg.com/media/DxJVkF5XcAAQ8TP.jpg" class="img-fluid figure-img"></p>
+<figcaption>Abstract vs the paper, with pizza</figcaption>
+</figure>
+</div>
+<p><em>The bait and switch</em></p>
+</section>
+<section id="the-question" class="level3">
+<h3 class="anchored" data-anchor-id="the-question">The Question</h3>
+<p>Tell the reader what the paper does. Think of this as the point in a trial where, having detailed the crime, you now identify a perpetrator and promise to provide a persuasive case. The reader should have an idea of a clean research question that will have a more or less satisfactory answer by the end of the paper. The question may take around two paragraphs. At the end of the first or possibly the beginning of the second you should probably have the sentence “This paper addresses the question …”.</p>
+<p>A slight variation on this magic sentence is required when introducing an asset such as a new dataset or a software package. In that case, the magic sentence becomes “This paper introduces <em>thing</em> that allows you to…”. If you have achieved the powerful union of answering an interesting question <em>and</em> introducing a helpful thing, you can have both!</p>
+</section>
+<section id="findings-or-main-contribution" class="level3">
+<h3 class="anchored" data-anchor-id="findings-or-main-contribution">Findings, or Main Contribution</h3>
+<p>What did you find in answer to the question you just set out? In this section, you need to spell out the key findings and messages of your research. If you want your reader to be able to remember what it is you found, there probably shouldn’t be more than 3 or 4 key findings in this section. You also need to place those findings in context; are they substantive or trivial (regardless of how precisely estimated your effects are)? It can be helpful to think of this section as ‘absolute contribution’, as opposed to the ‘relative contribution’ you’ll cover in the “Value-Add” section.</p>
+</section>
+<section id="the-antecedents" class="level3">
+<h3 class="anchored" data-anchor-id="the-antecedents">The Antecedents</h3>
+<p>Identify the prior work that is critical for understanding the contribution the paper will make. The key mistake to avoid here is discussing papers that are not essential parts of the intellectual narrative leading up to your own paper. Give credit where it is due but establish, in a non-insulting way, that the prior work has a gap in some important way that this paper (and perhaps its associated assets such as data or software) will fill.</p>
+<p>A good rule is to look at the three to five closest papers and spend most of the time discussing them. If your paper truly crosses more than one literature, you may want to pick out one or two papers from those other topics that are also close to your work.</p>
+</section>
+<section id="the-value-add" class="level3">
+<h3 class="anchored" data-anchor-id="the-value-add">The Value-Add</h3>
+<p>Describe approximately 3 contributions this paper will make relative to the antecedents. This paragraph might be the most important one for convincing referees not to reject the paper, and readers not to put it down. A big difference between it and the earlier “question” and “findings” section is that the contributions should make sense only in light of prior work whereas the basic research question of the paper should be understandable simply in terms of knowing the topic (from the hook paragraph). “Antecedents” and “Value-Add” may be intertwined. These should take up around 3 paragraphs.</p>
+<p>Do be respectful of others’ work in this section: research is hard, and you should give credit where it’s due.</p>
+<p>If part of the value add is that you created a software package or dataset to go along with the paper, but that is not the main focus of the paper, then this is a good place to mention them.</p>
+</section>
+<section id="robustness-checks" class="level3">
+<h3 class="anchored" data-anchor-id="robustness-checks">Robustness Checks</h3>
+<p>By now, the reader may be thinking “this is too good to be true! I wonder if it’s robust?” and you must respond by sketching out (but not giving full details of) the robustness checks that you did to ensure that what you have measured, estimated, or assumed is a real finding and not a fluke.</p>
+</section>
+<section id="the-road-map" class="level3">
+<h3 class="anchored" data-anchor-id="the-road-map">The Road Map</h3>
+<p>This section is incredibly tedious but, unfortunately, some referees insist on it. Indeed, Deirdre McCloskey, in her book <a href="https://press.uchicago.edu/ucp/books/book/chicago/E/bo25674588.html">Economical Writing</a>, says: “Still another piece of boilerplate, and one that kills the momentum of most papers on the second page, is the table-of-contents paragraph… Too many editors and referees demand it. Don’t, please … don’t.”</p>
+<p>I’m with Deirdre on this one. Don’t bother with a road map if you can possibly help it. No-one will be surprised that your results section contains results.</p>
+<p>If you <em>must</em> write a road map that outlines the organisation of the paper, avoid writing one so generic that it could apply to any paper. Instead customise the road map to the project and possibly mention pivotal “landmarks” (problems, solutions, results…) that will be seen along the way. But, if you have to put it in, keep this section as short as possible.</p>
+</section>
+</section>
+<section id="the-middle-of-the-paper" class="level2">
+<h2 class="anchored" data-anchor-id="the-middle-of-the-paper">The Middle of the Paper</h2>
+<p>Now we come on to the content of a paper. Here are some pointers to bear in mind:</p>
+<ul>
+<li><p>You might want to have a section titled “Background” or “Context” between the introduction and the data/theory or methods/empirical framework. This is especially so when you study, or have work related to, a new policy whose details are important or, perhaps, the features of the market or environment you are studying. For example, privacy issues surrounding some kinds of data could fit here. This can either be a substitute to, or a complement for, the theory section.</p></li>
+<li><p>You may not need a theoretical framework/methods section.</p></li>
+<li><p>It will sometimes make sense to switch the order between data, theory/methods, and empirical framework.</p></li>
+<li><p>Any limitations will appear both under “Results and Discussion” and later on in the conclusion. It’s very important (particularly in pieces close to policy) not to have results that are misinterpreted.</p></li>
+</ul>
+<p>Note that not every paper will have all of the subsections below. However, even if your paper doesn’t warrant a separate theory section, it’s a useful exercise to think about the content as being split according to assumptions (ie theory or methods), data, and the combination of the two (empirical framework) because the logic of an argument can break down in all three places.</p>
+<section id="data-including-descriptive-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="data-including-descriptive-statistics">Data (including descriptive statistics)</h3>
+<p>The data section is one of the most useful to readers (particularly other researchers), but it’s frequently not given as much love as either the theory or empirical framework sections.</p>
+<p>You may find it useful to first remind the reader about the research question, and then connect that question to the type of data that is needed or what the ideal data would be, before moving on to describe the data you actually have.</p>
+<p>You are likely to want to report the following about your data: when, where, why, how and by whom was it collected? What is the sample size and how does it compare to the population of interest? Did you drop any observations and, if so, why? Did you have to impute any values and, if so, how did you do it? Are any variables proxies for the real thing? What does each variable measure, exactly, and how was it constructed?</p>
+<p>You should also ask yourself whether you have any ‘dark data’ <span class="citation" data-cites="hand2020dark">(<a href="wrkflow-quarto.html#ref-hand2020dark" role="doc-biblioref">Hand 2020</a>)</span> and what limitations this might introduce to the analysis (and perhaps what mitigating steps you took). These are the types of dark data to consider:</p>
+<ol type="1">
+<li><p>Data we know are missing, eg a missing survey response</p></li>
+<li><p>Data we don’t know are missing, eg people who didn’t fill out the survey at all</p></li>
+<li><p>Selection bias, eg only being able to survey firms that haven’t failed</p></li>
+<li><p>Self-selection, eg opting in to an online survey</p></li>
+<li><p>Missing variables (aka confounders), eg the effect of age on coronavirus early on during the pandemic</p></li>
+<li><p>Counter-factuals, eg how many blood clots would have happened absent the vaccine</p></li>
+<li><p>Changes in time, eg apparent weakening of Phillips curve due to government policy</p></li>
+<li><p>Differences in data definitions, eg deaths with coronavirus recorded as opposed to deaths within 28 days</p></li>
+<li><p>Summaries of data, eg UK average productivity hiding wide regional variation</p></li>
+<li><p>Measurement error and uncertainty, eg resolution limitations in satellite images</p></li>
+<li><p>Feedback and gaming, eg effect of number of tests on apparent coronavirus prevalence</p></li>
+<li><p>Information asymmetry, ie the effect of one party knowing more about something that another</p></li>
+<li><p>Intentionally darkened data, ie data that have been intentionally modified in any of the other dark data ways to benefit someone</p></li>
+<li><p>Fabricated data, eg when people are not honest on surveys</p></li>
+<li><p>Extrapolation, ie going beyond the time, space, or group for which you have data (aka external validity)</p></li>
+</ol>
+<p>For some internal (as opposed to external) data issues, tools such as <a href="https://docs.profiling.ydata.ai/"><strong>ydata-profiling</strong></a>, <a href="https://dataprep.ai/"><strong>dataprep</strong></a>, or <a href="https://aeturrell.github.io/skimpy/"><strong>skimpy</strong></a> can help find problems (eg variables with high numbers of missing values).</p>
+<p>Descriptive statistics are easy to overlook but really help make something that is intangible (the full dataset you used) more tangible to readers. The most helpful way of reporting these often includes a table of basic numbers such as count, mean, median, etc. If you are imputing or dropping observations, and this is likely to be important for the results, you may want to report the numbers before and after that processing. If you choose to describe the contents of your table of descriptive statistics, tell a story about them, don’t just write up a boring enumeration of means.</p>
+<p>It’s particularly helpful if you express descriptive statistics in units that will be familiar to the reader; this means kg per metre cubed in place of slugs per cubic foot (ie SI units), or avoiding expressing income as logs. For variables that could be real or nominal, say which they are and provide the relevant date information.</p>
+<p>If you’re looking at categorical variables across different groups, you may want to include a balance table showing how the different sub-groups compare across different variables. For example, if you were analysing a random experiment where some people received unemployment insurance and some did not, there is the possibility that by bad luck that the two groups would end up being significantly different with respect to age: a balance table could highlight this. (This may also be suggestive of what controls will be needed in subsequent parts of the paper.)</p>
+<p>There are some things you should actively avoid in the data section too. Do not repeat in the text what is obvious from the tables or figures, unless it directly relates to, or affects, the research question—readers will assume it has a relevance that it does not, and will be confused. Don’t use the past tense even if you’re describing data from the past (the data are still the data, after all). The present tense and active voice are easier to read and understand. Another one to avoid is presenting data with too many decimal places—readers will reasonably assume that you know the numbers to that level of accuracy if you report them. If you are measuring the mass of the electron, and the accuracy is indeed to eleven decimal places, then this is fine; otherwise, no.</p>
+<p>Finally, take care to cite the datasets you used. If you created a new dataset, and you can share it, you should.</p>
+</section>
+<section id="theory-or-methods" class="level3">
+<h3 class="anchored" data-anchor-id="theory-or-methods">Theory or Methods</h3>
+<p>The theory section (for papers that include a mathematical model designed expressly for the paper) or methods section (for papers that pull together existing methods and apply them) is where you set out the assumptions you are making as clearly as possible. For a paper using machine learning, this might be the relationship between variable X and variable Y or the architecture of the neural net. For a dataset construction paper, it might be about how variable X is constructed, and if that relies on any assumptions.</p>
+<p>You will need to consider the following:</p>
+<ul>
+<li><p>Methods: What methods are you using and why? What limitations do they have? You should address your choice of benchmark method here.</p></li>
+<li><p>Assumptions: What assumptions are you making? The more you can make them explicit, the better. What assumptions are you making about the choice of variables? What assumptions are you making about the parameters and/or model?</p></li>
+<li><p>Variables: What are the theoretically endogenous variables? What are the theoretically exogenous variables? Which variables are parameters and which are measured?</p></li>
+<li><p>Optimisation problem: What are you assuming the agents you are studying are maximising and how?</p></li>
+<li><p>Testable prediction: state your main testable prediction. Generally, this should map one-to-one with the empirical framework.</p></li>
+<li><p>Proof: prove your main testable prediction. Here, go for simplicity rather than elegance—why go for a proof by construction when a proof by contradiction will do just fine?</p></li>
+<li><p>Other results and proofs: there might be some side results you can both demonstrate in theory and test empirically. (Generally, though, papers should do one thing.)</p></li>
+</ul>
+<p>Even if your paper doesn’t warrant a separate theory or methods section, asking yourself these questions—particularly the ones addressing assumptions, methods, and variables—is a useful exercise.</p>
+</section>
+<section id="empirical-framework" class="level3">
+<h3 class="anchored" data-anchor-id="empirical-framework">Empirical framework</h3>
+<p>This section deals with how to connect the theory or methods to the data. The questions you will need to answer in this section are about i) identification and ii) estimation.</p>
+<p>First, identification: how can you convince the reader that the problem you want to solve is the problem you’re actually solving? Identification strategy is especially relevant for causal studies. You should try and answer the following questions related to identification: what would the ideal data set look like to study your question? How close are you to that ideal, and what prevents you from getting closer? For causal studies, it is important to explicitly address how your identification strategy deals with (a) unobserved heterogeneity, (b) reverse causality or simultaneity, and (c) measurement error.</p>
+<p>Then, estimation. Ask yourself these questions: what variables in your equations are you evaluating or estimating? How will you estimate them? How will you compute uncertainty and standard errors? What is/are the metric(s) of success? What is the hypothesis test of interest for your main testable prediction?</p>
+<p>If your outcome variable or variable of interest needs to be constructed or estimated, this is where you’d discuss it.</p>
+</section>
+<section id="results-and-discussion" class="level3">
+<h3 class="anchored" data-anchor-id="results-and-discussion">Results and Discussion</h3>
+<p>Your killer chart that says it all in one fell swoop should be somewhere in this section (this will be useful for selling your work in short-form media too). It could showcase the scene-setting or core results, but it should be able to stand alone.</p>
+<p>In this section, you will need to cover:</p>
+<ul>
+<li><p>Scene-setting Results: These are results that don’t rely on parametric assumptions. An image is worth 1,000 words here: if you can somehow plot the relationship of interest in a two-way scatter with a regression line fit through it, or using kernel density estimates for treatment and comparison, it helps people see for themselves that there is a difference in outcomes in response to your variable of interest.</p></li>
+<li><p>Core Results: These are your parametric results. They demonstrate the success of your main testable prediction. Here, there is no need to go into a discussion of the sign of each significant control variable, unless such a discussion is somehow germane to your core testable prediction.</p></li>
+<li><p>Robustness Checks: These are variations on your preferred specification that show your result wasn’t just a fluke. They are as important as your core results. Do not neglect them. Slice and dice the data in as many ways as possible, sticking many of these results in an appendix, to show that the main testable prediction is supported by the data and that you haven’t cherry-picked your results.</p></li>
+<li><p>Extensions: This is where you can explore hitherto unexamined heterogeneity, or split the sample.</p></li>
+<li><p>Limitations: No result is perfect. How is internal validity limited? How is external validity limited? What are your results not saying, ie, what mistakes might people make in interpreting them? Every study is flawed or makes simplifying assumptions; every study has a method or result that may be misinterpreted. A caveat paragraph depicts a thoughtful author who is after the truth. Perhaps you’ve covered some of the limitations and issues along the way already in the Data, Methods, or Empirical sections. That’s okay; here you have a chance to summarise those and focus on the most pertinent of them.</p></li>
+</ul>
+<p>If your discussion is more than 2x longer than your results, cut it down. Careful reviewers and readers want to know how your results relate to your hypotheses, the strengths and weaknesses of your results, and perhaps one or two implications of your results. Focus on these three tasks.</p>
+</section>
+<section id="regression-tables" class="level3">
+<h3 class="anchored" data-anchor-id="regression-tables">Regression Tables</h3>
+<p>Keith Head has some <a href="http://blogs.ubc.ca/khead/research/research-advice/regression-tables">good advice</a> on regression tables that is reproduced with some modifications here. Keith reports that some of these may be controversial—they are certainly a good baseline to start from.</p>
+<ol type="1">
+<li><p>Report the number of observations, the r-squared, and the root mean squared error for each regression.</p></li>
+<li><p>Report the dependent variable and the estimation method in the table’s caption if it is common to all specifications or as a column heading if it varies across specifications.</p></li>
+<li><p>Use self-explanatory labels for your explanatory variables. Cryptic abbreviations or symbols from the model section force the reader to page back and forth to understand your results. With five or six columns of regression results there should be enough room to use words to describe each regressor. Put the symbol used in the model in parentheses below this.</p></li>
+<li><p>Choose sensible units for variables. The coefficients should not be very small (e.g.&nbsp;0.000032) or very large (e.g.&nbsp;75432.8). As a rule of thumb, coefficients should only use the first two or three places to the left or right of the decimal point. One exception is the case where variables are unit-free because you are estimating a log-log model. In that case coefficient size is inherently meaningful.</p></li>
+<li><p>The presentation version of the table should be in large, readable type.</p></li>
+<li><p>Put standard errors in the same column as the coefficients. Regression packages put standard errors along side coefficients as separate columns but you should put each regression as a single column in your results table.</p></li>
+<li><p>Insert key tables inside the body of the paper, not at the end. If your paper is accepted by a journal that insists on tables at the ends, you can always move them then.</p></li>
+<li><p>Display standard errors, not t-statistics or p-values. Unless the test that the coefficient is not equal to zero is the only conceivable test of interest, display standard errors. These give readers a direct view of the precision with which you are estimating the coefficient. They are useful information for a variety of possible tests and are still valuable even if the reader prefers not to engage in classical hypothesis testing at all.</p></li>
+</ol>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Some papers title their conclusion “Summary and Concluding Remarks”, which is a good indication of how the conclusion should proceed. It should have two main parts: (i) a summary of what you have spent the several pages before the conclusion doing, and (ii) the way forward. The topics you should cover include:</p>
+<ul>
+<li><p>Summary—“tell them what you’re going to tell them, tell them what you want to tell them, and tell them what you just told them.” This part can be tedious, but it needs to be there, and it needs to be different enough (but not new) from the abstract and the introduction. If possible, tell a story.</p></li>
+<li><p>Limitations—the conclusion should emphasise the limitations of the approach.</p></li>
+<li><p>Implications for policy—discuss what they are, but don’t make claims that are not supported by the results, and try to assess the cost of what is proposed in comparison to its benefits. You can do so somewhat imperfectly (this is the only place in the paper where “back-of-the-envelope” calculations are okay), since the point of the work was presumably about only one side of that equation—usually the benefits of something, sometimes its costs, but rarely both. The focus of the rest of the paper is likely to only address the problem partially; what does your result mean in the context of the bigger picture? If there are policy implications, carefully and sensitively spell them out. This will typically be the most sensitive section.</p></li>
+<li><p>Implications for future research—if you are writing a follow-up paper, this is a good place to set the stage for it. It’s also a good place to put a call-to-action for a piece of work you can’t do but think others can and should.</p></li>
+</ul>
+</section>
+<section id="after-the-draft-is-written" class="level2">
+<h2 class="anchored" data-anchor-id="after-the-draft-is-written">After the draft is written</h2>
+<p>Once you’ve written a draft you’re happy with, there are a bunch of checks you can do to help make sure the draft is everything it can be. The first is to pop it in a drawer for a week and let it stew. When you come to read it again, you’ll find that you can redraft it to be even better. The rest of the tips are:</p>
+<ul>
+<li><p>Write and re-write. First drafts are always bad.</p></li>
+<li><p>Get rid of every adjective modifying a relationship. Was x larger than y? Just say so. Saying it was much larger, or especially tiny, or amazingly huge adds no information.</p></li>
+<li><p>Replace long words with short words. Good writing maximises the content of the message per number of letters used. Replace long words with short words of equal meaning. Replace utilisation with use.</p></li>
+<li><p>Replace every “differed” or “was different” with the actual, quantitative relationship. Compare the content per letters used for the following two sentences: “Plants fertilised with nitrogen differed in height from controls.”, and “Plants fertilized with nitrogen were 2.5x taller than controls.” Not only have you conveyed that nitrogen increased growth, you’ve given a vivid word picture as to how much.</p></li>
+<li><p>Spell check everything.</p></li>
+<li><p>Read it aloud. There is no better way to gauge the flow and logic of a manuscript.</p></li>
+<li><p>Look back at your figures and tables, and be brutal. Do you need them all? Do they all convey important messages that a reader cannot get from the text? In general, you can have up to approximately 10 floats before an editor or referee may wonder if they have picked up a picture book rather than a journal article. Naturally, in some special cases—for example, if the paper is about data visualisation—you may feel warranted in having more. But a good check is whether you can tell the story in just four floats, and the most important result in just one.</p></li>
+</ul>
+</section>
+<section id="further-resources" class="level2">
+<h2 class="anchored" data-anchor-id="further-resources">Further Resources</h2>
+<p>Two extremely good general resources on writing are <span class="citation" data-cites="zinsser2006writing">Zinsser (<a href="wrkflow-quarto.html#ref-zinsser2006writing" role="doc-biblioref">2006</a>)</span> and <span class="citation" data-cites="white1972elements">White and Strunk (<a href="wrkflow-quarto.html#ref-white1972elements" role="doc-biblioref">1972</a>)</span>. For a more in-depth take on writing papers (specific to applied economics papers), see <span class="citation" data-cites="bellemare2020write">Bellemare (<a href="wrkflow-quarto.html#ref-bellemare2020write" role="doc-biblioref">2020</a>)</span>.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-bellemare2020write" class="csl-entry" role="listitem">
+Bellemare, Marc F. 2020. <span>“How to Write Applied Papers in Economics.”</span> <em>Working Paper</em>. <a href="http://marcfbellemare.com/wordpress/wp-content/uploads/2020/09/BellemareHowToPaperSeptember2020.pdf">http://marcfbellemare.com/wordpress/wp-content/uploads/2020/09/BellemareHowToPaperSeptember2020.pdf</a>.
+</div>
+<div id="ref-brauner2021inferring" class="csl-entry" role="listitem">
+Brauner, Jan M., Sören Mindermann, Mrinank Sharma, et al. 2021. <span>“Inferring the Effectiveness of Government Interventions Against COVID-19.”</span> <em>Science</em> 371 (6531): eabd9338.
+</div>
+<div id="ref-brown2022tradeoff" class="csl-entry" role="listitem">
+Brown, Jessica H. 2022. <span>“The Tradeoff Between Knowledge of Mandated Benefits and Moral Hazard.”</span> <em>Southern Economic Journal</em> 88 (3): 1037–64.
+</div>
+<div id="ref-hand2020dark" class="csl-entry" role="listitem">
+Hand, David J. 2020. <em>Dark Data: Why What You Don’t Know Matters</em>. Princeton University Press.
+</div>
+<div id="ref-ravuris2021skillful" class="csl-entry" role="listitem">
+Ravuri, Suman, Karel Lenc, Matthew Willson, et al. 2021. <span>“Skillful Precipitation Nowcasting Using Deep Generative Models of Radar.”</span> <em>Nature</em> 597: 672–77.
+</div>
+<div id="ref-white1972elements" class="csl-entry" role="listitem">
+White, Elwyn Brooks, and William Strunk. 1972. <em>The Elements of Style</em>. Macmillan New York.
+</div>
+<div id="ref-zinsser2006writing" class="csl-entry" role="listitem">
+Zinsser, William. 2006. <span>“On Writing Well: The Classic Guide to Writing Nonfiction.”</span> <em>New York, NY</em>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/aeturrell\.github\.io\/coding-for-economists");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./craft-generating-ideas.html" class="pagination-link" aria-label="Generating and Accepting Research Ideas">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Generating and Accepting Research Ideas</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./craft-research-blogs.html" class="pagination-link" aria-label="Research Blog Posts">
+        <span class="nav-page-text"><span class="chapter-title">Research Blog Posts</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>This book is available under an MIT license.</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/aeturrell/coding-for-economists/edit/main/craft-writing-papers.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/aeturrell/coding-for-economists/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

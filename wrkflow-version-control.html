@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Version Control – Coding for Economists</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./econmt-probability-random.html" rel="next">
+<link href="./wrkflow-command-line.html" rel="prev">
+<link href="./favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9FZQCPFXZJ"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-9FZQCPFXZJ', { 'anonymize_ip': true});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+
+
+<meta name="twitter:title" content="Version Control – Coding for Economists">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./auto-research-outputs.html">Essential Workflow</a></li><li class="breadcrumb-item"><a href="./wrkflow-version-control.html"><span class="chapter-title">Version Control</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Coding for Economists</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/aeturrell/coding-for-economists" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Getting Started</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-preliminaries.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preliminaries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coding Basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./workflow-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Workflow Basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-where.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Writing Code</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Essential Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-analysis-quickstart.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Analysis Quickstart</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Working with Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-transformation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Transformation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-read-and-write.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reading and Writing Files</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-numbers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Numbers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-categorical.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Categorical Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-spreadsheets.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Spreadsheets</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Essential Coding</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-best-practice.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Code in Style</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coding</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-advcd-best-practice.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Shortcuts to Better Coding</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Essential Data Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Intro to Data Visualisation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-letsplot.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-matplotlib.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Powerful Data Visualisation with <strong>Matplotlib</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-common-plots-one.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Common Plots I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-common-plots-two.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Common Plots II</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Essential Workflow</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./auto-research-outputs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Automating Research Outputs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-markdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Markdown</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-command-line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">The Command Line</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-version-control.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Version Control</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Econometrics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-probability-random.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Probability and Random Processes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-generalised-models.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Generalised regression models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-diagnostics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regression diagnostics and visualisations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-causal-inference.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Causal Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-bayesian.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bayesian Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-bayes-bambi.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bayesian Inference Made Easier</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-boolean.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Boolean Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-joining-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Joins</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-missing-values.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Missing Values</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-exploratory-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploratory Data Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-extraction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Getting Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-databases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Databases</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><strong>pandas</strong> alternatives, validation, and orchestration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-sharing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Sharing Data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Coding</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-further-advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Advanced Coding</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-narrative.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Narrative Data Visualisation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Tables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-dashboards.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Dashboards</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-animation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Animation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">Workflow</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-quarto.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Combining Code and Text in Quarto Markdown</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-environments.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Virtual Code Environments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-rap.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reproducible Analysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
+ <span class="menu-text">Time</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./time-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction to Time</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./time-series.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Time Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./time-fcasts-env.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Forecasting Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true">
+ <span class="menu-text">Text Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./text-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction to Text</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./text-regex.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regular Expressions, aka regex</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./text-nlp.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true">
+ <span class="menu-text">Machine Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction to Machine Learning and AI</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-sup.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Supervised Machine Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data for Machine Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-unsup.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Unsupervised Machine Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true">
+ <span class="menu-text">Geospatial</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geo-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Intro to Geo-Spatial Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geo-vis.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Geo-Spatial Visualisation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true">
+ <span class="menu-text">Mathematics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./maths-abstract.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Abstract Mathematics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./maths-numerical.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Numerical Mathematics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true">
+ <span class="menu-text">Craft</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-search.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Putting the Search in Research</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-generating-ideas.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Generating and Accepting Research Ideas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-writing-papers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Writing Papers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-research-blogs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Research Blog Posts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-referee.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Writing Referee Reports</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-technical-reports.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Writing Technical Reports</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-extended-abstracts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Extended Abstracts</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true">
+ <span class="menu-text">Further Data Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-plotnine.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-seaborn.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Visualisation with <strong>Seaborn</strong></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true">
+ <span class="menu-text">Coming from …</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./coming-from-stata.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coming from Stata</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./coming-from-matlab.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coming from Matlab</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./coming-from-r.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coming from R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./coming-from-excel.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coming from Excel</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="true">
+ <span class="menu-text">End Matter</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./contributing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Contributing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./zreferences.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bibliography</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-is-version-control" id="toc-what-is-version-control" class="nav-link active" data-scroll-target="#what-is-version-control">What is version control?</a>
+  <ul class="collapse">
+  <li><a href="#why-do-you-need-version-control" id="toc-why-do-you-need-version-control" class="nav-link" data-scroll-target="#why-do-you-need-version-control">Why do you need version control?</a></li>
+  <li><a href="#git-the-most-popular-version-control-tool" id="toc-git-the-most-popular-version-control-tool" class="nav-link" data-scroll-target="#git-the-most-popular-version-control-tool">Git, the most popular version control tool</a></li>
+  </ul></li>
+  <li><a href="#version-control-with-git" id="toc-version-control-with-git" class="nav-link" data-scroll-target="#version-control-with-git">Version control with git</a>
+  <ul class="collapse">
+  <li><a href="#installing-git" id="toc-installing-git" class="nav-link" data-scroll-target="#installing-git">Installing git</a></li>
+  <li><a href="#configuring-git" id="toc-configuring-git" class="nav-link" data-scroll-target="#configuring-git">Configuring git</a></li>
+  <li><a href="#how-git-works-locally" id="toc-how-git-works-locally" class="nav-link" data-scroll-target="#how-git-works-locally">How git works locally</a></li>
+  </ul></li>
+  <li><a href="#using-git-for-version-control-on-the-command-line-a-walk-through" id="toc-using-git-for-version-control-on-the-command-line-a-walk-through" class="nav-link" data-scroll-target="#using-git-for-version-control-on-the-command-line-a-walk-through">Using git for version control on the command line: a walk through</a>
+  <ul class="collapse">
+  <li><a href="#creating-a-new-repository" id="toc-creating-a-new-repository" class="nav-link" data-scroll-target="#creating-a-new-repository">Creating a new repository</a></li>
+  <li><a href="#adding-files" id="toc-adding-files" class="nav-link" data-scroll-target="#adding-files">Adding files</a></li>
+  <li><a href="#reviewing-changes" id="toc-reviewing-changes" class="nav-link" data-scroll-target="#reviewing-changes">Reviewing changes</a></li>
+  <li><a href="#other-files-you-may-want-to-include-under-version-control" id="toc-other-files-you-may-want-to-include-under-version-control" class="nav-link" data-scroll-target="#other-files-you-may-want-to-include-under-version-control">Other files you may want to include under version control</a></li>
+  </ul></li>
+  <li><a href="#branches" id="toc-branches" class="nav-link" data-scroll-target="#branches">Branches</a>
+  <ul class="collapse">
+  <li><a href="#a-walkthrough-using-a-branch" id="toc-a-walkthrough-using-a-branch" class="nav-link" data-scroll-target="#a-walkthrough-using-a-branch">A walkthrough using a branch</a></li>
+  </ul></li>
+  <li><a href="#remote-and-local-repositories" id="toc-remote-and-local-repositories" class="nav-link" data-scroll-target="#remote-and-local-repositories">Remote and local repositories</a>
+  <ul class="collapse">
+  <li><a href="#github" id="toc-github" class="nav-link" data-scroll-target="#github">GitHub</a></li>
+  <li><a href="#the-remote-merge-aka-a-pull-request" id="toc-the-remote-merge-aka-a-pull-request" class="nav-link" data-scroll-target="#the-remote-merge-aka-a-pull-request">The remote merge, aka a pull request</a></li>
+  </ul></li>
+  <li><a href="#using-visual-studio-code-for-version-control-with-git" id="toc-using-visual-studio-code-for-version-control-with-git" class="nav-link" data-scroll-target="#using-visual-studio-code-for-version-control-with-git">Using Visual Studio Code for version control with git</a></li>
+  <li><a href="#the-magic-of-pre-commit" id="toc-the-magic-of-pre-commit" class="nav-link" data-scroll-target="#the-magic-of-pre-commit">The magic of pre-commit</a></li>
+  <li><a href="#command-line-reference" id="toc-command-line-reference" class="nav-link" data-scroll-target="#command-line-reference">Command line reference</a></li>
+  <li><a href="#further-resources" id="toc-further-resources" class="nav-link" data-scroll-target="#further-resources">Further Resources</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/aeturrell/coding-for-economists/edit/main/wrkflow-version-control.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/aeturrell/coding-for-economists/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./auto-research-outputs.html">Essential Workflow</a></li><li class="breadcrumb-item"><a href="./wrkflow-version-control.html"><span class="chapter-title">Version Control</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-wrkflow-version-control" class="quarto-section-identifier"><span class="chapter-title">Version Control</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In this chapter, you’re going to learn about version control. This will enable you to keep track of any code you write, down to the line, following best software development practices. It can be a challenging topic as it requires a different mindset to the one you’re probably used to where you just save a file. But I promise you that it’s worth it—and it will really help you ensure that your analysis is reproducible, and easily packaged up into a replication packet.</p>
+<p>This chapter has benefitted from a wide range of sources, including <a href="https://merely-useful.tech/py-rse/">Research Software Engineering with Python</a>, the free online book <a href="https://git-scm.com/book/en/v2">Pro Git</a>, Grant McDermott’s <a href="https://raw.githack.com/uo-ec607/lectures/master/02-git/02-Git.html#1">ever excellent notes</a>, and the Alan Turing Institute’s <a href="https://alan-turing-institute.github.io/">Research Software Engineering with Python</a>.</p>
+<section id="what-is-version-control" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-version-control">What is version control?</h2>
+<p>Version control means keep tracking of the versions of the assets (code, data, models) that you are working with to produce analysis. In this chapter, we’ll mainly be looking at version control for plain text files (this includes code but also other text files, such as latex files).</p>
+<p>Note that, if you’re working with data or models that are changing a lot, there are technologies for version control of data and models (for example, <a href="https://dvc.org/">DVC</a> and <a href="https://www.pachyderm.com/">pachyderm</a>) too—but we don’t cover these here.</p>
+<p>When coders talk about version control, they’re usually referring to the ability to record changes to a file or set of files over time. Furthermore, they’re usually talking about a specific technology for version control—a programme called git, that we’ll see more of later in the chapter.</p>
+<p>You should also know right up front that there’s a distinction between git—the tool that can do version control, and GitHub—a central repository that can save the record of your version history on the cloud.</p>
+<p>One of the most important things to get your head around with version control is that it offers <strong>much more</strong> than Dropbox or Google Drive. Those do not offer you:</p>
+<ul>
+<li>comments, commit messages, issues, or labels</li>
+<li>a complete version history</li>
+<li>the ability to compare any version with any other version</li>
+<li>the ability to “branch”</li>
+<li>the ability to resolve merge conflicts</li>
+</ul>
+<p>We’ll find out more about these abilities later in the chapter.</p>
+<p>Version control <em>doesn’t</em> do some things that Dropbox and Google Drive do though: it doesn’t save your files, or even sync them, automatically; you have to manually say when you wish to lodge a more recent version of a file.</p>
+<p>Version control based on git is also different in that it works at the project-folder level, keeping everything you need for one project in one structure called a <em>repository</em>.</p>
+<p>One benefit of version control is that it aids reproducibility. This helps future you (if your computer gets busted), your co-authors (who can “clone” your repository), and perhaps even the world at large (if you open up your source code). By putting your repository under version control at the project-folder level, you make it <em>much</em> easier for others to work with it and make changes.</p>
+<p>Finally, version control is the de facto standard for managing code. It’s a very important part of coding, so if you can learn to use even a little bit, it’s well worth it.</p>
+<section id="why-do-you-need-version-control" class="level3">
+<h3 class="anchored" data-anchor-id="why-do-you-need-version-control">Why do you need version control?</h3>
+<p>There are plenty of benefits to using version control. Ultimately it will allow you to be a better analyst, researcher, and economist because your work will be better recorded, more reproducible, and easier to expand.</p>
+<p>Version control solves lots of problems in research. Ever had a file called “final_final_v3.doc”? Yeah, I bet you have.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://phdcomics.com/comics/archive/phd101212s.gif" class="img-fluid figure-img"></p>
+<figcaption>PhD Comics “Final”.doc</figcaption>
+</figure>
+</div>
+<p>Version control aims to remove the problems associated with trying to have an individual track all the different versions. It gets even worse when multiple people are involved, emailing around spreadsheets or code with the same file names but different contents.</p>
+<p>Version control gives you many benefits and abilities: - save changes that you’ve made to code, text files (eg latex files), and to small amounts of data; - access a complete organised revision history of your work; - revert selected files back to a previous state; - revert the entire project back to a previous state; - compare changes over time; - go back and forth between many different versions of the same file; - safely experiment with changing things (on a different <em>branch</em>) - concurrently collaborate on the same code base with others; - merge changes from multiple authors together; - see who last modified something that might be causing a problem down to the individual line and time it was added; and - much more.</p>
+<p>Modern version control systems let you easily answer questions like who wrote this line and when? They also let you attach a message to every change you make. This feature is particularly useful when revising papers; you can have a commit per referee comment that you deal with and know <em>exactly</em> what you changed in the code and paper for it.</p>
+<p>Of course, your git commit messages do need to be informative…</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://imgs.xkcd.com/comics/git_commit.png" class="img-fluid figure-img"></p>
+<figcaption>XKCD comic 1296</figcaption>
+</figure>
+</div>
+<p>You may wonder who uses version control. It’s researchers, software developrs, analysts, data scientists; anyone who has plain text files that they need to track.</p>
+<p>There are some files you <em>wouldn’t</em> or shouldn’t put under version control:</p>
+<ul>
+<li>passwords and other files with secrets in</li>
+<li>larger data files</li>
+<li>binary (non-text) files</li>
+</ul>
+</section>
+<section id="git-the-most-popular-version-control-tool" class="level3">
+<h3 class="anchored" data-anchor-id="git-the-most-popular-version-control-tool">Git, the most popular version control tool</h3>
+<p>By far the most popular technology for version control of plain text files (which includes code, latex, notebooks, and markdown) is <em>git</em>. Git is a system for lodging changes, tracking them, and backing them up to a central repository. It is the industry standard and ubiquitous for coding.</p>
+<p>Once you’ve installed it (which we’ll come to), git is a programme that is available on your computer’s console (aka the command line, covered in <a href="wrkflow-command-line.html" class="quarto-xref"><span>The Command Line</span></a>). Some people use it directly from the command line, but there are also good Graphical User Interfaces (GUIs) around for it, including <a href="https://code.visualstudio.com/">Visual Studio Code</a>, which this book recommends for coding.</p>
+<p>Git is a <em>distributed version control system</em>. This means that the complete codebase, including its full history, is mirrored on every developer’s computer (including the central repository).</p>
+<p>It’s fair to say that git has a steep learning curve, as immortalised by the below XKCD comic.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://imgs.xkcd.com/comics/git.png" class="img-fluid figure-img"></p>
+<figcaption>XKCD comic 1597</figcaption>
+</figure>
+</div>
+<p>There are two main ways to use git:</p>
+<ul>
+<li>The command line.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+<li>A graphical user interface, eg Visual Studio Code</li>
+</ul>
+<p>In this chapter, we’ll try to equip you with:</p>
+<ol type="1">
+<li>a knowledge of the basics, enough to use git productively; and</li>
+<li>how to use git on the command line and with a GUI.</li>
+</ol>
+</section>
+</section>
+<section id="version-control-with-git" class="level2">
+<h2 class="anchored" data-anchor-id="version-control-with-git">Version control with git</h2>
+<p>Let’s get started with version control.</p>
+<section id="installing-git" class="level3">
+<h3 class="anchored" data-anchor-id="installing-git">Installing git</h3>
+<p>If you’re working through this book on Google Colab, GitHub Codespaces, or other prepared systems, then you’re likely to find that git is already installed. You can check this by running</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>on the command line.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Tip">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you are using a Jupyter Notebook, or other notebook environment like Google Colab, you can access the command line in a cell by pre-fixing the command with an exclamation mark, eg <code>!git --version</code></p>
+</div>
+</div>
+<p>If you need to install git, head over to the <a href="https://git-scm.com/">git website</a> and download the version for your operating system then follow the install instructions. Again, once installed, you can check it’s worked by opening up the command line in Visual Studio Code (“Terminal” -&gt; “New Terminal”) and typing <code>git --version</code>.</p>
+</section>
+<section id="configuring-git" class="level3">
+<h3 class="anchored" data-anchor-id="configuring-git">Configuring git</h3>
+<p>The first thing you’ll want to do with git is configure it so that you are recognised as you when you track a change. You can do this via the following commands:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"YOUR NAME HERE"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"yourname@example.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can check this worked by running the following in your command line:</p>
+<div id="743eeaa8" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>bash</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>git config <span class="op">--</span>get user.name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>aeturrell</code></pre>
+</div>
+</div>
+<p>You can check other settings with <code>git config --list</code>.</p>
+</section>
+<section id="how-git-works-locally" class="level3">
+<h3 class="anchored" data-anchor-id="how-git-works-locally">How git works locally</h3>
+<p>Git works at a project-folder level. This should be the root folder (aka the <em>working directory</em>) for your project. In git terminology, this folder is called a <em>repository</em>.</p>
+<p>Git works by creating a hidden folder within your project folder, or repository, called <code>.git</code>. Inside this folder, the changes to your repository are tracked.</p>
+<p>The typical workflow for git done locally involves three stages:</p>
+<ol type="1">
+<li>checking out the repository (for example, by pulling it down from the internet). The command is <code>git clone url-of-repository-name</code>. Alternatively, creating a new repository using <code>git init repository-name</code>.</li>
+<li>add changes to the staging area using <code>git add file-name</code> for any files you wish to track.</li>
+<li>use <code>git commit -m 'commit message'</code> to commit the changes to version control.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://git-scm.com/book/en/v2/images/areas.png" class="img-fluid figure-img"></p>
+<figcaption>Diagram showing the three different stages involved in version control with git.</figcaption>
+</figure>
+</div>
+<p><em>The three different stages involved in local version control</em></p>
+</section>
+</section>
+<section id="using-git-for-version-control-on-the-command-line-a-walk-through" class="level2">
+<h2 class="anchored" data-anchor-id="using-git-for-version-control-on-the-command-line-a-walk-through">Using git for version control on the command line: a walk through</h2>
+<section id="creating-a-new-repository" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-new-repository">Creating a new repository</h3>
+<p>Okay, open up a folder on your computer and your favourite command line tool.</p>
+<p>Create a new folder called “test-repo”, and move into it on the command line:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> test-repo</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> test-repo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To create a new repository (inside “test-repo”), hit</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init <span class="at">--initial-branch</span><span class="op">=</span>main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now, to check it’s all worked run</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>On branch main
+
+No commits yet
+
+nothing to commit (create/copy files and use "git add" to track)</code></pre>
+</section>
+<section id="adding-files" class="level3">
+<h3 class="anchored" data-anchor-id="adding-files">Adding files</h3>
+<p>Let’s now put a file under tracking by version control.</p>
+<p>First we need a file to track! We’ll create a markdown file that you often find in a code repository, <code>README.md</code>. This tells others (and future you) about what’s in the project and how to use the code in it. (For an example, look at the <code>README.md</code> of the <a href="https://github.com/aeturrell/skimpy">skimpy package</a>.) We can create this file on the command line.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"# my test repo"</span> <span class="op">&gt;</span> README.md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can check this has worked by looking at the file in the file explorer, or by running <code>ls -lah</code> (which shows files including hidden files) on the command line:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lah</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>Permissions Size User          Date Modified Name
+drwxr-xr-x     - username 23 Oct 17:35  .git
+.rw-r--r--    15 username 23 Oct 17:43  README.md</code></pre>
+<p>So, we’ve created a file but it’s not yet being tracked by version control: for that, we need to add it.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add README.md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Running <code>git status</code> now shows</p>
+<pre class="text"><code>On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached &lt;file&gt;..." to unstage)
+        new file:   README.md</code></pre>
+<p>This means we have “staged” the file, but not committed it.</p>
+<p>By the way, you can stage lots of files at once. For example, you can add all files in the directory with <code>git add .</code>, though this may not be a good idea: there are some files you may not want to track because they are very large.</p>
+<p>So we have staged, but not committed, our new file. Let’s now commit it, with a suitable message.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add readme; first commit"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>[main (root-commit) 0dc5442] Add readme; first commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md</code></pre>
+<p><code>git commit</code> takes everything that was staged using <code>git add</code> and stores a copy permanently inside the repository’s .git directory. This permanent copy is called a commit or a revision. Git gives it a unique identifier, and the first line of output from git commit displays its short identifier 0dc5442, which is the first few characters of that unique label.</p>
+</section>
+<section id="reviewing-changes" class="level3">
+<h3 class="anchored" data-anchor-id="reviewing-changes">Reviewing changes</h3>
+<p>We can now look at the git log to see all of the changes we made:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>commit 0dc54420a7d606c643f9a254939f82a2dc8df968 (HEAD -&gt; main)
+Author: USERNAME
+Date:   Sun Oct 23 18:02:09 2022 +0100
+
+    Add readme; first commit</code></pre>
+<p>Now if you run <code>git status</code>, you’ll see a message saying that there’s nothing to commit (because every tracked file has no new changes since the last commit).</p>
+<p>There’s some really nice features for looking at what’s been committed, even at the command line. For example, here’s an excerpt (simplified) from running <code>git log --graph</code> on the “Coding for Economists” git repository:</p>
+<pre class="text"><code>*   commit 2f89dd3517dad054f57bdabda693e370da21cb36
+|\  Merge: f1d132c 4c4aa29
+| | 
+| | Date:   Sat Aug 20 23:50:48 2022 +0100
+| | 
+| |     Merge pull request #24 from aeturrell/pyfords_improvemnets
+| |     
+| |     Pyfords improvemnets
+| | 
+| * commit 4c4aa29398fd4724e8e3c2a0b53a6378ef7b1bd4
+| | 
+| | Date:   Sat Aug 20 23:50:11 2022 +0100
+| | 
+| |     major update structure
+| | 
+| * commit e46e6e46e40b1bd4c59ae035bc9348f99064be77
+| | 
+| | Date:   Sat Aug 20 14:06:52 2022 +0100
+| | 
+| |     basic content re-org
+| | 
+| * commit c2fa840e60791f47f202e43f6acac7f88ad85364
+| | 
+| | Date:   Tue Aug 16 10:35:52 2022 +0100
+| | 
+| |     cutting back content in data-advanced
+| | 
+| * commit fbb69a342a61a1ebc374b7c04a650bd7766839fd
+|/  
+|   Date:   Tue Aug 9 21:43:15 2022 +0100
+|   
+|       python4ds additions / changes 1st round</code></pre>
+<p>You can see it’s not a single straight line; that’s because two branches of the code co-existed and were merged at some point.</p>
+<section id="looking-at-differences" class="level4">
+<h4 class="anchored" data-anchor-id="looking-at-differences">Looking at differences</h4>
+<p>Let’s now make another change and add a simple Python script:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"print('hello world')"</span> <span class="op">&gt;</span> script.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now we’ll do:</p>
+<ol type="1">
+<li><code>git add script.py</code></li>
+<li><code>git commit -m 'python script to print out hello world'</code></li>
+</ol>
+<p>To track our new script file.</p>
+<p>Say you made a mistake: you really wanted the script to say <code>print('hello world!')</code>, with an exclamation mark. But you want to track this change. Use a text editor to make the change to an exclamation mark but don’t stage the file.</p>
+<p>Now run</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>diff --git a/script.py b/script.py
+index 75d9766..0ab9637 100644
+--- a/script.py
++++ b/script.py
+@@ -1 +1 @@
+-print('hello world')
++print('hello world!')</code></pre>
+<p>Here “diff” is short for difference and allows you to review exactly what changed between the previous commit and the unstaged files.</p>
+<p>Let’s stage this change, <code>git add script.py</code>, and commit it, <code>git commit -m 'adding exclamation mark to printed message'</code>.</p>
+<p>We’ll now use <code>git diff</code> again but to compare two historic commits against each other. We can use the shorthand for two commits in the form of their first few digits</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff 46fe57 d0f60e3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>(If you’re following along, you’ll need to change these codes to the ones that your computer generates.) What you should see is the same output before with minus signs and plus signs showing the differences.</p>
+<p>You can also use <code>git diff HEAD HEAD~1</code> to look at the differences between the two most recent commits.</p>
+</section>
+<section id="reverting-to-a-previous-commit" class="level4">
+<h4 class="anchored" data-anchor-id="reverting-to-a-previous-commit">Reverting to a previous commit</h4>
+<p>Let’s say we decided we <em>didn’t</em> actually want an exclamation mark in our script! Now, in this simple case, you’d probably just be tempted to edit the file directly, but what if it’s more complex than that and you have many lines that changed?</p>
+<p>git gives you a way of restoring files from a particular commit. This command is called <code>git checkout</code>. Let’s use it to revert our script to the version without the exclamation mark. The last pre-exclamation mark commit was d0f60e3, so we’ll use that:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout d0f60e3 script.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now, running <code>cat script.py</code> yields</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'hello world'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You will need to commit this reversion if you want to keep it though (it’s automatically staged).</p>
+<p>Now, if you want to temporarily go back to a previous commit, fool around, then come back to where you are later, all you have to do is check out the desired commit:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout d0f60e3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To go back to your latest commit, it’s</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>(Or whatever branch you were on, we’re assuming here it was the “main” branch.)</p>
+<p>However, if you want to make commits while you’ve temporarily got an old version checked out, you will need to make a new branch (we haven’t seen branching yet, so this is a preview):</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> old-state d0f60e3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The new branch will have the name “old-state”.</p>
+</section>
+<section id="whats-in-a-commit" class="level4">
+<h4 class="anchored" data-anchor-id="whats-in-a-commit">What’s in a commit?</h4>
+<p>You may wonder when to make your commits; how much work should you do between commits? Usually, a single commit reflects a discrete task: a collection of changes, possibly over multiple files, that achieve one change. A good guide is that you should be able to fit the information about your commit into the (fairly short) commit message.</p>
+</section>
+<section id="summary-of-the-git-workflow" class="level4">
+<h4 class="anchored" data-anchor-id="summary-of-the-git-workflow">Summary of the git workflow</h4>
+<p>So let’s summarise the git workflow after you’ve created your repository.</p>
+<ol type="1">
+<li>Do work in your project directory</li>
+<li>Add changes you want to preserve to your staging area using <code>git add</code></li>
+<li>commit a snapshot of those changes, <code>git commit -m 'commit message'</code></li>
+<li>If you have a remote repository, push your commit to the remote repository (we haven’t seen this yet); <code>git push</code></li>
+</ol>
+</section>
+<section id="tracking-what-commands-youve-used" class="level4">
+<h4 class="anchored" data-anchor-id="tracking-what-commands-youve-used">Tracking what commands you’ve used</h4>
+<p>Given all the possible options to move around your commits, it can be useful to see what you’ve done in the past! That’s where the <code>git reflog</code> command comes in. Here it is as applied to the <code>test-repo</code> that was set up above.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reflog</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>46fe574 (HEAD -&gt; main) HEAD@{0}: checkout: moving from d0f60e3f3b55f20f16e27c55e620a72c2d4308ca to main
+d0f60e3 HEAD@{1}: checkout: moving from main to d0f60e3
+46fe574 (HEAD -&gt; main) HEAD@{2}: commit: adding exclamation mark to printed message
+d0f60e3 HEAD@{3}: commit: python script to print out hello world
+0dc5442 HEAD@{4}: commit (initial): Add readme; first commit</code></pre>
+</section>
+</section>
+<section id="other-files-you-may-want-to-include-under-version-control" class="level3">
+<h3 class="anchored" data-anchor-id="other-files-you-may-want-to-include-under-version-control">Other files you may want to include under version control</h3>
+<p>As well as your project files, there are some really useful files you can put under version control:</p>
+<ul>
+<li><code>.gitignore</code>, which tells git <em>not</em> to track certain files (eg large data files; more on this below)</li>
+<li>a <code>LICENSE</code>, which tells others under what terms they can use your code. This book uses the permissive <a href="https://github.com/aeturrell/coding-for-economists/blob/main/LICENSE">MIT License</a>.</li>
+<li>a <code>README.md</code>, which, as noted, explains what’s in the repository and may have instructions on how to use the code in it. If you need a reminder on how to write an <code>.md</code>, or markdown, file, look back at <a href="wrkflow-markdown.html" class="quarto-xref"><span>Markdown</span></a>.</li>
+</ul>
+<section id="gitignore" class="level4">
+<h4 class="anchored" data-anchor-id="gitignore">.gitignore</h4>
+<p>A .gitignore file tells git what to ignore.</p>
+<p>This is especially useful if you want to exclude whole folders or a class of files. For example, any proprietary data files should be ignored from the beginning if you intend to make a repo public at some point.</p>
+<p>You should ignore any very large individual files (&gt;100 MB) as these exceed GitHub’s maximum allowable size. Generally, it’s a good idea not to use version control with git for data unless those data are very small and in plain text, though people (including the authors of this book), frequently break this rule a bit.</p>
+<p>Then there are files that are associated with the code having run, but which aren’t actually necessary for the code <em>to</em> run. There’s no point tracking these. As examples, the <code>.gitignore</code> file for this book contains some entries like:</p>
+<ul>
+<li><code>_build/*</code>, which says to ignore any (this is what <code>*</code> does) file in the <code>_build</code> directory</li>
+<li><code>coverage.xml</code>, which is an automatically generated file that tracks how much of a code base is covered by tests, but which doesn’t need to be tracked as part of the project.</li>
+</ul>
+<p>You can create a <code>.gitignore</code> file by running <code>touch .gitignore</code> on the command line and then adding contents with a text editor. Or, if you’re using GitHub to initialise a repository, then it will suggest <code>.gitignore</code> files from a big roster of templates.</p>
+<p>A typical <code>.gitignore</code> file for a Python project, that excludes some files that get generated when Python runs but don’t contain the code from your scripts, can be found <a href="https://github.com/github/gitignore/blob/main/Python.gitignore">here</a>. This is what GitHub will offer if you choose their Python template.</p>
+<p>These are the rules for ignoring files; they should be written on different lines in the <code>.gitignore</code> file:</p>
+<ul>
+<li>To ignore a single a file: <code>FILE-I-WANT-TO-IGNORE.csv</code></li>
+<li>To ignore a whole folder (and all of its contents, subfolders, etc.): <code>FOLDER-NAME/**</code></li>
+<li>The standard shell commands and special characters apply:
+<ul>
+<li>Ignore all CSV files in the repo: <code>*.csv</code></li>
+<li>Ignore all files beginning with “test”: <code>test*</code></li>
+<li>Don’t ignore a particular file: <code>!somefile.txt</code></li>
+</ul></li>
+</ul>
+<p>One trick we recommend is, if you want to keep a folder but not its contents, add these two lines:</p>
+<pre class="text"><code>foldername/*
+!foldername/.gitkeep</code></pre>
+<p>and run <code>touch foldername/.gitkeep</code>. This preserves the structure but doesn’t track anything in the folder—highly useful for folders containing data.</p>
+</section>
+</section>
+</section>
+<section id="branches" class="level2">
+<h2 class="anchored" data-anchor-id="branches">Branches</h2>
+<p>We’ve seen a little sneak preview of branches. In essence, they allow you and your co-authors to independently and simultaneously work on multiple features.</p>
+<p>Branches are one of git’s most powerful tools. They allow you to try out a whole new idea without affecting the default branch (usually this default branch is called called “main”). Only once you’re satisfied that you want to keep those new developments do you need to merge it back into the “main” branch. And, if you’re <em>not</em> satisfied and it doesn’t work, you can just delete the experimental branch.</p>
+<p>This is how most new features in modern software and apps are developed. It is also how bugs are caught and diagnosed.</p>
+<p>For researchers and analysts, it’s also a good way option for trying out new ideas, adding extra robustness checks, doing revisions, and more.</p>
+<section id="a-walkthrough-using-a-branch" class="level3">
+<h3 class="anchored" data-anchor-id="a-walkthrough-using-a-branch">A walkthrough using a branch</h3>
+<p>Let’s revisit our example with the <code>test-repo</code> project. We’re going to create a branch to develop an experimental feature. We’ll use the <code>-b</code> optional argument to do this. Let’s create a new branch called experimental:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> experimental</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You should get a message saying “Switched to a new branch ‘experimental’”. Let’s make a change in this experimental branch, creating a new file, <code>personalised_hello.py</code>.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter your name: "</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Hello </span><span class="sc">{</span>value<span class="sc">}</span><span class="ss">!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can create this on the command line with <code>echo "value = input('Enter your name: ')\nprint(f'Hello {value}!')" &gt; personalised_hello.py</code>.</p>
+<p>You can run this code on the command line by typing <code>python personalised_hello.py</code>.</p>
+<p>Let’s commit this new script to the branch by doing <code>git add personalised_hello.py</code> followed by <code>git commit -m 'personalised hello script added'</code>.</p>
+<p>Congratulations! You just made your first commit to a new branch!</p>
+<section id="merging" class="level4">
+<h4 class="anchored" data-anchor-id="merging">Merging</h4>
+<p>This is about merging locally; you can also merge on the remote via a pull request, but we’ll cover that later.</p>
+<p>Now, in this case, the new branch we made is fairly easy to merge in: it just adds an extra file. But what if we had a merge that was a bit more interesting? Something more like this:</p>
+<pre class="text"><code>      A---B---C experimental
+     /         \
+    D---E---F---G---H main</code></pre>
+<p>where letters represent commits.</p>
+<p>Let’s first move “main” on by one commit by adding a (very boring) .gitignore file with an exclusion for any csv files.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"*.csv"</span> <span class="op">&gt;</span> .gitignore</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .gitignore</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">'git ignore for the project'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now let’s go back to the “experimental” branch, with <code>git checkout experimental</code>, and change the main script to say “hey world!” instead. On the command line, this is <code>echo "print('hey world!')" &gt; script.py</code>. To commit it, <code>git add script.py</code> and then <code>git commit -m 'hey instead of hello'</code>. Now we have several changes on the branch: a new file, <code>personalised_hello.py</code>, and a different line in <code>script.py</code>.</p>
+<p>We’re now going to try and merge the two different branches we have: “main” and “experimental”. To do this we need a special “merge commit”.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://wac-cdn.atlassian.com/dam/jcr:c6db91c1-1343-4d45-8c93-bdba910b9506/02%20Branch-1%20kopiera.png?cdnVersion=600" class="img-fluid figure-img"></p>
+<figcaption>Diagram showing a merge commit of a feature.</figcaption>
+</figure>
+</div>
+<p><em>Diagram showing a merge commit of a feature.</em></p>
+<p>First, we checkout “main” using <code>git checkout main</code>. Then we say which branch we want to merge in and add a message about it:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge experimental</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will ask you for a merge message in git’s favoured editor, which is called “vi”. This can be confusing to use, to say the least, but some info that will help you is:</p>
+<ol type="1">
+<li>press <code>i</code> (i for insert)</li>
+<li>write your merge message</li>
+<li>press <code>esc</code> (escape)</li>
+<li>write <code>:wq</code> (write &amp; quit)</li>
+<li>then press enter</li>
+</ol>
+<p>Once you’re done, you can look at the git graph, <code>git log --graph</code>, to see your “merge commit” and how it has become part of main.</p>
+<p>If you run <code>cat script.py</code>, you’ll see that script.py now contains “print(‘hey world!’)”, so that the commit from the more recent branch is picked up. And the <code>personalised_hello.py</code> script is also there, inherited from our “experimental” branch.</p>
+<p>To list all the branches on your machine, run <code>git branch</code>. To delete branches that you have finished with, it’s</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> branch-name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>where <code>-d</code> means “delete”.</p>
+</section>
+<section id="merge-conflicts" class="level4">
+<h4 class="anchored" data-anchor-id="merge-conflicts">Merge Conflicts</h4>
+<p>Sometimes when merging, it’s not plain sailing. Though git tries to do all of the resolving of conflicts that it can, there may be disagreements at the line level of what the code should say.</p>
+<p>When this happens, you will see something like the following:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># README</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Some</span> text here.</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span>HEAD</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Text</span> added by Person 2.</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="ex">=======</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Text</span> added by Person 2.</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span><span class="op">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> ac22bd20a39b68f0bc4a49594a56d3d2421feb2c.</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="ex">More</span> text here.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>What do these symbols mean?</p>
+<ul>
+<li><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code>Indicates the start of the merge conflict.</li>
+<li><code>=======</code>Indicates the break point used for comparison.</li>
+<li><code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; &lt;commit ID&gt;</code>Indicates the end of the lines that had a merge conflict.</li>
+</ul>
+<p>Fixing these conflicts is a simple matter of (manually) editing the README file by deleting the lines of the text that you don’t want; essentially manually resolving the conflict. You need to delete the special Git merge conflict symbols too.</p>
+<p>Once that’s done, you should be able to stage, commit, pull and even push your changes to a remote repository without any errors.</p>
+<p>Some things to note:</p>
+<ul>
+<li>Person 1 gets to decide what to keep because they are fixing the merge conflict.</li>
+<li>The full commit history is preserved, so person 2 can always recover their changes if desired.</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="remote-and-local-repositories" class="level2">
+<h2 class="anchored" data-anchor-id="remote-and-local-repositories">Remote and local repositories</h2>
+<p>If you only use git for <em>local</em> version control, then you are going to lose all of your work if something happens to your computer! For this reason, most people also work with a <em>remote repository</em> that acts as something like a mirror of your local repository. You can <em>push</em> commits to that remote repository or <em>pull</em> commits down from it.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://merely-useful.tech/py-rse/figures/git-cmdline/git-remote.png" class="img-fluid figure-img"></p>
+<figcaption>Diagram showing how a remote repo relates to your project directory, staging area, and local repository</figcaption>
+</figure>
+</div>
+<p><em>Diagram showing how a remote repo relates to your project directory, staging area, and local repository</em></p>
+<p>There are other benefits of remote repositories: the main one being that you can work with collaborators who can push and pull to the same remote; they enable you to work with others. And, for open source code, you may not even <em>know</em> those other collaborators—so this is a very powerful feature.</p>
+<p>Note that you will need to decide whether you will make your remote repository public or private. This largely depends on whether you want to share the work, and invite collaboration, from people you don’t know. You can share a private repo with known collaborators via adding their username.</p>
+<p>There are several remote, cloud-based repositories out there that you can use but the three of the most popular are <em>GitHub</em>, <em>GitLab</em>, and <em>BitBucket</em>. In the next section, we’ll find out more about working with <em>GitHub</em>.</p>
+<section id="github" class="level3">
+<h3 class="anchored" data-anchor-id="github">GitHub</h3>
+<p>GitHub is not git; it is a remote repository for git projects. It is, if you like, Dropbox for git repositories, but the way you use it is quite different. Although you don’t need GitHub or other remote repository providers to use git, it’s a lot more powerful if you do. And GitHub has a slew of other useful features for version control and managing projects.</p>
+<p>Some of those features include: - a way to <a href="https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects">manage projects</a> with kanban boards - a way to manage <a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues">issues</a> for your repository, which you and others can use to make requests for new features, to record bugs that need fixing, and more. For example, you can raise and see issues on the “Coding for Economists” repo <a href="https://github.com/aeturrell/coding-for-economists/issues">here</a>. If you’re using Visual Studio Code, you can automatically convert the text “#todo” into an issue without ever leaving your code editor. - GitHub stars, a way to track the popularity of open source repositories. You can see the history of stars for “Coding for Economists” <a href="https://star-history.com/#aeturrell/coding-for-economists&amp;Date">here</a>. Do give “Coding for Economists” a star if you like it! - A live text editor for remote repositories. Just go onto any repo’s home page when logged in and hit the <code>.</code> button to load up the text editor. - <a href="https://github.com/features/codespaces">Codespaces</a>, a cloud service that you can use to do development on, including running code. Codespaces uses Visual Studio Code in the browser as its editor and code-runner.</p>
+<p>There are free and paid tiers of Github, with different functionality. But you can make as many public or private repos as you like on the free tier.</p>
+<section id="workflow-using-github-as-a-remote-repository" class="level4">
+<h4 class="anchored" data-anchor-id="workflow-using-github-as-a-remote-repository">Workflow using GitHub as a remote repository</h4>
+<p>You can either add an existing local repository to a remote one or <code>git clone</code> a remote one that you’ve just created to pull down a local version from GitHub. We’ll look at the latter.</p>
+<p>Head over to GitHub, sign in and use the <code>+</code> symbol in the top right to create a new repository. You’ll need to set:</p>
+<ul>
+<li>a name</li>
+<li>a .gitignore</li>
+<li>a license</li>
+<li>a description</li>
+<li>say whether you wish to create a README.md</li>
+<li>say whether it should be public or private</li>
+</ul>
+<p>Once you’ve created your new repository, go to its homepage (usually “https://github.com/your-username/repo-name”) and then click “code”, “local”, then copy the HTTPS link. This will usually be something like “https://github.com/your-usernmae/repo-name.git”.</p>
+<p>Back on your local machine’s command line, type <code>git clone</code> then paste in the link:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/your-username/repo-name.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You should get a message like “Cloning into ‘repo-name’”. What’s happening is that a local copy of what’s on the server (aka the “remote”) is being made on your computer. You can then follow your usual git workflow. The only difference is when you want to sync the remote.</p>
+<p>When you’re ready to sync with the remote, you can run <code>git push</code> to push your recent commits up to GitHub. This can include branches.</p>
+<p>To pull down other peoples’ changes, use <code>git pull</code>.</p>
+<p>So the complete workflow is:</p>
+<ol type="1">
+<li><code>git pull</code> any changes on the remote</li>
+<li>Stage files using <code>git add</code>: tell Git that you want to add changes to the repo history (file edits, additions, deletions, etc)</li>
+<li>Commit using <code>git commit -m "your commit message"</code></li>
+<li><code>git push</code> any commited local changes to the remote GitHub repo.</li>
+</ol>
+</section>
+</section>
+<section id="the-remote-merge-aka-a-pull-request" class="level3">
+<h3 class="anchored" data-anchor-id="the-remote-merge-aka-a-pull-request">The remote merge, aka a pull request</h3>
+<p>As well as doing local merges, you can merge on the remote via something called a <em>pull request</em>. A pull request, also referred to as a merge request, takes place when a contributor/developer wants to merge new code changes from a branch into the main project repository.</p>
+<p>There is an advantage of a pull request relative to a local merge: collaboration. Others can review, comment on, and even edit your pull request before it gets merged in.</p>
+<p>The way to create a pull request is to push a branch you’d like to merge in then go on to your repository’s branches page. This will usually be “https://github.com/user-name/project-name/branches”. Then, next to the branch you’d like to merge in, use the “New pull request” button.</p>
+<p>After initialising a pull request, you’ll see a review page that shows a high-level overview of the changes between your branch (the compare branch) and the repository’s base branch. You can add a summary of the proposed changes, review the changes made by commits, add labels, milestones, and assignees, and @mention individual contributors or teams. For more information, see the GitHub docs for <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request">“Creating a pull request”</a>.</p>
+<p>Once you have lodged your pull request, other contributors can review your proposed changes, add review comments, contribute to the pull request discussion, and even add commits to the pull request. By default, in public repositories, any user can submit reviews that approve or request changes to a pull request.</p>
+<p>After you’re happy with the proposed changes, you can merge the pull request. If you’re working in a shared repository model, you create a pull request and you, or someone else, will merge your changes from your feature branch into the base branch you specify in your pull request.</p>
+<p>You can find a lot more about pull requests and merging on the <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests">GitHub documentation</a>.</p>
+</section>
+</section>
+<section id="using-visual-studio-code-for-version-control-with-git" class="level2">
+<h2 class="anchored" data-anchor-id="using-visual-studio-code-for-version-control-with-git">Using Visual Studio Code for version control with git</h2>
+<p>Although we’ve seen a lot of how to use git on the command line, it’s not the only option! Visual Studio Code has a ton of functionality to help you with version control.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/vscode_layout.png" class="img-fluid figure-img"></p>
+<figcaption>Typical layout of Visual Studio Code</figcaption>
+</figure>
+</div>
+<p><em>Typical layout of Visual Studio Code</em></p>
+<p>On the left-hand side of the Visual Studio Code panel (to the left of “1” and “2” on the image above), you can see some icons. The one that looks like dots connected by lines that are branching is a tab that brings up Visual Studio Code’s git functionality. This exposes buttons and tools that carry out the commands we saw above for you automatically.</p>
+<p>Rather than staging with <code>git add</code>, you can just click the <code>+</code> icon next to any files that have changed. And, once changes are staged, you can simply type your commit message and hit the “commit” button.</p>
+<p>There are also convenient buttons to synchronise between remote and local repositories, to push and pull, and to create and work with new branches.</p>
+<p>There are also some excellent extensions for Visual Studio Code to help you with version control:</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph">Git Graph</a>, which allows you to view a graph of your repository</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory">Git History</a>, which allows you to view and search git log along with the graph and details</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=waderyan.gitblame">Git Blame</a>, which shows information in the status bar on who wrote the currently selected line and when they wrote it.</li>
+</ul>
+<p>Some of these create extra buttons on the source control panel in Visual Studio Code.</p>
+</section>
+<section id="the-magic-of-pre-commit" class="level2">
+<h2 class="anchored" data-anchor-id="the-magic-of-pre-commit">The magic of pre-commit</h2>
+<p>Your code should run properly when you commit a change, but wouldn’t it be nice if there was a way to check? Happily, there is a technology that does this. It’s called “pre-commit” and it’s a game-changer for ensuring code does what you want.</p>
+<p><a href="https://pre-commit.com/">Pre-commit</a> is a framework for managing and maintaining multi-language pre-commit hooks, that is things that happen to your code—like checking it runs—before the code is committed. These “git hook scripts” are useful for identifying simple issues before submission of code.</p>
+<p>You can install pre-commit as a Python package using <code>pip install pre-commit</code>. You can check it’s installed by running <code>pre-commit --version</code>.</p>
+<p>The kind of things you can do with pre-commit includes:</p>
+<ul>
+<li>checking for any large files that have been committed by mistake</li>
+<li><em>linting</em> code to look for, and even fix, bad code style</li>
+<li>check the formatting of other standard file types, like TOML and YAML</li>
+<li>remove any trailing whitespace from text files</li>
+<li>stripping out data from Jupyter Notebooks leaving just the code and text</li>
+<li>re-order Python imports according to whether they are from external or built-in packages</li>
+</ul>
+<p>The way that pre-commit works is that you create a special file, <code>.pre-commit-config</code>, that lists what pre-commit “hooks” you want to use on your code.</p>
+<p>Below, you can see the output from running</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pre-commit</span> run <span class="at">--all-files</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>on the Coding for Economists repository:</p>
+<pre class="text"><code>Check for added large files..............................................Passed
+nbstripout...............................................................Passed
+black....................................................................Passed
+flake8...................................................................Passed</code></pre>
+<p>For more information on pre-commit hooks, look at the <a href="https://pre-commit.com/">official website</a> and <a href="https://ericmjl.github.io/data-science-bootstrap-notes/set-up-pre-commit-hooks-to-automate-checks-before-making-git-commits/">this blog</a> on using pre-commit to automate checks.</p>
+</section>
+<section id="command-line-reference" class="level2">
+<h2 class="anchored" data-anchor-id="command-line-reference">Command line reference</h2>
+<p>Here are all of the commands you might ever need for git on the command line!</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 22%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Command</th>
+<th style="text-align: left;">What the command does</th>
+<th style="text-align: center;">Category</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>git help COMMAND</code></td>
+<td style="text-align: left;">get help for a git command</td>
+<td style="text-align: center;">Basics</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git init</code></td>
+<td style="text-align: left;">creates a new git repo, with data stored in the .git directory</td>
+<td style="text-align: center;">Basics</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git status</code></td>
+<td style="text-align: left;">tells you what’s going on</td>
+<td style="text-align: center;">Basics</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git add FILENAME</code></td>
+<td style="text-align: left;">adds files to staging area</td>
+<td style="text-align: center;">Basics</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git commit</code></td>
+<td style="text-align: left;">creates a new commit</td>
+<td style="text-align: center;">Basics</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git log</code></td>
+<td style="text-align: left;">shows a flattened log of history</td>
+<td style="text-align: center;">Basics</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git log --all --graph --decorate</code></td>
+<td style="text-align: left;">visualises git history as a DAG</td>
+<td style="text-align: center;">Basics</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git diff FILENAME</code></td>
+<td style="text-align: left;">show changes you made relative to the staging area</td>
+<td style="text-align: center;">Basics</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git diff REVISION FILENAME</code></td>
+<td style="text-align: left;">shows differences in a file between snapshots</td>
+<td style="text-align: center;">Basics</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git checkout REVISION</code></td>
+<td style="text-align: left;">updates HEAD and current branch</td>
+<td style="text-align: center;">Basics</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git branch</code></td>
+<td style="text-align: left;">shows branches</td>
+<td style="text-align: center;">Branching and merging</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git branch BRANCH-NAME</code></td>
+<td style="text-align: left;">creates a branch</td>
+<td style="text-align: center;">Branching and merging</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git checkout -b BRANCH-NAME</code></td>
+<td style="text-align: left;">creates a branch and switches to it</td>
+<td style="text-align: center;">Branching and merging</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git merge REVISION</code></td>
+<td style="text-align: left;">merges into current branch</td>
+<td style="text-align: center;">Branching and merging</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git mergetool</code></td>
+<td style="text-align: left;">use a fancy tool to help resolve merge conflicts</td>
+<td style="text-align: center;">Branching and merging</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git rebase</code></td>
+<td style="text-align: left;">rebase set of patches onto a new base</td>
+<td style="text-align: center;">Branching and merging</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git remote</code></td>
+<td style="text-align: left;">list remotes</td>
+<td style="text-align: center;">Remotes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git remote add BRANCH-NAME URL</code></td>
+<td style="text-align: left;">add a remote</td>
+<td style="text-align: center;">Remotes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git push REMOTE LOCAL-BRANCH REMOTE-BRANCH</code></td>
+<td style="text-align: left;">send objects to remote</td>
+<td style="text-align: center;">Remotes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git fetch</code></td>
+<td style="text-align: left;">retrieve objects/references from a remote</td>
+<td style="text-align: center;">Remotes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git pull</code></td>
+<td style="text-align: left;">same as git fetch; git merge</td>
+<td style="text-align: center;">Remotes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git clone</code></td>
+<td style="text-align: left;">download repository from remote</td>
+<td style="text-align: center;">Remotes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git commit --amend</code></td>
+<td style="text-align: left;">edit a commit’s contents/message</td>
+<td style="text-align: center;">Undo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git reset HEAD FILENAME</code></td>
+<td style="text-align: left;">unstage a file</td>
+<td style="text-align: center;">Undo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git checkout -- FILENAME</code></td>
+<td style="text-align: left;">discard changes</td>
+<td style="text-align: center;">Undo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>git config</code></td>
+<td style="text-align: left;">Git is highly customizable</td>
+<td style="text-align: center;">Undo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>git blame</code></td>
+<td style="text-align: left;">show who last edited which line</td>
+<td style="text-align: center;">Undo</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="further-resources" class="level2">
+<h2 class="anchored" data-anchor-id="further-resources">Further Resources</h2>
+<p>These are some other good git and GitHub resources.</p>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2">Pro Git</a> is highly recommended and very thorough. Going through Chapters 1–5 should teach you most of what you need.</li>
+<li><a href="https://ohshitgit.com/">Oh Shit, Git!?!</a> is a short guide on how to recover from some common Git mistakes</li>
+<li><a href="https://skills.github.com/">GitHub Skills</a> will help you learn how to use GitHub with interactive courses designed for beginners and experts.</li>
+<li><a href="https://learngitbranching.js.org/">Learn Git Branching</a> is a browser-based game that teaches you Git.</li>
+<li><a href="https://onlywei.github.io/explain-git-with-d3">Visualizing Git Concepts with D3</a> helps you understand some common git commands with visualisations.</li>
+<li><a href="https://gitexplorer.com/">Git Explorer</a> lets you explore which git commands you might need.</li>
+<li><a href="https://beej.us/guide/bggit/html/split/">Beej’s Guide to Git</a> is a long guide on Git and GitHub.</li>
+</ul>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Some ‘shells’ that provide a command line, like <a href="https://ohmyz.sh/">Oh My Zsh</a>—which this book recommends, come with git integration and will show information about the repository of the current folder.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/aeturrell\.github\.io\/coding-for-economists");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./wrkflow-command-line.html" class="pagination-link" aria-label="The Command Line">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">The Command Line</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./econmt-probability-random.html" class="pagination-link" aria-label="Probability and Random Processes">
+        <span class="nav-page-text"><span class="chapter-title">Probability and Random Processes</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>This book is available under an MIT license.</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/aeturrell/coding-for-economists/edit/main/wrkflow-version-control.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/aeturrell/coding-for-economists/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

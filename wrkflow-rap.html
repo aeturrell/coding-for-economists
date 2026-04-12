@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Reproducible Analysis – Coding for Economists</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./time-intro.html" rel="next">
+<link href="./wrkflow-environments.html" rel="prev">
+<link href="./favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9FZQCPFXZJ"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-9FZQCPFXZJ', { 'anonymize_ip': true});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+
+
+<meta name="twitter:title" content="Reproducible Analysis – Coding for Economists">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://external-preview.redd.it/aR6WdUcsrEgld5xUlglgKX_0sC_NlryCPTXIHk5qdu8.jpg?auto=webp&amp;s=5fe64dd318eec71711d87805d43def2765dd83cd">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./wrkflow-quarto.html">Workflow</a></li><li class="breadcrumb-item"><a href="./wrkflow-rap.html"><span class="chapter-title">Reproducible Analysis</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Coding for Economists</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/aeturrell/coding-for-economists" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Getting Started</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-preliminaries.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preliminaries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coding Basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./workflow-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Workflow Basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-where.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Writing Code</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Essential Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-analysis-quickstart.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Analysis Quickstart</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Working with Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-transformation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Transformation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-read-and-write.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reading and Writing Files</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-numbers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Numbers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-categorical.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Categorical Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-spreadsheets.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Spreadsheets</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Essential Coding</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-best-practice.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Code in Style</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coding</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-advcd-best-practice.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Shortcuts to Better Coding</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Essential Data Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Intro to Data Visualisation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-letsplot.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Easy Data Visualisation for Tidy Data with <strong>Lets-Plot</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-matplotlib.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Powerful Data Visualisation with <strong>Matplotlib</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-common-plots-one.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Common Plots I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-common-plots-two.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Common Plots II</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Essential Workflow</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./auto-research-outputs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Automating Research Outputs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-markdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Markdown</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-command-line.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">The Command Line</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-version-control.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Version Control</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Econometrics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-probability-random.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Probability and Random Processes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-statistics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-generalised-models.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Generalised regression models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-diagnostics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regression diagnostics and visualisations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-causal-inference.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Causal Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-bayesian.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bayesian Inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./econmt-bayes-bambi.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bayesian Inference Made Easier</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-boolean.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Boolean Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-joining-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Joins</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-missing-values.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Missing Values</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-exploratory-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploratory Data Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-extraction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Getting Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-databases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Databases</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-title"><strong>pandas</strong> alternatives, validation, and orchestration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-sharing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Sharing Data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Coding</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code-further-advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Advanced Coding</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-narrative.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Narrative Data Visualisation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-tables.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Tables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-dashboards.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Dashboards</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-animation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Animation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">Workflow</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-quarto.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Combining Code and Text in Quarto Markdown</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-environments.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Virtual Code Environments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./wrkflow-rap.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Reproducible Analysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
+ <span class="menu-text">Time</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./time-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction to Time</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./time-series.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Time Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./time-fcasts-env.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Forecasting Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true">
+ <span class="menu-text">Text Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./text-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction to Text</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./text-regex.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regular Expressions, aka regex</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./text-nlp.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Natural Language Processing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true">
+ <span class="menu-text">Machine Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction to Machine Learning and AI</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-sup.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Supervised Machine Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data for Machine Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-unsup.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Unsupervised Machine Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true">
+ <span class="menu-text">Geospatial</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geo-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Intro to Geo-Spatial Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geo-vis.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Geo-Spatial Visualisation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true">
+ <span class="menu-text">Mathematics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./maths-abstract.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Abstract Mathematics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./maths-numerical.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Numerical Mathematics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true">
+ <span class="menu-text">Craft</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-search.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Putting the Search in Research</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-generating-ideas.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Generating and Accepting Research Ideas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-writing-papers.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Writing Papers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-research-blogs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Research Blog Posts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-referee.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Writing Referee Reports</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-technical-reports.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Writing Technical Reports</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./craft-extended-abstracts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Extended Abstracts</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true">
+ <span class="menu-text">Further Data Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-plotnine.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Visualisation using the Grammar of Graphics with <strong>Plotnine</strong></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vis-seaborn.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Visualisation with <strong>Seaborn</strong></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true">
+ <span class="menu-text">Coming from …</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./coming-from-stata.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coming from Stata</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./coming-from-matlab.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coming from Matlab</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./coming-from-r.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coming from R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./coming-from-excel.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Coming from Excel</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="true">
+ <span class="menu-text">End Matter</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./contributing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Contributing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./zreferences.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bibliography</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="-1">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#using-modular-code" id="toc-using-modular-code" class="nav-link" data-scroll-target="#using-modular-code">Using Modular Code</a></li>
+  <li><a href="#project-structure" id="toc-project-structure" class="nav-link" data-scroll-target="#project-structure">Project Structure</a></li>
+  <li><a href="#reproducible-analytical-pipelines" id="toc-reproducible-analytical-pipelines" class="nav-link" data-scroll-target="#reproducible-analytical-pipelines">Reproducible Analytical Pipelines</a>
+  <ul class="collapse">
+  <li><a href="#directed-acyclic-graphs" id="toc-directed-acyclic-graphs" class="nav-link" data-scroll-target="#directed-acyclic-graphs">Directed Acyclic Graphs</a></li>
+  <li><a href="#scripting-reproducible-analytical-pipelines" id="toc-scripting-reproducible-analytical-pipelines" class="nav-link" data-scroll-target="#scripting-reproducible-analytical-pipelines">Scripting Reproducible Analytical Pipelines</a></li>
+  <li><a href="#make-for-reproducible-analytical-pipelines" id="toc-make-for-reproducible-analytical-pipelines" class="nav-link" data-scroll-target="#make-for-reproducible-analytical-pipelines">Make for Reproducible Analytical Pipelines</a></li>
+  <li><a href="#other-options-for-reproducible-analytical-pipelines" id="toc-other-options-for-reproducible-analytical-pipelines" class="nav-link" data-scroll-target="#other-options-for-reproducible-analytical-pipelines">Other Options for Reproducible Analytical Pipelines</a></li>
+  </ul></li>
+  <li><a href="#reproducible-python-environments" id="toc-reproducible-python-environments" class="nav-link" data-scroll-target="#reproducible-python-environments">Reproducible Python Environments</a>
+  <ul class="collapse">
+  <li><a href="#reproducible-environments-with-uv" id="toc-reproducible-environments-with-uv" class="nav-link" data-scroll-target="#reproducible-environments-with-uv">Reproducible Environments with uv</a></li>
+  <li><a href="#semi-reproducible-environments-with-miniconda" id="toc-semi-reproducible-environments-with-miniconda" class="nav-link" data-scroll-target="#semi-reproducible-environments-with-miniconda">Semi-reproducible Environments with Miniconda</a></li>
+  </ul></li>
+  <li><a href="#reproducible-computational-environments" id="toc-reproducible-computational-environments" class="nav-link" data-scroll-target="#reproducible-computational-environments">Reproducible Computational Environments</a></li>
+  <li><a href="#saving-your-analysis-for-prosperity" id="toc-saving-your-analysis-for-prosperity" class="nav-link" data-scroll-target="#saving-your-analysis-for-prosperity">Saving Your Analysis For Prosperity</a></li>
+  <li><a href="#bringing-it-all-together" id="toc-bringing-it-all-together" class="nav-link" data-scroll-target="#bringing-it-all-together">Bringing It All Together</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.dev/aeturrell/coding-for-economists/blob/main/wrkflow-rap.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/aeturrell/coding-for-economists/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./wrkflow-quarto.html">Workflow</a></li><li class="breadcrumb-item"><a href="./wrkflow-rap.html"><span class="chapter-title">Reproducible Analysis</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-wrkflow-rap" class="quarto-section-identifier"><span class="chapter-title">Reproducible Analysis</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>This chapter will tell you about reproducible analysis and what are sometimes called “reproducible analytical pipelines”, also known as RAPs. This chapter has benefitted from the “<a href="https://best-practice-and-impact.github.io/qa-of-code-guidance">Quality Assurance of Code for Analysis and Research</a>” book produced by the Best Practice and Impact division of the Office for National Statistics and “The Turing Way”, a <a href="https://the-turing-way.netlify.app">guide to reproducibility</a> produced by the Alan Turing Institute.</p>
+<p>Reproducibility can mean a lot of things to a lot of different people in a lot of different contexts. Here, we’re going to think about the reproducibility of analysis performed by code. That excludes external validity and although it might include robust coding practices, it doesn’t include robustness checks.</p>
+<p>It does include Reproducible Analytical Pipelines (RAPs), which are automated analytical processes. At their best, RAPs use elements of software engineering best practice to ensure that analysis is reproducible.</p>
+<p>There are different levels and aspects of reproducibile analysis with code, which we will step through in the rest of this chapter, but they form a hierarchy:</p>
+<ul>
+<li>modular code</li>
+<li>sensible, isolated project structure using relative filepaths</li>
+<li>an unmodified version of the raw data is retained; outputs can be regenerated</li>
+<li>operations should form a reproducible analytical pipeline</li>
+<li>the reproducible analytical pipeline can be automatically executed (eg using Make or a ‘main’ script)</li>
+<li>code language is reproducible (eg <code>Python=3.10.6</code> in pyproject.toml file)</li>
+<li>code language packages are reproducible (eg <code>pandas=2.2.3</code> in pyproject.toml file)</li>
+<li>code language packages’ dependencies are reproducible (eg that pandas depends on <code>numpy=1.26.4</code> in this installation is recorded somewhere)</li>
+<li>operating system is reproducible (as specified in a Docker file or by using repo2docker)</li>
+</ul>
+<p><em>A lot of the value to be had in reproducible code can be achieved by just the first five</em>. Nailing all but the last one is a high standard and probably the right spot in the trade-off between effort and reproducibility for a lot of projects. If you get this far, you’re doing a really great job. Doing all of these is the gold standard.</p>
+<p>Reproducibility isn’t just about ensuring your results reproduce, though that’s obviously the main reason to do it. It’s also about saving you time and effort. This image, from biological psychiatry researcher Daniel Quintana’s <a href="http://dx.doi.org/10.17605/OSF.IO/DZTVQ">talk</a> <em>Five things about open and reproducible science that every early career researcher should know</em>, sums it up nicely:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://github.com/aeturrell/coding-for-economists/raw/main/img/reproducibiity_relocates_time.png" class="img-fluid figure-img"></p>
+<figcaption>Time taken with and without reproducibility</figcaption>
+</figure>
+</div>
+</section>
+<section id="using-modular-code" class="level2">
+<h2 class="anchored" data-anchor-id="using-modular-code">Using Modular Code</h2>
+<p>(You may have already met this idea before as the DRY, or “don’t repeat yourself”, concept).</p>
+<p>How you structure your code can itself aid reproducibility. Let’s imagine you have a situation where you want to perform two similar analytical tasks in which the only thing that changes are the inputs and outputs. Let’s say, for example, that you want to perform a particular set of operations, perhaps the following:</p>
+<blockquote class="blockquote">
+<p>find the mean from the second entry in a list onwards, add 1, divide by the number of entries in the reduced length list and then print the answer as a score</p>
+</blockquote>
+<p>Here’s one example of that:</p>
+<div id="cell-2" class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>list1 <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>score1 <span class="op">=</span> (np.mean(list1[<span class="dv">1</span>:]) <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> <span class="dv">5</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The score is </span><span class="sc">{</span>score1<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>But now we have imagine we have a second set of variables we’d like to run the same logic on. Naively, you might copy and paste the same code again but replace the list with the new one, like this:</p>
+<div id="cell-4" class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>list2 <span class="op">=</span> [<span class="dv">16</span>, <span class="dv">12</span>, <span class="dv">88</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">7</span>, <span class="dv">32</span>, <span class="dv">5</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>score2 <span class="op">=</span> (np.mean(list2[<span class="dv">1</span>:]) <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> <span class="dv">5</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The score is </span><span class="sc">{</span>score2<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The problem with this is that we repeated the code even though we wanted to perform the same operation, which is not very efficient.</p>
+<p>We also expect <code>score1</code> and <code>score2</code> to be using the same operations, but we can’t be sure now because <em>the code is different</em>. And indeed, in this case, the copy and paste philosophy has gone wrong. Did you spot the mistake? Instead of dividing by the number of entries in the reduced length list, our copy and paste job saw us dividing by the number of entries in the first case (creating <code>score1</code>).</p>
+<p>What we should have done is create modular code, where the same logic is not repeated but <em>re-used</em>. In this case, that’s best done with a function like follows:</p>
+<div id="cell-6" class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_score(list_input):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""find the mean from the second entry in a list onwards,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">    add 1, divide by the number of entries in the reduced</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">    length list and then print the answer as a score.</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">        list_input (list[float]): A list of numbers</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">        score (float): A computed score</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    reduced_list <span class="op">=</span> list_input[<span class="dv">1</span>:]</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    score <span class="op">=</span> (np.mean(reduced_list) <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> <span class="bu">len</span>(reduced_list)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"The score is </span><span class="sc">{</span>score<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Just to show it works:</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>compute_score(list1)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>compute_score(list2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can now be sure that we get <em>exactly</em> the same set of operations applied each time because we put the logic into one function that is called for both lists. And, to avoid any copy and paste errors, we switched from hard-coding the divisor to making it part of the logic of the function (by dividing by <code>len(reduced_list)</code>).</p>
+<p>By putting our logic in a function, we’ve also made what we are trying to do clearer to the reader—and remember, coders, that reader is most likely to be you in a few months time.</p>
+<p>Functions help with reproducibile analytical pipelines because you can be sure that even if your inputs change slightly, the same logic or set of operations will be run.</p>
+<p>Of course, functions do not have to be in the same script (the same <code>.py</code> file) as the one you are currently writing your code in. Python allows you to import functions from other scripts.</p>
+<p>A classic example would be if you had a project that was structured like this:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">📁</span> project</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">│──main.py</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">│──utilities.py</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">│──figures.py</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">│──README.md</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>where ‘project’ is a folder, and the files within it are three Python scripts and a markdown document. Your utilities script might have a really useful function in it that you’d like to use in main.py and figures.py too. You can do this! It’s possible to do from ‘within’ your other scripts. It’s also surprisingly simple. Your utilities script might look like:</p>
+<div id="cell-8" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contents of utilities.py file</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> really_useful_func(number):</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Performs a really useful operation on input number</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">    and returns the result."""</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> number <span class="op">*</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>While, to use this function in your main.py script, you’d have:</p>
+<div id="cell-10" class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contents of main.py</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> utilities <span class="im">as</span> util_mod</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(util_mod.really_useful_func(<span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And, just as valid, you could import the same function from utilities in a different way in figures.py</p>
+<div id="cell-12" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utilities <span class="im">import</span> really_useful_func</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(really_useful_func(<span class="dv">30</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The technical jargon for what you’ve just done is to use <code>utilities.py</code> as a <em>module</em> rather than as a script.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If your script is in a different directory, you will need a relative import. Let’s say you’ve set your project’s default directory to the folder “project”, and the module you’d like to import is in a directory useful, so that it’s path is <code>project/useful/utilities.py</code>. As before, you’re running code from the default directory, <code>project/main.py</code>. Then you’ll need to import the script within <code>main.py</code> using the following: <code>from useful import utilities as utils</code>.</p>
+</div>
+</div>
+<p>The reasons for wanting to be able to import functions (or other code) from other scripts are exactly the same as for functions within scripts: so that you only need write the function once to use it everywhere, and so that you can be sure you are running exactly the same set of operations each time.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you are in the middle of a coding session and you change the code in a module (external script), your Python kernel will not necessarily know that you have changed the external script. You can either restart the Python kernel, but you lose your variables, or use the built-in <code>importlib</code> Python package. For example, to reload an external module named <code>utilities.py</code> that had been imported via <code>import utilities as utils</code>, you would run <code>import importlib</code> and, when you wanted to refresh the module, <code>importlib.reload(utils)</code>.</p>
+</div>
+</div>
+</section>
+<section id="project-structure" class="level2">
+<h2 class="anchored" data-anchor-id="project-structure">Project Structure</h2>
+<p>The first principle to guide you should be that <strong>each project lives in its own folder</strong>. Everything for that project will appear somewhere under the top level directory. Do not mix projects in the same folder directory.</p>
+<p>A typical project structure might look like:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">📁</span> project</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span><span class="ex">──</span> README.md</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span><span class="ex">──</span> requirements.txt</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span><span class="ex">──</span> data/</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="ex">└──</span> raw_data.csv</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span><span class="ex">──</span> src/</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="ex">├──</span> utilities.py</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="ex">├──</span> data_cleaning.py</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="ex">├──</span> analysis.py</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="ex">└──</span> generate_plots_and_tables.py</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span><span class="ex">──</span> results/</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="ex">├──</span> cleaned_data.csv</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="ex">└──</span> derived_data.csv</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span><span class="ex">──</span> outputs/</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>   <span class="ex">└──</span> latex/</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>       <span class="ex">├──</span> paper.tex</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>       <span class="ex">└──</span> slides.tex</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>    <span class="ex">──</span> floats/</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>       <span class="ex">├──</span> table.tex</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>       <span class="ex">└──</span> time_series_plot.pdf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s take a quick tour through this example project’s structure, all of which sits in the “project” directory.</p>
+<p>First we have the README.md, a file full of instructions in a simple text format called <em>markdown</em> (=“.md”). Markdown is kind of like a code language for text and is commonly used to write information in coding projects. It can be “rendered” (that is, can be displayed not as code but in a form that is intended to be read) by Visual Studio Code using the markdown all in one extension (see the <a href="code-where.html" class="quarto-xref"><span>Writing Code</span></a> chapter for more on markdown).</p>
+<p>The next file, “requirements.txt”, is one we’ll be seeing much more of later in this chapter. For now, all you need to do know is that it is a list of all of the Python packages needed to run the project. Sometimes it might be called “environment.yml” instead, or sometimes “pyproject.toml”.</p>
+<p>Next we have the data, which is the data as you received it, no matter how poor the format (wishful thinking in this example that it might be a clean csv file and not 400 Excel files!). A really important principle here is that <strong>you should not alter raw data</strong> as it comes to you, but instead treat it as read-only. This is so that you can always trace a path from the raw data you began with to the finished product. Incoming data can and does change surprisingly often so if someone else were to do the “same” analysis as you and find a different answer, you want to be able to rule out starting with different input datasets as the cause. Or you may find that your data cleaning script needs adjusting, and you need to repeat all of the operations in your project. Or other good reasons. Always keep a copy of the raw data.</p>
+<p>The next folder is “src”, which is short for “source code”, and it’s where your code scripts (.py files) or possibly Jupyter Notebooks (.ipynb files) live. These are nicely separated into the functions they perform: cleaning the data, performing the analysis, and summarising the analysis into figures and tables (also known as floats). The other script, “utilities.py”, might be imported as module that all of the other scripts can use.</p>
+<p>The results from running the first two scripts are in the “results” folder. First we have a file that saves the results from the intermediate step of the cleaning the data (courtesy of running “data_cleaning.py”), then we have the results from “analysis.py”, the derived data. Derived data might be, for example, the final tabular dataset that you use for a regression.</p>
+<p>Next up is outputs, which is split into “latex” and “floats”.</p>
+<p>Latex is a typesetting language that is used for writing reports, slides, journal articles, and more. Importantly for coding and replicability, it can be automated (in a way that, say, Word can’t be). Another option here would be markdown, which can also be exported to a wide variety of output formats. The text in a Latex report has to be written, we can’t automate that (yet), but the figures and tables that are generated by the “generate_plots_and_tables.py” script can be automatically inserted. The same goes for slides written in a variant of Latex called Beamer. You can find more information on the process of automating research outputs in the chapter on <a href="auto-research-outputs.html" class="quarto-xref"><span>Automating Research Outputs</span></a>.</p>
+<p>Floats means, here at least, tables and figures. These also live in the outputs directory, and are put there by the “generate_plots_and_tables.py” script.</p>
+<p>So that’s the structure. There is another important principle here, which follows on from the first: <strong>you should be able to dispose of the results, figures, and tables (ie delete them), without worrying</strong>. If you are working on a project and deleting any outputs that are generated by code scripts would scupper everything, then your project is not reproducible. (This is another reason why you should always keep an “untouched” version of the raw data.) If it’s feasible to do so time-wise, it is good practice to delete and regenerate your outputs regularly to test that your project is indeed reproducible.</p>
+<p>There are, of course, many variations on this example project structure. You can find “cookiecutter” templates out there that will help you structure your own project (some involve answering some questions about what you need, and what you’d like to call project, and so on), or just get inspiration. Some good templates to check out that can help you structure your project are the UK Government data science, <a href="https://github.com/ukgovdatascience/govcookiecutter">govcookiecutter</a> and this comprehensive Python data science project template known as <a href="http://drivendata.github.io/cookiecutter-data-science/">cookiecutter-data-science</a>. For advanced users looking to build Python packages that others can install, the <a href="https://cookiecutter-hypermodern-python.readthedocs.io/en/2021.7.15/">hypermodern Python cookiecutter</a> is packed full of amazing features and comes highly recommended.</p>
+<p>Another important principle of good project structure is to use relative filepaths; you can read more about those in the Chapter on <a href="code-best-practice.html" class="quarto-xref"><span>Code in Style</span></a>.</p>
+</section>
+<section id="reproducible-analytical-pipelines" class="level2">
+<h2 class="anchored" data-anchor-id="reproducible-analytical-pipelines">Reproducible Analytical Pipelines</h2>
+<p>We’ve seen how functions and modules can aid the reproducibility of logic. We’ve seen the kind of folder and file structure that can aid reproducibility of projects too. But the <em>order</em> of operations matters as well! Pipelines organise your analysis in a series of steps that, when executed, perform the same series of operations in the same order. If you arrange your code in a reproducible analytical pipelines, you will know that you can send your code to someone else and, when they run it, the same steps will be executed in the same order.</p>
+<p>In this section, we’ll look at the concept in general as well as some tools that can aid you in creating reproducible analytical pipelines.</p>
+<p>The first principle of RAPs may be a surprise: you shouldn’t use the interactive console interactively (eg by jamming, re-running lines, etc, as you go). A RAP should be able to go from start to finish with zero human interaction during execution, and produce consistent results at the end. This is different to when you’re still developing a project, and the interactive console is super useful because you’re trying things out. But RAP is for prosperity and needs to work without your intervention!</p>
+<section id="directed-acyclic-graphs" class="level3">
+<h3 class="anchored" data-anchor-id="directed-acyclic-graphs">Directed Acyclic Graphs</h3>
+<p>Directed acyclic graphs pop up in lots of contexts. Here, in a RAP context, we’re talking about them because the execution order of your code and scripts should form a directed acyclic graph (DAG). The word “graph” here can be confusing: it’s referring to the formal notion of a graph from the branch of mathematics called graph theory, which is the study of pairwise relations between objects. A graph in this context is made up of vertices (also called nodes or points) that are connected by edges (also called links or lines). A DAG is a directed graph with no directed cycles (closed loops). It consists of vertices and edges with each edge directed from one vertex to another, such that following the directions will never form a closed loop. To summarise: “directed” means that edges between nodes have a direction and you can only traverse the graph in that direction (often shown by arrows in diagrams) and “acyclic”: means there are no cycles so that, for example, a node A can’t depend on a node B when B depends on A.</p>
+<p>The point is that the set of operations that are performed when following a DAG proceeds like water flowing through a series of rapids: one step after another, with no looping back.</p>
+<p>This is all a bit abstract and so it’s a lot easier to just take a look at a visualisation of one. We’ll use the example from the previous section boiled down to only the code scripts (.py files).</p>
+<div id="cell-16" class="cell" data-tags="[&quot;remove-input&quot;]">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: hide input</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Warning: This has a dependency on GraphViz</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># On mac, using homebrew, brew install graphviz</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> string</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>dot <span class="op">=</span> graphviz.Digraph(comment<span class="op">=</span><span class="st">"DAG example"</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>labels_list <span class="op">=</span> [<span class="st">"Utilities"</span>, <span class="st">"Data Cleaning"</span>, <span class="st">"Analysis"</span>, <span class="st">"Generate Plots and Tables"</span>]</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>names_list <span class="op">=</span> string.ascii_uppercase[: <span class="bu">len</span>(labels_list)]</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>labels_to_names <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(labels_list, names_list))</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, label <span class="kw">in</span> <span class="bu">zip</span>(names_list, labels_list):</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    dot.node(name, label)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>list_of_connections <span class="op">=</span> [</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Utilities"</span>, <span class="st">"Data Cleaning"</span>),</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Utilities"</span>, <span class="st">"Analysis"</span>),</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Utilities"</span>, <span class="st">"Generate Plots and Tables"</span>),</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Data Cleaning"</span>, <span class="st">"Analysis"</span>),</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Analysis"</span>, <span class="st">"Generate Plots and Tables"</span>),</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>list_of_connections <span class="op">=</span> [</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    (labels_to_names[a], labels_to_names[b]) <span class="cf">for</span> a, b <span class="kw">in</span> list_of_connections</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>dot.edges(list_of_connections)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>dot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you are running this code yourself and want to run the code that creates the diagram above, you should be aware that the diagram above has a dependency on a non-Python library called graphviz that you will need to install separately (in <em>addition</em> to the Python library called graphviz, which can be installed using <code>pip install graphviz</code>). On Mac, you can use homebrew to run <code>brew install graphviz</code> on the command line. <code>sudo apt install graphviz</code> works on some flavours of Linux. You can download Windows installers and find more information about this <a href="https://www.graphviz.org/download/">here</a>.</p>
+</div>
+</div>
+<p>Here we see the execution order. utilities is the antecedent of every step because it is imported by all three of the other scripts. The rest of the DAG is: data cleaning, analysis, and, finally, generate plots and tables. Fancier DAGs might also show the input data, processed data, results, and outputs on the diagram too.</p>
+<p>Why is turning your project into a DAG important? Because, to be able to reproduce what you did, you must be able to clearly define what the steps were that took raw data at the start and output the finished product at the end.</p>
+</section>
+<section id="scripting-reproducible-analytical-pipelines" class="level3">
+<h3 class="anchored" data-anchor-id="scripting-reproducible-analytical-pipelines">Scripting Reproducible Analytical Pipelines</h3>
+<p>There’s still a manual step in the above logic. Even with the raw data and the folder structure, someone needs to come along and remember to run the (right) three scripts in the right order. But there’s no need to leave running the scripts in the right order to chance.</p>
+<p>There are a few options to automate the execution order of the scripts. One is to write all the scripts as modules with a main script, “main.py”, that runs everything else. The contents of main.py might look like this:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">""" main.py: Master script for project "project".</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> data_cleaning <span class="im">as</span> dc</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> analysis <span class="im">as</span> analysis</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> generate_plots_and_tables <span class="im">as</span> gen_outputs</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>dc.run()</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>analysis.run()</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>gen_outputs.run()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>With this arrangement, all the user has to know (perhaps from the README.md) is that they need to run “main.py” and it will take care of the rest. The code writer (often the same person as the user, but not always) does need to take the extra step of creating the relevant “run” functions in each of the three script files too though. And they need to ensure that <em>they</em> use main.py when generating their results (rather than running the scripts separately), because otherwise there may be differences.</p>
+<p>You can see an example project that uses the script method <a href="https://github.com/aeturrell/cookie-cutter-research-project">here</a>.</p>
+</section>
+<section id="make-for-reproducible-analytical-pipelines" class="level3">
+<h3 class="anchored" data-anchor-id="make-for-reproducible-analytical-pipelines">Make for Reproducible Analytical Pipelines</h3>
+<p>Make is a command line tool (to learn more about what the command line is, check out <a href="wrkflow-command-line.html" class="quarto-xref"><span>The Command Line</span></a>) that helps with automating the execution of a series of processes—exactly what we need in a RAP. Make does its magic via a command line script. Honestly, it’s pretty fussy and complicated, which perhaps explains why it’s not more popular, but it’s well worth considering as one option for gold-plated reproducible analytical pipelines.</p>
+<p>It’s worth saying up front that Make has little time for pipelines that produce more than one output per input dataset + script combination. This can be puzzling initially, but it’s actually probably good practice to have one output per unique combination of inputs. The place where it makes less sense, perhaps, is if you have one script that produces all of your figures and tables.</p>
+<p>Make is not a Python library, so you’ll need to download and install it separately. The installation instructions are different on different operating systems: you can find information on how to install Make <a href="https://www.gnu.org/software/make/">here</a>. On Mac, if you use homebrew, the command to install it is <code>brew install make</code>. Similar commands exist for Linux. In Windows, you can use the <a href="https://chocolatey.org/">chocolatey</a> package manager and then <code>choco install make</code> or work in the <a href="https://docs.microsoft.com/en-us/windows/wsl/install">Windows Subsystem for Linux</a>.</p>
+<p>There really is no better tutorial for Make out there than the one that the Alan Turing Institute has put together <a href="https://the-turing-way.netlify.app/reproducible-research/make/make-examples.html">here</a>, so there’s little point giving another tutorial here. It does assume some knowledge of command line scripting and version control, but it’s pretty comprehensive and a good place to go to see how to use Make for RAP.</p>
+<p>To give a flavour of how Make works, we’ll look at just one step from the Turing example. The most common thing you’d do with a project that uses Make is navigate to the project directory and use the command line to enter <code>make</code> and, sometimes, <code>make clean</code>. The repository in this example looks like this:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">📁</span> project</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> data/</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   ├── input_file_1.csv</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   └── input_file_2.csv</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> LICENSE</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> Makefile</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> output/</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> README.md</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> report/</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   └── report.tex</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> scripts/</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> generate_histogram.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The recipe for Make is put into a file called “Makefile” within your project folder:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contents of "Makefile" for analysis report</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">.PHONY:</span> all clean</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ex">all:</span> output/report.pdf</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="ex">output/figure_1.png:</span> data/input_file_1.csv scripts/generate_histogram.py</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">python</span> scripts/generate_histogram.py <span class="at">-i</span> $<span class="op">&lt;</span> -o <span class="va">$@</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="ex">output/figure_2.png:</span> data/input_file_2.csv scripts/generate_histogram.py</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="ex">python</span> scripts/generate_histogram.py <span class="at">-i</span> $<span class="op">&lt;</span> -o <span class="va">$@</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="ex">output/report.pdf:</span> report/report.tex output/figure_1.png output/figure_2.png</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">cd</span> report/ <span class="kw">&amp;&amp;</span> <span class="ex">pdflatex</span> report.tex <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> report.pdf ../output/report.pdf</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="ex">clean:</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rm</span> <span class="at">-f</span> output/report.pdf</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rm</span> <span class="at">-f</span> output/figure_<span class="pp">*</span>.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s walk through this and then we’ll talk about what it does. (NB: Make uses tabs, not spaces, for continued lines.) Bear in mind, Make is going to execute a RAP for us, so various bits of what’s in the Makefile are going to relate to parts of the process.</p>
+<p>First up, phony tells Make that “all” and “clean” are not the names of outputs from the project, but commands. “all” is defined by <code>all: output/report.pdf</code> and is the first target—which means that when <code>Make</code> is run without any other information, it will be called. You can see further down the page what “all” does: it uses the .tex file and two figures to run <code>pdflatex</code> on <code>report.tex</code>, thus compiling the latex to a pdf. (It also does some sensible moving things around in the file system.)</p>
+<p>“all” depends on the figures being there. So, if they aren’t, it will run the previous two commands listed in the makefile to create them: <code>output/figure_1.png</code> and <code>output/figure_2.png</code>. These rely on the input csv data and generate_histogram.py script being present and then run the scripts (remember, telling the command line <code>python script.py</code> runs the <code>script.py</code> from top to bottom). <code>-i</code> is a flag that precedes the name of an input, but rather than type out the name of the csv again, a shorthand has been used: <code>$&lt;</code>, which just means “look at the first thing in the command”. <code>-o</code> is the flag that precedes the name of an output but again a shorthand is used; <code>$@</code> means use the name of the target (here <code>output/figure_1.png</code> or <code>output/figure_2.png</code>).</p>
+<p>Finally, we mentioned earlier that it’s good practice to delete your ouputs and check that your RAP can re-execute and produce everything again. “clean” is the command that does this (via <code>make clean</code>). <code>rm</code> is command-line speak for remove, and <code>*</code> is a wildcard character that can mean anything so here it deletes <code>figure_1.png</code> and <code>figure_2.png</code> if they exist.</p>
+<p>One of the nice features of Make is that it can auto-generate the DAG that is defined in the Makefile. Here’s the makefile for this example rendered as a DAG by the programme <a href="https://github.com/lindenb/makefile2graph">makefile2DAG</a>, which uses another tool, graphviz.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://github.com/aeturrell/coding-for-economists/raw/main/img/makefile_example.png" class="img-fluid figure-img"></p>
+<figcaption>Directed acyclic graph of make example</figcaption>
+</figure>
+</div>
+<p>Another good feature is that Make doesn’t care <em>what</em> programme you’re using: pdflatex, python, R, whatever, <em>as long as you can call it from the command line</em>. Which is basically all programmes. So it’s very flexible too.</p>
+<p>One of the less nice features of Make is that it’s quite complex, and it doesn’t play that nicely with Windows. There is a lot extra that you can do with it, and with the complexity of your makefile, that goes beyond what we saw in the simple example above—though, as noted, the <a href="https://the-turing-way.netlify.app/reproducible-research/make/make-examples.html">Turing’s tutorial</a> is a great place to start.</p>
+<p><a href="https://snakemake.readthedocs.io/">Snakemake</a> is another tool that shares a lot of similarities with Make but, instead of a Makefile, you write instructions in an arguably simpler format, yaml. Despite being very much geared around the Python ecosystem (and especially biological and genetic applications), it can be used to automate any command that you would issue in your terminal.</p>
+</section>
+<section id="other-options-for-reproducible-analytical-pipelines" class="level3">
+<h3 class="anchored" data-anchor-id="other-options-for-reproducible-analytical-pipelines">Other Options for Reproducible Analytical Pipelines</h3>
+<p>Make can be quite unintuitive and doesn’t suit more complex tasks and dependencies in your DAG. Another option is to use “data orchestrators”. These still carry out a DAG, and do require a bit more configuration, but also have many more options. Some popular ones are <a href="https://docs.prefect.io/v3/get-started/index">Prefect</a>, <a href="https://airflow.apache.org/">Airflow</a> (older but more established), and <a href="https://docs.dagster.io/getting-started">Dagster</a>. The underlying technologies are all open source, but be warned that most orchestrators apart from Airflow will try and sell you their cloud services too. That could be helpful for you, but if you’re just trying it out, navigate to the docs to see how to use the open source code.</p>
+</section>
+</section>
+<section id="reproducible-python-environments" class="level2">
+<h2 class="anchored" data-anchor-id="reproducible-python-environments">Reproducible Python Environments</h2>
+<p>So, you’ve created your project’s code in a modular way, you’ve used a sensible structure for your files, <em>and</em> you’ve set everything up as a reproducible analytical pipeline (or RAP). But now imagine a scenario where your computer breaks, and you need buy a new one, load it up, and try to run the code, or perhaps your colleague or co-author wants to run the code. What do you do!?</p>
+<p>For code to be truly reproducible, you, your colleagues, and your co-authors (and possibly reviewers too) need to be able to do reproduce the exact set of packages and version of programming languages that you used to generate your results.</p>
+<p>Here we hit upon another important principle of reproducible analysis: <em>you should use a clean, dedicated Python environment and set of packages for each project that you do.</em> This means that only packages that are necessary for your RAP need be installed and included, and makes it easier to isolate what others will need to re-run that project’s scripts.</p>
+<p>Fortunately, Python makes this possible because it allows <em>virtual environments</em>: that is, you do not need to just have one, monolithic installation of Python on your computer but, instead, have many apparently different versions, each one dedicated to a particular project. And you can do it without the pain of actually installing many different versions of Python.</p>
+<p>Actually, for many years, this was quite complicated, so much so that it inspired the XKCD comic below! But although there are still unfortunately many tools for reproducing Python environments, the tools and situation are much better than they once were.</p>
+<p><img src="https://imgs.xkcd.com/comics/python_environment.png" class="img-fluid"></p>
+<p>It may be easier to illustrate creating Python environments with an example. Let’s say you’re using Python 3.8, statsmodels, and pandas for one project, project A. And, for project B, you’re using Python 3.8 with numpy and scikit-learn. Best practice would be to have two separate virtual Python environments: environment A, with everything needed for project A, and environment B, with everything needed for project B. This way, when you “hand over” project A to a colleague, what they need is clear—and even specified as <em>part</em> of the documents contained within the project. Better still, you can specify the version of Python too.</p>
+<p>There are two ways one could create reproducible Python environments that we’re going to look at in this section: <a href="https://docs.astral.sh/uv/">uv</a> and <a href="https://docs.anaconda.com/miniconda/">Miniconda</a>. <em>uv is recommended for full reproducibility but you may find Miniconda to be more convenient for some packages involving compiled code</em>. Miniconda can get you most, but not all, of the way to reproducible Python environments and are an excellent back-up option if you don’t want to use uv.</p>
+<p>Before we get into the details though, a word of warning: even if you install the same packages and the same version of a programming language, you may still get differences on different operating systems (or other differences in computers, like hardware). uv is at the absolute forefront of making environments work across operating systems but it’s a hard problem. This will be explored later on in this chapter.</p>
+<section id="reproducible-environments-with-uv" class="level3">
+<h3 class="anchored" data-anchor-id="reproducible-environments-with-uv">Reproducible Environments with uv</h3>
+<p><a href="https://docs.astral.sh/uv/">uv</a> is a relatively new but really quite amazing command line tool that performs several important tasks: - automatically creates virtual environments on a per project basis (these environments live in a <code>.venv</code> file in the root folder of your project) - manages and installs Python packages and their dependencies, and logs their versions automatically - manages and installs Python itself - can create cross-platform logs of all packages and their dependencies called a lock file - using the above, can do an install of a complete environment from a lock file - (advanced) builds Python packages - (advanced) uploads Python packages to PyPI where they can be installed by others</p>
+<p>To use uv, install it, and navigate to your project folder within the command line. Then run <code>uv init</code>. This will create a (human-readable) <code>pyproject.toml</code> file that lists the packages needed for your project. It will also create a virtual Python environment just for your project.</p>
+<p>To add and install packages, the command is <code>uv add package-name</code>. As you add packages, you will see that <code>pyproject.toml</code> automatically becomes populated with what you installed. Here’s an excerpt of a typical <code>pyproject.toml</code> file designed for reproducibility:</p>
+<pre class="text"><code>requires-python = "&gt;=3.9"
+dependencies = [
+    "click&gt;=8.1.7",
+    "ipykernel&gt;=6.29.5",
+    "numpy&gt;=2.0.2",
+    "pandas-stubs&gt;=2.2.2.240807",
+    "pandas&gt;=2.2.3",
+    "polars&gt;=1.17.1",
+    "pyarrow&gt;=18.1.0",
+    "pygments&gt;=2.18.0",
+    "rich&gt;=13.9.4",
+    "typeguard&gt;=4.4.1",
+]
+</code></pre>
+<p>The first line here says that this runs on any Python version greater than 3.9. The rest sets out the main dependencies, or packages directly needed for the project, and their minimum versions.</p>
+<p>A second file, <code>uv.lock</code>, is also created. This “locks” down the dependencies of your packages. It’s also human-readable, just not very compelling. Visual Studio Code will happily open both types of file. In that file is a list of every package directly used, the version that’s installed, and the dependencies of that package and what versions of <em>those</em> is installed.</p>
+<p>So when you send someone else the project, they will get the automatically generated <code>pyproject.toml</code> and <code>uv.lock</code> files. Then, all they need is to navigate to the project folder in the command line, and enter <code>uv sync --frozen</code>. This will install all of the (same versions of) packages needed to run the code!</p>
+<p>Note that, if you want to use the virtual environment to run scripts or tools installed using <code>uv add</code>, you will need to use <code>uv run command-name</code> rather than the usual <code>command-name</code>. For example, if you have a script <code>analysis.py</code>, you would call it with <code>uv run Python analysis.py</code>.</p>
+<p>uv is fast becoming the best go-to option for reproducible Python environments.</p>
+</section>
+<section id="semi-reproducible-environments-with-miniconda" class="level3">
+<h3 class="anchored" data-anchor-id="semi-reproducible-environments-with-miniconda">Semi-reproducible Environments with Miniconda</h3>
+<p>Miniconda is a package and environment manager that supports Python and R. It’s very much geared toward data science, and has been around for a while. (This book uses it for its reproducible environment.)</p>
+<p>Note that Miniconda provides pre-built package binaries. This is especially useful on some systems where compiling packages is a nuisance (yes, it’s Windows being difficult again). For this reason, and some others to do with guarantees around package quality, Miniconda is a popular choice for corporate coding setups.</p>
+<p>However, that doesn’t mean it’s a good choice. It has some serious failings when it comes to reproducibility, which we’ll get to.</p>
+<p>Before we talk about reproducibility, we’re going to look at creating conda environments from a file. While creating environments from a file isn’t sufficient alone for reproducibility, it is necessary, and it’s useful to know about in any case.</p>
+<p><strong>Miniconda and Python environments</strong></p>
+<p>This section outlines a really powerful and useful feature of Miniconda that doesn’t quite get us to full reproducibility.</p>
+<p>Miniconda has an option for creating environments from a file. It uses an <code>environment.yml</code> file to do this. A yaml file is just a good old text file with the extension <code>.yml</code> instead of <code>.txt</code> and a certain layout of items (human-readable). You can open and edit yaml files in Visual Studio Code. Here’s the contents of a simple <code>environment.yml</code> file; the packages can be pinned down just as the version of Python is (for example <code>pandas=1.3.3</code> instead of <code>pandas</code>) but the code below just installs the latest compatible version:</p>
+<pre class="text"><code>name: codeforecon
+channels:
+  - conda-forge
+dependencies:
+  - python=3.8
+  - pip
+  - pandas
+  - pip:
+    - plotnine</code></pre>
+<p>There’s quite a bit going on here so let’s break it down. First, the version of Python. This is pinned to 3.8 by the line <code>python=3.8</code>. Second, the “channels” are where packages can be picked up from. “conda-forge” is a community-led effort that holds a superset of other packages and, by including it, you’re saying you’re happy for packages to come via this route too. Then the “dependencies” section lists the actual dependencies. These are what you’d get alternatively by running <code>conda install pandas</code>, etc., on the command line (assuming you had already installed Miniconda and put it on your computer’s PATH).</p>
+<p>There are so many python packages out there that not all of them are available via conda or conda-forge, and sometimes the packages available on these channels are not the latest versions. So we also include <code>pip</code> as a dependency and then go on to say “install some dependencies via <code>pip</code>”, that is install these as if a person had typed <code>pip install packagename</code> on the command line. Remember, pip installing a package pulls it down from PyPI, which is the biggest and most widely used Python package store.</p>
+<p>Once you have your <code>environment.yml</code> file, you can install it on the command line with:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> environment.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It can take some time to create a new environment as Miniconda tries to resolve all possible clashes and dependencies in the packages you asked for; it takes longer the more packages you have. (As an example of an environment file that takes a really long time to solve, look no further than the one used to create this book! The book uses many packages, all with their own dependencies and constraints, to finding a set of versions that can work together is time-consuming.) To use your newly created environment, it’s</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate codeforecon</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>on the command line, where <code>codeforecon</code> what be whatever name you put at the start of your <code>environment.yml</code> file. If everything has worked you should see</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">codeforecon</span><span class="kw">)</span> <span class="ex">your-computer:your-folder</span> your-name$</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>on the command line, if you’re using the bash terminal, though this book recommends the zsh terminal. Now, every time you run a command, it will be in this Python environment. You can deactivate the environment with <code>conda deactivate</code> to go back to the base environment or <code>conda activate other-environment</code> (with the name of a different existing environment) to switch.</p>
+<p><strong>Semi-reproducible Miniconda Python environments</strong></p>
+<p>Now, having delved into how Miniconda environments work, let’s think about how to make them reproducible. What we did above, pinning the version of <em>Python</em> but not the packages is not going to cut the mustard. Conda environment.yml files are very useful for defining desired environments but there are times, as here, when we want to be able to <em>exactly</em> reproduce an environment—including the dependencies of the dependencies.</p>
+<p>Unfortunately there’s just no good way to do this with Miniconda currently. Although it’s possible to completely and automatically lock down the versions of packages installed in the first part of the environment.yml file, ie those that can be conda installed, it is not currently possible to automatically lock down the packages that are installed by pip. There are some nuances to that story, but the important point is it’s just too painful and complicated to create perfectly reproducible environments using conda &amp; pip together right now (and, really, you want a solution that can cover both given conda doesn’t cover all Python packages).</p>
+<p>So what do semi-reproducible Miniconda Python environments look like? They look just like what we saw above; manually creating a <code>environment.yml</code> with the version of Python pinned and the names of both conda and pip packages listed but without their versions. Then, to install this, it’s <code>conda env create -f environment.yml</code>.</p>
+</section>
+</section>
+<section id="reproducible-computational-environments" class="level2">
+<h2 class="anchored" data-anchor-id="reproducible-computational-environments">Reproducible Computational Environments</h2>
+<p>“But it works on my computer!” Ever heard that? The tools in the previous section are fantastic for reproducibility but only up to a point. The hard truth is that code packages prepared for different operating systems can have differences, most often if the package contains C or other compiled language code.</p>
+<p><img src="https://external-preview.redd.it/aR6WdUcsrEgld5xUlglgKX_0sC_NlryCPTXIHk5qdu8.jpg?auto=webp&amp;s=5fe64dd318eec71711d87805d43def2765dd83cd" class="img-fluid"></p>
+<p>For example, because it’s hard to compile code on the fly in Windows, there are pre-compiled versions of popular packages available, either through Miniconda or just on the <a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/">websites of enthusiasts</a>. The way Windows compiles code is different to Mac, which is different to Linux, and so on.</p>
+<p>So to be <em>really</em> sure that your project will run exactly the same on another system, you must not only reproduce the packages and their dependencies but also the computational environment they were run in.</p>
+<p>By far the most popular tool for creating virtual operating systems that you can then work in is called <a href="https://www.docker.com/">Docker</a>. Docker containers are a “standard unit” of software that packages up code and all its dependencies so a project runs the same regardless of what your computing environment looks like. A Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries (eg the operating system) and settings. Docker essentially puts a mini standardised operating system on top of whichever one you’re using.</p>
+<p>To run Docker, you will need to <a href="https://www.docker.com/products/docker-desktop">install it</a> but be warned—it’s quite demanding on your system when it’s running.</p>
+<p>Docker images are defined by “dockerfiles” and, as we’ve seen in the rest of this chapter, this is going to mean a plain text file with some weird formatting! Once a dockerfile is written it can then be built into an image (a time-consuming process), and finally run on your computer.</p>
+<p>You can find lots more information about Docker on the internet, including this <a href="https://testdriven.io/blog/docker-best-practices">popular article</a> on best practices with Docker for Python developers—although you should be aware that it is written with production-grade software in mind, not RAP.</p>
+<p>How do you create a docker file (the text based version of your repo)? There are two main options; the former is easier but the latter comes with more guarantees about long-term reproducibility.</p>
+<p><strong>repo2docker</strong></p>
+<p>You can create a dockerfile automatically from a github repository using the <a href="https://github.com/jupyterhub/repo2docker">repo2docker</a> tool. repo2docker is used to create interactive repos in the supremely wonderful <a href="https://mybinder.org/">Binder</a> project, which you can use to run code from this book (it’s under the rocketship icon at the top of the page).</p>
+<p>repo2docker will look at a repository (which could be GitHub, GitLab, Zenodo, Figshare, Dataverse installations, a Git repository or a local file directory) and build a Docker container image in which the code can be executed. The image build process is based on the configuration files found in the repository.</p>
+<p>Lots of different configuration files are supported by repo2docker. Miniconda’s <code>environment.yml</code> are, and it’s recommended that you export your working environment using <code>conda env export --from-history -f environment.yml</code> to build an image using this technology (but note that this will not pick up any packages installed using other approaches). Another standard option is including a <code>requirements.txt</code> file, which you can create from pip via <code>pip freeze &gt; requirements.txt</code>.</p>
+<p><strong>Create your own Dockerfile</strong></p>
+<p>Another option is to create a Dockerfile specific to your project. You can find a simple Dockerfile for an example project over at [this repo].</p>
+<p>Of course, there’s a Visual Studio Code extension for Dockerfiles.</p>
+<p>Note that for each instruction or command from the Dockerfile, the Docker builder generates an image layer and stacks it upon the previous ones. To make any rebuilding of your dockerfile less painful, you can ensure that only the later lines change, insofar as is possible.</p>
+<p>To build this docker image, the command line command to run in the relevant directory is</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> pythonbasic .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>which will tag the built docker image with the name “pythonbasic”. To run the created image as a container, it’s</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-t</span> <span class="at">-d</span> <span class="at">--name</span> pybasicrun pythonbasic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>where <code>--name</code> gives the running instance a name <code>pybasicrun</code>. And then to enter the docker container and use commands within it, the command to launch the bash shell is</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> exec <span class="at">-i</span> <span class="at">-t</span> pybasicrun /bin/bash</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you run this, you should see something like:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">root@ec5c6d10ebc3:/app#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Create a Dockerfile from the above text, build it, run the container, and then jump into it. Now, inside the docker container, run <code>printf "print('hello world')" &gt;&gt; test.py</code> and then <code>python test.py</code>. Your “hello world” message should appear on the command line.</p>
+</div>
+</div>
+<p>If you can see this, congratulations! You’ve just set up your first Python-enabled Docker container. To quit the Docker container use <kbd>ctrl</kbd> + <kbd>c</kbd>, <kbd>ctrl</kbd> + <kbd>d</kbd>.</p>
+<p>To stop the container that’s running and remove it in one go, use <code>docker rm pybasicrun --force</code> once you’ve quit the running instance.</p>
+<p><strong>Developing using Visual Studio Code within a Docker container</strong></p>
+<p>Now, developing on the command line like this is no fun, clearly. You want access to all of the power of an IDE. Fortunately, Visual Studio Code is designed to be able to connect from your desktop computer to the <em>inside</em> of your Docker container and provide a development experience as if you were running Visual Studio Code as normal.</p>
+<p>You can find instructions and a LOT more detail <a href="https://code.visualstudio.com/docs/remote/attach-container#_attach-to-a-docker-container">here</a>, but the short version is that you:</p>
+<ol type="1">
+<li>Install the VS Code remote: containers extension (<a href="https://code.visualstudio.com/docs/remote/remote-overview">more info on that here</a>)</li>
+<li>Click on the ‘remote explorer’ icon on the left-hand panel in Visual Studio Code.</li>
+<li>Select “containers” from the drop-down menu (not “SSH Targets” or “Github Codespaces”)</li>
+<li>Right-click on the image you’d like to connect to (perhaps “pythonbasic” from the example above), and hit “Attach to container”</li>
+</ol>
+<p>You should see a new Visual Studio Code window pop up with a message, “Starting Dev Container”. This may take a while on the first run, as VS Code installs what it needs to connect remotely. But, once it’s done, you’ll find that you can navigate your Docker container, open a terminal in it, and do a lot of what you would normally but <em>within</em> the Docker container.</p>
+<p>As an aside, you can do much the same trick with other VS Code remote options—SSH or GitHub Codespaces, but don’t worry if you don’t know what these are.</p>
+<p>Also note that you could do your entire development in a Docker container from the start if you wished to truly ensure that everything was isolated and repeatable. For extremely advanced users creating software tools, this <a href="https://code.visualstudio.com/docs/remote/create-dev-container">article explains how you can create a “development container”</a> for software development. For everyone else, a variation on what we’ve seen would be fine.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Attach Visual Studio Code to a docker container and then use the VS Code window that is connected to your running image to create a new file called test.py. Write <code>print('hello world')</code> in that file, save it, and use the VS Code integrated terminal to run it within the docker container.</p>
+</div>
+</div>
+<p><strong>A docker image with uv and all packages specified</strong></p>
+<p>This chapter is supposed to be about reproducibility, but we’ve taken a real detour into Docker and operating systems, and remote development. But have no fear because our digressions have been equipping us to create a fully reproducible environment.</p>
+<p>What we need for a fully reproducible environment is the code, the language, the packages, the dependencies of the packages, and the operating system to be specified. We are now in a position to do all that. We’ll even create the DAG and pipeline using Make and graphviz!</p>
+<p>Over at <a href="https://github.com/aeturrell/example-reproducible-research">example-reproducible-research</a> there’s a complete end-to-end example of putting all of this into practice. You can see the DAG that’s executed there, but it’s</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://github.com/aeturrell/example-reproducible-research/raw/main/assets/out.png" class="img-fluid figure-img"></p>
+<figcaption>DAG for the example repo</figcaption>
+</figure>
+</div>
+<p>There’s a lot going on here but mostly it’s about getting a fixed version of Python and the Debian flavour of Linux operating system, installing Latex, ensuring running <code>python</code> on the command line picks up the version of Python we want, installing uv (for reproducible Python package environments), using uv to add specific versions of packakes by installing what’s in the pyproject.toml file and uv.lock file (neither of these are shown, but are assumed to be in the directory that is copied into the Docker container, and should have versions pinned), copying all of the contents of the current directory into the Docker container, and finally executing the DAG via uv and make.</p>
+<p>If you’d like to try is for yourself and execute the DAG, the instructions are in the <a href="https://github.com/aeturrell/example-reproducible-research">separate repo</a>.</p>
+<p>The final output of the project, <code>report.pdf</code>, is saved in the outputs folder within the running docker instance.</p>
+<p>To export the final report out of the docker container and to your current directory, use the following command on your computer (not in the container)</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> cp repro_run:app/output/report.pdf .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To exit a running Docker command line terminal, use ctrl + c, ctrl + d.&nbsp;To remove the image and stop it running, use <code>docker rm repro_run --force</code>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Follow the instructions in this section and export the report.pdf that’s generated from the Dockerfile.</p>
+</div>
+</div>
+</section>
+<section id="saving-your-analysis-for-prosperity" class="level2">
+<h2 class="anchored" data-anchor-id="saving-your-analysis-for-prosperity">Saving Your Analysis For Prosperity</h2>
+<p>True reproducible analysis should be findable and accessible, as well as interoperable and re-usable (these are the FAIR principles for data, but they pretty much work for analysis too). So how can you make what you’ve done findable and accessible to others?</p>
+<p>Before we try to answer that, it’s worth noting that, for an analysis that’s to be preserved in perpetuity, you really want to freeze it in time. So although github and gitlab are great to sharing dynamically changing content, they’re not as good for long-term preservation. Or, at the very least, you need clear version labels that are used to say what version of the code was used to produce a particular analysis.</p>
+<p>There are some fantastic options out there for preserving your code base (and therefore your reproducible project) while also making it findable and accessible. <a href="https://zenodo.org/">Zenodo</a> accepts both code and data (up to 50GB at the time of writing), and gives each repo a DOI, or Digital Object Identifier, a “perma-link” that will always take users to that repository regardless of other website changes. Importantly, different versions are supported and clearly labelled.</p>
+<p>You can also now integrate a github repo and Zenodo; instructions are available in <a href="https://the-turing-way.netlify.app/communication/citable/citable-cite.html#cm-citable-cite-software">The Turing Way</a>.</p>
+<p>You can also integrate Zenodo, a github repo, and Binder too: so that people coming to your analysis on Zenodo can, with a single click, create a fully interactive version of your analysis on Binder! See this <a href="https://blog.jupyter.org/binder-with-zenodo-af68ed6648a6">blog post</a> for details, and you may want to read the section above on repo2docker too.</p>
+<p><a href="https://figshare.com/">Figshare</a> is a similar service to Zenodo.</p>
+</section>
+<section id="bringing-it-all-together" class="level2">
+<h2 class="anchored" data-anchor-id="bringing-it-all-together">Bringing It All Together</h2>
+<p>Reproducible analysis is a bit more tricky than you thought, eh? But, as noted at the start, you can derive a lot the value by doing only some of the steps. Although it’s also worth thinking about reproducible analysis <em>right from the start of a project</em> so that it’s not really painful to lever it back in at the end. In research especially, because you’re exploring as you go, this can be hard work and you may have to “refactor” your code multiple times. Favouring simplicity over complexity can make it all go a lot more smoothly.</p>
+<p>We’ve looked at numerous tools throughout this chapter, especially for reproducibility for the steps at the start from automatic execution of your RAP onwards. It’s worth suggesting a default set of tools which this book recommends as:</p>
+<p><strong>Recipe 1 for complete reproducible analytical pipelines</strong></p>
+<ol type="1">
+<li>modular code in scripts</li>
+<li>Make for automatic execution of scripts and other tools according to a directed acyclic graph</li>
+<li>uv for capturing the versions of Python, packages, and the dependencies of packages</li>
+<li>manually creating a dedicated Dockerfile to reproduce an operating system</li>
+</ol>
+<p>Some of these tools are not very friendly to beginners, and sometimes uv can be less convenient for installing package dependencies that are not Python packages than <code>conda</code> (especially on Windows), so an alternative that goes a long way toward reproducibility is:</p>
+<p><strong>Recipe 2 for reproducible analytical pipelines</strong></p>
+<ol type="1">
+<li>modular code in scripts</li>
+<li>A “main.py” script for automatic execution of scripts and other tools according to a directed acyclic graph (Python scripts can execute terminal commands too)</li>
+<li>A manually written <code>environment.yml</code> file for specifying the names (but not versions) of packages and the version of Python (for an example, see <a href="https://github.com/aeturrell/coding-for-economists/blob/b4ad9ad978bcc2b0718155b42296088c8d90c548/codeforecon.yml">here</a>)</li>
+<li>creating a dedicated Dockerfile to reproduce an operating system, either manually or using repo2docker</li>
+</ol>
+<p>In both cases, using a service like Zenodo to freeze your project in time, create a citation, create a DOI, and make your project findable is recommended.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use the two “recipes” above to help you decide what tools to use in your reproducible analytical pipeline.</p>
+</div>
+</div>
+<p>Finally, there are a few other good programming practices that you can follow to enhance the long-term sustainability and reproducibility of your code, especially as your code base gets bigger or more complex. You may not have heard of these yet, and they will or do appear in other chapters (especially <a href="code-advanced.html" class="quarto-xref"><span>Coding</span></a> and <a href="code-advcd-best-practice.html" class="quarto-xref"><span>Shortcuts to Better Coding</span></a>), but they are listed here for completeness.</p>
+<ul>
+<li>unit testing</li>
+<li>error handling</li>
+<li>documentation of functions via docstrings</li>
+<li>using a code style such as <a href="https://black.readthedocs.io/">black</a></li>
+<li>consider using <a href="http://mypy-lang.org/">typing</a> and <a href="https://typeguard.readthedocs.io/">typeguarding</a>, at least for some code</li>
+<li>input data validation</li>
+<li>logging</li>
+<li>pre-commit hooks</li>
+<li>continuous integration</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/aeturrell\.github\.io\/coding-for-economists");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./wrkflow-environments.html" class="pagination-link" aria-label="Virtual Code Environments">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Virtual Code Environments</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./time-intro.html" class="pagination-link" aria-label="Introduction to Time">
+        <span class="nav-page-text"><span class="chapter-title">Introduction to Time</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>This book is available under an MIT license.</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/aeturrell/coding-for-economists/blob/main/wrkflow-rap.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/aeturrell/coding-for-economists/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
