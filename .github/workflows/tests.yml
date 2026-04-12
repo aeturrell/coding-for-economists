@@ -34,7 +34,7 @@ jobs:
         run: uv python install
 
       - name: Install dependencies
-        run: uv sync
+        run: uv sync --all-extras --dev
 
       - name: Install Quarto
         uses: quarto-dev/quarto-actions/setup@v2
@@ -72,6 +72,9 @@ jobs:
       - name: build the book
         run: |
           uv run quarto render --execute
+        env:
+            # This forces Quarto to use the Python inside your uv venv
+            QUARTO_PYTHON: .venv/bin/python
 
       - name: success
         run: |
