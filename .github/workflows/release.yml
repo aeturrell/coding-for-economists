@@ -63,7 +63,7 @@ jobs:
 
       - name: build the book
         run: |
-          uv run quarto render
+          uv run quarto render --execute
 
       - name: Check if there is a parent commit
         id: check-parent-commit
@@ -76,7 +76,7 @@ jobs:
         uses: salsify/action-detect-and-tag-new-version@v2.0.3
         with:
           version-command: |
-            python3 -c "import tomllib; print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])"
+            uv run python -c "import toml; print(toml.load('pyproject.toml')['project']['version'])"
 
       - name: Bump version for developmental release
         if: "! steps.check-version.outputs.tag"
@@ -85,7 +85,7 @@ jobs:
 
       - name: Publish
         if: steps.check-version.outputs.tag
-        run: uv run ghp-import -n -p -f _book
+        run: uv run quarto publish gh-pages --no-render --no-browser
 
       - name: Publish the release notes
         uses: release-drafter/release-drafter@v6.0.0

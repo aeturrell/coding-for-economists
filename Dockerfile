@@ -2,7 +2,7 @@
 # Please note that you will need a lot of RAM dedicated to Docker to build this image (15Gb+, change this in your docker settings)
 
 # Set base image
-FROM python:3.10-slim
+FROM python:3.10.16-slim
 
 WORKDIR /app
 
