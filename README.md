@@ -28,7 +28,7 @@ To make changes:
 1. create a new branch
 2. install the Python environment or alternatively build and work in the docker image (which comes with the Python environment)
 3. make your content changes, amending the Python environment as necessary (eg add packages via `uv add <packagename>`)
-4. Check your changes look right with `uv run quarto render --execute` to render the book, and `uv run python -m http.server -d _book 8000` to read it locally
+4. Check your changes look right with `uv run quarto render --execute` to render the book, and `uv run python -m http.server -d _book 8000` to read it locally then head to "http://localhost:8000" to see it.
 5. run pre-commit using `uv run pre-commit run --all-files`
 6. if the checks clear, commit your change(s) 
 7. make a pull request
