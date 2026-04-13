@@ -89,9 +89,9 @@ You may also find yourself wanting to display numerical or other values directly
 
 ```python
 col1, col2, col3 = st.columns(3)
-col1.metric("Temperature","70 °F","1.2 °F")
-col2.metric("Wind","9 mph","-8%")
-col3.metric("Humidity","86%","4%")
+col1.metric("Temperature", "70 °F", "1.2 °F")
+col2.metric("Wind", "9 mph", "-8%")
+col3.metric("Humidity", "86%", "4%")
 ```
 
 Let's move on now to visualisations. Streamlit supports a wide range of visualisation options, including packages such as **altair**, **matplotlib**, **plotly**, **bokeh**, and even graph viz (a tool used to draw directed cyclic graphs). Because they are so widely used for dashboards, we'll look at visualisations using **matplotlib**, **altair**, and **plotly**. The functional form of the command used to display a chart is going to be similar in each case, along the lines of `st.method(chart object)`.
@@ -100,10 +100,12 @@ First, we need some data to visualise though. Let's create some.
 
 ```python
 seed_for_prng = 78557
-prng = np.random.default_rng(seed_for_prng)  # prng=probabilistic random number generator
+prng = np.random.default_rng(
+    seed_for_prng
+)  # prng=probabilistic random number generator
 x = np.linspace(0, 8, 16)
-y1 = 3 + 4*x/8 + prng.uniform(0.0, 0.5, len(x))
-y2 = 1 + 2*x/8 + prng.uniform(0.0, 0.5, len(x))
+y1 = 3 + 4 * x / 8 + prng.uniform(0.0, 0.5, len(x))
+y2 = 1 + 2 * x / 8 + prng.uniform(0.0, 0.5, len(x))
 ```
 
 Here's an example of a chart of this data using **matplotlib**. Within your script, create the chart using the code almost as normal. The only difference is that to display the created chart you'll need to use the special method `st.pyplot()`.
@@ -111,11 +113,10 @@ Here's an example of a chart of this data using **matplotlib**. Within your scri
 ```python
 # usual code for plot
 fig, ax = plt.subplots()
-ax.fill_between(x, y1, y2, alpha=.5, linewidth=0)
-ax.plot(x, (y1 + y2)/2, linewidth=2)
+ax.fill_between(x, y1, y2, alpha=0.5, linewidth=0)
+ax.plot(x, (y1 + y2) / 2, linewidth=2)
 ax.set_title("Chart with forecast bands", loc="left")
-ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
-       ylim=(0, 8), yticks=np.arange(1, 8))
+ax.set(xlim=(0, 8), xticks=np.arange(1, 8), ylim=(0, 8), yticks=np.arange(1, 8))
 ax.set_xlabel("Time")
 ax.set_ylabel("Value")
 # Show the chart on the streamlit dashboard
@@ -125,12 +126,12 @@ st.pyplot(fig)
 Now let's look at the plotting library **altair**, which is particularly well-suited to dashboards and live web elements. You'll need to have the **altair** package installed to run this. Note that the tooltip option makes the chart interactive, while the `use_container_width=True` option changes the size of the figure to fit the streamlit container that it's in. All of the usual interactivity available in this package works. There are some other nice features too, like providing users with an easy way to save the figure in png or svg. **altair** works less well with large datasets though.
 
 ```python
-df = pd.DataFrame(
-     prng.standard_normal(size=(200, 3)),
-     columns=['a', 'b', 'c'])
-alt_chart = alt.Chart(df).mark_circle().encode(
-     x='a', y='b', size='c', color='c', tooltip=['a', 'b', 'c']
-     )
+df = pd.DataFrame(prng.standard_normal(size=(200, 3)), columns=["a", "b", "c"])
+alt_chart = (
+    alt.Chart(df)
+    .mark_circle()
+    .encode(x="a", y="b", size="c", color="c", tooltip=["a", "b", "c"])
+)
 st.altair_chart(alt_chart, use_container_width=True)
 ```
 
@@ -138,9 +139,16 @@ Finally, let's try **plotly**, which also has interactivity built-in.
 
 ```python
 import plotly.express as px
+
 df = px.data.iris()
-pxfig = px.scatter(df, x="sepal_width", y="sepal_length", color="species",
-                 size='petal_length', hover_data=['petal_width'])
+pxfig = px.scatter(
+    df,
+    x="sepal_width",
+    y="sepal_length",
+    color="species",
+    size="petal_length",
+    hover_data=["petal_width"],
+)
 st.plotly_chart(pxfig, use_container_width=True)
 ```
 
@@ -151,8 +159,8 @@ Although we've already seen built-in interactivity via a couple of the chart pac
 What's quite amazing is how simple this interactivity is to implement. For example, a button that displays a message is clicked into the 'on' position is as simple as:
 
 ```python
-if st.button('Say Hello'):
-    st.write('Hello!')
+if st.button("Say Hello"):
+    st.write("Hello!")
 ```
 
 There's some magic going on here: if a user clicks the button marked "Say Hello" then `st.button("Say Hello")` returns true and `st.write("Hello!")` is executed. While this is a simple example, you could execute anything in that block.
@@ -160,14 +168,13 @@ There's some magic going on here: if a user clicks the button marked "Say Hello"
 That's quite a simple and straightforward case; what if there are multiple options? Radio buttons offer several different options at once and have the syntax, `st.radio(question, list or pandas series of categories)`. For example:
 
 ```python
-
 genre = st.radio(
-     "What's your favourite movie genre",
-     ('Comedy', 'Drama', 'Documentary'))
-if genre == (answer := 'Comedy'):
-    st.write(f'You selected {answer}.')
-elif genre == (answer := 'Drama'):
-    st.write(f'You selected {answer}.')
+    "What's your favourite movie genre", ("Comedy", "Drama", "Documentary")
+)
+if genre == (answer := "Comedy"):
+    st.write(f"You selected {answer}.")
+elif genre == (answer := "Drama"):
+    st.write(f"You selected {answer}.")
 else:
     st.write("You didn't select comedy or drama.")
 ```

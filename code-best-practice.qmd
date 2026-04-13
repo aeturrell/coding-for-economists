@@ -52,14 +52,14 @@ In summary:
 - avoid 'magic numbers', eg numbers in your code that set a key parameter. Set these as named constants instead. Here's an example:
   ```python
     import random
-
+  
     # This is bad
     def roll():
         return random.randint(0, 36)  # magic number!
-
+  
     # This is good
     MAX_INT_VALUE = 36
-
+  
     def roll():
         return random.randint(0, MAX_INT_VALUE)
   ```
@@ -96,9 +96,9 @@ list_var = [1, 2, 3, 4]
 rather than
 
 ```python
-list_var = [1,2,3,4]
+list_var = [1, 2, 3, 4]
 # or
-list_var = [1 , 2 , 3 , 4]
+list_var = [1, 2, 3, 4]
 ```
 
 There are packages that can re-organise your whitespace for you; these are featured in the Chapter on @sec-code-advcd-best-practice.
@@ -117,12 +117,8 @@ In summary,
 For quite arbitrary historical reasons, PEP8 also suggests 79 characters for each line of code. Some find this too restrictive, especially with the advent of wider monitors. But it is good to split up very long lines. Anything that is contained in parenthesis can be split into multiple lines like so:
 
 ```python
-def function(input_one, input_two,
-             input_three, input_four):
-    result = (input_one,
-              + input_two,
-              + input_three,
-              + input_four)
+def function(input_one, input_two, input_three, input_four):
+    result = (input_one, +input_two, +input_three, +input_four)
     return result
 ```
 
@@ -170,9 +166,11 @@ def transform(text, uppercase):
     else:
         return text.lower()
 
+
 # This is good
 def uppercase(text):
     return text.upper()
+
 
 def lowercase(text):
     return text.lower()
@@ -199,7 +197,7 @@ def round_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         pd.DataFrame: Dataframe with numbers rounded to 2 s.f.
     """
     for col in df.select_dtypes("number"):
-        df[col] = df[col].apply(lambda x: float(f'{float(f"{x:.2g}"):g}'))
+        df[col] = df[col].apply(lambda x: float(f"{float(f'{x:.2g}'):g}"))
     return df
 ```
 
@@ -253,7 +251,8 @@ Then, we use the convention that code executed for a project should have the pro
 
 ```python
 import pandas as pd
-df = pd.read_csv('data/raw/file.csv')
+
+df = pd.read_csv("data/raw/file.csv")
 ```
 
 This works great on Mac and Linux, but it's not going to work on Windows; Windows uses backwards slashes, and back slashes unfortunately tend to do other things in programming too. To ensure relative paths work *across* operating systems, the best way is to wrap the file path in a call to the `Path()` method in the **pathlib** module:
@@ -262,7 +261,7 @@ This works great on Mac and Linux, but it's not going to work on Windows; Window
 from pathlib import Path
 import pandas as pd
 
-path_to_data = Path('data/raw/file.csv')
+path_to_data = Path("data/raw/file.csv")
 df = pd.read_csv(path_to_data)
 ```
 
