@@ -16,9 +16,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Set pandas max rows displayed for readability
-pd.set_option('display.max_rows', 6)
+pd.set_option("display.max_rows", 6)
 # Plot settings
-plt.style.use("https://github.com/aeturrell/coding-for-economists/raw/main/plot_style.txt")
+plt.style.use(
+    "https://github.com/aeturrell/coding-for-economists/raw/main/plot_style.txt"
+)
 ```
 
 ## Reading in data from a file
@@ -28,7 +30,7 @@ The syntax for reading in data is usually very similar and of the form `pd.read_
 ```python
 import pandas as pd
 
-df = pd.read_csv('data.csv')
+df = pd.read_csv("data.csv")
 ```
 
 These examples assume that the data file is in the *working directory* of the Python console, but what if it's not?
@@ -40,7 +42,7 @@ Here's a really typical example of reading in a csv called 'data.csv' whose rela
 ```python
 from pathlib import Path
 
-df = pd.read_csv(Path('research/files/data.csv'))
+df = pd.read_csv(Path("research/files/data.csv"))
 ```
 
 **pathlib** takes care of paths on different operating systems: it doesn't mind you using forward slashes, even on Windows, because it will translate the relative path you have entered into whatever the local operating system needs. There are introductory videos to **pathlib** and its use available [here](https://calmcode.io/pathlib/do-not-hardcode.html).
@@ -53,7 +55,7 @@ Imagine you have a directory full of files with names like 'Jan-2001-data.csv', 
 
 ```python
 p = Path("research/data")
-list_of_files = list(p.glob('*-data.csv'))
+list_of_files = list(p.glob("*-data.csv"))
 ```
 
 Here, the `*` character is a wildcard that can match to anything (including any number of characters). You can keep it more specific by, for example, searching for a single wildcard character with `?` or any single digit with `[0-9]`.
@@ -85,10 +87,8 @@ It's best *not* to use formats associated with proprietary software, especially 
 It's frequently the case that you'll want to write an individual table, chunk of text, or other content that can be opened with a text editor to file. **pandas** has some convenience functions for this (there was a short example in the data analysis quickstart). Let's say we had a table:
 
 ```{python}
-df = pd.read_csv('https://vincentarelbundock.github.io/Rdatasets/csv/dplyr/storms.csv')
-table = (df.groupby(['month'])
-           .agg({'wind': 'mean',
-                 'pressure': 'mean'}))
+df = pd.read_csv("https://vincentarelbundock.github.io/Rdatasets/csv/dplyr/storms.csv")
+table = df.groupby(["month"]).agg({"wind": "mean", "pressure": "mean"})
 table
 ```
 
@@ -109,13 +109,13 @@ Each of these export options accepts a filepath to write to, eg one can write `t
 If you have a string, bit of tex, or chunk of markdown that isn't coming directly from **pandas**, you can use base Python to write it to a file. Let's say we wanted to take some text,
 
 ```python
-text = 'The greatest improvement in the productive powers of labour, and the greater part of the skill, dexterity, and judgment with which it is anywhere directed, or applied, seem to have been the effects of the division of labour.'
+text = "The greatest improvement in the productive powers of labour, and the greater part of the skill, dexterity, and judgment with which it is anywhere directed, or applied, seem to have been the effects of the division of labour."
 ```
 
 and write it to file. The command would be
 
 ```python
-open('file.txt', 'w').write(text)
+open("file.txt", "w").write(text)
 ```
 
 ## Review

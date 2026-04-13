@@ -1,6 +1,5 @@
 # Automating Research Outputs {#sec-auto-research-outputs}
 
-
 In this chapter, you'll learn how to automate the inclusion of figures and tables in LaTeX-derived research outputs including PDFs and slides——plus how to convert those outputs to Microsoft Word documents and more. Much of what you'll see in this chapter applies to a wide range of coding languages.
 
 This chapter has some similarities with another chapter, on @sec-quarto. Increasingly, we're inclined to use Quarto to write papers where we want research outputs to be automated because it supports a few things that are hard or infeasible in LaTeX. These include within-document code execution and in-line insertion of variables. And the Quarto-based approach still generates a LaTeX file if you want! If you're not sure where to start, we now recommend you begin with Quarto rather than pure LaTeX. Check the other chapter for more—particularly the last section.
@@ -48,8 +47,8 @@ Then, whenever you need to include a figure, say `chart.pdf`, you can always do 
 
 ```latex
 \begin{figure}
-	\includegraphics[width=\textwidth]{chart.pdf}
-	\caption{Example figure. \label{fig:example}}
+    \includegraphics[width=\textwidth]{chart.pdf}
+    \caption{Example figure. \label{fig:example}}
 \end{figure}
 ```
 
@@ -81,7 +80,7 @@ table
 This can be turned into a $\LaTeX$ table using the following command
 
 ```{python}
-table.style.to_latex(caption='A Table', label='tab:descriptive')
+table.style.to_latex(caption="A Table", label="tab:descriptive")
 ```
 
 Or perhaps you have a regression table, for example
@@ -94,11 +93,11 @@ from stargazer.stargazer import Stargazer
 
 diabetes = datasets.load_diabetes()
 df = pd.DataFrame(diabetes.data)
-df.columns = ['Age', 'Sex', 'BMI', 'ABP', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6']
-df['target'] = diabetes.target
+df.columns = ["Age", "Sex", "BMI", "ABP", "S1", "S2", "S3", "S4", "S5", "S6"]
+df["target"] = diabetes.target
 
-est = smf.ols('target ~ Age + Sex + BMI + ABP', data=df).fit()
-est2 = smf.ols('target ~ Age + Sex + BMI + ABP + S1 + S2', data=df).fit()
+est = smf.ols("target ~ Age + Sex + BMI + ABP", data=df).fit()
+est2 = smf.ols("target ~ Age + Sex + BMI + ABP + S1 + S2", data=df).fit()
 
 reg_results = Stargazer([est, est2])
 reg_results
@@ -107,7 +106,8 @@ reg_results
 ```{python}
 import numpy as np
 import pandas as pd
-#import pylatex as pl  # for the latex table; note: not a dependency of pyfixest - needs manual installation
+
+# import pylatex as pl  # for the latex table; note: not a dependency of pyfixest - needs manual installation
 from great_tables import loc, style
 from IPython.display import FileLink, display
 
@@ -120,7 +120,14 @@ fit2 = pf.feols("Y ~ X1 + X2 | f1 + f2", data=data)
 fit3 = pf.feols("Y2 ~ X1 + X2 | f1", data=data)
 fit4 = pf.feols("Y2 ~ X1 + X2 | f1 + f2", data=data)
 
-pf.etable([fit1, fit2, fit3, fit4,])
+pf.etable(
+    [
+        fit1,
+        fit2,
+        fit3,
+        fit4,
+    ]
+)
 ```
 
 which can be cast into $\LaTeX$ using `type="tex"`.
