@@ -68,6 +68,16 @@ jobs:
             # This forces Quarto to use the Python inside your uv venv
             QUARTO_PYTHON: ${{ github.workspace }}/.venv/bin/python
 
+      - name: Reset notebook source files modified by quarto render
+        # `quarto render --execute` writes cell outputs back into the source
+        # .ipynb files. We intentionally do not track notebook outputs in git
+        # (see nbstripout in .pre-commit-config.yaml), and the rendered HTML
+        # with outputs already lives in the gitignored _book/ directory, which
+        # is what `quarto publish gh-pages --no-render` uploads. Restoring the
+        # source notebooks here leaves the working tree clean so the next
+        # step (salsify) can run `git checkout HEAD~1` without hitting
+        # "local changes would be overwritten by checkout".
+        run: git checkout -- '*.ipynb'
 
       - name: Check if there is a parent commit
         id: check-parent-commit
