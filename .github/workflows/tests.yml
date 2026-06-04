@@ -52,12 +52,11 @@ jobs:
 
       - name: install special fonts
         run: |
-          mkdir -p /usr/share/fonts/truetype/ &&
-          wget https://www.wfonts.com/download/data/2015/10/08/varta/varta.zip &&
-          unzip varta.zip &&
-          install -m644 *.ttf /usr/share/fonts/truetype/ &&
-          rm *.ttf
-          rm varta.zip
+          sudo mkdir -p /usr/share/fonts/truetype/ &&
+          wget -O "Varta[wght].ttf" "https://github.com/google/fonts/raw/main/ofl/varta/Varta%5Bwght%5D.ttf" &&
+          sudo install -m644 "Varta[wght].ttf" /usr/share/fonts/truetype/ &&
+          rm "Varta[wght].ttf" &&
+          sudo fc-cache -f
 
       - name: install text models
         run: |
