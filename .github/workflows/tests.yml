@@ -68,6 +68,16 @@ jobs:
           git config user.name "$(git log -n 1 --pretty=format:%an)" &&
           git config user.email "$(git log -n 1 --pretty=format:%ae)"
 
+      - name: Cache OpenStreetMap API responses
+        # osmnx caches Overpass/Nominatim responses in ./cache; persisting it
+        # across runs avoids re-querying volunteer-run OSM servers every build
+        uses: actions/cache@v4
+        with:
+          path: cache
+          key: osmnx-${{ hashFiles('geo-*.ipynb') }}
+          restore-keys: |
+            osmnx-
+
       - name: build the book
         run: |
           uv run quarto render --execute
