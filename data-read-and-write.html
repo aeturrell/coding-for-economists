@@ -83,7 +83,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-294be8ca1eefda555f1994b6e1be42f6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-a46c92d1a3b8d11f1f9fb1f566cd2c52.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dark-c86288332d64c0e70523559916bf5177.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-294be8ca1eefda555f1994b6e1be42f6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -987,35 +987,37 @@ gtag('config', 'G-9FZQCPFXZJ', { 'anonymize_ip': true});
 </div>
 <p>There are a huge range of input and output formats available in <strong>pandas</strong>: Stata (.dta), Excel (.xls, .xlsx), csv (tab or comma or whatever, use the <code>sep=</code> keyword), big data formats (HDF5, parquet), JSON, SAS, SPSS, SQL, and more; there’s a <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html">full list</a> of formats available in the documentation.</p>
 <p>Let’s set some preliminary settings:</p>
-<div id="a72333f0" class="cell" data-execution_count="1">
+<div id="091dc722" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set pandas max rows displayed for readability</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">'display.max_rows'</span>, <span class="dv">6</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">"display.max_rows"</span>, <span class="dv">6</span>)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot settings</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">"https://github.com/aeturrell/coding-for-economists/raw/main/plot_style.txt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plt.style.use(</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://github.com/aeturrell/coding-for-economists/raw/main/plot_style.txt"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="reading-in-data-from-a-file" class="level2">
 <h2 class="anchored" data-anchor-id="reading-in-data-from-a-file">Reading in data from a file</h2>
 <p>The syntax for reading in data is usually very similar and of the form <code>pd.read_</code> and then the format e.g.&nbsp;<code>df = pd.read_stata('statafile.dta')</code> for Stata. And here’s a typical example of reading a csv file</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'data.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>These examples assume that the data file is in the <em>working directory</em> of the Python console, but what if it’s not?</p>
 <p>If the data are not in working directory, you need to add information about the relative path to the file. Let’s say the data were in a folder called ‘data’ in another folder called ‘files’. Different operating systems have different file path conventions: on a Mac or Linux machine, you would open this file using <code>df = pd.read_stata('files/data/statafile.dta')</code> but, on Windows, the slashes go the other way. If you’re writing code to be <em>reproducible</em> you should endeavour, insofar as you can, to make it run happily on all major operating systems. Fortunately, the built-in <strong>pathlib</strong> package can help out with this.</p>
 <p>Here’s a really typical example of reading in a csv called ‘data.csv’ whose relative path to the working directory of the code is a folder ‘research’ and then ‘files’:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(Path(<span class="st">'research/files/data.csv'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(Path(<span class="st">"research/files/data.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>pathlib</strong> takes care of paths on different operating systems: it doesn’t mind you using forward slashes, even on Windows, because it will translate the relative path you have entered into whatever the local operating system needs. There are introductory videos to <strong>pathlib</strong> and its use available <a href="https://calmcode.io/pathlib/do-not-hardcode.html">here</a>.</p>
 <section id="reading-data-from-lots-of-files" class="level3">
 <h3 class="anchored" data-anchor-id="reading-data-from-lots-of-files">Reading data from lots of files</h3>
 <p>Quite often, you have a case where you need to read in data from many files at once. There are two tools that will help with this: glob and concatenate.</p>
 <p>Imagine you have a directory full of files with names like ‘Jan-2001-data.csv’, ‘Feb-2001-data.csv’, and so on. The <code>glob()</code> command can help you grab the names of all of these files. Imagine your files are in ‘research/data’, then you would use:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> Path(<span class="st">"research/data"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>list_of_files <span class="op">=</span> <span class="bu">list</span>(p.glob(<span class="st">'*-data.csv'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>list_of_files <span class="op">=</span> <span class="bu">list</span>(p.glob(<span class="st">"*-data.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Here, the <code>*</code> character is a wildcard that can match to anything (including any number of characters). You can keep it more specific by, for example, searching for a single wildcard character with <code>?</code> or any single digit with <code>[0-9]</code>.</p>
 <p>Okay, so you have a big list of file paths: now what!? Assuming that the files have the same structure (eg the same columns), we can use <code>pd.read_csv()</code> in a list followed by <code>pd.concat()</code> to collapse these down either by index or by column (typically it’s by index):</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.concat([pd.read_csv(x) <span class="cf">for</span> x <span class="kw">in</span> list_of_files], axis<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1036,12 +1038,10 @@ gtag('config', 'G-9FZQCPFXZJ', { 'anonymize_ip': true});
 <section id="reading-and-writing-text-tex-md-and-other-text-editor-friendly-file-formats" class="level2">
 <h2 class="anchored" data-anchor-id="reading-and-writing-text-tex-md-and-other-text-editor-friendly-file-formats">Reading and writing text, tex, md, and other text-editor friendly file formats</h2>
 <p>It’s frequently the case that you’ll want to write an individual table, chunk of text, or other content that can be opened with a text editor to file. <strong>pandas</strong> has some convenience functions for this (there was a short example in the data analysis quickstart). Let’s say we had a table:</p>
-<div id="56249b9f" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'https://vincentarelbundock.github.io/Rdatasets/csv/dplyr/storms.csv'</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>table <span class="op">=</span> (df.groupby([<span class="st">'month'</span>])</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>           .agg({<span class="st">'wind'</span>: <span class="st">'mean'</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                 <span class="st">'pressure'</span>: <span class="st">'mean'</span>}))</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="efb1bc17" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"https://vincentarelbundock.github.io/Rdatasets/csv/dplyr/storms.csv"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>table <span class="op">=</span> df.groupby([<span class="st">"month"</span>]).agg({<span class="st">"wind"</span>: <span class="st">"mean"</span>, <span class="st">"pressure"</span>: <span class="st">"mean"</span>})</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
@@ -1120,9 +1120,9 @@ Note
 </div>
 </div>
 <p>If you have a string, bit of tex, or chunk of markdown that isn’t coming directly from <strong>pandas</strong>, you can use base Python to write it to a file. Let’s say we wanted to take some text,</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">'The greatest improvement in the productive powers of labour, and the greater part of the skill, dexterity, and judgment with which it is anywhere directed, or applied, seem to have been the effects of the division of labour.'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"The greatest improvement in the productive powers of labour, and the greater part of the skill, dexterity, and judgment with which it is anywhere directed, or applied, seem to have been the effects of the division of labour."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>and write it to file. The command would be</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">open</span>(<span class="st">'file.txt'</span>, <span class="st">'w'</span>).write(text)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">open</span>(<span class="st">"file.txt"</span>, <span class="st">"w"</span>).write(text)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="review" class="level2">
 <h2 class="anchored" data-anchor-id="review">Review</h2>

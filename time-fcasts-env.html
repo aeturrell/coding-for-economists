@@ -83,7 +83,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-294be8ca1eefda555f1994b6e1be42f6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-a46c92d1a3b8d11f1f9fb1f566cd2c52.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dark-c86288332d64c0e70523559916bf5177.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-294be8ca1eefda555f1994b6e1be42f6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -1029,7 +1029,7 @@ window.Quarto = {
 <p>In this chapter, we’re going to do a tour of forecasting exercises: that is, the set of operations, like slicing up time, that you might need to do when performing a forecast. Although there will be some code in this chapter, we’re mostly laying the theoretical groundwork.</p>
 <p>Let’s start with some definitions. Features, or regressors, are labelled by <span class="math inline">k = 0, \dots, K-1</span> and time by <span class="math inline">t = 0, \dots, T-1</span>. Note that this means there are <span class="math inline">T</span> time periods and <span class="math inline">K</span> features. We’ll label different slices of time (or equivalently models trained on different data) by an index <span class="math inline">\mu</span> beginning from <span class="math inline">\mu=1</span>, and we’ll give these slices of time different labels: IS for in-sample and OS for out-of-sample. <span class="math inline">f_\mu</span> is the model trained on the <span class="math inline">\mu</span>th set of in-sample data. The target variable (the number we are trying to forecast) is <span class="math inline">\left\{y_{t+h}\right\}_{t=0}^{t=T-1}</span>, where <span class="math inline">h</span> is the number of time steps ahead we wish to forecast. Let <span class="math inline">\left\{x_{tk}\right\}_{t=0}^{t=T-1}</span> represent feature (or regressor) <span class="math inline">k</span>. In general, a forecast implies <span class="math inline">h&gt;0</span> (otherwise we’re doing a nowcast).</p>
 <p>Let’s first do some setup for the rest of the chapter. We’ll be using the <strong>numpy</strong>, <strong>pandas</strong>, <strong>matplotlib</strong>, and <strong>lets-plot</strong> packages.</p>
-<div id="7f6c1df8" class="cell" data-execution_count="1">
+<div id="1" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -1044,7 +1044,7 @@ window.Quarto = {
 <p>The most simple forecast you can imagine is if we have two periods (each of which may be made up of more than one value of <span class="math inline">t</span>). The important thing is that the <span class="math inline">t</span> in the first, “in-sample” period do not overlap with the <span class="math inline">t</span> in the second, “out-of-sample” period. That’s because we <em>only want to use information in the in-sample period to forecast the out-of-sample period</em>. There are some cases where you may want to “forecast” the in-sample period, but if you’re interested in the real-world performance of your forecast, this is the setup you need.</p>
 <p>In this world of a single in-sample period and a single out-of-sample period, <span class="math inline">\mu=1</span>, and we could get drop that notation and just use IS and OS. But we’ll leave it in to make the contrast with what’s to come clearer.</p>
 <p>The exercise is to use a model, <span class="math inline">f = f_{\mu=1}</span>, that is trained to predict <span class="math inline">\{y_{t+h}, t:\mu_{\text{IS}}=1\}</span> using <span class="math inline">\{x_{tk}, t:\mu_{\text{IS}}=1\}</span> so that it can do an out-of-sample forecast of <span class="math inline">\{y_{t+h}, t:\mu_\text{OS}=1\}</span> using <span class="math inline">\{x_{tk}, t:\mu_{\text{OS}}=1\}</span>. It’s actually easier to see it with a picture:</p>
-<div id="84bc8b3c" class="cell" data-tags="[&quot;remove-input&quot;]" data-execution_count="3">
+<div id="4" class="cell" data-tags="[&quot;remove-input&quot;]" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">4</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="dv">10</span></span>
@@ -1077,7 +1077,7 @@ window.Quarto = {
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    xf[<span class="st">"sample"</span>] <span class="op">=</span> <span class="st">"out-of-sample"</span></span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> xf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="8f2f0692" class="cell" data-tags="[&quot;remove-input&quot;]" data-execution_count="4">
+<div id="5" class="cell" data-tags="[&quot;remove-input&quot;]" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>two_period <span class="op">=</span> pd.concat(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    [in_sample_block_e(<span class="dv">1</span>, s, alpha, T), os_sample_block_e(<span class="dv">1</span>, s, alpha, T)], axis<span class="op">=</span><span class="dv">0</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1103,7 +1103,7 @@ window.Quarto = {
 text {
    text-rendering: optimizeLegibility;
 }
-#pvM9eR8 .plot-title {
+#przBoOO .plot-title {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -1111,7 +1111,7 @@ font-family: sans-serif;
 font-size: 16.0px;
 
 }
-#pvM9eR8 .plot-subtitle {
+#przBoOO .plot-subtitle {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -1119,7 +1119,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pvM9eR8 .plot-caption {
+#przBoOO .plot-caption {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -1127,7 +1127,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pvM9eR8 .plot-tag {
+#przBoOO .plot-tag {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -1135,13 +1135,13 @@ font-family: sans-serif;
 font-size: 16.0px;
 
 }
-#pvM9eR8 .hyperlink-element {
+#przBoOO .hyperlink-element {
 fill: #118ed8;
 font-weight: normal;
 font-style: normal;
 
 }
-#pvM9eR8 .legend-title {
+#przBoOO .legend-title {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -1149,7 +1149,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pvM9eR8 .legend-item {
+#przBoOO .legend-item {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -1157,7 +1157,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pvM9eR8 .axis-title-x {
+#przBoOO .axis-title-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -1165,7 +1165,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pvM9eR8 .axis-text-x {
+#przBoOO .axis-text-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -1173,7 +1173,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dnTn8gi .axis-tooltip-text-x {
+#dUOr7VU .axis-tooltip-text-x {
 fill: #ffffff;
 font-weight: normal;
 font-style: normal;
@@ -1181,7 +1181,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pvM9eR8 .axis-title-y {
+#przBoOO .axis-title-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -1189,7 +1189,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pvM9eR8 .axis-text-y {
+#przBoOO .axis-text-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -1197,7 +1197,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dnTn8gi .axis-tooltip-text-y {
+#dUOr7VU .axis-tooltip-text-y {
 fill: #ffffff;
 font-weight: normal;
 font-style: normal;
@@ -1205,7 +1205,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pvM9eR8 .facet-strip-text-x {
+#przBoOO .facet-strip-text-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -1213,7 +1213,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pvM9eR8 .facet-strip-text-y {
+#przBoOO .facet-strip-text-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -1221,7 +1221,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dnTn8gi .tooltip-text {
+#dUOr7VU .tooltip-text {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -1229,7 +1229,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dnTn8gi .tooltip-title {
+#dUOr7VU .tooltip-title {
 fill: #474747;
 font-weight: bold;
 font-style: normal;
@@ -1237,7 +1237,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dnTn8gi .tooltip-label {
+#dUOr7VU .tooltip-label {
 fill: #474747;
 font-weight: bold;
 font-style: normal;
@@ -1247,7 +1247,7 @@ font-size: 13.0px;
 }
 
   </style>
-  <g id="pvM9eR8">
+  <g id="przBoOO">
     <path fill-rule="evenodd" fill="rgb(255,255,255)" fill-opacity="1.0" d="M0.0 0.0 L0.0 200.0 L600.0 200.0 L600.0 0.0 Z">
     </path>
     <g transform="translate(21.0 6.0 ) ">
@@ -1285,7 +1285,7 @@ font-size: 13.0px;
           </g>
         </g>
       </g>
-      <g clip-path="url(#cgwcvBw)" clip-bounds-jfx="[rect (100.41139950448785, 0.0), (337.1868982632902, 154.0)]">
+      <g clip-path="url(#c8ZmYyy)" clip-bounds-jfx="[rect (100.41139950448785, 0.0), (337.1868982632902, 154.0)]">
         <g transform="translate(100.41139950448785 0.0 ) ">
           <g>
             <g buffered-rendering="static">
@@ -1307,7 +1307,7 @@ font-size: 13.0px;
           </g>
         </g>
         <defs>
-          <clippath id="cgwcvBw">
+          <clippath id="c8ZmYyy">
             <rect x="100.41139950448785" y="0.0" width="337.1868982632902" height="154.0">
             </rect>
           </clippath>
@@ -1482,14 +1482,14 @@ font-size: 13.0px;
     <path fill="rgb(0,0,0)" fill-opacity="0.0" stroke="rgb(71,71,71)" stroke-opacity="1.0" stroke-width="0.0" d="M0.0 0.0 L0.0 200.0 L600.0 200.0 L600.0 0.0 Z" pointer-events="none">
     </path>
   </g>
-  <g id="dnTn8gi">
+  <g id="dUOr7VU">
   </g>
 </svg>
 </div>
 </div>
 <p>In this case, the in-sample period runs from <span class="math inline">t=0</span> to <span class="math inline">t=4</span>, while the out-of-sample period runs from <span class="math inline">t=5</span> to <span class="math inline">t=9</span>. <span class="math inline">T=10</span>.</p>
 <p>Let’s see how it works with some fake data, and we’ll assume <span class="math inline">h=3</span> in this case.</p>
-<div id="c67d0c81" class="cell" data-execution_count="5">
+<div id="7" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> string</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>horizon <span class="op">=</span> <span class="dv">3</span></span>
@@ -1620,7 +1620,7 @@ font-size: 13.0px;
 </div>
 </div>
 <p>What we have here is a dataset with a time index and y and x values. <span class="math inline">y_{t+h}</span> has been added as a feature by shifting the <span class="math inline">y</span> variable back by <span class="math inline">h=3</span> steps. We’re not going to be able to predict those NaN values, so the first thing to do is to drop those variables. Second, we’ll want to add in which parts are in-sample and which are out-of-sample.</p>
-<div id="9d83f915" class="cell" data-execution_count="6">
+<div id="9" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.dropna().copy()</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"sample"</span>] <span class="op">=</span> df[<span class="st">"Time"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="st">"IS"</span> <span class="cf">if</span> <span class="bu">int</span>(x) <span class="op">&lt;</span> <span class="dv">5</span> <span class="cf">else</span> <span class="st">"OS"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.set_index(<span class="st">"Time"</span>)</span>
@@ -1737,7 +1737,7 @@ font-size: 13.0px;
 <section id="an-example-two-period-forecast" class="level3">
 <h3 class="anchored" data-anchor-id="an-example-two-period-forecast">An Example Two Period Forecast</h3>
 <p>Let’s see an example of this with some numerical data. Our dataframe needs to have our features, <span class="math inline">x</span>, and target, <span class="math inline">y_{t+h}</span>, in.</p>
-<div id="544e6767" class="cell" data-execution_count="7">
+<div id="11" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>window_size <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>horizon <span class="op">=</span> <span class="dv">3</span></span>
@@ -1843,7 +1843,7 @@ font-size: 13.0px;
 </div>
 </div>
 <p>As ever, it’s good to look at your data so let’s do a quick chart. Note that time and <span class="math inline">x</span> have the same values here, so this is also the time series of <span class="math inline">y_{t+h}</span>.</p>
-<div id="8f152ba8" class="cell" data-execution_count="8">
+<div id="13" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df.plot.scatter(x<span class="op">=</span><span class="st">"x"</span>, y<span class="op">=</span><span class="st">"y at t+h"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1854,7 +1854,7 @@ font-size: 13.0px;
 </div>
 </div>
 <p>Okay, what could possibly go wrong! Let’s now do our forecasting exercise. First, we train or fit the model. Note that <em>pandas</em> indexing is <em>inclusive</em>, so we run to <code>window_size-1</code> rather than <code>window_size</code> to pick up our 5 in-sample points</p>
-<div id="59c23cc4" class="cell" data-execution_count="9">
+<div id="15" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.dropna().copy()</span>
@@ -1869,7 +1869,7 @@ font-size: 13.0px;
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>] <span class="op">*</span> (window_size)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Make out of sample prediction:</p>
-<div id="4314e436" class="cell" data-execution_count="10">
+<div id="17" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"y at t+h OS"</span>] <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> (window_size) <span class="op">+</span> <span class="bu">list</span>(</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    model.predict(df.loc[window_size:, [<span class="st">"x"</span>]]).flatten()</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1965,7 +1965,7 @@ font-size: 13.0px;
 </div>
 </div>
 </div>
-<div id="41e037bb" class="cell" data-execution_count="11">
+<div id="18" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df.plot.scatter(x<span class="op">=</span><span class="st">"x"</span>, y<span class="op">=</span><span class="st">"y at t+h"</span>, ax<span class="op">=</span>ax, label<span class="op">=</span><span class="st">"y at t+h"</span>, s<span class="op">=</span><span class="dv">80</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>df.plot.scatter(</span>
@@ -1987,7 +1987,7 @@ font-size: 13.0px;
 </div>
 </div>
 <p>Oh dear, it doesn’t look like our out-of-sample prediction did very well! Let’s see what the RMSE error is for both the in-sample and out-of-sample prediction.</p>
-<div id="44534b62" class="cell" data-execution_count="12">
+<div id="20" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -2016,7 +2016,7 @@ The rmse for out-of-sample best predictions is 2.83</code></pre>
 <h3 class="anchored" data-anchor-id="adding-a-lag">Adding a Lag</h3>
 <p>Quite frequently, you’ll want to include lags in your forecast specification. Let’s see how to do that in this simple, two-period forecast example.</p>
 <p>Just as forecasting a variable at <span class="math inline">t+h</span> means performing a <code>.shift(-h)</code> in order to bring the data together in the same row of a dataframe, so creating a feature (or regressor) that is a lag of another column will involve shifting the <em>other</em> way in time. So we’re going to use <code>.shift(lag)</code>. Let’s see it with some data:</p>
-<div id="9ac13b92" class="cell" data-execution_count="13">
+<div id="23" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>window_size <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>horizon <span class="op">=</span> <span class="dv">3</span></span>
@@ -2158,7 +2158,7 @@ The rmse for out-of-sample best predictions is 2.83</code></pre>
 </div>
 </div>
 <p>Now you can see that there’s an extra row we can’t use (because we don’t have the data for a lag of y from that time). As before, in practice, we’d drop y so that we didn’t use it by mistake and also drop the top and tail rows that have nans in. We also reset the index to ensure it starts at 0 (by dropping the first row, we would otherwise lose the first index of zero):</p>
-<div id="14d21165" class="cell" data-execution_count="14">
+<div id="25" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.drop(<span class="st">"y"</span>, axis<span class="op">=</span><span class="dv">1</span>).dropna().reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
@@ -2256,7 +2256,7 @@ I^e_{\mu}(\vec{z}) = \left\{z_t  \right\}_{t=0}^{t=\mu\cdot s + \alpha -1}
 O^e_{\mu}(\vec{z}) = \left\{z_t \right\}^{t=T-1}_{t=\mu\cdot s + \alpha}
 </span></p>
 <p>We can visualise this like so:</p>
-<div id="24b9b496" class="cell" data-tags="[&quot;remove-input&quot;]" data-execution_count="15">
+<div id="27" class="cell" data-tags="[&quot;remove-input&quot;]" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="dv">10</span></span>
@@ -2271,7 +2271,7 @@ O^e_{\mu}(\vec{z}) = \left\{z_t \right\}^{t=T-1}_{t=\mu\cdot s + \alpha}
 <span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>multi_period[<span class="st">"sample"</span>] <span class="op">=</span> multi_period[<span class="st">"sample"</span>].astype(<span class="st">"category"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="7c447097" class="cell" data-tags="[&quot;remove-input&quot;]" data-execution_count="16">
+<div id="28" class="cell" data-tags="[&quot;remove-input&quot;]" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    ggplot(multi_period, aes(x<span class="op">=</span><span class="st">"t"</span>, y<span class="op">=</span>as_discrete(<span class="st">"μ"</span>), fill<span class="op">=</span>as_discrete(<span class="st">"sample"</span>)))</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_tile(<span class="op">**</span>width_height_tiles)</span>
@@ -2293,7 +2293,7 @@ O^e_{\mu}(\vec{z}) = \left\{z_t \right\}^{t=T-1}_{t=\mu\cdot s + \alpha}
 text {
    text-rendering: optimizeLegibility;
 }
-#pPGo631 .plot-title {
+#pDEUkXL .plot-title {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -2301,7 +2301,7 @@ font-family: sans-serif;
 font-size: 16.0px;
 
 }
-#pPGo631 .plot-subtitle {
+#pDEUkXL .plot-subtitle {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -2309,7 +2309,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pPGo631 .plot-caption {
+#pDEUkXL .plot-caption {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -2317,7 +2317,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pPGo631 .plot-tag {
+#pDEUkXL .plot-tag {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -2325,13 +2325,13 @@ font-family: sans-serif;
 font-size: 16.0px;
 
 }
-#pPGo631 .hyperlink-element {
+#pDEUkXL .hyperlink-element {
 fill: #118ed8;
 font-weight: normal;
 font-style: normal;
 
 }
-#pPGo631 .legend-title {
+#pDEUkXL .legend-title {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -2339,7 +2339,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pPGo631 .legend-item {
+#pDEUkXL .legend-item {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -2347,7 +2347,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pPGo631 .axis-title-x {
+#pDEUkXL .axis-title-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -2355,7 +2355,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pPGo631 .axis-text-x {
+#pDEUkXL .axis-text-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -2363,7 +2363,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dGXVmZl .axis-tooltip-text-x {
+#dGDjftt .axis-tooltip-text-x {
 fill: #ffffff;
 font-weight: normal;
 font-style: normal;
@@ -2371,7 +2371,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pPGo631 .axis-title-y {
+#pDEUkXL .axis-title-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -2379,7 +2379,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pPGo631 .axis-text-y {
+#pDEUkXL .axis-text-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -2387,7 +2387,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dGXVmZl .axis-tooltip-text-y {
+#dGDjftt .axis-tooltip-text-y {
 fill: #ffffff;
 font-weight: normal;
 font-style: normal;
@@ -2395,7 +2395,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pPGo631 .facet-strip-text-x {
+#pDEUkXL .facet-strip-text-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -2403,7 +2403,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pPGo631 .facet-strip-text-y {
+#pDEUkXL .facet-strip-text-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -2411,7 +2411,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dGXVmZl .tooltip-text {
+#dGDjftt .tooltip-text {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -2419,7 +2419,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dGXVmZl .tooltip-title {
+#dGDjftt .tooltip-title {
 fill: #474747;
 font-weight: bold;
 font-style: normal;
@@ -2427,7 +2427,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dGXVmZl .tooltip-label {
+#dGDjftt .tooltip-label {
 fill: #474747;
 font-weight: bold;
 font-style: normal;
@@ -2437,7 +2437,7 @@ font-size: 13.0px;
 }
 
   </style>
-  <g id="pPGo631">
+  <g id="pDEUkXL">
     <path fill-rule="evenodd" fill="rgb(255,255,255)" fill-opacity="1.0" d="M0.0 0.0 L0.0 400.0 L600.0 400.0 L600.0 0.0 Z">
     </path>
     <g transform="translate(21.0 6.0 ) ">
@@ -2485,7 +2485,7 @@ font-size: 13.0px;
           </g>
         </g>
       </g>
-      <g clip-path="url(#c6E0HYA)" clip-bounds-jfx="[rect (9.980605455468202, 0.0), (427.6176923123098, 354.0)]">
+      <g clip-path="url(#cCPNmOx)" clip-bounds-jfx="[rect (9.980605455468202, 0.0), (427.6176923123098, 354.0)]">
         <g transform="translate(9.980605455468202 0.0 ) ">
           <g>
             <g buffered-rendering="static">
@@ -2567,7 +2567,7 @@ font-size: 13.0px;
           </g>
         </g>
         <defs>
-          <clippath id="c6E0HYA">
+          <clippath id="cCPNmOx">
             <rect x="9.980605455468202" y="0.0" width="427.6176923123098" height="354.0">
             </rect>
           </clippath>
@@ -2777,7 +2777,7 @@ font-size: 13.0px;
     <path fill="rgb(0,0,0)" fill-opacity="0.0" stroke="rgb(71,71,71)" stroke-opacity="1.0" stroke-width="0.0" d="M0.0 0.0 L0.0 400.0 L600.0 400.0 L600.0 0.0 Z" pointer-events="none">
     </path>
   </g>
-  <g id="dGXVmZl">
+  <g id="dGDjftt">
   </g>
 </svg>
 </div>
@@ -2797,7 +2797,7 @@ font-size: 13.0px;
 </span></p>
 <p>in the diagram above, it’s the longest diagonal of out-of-sample predictions. Equivalently, the out-of-sample prediction set is composed of the first step of each test set indexed by <span class="math inline">\mu</span>. In each case, these out-of-sample predictions are likely to be better than ones for other values of <span class="math inline">\mu</span> because they are trained on models that are closer in time to the value that is being predicted.</p>
 <p>Let’s work this out using code too. First, we define a function that, given a data frame with a time index as defined earlier, can return the out-of-sample rows. We know this ranges from <span class="math inline">\mu \cdot s + \alpha</span> to <span class="math inline">T-1</span> (inclusive), so will become <code>range(mu * s + alpha, T, step_size)</code> inside the function:</p>
-<div id="6c6babd4" class="cell" data-execution_count="17">
+<div id="30" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>step_size <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>window_size <span class="op">=</span> alpha <span class="op">+</span> step_size</span>
@@ -2813,7 +2813,7 @@ font-size: 13.0px;
 <span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> xf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Next, we create the union of best predictions, which will always be the last time step in ascending order of <span class="math inline">\mu</span>:</p>
-<div id="c6f962a2" class="cell" data-execution_count="18">
+<div id="32" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># iterate over increasing values of mu</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>script_O_e <span class="op">=</span> pd.concat(</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    [os_sample_block_e(mu, s, alpha, T) <span class="cf">for</span> mu <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, max_mu)], axis<span class="op">=</span><span class="dv">0</span></span>
@@ -2926,7 +2926,7 @@ font-size: 13.0px;
 </div>
 </div>
 <p>Now we can plot the pattern of predictions we’d like to use as a function of <span class="math inline">\mu</span>:</p>
-<div id="3983da19" class="cell" data-execution_count="19">
+<div id="34" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    ggplot(script_O_e, aes(x<span class="op">=</span><span class="st">"t"</span>, y<span class="op">=</span>as_discrete(<span class="st">"μ"</span>), fill<span class="op">=</span><span class="st">"Preferred Prediction"</span>))</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_tile(<span class="op">**</span>width_height_tiles)</span>
@@ -2949,7 +2949,7 @@ font-size: 13.0px;
 text {
    text-rendering: optimizeLegibility;
 }
-#pUvsKTL .plot-title {
+#p8O5Xxw .plot-title {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -2957,7 +2957,7 @@ font-family: sans-serif;
 font-size: 16.0px;
 
 }
-#pUvsKTL .plot-subtitle {
+#p8O5Xxw .plot-subtitle {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -2965,7 +2965,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pUvsKTL .plot-caption {
+#p8O5Xxw .plot-caption {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -2973,7 +2973,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pUvsKTL .plot-tag {
+#p8O5Xxw .plot-tag {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -2981,13 +2981,13 @@ font-family: sans-serif;
 font-size: 16.0px;
 
 }
-#pUvsKTL .hyperlink-element {
+#p8O5Xxw .hyperlink-element {
 fill: #118ed8;
 font-weight: normal;
 font-style: normal;
 
 }
-#pUvsKTL .legend-title {
+#p8O5Xxw .legend-title {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -2995,7 +2995,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pUvsKTL .legend-item {
+#p8O5Xxw .legend-item {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3003,7 +3003,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pUvsKTL .axis-title-x {
+#p8O5Xxw .axis-title-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3011,7 +3011,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pUvsKTL .axis-text-x {
+#p8O5Xxw .axis-text-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3019,7 +3019,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dszDuif .axis-tooltip-text-x {
+#dokt6vQ .axis-tooltip-text-x {
 fill: #ffffff;
 font-weight: normal;
 font-style: normal;
@@ -3027,7 +3027,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pUvsKTL .axis-title-y {
+#p8O5Xxw .axis-title-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3035,7 +3035,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pUvsKTL .axis-text-y {
+#p8O5Xxw .axis-text-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3043,7 +3043,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dszDuif .axis-tooltip-text-y {
+#dokt6vQ .axis-tooltip-text-y {
 fill: #ffffff;
 font-weight: normal;
 font-style: normal;
@@ -3051,7 +3051,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pUvsKTL .facet-strip-text-x {
+#p8O5Xxw .facet-strip-text-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3059,7 +3059,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pUvsKTL .facet-strip-text-y {
+#p8O5Xxw .facet-strip-text-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3067,7 +3067,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dszDuif .tooltip-text {
+#dokt6vQ .tooltip-text {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3075,7 +3075,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dszDuif .tooltip-title {
+#dokt6vQ .tooltip-title {
 fill: #474747;
 font-weight: bold;
 font-style: normal;
@@ -3083,7 +3083,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dszDuif .tooltip-label {
+#dokt6vQ .tooltip-label {
 fill: #474747;
 font-weight: bold;
 font-style: normal;
@@ -3093,7 +3093,7 @@ font-size: 13.0px;
 }
 
   </style>
-  <g id="pUvsKTL">
+  <g id="p8O5Xxw">
     <path fill-rule="evenodd" fill="rgb(255,255,255)" fill-opacity="1.0" d="M0.0 0.0 L0.0 300.0 L700.0 300.0 L700.0 0.0 Z">
     </path>
     <g transform="translate(21.0 38.0 ) ">
@@ -3141,7 +3141,7 @@ font-size: 13.0px;
           </g>
         </g>
       </g>
-      <g clip-path="url(#cI41IRg)" clip-bounds-jfx="[rect (9.980605455468202, 0.0), (494.7324881183075, 222.0)]">
+      <g clip-path="url(#cohqYHy)" clip-bounds-jfx="[rect (9.980605455468202, 0.0), (494.7324881183075, 222.0)]">
         <g transform="translate(9.980605455468202 0.0 ) ">
           <g>
             <g buffered-rendering="static">
@@ -3181,7 +3181,7 @@ font-size: 13.0px;
           </g>
         </g>
         <defs>
-          <clippath id="cI41IRg">
+          <clippath id="cohqYHy">
             <rect x="9.980605455468202" y="0.0" width="494.7324881183075" height="222.0">
             </rect>
           </clippath>
@@ -3399,7 +3399,7 @@ font-size: 13.0px;
     <path fill="rgb(0,0,0)" fill-opacity="0.0" stroke="rgb(71,71,71)" stroke-opacity="1.0" stroke-width="0.0" d="M0.0 0.0 L0.0 300.0 L700.0 300.0 L700.0 0.0 Z" pointer-events="none">
     </path>
   </g>
-  <g id="dszDuif">
+  <g id="dokt6vQ">
   </g>
 </svg>
 </div>
@@ -3409,7 +3409,7 @@ font-size: 13.0px;
 <p><span class="math display">
 \mathcal{I}^{e} = \bigcup_\mu \bigg\{ f_\mu\left(I_\mu^e(X)\right)\bigg\}_{t=(\mu -1) s + \alpha}^{t=\mu s -1+\alpha}
 </span></p>
-<div id="21b9ca85" class="cell" data-execution_count="20">
+<div id="36" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> in_sample_block_e(mu, step_size, alpha, T):</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Returns the times within the $mu$th block of an expanding window (in-sample)"""</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    xf <span class="op">=</span> pd.DataFrame({<span class="st">"t"</span>: np.arange(<span class="dv">0</span>, mu <span class="op">*</span> s <span class="op">+</span> alpha, step_size)})</span>
@@ -3427,7 +3427,7 @@ font-size: 13.0px;
 <span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    script_I_e[<span class="op">~</span>script_I_e[<span class="st">"t"</span>].duplicated(keep<span class="op">=</span><span class="st">"last"</span>)].index, <span class="st">"Preferred Prediction"</span></span>
 <span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>] <span class="op">=</span> <span class="va">True</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="9f619665" class="cell" data-execution_count="21">
+<div id="37" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the union of expanding window in-sample predictions:</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    ggplot(script_I_e, aes(x<span class="op">=</span><span class="st">"t"</span>, y<span class="op">=</span>as_discrete(<span class="st">"μ"</span>), fill<span class="op">=</span><span class="st">"Preferred Prediction"</span>))</span>
@@ -3451,7 +3451,7 @@ font-size: 13.0px;
 text {
    text-rendering: optimizeLegibility;
 }
-#pMK6k3d .plot-title {
+#pxY8dno .plot-title {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3459,7 +3459,7 @@ font-family: sans-serif;
 font-size: 16.0px;
 
 }
-#pMK6k3d .plot-subtitle {
+#pxY8dno .plot-subtitle {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3467,7 +3467,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pMK6k3d .plot-caption {
+#pxY8dno .plot-caption {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3475,7 +3475,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pMK6k3d .plot-tag {
+#pxY8dno .plot-tag {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3483,13 +3483,13 @@ font-family: sans-serif;
 font-size: 16.0px;
 
 }
-#pMK6k3d .hyperlink-element {
+#pxY8dno .hyperlink-element {
 fill: #118ed8;
 font-weight: normal;
 font-style: normal;
 
 }
-#pMK6k3d .legend-title {
+#pxY8dno .legend-title {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3497,7 +3497,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pMK6k3d .legend-item {
+#pxY8dno .legend-item {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3505,7 +3505,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pMK6k3d .axis-title-x {
+#pxY8dno .axis-title-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3513,7 +3513,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pMK6k3d .axis-text-x {
+#pxY8dno .axis-text-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3521,7 +3521,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dCJs8AP .axis-tooltip-text-x {
+#daek09X .axis-tooltip-text-x {
 fill: #ffffff;
 font-weight: normal;
 font-style: normal;
@@ -3529,7 +3529,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pMK6k3d .axis-title-y {
+#pxY8dno .axis-title-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3537,7 +3537,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pMK6k3d .axis-text-y {
+#pxY8dno .axis-text-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3545,7 +3545,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dCJs8AP .axis-tooltip-text-y {
+#daek09X .axis-tooltip-text-y {
 fill: #ffffff;
 font-weight: normal;
 font-style: normal;
@@ -3553,7 +3553,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pMK6k3d .facet-strip-text-x {
+#pxY8dno .facet-strip-text-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3561,7 +3561,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pMK6k3d .facet-strip-text-y {
+#pxY8dno .facet-strip-text-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3569,7 +3569,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dCJs8AP .tooltip-text {
+#daek09X .tooltip-text {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3577,7 +3577,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dCJs8AP .tooltip-title {
+#daek09X .tooltip-title {
 fill: #474747;
 font-weight: bold;
 font-style: normal;
@@ -3585,7 +3585,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dCJs8AP .tooltip-label {
+#daek09X .tooltip-label {
 fill: #474747;
 font-weight: bold;
 font-style: normal;
@@ -3595,7 +3595,7 @@ font-size: 13.0px;
 }
 
   </style>
-  <g id="pMK6k3d">
+  <g id="pxY8dno">
     <path fill-rule="evenodd" fill="rgb(255,255,255)" fill-opacity="1.0" d="M0.0 0.0 L0.0 300.0 L700.0 300.0 L700.0 0.0 Z">
     </path>
     <g transform="translate(21.0 22.0 ) ">
@@ -3643,7 +3643,7 @@ font-size: 13.0px;
           </g>
         </g>
       </g>
-      <g clip-path="url(#cyfunQk)" clip-bounds-jfx="[rect (9.980605455468202, 0.0), (494.7324881183075, 238.0)]">
+      <g clip-path="url(#c3NJLFt)" clip-bounds-jfx="[rect (9.980605455468202, 0.0), (494.7324881183075, 238.0)]">
         <g transform="translate(9.980605455468202 0.0 ) ">
           <g>
             <g buffered-rendering="static">
@@ -3697,7 +3697,7 @@ font-size: 13.0px;
           </g>
         </g>
         <defs>
-          <clippath id="cyfunQk">
+          <clippath id="c3NJLFt">
             <rect x="9.980605455468202" y="0.0" width="494.7324881183075" height="238.0">
             </rect>
           </clippath>
@@ -3912,7 +3912,7 @@ font-size: 13.0px;
     <path fill="rgb(0,0,0)" fill-opacity="0.0" stroke="rgb(71,71,71)" stroke-opacity="1.0" stroke-width="0.0" d="M0.0 0.0 L0.0 300.0 L700.0 300.0 L700.0 0.0 Z" pointer-events="none">
     </path>
   </g>
-  <g id="dCJs8AP">
+  <g id="daek09X">
   </g>
 </svg>
 </div>
@@ -3932,7 +3932,7 @@ I^r_{\mu}(\vec{z}) = \bigg\{ z_{t} \bigg\}_{t=(\mu-1)\cdot s}^{t=\mu\cdot s+\alp
 O^r_{\mu}(\vec{z}) = \bigg\{ z_{t} \bigg\}_{t=\mu\cdot s+\alpha}^{t=T}
 </span></p>
 <p>Below is a visualisation of all the rolling window forecasts in a single forecasting exercise.</p>
-<div id="71bc6365" class="cell" data-tags="[&quot;remove-input&quot;]" data-execution_count="23">
+<div id="40" class="cell" data-tags="[&quot;remove-input&quot;]" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>window_size <span class="op">=</span> s <span class="op">+</span> alpha</span>
@@ -3948,7 +3948,7 @@ O^r_{\mu}(\vec{z}) = \bigg\{ z_{t} \bigg\}_{t=\mu\cdot s+\alpha}^{t=T}
 <span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>multi_period_rolling[<span class="st">"sample"</span>] <span class="op">=</span> multi_period_rolling[<span class="st">"sample"</span>].astype(<span class="st">"category"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="4b69ba53" class="cell" data-tags="[&quot;remove-input&quot;]" data-execution_count="24">
+<div id="41" class="cell" data-tags="[&quot;remove-input&quot;]" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    ggplot(multi_period_rolling, aes(x<span class="op">=</span><span class="st">"t"</span>, y<span class="op">=</span>as_discrete(<span class="st">"μ"</span>), fill<span class="op">=</span><span class="st">"sample"</span>))</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_tile(<span class="op">**</span>width_height_tiles)</span>
@@ -3971,7 +3971,7 @@ O^r_{\mu}(\vec{z}) = \bigg\{ z_{t} \bigg\}_{t=\mu\cdot s+\alpha}^{t=T}
 text {
    text-rendering: optimizeLegibility;
 }
-#pqGR0TX .plot-title {
+#pz9oMWA .plot-title {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3979,7 +3979,7 @@ font-family: sans-serif;
 font-size: 16.0px;
 
 }
-#pqGR0TX .plot-subtitle {
+#pz9oMWA .plot-subtitle {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3987,7 +3987,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pqGR0TX .plot-caption {
+#pz9oMWA .plot-caption {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -3995,7 +3995,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pqGR0TX .plot-tag {
+#pz9oMWA .plot-tag {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4003,13 +4003,13 @@ font-family: sans-serif;
 font-size: 16.0px;
 
 }
-#pqGR0TX .hyperlink-element {
+#pz9oMWA .hyperlink-element {
 fill: #118ed8;
 font-weight: normal;
 font-style: normal;
 
 }
-#pqGR0TX .legend-title {
+#pz9oMWA .legend-title {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4017,7 +4017,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pqGR0TX .legend-item {
+#pz9oMWA .legend-item {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4025,7 +4025,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pqGR0TX .axis-title-x {
+#pz9oMWA .axis-title-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4033,7 +4033,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pqGR0TX .axis-text-x {
+#pz9oMWA .axis-text-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4041,7 +4041,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dKl9PWp .axis-tooltip-text-x {
+#diq4Xsn .axis-tooltip-text-x {
 fill: #ffffff;
 font-weight: normal;
 font-style: normal;
@@ -4049,7 +4049,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pqGR0TX .axis-title-y {
+#pz9oMWA .axis-title-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4057,7 +4057,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pqGR0TX .axis-text-y {
+#pz9oMWA .axis-text-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4065,7 +4065,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dKl9PWp .axis-tooltip-text-y {
+#diq4Xsn .axis-tooltip-text-y {
 fill: #ffffff;
 font-weight: normal;
 font-style: normal;
@@ -4073,7 +4073,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pqGR0TX .facet-strip-text-x {
+#pz9oMWA .facet-strip-text-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4081,7 +4081,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pqGR0TX .facet-strip-text-y {
+#pz9oMWA .facet-strip-text-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4089,7 +4089,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dKl9PWp .tooltip-text {
+#diq4Xsn .tooltip-text {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4097,7 +4097,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dKl9PWp .tooltip-title {
+#diq4Xsn .tooltip-title {
 fill: #474747;
 font-weight: bold;
 font-style: normal;
@@ -4105,7 +4105,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#dKl9PWp .tooltip-label {
+#diq4Xsn .tooltip-label {
 fill: #474747;
 font-weight: bold;
 font-style: normal;
@@ -4115,7 +4115,7 @@ font-size: 13.0px;
 }
 
   </style>
-  <g id="pqGR0TX">
+  <g id="pz9oMWA">
     <path fill-rule="evenodd" fill="rgb(255,255,255)" fill-opacity="1.0" d="M0.0 0.0 L0.0 300.0 L700.0 300.0 L700.0 0.0 Z">
     </path>
     <g transform="translate(21.0 22.0 ) ">
@@ -4163,7 +4163,7 @@ font-size: 13.0px;
           </g>
         </g>
       </g>
-      <g clip-path="url(#clfZ7zj)" clip-bounds-jfx="[rect (9.980605455468202, 0.0), (527.6176923123098, 238.0)]">
+      <g clip-path="url(#c9kMJG6)" clip-bounds-jfx="[rect (9.980605455468202, 0.0), (527.6176923123098, 238.0)]">
         <g transform="translate(9.980605455468202 0.0 ) ">
           <g>
             <g buffered-rendering="static">
@@ -4224,7 +4224,7 @@ font-size: 13.0px;
           </g>
         </g>
         <defs>
-          <clippath id="clfZ7zj">
+          <clippath id="c9kMJG6">
             <rect x="9.980605455468202" y="0.0" width="527.6176923123098" height="238.0">
             </rect>
           </clippath>
@@ -4439,7 +4439,7 @@ font-size: 13.0px;
     <path fill="rgb(0,0,0)" fill-opacity="0.0" stroke="rgb(71,71,71)" stroke-opacity="1.0" stroke-width="0.0" d="M0.0 0.0 L0.0 300.0 L700.0 300.0 L700.0 0.0 Z" pointer-events="none">
     </path>
   </g>
-  <g id="dKl9PWp">
+  <g id="diq4Xsn">
   </g>
 </svg>
 </div>
@@ -4458,7 +4458,7 @@ font-size: 13.0px;
 </span></p>
 <p>in the diagram above, it’s the longest diagonal of out-of-sample predictions. Equivalently, the out-of-sample prediction set is composed of the first step of each test set indexed by <span class="math inline">\mu</span>. In each case, these out-of-sample predictions are likely to be better than ones for other values of <span class="math inline">\mu</span> because they are trained on models that are closer in time to the value that is being predicted.</p>
 <p>Let’s work this out using code too. First, we define function thats, given a data frame with a time index as defined earlier, can return the in-sample or out-of-sample rows. For out-of-sample, the slices range from <span class="math inline">\mu\cdot s + \alpha</span> to <span class="math inline">T-1</span> (inclusive), so will become <code>range(mu * s + alpha, T, step_size)</code> inside the function. Likewise, the inclusive/exclusive distinction applies to the in-sample slice, which will have <code>range((mu - 1) * s, mu * s + alpha, s)</code> for <span class="math inline">(\mu-1)\cdot s</span> to <span class="math inline">\mu\cdot s+\alpha -1</span>.</p>
-<div id="e55d0d5c" class="cell" data-execution_count="25">
+<div id="43" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> in_sample_block_r(mu, s, alpha, T):</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    xf <span class="op">=</span> pd.DataFrame({<span class="st">"t"</span>: np.arange((mu <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> s, mu <span class="op">*</span> s <span class="op">+</span> alpha, s)})</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    xf[<span class="st">"μ"</span>] <span class="op">=</span> [mu] <span class="op">*</span> (mu <span class="op">*</span> s <span class="op">+</span> alpha <span class="op">-</span> (mu <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> s)</span>
@@ -4473,7 +4473,7 @@ font-size: 13.0px;
 <span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> xf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Having defined these, we can compute the unions of best in- and out-of-sample predictions. For the expanding window case, we ended up repeating some of the same code. This is bad practice. We can do better by putting all of the common elements into a single function:</p>
-<div id="9c91ec88" class="cell" data-execution_count="26">
+<div id="45" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Config:</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">2</span></span>
@@ -4568,7 +4568,7 @@ font-size: 13.0px;
 </div>
 </div>
 <p>Let’s plot the union of best rolling out-of-sample predictions:</p>
-<div id="8bc8c0bd" class="cell" data-execution_count="27">
+<div id="47" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    ggplot(script_O_r, aes(x<span class="op">=</span><span class="st">"t"</span>, y<span class="op">=</span>as_discrete(<span class="st">"μ"</span>), fill<span class="op">=</span><span class="st">"Preferred Prediction"</span>))</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_tile(<span class="op">**</span>width_height_tiles)</span>
@@ -4591,7 +4591,7 @@ font-size: 13.0px;
 text {
    text-rendering: optimizeLegibility;
 }
-#pOVxt6v .plot-title {
+#ppk9kEI .plot-title {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4599,7 +4599,7 @@ font-family: sans-serif;
 font-size: 16.0px;
 
 }
-#pOVxt6v .plot-subtitle {
+#ppk9kEI .plot-subtitle {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4607,7 +4607,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pOVxt6v .plot-caption {
+#ppk9kEI .plot-caption {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4615,7 +4615,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pOVxt6v .plot-tag {
+#ppk9kEI .plot-tag {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4623,13 +4623,13 @@ font-family: sans-serif;
 font-size: 16.0px;
 
 }
-#pOVxt6v .hyperlink-element {
+#ppk9kEI .hyperlink-element {
 fill: #118ed8;
 font-weight: normal;
 font-style: normal;
 
 }
-#pOVxt6v .legend-title {
+#ppk9kEI .legend-title {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4637,7 +4637,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pOVxt6v .legend-item {
+#ppk9kEI .legend-item {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4645,7 +4645,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pOVxt6v .axis-title-x {
+#ppk9kEI .axis-title-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4653,7 +4653,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pOVxt6v .axis-text-x {
+#ppk9kEI .axis-text-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4661,7 +4661,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#d8lQoRz .axis-tooltip-text-x {
+#dnYfQIz .axis-tooltip-text-x {
 fill: #ffffff;
 font-weight: normal;
 font-style: normal;
@@ -4669,7 +4669,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pOVxt6v .axis-title-y {
+#ppk9kEI .axis-title-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4677,7 +4677,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#pOVxt6v .axis-text-y {
+#ppk9kEI .axis-text-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4685,7 +4685,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#d8lQoRz .axis-tooltip-text-y {
+#dnYfQIz .axis-tooltip-text-y {
 fill: #ffffff;
 font-weight: normal;
 font-style: normal;
@@ -4693,7 +4693,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pOVxt6v .facet-strip-text-x {
+#ppk9kEI .facet-strip-text-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4701,7 +4701,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#pOVxt6v .facet-strip-text-y {
+#ppk9kEI .facet-strip-text-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4709,7 +4709,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#d8lQoRz .tooltip-text {
+#dnYfQIz .tooltip-text {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -4717,7 +4717,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#d8lQoRz .tooltip-title {
+#dnYfQIz .tooltip-title {
 fill: #474747;
 font-weight: bold;
 font-style: normal;
@@ -4725,7 +4725,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#d8lQoRz .tooltip-label {
+#dnYfQIz .tooltip-label {
 fill: #474747;
 font-weight: bold;
 font-style: normal;
@@ -4735,7 +4735,7 @@ font-size: 13.0px;
 }
 
   </style>
-  <g id="pOVxt6v">
+  <g id="ppk9kEI">
     <path fill-rule="evenodd" fill="rgb(255,255,255)" fill-opacity="1.0" d="M0.0 0.0 L0.0 300.0 L700.0 300.0 L700.0 0.0 Z">
     </path>
     <g transform="translate(21.0 38.0 ) ">
@@ -4783,7 +4783,7 @@ font-size: 13.0px;
           </g>
         </g>
       </g>
-      <g clip-path="url(#c94WKcp)" clip-bounds-jfx="[rect (9.980605455468202, 0.0), (494.7324881183075, 222.0)]">
+      <g clip-path="url(#c7n6ceX)" clip-bounds-jfx="[rect (9.980605455468202, 0.0), (494.7324881183075, 222.0)]">
         <g transform="translate(9.980605455468202 0.0 ) ">
           <g>
             <g buffered-rendering="static">
@@ -4823,7 +4823,7 @@ font-size: 13.0px;
           </g>
         </g>
         <defs>
-          <clippath id="c94WKcp">
+          <clippath id="c7n6ceX">
             <rect x="9.980605455468202" y="0.0" width="494.7324881183075" height="222.0">
             </rect>
           </clippath>
@@ -5041,13 +5041,13 @@ font-size: 13.0px;
     <path fill="rgb(0,0,0)" fill-opacity="0.0" stroke="rgb(71,71,71)" stroke-opacity="1.0" stroke-width="0.0" d="M0.0 0.0 L0.0 300.0 L700.0 300.0 L700.0 0.0 Z" pointer-events="none">
     </path>
   </g>
-  <g id="d8lQoRz">
+  <g id="dnYfQIz">
   </g>
 </svg>
 </div>
 </div>
 <p>And the equivalent for in-sample predictions:</p>
-<div id="1d95a44d" class="cell" data-execution_count="28">
+<div id="49" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    ggplot(script_I_r, aes(x<span class="op">=</span><span class="st">"t"</span>, y<span class="op">=</span>as_discrete(<span class="st">"μ"</span>), fill<span class="op">=</span><span class="st">"Preferred Prediction"</span>))</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_tile(<span class="op">**</span>width_height_tiles)</span>
@@ -5070,7 +5070,7 @@ font-size: 13.0px;
 text {
    text-rendering: optimizeLegibility;
 }
-#p4T2Y49 .plot-title {
+#poFfgnh .plot-title {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -5078,7 +5078,7 @@ font-family: sans-serif;
 font-size: 16.0px;
 
 }
-#p4T2Y49 .plot-subtitle {
+#poFfgnh .plot-subtitle {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -5086,7 +5086,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#p4T2Y49 .plot-caption {
+#poFfgnh .plot-caption {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -5094,7 +5094,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#p4T2Y49 .plot-tag {
+#poFfgnh .plot-tag {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -5102,13 +5102,13 @@ font-family: sans-serif;
 font-size: 16.0px;
 
 }
-#p4T2Y49 .hyperlink-element {
+#poFfgnh .hyperlink-element {
 fill: #118ed8;
 font-weight: normal;
 font-style: normal;
 
 }
-#p4T2Y49 .legend-title {
+#poFfgnh .legend-title {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -5116,7 +5116,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#p4T2Y49 .legend-item {
+#poFfgnh .legend-item {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -5124,7 +5124,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#p4T2Y49 .axis-title-x {
+#poFfgnh .axis-title-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -5132,7 +5132,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#p4T2Y49 .axis-text-x {
+#poFfgnh .axis-text-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -5140,7 +5140,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#ddCplp7 .axis-tooltip-text-x {
+#dWa9OJm .axis-tooltip-text-x {
 fill: #ffffff;
 font-weight: normal;
 font-style: normal;
@@ -5148,7 +5148,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#p4T2Y49 .axis-title-y {
+#poFfgnh .axis-title-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -5156,7 +5156,7 @@ font-family: sans-serif;
 font-size: 15.0px;
 
 }
-#p4T2Y49 .axis-text-y {
+#poFfgnh .axis-text-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -5164,7 +5164,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#ddCplp7 .axis-tooltip-text-y {
+#dWa9OJm .axis-tooltip-text-y {
 fill: #ffffff;
 font-weight: normal;
 font-style: normal;
@@ -5172,7 +5172,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#p4T2Y49 .facet-strip-text-x {
+#poFfgnh .facet-strip-text-x {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -5180,7 +5180,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#p4T2Y49 .facet-strip-text-y {
+#poFfgnh .facet-strip-text-y {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -5188,7 +5188,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#ddCplp7 .tooltip-text {
+#dWa9OJm .tooltip-text {
 fill: #474747;
 font-weight: normal;
 font-style: normal;
@@ -5196,7 +5196,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#ddCplp7 .tooltip-title {
+#dWa9OJm .tooltip-title {
 fill: #474747;
 font-weight: bold;
 font-style: normal;
@@ -5204,7 +5204,7 @@ font-family: sans-serif;
 font-size: 13.0px;
 
 }
-#ddCplp7 .tooltip-label {
+#dWa9OJm .tooltip-label {
 fill: #474747;
 font-weight: bold;
 font-style: normal;
@@ -5214,7 +5214,7 @@ font-size: 13.0px;
 }
 
   </style>
-  <g id="p4T2Y49">
+  <g id="poFfgnh">
     <path fill-rule="evenodd" fill="rgb(255,255,255)" fill-opacity="1.0" d="M0.0 0.0 L0.0 300.0 L700.0 300.0 L700.0 0.0 Z">
     </path>
     <g transform="translate(21.0 22.0 ) ">
@@ -5262,7 +5262,7 @@ font-size: 13.0px;
           </g>
         </g>
       </g>
-      <g clip-path="url(#cXvXLkg)" clip-bounds-jfx="[rect (9.980605455468202, 0.0), (494.7324881183075, 238.0)]">
+      <g clip-path="url(#ctKbbjj)" clip-bounds-jfx="[rect (9.980605455468202, 0.0), (494.7324881183075, 238.0)]">
         <g transform="translate(9.980605455468202 0.0 ) ">
           <g>
             <g buffered-rendering="static">
@@ -5295,7 +5295,7 @@ font-size: 13.0px;
           </g>
         </g>
         <defs>
-          <clippath id="cXvXLkg">
+          <clippath id="ctKbbjj">
             <rect x="9.980605455468202" y="0.0" width="494.7324881183075" height="238.0">
             </rect>
           </clippath>
@@ -5510,7 +5510,7 @@ font-size: 13.0px;
     <path fill="rgb(0,0,0)" fill-opacity="0.0" stroke="rgb(71,71,71)" stroke-opacity="1.0" stroke-width="0.0" d="M0.0 0.0 L0.0 300.0 L700.0 300.0 L700.0 0.0 Z" pointer-events="none">
     </path>
   </g>
-  <g id="ddCplp7">
+  <g id="dWa9OJm">
   </g>
 </svg>
 </div>

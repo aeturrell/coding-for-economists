@@ -102,7 +102,7 @@ div.csl-indent {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-294be8ca1eefda555f1994b6e1be42f6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-a46c92d1a3b8d11f1f9fb1f566cd2c52.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dark-c86288332d64c0e70523559916bf5177.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-294be8ca1eefda555f1994b6e1be42f6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -1605,7 +1605,7 @@ Name: geometry, dtype: geometry</code></pre>
 <span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a><span class="co">## Convert it to a geopandas dataframe for easy plotting</span></span>
 <span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a><span class="co"># gpd.GeoDataFrame([connector],columns=['line'], geometry='line').plot(ax=ax, linestyle='-.', color='black')</span></span>
 <span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a>ax.set_title(</span>
-<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Distance between </span><span class="sc">{</span>name_a<span class="sc">}</span><span class="ss"> and </span><span class="sc">{</span>name_b<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>dist_a_b<span class="op">/</span><span class="fl">1e3</span><span class="sc">:1.0f}</span><span class="ss"> km."</span>, loc<span class="op">=</span><span class="st">"left"</span></span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Distance between </span><span class="sc">{</span>name_a<span class="sc">}</span><span class="ss"> and </span><span class="sc">{</span>name_b<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>dist_a_b <span class="op">/</span> <span class="fl">1e3</span><span class="sc">:1.0f}</span><span class="ss"> km."</span>, loc<span class="op">=</span><span class="st">"left"</span></span>
 <span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -2267,14 +2267,16 @@ Name: geometry, dtype: geometry</code></pre>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a geolocator using Open Street Map (aka Nominatim)</span></span>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Use your own user agent identifier here</span></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>geolocator <span class="op">=</span> Nominatim(user_agent<span class="op">=</span><span class="st">"codeforecon"</span>)</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Pass an address to retrieve full location information:</span></span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>location <span class="op">=</span> geolocator.geocode(<span class="st">"Bank of England"</span>)</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>location.address</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>geolocator <span class="op">=</span> Nominatim(</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    user_agent<span class="op">=</span><span class="st">"coding-for-economists/1.0 (+https://github.com/aeturrell/coding-for-economists)"</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Pass an address to retrieve full location information:</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>location <span class="op">=</span> geolocator.geocode(<span class="st">"Bank of England"</span>)</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>location.address</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="31">
-<pre><code>'Bank of England, 8AH, Threadneedle Street, Devonshire Square, Bank, City of London, Greater London, England, EC2R 8AH, United Kingdom'</code></pre>
+<pre><code>'Bank of England, 8AH, Threadneedle Street, Leadenhall Market, Bank, City of London, Greater London, England, EC2R 8AH, United Kingdom'</code></pre>
 </div>
 </div>
 <p>The location parameter also contains a latitude and longitude, which is useful for further geospatial operations:</p>
@@ -2291,7 +2293,7 @@ Name: geometry, dtype: geometry</code></pre>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>scnd_location.address</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="33">
-<pre><code>'96, Euston Road, Somers Town, London Borough of Camden, Greater London, England, NW1 2DB, United Kingdom'</code></pre>
+<pre><code>'British Library cafe, 96, Euston Road, Somers Town, London Borough of Camden, Greater London, England, NW1 2DB, United Kingdom'</code></pre>
 </div>
 </div>
 </section>
@@ -2344,11 +2346,14 @@ Name: geometry, dtype: geometry</code></pre>
 </div>
 <p>Next we carry out the geocoding step using <code>gpd.tools.geocode()</code> and pass an entire column of values that we would like to get <code>POINT</code> geometries and address for:</p>
 <div id="cell-75" class="cell" data-execution_count="35">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>boros_df[[<span class="st">"geometry"</span>, <span class="st">"address"</span>]] <span class="op">=</span> gpd.tools.geocode(</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    boros_df.boro_name,</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    provider<span class="op">=</span><span class="st">"photon"</span>,</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>).set_geometry(<span class="st">"geometry"</span>)</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>boros_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Nominatim (OpenStreetMap) is the provider here; it requires a user agent</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>boros_df[[<span class="st">"geometry"</span>, <span class="st">"address"</span>]] <span class="op">=</span> gpd.tools.geocode(</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    boros_df.boro_name <span class="op">+</span> <span class="st">", New York"</span>,</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    provider<span class="op">=</span><span class="st">"nominatim"</span>,</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    user_agent<span class="op">=</span><span class="st">"coding-for-economists/1.0"</span>,</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    timeout<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>).set_geometry(<span class="st">"geometry"</span>)</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>boros_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/Users/aet/Documents/git_projects/coding-for-economists/.venv/lib/python3.10/site-packages/pandas/core/frame.py:4354: FutureWarning: You are adding a column named 'geometry' to a GeoDataFrame constructed without an active geometry column. Currently, this automatically sets the active geometry column to 'geometry' but in the future that will no longer happen. Instead, either provide geometry to the GeoDataFrame constructor (GeoDataFrame(... geometry=GeoSeries()) or use `set_geometry('geometry')` to explicitly set the active geometry column.
   self[k1] = value[k2]</code></pre>
@@ -2371,31 +2376,31 @@ Name: geometry, dtype: geometry</code></pre>
 <th data-quarto-table-cell-role="th">0</th>
 <td>Staten Island</td>
 <td>POINT (-74.1496 40.58346)</td>
-<td>Staten Island, New York, New York, United States</td>
+<td>Staten Island, Richmond County, New York, Unit...</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
 <td>Queens</td>
 <td>POINT (-73.82831 40.71351)</td>
-<td>Queens, New York, New York, United States</td>
+<td>Queens, Queens County, New York, United States</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2</th>
 <td>Brooklyn</td>
 <td>POINT (-73.94972 40.6526)</td>
-<td>Brooklyn, New York, New York, United States</td>
+<td>Brooklyn, Kings County, New York, United States</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
 <td>Manhattan</td>
 <td>POINT (-73.98553 40.75796)</td>
-<td>Manhattan, New York, New York, United States</td>
+<td>Manhattan, New York County, New York, United S...</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">4</th>
 <td>Bronx</td>
 <td>POINT (-73.87859 40.84665)</td>
-<td>The Bronx, New York, New York, United States</td>
+<td>The Bronx, Bronx County, New York, United States</td>
 </tr>
 </tbody>
 </table>
@@ -2412,10 +2417,13 @@ Name: geometry, dtype: geometry</code></pre>
 <div id="cell-77" class="cell" data-execution_count="36">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> osmnx <span class="im">as</span> ox</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetch OSM street network from the location</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> ox.graph_from_point(</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    (location.latitude, location.longitude), dist<span class="op">=</span><span class="fl">1.3e3</span>, network_type<span class="op">=</span><span class="st">"all"</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify ourselves to OSM services</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>ox.settings.http_user_agent <span class="op">=</span> <span class="st">"coding-for-economists/1.0 (+https://github.com/aeturrell/coding-for-economists)"</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetch OSM street network from the location</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> ox.graph_from_point(</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    (location.latitude, location.longitude), dist<span class="op">=</span><span class="fl">1.3e3</span>, network_type<span class="op">=</span><span class="st">"all"</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The returned object is of <code>type</code> multidigraph, or more precisely <code>networkx.classes.multidigraph.MultiDiGraph</code>. This is an object defined in the <strong>networkx</strong> package, and you can find out more about its properties <a href="https://networkx.org/documentation/stable/reference/classes/multidigraph.html">here</a> but what’s important is that, at least here, the network’s nodes are where streets meet and its edges are streets.</p>
 <p>Rather than plot this as nodes and edges, we can make a much nicer plot of the grid of streets using the below snippet:</p>
@@ -2438,7 +2446,7 @@ Name: geometry, dtype: geometry</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>lunch_loc <span class="op">=</span> geolocator.geocode(<span class="st">"Borough Market"</span>)</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>lunch_loc.address</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="38">
-<pre><code>'Borough Market, Park Street, Borough Market, Bankside, The Borough, London Borough of Southwark, Greater London, England, SE1 9AL, United Kingdom'</code></pre>
+<pre><code>'Borough Market, Bankside, The Borough, London Borough of Southwark, Greater London, England, SE1 9AL, United Kingdom'</code></pre>
 </div>
 </div>
 <p>Now we find the nearest node to the given locations, and ask <strong>osmnx</strong> to work out a route.</p>

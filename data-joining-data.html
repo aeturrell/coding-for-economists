@@ -83,7 +83,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-294be8ca1eefda555f1994b6e1be42f6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-a46c92d1a3b8d11f1f9fb1f566cd2c52.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dark-c86288332d64c0e70523559916bf5177.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-294be8ca1eefda555f1994b6e1be42f6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -989,7 +989,7 @@ gtag('config', 'G-9FZQCPFXZJ', { 'anonymize_ip': true});
 <p>For the same columns, pass <code>axis=0</code> to glue the index together; for the same index, pass <code>axis=1</code> to glue the columns together. The concatenate function will typically be used on a list of dataframes.</p>
 <p>If you want to track where the original data came from in the final dataframe, use the <code>keys</code> keyword.</p>
 <p>Here’s an example using data on two different states’ populations that also makes uses of the <code>keys</code> option:</p>
-<div id="01e3c465" class="cell" data-execution_count="2">
+<div id="4" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>base_url <span class="op">=</span> (</span>
@@ -1090,7 +1090,7 @@ gtag('config', 'G-9FZQCPFXZJ', { 'anonymize_ip': true});
 <p><img src="https://pandas.pydata.org/docs/_images/08_merge_left.svg" class="img-fluid"></p>
 <p>The <code>how=</code> keyword works in the following ways: - <code>how='left'</code> uses keys from the left dataframe only to merge. - <code>how='right'</code> uses keys from the right dataframe only to merge. - <code>how='inner'</code> uses keys that appear in both dataframes to merge. - <code>how='outer'</code> uses the cartesian product of keys in both dataframes to merge on.</p>
 <p>Let’s see examples of some of these:</p>
-<div id="ff427ac3" class="cell" data-execution_count="3">
+<div id="7" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>left <span class="op">=</span> pd.DataFrame(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    {</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"key1"</span>: [<span class="st">"K0"</span>, <span class="st">"K0"</span>, <span class="st">"K1"</span>, <span class="st">"K2"</span>],</span>
@@ -1170,7 +1170,7 @@ gtag('config', 'G-9FZQCPFXZJ', { 'anonymize_ip': true});
 </div>
 <p>Note that the key combination of K2 and K0 did not exist in the left-hand dataframe, and so its entries in the final dataframe are NaNs. But it <em>does</em> have entries because we chose the keys from the right-hand dataframe.</p>
 <p>What about an inner merge?</p>
-<div id="6a0fef16" class="cell" data-execution_count="4">
+<div id="9" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pd.merge(left, right, on<span class="op">=</span>[<span class="st">"key1"</span>, <span class="st">"key2"</span>], how<span class="op">=</span><span class="st">"inner"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
@@ -1224,7 +1224,7 @@ gtag('config', 'G-9FZQCPFXZJ', { 'anonymize_ip': true});
 </div>
 <p>Now we see that the combination K2 and K0 are excluded because they didn’t exist in the overlap of keys in both dataframes.</p>
 <p>Finally, let’s take a look at an outer merge that comes with some extra info via the <code>indicator</code> keyword:</p>
-<div id="ec5a94ba" class="cell" data-execution_count="5">
+<div id="11" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pd.merge(left, right, on<span class="op">=</span>[<span class="st">"key1"</span>, <span class="st">"key2"</span>], how<span class="op">=</span><span class="st">"outer"</span>, indicator<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>

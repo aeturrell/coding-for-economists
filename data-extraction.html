@@ -83,7 +83,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-294be8ca1eefda555f1994b6e1be42f6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-a46c92d1a3b8d11f1f9fb1f566cd2c52.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dark-c86288332d64c0e70523559916bf5177.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-294be8ca1eefda555f1994b6e1be42f6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -1036,7 +1036,7 @@ window.Quarto = {
 <section id="imports" class="level3">
 <h3 class="anchored" data-anchor-id="imports">Imports</h3>
 <p>First we need to import the packages we’ll be using</p>
-<div id="cb379200" class="cell" data-execution_count="1">
+<div id="2" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> textwrap</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1049,7 +1049,7 @@ window.Quarto = {
 <section id="extracting-data-from-files-on-the-internet" class="level2">
 <h2 class="anchored" data-anchor-id="extracting-data-from-files-on-the-internet">Extracting data from files on the internet</h2>
 <p>As you will have seen in some of the examples in this book, it’s easy to read data from the internet once you have the url and file type. Here, for instance, is an example that reads in the ‘storms’ dataset (we’ll only grab the first 10 rows):</p>
-<div id="05366eed" class="cell" data-execution_count="3">
+<div id="5" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pd.read_csv(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://vincentarelbundock.github.io/Rdatasets/csv/dplyr/storms.csv"</span>, nrows<span class="op">=</span><span class="dv">10</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1225,7 +1225,7 @@ Note
 <p>To see this, let’s directly use an API to get some time series data. We will make the call out to the internet using the <strong>requests</strong> package.</p>
 <p>An API has an ‘endpoint’, the base url, and then a URL that encodes the question. Let’s see an example with the ONS API for which the endpoint is “https://api.beta.ons.gov.uk/v1”. There’s then the information that filters down to the specific time series we’re interested in. This is a long string! For the ONS API, if you ever wish to search for the ‘data’ part of the API call, you can also use the API to search for that time series by its ID. For example, to get the full URL of the vacancy postings in the service sector below, we first had to run “https://api.beta.ons.gov.uk/v1/search?content_type=timeseries&amp;cdids=JP9Z” in a browser and extra the “uri” part. The uri part then forms the end of the API call, forming a complete URL. You can check all of these URLs yourself by pasting them into your internet browser’s address bar.</p>
 <p>The data that are returned by APIs are typically in JSON format, which looks a lot like a nested Python dictionary and its entries can be accessed in the same way–this is what is happening when getting the series’ title in the example below. JSON is not good for analysis, so we’ll use <strong>pandas</strong> to put the data into shape.</p>
-<div id="9cabd23f" class="cell" data-execution_count="4">
+<div id="7" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://api.beta.ons.gov.uk/v1/data?uri=/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/timeseries/jp9z/lms/previous/v108"</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the data from the ONS API:</span></span>
@@ -1251,7 +1251,7 @@ Note
 </div>
 </div>
 </div>
-<div id="312fae83" class="cell" data-execution_count="5">
+<div id="8" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(pd.json_normalize(json_data[<span class="st">"months"</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
@@ -1370,7 +1370,7 @@ Note
 </ul>
 <p>and more.</p>
 <p>Let’s see an example using FRED (the Federal Reserve Bank of St.&nbsp;Louis’ economic data library). This time, let’s look at the UK unemployment rate:</p>
-<div id="c2c7264f" class="cell" data-execution_count="6">
+<div id="10" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas_datareader.data <span class="im">as</span> web</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df_u <span class="op">=</span> web.DataReader(<span class="st">"LRHUTTTTGBM156S"</span>, <span class="st">"fred"</span>)</span>
@@ -1385,7 +1385,7 @@ Note
 </div>
 </div>
 <p>And, because it’s also a really useful one, let’s also see how to use <strong>wbgapi</strong> to access World Bank data.</p>
-<div id="f81cc231" class="cell" data-execution_count="7">
+<div id="12" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># World Bank CO2 equivalent emissions (metric tons per capita)</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># https://data.worldbank.org/indicator/EN.GHG.ALL.PC.CE.AR5</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># country and region codes at http://api.worldbank.org/v2/country</span></span>
@@ -1433,7 +1433,7 @@ Note
 <tr class="odd">
 <th data-quarto-table-cell-role="th">0</th>
 <td>Europe &amp;\nCentral\nAsia</td>
-<td>9.171446</td>
+<td>9.171476</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
@@ -1451,7 +1451,7 @@ Note
 </div>
 </div>
 </div>
-<div id="1064adfe" class="cell" data-execution_count="8">
+<div id="13" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
@@ -1519,7 +1519,7 @@ Note
 <p>For quick and simple webscraping, my usual combo would <strong>requests</strong>, which does little more than go and grab the HTML of a webpage, and <strong>beautifulsoup</strong>, which then helps you to navigate the structure of the page and pull out what you’re actually interested in. For dynamic webpages that use javascript rather than just HTML, you’ll need <strong>selenium</strong>. To scale up and hit thousands of webpages in an efficient way, you might try <strong>scrapy</strong>, which can work with the other tools and handle multiple sessions, and all other kinds of bells and whistles… it’s actually a “web scraping framework”.</p>
 <p>It’s always helpful to see coding in practice, so that’s what we’ll do now, but note that we’ll be skipping over a lot of important detail such as user agents, being ‘polite’ with your scraping requests, being efficient with caching and crawling.</p>
 <p>In lieu of a better example, let’s scrape <a href="http://aeturrell.com/">http://aeturrell.com/</a></p>
-<div id="8559da32" class="cell" data-execution_count="9">
+<div id="20" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"http://aeturrell.com/research"</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>page <span class="op">=</span> requests.get(url)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>page.text[:<span class="dv">300</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1529,32 +1529,29 @@ Note
 </div>
 <p>Okay, what just happened? We asked requests to grab the HTML of the webpage and then printed the first 300 characters of the text that it found.</p>
 <p>Let’s now parse this into something humans can read (or can read more easily) using beautifulsoup:</p>
-<div id="2f5e68e5" class="cell" data-execution_count="10">
+<div id="22" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>soup <span class="op">=</span> BeautifulSoup(page.text, <span class="st">"html.parser"</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(soup.prettify()[<span class="dv">60000</span>:<span class="dv">60500</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&gt;
+<pre><code>stem, Part IV
+           &lt;/i&gt;
+           . Sante Fe Institute, 2025. doi:
+           &lt;a href="https://doi.org/10.37911/9781947864665.11"&gt;
+            &lt;code&gt;
+             https://doi.org/10.37911/9781947864665.11
+            &lt;/code&gt;
+           &lt;/a&gt;
+          &lt;/p&gt;
+         &lt;/div&gt;
+         &lt;div class="thumbnail"&gt;
+          &lt;img alt="Travel time from St. Helens, UK" src="../research/chapters/turrell-2025/travel_area_web.webp"/&gt;
+         &lt;/div&gt;
          &lt;div class="project-categories"&gt;
-          &lt;div class="project-category"&gt;
-           &lt;a href="#category=data science"&gt;
-            data science
-           &lt;/a&gt;
-          &lt;/div&gt;
-          &lt;div class="project-category"&gt;
-           &lt;a href="#category=public policy"&gt;
-            public policy
-           &lt;/a&gt;
-          &lt;/div&gt;
-          &lt;div class="project-category"&gt;
-           &lt;a href="#category=complexity science"&gt;
-            complexity science
-           &lt;/a&gt;
-          &lt;/div&gt;
-         &lt;</code></pre>
+          &lt;div</code></pre>
 </div>
 </div>
 <p>Now we see more structure of the page and even some <em>HTML tags</em> such as ‘title’ and ‘link’. Now we come to the data extraction part: say we want to pull out every paragraph of text, we can use beautifulsoup to skim down the HTML structure and pull out only those parts with the paragraph tag (‘p’).</p>
-<div id="9770293d" class="cell" data-execution_count="11">
+<div id="24" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get all paragraphs</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>all_paras <span class="op">=</span> soup.find_all(<span class="st">"p"</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Just show one of the paras</span></span>
@@ -1564,14 +1561,14 @@ Note
 </div>
 </div>
 <p>To make this more readable, you can use the <code>.text</code> method:</p>
-<div id="08c74be8" class="cell" data-execution_count="12">
+<div id="26" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>all_paras[<span class="dv">1</span>].text</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>'Blundell, Jack, Emma Duchini, Stefania Simion, and Arthur Turrell. "Pay transparency and gender equality." American Economic Journal: Economic Policy (2024). doi: 10.1257/pol.20220766'</code></pre>
 </div>
 </div>
 <p>Now let’s say we didn’t care about most of the page, we <em>only</em> wanted to get hold of the names of projects. For this we need to identify the tag type of the element we’re interested in, in this case ‘div’, and it’s class type, in this case “project-name”. We do it like this (and show nice text in the process):</p>
-<div id="920341a0" class="cell" data-execution_count="13">
+<div id="28" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>projects <span class="op">=</span> soup.find_all(<span class="st">"div"</span>, class_<span class="op">=</span><span class="st">"project-content listing-pub-info"</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>projects <span class="op">=</span> [x.text.strip() <span class="cf">for</span> x <span class="kw">in</span> projects]</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>projects[:<span class="dv">4</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1594,7 +1591,7 @@ info_on_pages = [scraper(root_url + str(i)) for i in range(start, stop)]</code><
 <p>Often there are times when you don’t actually want to scrape an entire webpage and all you want is the data from a <em>table</em> within the page. Fortunately, there is an easy way to scrape individual tables using the <strong>pandas</strong> package.</p>
 <p>We will read data from the first table on ‘https://aeturrell.com/blog/posts/time-series-explosion/’ using <strong>pandas</strong>. The function we’ll use is <code>read_html()</code>, which returns a list of dataframes of all the tables it finds when you pass it a URL. If you want to filter the list of tables, use the <code>match=</code> keyword argument with text that only appears in the table(s) you’re interested in.</p>
 <p>The example below shows how this works; looking at the website, we can see that the table we’re interested in (of past world cup results), has a ‘fourth place’ column while other tables on the page do not. Therefore we run:</p>
-<div id="e5d07860" class="cell" data-execution_count="14">
+<div id="31" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df_list <span class="op">=</span> pd.read_html(</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://aeturrell.com/blog/posts/time-series-explosion/"</span>, match<span class="op">=</span><span class="st">"Darts"</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>)</span>

@@ -83,7 +83,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-294be8ca1eefda555f1994b6e1be42f6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-a46c92d1a3b8d11f1f9fb1f566cd2c52.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dark-c86288332d64c0e70523559916bf5177.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-294be8ca1eefda555f1994b6e1be42f6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -1000,7 +1000,7 @@ gtag('config', 'G-9FZQCPFXZJ', { 'anonymize_ip': true});
 <h3 class="anchored" data-anchor-id="prerequisites">Prerequisites</h3>
 <p>This chapter mostly uses functions from <strong>pandas</strong>, which you are likely to already have installed bu you can install using <code>pip install pandas</code> in the terminal. We’ll use real examples from nycflights13, as well as toy examples made with fake data.</p>
 <p>Let’s first load up the NYC flights data (note that this is not a tiny file so will take a moment to load from the internet)</p>
-<div id="c8409f13" class="cell" data-execution_count="2">
+<div id="2" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>flights <span class="op">=</span> pd.read_parquet(</span>
@@ -1011,14 +1011,14 @@ gtag('config', 'G-9FZQCPFXZJ', { 'anonymize_ip': true});
 <section id="counts" class="level3">
 <h3 class="anchored" data-anchor-id="counts">Counts</h3>
 <p>It’s surprising how much data science you can do with just counts and a little basic arithmetic, so <strong>pandas</strong> strives to make counting as easy as possible with <code>.count()</code> and <code>.value_counts()</code>. The former just provides a straight count of all the non NA items:</p>
-<div id="0351aea6" class="cell" data-execution_count="3">
+<div id="4" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>flights[<span class="st">"dest"</span>].count()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>np.int64(100000)</code></pre>
 </div>
 </div>
 <p>The latter provides a count broken down by type:</p>
-<div id="cf9d20c5" class="cell" data-execution_count="4">
+<div id="6" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>flights[<span class="st">"dest"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>dest
@@ -1037,7 +1037,7 @@ Name: count, Length: 105, dtype: int64</code></pre>
 </div>
 </div>
 <p>This is automatically sorted in order of the most common category. You can perform the same computation “by hand” with <code>groupby()</code>, <code>agg()</code> and then using the count function. This is useful because it allows you to compute other summaries at the same time:</p>
-<div id="b37fceea" class="cell" data-execution_count="5">
+<div id="8" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    flights.groupby([<span class="st">"dest"</span>], observed<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
@@ -1127,7 +1127,7 @@ Name: count, Length: 105, dtype: int64</code></pre>
 </div>
 </div>
 <p>Note that a weighted count is just a sum. For example you could “count” the number of miles each plane flew:</p>
-<div id="5daad6b5" class="cell" data-execution_count="6">
+<div id="10" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(flights.groupby(<span class="st">"tailnum"</span>, observed<span class="op">=</span><span class="va">False</span>).agg(miles<span class="op">=</span>(<span class="st">"distance"</span>, <span class="st">"sum"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
@@ -1197,7 +1197,7 @@ Name: count, Length: 105, dtype: int64</code></pre>
 </div>
 </div>
 <p>You can count missing values by combining <code>sum()</code> and <code>isnull()</code>. In the flights dataset this represents flights that are cancelled. Note that because there isn’t a simple string name for applying <code>.isnull()</code> followed by <code>.sum()</code> (unlike just running <code>sum</code>, which would be given by the string “sum”), we need to use a lambda function in the below:</p>
-<div id="1e20fe97" class="cell" data-execution_count="7">
+<div id="12" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    flights.groupby(<span class="st">"dest"</span>, observed<span class="op">=</span><span class="va">False</span>).agg(</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        n_cancelled<span class="op">=</span>(<span class="st">"dep_time"</span>, <span class="kw">lambda</span> x: x.isnull().<span class="bu">sum</span>())</span>
@@ -1283,14 +1283,14 @@ Name: count, Length: 105, dtype: int64</code></pre>
 <section id="minimum-and-maximum" class="level3">
 <h3 class="anchored" data-anchor-id="minimum-and-maximum">Minimum and Maximum</h3>
 <p>The arithmetic functions do what you’d expect.</p>
-<div id="6b8d1033" class="cell" data-execution_count="8">
+<div id="16" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>flights[<span class="st">"distance"</span>].<span class="bu">max</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>np.int64(4983)</code></pre>
 </div>
 </div>
 <p>Sometimes, you’d like to look at the maximum or minimum value across rows <em>or</em> columns. As often is the case with <strong>pandas</strong>, you can specify rows or columns to apply functions to by passing <code>axis=0</code> (index) or <code>axis=1</code> (columns) to that function. The axis designation can be confusing: remember that you are asking which dimension you wish to aggregate over, leaving you with the other dimension. So if we wish to find the minimum in each row, we aggregate / collapse columns, so we need to pass <code>axis=1</code>.</p>
-<div id="96e6802c" class="cell" data-execution_count="9">
+<div id="18" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"x"</span>: [<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">7</span>], <span class="st">"y"</span>: [<span class="dv">3</span>, <span class="dv">2</span>, pd.NA]})</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
@@ -1328,7 +1328,7 @@ Name: count, Length: 105, dtype: int64</code></pre>
 </div>
 </div>
 <p>Now let’s find the min by row:</p>
-<div id="f5657d84" class="cell" data-execution_count="10">
+<div id="20" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df.<span class="bu">min</span>(axis<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>0    1
@@ -1341,7 +1341,7 @@ dtype: object</code></pre>
 <section id="modular-arithmetic" class="level3">
 <h3 class="anchored" data-anchor-id="modular-arithmetic">Modular arithmetic</h3>
 <p>Modular arithmetic is the technical name for the type of math you do on whole numbers, i.e.&nbsp;division that yields a whole number and a remainder. In Python, <code>//</code> does integer division and <code>%</code> computes the remainder:</p>
-<div id="116e2d2b" class="cell" data-execution_count="11">
+<div id="22" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>([x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>)])</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"divided by 3 gives"</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"remainder:"</span>)</span>
@@ -1358,7 +1358,7 @@ divisions:
 </div>
 </div>
 <p>Modular arithmetic is handy for the flights dataset, because we can use it to unpack the <code>sched_dep_time</code> variable into and <code>hour</code> and <code>minute</code>:</p>
-<div id="02d64ba9" class="cell" data-execution_count="12">
+<div id="24" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>flights.assign(</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    hour<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="st">"sched_dep_time"</span>] <span class="op">//</span> <span class="dv">100</span>,</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    minute<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="st">"sched_dep_time"</span>] <span class="op">%</span> <span class="dv">100</span>,</span>
@@ -1646,7 +1646,7 @@ divisions:
 <section id="logarithms" class="level3">
 <h3 class="anchored" data-anchor-id="logarithms">Logarithms</h3>
 <p>Logarithms are an incredibly useful transformation for dealing with data that ranges across multiple orders of magnitude. They also convert exponential growth to linear growth. For example, take compounding interest — the amount of money you have at <code>year + 1</code> is the amount of money you had at <code>year</code> multiplied by the interest rate. That gives a formula like <code>money = starting * interest ** year</code>:</p>
-<div id="a9f55ccc" class="cell" data-execution_count="13">
+<div id="26" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>starting <span class="op">=</span> <span class="dv">100</span></span>
@@ -1700,7 +1700,7 @@ divisions:
 </div>
 </div>
 <p>If you plot this data, you’ll get an exponential curve:</p>
-<div id="7d47a39e" class="cell" data-execution_count="14">
+<div id="28" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>money.plot(x<span class="op">=</span><span class="st">"year"</span>, y<span class="op">=</span><span class="st">"money"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1711,7 +1711,7 @@ divisions:
 </div>
 </div>
 <p>Log transforming the y-axis gives a straight line:</p>
-<div id="1e691b96" class="cell" data-execution_count="15">
+<div id="30" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>money.plot(x<span class="op">=</span><span class="st">"year"</span>, y<span class="op">=</span><span class="st">"money"</span>, logy<span class="op">=</span><span class="va">True</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1728,7 +1728,7 @@ divisions:
 <section id="rounding" class="level3">
 <h3 class="anchored" data-anchor-id="rounding">Rounding</h3>
 <p>To round to a specific number of decimal places, use <code>.round(n)</code> where <code>n</code> is the number of decimal places that you wish to round to.</p>
-<div id="49551203" class="cell" data-execution_count="16">
+<div id="33" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>money.head().<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <div>
@@ -1775,7 +1775,7 @@ divisions:
 </div>
 </div>
 <p>This can also be applied to individual columns or differentially to columns via a dictionary:</p>
-<div id="b50d20c0" class="cell" data-execution_count="17">
+<div id="35" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>money.head().<span class="bu">round</span>({<span class="st">"year"</span>: <span class="dv">0</span>, <span class="st">"money"</span>: <span class="dv">1</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <div>
@@ -1822,7 +1822,7 @@ divisions:
 </div>
 </div>
 <p><code>.round(n)</code> rounds to the nearest <code>10**(-n)</code> so <code>n = 2</code> will round to the nearest 0.01. This definition is useful because it implies <code>.round(-2)</code> will round to the nearest hundred, which indeed it does:</p>
-<div id="72b3d2b6" class="cell" data-execution_count="18">
+<div id="37" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>money.tail().<span class="bu">round</span>({<span class="st">"year"</span>: <span class="dv">0</span>, <span class="st">"money"</span>: <span class="op">-</span><span class="dv">2</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <div>
@@ -1869,8 +1869,8 @@ divisions:
 </div>
 </div>
 <p>Sometimes, you’ll want to round according to significant figures rather than decimal places. There’s not a really easy way to do this but you can define a custom function to do it. Here’s an example of rounding to 2 significant figures (change the <code>2</code> in the below to round to a different number of significant figures):</p>
-<div id="4d0783e9" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>money[<span class="st">"money"</span>].head().<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">float</span>(<span class="ss">f'</span><span class="sc">{</span><span class="bu">float</span>(<span class="ss">f"</span><span class="sc">{</span>x<span class="sc">:.2g}</span><span class="ss">"</span>)<span class="sc">:g}</span><span class="ss">'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="39" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>money[<span class="st">"money"</span>].head().<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">float</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">float</span>(<span class="ss">f'</span><span class="sc">{</span>x<span class="sc">:.2g}</span><span class="ss">'</span>)<span class="sc">:g}</span><span class="ss">"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>0    100.0
 1    110.0
@@ -1881,35 +1881,35 @@ Name: money, dtype: float64</code></pre>
 </div>
 </div>
 <p>If you have an array or list of numbers outside of a data frame, you can use the <strong>numpy</strong> function</p>
-<div id="21b459d1" class="cell" data-execution_count="20">
+<div id="41" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">round</span>([<span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">1.4</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <pre><code>array([2., 2., 1.])</code></pre>
 </div>
 </div>
 <p><strong>numpy</strong> has both <code>.floor()</code> and <code>.ceil()</code> methods too</p>
-<div id="ab2392b7" class="cell" data-execution_count="21">
+<div id="43" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>real_nums <span class="op">=</span> <span class="dv">100</span> <span class="op">*</span> np.random.random(size<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>real_nums</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
-<pre><code>array([60.1359934 , 47.42823815, 32.9581122 , 34.22278615, 53.90146376,
-       65.37797432, 87.88950937, 82.42769353, 10.69531629, 21.79640189])</code></pre>
+<pre><code>array([10.7567384 , 76.98571229, 12.74936643, 38.19143378, 21.41552413,
+       25.74452562, 76.52647862, 99.30383146, 19.02926318, 66.31964353])</code></pre>
 </div>
 </div>
-<div id="fc887e4e" class="cell" data-execution_count="22">
+<div id="44" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>np.ceil(real_nums)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
-<pre><code>array([61., 48., 33., 35., 54., 66., 88., 83., 11., 22.])</code></pre>
+<pre><code>array([ 11.,  77.,  13.,  39.,  22.,  26.,  77., 100.,  20.,  67.])</code></pre>
 </div>
 </div>
-<div id="9ee335c9" class="cell" data-execution_count="23">
+<div id="45" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>np.floor(real_nums)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
-<pre><code>array([60., 47., 32., 34., 53., 65., 87., 82., 10., 21.])</code></pre>
+<pre><code>array([10., 76., 12., 38., 21., 25., 76., 99., 19., 66.])</code></pre>
 </div>
 </div>
 <p>Remember that you can always apply <strong>numpy</strong> functions to <strong>pandas</strong> data frame columns like so:</p>
-<div id="d6782745" class="cell" data-execution_count="24">
+<div id="47" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>money[<span class="st">"money"</span>].head().<span class="bu">apply</span>(np.ceil)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>0    105.0
@@ -1924,7 +1924,7 @@ Name: money, dtype: float64</code></pre>
 <section id="cumulative-and-rolling-aggregates" class="level3">
 <h3 class="anchored" data-anchor-id="cumulative-and-rolling-aggregates">Cumulative and Rolling Aggregates</h3>
 <p><strong>pandas</strong> has several cumulative functions, including <code>.cumsum()</code>, <code>.cummax()</code> and <code>.cummin()</code>, and <code>.cumprod()</code>.</p>
-<div id="d6820be4" class="cell" data-execution_count="25">
+<div id="49" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>money[<span class="st">"money"</span>].tail().cumsum()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <pre><code>45     943.425818
@@ -1944,7 +1944,7 @@ Name: money, dtype: float64</code></pre>
 <section id="ranking" class="level3">
 <h3 class="anchored" data-anchor-id="ranking">Ranking</h3>
 <p><strong>pandas</strong>’ rank function is <code>.rank()</code>. Let’s look back at the data we made earlier and rank it:</p>
-<div id="af640d49" class="cell" data-execution_count="26">
+<div id="52" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="26">
 <div>
@@ -1980,7 +1980,7 @@ Name: money, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="42c9a1f0" class="cell" data-execution_count="27">
+<div id="53" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df.rank()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="27">
 <div>
@@ -2017,7 +2017,7 @@ Name: money, dtype: float64</code></pre>
 </div>
 </div>
 <p>Of course, there’s no change here because the items were already ranked! We can also do a pct rank by passing the keyword argument <code>pct=True</code>.</p>
-<div id="17592d6b" class="cell" data-execution_count="28">
+<div id="55" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df.rank(pct<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="28">
 <div>
@@ -2058,7 +2058,7 @@ Name: money, dtype: float64</code></pre>
 <h3 class="anchored" data-anchor-id="offsets-and-shifting">Offsets and Shifting</h3>
 <p>Offsets allow you to ‘roll’ columns up and down relative to their original position, ie to offset their location relative to the index. The function that does this is called <code>shift()</code> and it produces leads or lags depending on whether you use positive or negative values respectively. Remember that a lead is going to shift the pattern in the data to the left when plotted against the index, while the lag is going to shift patterns to the right. Leads and lags are particularly useful for time series data (which we haven’t yet seen).</p>
 <p>Let’s see an example of offsets with the <code>money</code> data frame from earlier:</p>
-<div id="0360b0ec" class="cell" data-execution_count="29">
+<div id="57" class="cell" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>money[<span class="st">"money_lag_5"</span>] <span class="op">=</span> money[<span class="st">"money"</span>].shift(<span class="dv">5</span>)</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>money[<span class="st">"money_lead_10"</span>] <span class="op">=</span> money[<span class="st">"money"</span>].shift(<span class="op">-</span><span class="dv">10</span>)</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>money.set_index(<span class="st">"year"</span>).plot()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2088,14 +2088,14 @@ Name: money, dtype: float64</code></pre>
 <h2 class="anchored" data-anchor-id="more-useful-summary-statistics">More Useful Summary Statistics</h2>
 <p>We’ve seen how useful <code>.mean()</code>, <code>.count()</code>, and <code>.value_counts()</code> can be for analysis. <strong>pandas</strong> has a great many more built-in summary statistics functions, however. These include <code>.median()</code> (you may find it interesting to compare the mean vs the median when looking at the hourly departure delay in the flights data), <code>.mode()</code>, <code>.min()</code>, and <code>.max()</code>.</p>
 <p>A class of useful summary statistics are provided by the <code>.quantile()</code> function, which is the same as <code>median()</code> for <code>.quantile(0.5)</code>. The quantile at x% is the value that x% of values are below. (Note that under this definition, <code>.quantile(1)</code> will be the same as <code>.max()</code>.) Let’s see an example with the 25th percentile.</p>
-<div id="80abee6d" class="cell" data-execution_count="30">
+<div id="60" class="cell" data-execution_count="30">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>money[<span class="st">"money"</span>].quantile(<span class="fl">0.25</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="30">
 <pre><code>np.float64(190.92197566022773)</code></pre>
 </div>
 </div>
 <p>Sometimes you don’t just want one percentile, but a bunch of them. <strong>pandas</strong> makes this very easy by allowing you to pass a list of quantiles:</p>
-<div id="b8d8be2d" class="cell" data-execution_count="31">
+<div id="62" class="cell" data-execution_count="31">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>money[<span class="st">"money"</span>].quantile([<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>0.00    105.000000
@@ -2109,7 +2109,7 @@ Name: money, dtype: float64</code></pre>
 <h3 class="anchored" data-anchor-id="spread">Spread</h3>
 <p>Sometimes you’re not so interested in where the bulk of the data lies, but how it is spread out. Two commonly used summaries are the standard deviation, <code>.std()</code>, and the inter-quartile range, which you can compute from the relevant quantiles, ie it’s the quantile at 75% minus the quantile at 25% and gives you the range that contains the middle 50% of the data.</p>
 <p>We can use this to reveal a small oddity in the flights data. You might expect that the spread of the distance between origin and destination to be zero, since airports are always in the same place. But the code below makes it looks like one airport, <a href="https://en.wikipedia.org/wiki/Eagle_County_Regional_Airport">EGE</a>, might have moved.</p>
-<div id="0c72a07e" class="cell" data-execution_count="32">
+<div id="64" class="cell" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    flights.groupby([<span class="st">"origin"</span>, <span class="st">"dest"</span>], observed<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
@@ -2161,7 +2161,7 @@ Name: money, dtype: float64</code></pre>
 <h3 class="anchored" data-anchor-id="distributions">Distributions</h3>
 <p>It’s worth remembering that all of the summary statistics described above are a way of reducing the distribution down to a single number. This means that they’re fundamentally reductive, and if you pick the wrong summary, you can easily miss important differences between groups. That’s why it’s always a good idea to visualise the distribution of values as well as using aggregate statistics.</p>
 <p>The plot below shows the overall distribution of departure delays. The distribution is so skewed that we have to zoom in to see the bulk of the data. This suggests that the mean is unlikely to be a good summary and we might prefer the median instead.</p>
-<div id="89f0a085" class="cell" data-execution_count="33">
+<div id="66" class="cell" data-execution_count="33">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>flights[<span class="st">"dep_delay"</span>].plot.hist(bins<span class="op">=</span><span class="dv">50</span>, title<span class="op">=</span><span class="st">"         Distribution: length of delay"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -2171,7 +2171,7 @@ Name: money, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="b24612cc" class="cell" data-execution_count="34">
+<div id="67" class="cell" data-execution_count="34">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>flights.query(<span class="st">"dep_delay &lt;= 120"</span>)[<span class="st">"dep_delay"</span>].plot.hist(</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    bins<span class="op">=</span><span class="dv">50</span>, title<span class="op">=</span><span class="st">"         Distribution: length of delay"</span></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
